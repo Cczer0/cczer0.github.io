@@ -1,0 +1,873 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="monitor,smokeping," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Smokeping 监控网络质量什么是SmokepingSmokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：
+
+多种探测方式，包括 fping、echoping、dig、curl 等；
+易用可扩展的插件；master/slave 的工作方式，可以在多个节点收集同一个监测点的数据；
+很有特色的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smokeping-安装">
+<meta property="og:url" content="http://czero000.github.io/2015/12/20/install-smokeping.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="Smokeping 监控网络质量什么是SmokepingSmokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：
+
+多种探测方式，包括 fping、echoping、dig、curl 等；
+易用可扩展的插件；master/slave 的工作方式，可以在多个节点收集同一个监测点的数据；
+很有特色的">
+<meta property="og:updated_time" content="2016-05-05T08:48:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Smokeping-安装">
+<meta name="twitter:description" content="Smokeping 监控网络质量什么是SmokepingSmokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：
+
+多种探测方式，包括 fping、echoping、dig、curl 等；
+易用可扩展的插件；master/slave 的工作方式，可以在多个节点收集同一个监测点的数据；
+很有特色的">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/20/install-smokeping.html"/>
+
+
+  <title> Smokeping-安装 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Smokeping-安装
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-20T19:41:31+08:00" content="2015-12-20">
+              2015-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/20/install-smokeping.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-smokeping.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/20/install-smokeping.html" class="leancloud_visitors" data-flag-title="Smokeping-安装">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Smokeping-监控网络质量"><a href="#Smokeping-监控网络质量" class="headerlink" title="Smokeping 监控网络质量"></a>Smokeping 监控网络质量</h3><h4 id="什么是Smokeping"><a href="#什么是Smokeping" class="headerlink" title="什么是Smokeping"></a>什么是Smokeping</h4><p>Smokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：</p>
+<ul>
+<li>多种探测方式，包括 fping、echoping、dig、curl 等；</li>
+<li>易用可扩展的插件；master/slave 的工作方式，可以在多个节点收集同一个监测点的数据；</li>
+<li>很有特色的 alert 设置，不只是简单的设置一个阀值。</li>
+</ul>
+<h4 id="Smokeping架构组件"><a href="#Smokeping架构组件" class="headerlink" title="Smokeping架构组件"></a>Smokeping架构组件</h4><p>smokeping 是一个用 perl 写的程序，所以不需要安装，但是他需要使用一些工具。Smokeping 有以下组件组成：RRDtool、Fping、Echoping、Curl、Dig、SSh、Perl 模块，Perl、FCGI、Apache 等。</p>
+<h4 id="Smokeping-相关资源"><a href="#Smokeping-相关资源" class="headerlink" title="Smokeping 相关资源"></a>Smokeping 相关资源</h4><ul>
+<li>Smokeping官方网站：<a href="http://oss.oetiker.ch/smokeping/" target="_blank" rel="external">http://oss.oetiker.ch/smokeping/</a></li>
+<li>Smokeping官方文档：<a href="http://oss.oetiker.ch/smokeping/doc/index.en.html" target="_blank" rel="external">http://oss.oetiker.ch/smokeping/doc/index.en.html</a></li>
+</ul>
+<h3 id="安装Smokeping"><a href="#安装Smokeping" class="headerlink" title="安装Smokeping"></a>安装Smokeping</h3><h4 id="安装RRDTOOL"><a href="#安装RRDTOOL" class="headerlink" title="安装RRDTOOL"></a>安装RRDTOOL</h4><p>  RRDTool 是由Tobias Oetiker 开发的开源软件，它使用RRD（Round Rebin Databases）作为存储格式，Round robin 是一种处理定量数据以及当前元素指针的技术，RRDTool 主要用来跟踪对象的变化情况，生成改对象变化的趋势图。</p>
+<p>  依赖软件包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install cairo-devel libxml2-devel pango-devel pango libpng-devel freetype freetype-devel libart_lgpl-devel libidn libidn-devel httpd httpd-devel apr-util-devel apr-devel -y</div></pre></td></tr></table></figure></p>
+<p>如果nginx作为webserver，则要安装perl模块<code>perl-Net-Telnet perl-Net-DNS perl-LDAP perl-CGI-SpeedyCGI perl-libwww-perl perl-RadiusPerl perl-IO-Socket-SSL perl-Socket</code></p>
+<p>执行安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.7.tar.gz</div><div class="line">tar -zxf rrdtool-1.4.7.tar.gz</div><div class="line">cd rrdtool-1.4.7</div><div class="line">./configure --prefix=/usr/local/rrdtool</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure></p>
+<p> 检验安装是否成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/usr/local/rrdtool/bin/rrdtool</div><div class="line">RRDtool 1.4.7  Copyright 1997-2012 by Tobias Oetiker </div><div class="line">               Compiled May 21 2013 13:42:05</div><div class="line"> </div><div class="line">Usage: rrdtool [options] command command_options</div><div class="line">Valid commands: create, update, updatev, graph, graphv,  dump, restore,</div><div class="line">                last, lastupdate, first, info, fetch, tune,</div><div class="line">                resize, xport, flushcached</div><div class="line"> </div><div class="line">RRDtool is distributed under the Terms of the GNU General</div><div class="line">Public License Version 2. (www.gnu.org/copyleft/gpl.html)</div><div class="line"> </div><div class="line">For more information read the RRD manpages</div></pre></td></tr></table></figure></p>
+<p>执行命令如果出现以上输出，表示安装成功，并列出了使用该命令的帮助信息。</p>
+<h4 id="安装fping"><a href="#安装fping" class="headerlink" title="安装fping"></a>安装fping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/smokeping/pub/fping-2.4b2_to3-ipv6.tar.gz</div><div class="line">tar -zxf fping-2.4b2_to3-ipv6.tar.gz</div><div class="line">cd fping-2.4b2_to3-ipv6</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h4 id="安装echoping"><a href="#安装echoping" class="headerlink" title="安装echoping"></a>安装echoping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://sourceforge.net/projects/echoping/files/latest/download</div><div class="line">tar -zxf echoping-6.0.2.tar.gz</div><div class="line">cd echoping-6.0.2</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h4 id="安装fcgi"><a href="#安装fcgi" class="headerlink" title="安装fcgi"></a>安装fcgi</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://cpan.communilink.net/authors/id/F/FL/FLORA/FCGI-0.74.tar.gz</div><div class="line">tar -zxf FCGI-0.74.tar.gz</div><div class="line">cd FCGI-0.74</div><div class="line">perl Makefile.PL</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h4 id="安装mod-fastcgi"><a href="#安装mod-fastcgi" class="headerlink" title="安装mod_fastcgi"></a>安装mod_fastcgi</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wget http://www.fastcgi.com/dist/mod_fastcgi-2.4.6.tar.gz</div><div class="line">tar zxf mod_fastcgi-2.4.6.tar.gz</div><div class="line">cd mod_fastcgi-2.4.6</div><div class="line">	apxs -o mod_fastcgi.so -c *.c</div><div class="line">apxs -i -a -n fastcgi .libs/mod_fastcgi.so</div><div class="line">确保httpd.conf有如下配置：</div><div class="line">LoadModule fastcgi_module     /usr/lib/httpd/modules/mod_fastcgi.so</div></pre></td></tr></table></figure>
+<p>如果apache为源码安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://www.fastcgi.com/dist/mod_fastcgi-2.4.6.tar.gz</div><div class="line">tar -zxf mod_fastcgi-2.4.6.tar.gz</div><div class="line">cd mod_fastcgi-2.4.6</div><div class="line">cp Makefile.AP2 Makefile</div><div class="line">make top_dir=/usr/local/apache</div><div class="line">make install top_dir=/usr/local/apache</div></pre></td></tr></table></figure></p>
+<h4 id="安装smokeping"><a href="#安装smokeping" class="headerlink" title="安装smokeping"></a>安装smokeping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/smokeping/pub/smokeping-2.6.9.tar.gz</div><div class="line">tar -zxf smokeping-2.6.9.tar.gz</div><div class="line">cd smokeping-2.6.9</div><div class="line">./configure --prefix=/usr/local/smokeping PERL5LIB=/usr/lib/perl5/</div></pre></td></tr></table></figure>
+<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">checking checking for gnu make availablility... /usr/bin/gmake is GNU make</div><div class="line">checking checking for perl module &apos;RRDs&apos;... Failed</div><div class="line">checking checking for perl module &apos;FCGI&apos;... Ok</div><div class="line">checking checking for perl module &apos;CGI&apos;... Ok</div><div class="line">checking checking for perl module &apos;CGI::Fast&apos;... Ok</div><div class="line">checking checking for perl module &apos;Config::Grammar&apos;... Failed</div><div class="line">checking checking for perl module &apos;Digest::HMAC_MD5&apos;... Ok</div><div class="line">checking checking for perl module &apos;LWP&apos;... Ok</div></pre></td></tr></table></figure></p>
+<p>解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> ./setup/build-perl-modules.sh /usr/local/smokeping/thirdparty</div></pre></td></tr></table></figure></p>
+<p>或者<code>yum –y install perl-[FAIL-MOUDLES]</code></p>
+<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">checking checking for perl module &apos;RRDs&apos;... Failed</div></pre></td></tr></table></figure></p>
+<p>解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">32位：</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/i386-linux-thread-multi/RRDs.pm /usr/lib/perl5/</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/i386-linux-thread-multi/auto/RRDs/RRDs.so /usr/lib/perl5/</div><div class="line"> 64位：</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/x86_64-linux-thread-multi/RRDs.pm /usr/lib64/perl5/</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/x86_64-linux-thread-multi/auto/RRDs/RRDs.so /usr/lib64//perl5/</div></pre></td></tr></table></figure></p>
+<p>在执行下面操作，完成安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make clean</div><div class="line">./configure –prefix=/usr/local/smokeping</div><div class="line">/usr/bin/gmake install</div></pre></td></tr></table></figure></p>
+<h3 id="配置smokeping"><a href="#配置smokeping" class="headerlink" title="配置smokeping"></a>配置smokeping</h3><h4 id="修改相关文件"><a href="#修改相关文件" class="headerlink" title="修改相关文件"></a>修改相关文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/usr/local/smokeping/bin/smokeping</div><div class="line">/usr/local/smokeping/bin/smokeping_cgi</div><div class="line">将第八行         use lib qw(); # PERL5LIB</div><div class="line">修改为：         use lib qw(/usr/local/rrdtool/lib/perl); # PERL5LIB</div><div class="line"> </div><div class="line">/usr/local/smokeping/htdocs/smokeping.fcgi.dist：</div><div class="line">mv /usr/local/smokeping/htdocs/smokeping.fcgi.dist /usr/local/smokeping/htdocs/smokeping.fcgi</div><div class="line"> </div><div class="line">进入 /usr/local/smokeping/etc</div><div class="line">mv config.dist config</div><div class="line">mv basepage.html.dist basepage.html</div><div class="line">mv smokemail.dist smokemail</div><div class="line">mv tmail.dist tmail</div><div class="line">mv smokeping_secrets.dist smokeping_secrets</div></pre></td></tr></table></figure>
+<h4 id="修改主配置config"><a href="#修改主配置config" class="headerlink" title="修改主配置config"></a>修改主配置config</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div></pre></td><td class="code"><pre><div class="line">*** General ***                                                         ##全局配置</div><div class="line">owner    = charlie.cui@zerounix.com                                          ##联系人（显示在网页上）</div><div class="line">contact  = charlie.cui@zerounix.com                                         ##联系人邮箱</div><div class="line">mailhost = mail.zerounix.com                                                ##邮件服务主机</div><div class="line">sendmail = /usr/sbin/sendmail                                           ##发送邮件件的二进制可执行程序</div><div class="line"># NOTE: do not put the Image Cache below cgi-bin</div><div class="line"># since all files under cgi-bin will be executed ... this is not</div><div class="line"># good for images.</div><div class="line">imgcache = /usr/local/smokeping/cache                                   ##生成图片的缓存</div><div class="line">imgurl   = cache                                                ##cache 定义cgi程序显示图片的url目录</div><div class="line">datadir  = /usr/local/smokeping/data                                    ##rrd文件的位置</div><div class="line">piddir  = /usr/local/smokeping/var</div><div class="line">cgiurl   = http://some.url/smokeping.cgi                        ##smokeping访问地址</div><div class="line">smokemail = /usr/local/smokeping/etc/smokemail                          ##发送邮件的邮件内容模板</div><div class="line">tmail = /usr/local/smokeping/etc/tmail                                  ##HTML邮件模板的路径</div><div class="line"># specify this to get syslog logging</div><div class="line">syslogfacility = local0                                                 ##syslog日志记录的设备编号</div><div class="line"># each probe is now run in its own process</div><div class="line"># disable this to revert to the old behaviour</div><div class="line"># concurrentprobes = no</div><div class="line"> </div><div class="line">*** Alerts ***                                                          ##报警配置</div><div class="line">to =  monitor@zerounix.com                                    </div><div class="line">from = mon@zerounix.com</div><div class="line"> </div><div class="line">+网络中断</div><div class="line">type = rtt</div><div class="line">pattern = !=U,==U</div><div class="line">comment = 网络中断</div><div class="line">priority = 1</div><div class="line"> </div><div class="line">+中断恢复</div><div class="line">type = rtt</div><div class="line">pattern = ==U,!=U,!=U</div><div class="line">comment = 中断恢复</div><div class="line">priority = 2</div><div class="line"> </div><div class="line">+严重丢包</div><div class="line">type = loss</div><div class="line">pattern = &gt;50%</div><div class="line">comment = 丢包大于50%</div><div class="line">priority = 3</div><div class="line"> </div><div class="line">+丢包报警</div><div class="line">type = loss</div><div class="line">pattern = &gt;10%,&gt;10%,&gt;10%</div><div class="line">comment = 连续3次丢包10%以上</div><div class="line">priority = 4</div><div class="line"> </div><div class="line">+网络延迟</div><div class="line">type = rtt</div><div class="line">pattern = &gt;180,&gt;180,&gt;180</div><div class="line">comment = 连续3次延时180以上</div><div class="line">priority = 5</div><div class="line"> </div><div class="line"> </div><div class="line">*** Database ***</div><div class="line"> </div><div class="line">step     = 60</div><div class="line">pings    = 10</div><div class="line"> </div><div class="line"># consfn mrhb steps total</div><div class="line"> </div><div class="line">AVERAGE  0.5   1  1008</div><div class="line">AVERAGE  0.5  12  4320</div><div class="line">    MIN  0.5  12  4320</div><div class="line">    MAX  0.5  12  4320</div><div class="line">AVERAGE  0.5 144   720</div><div class="line">    MAX  0.5 144   720</div><div class="line">    MIN  0.5 144   720</div><div class="line"> </div><div class="line">*** Presentation ***</div><div class="line"> </div><div class="line">template = /usr/local/smokeping/etc/basepage.html</div><div class="line"> </div><div class="line">+ charts</div><div class="line"> </div><div class="line">menu = Charts</div><div class="line">title = The most interesting destinations</div><div class="line"> </div><div class="line">++ stddev</div><div class="line">sorter = StdDev(entries=&gt;4)</div><div class="line">title = Top Standard Deviation</div><div class="line">menu = Std Deviation</div><div class="line">format = Standard Deviation %f</div><div class="line"> </div><div class="line">++ max</div><div class="line">sorter = Max(entries=&gt;5)</div><div class="line">title = Top Max Roundtrip Time</div><div class="line">menu = by Max</div><div class="line">format = Max Roundtrip Time %f seconds</div><div class="line"> </div><div class="line">++ loss</div><div class="line">sorter = Loss(entries=&gt;5)</div><div class="line">title = Top Packet Loss</div><div class="line">menu = Loss</div><div class="line">format = Packets Lost %f</div><div class="line"> </div><div class="line">++ median</div><div class="line">sorter = Median(entries=&gt;5)</div><div class="line">title = Top Median Roundtrip Time</div><div class="line">menu = by Median</div><div class="line">format = Median RTT %f seconds</div><div class="line"> </div><div class="line">+ overview</div><div class="line"> </div><div class="line">width = 600</div><div class="line">height = 50</div><div class="line">range = 10h</div><div class="line"> </div><div class="line">+ detail</div><div class="line"> </div><div class="line">width = 600</div><div class="line">height = 200</div><div class="line">unison_tolerance = 2</div><div class="line"> </div><div class="line">&quot;Last 3 Hours&quot;    3h</div><div class="line">&quot;Last 30 Hours&quot;   30h</div><div class="line">&quot;Last 10 Days&quot;    10d</div><div class="line">&quot;Last 400 Days&quot;   400d</div><div class="line"> </div><div class="line">#+ hierarchies</div><div class="line">#++ owner</div><div class="line">#title = Host Owner</div><div class="line">#++ location</div><div class="line">#title = Location</div><div class="line"> </div><div class="line">*** Probes ***</div><div class="line"> </div><div class="line">+ FPing</div><div class="line"> </div><div class="line">binary = /usr/local/sbin/fping</div><div class="line"> </div><div class="line">+ DNS</div><div class="line">binary = /usr/bin/dig</div><div class="line">lookup = name.example</div><div class="line">*** Slaves ***</div><div class="line">secrets=/usr/local/smokeping/etc/smokeping_secrets</div><div class="line">+boomer</div><div class="line">display_name=boomer</div><div class="line">color=0000ff</div><div class="line"> </div><div class="line">+slave2</div><div class="line">display_name=another</div><div class="line">color=00ff00</div><div class="line"> </div><div class="line">*** Targets ***</div><div class="line"> </div><div class="line">probe = FPing</div><div class="line"> </div><div class="line">menu = Top</div><div class="line">title = Network Latency Grapher</div><div class="line">remark = Welcome to the SmokePing website of xxx Company. \</div><div class="line">         Here you will learn all about the latency of our network.</div><div class="line"> </div><div class="line">+ Test</div><div class="line">menu= Targets</div><div class="line">#parents = owner:/Test/James location:/</div><div class="line"> </div><div class="line">++ James</div><div class="line"> </div><div class="line">menu = James</div><div class="line">title =James</div><div class="line">alerts = someloss</div><div class="line">slaves = boomer slave2</div><div class="line">host = james.address</div><div class="line"> </div><div class="line">++ MultiHost</div><div class="line"> </div><div class="line">menu = Multihost</div><div class="line">title = James and James as seen from Boomer</div><div class="line">host = /Test/James /Test/James~boomer</div></pre></td></tr></table></figure>
+<p>监控主机是分层结构，用+表示<br>例如第一层“+”，第二层“++”一次类推</p>
+<p>master/slave的方式，后面会介绍。</p>
+<h4 id="修改其他配置"><a href="#修改其他配置" class="headerlink" title="修改其他配置"></a>修改其他配置</h4><p>根据配置文件所写的，创建数据文件目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/smokeping/&#123;htdocs/var,cache,data&#125;</div></pre></td></tr></table></figure></p>
+<p>修改数据文件目录的属主及属组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown nobody:nobody /usr/local/smokeping/&#123;htdocs/var,cache,data&#125;</div></pre></td></tr></table></figure></p>
+<p><code>/usr/local/smokeping/etc/smokeping_secrets</code>这个文件存放的是<code>master/slave</code>之间的验证密码，现在暂时不用</p>
+<h4 id="启动smokeping"><a href="#启动smokeping" class="headerlink" title="启动smokeping"></a>启动smokeping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -u nobody /usr/local/smokeping/bin/smokeping --logfile=/var/log/smokeping.log --restart</div></pre></td></tr></table></figure>
+<p>报错：<code>ERROR: FPing must be installed setuid root or it will not work
+ at (eval 29) line 1</code><br>解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">whereis fping</div><div class="line">fping: /usr/local/sbin/fping</div><div class="line">chmod +s /usr/local/sbin/fping</div></pre></td></tr></table></figure></p>
+<h4 id="配置apache的配置文件"><a href="#配置apache的配置文件" class="headerlink" title="配置apache的配置文件"></a>配置apache的配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Alias /ping /usr/local/smokeping/htdocs/</div><div class="line">&lt;Directory &quot;/usr/local/smokeping/htdocs&quot;&gt;</div><div class="line">       DirectoryIndex index.html smokeping.fcgi</div><div class="line">       Options FollowSymLinks ExecCGI</div><div class="line">       AllowOverride None</div><div class="line">       AddHandler cgi-script .cgi .fcgi</div><div class="line">       Order allow,deny</div><div class="line">       Allow from all</div><div class="line">       AuthName &quot;Smokeping Access&quot;</div><div class="line">       AuthType Basic</div><div class="line">       AuthUserFile /usr/local/smokeping/htdocs/htpasswd.user</div><div class="line">       Require valid-user</div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure>
+<h3 id="FAQ："><a href="#FAQ：" class="headerlink" title="FAQ："></a>FAQ：</h3><p>不出图解决思路</p>
+<ul>
+<li>使用–debug方式启动smokeping，排查错误</li>
+<li>查看smokeping的log</li>
+<li>查看apache的error.log</li>
+<li>查看文件权限，包括数据文件目录及数据文件，apache和smokeping的启动用户，rrd文件是否有数据</li>
+</ul>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/monitor/" rel="tag">#monitor</a>
+          
+            <a href="/tags/smokeping/" rel="tag">#smokeping</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/20/install-rrdtool-trubleshooting.html" rel="next" title="RRDTOOL安装报错解决">
+                <i class="fa fa-chevron-left"></i> RRDTOOL安装报错解决
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/20/centos7-install-smokeping.html" rel="prev" title="Centos7安装smokeping">
+                Centos7安装smokeping <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/20/install-smokeping.html"
+     data-title="Smokeping-安装"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/20/install-smokeping.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/20/install-smokeping.html"
+           data-title="Smokeping-安装" data-url="http://czero000.github.io/2015/12/20/install-smokeping.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Smokeping-监控网络质量"><span class="nav-number">1.</span> <span class="nav-text">Smokeping 监控网络质量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是Smokeping"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Smokeping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Smokeping架构组件"><span class="nav-number">1.2.</span> <span class="nav-text">Smokeping架构组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Smokeping-相关资源"><span class="nav-number">1.3.</span> <span class="nav-text">Smokeping 相关资源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Smokeping"><span class="nav-number">2.</span> <span class="nav-text">安装Smokeping</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装RRDTOOL"><span class="nav-number">2.1.</span> <span class="nav-text">安装RRDTOOL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装fping"><span class="nav-number">2.2.</span> <span class="nav-text">安装fping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装echoping"><span class="nav-number">2.3.</span> <span class="nav-text">安装echoping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装fcgi"><span class="nav-number">2.4.</span> <span class="nav-text">安装fcgi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装mod-fastcgi"><span class="nav-number">2.5.</span> <span class="nav-text">安装mod_fastcgi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装smokeping"><span class="nav-number">2.6.</span> <span class="nav-text">安装smokeping</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置smokeping"><span class="nav-number">3.</span> <span class="nav-text">配置smokeping</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改相关文件"><span class="nav-number">3.1.</span> <span class="nav-text">修改相关文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改主配置config"><span class="nav-number">3.2.</span> <span class="nav-text">修改主配置config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改其他配置"><span class="nav-number">3.3.</span> <span class="nav-text">修改其他配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动smokeping"><span class="nav-number">3.4.</span> <span class="nav-text">启动smokeping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置apache的配置文件"><span class="nav-number">3.5.</span> <span class="nav-text">配置apache的配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAQ："><span class="nav-number">4.</span> <span class="nav-text">FAQ：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

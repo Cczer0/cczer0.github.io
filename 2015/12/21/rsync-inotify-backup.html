@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="inotify,rsync," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="rsync的优点和缺点  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsync+inotify实现实时备份">
+<meta property="og:url" content="http://czero000.github.io/2015/12/21/rsync-inotify-backup.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="rsync的优点和缺点  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件">
+<meta property="og:updated_time" content="2016-01-18T09:15:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rsync+inotify实现实时备份">
+<meta name="twitter:description" content="rsync的优点和缺点  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/21/rsync-inotify-backup.html"/>
+
+
+  <title> rsync+inotify实现实时备份 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                rsync+inotify实现实时备份
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-21T23:02:15+08:00" content="2015-12-21">
+              2015-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/21/rsync-inotify-backup.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/rsync-inotify-backup.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/21/rsync-inotify-backup.html" class="leancloud_visitors" data-flag-title="rsync+inotify实现实时备份">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h3 id="rsync的优点和缺点"><a href="#rsync的优点和缺点" class="headerlink" title="rsync的优点和缺点"></a>rsync的优点和缺点</h3><p>  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。<br>  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件将耗费大量事件，而发生变化的往往是其中极少的一部分，这是非常低效的方式，其次rsync不能实时去监测、同步数据，虽然可以通过守护进程方式或者是crontab等方式进行触发，但是动作会有一定的时间差，这会导致两地数据可能会出现不一致，无法保证数据或者应用的安全性。</p>
+<h3 id="inotify简介"><a href="#inotify简介" class="headerlink" title="inotify简介"></a>inotify简介</h3><p>  Inotify 是一种强大的、细粒度的、异步的文件系统事件监控机制，linux内核从2.6.13起，加入了Inotify支持，通过Inotify可以监控文件系统中添加、删除，修改、移动等各种细微事件，利用这个内核接口，第三方软件就可以监控文件系统下文件的各种变化情况，而inotify-tools就是这样的一个第三方软件。rsync可以实现触发式的文件同步，但是通过crontab守护进程方式进行触发，同步的数据和实际数据会有差异，而inotify可以监控文件系统的各种变化，当文件有任何变动时，就触发rsync同步，这样刚好解决了同步数据的实时性问题。</p>
+<h3 id="安装inotfiy工具inotifytools"><a href="#安装inotfiy工具inotifytools" class="headerlink" title="安装inotfiy工具inotifytools"></a>安装inotfiy工具inotifytools</h3><p>  由于inotofy需要Linux内核的支持，在安装inotify-tools前要先确认系统内核师傅支持，如果Linux内核低于2.6.13版本，就需要重启编译内核加入inotify的支持，如何知道你的Linux内核是否支持Inotify机制呢，执行下面命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grep INOTIFY_USER /boot/config-$(uname -r)</div><div class="line">CONFIG_INOTIFY_USER=y</div><div class="line">如果输出“CONFIG_INOTIFY_USER=y”，那么就可以享受Inotify之旅了。</div></pre></td></tr></table></figure></p>
+<h4 id="软件下载地址"><a href="#软件下载地址" class="headerlink" title="软件下载地址"></a>软件下载地址</h4><p>官方地址：<a href="https://github.com/rvoicilas/inotify-tools/wiki" target="_blank" rel="external">https://github.com/rvoicilas/inotify-tools/wiki</a></p>
+<h4 id="下载安装软件包"><a href="#下载安装软件包" class="headerlink" title="下载安装软件包"></a>下载安装软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</div><div class="line">tar -zxf inotify-tools-3.14.tar.gz </div><div class="line">cd inotify-tools-3.14</div><div class="line">./configure --prefix=/usr/local/inotify</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h3 id="配置rsync、inotify"><a href="#配置rsync、inotify" class="headerlink" title="配置rsync、inotify"></a>配置rsync、inotify</h3><h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>CentOS_5.4_i386<br>更新服务器：172.16.6.100<br>目标服务器：172.16.6.98</p>
+<h4 id="配置目标服务器"><a href="#配置目标服务器" class="headerlink" title="配置目标服务器"></a>配置目标服务器</h4><h5 id="检查rsync是否安装"><a href="#检查rsync是否安装" class="headerlink" title="检查rsync是否安装"></a>检查rsync是否安装</h5><p>如果没有安装可以源码安装或者<code>yum -y install rsync</code>，rsync3.0相对与2.0有很多的改进，3.0是边对边边同步，2.0是完全对比之后在同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -qa rsync</div><div class="line">rsync-2.6.8-3.1</div></pre></td></tr></table></figure></p>
+<h5 id="定义rsync配置文件-etc-rsyncd-conf"><a href="#定义rsync配置文件-etc-rsyncd-conf" class="headerlink" title="定义rsync配置文件/etc/rsyncd.conf"></a>定义rsync配置文件/etc/rsyncd.conf</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat &gt;&gt; /etc/rsyncd.conf &lt;uid=nobody </div><div class="line">gid=nobody</div><div class="line">use chroot = no </div><div class="line">max connections = 100</div><div class="line">timeout = 600</div><div class="line">pid file = /var/run/rsyncd.pid</div><div class="line">lock file = /var/run/rsyncd.lock</div><div class="line">log file = /var/log/rsyncd.log</div><div class="line">secrets file = /etc/rsyncd.passwd</div><div class="line">hosts allow = 172.16.6.100</div><div class="line">[website]</div><div class="line">path = /data/website/</div><div class="line">comment = Web Site</div><div class="line">read only = no</div><div class="line">ignore errors</div><div class="line">list = no</div><div class="line">auth users = website</div><div class="line">EOF</div></pre></td></tr></table></figure>
+<h5 id="配置rsync密码文件，修改密码文件权限，是其他用户无权查看"><a href="#配置rsync密码文件，修改密码文件权限，是其他用户无权查看" class="headerlink" title="配置rsync密码文件，修改密码文件权限，是其他用户无权查看"></a>配置rsync密码文件，修改密码文件权限，是其他用户无权查看</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cat &gt;&gt; /etc/rsyncd.passwd &lt;&lt; EOF</div><div class="line">website:website</div><div class="line">EOF</div><div class="line">chmod 600 /etc/rsyncd.passwd</div></pre></td></tr></table></figure>
+<h5 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/usr/bin/rsync --daemon --config=/etc/rsyncd.conf </div><div class="line">lsof -i:873</div><div class="line">COMMAND   PID USER   FD   TYPE     DEVICE SIZE NODE NAME</div><div class="line">rsync   25469 root    3u  IPv6 1038838496       TCP *:rsync (LISTEN)</div><div class="line">rsync   25469 root    5u  IPv4 1038838497       TCP *:rsync (LISTEN)</div></pre></td></tr></table></figure>
+<h5 id="客户端测试，同步代码"><a href="#客户端测试，同步代码" class="headerlink" title="客户端测试，同步代码"></a>客户端测试，同步代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rsync -vzrtopg --progress website@172.16.6.98::website --password-file=/etc/rsync.passwd /data/website/</div><div class="line">sent 26731 bytes  received 6831971 bytes  4572468.00 bytes/sec</div><div class="line">total size is 19027624  speedup is 2.77</div></pre></td></tr></table></figure>
+<h5 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">inotifywait=&apos;/usr/local/inotify/bin/inotifywait&apos;</div><div class="line">LOCAL=172.16.6.98</div><div class="line">SRC=/data/website/</div><div class="line">USER=website</div><div class="line">COMMAND=/usr/bin/rsync </div><div class="line">Option=&quot;-vzrtopg --progress --delete&quot; </div><div class="line">Module=website</div><div class="line">PASSFILE=/etc/rsync.passwd</div><div class="line">$inotifywait -mrq --timefmt &apos;%y-%m-%d %H:%M&apos; --format &apos;%T %w%f %e&apos; --event modify,delete,create,attrib $SRC | while read date time files</div><div class="line">do</div><div class="line">        $COMMAND $Option --password-file=$PASSFILE $SRC $USER@$LOCAL::$Module</div><div class="line">        echo &quot;$files was rsyncd&quot; &gt;&gt; /var/log/rsync.log 2&gt;&amp;1</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>把脚本使用nohup放入后台执行nohup ./rsync.sh &amp;<br>这样将更新的文件提交到更新源服务器上，就可以通过Inotify和rsync的配合批量的将更新文件同步到所有服务器中。</p>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/inotify/" rel="tag">#inotify</a>
+          
+            <a href="/tags/rsync/" rel="tag">#rsync</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/21/update-openssl.html" rel="next" title="Openssl升级">
+                <i class="fa fa-chevron-left"></i> Openssl升级
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/21/inotify-command.html" rel="prev" title="初识inotify">
+                初识inotify <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/21/rsync-inotify-backup.html"
+     data-title="rsync+inotify实现实时备份"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/21/rsync-inotify-backup.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/21/rsync-inotify-backup.html"
+           data-title="rsync+inotify实现实时备份" data-url="http://czero000.github.io/2015/12/21/rsync-inotify-backup.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的优点和缺点"><span class="nav-number">1.</span> <span class="nav-text">rsync的优点和缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inotify简介"><span class="nav-number">2.</span> <span class="nav-text">inotify简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装inotfiy工具inotifytools"><span class="nav-number">3.</span> <span class="nav-text">安装inotfiy工具inotifytools</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件下载地址"><span class="nav-number">3.1.</span> <span class="nav-text">软件下载地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载安装软件包"><span class="nav-number">3.2.</span> <span class="nav-text">下载安装软件包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置rsync、inotify"><span class="nav-number">4.</span> <span class="nav-text">配置rsync、inotify</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统环境"><span class="nav-number">4.1.</span> <span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置目标服务器"><span class="nav-number">4.2.</span> <span class="nav-text">配置目标服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#检查rsync是否安装"><span class="nav-number">4.2.1.</span> <span class="nav-text">检查rsync是否安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义rsync配置文件-etc-rsyncd-conf"><span class="nav-number">4.2.2.</span> <span class="nav-text">定义rsync配置文件/etc/rsyncd.conf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置rsync密码文件，修改密码文件权限，是其他用户无权查看"><span class="nav-number">4.2.3.</span> <span class="nav-text">配置rsync密码文件，修改密码文件权限，是其他用户无权查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动服务"><span class="nav-number">4.2.4.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#客户端测试，同步代码"><span class="nav-number">4.2.5.</span> <span class="nav-text">客户端测试，同步代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步脚本"><span class="nav-number">4.2.6.</span> <span class="nav-text">同步脚本</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

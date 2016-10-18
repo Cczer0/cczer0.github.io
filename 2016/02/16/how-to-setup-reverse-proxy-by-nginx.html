@@ -1,0 +1,861 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nginx," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="反向代理初识反向代理反向代理(Reverse Proxy)是指以代理服务器来接受Internet的连接请求，然后将请求转发给内部服务器，并将从服务器得到的结构返回给Internet请求客户端，喜事的代理服务器对外表现为一个反向代理服务器。
+
+反向代理作用
+保护网站安全 – 任何来自Internet的请求都必须先经过代理服务器
+通过配置缓存功能加速Web请求 – 可以缓存后端Web服务器的某些静态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx--玩转反向代理">
+<meta property="og:url" content="http://czero000.github.io/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="反向代理初识反向代理反向代理(Reverse Proxy)是指以代理服务器来接受Internet的连接请求，然后将请求转发给内部服务器，并将从服务器得到的结构返回给Internet请求客户端，喜事的代理服务器对外表现为一个反向代理服务器。
+
+反向代理作用
+保护网站安全 – 任何来自Internet的请求都必须先经过代理服务器
+通过配置缓存功能加速Web请求 – 可以缓存后端Web服务器的某些静态">
+<meta property="og:image" content="http://www.zerounix.com/images/web/nginx/Reverse_Proxy.png">
+<meta property="og:updated_time" content="2016-02-16T09:04:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx--玩转反向代理">
+<meta name="twitter:description" content="反向代理初识反向代理反向代理(Reverse Proxy)是指以代理服务器来接受Internet的连接请求，然后将请求转发给内部服务器，并将从服务器得到的结构返回给Internet请求客户端，喜事的代理服务器对外表现为一个反向代理服务器。
+
+反向代理作用
+保护网站安全 – 任何来自Internet的请求都必须先经过代理服务器
+通过配置缓存功能加速Web请求 – 可以缓存后端Web服务器的某些静态">
+<meta name="twitter:image" content="http://www.zerounix.com/images/web/nginx/Reverse_Proxy.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html"/>
+
+
+  <title> Nginx--玩转反向代理 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Nginx--玩转反向代理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-16T17:02:21+08:00" content="2016-02-16">
+              2016-02-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/16/how-to-setup-reverse-proxy-by-nginx.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html" class="leancloud_visitors" data-flag-title="Nginx--玩转反向代理">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><h3 id="初识反向代理"><a href="#初识反向代理" class="headerlink" title="初识反向代理"></a>初识反向代理</h3><p>反向代理(Reverse Proxy)是指以代理服务器来接受Internet的连接请求，然后将请求转发给内部服务器，并将从服务器得到的结构返回给Internet请求客户端，喜事的代理服务器对外表现为一个反向代理服务器。</p>
+<p><img src="http://www.zerounix.com/images/web/nginx/Reverse_Proxy.png" alt="Reverse_Proxy" title="反向代理示意图"></p>
+<h3 id="反向代理作用"><a href="#反向代理作用" class="headerlink" title="反向代理作用"></a>反向代理作用</h3><ul>
+<li>保护网站安全 – 任何来自Internet的请求都必须先经过代理服务器</li>
+<li>通过配置缓存功能加速Web请求 – 可以缓存后端Web服务器的某些静态资源，减轻Web服务器的负载</li>
+<li>实现负载均衡 – 充当负载均衡服务器均衡的分发请求，平衡集群中各个服务器的负载压力</li>
+</ul>
+<h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><p>安装过程参考nginx+php-fpm这篇文章的安装过程</p>
+<h2 id="配置反向代理"><a href="#配置反向代理" class="headerlink" title="配置反向代理"></a>配置反向代理</h2><p>简单的反向代理就是http，不需要缓存控制等高级功能，仅仅一个简单的代理，比如nginx+php-fpm也是一种反向代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">location ~ .*\.(php|php5)$ &#123;</div><div class="line">   fastcgi_pass 127.0.0.1:9000;</div><div class="line">   include        fastcgi.conf;</div><div class="line">   try_files $uri =404;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而相对复杂一些的就是反向代理一些网站，会应用到缓存控制机制。</p>
+<h3 id="简单反向代理"><a href="#简单反向代理" class="headerlink" title="简单反向代理"></a>简单反向代理</h3><ul>
+<li>在nginx.conf配置文件中的http块中添加下面内容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">// 反向代理参数</div><div class="line">proxy_connect_timeout 5;                        // nginx跟后端服务器连接超时时间(代理连接超时)                       </div><div class="line">proxy_send_timeout 60;</div><div class="line">proxy_read_timeout 5;                           // 连接成功后，后端服务器响应时间(代理接收超时)</div><div class="line">proxy_buffer_size 32k;                          // 设置代理服务器（nginx）保存用户头信息的缓冲区大小</div><div class="line">proxy_buffers 4 64k;                            // proxy_buffers缓冲区</div><div class="line">proxy_busy_buffers_size 128k;                   // 高负荷下缓冲大小（proxy_buffers*2）</div><div class="line">proxy_temp_file_write_size 128k;                  </div><div class="line">proxy_ignore_client_abort on;                   // 不允许代理端主动关闭连接</div><div class="line">proxy_headers_hash_max_size 51200;</div><div class="line">proxy_headers_hash_bucket_size 6400;</div><div class="line"></div><div class="line">// 配置临时目录、缓存路径(同一个硬盘分区，注意权限)</div><div class="line">proxy_temp_path   /cache/proxy_temp 1 2;</div><div class="line">proxy_cache_path  /cache/proxy_cache levels=1:2 keys_zone=cache_one:200m inactive=1d max_size=10g;</div><div class="line"></div><div class="line">// keys_zone=cache_one:200m 表示这个 zone 名称为 cache_one，分配的内存大小为 200MB</div><div class="line">// levels=1:2 表示缓存目录的第一级目录是 1 个字符，第二级目录是 2 个字符</div><div class="line">// inactive=1d 表示这个zone中的缓存文件如果在 1 天内都没有被访问，那么文件会被cache manager 进程删除</div><div class="line">// max_size=10G 表示这个zone的硬盘容量为 10G</div></pre></td></tr></table></figure>
+<ul>
+<li>在虚拟主机配置文件proxy.zerounix.com.conf文件中添加下面内容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  proxy.zerounix.com;</div><div class="line">        index index.html index.htm index.php;</div><div class="line">        access_log  logs/proxy.zerounix.com_access.log access;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">            proxy_redirect off;</div><div class="line">            proxy_set_header Host $host;</div><div class="line">            proxy_set_header X-Real-IP $remote_addr;</div><div class="line">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">            proxy_set_header X-Forwarded-For $remote_addr;</div><div class="line">            proxy_pass http://172.16.11.211;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">// 只对图片、js、css等静态文件进行缓存</div><div class="line"></div><div class="line">        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ &#123;</div><div class="line">            proxy_next_upstream http_502 http_504 error timeout invalid_header;</div><div class="line">            proxy_cache cache_one;</div><div class="line">            proxy_cache_valid  200 304 12h;</div><div class="line">            proxy_cache_valid 301 302 1m;</div><div class="line">            proxy_cache_valid any 1m;</div><div class="line">            proxy_cache_key $host$uri$is_args$args;</div><div class="line">            proxy_set_header Host $host;</div><div class="line">            proxy_set_header X-Real-IP $remote_addr;</div><div class="line">            proxy_set_header X-Forwarded-For $remote_addr;</div><div class="line">            proxy_set_header Accept-Encoding &quot;none&quot;;</div><div class="line">            proxy_ignore_headers &quot;Cache-Control&quot; &quot;Expires&quot;;</div><div class="line">            proxy_pass http://172.16.11.211;</div><div class="line">            expires      1h;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        location ~ .*\.(php|jsp|cgi)?$ &#123;</div><div class="line">            proxy_set_header Host $host;</div><div class="line">            proxy_set_header X-Forwarded-For  $remote_addr;</div><div class="line">            proxy_pass http://172.16.11.211;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page  500 502 503 504  /50x.html;</div><div class="line"></div><div class="line">        location = /50x.html &#123;</div><div class="line">            root   html;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用SSL的反向代理"><a href="#使用SSL的反向代理" class="headerlink" title="使用SSL的反向代理"></a>使用SSL的反向代理</h3><ul>
+<li>安装nginx</li>
+</ul>
+<p>需要将将 –with-http_sub_module、ngx_cache_purge-2.3编译到nginx中<br>下载链接<a href="http://labs.frickle.com/files/" target="_blank" rel="external">http://labs.frickle.com/files/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 编译参数</div><div class="line">./configure --prefix=/usr/local/nginx --add-module=../ngx_cache_purge-2.3 \</div><div class="line">--with-http_sub_module --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module \</div><div class="line">--with-http_gzip_static_module --with-ld-opt=-ljemalloc</div></pre></td></tr></table></figure>
+<ul>
+<li>签发证书</li>
+</ul>
+<p>自己签发免费ssl证书，为nginx生成自签名ssl证书(访问时需添加信任。也可以使用第三方签名后的证书，如免费的startssl)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/nginx/conf</div><div class="line">openssl genrsa -out server.key 1024</div><div class="line">openssl req -new -key server.key -out server.csr</div><div class="line">openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt</div></pre></td></tr></table></figure></p>
+<ul>
+<li>配置反向代理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">proxy_temp_path   /cache/proxy_temp 1 2;</div><div class="line">proxy_cache_path  /cache/proxy_cache levels=1:2 keys_zone=cache_one:200m inactive=1d max_size=10g;</div><div class="line">proxy_cache_key &quot;$host$request_uri&quot;;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">listen 80;</div><div class="line">server_name proxy.zerounix.com;</div><div class="line">rewrite ^(.*) https://proxy.zerounix.com$1 permanent;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server</div><div class="line">    &#123;</div><div class="line">        listen 443;</div><div class="line">        server_name proxy.zerounix.com;</div><div class="line"></div><div class="line">        upstream google &#123;</div><div class="line">            server 173.194.127.144:80 max_fails=3;</div><div class="line">            server 173.194.127.147:80 max_fails=3;</div><div class="line">            server 173.194.127.148:80 max_fails=3;</div><div class="line">            server 173.194.127.145:80 max_fails=3;</div><div class="line">            server 173.194.127.146:80 max_fails=3;  </div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ssl on;</div><div class="line">        ssl_certificate      /usr/local/nginx/ssl/nginx.crt;      </div><div class="line">        ssl_certificate_key  /usr/local/nginx/ssl/nginx.key;   </div><div class="line">        ssl_protocols   TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">        ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:RC4-SHA:!aNULL:!eNULL:!EXPORT:!DES:!3DES:!MD5:!DSS:!PKS;</div><div class="line">        ssl_prefer_server_ciphers  on;</div><div class="line">        ssl_session_cache       shared:SSL:10m;</div><div class="line">        ssl_session_timeout     5m;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">            proxy_cache one;</div><div class="line">            proxy_cache_valid  200 302  1h;</div><div class="line">            proxy_cache_valid  404      1m;</div><div class="line">            proxy_redirect https://www.google.com/ /;</div><div class="line">            proxy_cookie_domain google.com proxy.zerounix.com;</div><div class="line">            proxy_pass              http://google;</div><div class="line">            proxy_set_header Host &quot;www.google.com&quot;;</div><div class="line">            proxy_set_header Accept-Encoding &quot;&quot;;</div><div class="line">            proxy_set_header User-Agent $http_user_agent;</div><div class="line">            proxy_set_header Accept-Language &quot;zh-CN&quot;;</div><div class="line">            proxy_set_header Cookie &quot;PREF=ID=047808f19f6de346:U=0f62f33dd8549d11:FF=2:LD=zh-CN:NW=1:TM=1325338577:LM=1332142444:GM=1:SG=2:S=rE0SyJh2w1IQ-Maw&quot;;            </div><div class="line">            sub_filter www.google.com proxy.zerounix.com;</div><div class="line">            sub_filter_once off</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>1 监听了80和443端口，可以在Linux自己生成证书。<br>2 定义了个upstream google，放了5个谷歌的ip（通过nslookup www.google.com命令获取（yum -y install bind-utils）），如果不这样做，就等着被谷歌的验证码搞崩溃吧。<br>3 也设置了反向代理缓存，某些资源不用重复去请求谷歌获取，加快搜索速度<br>4 proxy_redirect <a href="https://www.google.com/" target="_blank" rel="external">https://www.google.com/</a> /; 这行的作用是把谷歌服务器返回的302响应头里的域名替换成我们的，不然浏览器还是会直接请求www.google.com，那样反向代理就失效了。<br>5 proxy_cookie_domain google.com proxy.zerounix.com; 把cookie的作用域替换成我们的域名<br>6 proxy_pass <a href="http://google" target="_blank" rel="external">http://google</a>; 反向代理到upstream google<br>7 proxy_set_header Accept-Encoding “”; 防止谷歌返回压缩的内容，因为压缩的内容我们无法作域名替换<br>8 proxy_set_header Accept-Language “zh-CN”;设置语言为中文<br>9 proxy_set_header Cookie “PREF=ID=047808f19f6de346:U=0f62f33dd8549d11:FF=2:LD=zh-CN:NW=1:TM=1325338577:LM=1332142444:GM=1:SG=2:S=rE0SyJh2w1IQ-Maw”; 这行很关键，传固定的cookie给谷歌，是为了禁止即时搜索，因为开启即时搜索无法替换内容。还有设置为新窗口打开网站，这个符合我们打开链接的习惯<br>10 sub_filter www.google.com proxy.zerounix.com当然是把谷歌的域名替换成我们的了，注意需要安装nginx的sub_filter模块(编译加上–with-http_sub_module参数)</p>
+<hr>
+<p><strong> <a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a> </strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag">#nginx</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/16/nginx-support-https.html" rel="next" title="通过HTTPS访问Web">
+                <i class="fa fa-chevron-left"></i> 通过HTTPS访问Web
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/18/glibc-getaddrinfo-repair.html" rel="prev" title="glibc再爆漏洞">
+                glibc再爆漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/16/how-to-setup-reverse-proxy-by-nginx.html"
+     data-title="Nginx--玩转反向代理"
+     data-content=""
+     data-url="http://czero000.github.io/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/16/how-to-setup-reverse-proxy-by-nginx.html"
+           data-title="Nginx--玩转反向代理" data-url="http://czero000.github.io/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">1.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初识反向代理"><span class="nav-number">1.1.</span> <span class="nav-text">初识反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理作用"><span class="nav-number">1.2.</span> <span class="nav-text">反向代理作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Nginx"><span class="nav-number">2.</span> <span class="nav-text">安装 Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置反向代理"><span class="nav-number">3.</span> <span class="nav-text">配置反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单反向代理"><span class="nav-number">3.1.</span> <span class="nav-text">简单反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用SSL的反向代理"><span class="nav-number">3.2.</span> <span class="nav-text">使用SSL的反向代理</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

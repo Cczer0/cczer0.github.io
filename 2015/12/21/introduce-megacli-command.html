@@ -1,0 +1,899 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="megacli,raid," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Cou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Megacli命令指南">
+<meta property="og:url" content="http://czero000.github.io/2015/12/21/introduce-megacli-command.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Cou">
+<meta property="og:updated_time" content="2016-01-21T03:51:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Megacli命令指南">
+<meta name="twitter:description" content="MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Cou">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/21/introduce-megacli-command.html"/>
+
+
+  <title> Megacli命令指南 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Megacli命令指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-21T22:58:15+08:00" content="2015-12-21">
+              2015-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/21/introduce-megacli-command.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/introduce-megacli-command.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/21/introduce-megacli-command.html" class="leancloud_visitors" data-flag-title="Megacli命令指南">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p> MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Count: 0 这两个数值来确定阵列中磁盘是否有问题；Medai Error Count 表示磁盘可能错误，可能是磁盘有坏道，这个值不为0值得注意，数值越大，危险系数越高，Other Error Count 表示磁盘可能存在松动，可能需要重新再插入。MegaCli 可以对阵列中所有的磁盘进行检测，我们可以通过脚本的方式来检测相关参数，从而通知管理人员。</p>
+<p>下载MegCli,目前针对公司DB数据库是IBM的服务器，直接从IBM官方下载，如果其它服务器的，使用各官方下载或者 LSI网站上进行相关下载。一般来说，是通用的。这个包适用32 /64位操作系统平台</p>
+<p>下载地址：ftp://download2.boulder.ibm.com/ecc/sar/CMA/XSA/ibm_utl_sraidmr_megacli-8.00.48_linux_32-64.zip</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unzip ibm_utl_sraidmr_megacli-8.00.48_linux_32-64.zip</div><div class="line">cd linux</div><div class="line">rpm -ivh Lib_Utils-1.00-09.noarch.rpm  MegaCli-8.00.48-1.i386.rpm</div></pre></td></tr></table></figure>
+<h3 id="使用命令及参数"><a href="#使用命令及参数" class="headerlink" title="使用命令及参数"></a>使用命令及参数</h3><h4 id="命令使用："><a href="#命令使用：" class="headerlink" title="命令使用："></a>命令使用：</h4><ul>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -Lall -aALL 查raid级别</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpAllInfo -aALL 查raid卡信息</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -PDList -aALL 查看硬盘信息</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -aAll 查看电池信息</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -FwTermLog -Dsply -aALL 查看raid卡日志</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -adpCount 【显示适配器个数】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpGetTime –aALL 【显示适配器时间】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpAllInfo -aAll 【显示所有适配器信息】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -LALL -aAll 【显示所有逻辑磁盘组信息】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -PDList -aAll 【显示所有的物理信息】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuStatus -aALL |grep ‘Charger Status’ 【查看充电状态】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuStatus -aALL【显示BBU状态信息】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuCapacityInfo -aALL【显示BBU容量信息】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuDesignInfo -aALL 【显示BBU设计参数】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuProperties -aALL 【显示当前BBU属性】</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -cfgdsply -aALL 【显示Raid卡型号，Raid设置，Disk相关信息】</li>
+</ul>
+<h4 id="磁带状态的变化，从拔盘，到插盘的过程中。"><a href="#磁带状态的变化，从拔盘，到插盘的过程中。" class="headerlink" title="磁带状态的变化，从拔盘，到插盘的过程中。"></a>磁带状态的变化，从拔盘，到插盘的过程中。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
+<h4 id="查看磁盘缓存策略"><a href="#查看磁盘缓存策略" class="headerlink" title="查看磁盘缓存策略"></a>查看磁盘缓存策略</h4><ul>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -L0 -a0</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -L1 -a0</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -LALL -a0</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -LALL -aALL</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -DskCache -LALL -aALL</li>
+</ul>
+<h4 id="设置磁盘缓存策略"><a href="#设置磁盘缓存策略" class="headerlink" title="设置磁盘缓存策略"></a>设置磁盘缓存策略</h4><p>缓存策略解释：</p>
+<ul>
+<li>WT (Write through</li>
+<li>WB (Write back)</li>
+<li>NORA (No read ahead)</li>
+<li>RA (Read ahead)</li>
+<li>ADRA (Adaptive read ahead)</li>
+<li>Cached</li>
+<li>Direct<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDSetProp WT|WB|NORA|RA|ADRA -L0 -a0</div><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDSetProp -Cached|-Direct -L0 -a0 enable / disable disk cache</div><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDSetProp -EnDskCache|-DisDskCache -L0 -a0</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5"><a href="#创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5" class="headerlink" title="创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5"></a>创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -CfgLdAdd -r5 [1:2,1:3,1:4] WB Direct -Hsp[1:5] -a0</div></pre></td></tr></table></figure>
+<h4 id="创建阵列，不指定热备"><a href="#创建阵列，不指定热备" class="headerlink" title="创建阵列，不指定热备"></a>创建阵列，不指定热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -CfgLdAdd -r5 [1:2,1:3,1:4] WB Direct -a0</div></pre></td></tr></table></figure>
+<h4 id="删除阵列"><a href="#删除阵列" class="headerlink" title="删除阵列"></a>删除阵列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -CfgLdDel -L1 -a0</div></pre></td></tr></table></figure>
+<h4 id="在线添加磁盘"><a href="#在线添加磁盘" class="headerlink" title="在线添加磁盘"></a>在线添加磁盘</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDRecon -Start -r5 -Add -PhysDrv[1:4] -L1 -a0</div></pre></td></tr></table></figure>
+<h4 id="阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"><a href="#阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。" class="headerlink" title="阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"></a>阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。</h4><ul>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInit -ShowProg -LALL -aALL 或者以动态可视化文字界面显示</li>
+<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInit -ProgDsply -LALL -aALL</li>
+</ul>
+<h4 id="查看阵列后台初始化进度"><a href="#查看阵列后台初始化进度" class="headerlink" title="查看阵列后台初始化进度"></a>查看阵列后台初始化进度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDBI -ShowProg -LALL -aALL</div></pre></td></tr></table></figure>
+<p>或者以动态可视化文字界面显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDBI -ProgDsply -LALL -aALL</div></pre></td></tr></table></figure></p>
+<h4 id="指定第-5-块盘作为全局热备"><a href="#指定第-5-块盘作为全局热备" class="headerlink" title="指定第 5 块盘作为全局热备"></a>指定第 5 块盘作为全局热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDHSP -Set [-EnclAffinity] [-nonRevertible] -PhysDrv[1:5] -a0</div></pre></td></tr></table></figure>
+<h4 id="指定为某个阵列的专用热备"><a href="#指定为某个阵列的专用热备" class="headerlink" title="指定为某个阵列的专用热备"></a>指定为某个阵列的专用热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDHSP -Set [-Dedicated [-Array1]] [-EnclAffinity] [-nonRevertible] -PhysDrv[1:5] -a0</div></pre></td></tr></table></figure>
+<h4 id="删除全局热备"><a href="#删除全局热备" class="headerlink" title="删除全局热备"></a>删除全局热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDHSP -Rmv -PhysDrv[1:5] -a0</div></pre></td></tr></table></figure>
+<h4 id="将某块物理盘下线-上线"><a href="#将某块物理盘下线-上线" class="headerlink" title="将某块物理盘下线/上线"></a>将某块物理盘下线/上线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDOffline -PhysDrv [1:4] -a0</div><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDOnline -PhysDrv [1:4] -a0</div></pre></td></tr></table></figure>
+<h4 id="查看物理磁盘重建进度"><a href="#查看物理磁盘重建进度" class="headerlink" title="查看物理磁盘重建进度"></a>查看物理磁盘重建进度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDRbld -ShowProg -PhysDrv [1:5] -a0</div></pre></td></tr></table></figure>
+<p>或者以动态可视化文字界面显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDRbld -ProgDsply -PhysDrv [1:5] -a0</div></pre></td></tr></table></figure></p>
+<h4 id="磁带状态的变化，从拔盘，到插盘的过程中："><a href="#磁带状态的变化，从拔盘，到插盘的过程中：" class="headerlink" title="磁带状态的变化，从拔盘，到插盘的过程中："></a>磁带状态的变化，从拔盘，到插盘的过程中：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
+<h4 id="raid-电池设置相关"><a href="#raid-电池设置相关" class="headerlink" title="raid 电池设置相关"></a>raid 电池设置相关</h4><p>查看电池状态信息(Display BBU Status Information)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuStatus -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuStatus -aALL</div></pre></td></tr></table></figure></p>
+<p>查看电池容量（Display BBU Capacity Information）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuCapacityInfo -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuCapacityInfo –aALL</div></pre></td></tr></table></figure></p>
+<p>查看电池设计参数(Display BBU Design Parameters)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuDesignInfo -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuDesignInfo –aALL</div></pre></td></tr></table></figure></p>
+<p>查看电池属性（Display Current BBU Properties）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuProperties -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuProperties –aALL</div></pre></td></tr></table></figure></p>
+<p>设置电池为学习模式为循环模式（Start BBU Learning Cycle）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Description Starts the learning cycle on the BBU.</div><div class="line">No parameter is needed for this option.</div><div class="line">MegaCli -AdpBbuCmd -BbuLearn -aN|-a0,1,2|-aALL</div></pre></td></tr></table></figure></p>
+<p>设置磁盘的缓存模式和访问方式 （Change Virtual Disk Cache and Access Parameters）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Description Allows you to change the following virtual disk parameters:</div><div class="line">-WT (Write through), WB (Write back): Selects write policy.</div><div class="line">-NORA (No read ahead), RA (Read ahead), ADRA (Adaptive read ahead): Selects read policy.</div><div class="line">-Cached, -Direct: Selects cache policy.</div><div class="line">-RW, -RO, Blocked: Selects access policy.</div><div class="line">-EnDskCache: Enables disk cache.</div><div class="line">-DisDskCache: Disables disk cache.</div><div class="line">MegaCli -LDSetProp &#123; WT | WB|NORA |RA | ADRA|-Cached|Direct&#125; |</div><div class="line">&#123;-RW|RO|Blocked&#125; |</div><div class="line">&#123;-Name[string]&#125; |</div><div class="line">&#123;-EnDskCache|DisDskCache&#125; –Lx |</div><div class="line">-L0,1,2|-Lall -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -LDSetProp WT -L0 -a0</div></pre></td></tr></table></figure></p>
+<p>显示磁盘缓存和访问方式（Display Virtual Disk Cache and Access Parameters）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">MegaCli -LDGetProp -Cache | -Access | -Name | -DskCache -Lx|-L0,1,2|</div><div class="line">-Lall -aN|-a0,1,2|-aALL</div><div class="line">Displays the cache and access policies of the virtual disk(s):</div><div class="line">-WT (Write through), WB (Write back): Selects write policy.</div><div class="line">-NORA (No read ahead), RA (Read ahead), ADRA (Adaptive read ahead): Selects read policy.</div><div class="line">-Cache, -Cached, Direct: Displays cache policy.</div><div class="line">-Access, -RW, -RO, Blocked: Displays access policy.</div><div class="line">-DskCache: Displays physical disk cache policy.</div></pre></td></tr></table></figure></p>
+<p>Megaraid 必知必会 使用LSI的megaraid可以对raid进行有效监控。别的厂商比如HP,IBM也有自己的raid API</p>
+<ul>
+<li>MegaCli -ldinfo -lall -aall 查询raid级别，磁盘数量，容量，条带大小</li>
+<li>MegaCli -cfgdsply -aALL |grep Policy 查询控制器cache策略</li>
+<li>MegaCli -LDSetProp WB -L0 -a0 设置write back功能</li>
+<li>MegaCli -LDSetProp CachedBadBBU -L0 -a0 设置即使电池坏了还是保持WB功能</li>
+<li>MegaCli -AdpBbuCmd -BbuLearn a0 手动充电</li>
+<li>MegaCli -FwTermLog -Dsply -aALL 查询日志</li>
+<li>MegaCli -adpCount 显示适配器个数</li>
+</ul>
+<p>显示所有适配器信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpAllInfo -aAll</div><div class="line">Critical Disks : 0</div><div class="line">Failed Disks : 0</div></pre></td></tr></table></figure>
+<p>显示所有逻辑磁盘组信息： <code>MegaCli -LDInfo -LALL -aAll</code><br>显示所有的物理信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MegaCli -PDList -aAll</div><div class="line">Media Error Count: 0</div><div class="line">Other Error Count: 0</div></pre></td></tr></table></figure></p>
+<p>查看充电状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuStatus -aALL</div><div class="line">Learn Cycle Requested : No</div><div class="line">Fully Charged : Yes</div></pre></td></tr></table></figure></p>
+<p>显示BBU(后备电池)状态信息： <code>MegaCli -AdpBbuCmd -GetBbuStatus -aALL</code><br>显示BBU容量信息： <code>MegaCli -AdpBbuCmd -GetBbuCapacityInfo -aALL</code><br>显示BBU设计参数： <code>MegaCli -AdpBbuCmd -GetBbuDesignInfo -aALL</code><br>显示当前BBU属性： <code>MegaCli -AdpBbuCmd -GetBbuProperties -aALL</code><br>显示Raid卡型号，Raid设置，Disk相关信息： <code>MegaCli -cfgdsply -aALL</code><br>查看Cache 策略设置： <code>MegaCli -cfgdsply -aALL |grep -i Policy
+Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BBU</code><br>查看充电进度百分比： <code>MegaCli -AdpBbuCmd -GetBbuStatus -aALL</code></p>
+<p>各种设备和磁盘的不同状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
+<h4 id="通过脚本检测RAID-磁盘状态"><a href="#通过脚本检测RAID-磁盘状态" class="headerlink" title="通过脚本检测RAID 磁盘状态"></a>通过脚本检测RAID 磁盘状态</h4><p>Linux下脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#check raid disk status</div><div class="line">MEGACLI=&quot;/opt/MegaRAID/MegaCli/MegaCli64 &quot;</div><div class="line">$MEGACLI -pdlist -aALL  | grep &quot;Firmware state&quot; | awk -F : &apos;&#123;print $2&#125;&apos; | awk -F , &apos;&#123;print $1&#125;&apos; &gt;/tmp/fireware.log</div><div class="line">$MEGACLI -pdlist -aALL  | grep -E &quot;Media Error|Other Error&quot; | awk -F : &apos;&#123;print $2&#125;&apos; &gt;/tmp/disk.log</div><div class="line">for i in `cat &lt; /tmp/disk.log`</div><div class="line">do</div><div class="line">if [ $i -ne 0 ]</div><div class="line">        then</div><div class="line">curl &quot;http://xxxxxxB&amp;state=ALARM&amp;description=raid_disk_error&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">for i in `cat &lt; /tmp/fireware.log`</div><div class="line">do</div><div class="line">if [ $i !=  Online ]</div><div class="line">        then</div><div class="line">curl &quot;http://xxxxxxstate=ALARM&amp;description=raid_disk_offline&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">Windows 下脚本</div><div class="line">Windows下脚本用的工具是gnu for windows平台的一些软件，如 bash grep awk cat</div><div class="line">通过bash直接调用脚本</div><div class="line">如：G:\raid_check\unixtools&gt;bash.exe  G:\disk.sh</div><div class="line">#check raid disk status</div><div class="line">MEGACLI=&quot;//G/raid_check/MegaCli.exe&quot;</div><div class="line">GREP=&quot;//G/raid_check/unixtools/grep.exe&quot;</div><div class="line">AWK=&quot;//G/raid_check/unixtools/awk.exe&quot;</div><div class="line">CAT=&quot;//G/raid_check/unixtools/cat.exe&quot;</div><div class="line">CURL=&quot;//G/raid_check/unixtools/curl.exe&quot;</div><div class="line">$MEGACLI -pdlist -aALL  | $GREP &quot;Firmware state&quot; |$AWK -F: &apos;&#123;print $2&#125;&apos; |$AWK -F , &apos;&#123;print $1&#125;&apos; &gt;//c/fireware.log</div><div class="line">$MEGACLI -pdlist -aALL  | $GREP -E &quot;Media Error|Other Error&quot; | $AWK -F : &apos;&#123;print $2&#125;&apos; &gt; //c/disk.log</div><div class="line">for i in `$CAT c:/disk.log`</div><div class="line">do</div><div class="line">if [ $i -ne 0 ]</div><div class="line">        then</div><div class="line">$CURL &quot;http://xxxxxx&amp;description=raid_disk_error&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">for i in `$CAT c:/fireware.log`</div><div class="line">do</div><div class="line">if [ $i != Online ]</div><div class="line">        then</div><div class="line">$CURL &quot;http://xxxxx&amp;state=ALARM&amp;description=raid_disk_offline&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/megacli/" rel="tag">#megacli</a>
+          
+            <a href="/tags/raid/" rel="tag">#raid</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/21/passwd-command-failed.html" rel="next" title="passwd修改密码失败">
+                <i class="fa fa-chevron-left"></i> passwd修改密码失败
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/21/update-openssl.html" rel="prev" title="Openssl升级">
+                Openssl升级 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/21/introduce-megacli-command.html"
+     data-title="Megacli命令指南"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/21/introduce-megacli-command.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/21/introduce-megacli-command.html"
+           data-title="Megacli命令指南" data-url="http://czero000.github.io/2015/12/21/introduce-megacli-command.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用命令及参数"><span class="nav-number">2.</span> <span class="nav-text">使用命令及参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令使用："><span class="nav-number">2.1.</span> <span class="nav-text">命令使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带状态的变化，从拔盘，到插盘的过程中。"><span class="nav-number">2.2.</span> <span class="nav-text">磁带状态的变化，从拔盘，到插盘的过程中。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘缓存策略"><span class="nav-number">2.3.</span> <span class="nav-text">查看磁盘缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置磁盘缓存策略"><span class="nav-number">2.4.</span> <span class="nav-text">设置磁盘缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5"><span class="nav-number">2.5.</span> <span class="nav-text">创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建阵列，不指定热备"><span class="nav-number">2.6.</span> <span class="nav-text">创建阵列，不指定热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除阵列"><span class="nav-number">2.7.</span> <span class="nav-text">删除阵列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在线添加磁盘"><span class="nav-number">2.8.</span> <span class="nav-text">在线添加磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"><span class="nav-number">2.9.</span> <span class="nav-text">阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看阵列后台初始化进度"><span class="nav-number">2.10.</span> <span class="nav-text">查看阵列后台初始化进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定第-5-块盘作为全局热备"><span class="nav-number">2.11.</span> <span class="nav-text">指定第 5 块盘作为全局热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定为某个阵列的专用热备"><span class="nav-number">2.12.</span> <span class="nav-text">指定为某个阵列的专用热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除全局热备"><span class="nav-number">2.13.</span> <span class="nav-text">删除全局热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将某块物理盘下线-上线"><span class="nav-number">2.14.</span> <span class="nav-text">将某块物理盘下线/上线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看物理磁盘重建进度"><span class="nav-number">2.15.</span> <span class="nav-text">查看物理磁盘重建进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带状态的变化，从拔盘，到插盘的过程中："><span class="nav-number">2.16.</span> <span class="nav-text">磁带状态的变化，从拔盘，到插盘的过程中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#raid-电池设置相关"><span class="nav-number">2.17.</span> <span class="nav-text">raid 电池设置相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过脚本检测RAID-磁盘状态"><span class="nav-number">2.18.</span> <span class="nav-text">通过脚本检测RAID 磁盘状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

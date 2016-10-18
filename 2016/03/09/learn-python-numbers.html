@@ -1,0 +1,1090 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Python数字python数字数据类型用于存储数值，数据类型是不允许改变的，如果改变数字数据类型的值，将重新分配内存空间
+
+创建数字变量赋值
+
+12var1 = 1var2 = 0
+
+删除数字对象引用
+
+123del var1[,var2][,...varN]del vardel var_a var_b
+Python支持的数据类型Python支持四种不同的数值类型
+
+整型(int) –通常被称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习--数字">
+<meta property="og:url" content="http://czero000.github.io/2016/03/09/learn-python-numbers.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="Python数字python数字数据类型用于存储数值，数据类型是不允许改变的，如果改变数字数据类型的值，将重新分配内存空间
+
+创建数字变量赋值
+
+12var1 = 1var2 = 0
+
+删除数字对象引用
+
+123del var1[,var2][,...varN]del vardel var_a var_b
+Python支持的数据类型Python支持四种不同的数值类型
+
+整型(int) –通常被称">
+<meta property="og:updated_time" content="2016-03-14T04:35:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习--数字">
+<meta name="twitter:description" content="Python数字python数字数据类型用于存储数值，数据类型是不允许改变的，如果改变数字数据类型的值，将重新分配内存空间
+
+创建数字变量赋值
+
+12var1 = 1var2 = 0
+
+删除数字对象引用
+
+123del var1[,var2][,...varN]del vardel var_a var_b
+Python支持的数据类型Python支持四种不同的数值类型
+
+整型(int) –通常被称">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/03/09/learn-python-numbers.html"/>
+
+
+  <title> Python学习--数字 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python学习--数字
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-09T16:11:27+08:00" content="2016-03-09">
+              2016-03-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/09/learn-python-numbers.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09/learn-python-numbers.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/09/learn-python-numbers.html" class="leancloud_visitors" data-flag-title="Python学习--数字">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="Python数字"><a href="#Python数字" class="headerlink" title="Python数字"></a>Python数字</h2><p>python数字数据类型用于存储数值，数据类型是不允许改变的，如果改变数字数据类型的值，将重新分配内存空间</p>
+<ul>
+<li>创建数字变量赋值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var1 = <span class="number">1</span></div><div class="line">var2 = <span class="number">0</span></div></pre></td></tr></table></figure>
+<ul>
+<li>删除数字对象引用</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">del</span> var1[,var2][,...varN]</div><div class="line"><span class="keyword">del</span> var</div><div class="line"><span class="keyword">del</span> var_a var_b</div></pre></td></tr></table></figure>
+<h3 id="Python支持的数据类型"><a href="#Python支持的数据类型" class="headerlink" title="Python支持的数据类型"></a>Python支持的数据类型</h3><p>Python支持四种不同的数值类型</p>
+<ul>
+<li><strong>整型(int)</strong> –通常被称为整型或整数，是正或负数，不带有小数点</li>
+<li><strong>长整型(long integers)</strong> - 无限大小的整数，这书最后一个大写或者小写的L</li>
+<li><strong>浮点型(folating point real values)</strong> - 浮点型有整数和小数部分组成</li>
+<li><strong>复数(complex numbers)</strong> - 复数的虚部以字母J或者j结尾，如2+3j</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>int</th>
+<th>long</th>
+<th>float</th>
+<th>complex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>51924361L</td>
+<td>0.0</td>
+<td>3.14j</td>
+</tr>
+<tr>
+<td>100</td>
+<td>-0x19323L</td>
+<td>15.20</td>
+<td>45.j</td>
+</tr>
+<tr>
+<td>-786</td>
+<td>0122L</td>
+<td>-21.9</td>
+<td>9.322e-36j</td>
+</tr>
+<tr>
+<td>080</td>
+<td>0xDEFABCECBDAECBFBAEl</td>
+<td>32.3+e18</td>
+<td>.876j</td>
+</tr>
+<tr>
+<td>-0490</td>
+<td>535633629843L</td>
+<td>-90.</td>
+<td>-.6545+0J</td>
+</tr>
+<tr>
+<td>-0x260</td>
+<td>-052318172735L</td>
+<td>-32.54e100</td>
+<td>3e+26J</td>
+</tr>
+<tr>
+<td>0x69</td>
+<td>-4721885298529L</td>
+<td>70.2-E12</td>
+<td>4.53e-7j</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>长整型也可以使用小写L，但是还是建议使用大写L，避免与数字1混淆，Python使用L来表示长整型</li>
+<li>Python还支持复数，复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型</li>
+</ul>
+<h3 id="Python数字类型转换"><a href="#Python数字类型转换" class="headerlink" title="Python数字类型转换"></a>Python数字类型转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">int(x [,base ])         将x转换为一个整数  </div><div class="line">long(x [,base ])        将x转换为一个长整数  </div><div class="line">float(x )               将x转换到一个浮点数  </div><div class="line">complex(real [,imag ])  创建一个复数  </div><div class="line">str(x )                 将对象 x 转换为字符串  </div><div class="line">repr(x )                将对象 x 转换为表达式字符串  </div><div class="line">eval(str )              用来计算在字符串中的有效Python表达式,并返回一个对象  </div><div class="line">tuple(s )               将序列 s 转换为一个元组  </div><div class="line">list(s )                将序列 s 转换为一个列表  </div><div class="line">chr(x )                 将一个整数转换为一个字符  </div><div class="line">unichr(x )              将一个整数转换为Unicode字符  </div><div class="line">ord(x )                 将一个字符转换为它的整数值  </div><div class="line">hex(x )                 将一个整数转换为一个十六进制字符串  </div><div class="line">oct(x )                 将一个整数转换为一个八进制字符串</div></pre></td></tr></table></figure>
+<h3 id="Python数学函数"><a href="#Python数学函数" class="headerlink" title="Python数学函数"></a>Python数学函数</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>返回值 ( 描述 )</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abs(x)</td>
+<td>返回数字的绝对值，如abs(-10) 返回 10</td>
+</tr>
+<tr>
+<td>ceil(x)</td>
+<td>返回数字的上入整数，如math.ceil(4.1) 返回 5</td>
+</tr>
+<tr>
+<td>cmp(x, y)</td>
+<td>如果 x &lt; y 返回 -1, 如果 x == y 返回 0, 如果 x &gt; y 返回 1</td>
+</tr>
+<tr>
+<td>exp(x)</td>
+<td>返回e的x次幂(ex),如math.exp(1) 返回2.718281828459045</td>
+</tr>
+<tr>
+<td>fabs(x)</td>
+<td>返回数字的绝对值，如math.fabs(-10) 返回10.0</td>
+</tr>
+<tr>
+<td>floor(x)</td>
+<td>返回数字的下舍整数，如math.floor(4.9)返回 4</td>
+</tr>
+<tr>
+<td>log(x)</td>
+<td>如math.log(math.e)返回1.0,math.log(100,10)返回2.0</td>
+</tr>
+<tr>
+<td>log10(x)</td>
+<td>返回以10为基数的x的对数，如math.log10(100)返回 2.0</td>
+</tr>
+<tr>
+<td>max(x1, x2,…)</td>
+<td>返回给定参数的最大值，参数可以为序列</td>
+</tr>
+<tr>
+<td>min(x1, x2,…)</td>
+<td>返回给定参数的最小值，参数可以为序列</td>
+</tr>
+<tr>
+<td>modf(x)</td>
+<td>返回x的整数部分与小数部分，两部分的数值符号与x相同，整数部分以浮点型表示</td>
+</tr>
+<tr>
+<td>pow(x, y)</td>
+<td>x**y 运算后的值</td>
+</tr>
+<tr>
+<td>round(x [,n])</td>
+<td>返回浮点数x的四舍五入值，如给出n值，则代表舍入到小数点后的位数</td>
+</tr>
+<tr>
+<td>sqrt(x)</td>
+<td>返回数字x的平方根，数字可以为负数，返回类型为实数，如math.sqrt(4)返回 2+0j</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Python随机数函数"><a href="#Python随机数函数" class="headerlink" title="Python随机数函数"></a>Python随机数函数</h3><p>随机数可以用于数学，游戏，安全等领域中，还经常被嵌入到算法中，用以提高算法效率，并提高程序的安全性。<br>Python包含以下常用随机数函数</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>choice(seq)</td>
+<td>从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。</td>
+</tr>
+<tr>
+<td>randrange ([start,] stop [,step])</td>
+<td>从指定范围内，按指定基数递增的集合中获取一个随机数，基数缺省值为1</td>
+</tr>
+<tr>
+<td>random()</td>
+<td>随机生成下一个实数，它在[0,1)范围内。</td>
+</tr>
+<tr>
+<td>seed([x])</td>
+<td>改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。</td>
+</tr>
+<tr>
+<td>shuffle(lst)</td>
+<td>将序列的所有元素随机排序</td>
+</tr>
+<tr>
+<td>uniform(x, y)</td>
+<td>随机生成下一个实数，它在[x,y]范围内。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Python三角函数"><a href="#Python三角函数" class="headerlink" title="Python三角函数"></a>Python三角函数</h3><p>Python包括以下三角函数</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>acos(x)</td>
+<td>返回x的反余弦弧度值。</td>
+</tr>
+<tr>
+<td>asin(x)</td>
+<td>返回x的反正弦弧度值。</td>
+</tr>
+<tr>
+<td>atan(x)</td>
+<td>返回x的反正切弧度值。</td>
+</tr>
+<tr>
+<td>atan2(y, x)</td>
+<td>返回给定的 X 及 Y 坐标值的反正切值。</td>
+</tr>
+<tr>
+<td>cos(x)</td>
+<td>返回x的弧度的余弦值。</td>
+</tr>
+<tr>
+<td>hypot(x, y)</td>
+<td>返回欧几里德范数 sqrt(x<em>x + y</em>y)。</td>
+</tr>
+<tr>
+<td>sin(x)</td>
+<td>返回的x弧度的正弦值。</td>
+</tr>
+<tr>
+<td>tan(x)</td>
+<td>返回x弧度的正切值。</td>
+</tr>
+<tr>
+<td>degrees(x)</td>
+<td>将弧度转换为角度,如degrees(math.pi/2) ， 返回90.0</td>
+</tr>
+<tr>
+<td>radians(x)</td>
+<td>将角度转换为弧度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Python数学常量"><a href="#Python数学常量" class="headerlink" title="Python数学常量"></a>Python数学常量</h3><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pi</td>
+<td>数学常量 pi（圆周率，一般以π来表示）</td>
+</tr>
+<tr>
+<td>e</td>
+<td>数学常量 e，e即自然常数（自然常数）</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/29/learn-python-operators.html" rel="next" title="Python学习--运算符">
+                <i class="fa fa-chevron-left"></i> Python学习--运算符
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/10/learn-python-strings.html" rel="prev" title="Python学习--字符串">
+                Python学习--字符串 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/09/learn-python-numbers.html"
+     data-title="Python学习--数字"
+     data-content=""
+     data-url="http://czero000.github.io/2016/03/09/learn-python-numbers.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/09/learn-python-numbers.html"
+           data-title="Python学习--数字" data-url="http://czero000.github.io/2016/03/09/learn-python-numbers.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python数字"><span class="nav-number">1.</span> <span class="nav-text">Python数字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python支持的数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">Python支持的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python数字类型转换"><span class="nav-number">1.2.</span> <span class="nav-text">Python数字类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python数学函数"><span class="nav-number">1.3.</span> <span class="nav-text">Python数学函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python随机数函数"><span class="nav-number">1.4.</span> <span class="nav-text">Python随机数函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python三角函数"><span class="nav-number">1.5.</span> <span class="nav-text">Python三角函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python数学常量"><span class="nav-number">1.6.</span> <span class="nav-text">Python数学常量</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

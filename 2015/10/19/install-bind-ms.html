@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bind," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Ma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos6配置主辅DNS">
+<meta property="og:url" content="http://czero000.github.io/2015/10/19/install-bind-ms.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Ma">
+<meta property="og:updated_time" content="2016-01-21T03:51:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos6配置主辅DNS">
+<meta name="twitter:description" content="主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Ma">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/10/19/install-bind-ms.html"/>
+
+
+  <title> Centos6配置主辅DNS | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Centos6配置主辅DNS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-19T17:43:54+08:00" content="2015-10-19">
+              2015-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/19/install-bind-ms.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/19/install-bind-ms.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/10/19/install-bind-ms.html" class="leancloud_visitors" data-flag-title="Centos6配置主辅DNS">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Master响应zone transfer请求并传送结果，直到整个slave更新完成。</p>
+<h2 id="安装软件包-主从服务器"><a href="#安装软件包-主从服务器" class="headerlink" title="安装软件包(主从服务器)"></a>安装软件包(主从服务器)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install bind bind-chroot bind-utils bind-libs</div></pre></td></tr></table></figure>
+<h2 id="配置Master服务器"><a href="#配置Master服务器" class="headerlink" title="配置Master服务器"></a>配置Master服务器</h2><h3 id="编辑bind主配置文件"><a href="#编辑bind主配置文件" class="headerlink" title="编辑bind主配置文件"></a>编辑bind主配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">cat /var/named/chroot/etc/named.conf</div><div class="line">//</div><div class="line">// named.conf</div><div class="line">//</div><div class="line">// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS</div><div class="line">// server as a caching only nameserver (as a localhost DNS resolver only).</div><div class="line">//</div><div class="line">// See /usr/share/doc/bind*/sample/ for example named configuration files.</div><div class="line">//</div><div class="line"></div><div class="line">options &#123;</div><div class="line">        listen-on port 53 &#123; 162.243.134.106; &#125;;                    \\监听ip及端口</div><div class="line">        directory       &quot;/var/named&quot;;                              \\dns工作目录</div><div class="line">        dump-file       &quot;/var/named/data/cache_dump.db&quot;;           \\ 缓存转存文件</div><div class="line">        statistics-file &quot;/var/named/data/named_stats.txt&quot;;         \\内存使用统计信息</div><div class="line">        allow-query     &#123; any; &#125;;                                  \\ 允许查询的主机，默认是localhost</div><div class="line">        recursion no;                                              \\是否递归查询</div><div class="line">        allow-transfer  &#123; 162.243.134.107; &#125;;                      \\允许同步ip</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;                                                          \\定义bind服务日志</div><div class="line">        channel &quot;named_log&quot; &#123;</div><div class="line">        file &quot;logs/named.log&quot; versions 10 size 5m;</div><div class="line">        severity dynamic;</div><div class="line">        print-category yes;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">channel &quot;query_log&quot; &#123;                                              \\定义查询日志</div><div class="line">        file &quot;logs/query.log&quot; versions 10 size 5m;</div><div class="line">        severity debug;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">category default &#123; named_log; &#125;;</div><div class="line">category queries &#123; query_log; &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone &quot;.&quot; IN &#123;</div><div class="line">        type hint;                                                 \\定义根区域</div><div class="line">        file &quot;named.ca&quot;;                                           \\区域文件  </div><div class="line">&#125;;</div><div class="line"></div><div class="line">include &quot;/etc/rndc.key&quot;; </div><div class="line"></div><div class="line">zone &quot;zerounix.com&quot; IN &#123;                                           \\用户区域文件                    </div><div class="line">        type master;</div><div class="line">        masters &#123; 162.243.134.106; &#125;;</div><div class="line">        file &quot;zerounix.com.db&quot;;</div><div class="line">&#125;;</div><div class="line">rm -f /etc/named.conf</div><div class="line">ls -s /var/named/chroot/etc/named.conf /etc/named.conf</div></pre></td></tr></table></figure>
+<h3 id="增加zerounix-com区域文件"><a href="#增加zerounix-com区域文件" class="headerlink" title="增加zerounix.com区域文件"></a>增加zerounix.com区域文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cat /var/named/chroot/var/named/zerounix.com.db </div><div class="line">$TTL    60</div><div class="line">@       IN      SOA     ns1.zerounix.com.    hostmaster.zerounix.com. (</div><div class="line">                        2015101702</div><div class="line">                        3600</div><div class="line">                        300</div><div class="line">                        604800</div><div class="line">                        600</div><div class="line">                        )</div><div class="line"></div><div class="line">                IN      NS      ns1.zerounix.com.</div><div class="line">                IN      NS      ns2.zerounix.com.</div><div class="line">                IN      MX      5       mail.zerounix.com.</div><div class="line">                IN              A       162.243.134.106</div><div class="line">www             IN              CNAME   web.zerounix.com</div><div class="line">web             IN              A       162.243.134.106</div></pre></td></tr></table></figure>
+<h3 id="启动bind服务"><a href="#启动bind服务" class="headerlink" title="启动bind服务"></a>启动bind服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/named start</div></pre></td></tr></table></figure>
+<h3 id="测试解析是否正常"><a href="#测试解析是否正常" class="headerlink" title="测试解析是否正常"></a>测试解析是否正常</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">dig www.zerounix.com @162.243.134.106</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.37.rc1.el6_7.4 &lt;&lt;&gt;&gt; www.zerounix.com</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20243</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;www.zerounix.com.              IN      A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">www.zerounix.com.       9       IN      CNAME   web.zerounix.com.</div><div class="line">web.zerounix.com.       9       IN      A       162.243.134.106</div><div class="line"></div><div class="line">;; Query time: 362 msec</div><div class="line">;; SERVER: 162.243.134.106#53(162.243.134.106)</div><div class="line">;; WHEN: Mon Oct 19 17:22:21 2015</div><div class="line">;; MSG SIZE  rcvd: 68</div></pre></td></tr></table></figure>
+<h2 id="配置Slave服务器"><a href="#配置Slave服务器" class="headerlink" title="配置Slave服务器"></a>配置Slave服务器</h2><h3 id="编辑bind配置文件"><a href="#编辑bind配置文件" class="headerlink" title="编辑bind配置文件"></a>编辑bind配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"> cat /var/named/chroot/etc/named.conf</div><div class="line">//</div><div class="line">// named.conf</div><div class="line">//</div><div class="line">// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS</div><div class="line">// server as a caching only nameserver (as a localhost DNS resolver only).</div><div class="line">//</div><div class="line">// See /usr/share/doc/bind*/sample/ for example named configuration files.</div><div class="line">//</div><div class="line"></div><div class="line">options &#123;</div><div class="line">        listen-on port 53 &#123; 162.243.134.107; &#125;;</div><div class="line">        directory       &quot;/var/named&quot;;</div><div class="line">        dump-file       &quot;/var/named/data/cache_dump.db&quot;;</div><div class="line">        statistics-file &quot;/var/named/data/named_stats.txt&quot;;</div><div class="line">        allow-query     &#123; any; &#125;;</div><div class="line">        recursion no;</div><div class="line">        allow-transfer  &#123; 162.243.134.106; 162.243.134.107;&#125;;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;</div><div class="line">        channel &quot;named_log&quot; &#123;</div><div class="line">        file &quot;logs/named.log&quot; versions 10 size 5m;</div><div class="line">        severity dynamic;</div><div class="line">        print-category yes;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">channel &quot;query_log&quot; &#123;</div><div class="line">        file &quot;logs/query.log&quot; versions 10 size 5m;</div><div class="line">        severity debug;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">category default &#123; named_log; &#125;;</div><div class="line">category queries &#123; query_log; &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone &quot;.&quot; IN &#123;</div><div class="line">        type hint;</div><div class="line">        file &quot;named.ca&quot;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">include &quot;/etc/rndc.key&quot;;</div><div class="line"></div><div class="line">zone &quot;zerounix.com&quot; IN &#123;</div><div class="line">        type slave;</div><div class="line">        masters &#123; 162.243.134.106; &#125;;</div><div class="line">        file &quot;zerounix.com.db&quot;;</div><div class="line">        transfer-source 162.243.134.107;</div><div class="line">&#125;;</div><div class="line">rm -f /etc/named.conf</div><div class="line">ls -s /var/named/chroot/etc/named.conf /etc/named.conf</div></pre></td></tr></table></figure>
+<h3 id="启动bind服务-1"><a href="#启动bind服务-1" class="headerlink" title="启动bind服务"></a>启动bind服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/named start</div></pre></td></tr></table></figure>
+<h3 id="验证主辅同步"><a href="#验证主辅同步" class="headerlink" title="验证主辅同步"></a>验证主辅同步</h3><h4 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tail -f /var/named/chroot/var/named/logs/named.log</div><div class="line">19-Oct-2015 17:39:42.825 notify: info: client 162.243.134.106#3133: received notify for zone &apos;zerounix.com&apos;</div><div class="line">19-Oct-2015 17:39:42.827 general: info: zone zerounix.com/IN: Transfer started.</div><div class="line">19-Oct-2015 17:39:42.828 xfer-in: info: transfer of &apos;zerounix.com/IN&apos; from 162.243.134.106#53: connected using 162.243.134.107#50919</div><div class="line">19-Oct-2015 17:39:42.830 general: info: zone zerounix.com/IN: transferred serial 2015101701</div><div class="line">19-Oct-2015 17:39:42.830 xfer-in: info: transfer of &apos;zerounix.com&apos; from 162.243.134.106#53: Transfer completed: 1 messages, 7 record</div><div class="line">s, 222 bytes, 0.001 secs (222000 bytes/sec)</div></pre></td></tr></table></figure>
+<h4 id="查看zone文件"><a href="#查看zone文件" class="headerlink" title="查看zone文件"></a>查看zone文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat /var/named/chroot/var/named/zerounix.com.db </div><div class="line">$ORIGIN .</div><div class="line">$ORIGIN .</div><div class="line">$TTL 60 ; 1 minute</div><div class="line">zerounix.com              IN SOA  ns1.zerounix.com. hostmaster.zerounix.com. (</div><div class="line">                                2015101702 ; serial</div><div class="line">                                3600       ; refresh (1 hour)</div><div class="line">                                300        ; retry (5 minutes)</div><div class="line">                                604800     ; expire (1 week)</div><div class="line">                                600        ; minimum (10 minutes)</div><div class="line">                                )</div><div class="line">                        NS      ns1.zerounix.com.</div><div class="line">                        NS      ns2.zerounix.com.</div><div class="line">                        A       162.243.134.106</div><div class="line">                        MX      5 mail.zerounix.com.</div><div class="line">$ORIGIN zerounix.com.</div><div class="line">www                     CNAME   web.zerounix.com.</div><div class="line">web                     A       162.243.134.106</div></pre></td></tr></table></figure>
+<h3 id="测试解析"><a href="#测试解析" class="headerlink" title="测试解析"></a>测试解析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">dig www.zerounix.com @162.243.134.107</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.37.rc1.el6_7.4 &lt;&lt;&gt;&gt; www.zerounix.com</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20272</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;www.zerounix.com.              IN      A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">www.zerounix.com.       9       IN      CNAME   web.zerounix.com.</div><div class="line">web.zerounix.com.       9       IN      A       162.243.134.106</div><div class="line"></div><div class="line">;; Query time: 379 msec</div><div class="line">;; SERVER: 162.243.134.107#53(162.243.134.107)</div><div class="line">;; WHEN: Mon Oct 19 17:35:21 2015</div><div class="line">;; MSG SIZE  rcvd: 68</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bind/" rel="tag">#bind</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/14/install-redis.html" rel="next" title="安装Redis">
+                <i class="fa fa-chevron-left"></i> 安装Redis
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/21/nginx-init-scripts.html" rel="prev" title="Nginx--INIT启动脚本">
+                Nginx--INIT启动脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/10/19/install-bind-ms.html"
+     data-title="Centos6配置主辅DNS"
+     data-content=""
+     data-url="http://czero000.github.io/2015/10/19/install-bind-ms.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/10/19/install-bind-ms.html"
+           data-title="Centos6配置主辅DNS" data-url="http://czero000.github.io/2015/10/19/install-bind-ms.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装软件包-主从服务器"><span class="nav-number">1.</span> <span class="nav-text">安装软件包(主从服务器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Master服务器"><span class="nav-number">2.</span> <span class="nav-text">配置Master服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑bind主配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">编辑bind主配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加zerounix-com区域文件"><span class="nav-number">2.2.</span> <span class="nav-text">增加zerounix.com区域文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动bind服务"><span class="nav-number">2.3.</span> <span class="nav-text">启动bind服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试解析是否正常"><span class="nav-number">2.4.</span> <span class="nav-text">测试解析是否正常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Slave服务器"><span class="nav-number">3.</span> <span class="nav-text">配置Slave服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑bind配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">编辑bind配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动bind服务-1"><span class="nav-number">3.2.</span> <span class="nav-text">启动bind服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证主辅同步"><span class="nav-number">3.3.</span> <span class="nav-text">验证主辅同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看日志"><span class="nav-number">3.3.1.</span> <span class="nav-text">查看日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看zone文件"><span class="nav-number">3.3.2.</span> <span class="nav-text">查看zone文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试解析"><span class="nav-number">3.4.</span> <span class="nav-text">测试解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number">4.</span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

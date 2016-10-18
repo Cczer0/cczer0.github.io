@@ -1,0 +1,842 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="parted,gpt," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="parted命令介绍parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。
+Parted 命令分为两种模式：命令行模式和交互模式。
+
+命令行模式： parted [option] device [command] ,该模式可以直接在命令行下对磁盘进行分区操作，比较">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建大于2TB分区">
+<meta property="og:url" content="http://czero000.github.io/2015/12/21/create-2t-partition.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="parted命令介绍parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。
+Parted 命令分为两种模式：命令行模式和交互模式。
+
+命令行模式： parted [option] device [command] ,该模式可以直接在命令行下对磁盘进行分区操作，比较">
+<meta property="og:updated_time" content="2016-01-18T09:15:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="创建大于2TB分区">
+<meta name="twitter:description" content="parted命令介绍parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。
+Parted 命令分为两种模式：命令行模式和交互模式。
+
+命令行模式： parted [option] device [command] ,该模式可以直接在命令行下对磁盘进行分区操作，比较">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/21/create-2t-partition.html"/>
+
+
+  <title> 创建大于2TB分区 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                创建大于2TB分区
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-21T17:56:56+08:00" content="2015-12-21">
+              2015-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/21/create-2t-partition.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/create-2t-partition.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/21/create-2t-partition.html" class="leancloud_visitors" data-flag-title="创建大于2TB分区">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="parted命令介绍"><a href="#parted命令介绍" class="headerlink" title="parted命令介绍"></a>parted命令介绍</h3><p>parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。</p>
+<p>Parted 命令分为两种模式：命令行模式和交互模式。</p>
+<ul>
+<li>命令行模式： parted [option] device [command] ,该模式可以直接在命令行下对磁盘进行分区操作，比较适合编程应用。</li>
+<li>交互模式：parted [option] device 类似于使用fdisk /dev/xxx</li>
+<li>MBR：MBR分区表(即主引导记录)大家都很熟悉。所支持的最大卷：2T，而且对分区有限制：最多4个主分区或3个主分区加一个扩展分区</li>
+<li>GPT： GPT（即GUID分区表）。是源自EFI标准的一种较新的磁盘分区表结构的标准，是未来磁盘分区的主要形式。与MBR分区方式相比，具有如下优点。突破MBR 4个主分区限制，每个磁盘最多支持128个分区。支持大于2T的分区，最大卷可达18EB。</li>
+</ul>
+<p>parted是一个可以分区并进行分区调整的工具，他可以创建，破坏，移动，复制，调整<code>ext2 linux-swap fat fat32 reiserfs</code>类型的分区，可以创建，调整，移动<code>Macintosh</code>的HFS分区，检测<code>jfs，ntfs，ufs，xfs</code>分区。</p>
+<p>使用方法：<code>parted [options] [device [command [options...]...]]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">options</div><div class="line">-h  显示帮助信息</div><div class="line">-l  显示所有块设备上的分区</div><div class="line">device 对哪个块设备进行操作，如果没有指定则使用第一个块设备</div><div class="line">command [options...]</div><div class="line"></div><div class="line">check partition  对分区做一个简单的检测</div><div class="line"></div><div class="line">cp [source-device] source dest  复制source-device设备上的source分区到当前设备的dest分区</div><div class="line"></div><div class="line">mklabel label-type 创建新分区表类型，label-type可以是：&quot;bsd&quot;, &quot;dvh&quot;, &quot;gpt&quot;,  &quot;loop&quot;,&quot;mac&quot;, &quot;msdos&quot;, &quot;pc98&quot;, or &quot;sun&quot; 一般的pc机都是msdos格式，如果分区大于2T则需要选用gpt格式的分区表。</div><div class="line"></div><div class="line">mkfs partition fs-type   在partition分区上创建一个fs-type文件系统，fs-type可以是：&quot;fat16&quot;, &quot;fat32&quot;, &quot;ext2&quot;, &quot;linux-swap&quot;,&quot;reiserfs&quot; 注意不支持ext3格式的文件系统，只能先分区然后用专有命令进行格式化。</div><div class="line"></div><div class="line">mkpart part-type [fs-type] start end  创建一个part-type类型的分区，part-type可以是：&quot;primary&quot;, &quot;logical&quot;, or &quot;extended&quot; 如果指定fs-type则在创建分区的同时进行格式化。start和end指的是分区的起始位置，单位默认是M。</div><div class="line"></div><div class="line">eg：</div><div class="line">mkpart  primary  0  -1   0表示分区的开始  -1表示分区的结尾  意思是划分整个硬盘空间为主分区</div><div class="line">mkpartfs part-type fs-type start end 创建一个fs-type类型的part-type分区，不推荐使用，最好是使用mkpart分区完成后使用mke2fs进行格式化。</div><div class="line">name partition name 给分区设置一个名字，这种设置只能用在Mac, PC98, and GPT类型的分区表，设置时名字用引号括起来</div><div class="line">select device 在机器上有多个硬盘时，选择操作那个硬盘</div><div class="line">resize partition start end  调整分区大小</div><div class="line">rm partition  删除一个分区</div><div class="line">rescue start end  拯救一个位于stat和end之间的分区</div><div class="line">unit unit 在前面分区时，默认分区时数值的单位是M，这个参数卡伊改变默认单位，&quot;kB&quot;, &quot;MB&quot;,  &quot;GB&quot;,  &quot;TB&quot;</div><div class="line">move partition start end 移动partition分区</div><div class="line">print  显示分区表信息  </div><div class="line">quit 退出parted</div></pre></td></tr></table></figure>
+<h3 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h3><h4 id="初始磁盘信息"><a href="#初始磁盘信息" class="headerlink" title="初始磁盘信息"></a>初始磁盘信息</h4><p>服务器新增3块4TB硬盘<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">fdisk -l                                                                                                                             </div><div class="line"></div><div class="line">Disk /dev/sdd: 4000.8 GB, 4000787030016 bytes</div><div class="line">255 heads, 63 sectors/track, 486401 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sdb: 4000.8 GB, 4000787030016 bytes</div><div class="line">255 heads, 63 sectors/track, 486401 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sdc: 4000.8 GB, 4000787030016 bytes</div><div class="line">255 heads, 63 sectors/track, 486401 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sda: 146.8 GB, 146815733760 bytes</div><div class="line">255 heads, 63 sectors/track, 17849 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000081</div><div class="line"></div><div class="line">Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sda1   *           1          26      204800   83  Linux</div><div class="line">Partition 1 does not end on cylinder boundary.</div><div class="line">/dev/sda2              26         548     4194304   82  Linux swap / Solaris</div><div class="line">Partition 2 does not end on cylinder boundary.</div><div class="line">/dev/sda3             548        1070     4194304   83  Linux</div><div class="line">/dev/sda4            1070       17850   134780308    5  Extended</div><div class="line">/dev/sda5            1071       17850   134778880   83  Linux</div></pre></td></tr></table></figure></p>
+<h4 id="尝试通过fdisk命令进行分区"><a href="#尝试通过fdisk命令进行分区" class="headerlink" title="尝试通过fdisk命令进行分区"></a>尝试通过fdisk命令进行分区</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb </div><div class="line">Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel</div><div class="line">Building a new DOS disklabel with disk identifier 0x6001e0a2.</div><div class="line">Changes will remain in memory only, until you decide to write them.</div><div class="line">After that, of course, the previous content won&apos;t be recoverable.</div><div class="line"></div><div class="line">Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)</div><div class="line"></div><div class="line">WARNING: The size of this disk is 4.0 TB (4000787030016 bytes).</div><div class="line">DOS partition table format can not be used on drives for volumes</div><div class="line">larger than (2199023255040 bytes) for 512-byte sectors. Use parted(1) and GUID </div><div class="line">partition table format (GPT).</div><div class="line"></div><div class="line"></div><div class="line">WARNING: DOS-compatible mode is deprecated. It&apos;s strongly recommended to</div><div class="line">         switch off the mode (command &apos;c&apos;) and change display units to</div><div class="line">         sectors (command &apos;u&apos;)</div></pre></td></tr></table></figure>
+<p>fdisk 命令无法对大于2TB以上的硬盘进行分区</p>
+<h3 id="通过parted命令进行分区"><a href="#通过parted命令进行分区" class="headerlink" title="通过parted命令进行分区"></a>通过parted命令进行分区</h3><h5 id="更改分区表类型"><a href="#更改分区表类型" class="headerlink" title="更改分区表类型"></a>更改分区表类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parted -s /dev/sdb mklabel gpt</div><div class="line">parted -s /dev/sdc mklabel gpt</div><div class="line">parted -s /dev/sdd mklabel gpt</div></pre></td></tr></table></figure>
+<h5 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parted /dev/sdb &apos;mkpart primary 0 -1&apos;</div><div class="line">parted /dev/sdc &apos;mkpart primary 0 -1&apos;</div><div class="line">parted /dev/sdd &apos;mkpart primary 0 -1&apos;</div></pre></td></tr></table></figure>
+<h5 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkfs.ext4 -q /dev/sdb1</div><div class="line">mkfs.ext4 -q /dev/sdc1</div><div class="line">mkfs.ext4 -q /dev/sdd1</div></pre></td></tr></table></figure>
+<h4 id="挂载目录"><a href="#挂载目录" class="headerlink" title="挂载目录"></a>挂载目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /MFS_DATA1; mount /dev/sdb1 /MFS_DATA1;echo &quot;mount /dev/sdb1 /MFS_DATA1&quot; &gt;&gt; /etc/rc.local</div><div class="line">mkdir /MFS_DATA2; mount /dev/sdc1 /MFS_DATA2;echo &quot;mount /dev/sdc1 /MFS_DATA2&quot; &gt;&gt; /etc/rc.local</div><div class="line">mkdir /MFS_DATA3; mount /dev/sdd1 /MFS_DATA3;echo &quot;mount /dev/sdd1 /MFS_DATA3&quot; &gt;&gt; /etc/rc.local</div></pre></td></tr></table></figure>
+<h4 id="查看磁盘挂载"><a href="#查看磁盘挂载" class="headerlink" title="查看磁盘挂载"></a>查看磁盘挂载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">/dev/sda5       127G  1.1G  120G   1% /</div><div class="line">tmpfs           7.8G   12K  7.8G   1% /dev/shm</div><div class="line">/dev/sda1       194M   29M  155M  16% /boot</div><div class="line">/dev/sda3       4.0G  254M  3.5G   7% /var</div><div class="line">/dev/sdb1       3.6T  196M  3.4T   1% /MFS_DATA1</div><div class="line">/dev/sdc1       3.6T  196M  3.4T   1% /MFS_DATA2</div><div class="line">/dev/sdd1       3.6T  196M  3.4T   1% /MFS_DATA3</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/parted/" rel="tag">#parted</a>
+          
+            <a href="/tags/gpt/" rel="tag">#gpt</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/20/smokeping-support-chinese.html" rel="next" title="Smokeping页面支持中文">
+                <i class="fa fa-chevron-left"></i> Smokeping页面支持中文
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/21/nfs-detail.html" rel="prev" title="NFS详解">
+                NFS详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/21/create-2t-partition.html"
+     data-title="创建大于2TB分区"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/21/create-2t-partition.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/21/create-2t-partition.html"
+           data-title="创建大于2TB分区" data-url="http://czero000.github.io/2015/12/21/create-2t-partition.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#parted命令介绍"><span class="nav-number">1.</span> <span class="nav-text">parted命令介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战演练"><span class="nav-number">2.</span> <span class="nav-text">实战演练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始磁盘信息"><span class="nav-number">2.1.</span> <span class="nav-text">初始磁盘信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试通过fdisk命令进行分区"><span class="nav-number">2.2.</span> <span class="nav-text">尝试通过fdisk命令进行分区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过parted命令进行分区"><span class="nav-number">3.</span> <span class="nav-text">通过parted命令进行分区</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#更改分区表类型"><span class="nav-number">3.0.1.</span> <span class="nav-text">更改分区表类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘分区"><span class="nav-number">3.0.2.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#格式化分区"><span class="nav-number">3.0.3.</span> <span class="nav-text">格式化分区</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载目录"><span class="nav-number">3.1.</span> <span class="nav-text">挂载目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘挂载"><span class="nav-number">3.2.</span> <span class="nav-text">查看磁盘挂载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

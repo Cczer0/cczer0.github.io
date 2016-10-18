@@ -1,0 +1,898 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="saltstack," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。
+
+It is all just data其实sls文件只是一个数据结构，对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SaltStack-States">
+<meta property="og:url" content="http://czero000.github.io/2016/04/07/saltstack-states.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。
+
+It is all just data其实sls文件只是一个数据结构，对">
+<meta property="og:updated_time" content="2016-04-07T03:44:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SaltStack-States">
+<meta name="twitter:description" content="SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。
+
+It is all just data其实sls文件只是一个数据结构，对">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/04/07/saltstack-states.html"/>
+
+
+  <title> SaltStack-States | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SaltStack-States
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-07T10:53:38+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维自动化/" itemprop="url" rel="index">
+                    <span itemprop="name">运维自动化</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维自动化/SaltStack/" itemprop="url" rel="index">
+                    <span itemprop="name">SaltStack</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/07/saltstack-states.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/saltstack-states.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/07/saltstack-states.html" class="leancloud_visitors" data-flag-title="SaltStack-States">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="SaltStack的state"><a href="#SaltStack的state" class="headerlink" title="SaltStack的state"></a>SaltStack的state</h2><p>SaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。</p>
+<ul>
+<li><p>It is all just data<br>其实sls文件只是一个数据结构，对于sls文件的深入理解会有助于对salt state的深入理解和应用。sls文件事实上只是一个字典、列表、字符串或者数字。通过对配置进行数据结构化，使其满足开发者的各种需求，写的越多，越易于理解。</p>
+</li>
+<li><p>The top file<br>所有的state file都可以通过top.sl文件来分配不同的主机使用，这是个整体入口描述，在执行命令的时候，会先检查这个文件，可以看作是基础配置文件</p>
+</li>
+<li><p>Default data -yaml<br>默认情况下salt表现的数据格式采用最简单的序列化数据格式-YAML，由于不同架构经常使用不同的名称和安装包，apache在红帽系列中是httpd，其他发行版多为apache，salt对于底层服务器管理使用init下的脚本，系统命令名，配置文件等，执行service.get_all函数来获取对应服务器可用的服务名称</p>
+</li>
+</ul>
+<hr>
+<h2 id="使用state"><a href="#使用state" class="headerlink" title="使用state"></a>使用state</h2><h3 id="通过命令查看state使用方法"><a href="#通过命令查看state使用方法" class="headerlink" title="通过命令查看state使用方法"></a>通过命令查看state使用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 查看所有states列表</div><div class="line">salt -N minion&apos; sys.list_state_modules</div><div class="line">// 查看指定states的functions</div><div class="line">salt -N &apos;minion&apos; sys.list_state_functions file</div><div class="line">//查看指定states的用法</div><div class="line">salt -N &apos;minion&apos; sys.state_doc file</div></pre></td></tr></table></figure>
+<h3 id="通过示例了解state"><a href="#通过示例了解state" class="headerlink" title="通过示例了解state"></a>通过示例了解state</h3><ul>
+<li>安装软件包及启动服务</li>
+</ul>
+<p>由于不同架构经常使用不同的名称和安装包，apache在红帽系列中是httpd，其他发行版多为apache，salt对于底层服务器管理使用init下的脚本，系统命令名，配置文件等，执行service.get_all函数来获取对应服务器可用的服务名称</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">httpd:</span></div><div class="line"><span class="attr">  pkg:</span></div><div class="line"><span class="bullet">    -</span> installed</div><div class="line"><span class="attr">  service:</span></div><div class="line"><span class="bullet">    -</span> running</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> httpd</div></pre></td></tr></table></figure>
+<p>这些sls数据确保apache包被安装而且apache服务处于运行状态。<br>第一行：被称为ID，这个ID是将要执行这些命令的名字<br>第二行和第四行：用来声明salt state开始的状态，分别使用包管理和服务管理，这个pkg状态管理，通过本地的软件包管理器进行软件安装，service管理系统守护进程<br>第三行、第五行：是要执行的function，这些函数被定义在pkg和service中，这里标示包会被安装，并且apache守护进行会运行<br>最后一行：require是一个必要的声明，用来定义状态之剑的依赖，他们保证apache服务安装成功后才会启动apache守护进程<br>state和方法可以通过点连接起来，上例和下文相同：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">httpd:</span></div><div class="line">  pkg.installed</div><div class="line">  service.running</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> httpd</div></pre></td></tr></table></figure></p>
+<p>在实际配置管理中，需要编写大量state.sls文件。这些文件会有一个top.sls（非必须）文件作为入口文件，负责指定minion调用某些state.sls文件。</p>
+<p>将上面的sls保存为init.sls放置在salt://apache目录下，</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/srv/salt/</div><div class="line">├── apache</div><div class="line">│   └── init.sls</div><div class="line">└── top.sls</div></pre></td></tr></table></figure>
+<ul>
+<li>添加配置文件和用户</li>
+</ul>
+<p>​    当建立类似Apache服务器这样的服务时，许多组件需要被安装。apache的配置文件要被管理起来，而且还需要特定的用户和用户</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="attr">httpd:</span></div><div class="line"><span class="attr">  pkg:</span></div><div class="line"><span class="bullet">    -</span> installed</div><div class="line"><span class="attr">  service:</span></div><div class="line"><span class="bullet">    -</span> running</div><div class="line"><span class="attr">    - watch:</span></div><div class="line"><span class="attr">      - pkg:</span> httpd</div><div class="line"><span class="attr">      - file:</span> /etc/httpd/conf/httpd.conf</div><div class="line"><span class="attr">      - user:</span> apache</div><div class="line">  user.present:</div><div class="line"><span class="attr">    - name:</span> apache</div><div class="line"><span class="attr">    - uid:</span> <span class="number">48</span></div><div class="line"><span class="attr">    - gid:</span> <span class="number">48</span></div><div class="line"><span class="attr">    - home:</span> /var/www</div><div class="line"><span class="attr">    - shell:</span> /bin/nologin</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - group:</span> apache</div><div class="line">  group.present:</div><div class="line"><span class="attr">    - name:</span> apache</div><div class="line"><span class="attr">    - gid:</span> <span class="number">48</span></div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> httpd</div><div class="line">/etc/httpd/conf/httpd.conf:</div><div class="line">  file.managed:</div><div class="line"><span class="attr">    - source:</span> salt://apache/httpd.conf</div><div class="line"><span class="attr">    - user:</span> root</div><div class="line"><span class="attr">    - group:</span> root</div><div class="line"><span class="attr">    - mode:</span> <span class="number">644</span></div></pre></td></tr></table></figure>
+<p>​    这个例子扩展了上面，其中包括了一个配置文件、一个用户、一个用户组还有一个新的声明：watch。在service中的require换成了watch，从需要一个软件包改成监视3个state（分别是pkg、file、user）。watch语句和require很相似，都能保证被监视或者需要的state在自己之前执行，但是watch还有其他作用。当被监视的state发生变化时，定义watch语句的state与执行自己的watcher函数，当更新软件包、配置文件或者修改apache用户的uid都会触发service state的watcher函数，在本例子中，service state的watcher会重启apache服务。</p>
+<ul>
+<li>多个sls文件</li>
+</ul>
+<p>​    在具有扩展性的SaltStack时，需要不止一个sls，上面的例子中只使用了1个sls文件，多个sls文件可以结合成state tree。sls文件以一定的目录结构分布在master，sls和要发到minion上的文件只是普通文件.</p>
+<p>ssh/init.sls</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">::::::::::::::</div><div class="line">init.sls</div><div class="line">::::::::::::::</div><div class="line"><span class="attr">include:</span></div><div class="line"><span class="bullet">  -</span> client</div><div class="line"><span class="bullet">  -</span> server</div><div class="line"></div><div class="line">::::::::::::::</div><div class="line">client.sls</div><div class="line">::::::::::::::</div><div class="line"><span class="attr">openssh-clients:</span></div><div class="line">  pkg.installed</div><div class="line">/etc/ssh/ssh_config:</div><div class="line">  file.managed:</div><div class="line"><span class="attr">    - user:</span> root</div><div class="line"><span class="attr">    - group:</span> root</div><div class="line"><span class="attr">    - mode:</span> <span class="number">644</span></div><div class="line"><span class="attr">    - source:</span> salt://ssh/files/ssh_config</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> openssh-clients</div><div class="line">      </div><div class="line">::::::::::::::</div><div class="line">server.sls</div><div class="line">::::::::::::::</div><div class="line"><span class="attr">include:</span></div><div class="line"><span class="bullet">  -</span> ssh</div><div class="line"><span class="attr">openssh-server:</span></div><div class="line">  pkg.installed</div><div class="line"><span class="attr">sshd:</span></div><div class="line">  service.running:</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> openssh-clients</div><div class="line"><span class="attr">      - pkg:</span> openssh-server</div><div class="line"><span class="attr">      - file:</span> /etc/ssh/sshd_config</div><div class="line">/etc/ssh/sshd_config:</div><div class="line">  file.managed:</div><div class="line"><span class="attr">    - user:</span> root</div><div class="line"><span class="attr">    - group:</span> root</div><div class="line"><span class="attr">    - mode:</span> <span class="number">644</span></div><div class="line"><span class="attr">    - source:</span> salt://ssh/files/sshd_config</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> openssh-server</div></pre></td></tr></table></figure>
+<ul>
+<li><p>扩展被引用的sls数据</p>
+<p>  什么是扩展呢。在ssh/server.sls文件中定义了一个apache通用的服务器，现在需要增加一个带有mod_python模块的apache，不需要重新写sls，可以直接include原来的server.sls，然后增加安装mod_python的state，在apache service的watch列表中增加mod_python即可。<em>**</em></p>
+</li>
+</ul>
+<p>python/mod_ypthon.sls内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">include:  </div><div class="line">- apache</div><div class="line"></div><div class="line">extend:</div><div class="line">  apache:</div><div class="line">    service:</div><div class="line">      - watch: </div><div class="line">        - pkg:mod_python</div><div class="line"></div><div class="line">mod_python:  pkg.installed</div></pre></td></tr></table></figure>
+<p>这个例子中，先把apache目录下init.sls文件包含进来（在include一个目录时，salt会自动查找init.sls文件），然后拓展了ID为apache下的service state中的watch列表。也可以在extending中修改下载文件位置。extend是salt 的sls更加灵活。</p>
+<ul>
+<li><p>理解渲染系统Render System</p>
+<p> 因为sls仅是数据，所以不是非要用YAML来表达。salt 默认用YAML，只是因为容易学习和使用，只要提供一个渲染器，sls文件可以以任意格式呈现出来。</p>
+</li>
+</ul>
+<p>​    缺省的渲染系统是yaml_jinja渲染器。yaml_jinja渲染器使用jinjia2模版引擎来处理sls，然后在调用YAML解析。其他可用的渲染其还包括：yaml_mako模版引擎；yaml_wempy，使用Wempy模版引擎；py，使用Python写sls文件；pydsl，建立在python语法基础上的描述语言。</p>
+<ul>
+<li><p>默认渲染器—yaml_jinja</p>
+<p>关于jinjia模板系统使用参考官方稳定：<a href="http://jinja.pocoo.org/docs" target="_blank" rel="external">http://jinja.pocoo.org/docs</a></p>
+</li>
+</ul>
+<p>在基于模板引擎的渲染器，可以从3个组件中获取需要的数据：salt，grains和pilla。在模板文件中，salt对象允许任何salt函数从模板内容进行调用，grains允许grains从模板中访问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">apache:</div><div class="line">  pkg:</div><div class="line">    - installed</div><div class="line">    &#123;% if grains[ &apos;os&apos; ] == &apos;CentOS&apos; %&#125;</div><div class="line">    - name: httpd</div><div class="line">    &#123;% endif %&#125;</div><div class="line">  service:</div><div class="line">    - running</div><div class="line">    &#123;% if grains[ &apos;os&apos; ] == &apos;CentOS&apos;%&#125;</div><div class="line">    - name: httpd</div><div class="line">    &#123;% endif %&#125;</div><div class="line">    - watch:</div><div class="line">      - pkg: apache</div><div class="line">      - file: /etc/httpd/conf/httpd.conf</div><div class="line">      - user: apache</div><div class="line">  user.present:</div><div class="line">    - name: apache</div><div class="line">    - uid: 48</div><div class="line">    - gid: 48</div><div class="line">    - home: /var/www</div><div class="line">    - shell: /bin/nologin</div><div class="line">    - require:</div><div class="line">      - group: apache</div><div class="line">  group.present:</div><div class="line">    - name: apache</div><div class="line">    - gid: 48</div><div class="line">    - require:</div><div class="line">      - pkg: apache</div><div class="line">/etc/httpd/conf/httpd.conf:</div><div class="line">  file.managed:</div><div class="line">    - source: salt://apache/files/httpd.conf</div><div class="line">    - user: root</div><div class="line">    - group: root</div><div class="line">    - mode: 644</div></pre></td></tr></table></figure>
+<p>这个例子很容易理解，用到jinja中的条件结构，如果grains中os表明minion的操作系统是CentOS，那么apache的软件包和服务名应当是httpd。更有意思的例子，用到jinja的循环结构，在设置MooseFS分布式中chunkserver：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">moosefs/chunk.sls：</div><div class="line"><span class="attr">include:</span></div><div class="line"><span class="bullet">    -</span> moosefs</div><div class="line">&#123;% for mnt in salt[<span class="string">'cmd.run'</span>](<span class="string">'ls /dev/data/moose*'</span>).split() %&#125;</div><div class="line">/mnt/moose&#123;&#123; mnt[<span class="bullet">-1</span>] &#125;&#125;:</div><div class="line">  mount.mounted:</div><div class="line"><span class="attr">    - device:</span> &#123;&#123; mnt &#125;&#125;</div><div class="line"><span class="attr">    - fstype:</span> xfs</div><div class="line"><span class="attr">    - mkmnt:</span> <span class="literal">True</span></div><div class="line">  file.directory:</div><div class="line"><span class="attr">    - user:</span> mfs</div><div class="line"><span class="attr">    - group:</span> mfs</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - user:</span> mfs</div><div class="line"><span class="attr">      - group:</span> mfs</div><div class="line">&#123;% endfor %&#125;</div><div class="line">/etc/mfshdd.cfg:</div><div class="line">  file.managed:</div><div class="line"><span class="attr">    - source:</span> salt://moosefs/mfshdd.cfg</div><div class="line"><span class="attr">    - user:</span> root</div><div class="line"><span class="attr">    - group:</span> root</div><div class="line"><span class="attr">    - mode:</span> <span class="number">644</span></div><div class="line"><span class="attr">    - template:</span> jinja</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> mfs-chunkserver</div><div class="line"> </div><div class="line">/etc/mfschunkserver.cfg:</div><div class="line">  file.managed:</div><div class="line"><span class="attr">    - source:</span> salt://moosefs/mfschunkserver.cfg</div><div class="line"><span class="attr">    - user:</span> root</div><div class="line"><span class="attr">    - group:</span> root</div><div class="line"><span class="attr">    - mode:</span> <span class="number">644</span></div><div class="line"><span class="attr">    - template:</span> jinja</div><div class="line"><span class="attr">    - require:</span></div><div class="line"><span class="attr">      - pkg:</span> mfs-chunkserver</div><div class="line"> </div><div class="line"><span class="attr">mfs-chunkserver:</span></div><div class="line"><span class="attr">  pkg:</span></div><div class="line"><span class="bullet">    -</span> installed</div><div class="line"><span class="attr">mfschunkserver:</span></div><div class="line"><span class="attr">  service:</span></div><div class="line"><span class="bullet">    -</span> running</div><div class="line"><span class="attr">    - require:</span></div><div class="line">&#123;% for mnt in salt[<span class="string">'cmd.run'</span>](<span class="string">'ls /dev/data/moose*'</span>) %&#125;</div><div class="line"><span class="attr">      - mount:</span> /mnt/moose&#123;&#123; mnt[<span class="bullet">-1</span>] &#125;&#125;</div><div class="line"><span class="attr">      - file:</span> /mnt/moose&#123;&#123; mnt[<span class="bullet">-1</span>] &#125;&#125;</div><div class="line">&#123;% endfor %&#125;</div><div class="line"><span class="attr">      - file:</span> /etc/mfschunkserver.cfg</div><div class="line"><span class="attr">      - file:</span> /etc/mfshdd.cfg</div><div class="line"><span class="attr">      - file:</span> /var/lib/mfs</div></pre></td></tr></table></figure>
+<p>这个例子展示了jinja的强大之处，多个for循环用来动态的检查并挂载磁盘，并多次使用salt cmd.run执行模块执行shell命令。</p>
+<ul>
+<li><p>运行和调用salt states</p>
+<p>一旦写好sls文件，就应该测试，以保证能够正常工作，调用这些规则，只需要在命令行中执行 salt * state.highstate。如果返回的只有主机名，很可能是sls文件存在问题，在minion，使用salt-call命令执行 salt-call state.highstate -l debug来调试输出的作物信息，亦可以在前台执行salt-minion -l debug</p>
+</li>
+</ul>
+<h3 id="state多环境配置"><a href="#state多环境配置" class="headerlink" title="state多环境配置"></a>state多环境配置</h3><ul>
+<li>master</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">file_roots:</div><div class="line">  base:</div><div class="line">    - /srv/salt/base</div><div class="line">  dev:</div><div class="line">    - /srv/salt/dev</div></pre></td></tr></table></figure>
+<ul>
+<li>通过命令执行不同环境state</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">salt -N &apos;minion&apos; state.sls saltenv=&apos;dev&apos;</div><div class="line">salt -N &apos;minion&apos; state.sls saltenv=&apos;base&apos;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/saltstack/" rel="tag">#saltstack</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/06/saltstack-pillar.html" rel="next" title="SaltStack-Pillar">
+                <i class="fa fa-chevron-left"></i> SaltStack-Pillar
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/07/saltstack-nodegroup.html" rel="prev" title="SaltStack-Nodegroup">
+                SaltStack-Nodegroup <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/07/saltstack-states.html"
+     data-title="SaltStack-States"
+     data-content=""
+     data-url="http://czero000.github.io/2016/04/07/saltstack-states.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/07/saltstack-states.html"
+           data-title="SaltStack-States" data-url="http://czero000.github.io/2016/04/07/saltstack-states.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SaltStack的state"><span class="nav-number">1.</span> <span class="nav-text">SaltStack的state</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用state"><span class="nav-number">2.</span> <span class="nav-text">使用state</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过命令查看state使用方法"><span class="nav-number">2.1.</span> <span class="nav-text">通过命令查看state使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过示例了解state"><span class="nav-number">2.2.</span> <span class="nav-text">通过示例了解state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state多环境配置"><span class="nav-number">2.3.</span> <span class="nav-text">state多环境配置</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

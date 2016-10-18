@@ -1,0 +1,830 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="transmission," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel
+下载tran">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装BT软件Transmission">
+<meta property="og:url" content="http://czero000.github.io/2015/12/29/centos-install-transmission.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel
+下载tran">
+<meta property="og:updated_time" content="2016-01-21T03:49:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装BT软件Transmission">
+<meta name="twitter:description" content="安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel
+下载tran">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/29/centos-install-transmission.html"/>
+
+
+  <title> 安装BT软件Transmission | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                安装BT软件Transmission
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-29T10:58:16+08:00" content="2015-12-29">
+              2015-12-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/29/centos-install-transmission.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-transmission.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/29/centos-install-transmission.html" class="leancloud_visitors" data-flag-title="安装BT软件Transmission">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel</div></pre></td></tr></table></figure>
+<h3 id="下载transmission及必要软件"><a href="#下载transmission及必要软件" class="headerlink" title="下载transmission及必要软件"></a>下载transmission及必要软件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget http://download-origin.transmissionbt.com/files/transmission-2.84.tar.xz</div><div class="line">wget http://ftp.acc.umu.se/pub/gnome/sources/intltool/0.40/intltool-0.40.6.tar.gz</div><div class="line">wget http://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz</div><div class="line">wget https://cloud.github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz</div></pre></td></tr></table></figure>
+<h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">tar -zxf intltool-0.40.6.tar.gz </div><div class="line">cd intltool-0.40.6</div><div class="line">./configure </div><div class="line">make &amp;&amp; make install</div><div class="line"> cd ..</div><div class="line">tar -zxf libiconv-1.14.tar.gz </div><div class="line">./configure </div><div class="line">make &amp;&amp; make install </div><div class="line">echo &quot;/usr/local/lib&quot; &gt;&gt; /etc/ld.so.conf</div><div class="line"> ldconfig </div><div class="line">cd ..</div><div class="line">tar -zxf libevent-2.0.21-stable.tar.gz </div><div class="line">cd libevent-2.0.21-stable</div><div class="line">./configure </div><div class="line">make &amp;&amp; make install </div><div class="line">export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig</div><div class="line">cd ..</div><div class="line">xz -d transmission-2.84.tar.xz </div><div class="line">tar -xf transmission-2.84.tar </div><div class="line">cd transmission-2.84</div><div class="line">./configure --prefix=/usr/local/transmission CFLAGS=-liconv</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">transmission-daemon -g /usr/local/transmission</div><div class="line">killall transmission-daemon</div></pre></td></tr></table></figure>
+<p>以上命令需执行两次</p>
+<p>然后就可以进行配置了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">cat /usr/local/transmission/settings.json</div><div class="line">&#123;</div><div class="line">    &quot;alt-speed-down&quot;: 50,</div><div class="line">    &quot;alt-speed-enabled&quot;: false,</div><div class="line">    &quot;alt-speed-time-begin&quot;: 540,</div><div class="line">    &quot;alt-speed-time-day&quot;: 127,</div><div class="line">    &quot;alt-speed-time-enabled&quot;: false,</div><div class="line">    &quot;alt-speed-time-end&quot;: 1020,</div><div class="line">    &quot;alt-speed-up&quot;: 50,</div><div class="line">    &quot;bind-address-ipv4&quot;: &quot;0.0.0.0&quot;,</div><div class="line">    &quot;bind-address-ipv6&quot;: &quot;::&quot;,</div><div class="line">    &quot;blocklist-enabled&quot;: true,                </div><div class="line">    &quot;blocklist-url&quot;: &quot;http://www.example.com/blocklist&quot;,</div><div class="line">    &quot;cache-size-mb&quot;: 4,</div><div class="line">    &quot;dht-enabled&quot;: true,                 //DHT支持</div><div class="line">    &quot;download-dir&quot;: &quot;/data/transmission/Downloads&quot;,     //下载完成的保存路径</div><div class="line">    &quot;encryption&quot;: 1,</div><div class="line">    &quot;idle-seeding-limit&quot;: 30,</div><div class="line">    &quot;idle-seeding-limit-enabled&quot;: false,</div><div class="line">    &quot;incomplete-dir&quot;: &quot;/data/transmission/Downloads&quot;,     //未下载完成的保存路径</div><div class="line">    &quot;incomplete-dir-enabled&quot;: false,</div><div class="line">    &quot;lazy-bitfield-enabled&quot;: true,</div><div class="line">    &quot;lpd-enabled&quot;: false,</div><div class="line">    &quot;message-level&quot;: 2,</div><div class="line">    &quot;open-file-limit&quot;: 32,</div><div class="line">    &quot;peer-congestion-algorithm&quot;: &quot;&quot;,</div><div class="line">    &quot;peer-limit-global&quot;: 240,                //全局种子最大连接数</div><div class="line">    &quot;peer-limit-per-torrent&quot;: 60,          //单一种子最大连接数</div><div class="line">    &quot;peer-port&quot;: 51413,</div><div class="line">    &quot;peer-port-random-high&quot;: 65535,</div><div class="line">    &quot;peer-port-random-low&quot;: 49152,</div><div class="line">    &quot;peer-port-random-on-start&quot;: false,</div><div class="line">    &quot;peer-socket-tos&quot;: &quot;default&quot;,</div><div class="line">    &quot;pex-enabled&quot;: true,</div><div class="line">    &quot;port-forwarding-enabled&quot;: true,</div><div class="line">    &quot;preallocation&quot;: 1,</div><div class="line">    &quot;prefetch-enabled&quot;: 1,</div><div class="line">    &quot;ratio-limit&quot;: 2,</div><div class="line">    &quot;ratio-limit-enabled&quot;: false,</div><div class="line">    &quot;rename-partial-files&quot;: true,</div><div class="line">    &quot;rpc-authentication-required&quot;: true,</div><div class="line">    &quot;rpc-bind-address&quot;: &quot;0.0.0.0&quot;,</div><div class="line">    &quot;rpc-enabled&quot;: true,</div><div class="line">    &quot;rpc-password&quot;: &quot;&#123;096110376f678fa59ac93b4ba2ef383fba6a9edcBELB4tYF&quot;,         //密码</div><div class="line">    &quot;rpc-port&quot;: 9091,                            //网页GUI使用的端口</div><div class="line">    &quot;rpc-url&quot;: &quot;/transmission/&quot;,</div><div class="line">    &quot;rpc-username&quot;: &quot;&quot;,                   //用户名</div><div class="line">    &quot;rpc-whitelist&quot;: &quot;*.*.*.*&quot;,              </div><div class="line">    &quot;rpc-whitelist-enabled&quot;: true,</div><div class="line">    &quot;script-torrent-done-enabled&quot;: false,</div><div class="line">    &quot;script-torrent-done-filename&quot;: &quot;&quot;,</div><div class="line">    &quot;speed-limit-down&quot;: 100,</div><div class="line">    &quot;speed-limit-down-enabled&quot;: false,</div><div class="line">    &quot;speed-limit-up&quot;: 100,</div><div class="line">    &quot;speed-limit-up-enabled&quot;: false,</div><div class="line">    &quot;start-added-torrents&quot;: true,</div><div class="line">    &quot;trash-original-torrent-files&quot;: false,</div><div class="line">    &quot;umask&quot;: 18,           //这里改为0，可以控制默认下载文件权限为777</div><div class="line">    &quot;upload-slots-per-torrent&quot;: 14           //每个种子上传连接数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。"><a href="#执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。" class="headerlink" title="执行transmission-daemon -g /usr/local/transmission，通过浏览器登陆（http://yourIP:9091/）就可以控制了。"></a>执行<code>transmission-daemon -g /usr/local/transmission</code>，通过浏览器登陆<code>（http://yourIP:9091/）</code>就可以控制了。</h3><h4 id="yum安装Transmission"><a href="#yum安装Transmission" class="headerlink" title="yum安装Transmission"></a>yum安装Transmission</h4><p>以前装在VPS上安装Transmission当Seedbox使大多使用一些一键包，或者使用rpm包的方式安装，一键包的方式我一直不喜欢，经常出问题，而且一般版本都很旧。<br>rpm包的方式可以参考这篇文章，不过这里的版本也已经很旧了，geekery现在提供更加方便yum repo的方式安装，自动解决依赖问题，版本很新(目前是2.71)，并可通过yum更新。</p>
+<p>安装方法非常简单，简单翻译了一下，原文可以参考这里:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cd /etc/yum.repos.d/</div><div class="line">CentOS 5 x86</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el5-i386.repo</div><div class="line">CentOS 5 x86_64</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el5-x86_64.repo</div><div class="line">CentOS 6 x86</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el6-i686.repo</div><div class="line">CentOS 6 x86_64</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el6-x86_64.repo</div></pre></td></tr></table></figure></p>
+<p>然后:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y transmission transmission-daemon</div></pre></td></tr></table></figure></p>
+<p>提示导入GPG Key的时候输y同意即可</p>
+<p>注意：如果之前通过RPM包的方式安装过Transmission，需要卸载后再用yum安装。<br>装好后可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service transmission-daemon start</div></pre></td></tr></table></figure></p>
+<p>来启动Transmission</p>
+<p>配置文件位于<code>/var/lib/transmission/.config/transmission-daemon/settings.json(CentOS 5)</code><br>或<code>/var/lib/transmission/settings.json(CentOS 6)</code><br>修改配置文件前要先用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service transmission-daemon stop</div></pre></td></tr></table></figure></p>
+<p>关掉Transmission，否则配置不会生效。<br>具体的配置网上有很多，就不详细说了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    &quot;rpc-authentication-required&quot;: true,</div><div class="line">    &quot;rpc-enabled&quot;: true,</div><div class="line">    &quot;rpc-password&quot;: &quot;管理密码密码&quot;,</div><div class="line">    &quot;rpc-username&quot;: &quot;管理用户名&quot;,</div><div class="line">    &quot;rpc-whitelist-enabled&quot;: false,</div></pre></td></tr></table></figure></p>
+<p>主要是把这几项改成我上面的样子就可以了，然后你就可以通过<code>http://你的IP地址:9091</code>的方式连接了。<br>远程管理建议使用<em>Transmission-Remote-GUI</em></p>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/transmission/" rel="tag">#transmission</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/29/update-kernel.html" rel="next" title="CentOS6.5升级内核">
+                <i class="fa fa-chevron-left"></i> CentOS6.5升级内核
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/29/centos-install-chromium.html" rel="prev" title="安装Chromium浏览器">
+                安装Chromium浏览器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/29/centos-install-transmission.html"
+     data-title="安装BT软件Transmission"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/29/centos-install-transmission.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/29/centos-install-transmission.html"
+           data-title="安装BT软件Transmission" data-url="http://czero000.github.io/2015/12/29/centos-install-transmission.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖包"><span class="nav-number">1.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载transmission及必要软件"><span class="nav-number">2.</span> <span class="nav-text">下载transmission及必要软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装软件包"><span class="nav-number">3.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。"><span class="nav-number">5.</span> <span class="nav-text">执行transmission-daemon -g /usr/local/transmission，通过浏览器登陆（http://yourIP:9091/）就可以控制了。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yum安装Transmission"><span class="nav-number">5.1.</span> <span class="nav-text">yum安装Transmission</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

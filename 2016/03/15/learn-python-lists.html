@@ -1,0 +1,1061 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Python 列表(Lists)序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 ,它的位置或索引，以0开头，依此类推。
+Python有6个序列的内置类型，但最常见的是列表和元组。序列都可以进行包括索引，切片，加，乘，检查成员等操作。此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习--列表">
+<meta property="og:url" content="http://czero000.github.io/2016/03/15/learn-python-lists.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="Python 列表(Lists)序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 ,它的位置或索引，以0开头，依此类推。
+Python有6个序列的内置类型，但最常见的是列表和元组。序列都可以进行包括索引，切片，加，乘，检查成员等操作。此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出">
+<meta property="og:updated_time" content="2016-03-17T06:47:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习--列表">
+<meta name="twitter:description" content="Python 列表(Lists)序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 ,它的位置或索引，以0开头，依此类推。
+Python有6个序列的内置类型，但最常见的是列表和元组。序列都可以进行包括索引，切片，加，乘，检查成员等操作。此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/03/15/learn-python-lists.html"/>
+
+
+  <title> Python学习--列表 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python学习--列表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-15T15:24:55+08:00" content="2016-03-15">
+              2016-03-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/15/learn-python-lists.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/learn-python-lists.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/15/learn-python-lists.html" class="leancloud_visitors" data-flag-title="Python学习--列表">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h3 id="Python-列表-Lists"><a href="#Python-列表-Lists" class="headerlink" title="Python 列表(Lists)"></a>Python 列表(Lists)</h3><p>序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 ,它的位置或索引，以0开头，依此类推。</p>
+<p>Python有6个序列的内置类型，但最常见的是列表和元组。序列都可以进行包括索引，切片，加，乘，检查成员等操作。此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。列表的数据项不需要具有相同的类型</p>
+<p>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">list1 = [&apos;physics&apos;, &apos;chemistry&apos;, 1997, 2000];</div><div class="line">list2 = [1, 2, 3, 4, 5 ];</div><div class="line">list3 = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];</div></pre></td></tr></table></figure>
+<p>与字符串的索引一样，列表索引从0开始。列表可以进行截取、组合等。</p>
+<hr>
+<h4 id="访问列表中的值"><a href="#访问列表中的值" class="headerlink" title="访问列表中的值"></a>访问列表中的值</h4><p>使用下标索引来访问列表中的值，同样可以使用方括号的形式截取字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line">list1 = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>]</div><div class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"List1[0] :"</span> , list1[<span class="number">0</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">"List2[1:5] :"</span>, list2[<span class="number">1</span>:<span class="number">5</span>]</div><div class="line"></div><div class="line">//输出</div><div class="line">List1[<span class="number">0</span>] : physics</div><div class="line">List2[<span class="number">1</span>:<span class="number">5</span>] : [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="更新列表"><a href="#更新列表" class="headerlink" title="更新列表"></a>更新列表</h4><p>可以对<code>list</code>的数据项进行修改或更新，也可以使用<code>append()</code>方法来添加列表项</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line">list = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>];</div><div class="line"><span class="keyword">print</span> <span class="string">"Value available at index 2 :"</span></div><div class="line"><span class="keyword">print</span> list[<span class="number">2</span>];</div><div class="line">list[<span class="number">2</span>] = <span class="number">2001</span>;</div><div class="line"><span class="keyword">print</span> <span class="string">"New value available at index 2: "</span></div><div class="line"><span class="keyword">print</span> list[<span class="number">2</span>];</div><div class="line"></div><div class="line">// 输出</div><div class="line">Value available at index <span class="number">2</span> :</div><div class="line"><span class="number">1997</span></div><div class="line">New value available at index <span class="number">2</span>: </div><div class="line"><span class="number">2001</span></div></pre></td></tr></table></figure>
+<hr>
+<h4 id="删除列表元素"><a href="#删除列表元素" class="headerlink" title="删除列表元素"></a>删除列表元素</h4><p>使用del语句来删除列表元素，也可以通过<code>remove()</code>方法操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8</span></div><div class="line"></div><div class="line">list = [ <span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span> ]</div><div class="line"><span class="keyword">print</span> list;</div><div class="line"><span class="keyword">del</span> list[<span class="number">2</span>];</div><div class="line"><span class="keyword">print</span> <span class="string">"After deleting value at index 2:"</span></div><div class="line"><span class="keyword">print</span> list</div><div class="line"></div><div class="line">// 输出</div><div class="line">[<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>]</div><div class="line">After deleting value at index <span class="number">2</span>:</div><div class="line">[<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">2000</span>]</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="python列表脚本操作符"><a href="#python列表脚本操作符" class="headerlink" title="python列表脚本操作符"></a>python列表脚本操作符</h4><p>列表对<code>+</code>和<code>*</code> 的操作符与字符串相似，<code>+</code>用于组合列表，<code>*</code>用于重复列表</p>
+<table>
+<thead>
+<tr>
+<th>Python 表达式</th>
+<th>结果</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len([1, 2, 3])</td>
+<td>3</td>
+<td>长度</td>
+</tr>
+<tr>
+<td>[1, 2, 3] + [4, 5, 6]</td>
+<td>[1, 2, 3, 4, 5, 6]</td>
+<td>组合</td>
+</tr>
+<tr>
+<td>[‘Hi!’] * 4</td>
+<td>[‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]</td>
+<td>重复</td>
+</tr>
+<tr>
+<td>3 in [1, 2, 3]</td>
+<td>True</td>
+<td>元素是否存在于列表中</td>
+</tr>
+<tr>
+<td>for x in [1, 2, 3]: print x,</td>
+<td>1 2 3</td>
+<td>迭代</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="Python列表截取"><a href="#Python列表截取" class="headerlink" title="Python列表截取"></a>Python列表截取</h4><p>Python的列表截取与字符串操作类型，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">L = [&apos;spam&apos;, &apos;Spam&apos;, &apos;SPAM!&apos;]</div></pre></td></tr></table></figure>
+<p>操作：</p>
+<table>
+<thead>
+<tr>
+<th>Python 表达式</th>
+<th>结果</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L[2]</td>
+<td>‘SPAM!’</td>
+<td>读取列表中第三个元素</td>
+</tr>
+<tr>
+<td>L[-2]</td>
+<td>‘Spam’</td>
+<td>读取列表中倒数第二个元素</td>
+</tr>
+<tr>
+<td>L[1:]</td>
+<td>[‘Spam’, ‘SPAM!’]</td>
+<td>从第二个元素开始截取列表</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="Python-列表函数和方法"><a href="#Python-列表函数和方法" class="headerlink" title="Python 列表函数和方法"></a>Python 列表函数和方法</h4><p>Python包含下面函数</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>[cmp(list1, list2)]比较两个列表的元素</td>
+</tr>
+<tr>
+<td>2</td>
+<td>[len(list)]列表元素个数</td>
+</tr>
+<tr>
+<td>3</td>
+<td>[max(list)]返回列表元素最大值</td>
+</tr>
+<tr>
+<td>4</td>
+<td>[min(list)]返回列表元素最小值</td>
+</tr>
+<tr>
+<td>5</td>
+<td>[list(seq)]将元组转换为列表</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>list cmp()</li>
+</ul>
+<p>描述：<code>cmp()</code>用于比较两个列表的元素</p>
+<p>语法： <code>cmp(list1, list2)</code></p>
+<p>返回值：如果比较的元素是同类行，则比较其值，返回结构；如果不是同一类型，则检查他们是否是数字；如果是数字，则执行比较的数字强制转换，然后比较；如果一方元素是数字，则另一方的元素大；否则通过类型的名字字母顺序比较。如果由一个列表首先到达末尾，则另一个列表大；如果以上都相同，则返回<code>0</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">list1, list2 = [<span class="number">123</span>, <span class="string">'xyz'</span>], [<span class="number">456</span>, <span class="string">'abc'</span>]</div><div class="line"><span class="keyword">print</span> cmp(list1, list2)</div><div class="line"><span class="keyword">print</span> cmp(list2, list1)</div><div class="line">list3 = list2 + [<span class="number">786</span>]</div><div class="line"><span class="keyword">print</span> cmp(list2, list3)</div><div class="line"></div><div class="line">//输出</div><div class="line"><span class="number">-1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">-1</span></div></pre></td></tr></table></figure>
+<ul>
+<li>list len()</li>
+</ul>
+<p>描述：<code>len()</code>返回列表元素个数</p>
+<p>语法：<code>len(list)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">list1, list2 = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>],[<span class="number">456</span>, <span class="string">'abc'</span> ]</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"First list length :"</span>, len(list1);</div><div class="line"><span class="keyword">print</span> <span class="string">"Second list lenth :"</span>, len(list2);</div><div class="line"></div><div class="line">// 输出</div><div class="line">First list length : <span class="number">3</span></div><div class="line">Second list lenth : <span class="number">2</span></div></pre></td></tr></table></figure>
+<ul>
+<li>list max()</li>
+</ul>
+<p>描述：max()返回列表元素的最大值</p>
+<p>语法：<code>max(list)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">list1, list2 = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>], [<span class="number">456</span>, <span class="number">700</span>, <span class="number">200</span>]</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"Max value element :"</span>, max(list1);</div><div class="line"><span class="keyword">print</span> <span class="string">"Max value element :"</span>, max(list2);</div><div class="line"></div><div class="line">// 输出</div><div class="line">Max value element : zero</div><div class="line">Max value element : <span class="number">700</span></div></pre></td></tr></table></figure>
+<ul>
+<li>list min()</li>
+</ul>
+<p>描述：<code>min()</code>返回列表元素的最小值</p>
+<p>语法：<code>min(list)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">list1, list2 = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>], [<span class="number">456</span>, <span class="number">700</span>, <span class="number">200</span>]</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"Min value element :"</span>, min(list1);</div><div class="line"><span class="keyword">print</span> <span class="string">"Min value element :"</span>, min(list2);</div><div class="line"></div><div class="line">// 输出</div><div class="line">Max value element : <span class="number">123</span></div><div class="line">Max value element : <span class="number">200</span></div></pre></td></tr></table></figure>
+<ul>
+<li>list list()</li>
+</ul>
+<p>描述：<code>list()</code>用于将元组转换为列表。元组与列表非常相似，区别在于元组的元素值不能修改，元组是放在括号中，列表是放于方括号中。</p>
+<p>语法：<code>list(seq)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line">aTuple = (<span class="string">'123'</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>);</div><div class="line">aList = list(aTuple);</div><div class="line"><span class="keyword">print</span> <span class="string">"List elements :"</span>, aList</div><div class="line"></div><div class="line">//输出</div><div class="line">List elements : [<span class="string">'123'</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>]</div></pre></td></tr></table></figure>
+<hr>
+<p>Python包含以下方法</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>[list.append(obj)]在列表末尾添加新的对象</td>
+</tr>
+<tr>
+<td>2</td>
+<td>[list.count(obj)]统计某个元素在列表中出现的次数</td>
+</tr>
+<tr>
+<td>3</td>
+<td>[list.extend(seq)]在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>[list.index(obj)]从列表中找出某个值第一个匹配项的索引位置</td>
+</tr>
+<tr>
+<td>5</td>
+<td>[list.insert(index, obj)]将对象插入列表</td>
+</tr>
+<tr>
+<td>6</td>
+<td>[list.pop(obj=list[-])]移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
+</tr>
+<tr>
+<td>7</td>
+<td>[list.remove(obj)]移除列表中某个值的第一个匹配项</td>
+</tr>
+<tr>
+<td>8</td>
+<td>[list.reverse()]反向列表中元素</td>
+</tr>
+<tr>
+<td>9</td>
+<td>[list.sort([fun])]对原列表进行排序</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>list append()</li>
+</ul>
+<p>描述：<code>append()</code>用于在列表末尾添加新的对象</p>
+<p>语法：<code>list.append(obj)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>];</div><div class="line">aList.append(<span class="number">2009</span>);</div><div class="line"><span class="keyword">print</span> <span class="string">"Update List :"</span>, aLis</div><div class="line"></div><div class="line">//输出</div><div class="line">Update List : [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>, <span class="number">2009</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>list count()</li>
+</ul>
+<p>描述：<code>conut()</code>用于统计某个元素在列表中出现的次数</p>
+<p>语法：<code>list.count(obj)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>, <span class="number">123</span>];</div><div class="line"><span class="keyword">print</span> <span class="string">"Count for 123 :"</span>, aList.count(<span class="number">123</span>);</div><div class="line"><span class="keyword">print</span> <span class="string">"Count for zero :"</span>, aList.count(<span class="string">'zero'</span>);</div><div class="line"></div><div class="line">//输出</div><div class="line">Count <span class="keyword">for</span> <span class="number">123</span> : <span class="number">2</span></div><div class="line">Count <span class="keyword">for</span> zero : <span class="number">1</span></div></pre></td></tr></table></figure>
+<ul>
+<li>list extend()</li>
+</ul>
+<p>描述：<code>extend()</code>函数用于在列表末尾一次性追加应一个序列的多个值</p>
+<p>语法：<code>list.extend(seq)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>, <span class="number">123</span>];</div><div class="line">bList = [<span class="number">2009</span>, <span class="string">'mini'</span>];</div><div class="line">aList.extend(bList)</div><div class="line"><span class="keyword">print</span> <span class="string">"Extend list :"</span>,aList;</div><div class="line"></div><div class="line">//输出</div><div class="line">Extend list : [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>, <span class="number">123</span>, <span class="number">2009</span>, <span class="string">'mini'</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>list index()</li>
+</ul>
+<p>描述：<code>index()</code>用于从列表中找出某个值第一个匹配项的索引位置</p>
+<p>语法：<code>list.index(obj)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>];</div><div class="line"><span class="keyword">print</span> <span class="string">"Index for xyz :"</span>, aList.index(<span class="string">'xyz'</span>);</div><div class="line"><span class="keyword">print</span> <span class="string">"Index for zero :"</span>, aList.index(<span class="string">'zero'</span>);</div><div class="line">//输出</div><div class="line">Index <span class="keyword">for</span> xyz : <span class="number">1</span></div><div class="line">Index <span class="keyword">for</span> zero : <span class="number">2</span></div></pre></td></tr></table></figure>
+<ul>
+<li>list insert()</li>
+</ul>
+<p>描述：<code>insert()</code>用于将指定对象插入列表</p>
+<p>语法：<code>list.insert(index, obj)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>];</div><div class="line">aList.insert(<span class="number">3</span>, <span class="number">2009</span>);</div><div class="line"><span class="keyword">print</span> <span class="string">"Final List :"</span>, aList</div><div class="line">// 输出</div><div class="line">Final List : [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="number">2009</span>, <span class="string">'abc'</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>list pop()</li>
+</ul>
+<p>描述：<code>pop()</code>用于移除列表中的一个元素，默认是最后一个元素，并返回该元素的值</p>
+<p>语法：<code>list.pop(obj=list[-1])</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zero'</span>, <span class="string">'abc'</span>];</div><div class="line"><span class="keyword">print</span> <span class="string">'A List :'</span>, aList.pop();</div><div class="line"><span class="keyword">print</span> <span class="string">'A list :'</span>, aList.pop(<span class="number">2</span>);</div><div class="line"><span class="keyword">print</span> aList</div><div class="line">// 输出</div><div class="line">A List : abc</div><div class="line">A list : zero</div><div class="line">[<span class="number">123</span>, <span class="string">'xyz'</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>list remove()</li>
+</ul>
+<p>描述：<code>remove()</code>用于移除列表中某个值的第一个匹配值</p>
+<p>语法：<code>list.remove(obj)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line">#!/usr/bin/env python</div><div class="line"># -*- coding: UTF-8 -*-</div><div class="line">aList = [123, &apos;xyz&apos;, &apos;zero&apos;, &apos;abc&apos;, &apos;xyz&apos;];</div><div class="line">aList.remove(&apos;xyz&apos;);</div><div class="line">print &quot;List :&quot;, aList;</div><div class="line">aList.remove(&apos;abc&apos;);</div><div class="line">print &quot;List :&quot;, aList;</div><div class="line"></div><div class="line">// 输出</div><div class="line">List : [123, &apos;zero&apos;, &apos;abc&apos;, &apos;xyz&apos;]</div><div class="line">List : [123, &apos;zero&apos;, &apos;xyz&apos;]</div></pre></td></tr></table></figure>
+<ul>
+<li>list reverse()</li>
+</ul>
+<p>描述：<code>reverse()</code>用于反向列表中的元素</p>
+<p>语法：<code>list.reverse()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zara'</span>, <span class="string">'abc'</span>, <span class="string">'xyz'</span>];</div><div class="line">aList.reverse()</div><div class="line"><span class="keyword">print</span> <span class="string">"List :"</span>, aList;</div><div class="line"></div><div class="line">//输出</div><div class="line">List : [<span class="string">'xyz'</span>, <span class="string">'abc'</span>, <span class="string">'zara'</span>, <span class="string">'xyz'</span>, <span class="number">123</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>list sort()</li>
+</ul>
+<p>描述：<code>sort()</code>用于对原序列排序，如果指定参数，则使用比较函数指定的比较函数</p>
+<p>语法：<code>list.sort([func])</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//脚本</div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zara'</span>, <span class="string">'abc'</span>, <span class="string">'xyz'</span>];</div><div class="line">aList.sort();</div><div class="line"><span class="keyword">print</span> <span class="string">"List: "</span>, aList</div><div class="line">//输出</div><div class="line">List:  [<span class="number">123</span>, <span class="string">'abc'</span>, <span class="string">'xyz'</span>, <span class="string">'xyz'</span>, <span class="string">'zara'</span>]</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/14/learn-python-loops.html" rel="next" title="Python学习--循环语句">
+                <i class="fa fa-chevron-left"></i> Python学习--循环语句
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/17/Learn-python-tuples.html" rel="prev" title="Python学习--元组">
+                Python学习--元组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/15/learn-python-lists.html"
+     data-title="Python学习--列表"
+     data-content=""
+     data-url="http://czero000.github.io/2016/03/15/learn-python-lists.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/15/learn-python-lists.html"
+           data-title="Python学习--列表" data-url="http://czero000.github.io/2016/03/15/learn-python-lists.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-列表-Lists"><span class="nav-number">1.</span> <span class="nav-text">Python 列表(Lists)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问列表中的值"><span class="nav-number">1.1.</span> <span class="nav-text">访问列表中的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新列表"><span class="nav-number">1.2.</span> <span class="nav-text">更新列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除列表元素"><span class="nav-number">1.3.</span> <span class="nav-text">删除列表元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python列表脚本操作符"><span class="nav-number">1.4.</span> <span class="nav-text">python列表脚本操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python列表截取"><span class="nav-number">1.5.</span> <span class="nav-text">Python列表截取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-列表函数和方法"><span class="nav-number">1.6.</span> <span class="nav-text">Python 列表函数和方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

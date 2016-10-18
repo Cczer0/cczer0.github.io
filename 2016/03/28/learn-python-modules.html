@@ -1,0 +1,876 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Python模块模块让你能能够有逻辑的组织你的Python代码块。把相关的代码分配到一个模块里让你的代码更好用，更易懂。模块也是python对象，具有随即的名字属性用来绑定或引用。简单的说，模块就是一个保存了python代码的文件，模块能够定义函数、类和变量。模块里也能够包含可执行的代码。
+一个叫做aname的模块里的代码一般能够在一个叫做aname.py的文件中找到。创建一个简单的模块supp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习--模块">
+<meta property="og:url" content="http://czero000.github.io/2016/03/28/learn-python-modules.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="Python模块模块让你能能够有逻辑的组织你的Python代码块。把相关的代码分配到一个模块里让你的代码更好用，更易懂。模块也是python对象，具有随即的名字属性用来绑定或引用。简单的说，模块就是一个保存了python代码的文件，模块能够定义函数、类和变量。模块里也能够包含可执行的代码。
+一个叫做aname的模块里的代码一般能够在一个叫做aname.py的文件中找到。创建一个简单的模块supp">
+<meta property="og:updated_time" content="2016-03-29T05:50:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习--模块">
+<meta name="twitter:description" content="Python模块模块让你能能够有逻辑的组织你的Python代码块。把相关的代码分配到一个模块里让你的代码更好用，更易懂。模块也是python对象，具有随即的名字属性用来绑定或引用。简单的说，模块就是一个保存了python代码的文件，模块能够定义函数、类和变量。模块里也能够包含可执行的代码。
+一个叫做aname的模块里的代码一般能够在一个叫做aname.py的文件中找到。创建一个简单的模块supp">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/03/28/learn-python-modules.html"/>
+
+
+  <title> Python学习--模块 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python学习--模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-28T15:32:11+08:00" content="2016-03-28">
+              2016-03-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/28/learn-python-modules.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/learn-python-modules.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/28/learn-python-modules.html" class="leancloud_visitors" data-flag-title="Python学习--模块">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h3 id="Python模块"><a href="#Python模块" class="headerlink" title="Python模块"></a>Python模块</h3><p>模块让你能能够有逻辑的组织你的Python代码块。把相关的代码分配到一个模块里让你的代码更好用，更易懂。模块也是python对象，具有随即的名字属性用来绑定或引用。简单的说，模块就是一个保存了python代码的文件，模块能够定义函数、类和变量。模块里也能够包含可执行的代码。</p>
+<p>一个叫做<code>aname</code>的模块里的代码一般能够在一个叫做<code>aname.py</code>的文件中找到。创建一个简单的模块support.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_func</span><span class="params">( par)</span> :</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"Hello :"</span>,par</div><div class="line">    <span class="keyword">return</span></div></pre></td></tr></table></figure>
+<hr>
+<h4 id="inport语句"><a href="#inport语句" class="headerlink" title="inport语句"></a>inport语句</h4><p>想使用python源文件，只需要在另外一个源文件中执行<code>import</code>语句<code>import module1[, module2][,...moduleN]</code></p>
+<p>当解释器遇到<code>import</code>语句，如果模块在当前的搜索路径就会被导入，搜索路径是一个解释器会先行搜索的所有目录列表，如果想要导入<code>support.py</code>，需要将命令放到脚本顶端。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"><span class="keyword">import</span> support</div><div class="line"></div><div class="line">support.print_func(<span class="string">"Zero"</span>)</div><div class="line"></div><div class="line">//输出</div><div class="line">Hello : Zero</div></pre></td></tr></table></figure>
+<p>一个模块只会被导入一次，不管你执行多少次import。这样可以防止导入模块被一遍一遍的执行。</p>
+<hr>
+<h4 id="from…import语句"><a href="#from…import语句" class="headerlink" title="from…import语句"></a>from…import语句</h4><p>python的from语句让你从模块中导入一个指定的部分到当前命名空间。<code>from modulename import name1[, name2][, nameN]</code></p>
+<p>例如：<code>from fib import fibonacci</code>，这个声明不会把整个fib模块导入当前命名空间中，他只会将fib里的fibonacci单个引用到执行这个声明的模块的全局符号表。</p>
+<hr>
+<h4 id="from…import-语句"><a href="#from…import-语句" class="headerlink" title="from…import* 语句"></a>from…import* 语句</h4><p>要把一个模块的所有内容全部导入当前命名空间也是可行的。<code>from modulename import *</code>这提供了一个简单的方法导入一个模块的所有项目，然而这种声明不该被过多的使用。</p>
+<h4 id="定位模块"><a href="#定位模块" class="headerlink" title="定位模块"></a>定位模块</h4><p>当你导入一个模块，python解释器对模块位置的搜索顺序是：</p>
+<ul>
+<li>当前目录</li>
+<li>python在shell变量<code>PYTHONPATH</code> 下的每个目录</li>
+<li>如果都到不到，python会查看默认路径。centos7 在<code>/usr/lib/python</code></li>
+</ul>
+<p>模块搜索路径存在<code>system</code>模块的<code>sys.path</code>变量中。变量包含当前目录，PYTHONPATH和安装的默认目录。</p>
+<hr>
+<h4 id="PYTHONPATH变量"><a href="#PYTHONPATH变量" class="headerlink" title="PYTHONPATH变量"></a>PYTHONPATH变量</h4><p>作为环境变量，<code>PYTHONPATH</code>有装在一个列表中的许多目录组成。<code>PYTHONPATH</code>的语法和shell变量PATH相同。</p>
+<hr>
+<h4 id="命名空间和作用域"><a href="#命名空间和作用域" class="headerlink" title="命名空间和作用域"></a>命名空间和作用域</h4><p>变量是拥有匹配对象的名字（标识符）。命名空间是一个包含了变量名称们（键）和它们各自相应的对象们（值）的字典。</p>
+<p>一个Python表达式可以访问局部命名空间和全局命名空间里的变量。如果一个局部变量和一个全局变量重名，则局部变量会覆盖全局变量。</p>
+<p>每个函数都有自己的命名空间。类的方法的作用域规则和通常函数的一样。</p>
+<p>Python会智能地猜测一个变量是局部的还是全局的，它假设任何在函数内赋值的变量都是局部的。</p>
+<p>因此，如果要给全局变量在一个函数里赋值，必须使用global语句。</p>
+<p>global VarName的表达式会告诉Python， VarName是一个全局变量，这样Python就不会在局部命名空间里寻找这个变量了。</p>
+<p>例如，我们在全局命名空间里定义一个变量money。我们再在函数内给变量money赋值，然后Python会假定money是一个局部变量。然而，我们并没有在访问前声明一个局部变量money，结果就是会出现一个UnboundLocalError的错误。取消global语句的注释就能解决这个问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line">Money = <span class="number">200</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">AddMoney</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment">#global Money   //变更全局变量</span></div><div class="line">    Money += <span class="number">1</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> Money</div><div class="line">AddMoney()</div><div class="line"><span class="keyword">print</span> Money</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="dir-函数"><a href="#dir-函数" class="headerlink" title="dir()函数"></a>dir()函数</h4><p><code>dir()</code>一个排好序的字符串列表，内容是一个模块里定义过的名字。返回的列表容纳了一个模块里定义的所有模块、变量和函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">content = dir(math)</div><div class="line"></div><div class="line"><span class="keyword">print</span> content;</div><div class="line"></div><div class="line">//输出</div><div class="line">[<span class="string">'__doc__'</span>, <span class="string">'__file__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'acos'</span>, <span class="string">'acosh'</span>, <span class="string">'asin'</span>, <span class="string">'asinh'</span>, <span class="string">'atan'</span>, <span class="string">'atan2'</span>, <span class="string">'atanh'</span>, <span class="string">'ceil'</span>, <span class="string">'copysign'</span>, <span class="string">'cos'</span>, <span class="string">'cosh'</span>, <span class="string">'degrees'</span>, <span class="string">'e'</span>, <span class="string">'erf'</span>, <span class="string">'erfc'</span>, <span class="string">'exp'</span>, <span class="string">'expm1'</span>, <span class="string">'fabs'</span>, <span class="string">'factorial'</span>, <span class="string">'floor'</span>, <span class="string">'fmod'</span>, <span class="string">'frexp'</span>, <span class="string">'fsum'</span>, <span class="string">'gamma'</span>, <span class="string">'hypot'</span>, <span class="string">'isinf'</span>, <span class="string">'isnan'</span>, <span class="string">'ldexp'</span>, <span class="string">'lgamma'</span>, <span class="string">'log'</span>, <span class="string">'log10'</span>, <span class="string">'log1p'</span>, <span class="string">'modf'</span>, <span class="string">'pi'</span>, <span class="string">'pow'</span>, <span class="string">'radians'</span>, <span class="string">'sin'</span>, <span class="string">'sinh'</span>, <span class="string">'sqrt'</span>, <span class="string">'tan'</span>, <span class="string">'tanh'</span>, <span class="string">'trunc'</span>]</div></pre></td></tr></table></figure>
+<p>在这里，特殊字符串变量<code>__name__</code>指向模块的名字，<code>__file__</code>指向该模块的导入文件名。</p>
+<hr>
+<h4 id="globals-和locals-函数"><a href="#globals-和locals-函数" class="headerlink" title="globals()和locals()函数"></a>globals()和locals()函数</h4><p>根据调用地方的不同，globals()和locals()函数可被用来返回全局变量和局部命名空间的名字。</p>
+<p>如果函数内部调用locals()，返回的是所有能在该函数里访问的命名</p>
+<p>如果函数内部调用globals()，返回的是所有在该函数里能访问的全局名字</p>
+<p>两个函数返回类型都是字典。所以他们能用key()函数摘取</p>
+<hr>
+<p>reload()函数</p>
+<p>当一个模块被导入一个脚本，模块顶层部分的代码只会被执行一次。如果你想重新执行模块里顶层部分的代码，可以使用reload()函数。还函数会重新导入之前导入过的模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">reload(module_name)</div><div class="line">// 导入support模块</div><div class="line">reload(support)</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="python中的包"><a href="#python中的包" class="headerlink" title="python中的包"></a>python中的包</h4><p>包是一个分层次的文件目录结构，它定义了一个有模块及子包，和子包下的子包等组成的python的应用环境。考虑在一个phone目录下的<code>Pots.py</code>文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Pots</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"I'm Pots Phone"</span></div></pre></td></tr></table></figure>
+<p>同样的，有另外两个保存了不同函数的文件：</p>
+<ul>
+<li>Phone/lsdn.py 包含函数lsdn()</li>
+<li>Phone/G3.py 包含函数G3()</li>
+</ul>
+<p>现在，在Phone目录下创建file<code>__init__.py</code>:</p>
+<ul>
+<li>Phone/<code>__init__py</code></li>
+</ul>
+<p>当你导入Phone时，为了能够使用所有函数，你需要在<code>__init__.py</code>里使用显示的导入语句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> Post <span class="keyword">import</span> Pots</div><div class="line"><span class="keyword">from</span> Isdn <span class="keyword">import</span> Isdn</div><div class="line"><span class="keyword">from</span> G3 <span class="keyword">import</span> G3</div></pre></td></tr></table></figure>
+<p>当你把这些代码加到<code>__init__.py</code>之后，导入Phone包的时候这些类就全部是可用的了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># -*- codine: UTF-8 -*-</div><div class="line"></div><div class="line">import Phone</div><div class="line"></div><div class="line">Phone.Pots()</div><div class="line">Phone.Isdn()</div><div class="line">Phone.G3()</div><div class="line"></div><div class="line">//输出</div><div class="line">I'm Pots Phone</div><div class="line">I'm Isdn Phone</div><div class="line">I'm 3G Phone</div></pre></td></tr></table></figure>
+<p>上面只在一个文件里放置了一个函数，其实可以放置多个函数，也可以在这些文件里定义Python的类，然后为这些类键一个包</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/22/learn-python-functions.html" rel="next" title="Python学习--函数">
+                <i class="fa fa-chevron-left"></i> Python学习--函数
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/29/learn-python-files-io.html" rel="prev" title="Python学习--文件I/O">
+                Python学习--文件I/O <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/28/learn-python-modules.html"
+     data-title="Python学习--模块"
+     data-content=""
+     data-url="http://czero000.github.io/2016/03/28/learn-python-modules.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/28/learn-python-modules.html"
+           data-title="Python学习--模块" data-url="http://czero000.github.io/2016/03/28/learn-python-modules.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python模块"><span class="nav-number">1.</span> <span class="nav-text">Python模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#inport语句"><span class="nav-number">1.1.</span> <span class="nav-text">inport语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#from…import语句"><span class="nav-number">1.2.</span> <span class="nav-text">from…import语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#from…import-语句"><span class="nav-number">1.3.</span> <span class="nav-text">from…import* 语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定位模块"><span class="nav-number">1.4.</span> <span class="nav-text">定位模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PYTHONPATH变量"><span class="nav-number">1.5.</span> <span class="nav-text">PYTHONPATH变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命名空间和作用域"><span class="nav-number">1.6.</span> <span class="nav-text">命名空间和作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dir-函数"><span class="nav-number">1.7.</span> <span class="nav-text">dir()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#globals-和locals-函数"><span class="nav-number">1.8.</span> <span class="nav-text">globals()和locals()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的包"><span class="nav-number">1.9.</span> <span class="nav-text">python中的包</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nfs," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="NFS服务简介NFS简介
+NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。  NFS 的基本原则是“允许不同的客户端及服务端通过一组RP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NFS详解">
+<meta property="og:url" content="http://czero000.github.io/2015/12/21/nfs-detail.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="NFS服务简介NFS简介
+NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。  NFS 的基本原则是“允许不同的客户端及服务端通过一组RP">
+<meta property="og:updated_time" content="2016-01-21T03:52:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NFS详解">
+<meta name="twitter:description" content="NFS服务简介NFS简介
+NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。  NFS 的基本原则是“允许不同的客户端及服务端通过一组RP">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/21/nfs-detail.html"/>
+
+
+  <title> NFS详解 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NFS详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-21T21:56:33+08:00" content="2015-12-21">
+              2015-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/21/nfs-detail.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/nfs-detail.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/21/nfs-detail.html" class="leancloud_visitors" data-flag-title="NFS详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="NFS服务简介"><a href="#NFS服务简介" class="headerlink" title="NFS服务简介"></a>NFS服务简介</h3><h4 id="NFS简介"><a href="#NFS简介" class="headerlink" title="NFS简介"></a>NFS简介</h4><blockquote>
+<p>NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。<br>  NFS 的基本原则是“允许不同的客户端及服务端通过一组RPC分享相同的文件系统”，它是独立于操作系统，允许不同硬件及操作系统的系统共同进行文件的分享。<br>  NFS在文件传送或信息传送过程中依赖于RPC协议。RPC，远程过程调用 (Remote Procedure Call) 是能使客户端执行其他系统中程序的一种机制。NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，这是因为NFS使用了一些其它的传输协议。而这些传输协议用到这个RPC功能的。可以说NFS本身就是使用RPC的一个程序。或者说NFS也是一个RPC SERVER。所以只要用到  NFS的地方都要启动RPC服务，不论是NFS SERVER或者NFS CLIENT。这样SERVER和CLIENT才能通过RPC来实现PROGRAM PORT的对应。可以这么理解RPC和NFS的关系：NFS是一个文件系统，而RPC是负责负责信息的传输。</p>
+</blockquote>
+<p>NFS协议从诞生到现在为止，已经有多个版本，如NFS V2（rfc1094）,NFS V3（rfc1813）（最新的版本是V4（rfc3010）。</p>
+<h4 id="各NFS协议版本的主要区别"><a href="#各NFS协议版本的主要区别" class="headerlink" title="各NFS协议版本的主要区别"></a>各NFS协议版本的主要区别</h4><p>V3相对V2的主要区别：</p>
+<ul>
+<li>文件尺寸<br>  V2最大只支持32BIT的文件大小(4G),而NFS V3新增加了支持64BIT文件大小的技术。</li>
+<li>文件传输尺寸<br>  V3没有限定传输尺寸，V2最多只能设定为8k，可以使用-rsize and -wsize 来进行设定。</li>
+<li>完整的信息返回<br>  V3增加和完善了许多错误和成功信息的返回，对于服务器的设置和管理能带来很大好处。</li>
+<li>增加了对TCP传输协议的支持<br>  V2只提供了对UDP协议的支持，在一些高要求的网络环境中有很大限制，V3增加了对TCP协议的支持</li>
+<li>异步写入特性</li>
+<li>改进了SERVER的mount性能</li>
+<li>有更好的I/O WRITES 性能。</li>
+<li>更强网络运行效能，使得网络运作更为有效</li>
+<li>更强的灾难恢复功能。</li>
+</ul>
+<p>异步写入特性（v3新增加）介绍：<br>  NFS V3 能否使用异步写入，这是可选择的一种特性。NFS V3客户端发发送一个异步写入请求到服务器，在给客户端答复之前服务器并不是必须要将数据写入到存储器中（稳定的）。服务器能确定何时去写入数据或者将多个写入请求聚合到一起并加以处理，然后写入。客户端能保持一个数据的copy以防万一服务器不能完整的将数据写入。当客户端希望释放这个copy的时候，它会向服务器通过这个操作过程，以确保每个操作步骤的完整。异步写入能够使服务器去确定最好的同步数据的策略。使数据能尽可能的同步的提交何到达。与V2比较来看，这样的机制能更好的实现数据缓冲和更多的平行（平衡）。而NFS V2的SERVER在将数据写入存储器之前不能再相应任何的写入请求。</p>
+<p>V4相对V3的改进：</p>
+<ul>
+<li>改进了INTERNET上的存取和执行效能</li>
+<li>在协议中增强了安全方面的特性</li>
+<li>增强的跨平台特性</li>
+</ul>
+<h3 id="安装部署NFS"><a href="#安装部署NFS" class="headerlink" title="安装部署NFS"></a>安装部署NFS</h3><h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>系统平台：<code>Red Hat Enterprise Linux Server release 5.4 (Tikanga)</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NFS Server IP：172.16.7.56</div><div class="line">NFS Client IP：172.16.7.57</div></pre></td></tr></table></figure></p>
+<h4 id="安装NFS服务"><a href="#安装NFS服务" class="headerlink" title="安装NFS服务"></a>安装NFS服务</h4><p>  NFS服务的安装非常简单，只需要两个软件包即可，在通常情况下，作为系统的默认软件包安装。</p>
+<ul>
+<li>nfs-utils-*    :包括基本的NFS命令与监控程序</li>
+<li>portmap-*    ：支持安全NFS RPC服务的连接</li>
+</ul>
+<h5 id="查看系统是否安装NFS"><a href="#查看系统是否安装NFS" class="headerlink" title="查看系统是否安装NFS"></a>查看系统是否安装NFS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm -qa nfs-utils</div><div class="line"> nfs-utils-1.0.9-42.el5</div><div class="line">rpm -qa portmap</div><div class="line"> portmap-4.0-65.2.2.1</div></pre></td></tr></table></figure>
+<p>系统已经默认安装了nfs-utils、portmap 两个软件包，如果没有安装，可以通过rpm和yum命令安装</p>
+<h5 id="NFS系统守护进程"><a href="#NFS系统守护进程" class="headerlink" title="NFS系统守护进程"></a>NFS系统守护进程</h5><blockquote>
+<p>RPC（Remote Procedure Call） NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，这是因为NFS使用了一些其它的传输协议。而这些传输协议勇士用到这个RPC功能的。可以说NFS本身就是使用RPC的一个程序。或者说NFS也是一个RPC SERVER.所以只要用到NFS的地方都要启动RPC服务，不论是NFS SERVER或者NFS CLIENT。这样SERVER和CLIENT才能通过RPC来实现PROGRAM PORT的对应。可以这么理解RPC和NFS的关系：NFS是一个文件系统，而RPC是负责负责信息的传输。</p>
+</blockquote>
+<ul>
+<li><p>NFS需要启动的Daemons：</p>
+<ul>
+<li>pc.nfsd:    基本的NFS守护进程，主要负责Clinet登录权限检查。</li>
+<li>rpm.mountd:    RPC安装守护进程，负责NFS的文件系统，当Client端通过rpc.nfsd登录NFS Server后，对Client存取Server的文件前，还必须通过文件使用权限的验证，他会读取NFS的配置文件/etc/exports来对比Client权限。</li>
+</ul>
+</li>
+<li><p>NFS Server 在Red Hat平台下需要两个NFS Daemons套件</p>
+<ul>
+<li>nfs-utils：    提供rpc.nfsd及rpc.mountd这两个NFS Daemons的套件</li>
+<li>portmap：    NFS其实可以看作一个RPC Server Program，主要功能是进行端口映射。当Client尝试连接并使用RPC服务提供的服务（NFS）时，portmap会将所管理的服务对应的端口提供给客户点，从而是Client可以通过该端口请求服务。</li>
+</ul>
+</li>
+</ul>
+<h5 id="配置NFS服务"><a href="#配置NFS服务" class="headerlink" title="配置NFS服务"></a>配置NFS服务</h5><p>NFS服务的配置相对简单，只需要在对应文件中进行配置，然后启动NFS服务即可。<br>NFS常用文件：</p>
+<ul>
+<li>/etc/exports                              NFS服务的主要配置文件</li>
+<li>/usr/sbin/exportfs                        NFS服务的管理命令</li>
+<li>/usr/sbin/showmount                       客户端的查看命令</li>
+<li>/var/lib/nfs/etab                         记录NFS分享出来的目录的完整权限设定值</li>
+<li>/var/lib/nfs/xtab                         记录曾经登录过的Clinent 信息</li>
+</ul>
+<p>NFS服务的配置文件是<code>/ext/exports</code>，这个文件是NFS的主要配置文件，不过系统并没有默认值，所以这个文件不一定存在，可能要自己手动创建，写入相应配置内容。</p>
+<p>/etc/exports文件内容格式：</p>
+<p> [客户端1 选项（访问权限,用户映射,其他）] [客户端2 选项（访问权限,用户映射,其他）]</p>
+<ul>
+<li>输出目录：<br>  输出目录是指NFS系统中需要共享给客户端使用的目录</li>
+<li>客户端：<br> 客户端是指网络中可以访问这个NFS Server的主机，客户端常用的指定方式如下：</li>
+<li>指定IP地址：172.16.7.57<ul>
+<li>指定子网中的主机：172.16.7.0/24</li>
+<li>指定域名的主机：ssq-54-57.zerounix.com</li>
+<li>指定域中的所有主机：*.zerounix.com</li>
+<li>所有主机：*</li>
+</ul>
+</li>
+</ul>
+<h5 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h5><p>  选项用来设置输出目录的访问权限、用户映射等。<br>NFS主要有3类选项：</p>
+<ul>
+<li><p>访问权限选项：</p>
+<ul>
+<li>设置输出目录只读：ro</li>
+<li>设置输出目录读写：rw</li>
+</ul>
+</li>
+<li><p>用户映射选项：</p>
+<ul>
+<li>all_squash：                  将远程访问的所有普通用户及属组都映射为匿名用户或用户组(nfsnobody)；</li>
+<li>no_all_squash：            与all_squash相反（default）；</li>
+<li>root_squash：                将root用户及属组都映射问匿名用户或用户组（default）；</li>
+<li>no_root_squash：</li>
+<li>anonuid=xxx：                将远程访问的所有用户都映射为匿名用户，并指定用户问本地用户（UID=xxx）；</li>
+<li>anongid=xxx：                将远程访问的所有用户都映射为匿名用户组，并指定用户问本地用户组（GID=xxx）；</li>
+</ul>
+</li>
+<li>其他选项：<ul>
+<li>secure：        限制客户端只能从小于1024的tcp端口连接NFS Server（default）；</li>
+<li>insecure：    允许客户端从大于1024的tcp端口连接NFS Server；</li>
+<li>sync：            将数据同步下乳内存缓冲区与磁盘中，效率低，但是可以保证数据的一致性；</li>
+<li>async：           将数据先保存在内存缓冲区中，必要时才写入磁盘；</li>
+<li>wdelay：        检查是否有相关的写操作，如果有则见这些写操作一起执行，可以提高效率（default）；</li>
+<li>no_wdelay：  若有写操作立即执行，应与sync配合使用；</li>
+<li>subtree：        若输出目录是一个子目录，则NFS Server将检查其父目录权限（default）；</li>
+<li>no_subtree：   若输出目录是一个子目录，则NFS Server将不检查其父目录权限；</li>
+</ul>
+</li>
+</ul>
+<p>例如：编辑/etc/exports 为：<br>/tmp        *(rw,no_root_squash)<br>/home/public    172.16.7.57(rw)    172.16.7.0/24(ro)</p>
+<h4 id="NFS-Server的启动与停止"><a href="#NFS-Server的启动与停止" class="headerlink" title="NFS Server的启动与停止"></a>NFS Server的启动与停止</h4><p>在对exports文件进行了正确的配置后，就可以启动NFS Server了。</p>
+<h5 id="启动NFS-Server"><a href="#启动NFS-Server" class="headerlink" title="启动NFS Server"></a>启动NFS Server</h5><p>为了使NFS 服务可以正常工作，需要启动portmap和nfs两个服务，并且portmap要先于nfs启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service portmap start</div><div class="line">service nfs start</div></pre></td></tr></table></figure></p>
+<h5 id="停止NFS-Server"><a href="#停止NFS-Server" class="headerlink" title="停止NFS Server"></a>停止NFS Server</h5><p>要停止NFS时，要先停止NFS服务在停止portmap，对于系统中有其他服务（如NIS）需要使用时，不要停止portmap。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">service portmap start</div><div class="line">Starting portmap:</div><div class="line"></div><div class="line">service nfs start</div><div class="line">Starting NFS services:</div><div class="line">Starting NFS quotas:</div><div class="line">Starting NFS daemon:</div><div class="line">Starting NFS mountd:</div></pre></td></tr></table></figure></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将NFS Server的/data/charlie/ 共享给172.16.7.57，权限读写</p>
+<h4 id="修改配置文件exports"><a href="#修改配置文件exports" class="headerlink" title="修改配置文件exports"></a>修改配置文件exports</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /etc/exports</div><div class="line">/data/charlie   172.16.7.57(rw,no_root_squash)</div></pre></td></tr></table></figure>
+<h5 id="重启NFS"><a href="#重启NFS" class="headerlink" title="重启NFS"></a>重启NFS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service portmap start</div><div class="line">service nfs start</div></pre></td></tr></table></figure>
+<p>查看是否应用配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">exportfs</div><div class="line">/data/charlie   172.16.7.57</div></pre></td></tr></table></figure></p>
+<h5 id="Client挂载目录"><a href="#Client挂载目录" class="headerlink" title="Client挂载目录"></a>Client挂载目录</h5><p>命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount options NFS_IP:共享目录 本地挂载点</div><div class="line">mount -t nfs -o nolock 172.16.7.56:/data/zerounix /mnt</div></pre></td></tr></table></figure></p>
+<h5 id="查看NFS挂载状态"><a href="#查看NFS挂载状态" class="headerlink" title="查看NFS挂载状态"></a>查看NFS挂载状态</h5><p>Server 端：<br>显示已经被Client挂载的目录信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">showmount -a</div><div class="line">All mount points on ssq-54.56.zerounix.com:</div><div class="line">172.16.7.57:/data/zerounix</div></pre></td></tr></table></figure></p>
+<p>Client端：<br>查看NFS共享状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">showmount -a</div><div class="line">Export list for 172.16.7.56</div><div class="line">/data/zerounix 172.16.7.57</div></pre></td></tr></table></figure></p>
+<p>查看文件是否统一</p>
+<p>NFS有很多默认的参数，打开/var/lib/nfs/etab 查看分享出来的/home/david/ 完整权限设定值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /var/lib/nfs/etab</div><div class="line">/data/zerounix    172.16.7.57(rw,sync,wdelay,hide,nocrossmnt,secure,no_root_squash,no_all_squash,no_subtree_check,secure_locks,acl,mapping=identity,anonuid=65534,anongid=65534)</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nfs/" rel="tag">#nfs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/21/create-2t-partition.html" rel="next" title="创建大于2TB分区">
+                <i class="fa fa-chevron-left"></i> 创建大于2TB分区
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/21/centos6.5-install-vncserver.html" rel="prev" title="CentOS6.5安装VNC">
+                CentOS6.5安装VNC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/21/nfs-detail.html"
+     data-title="NFS详解"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/21/nfs-detail.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/21/nfs-detail.html"
+           data-title="NFS详解" data-url="http://czero000.github.io/2015/12/21/nfs-detail.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS服务简介"><span class="nav-number">1.</span> <span class="nav-text">NFS服务简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NFS简介"><span class="nav-number">1.1.</span> <span class="nav-text">NFS简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各NFS协议版本的主要区别"><span class="nav-number">1.2.</span> <span class="nav-text">各NFS协议版本的主要区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装部署NFS"><span class="nav-number">2.</span> <span class="nav-text">安装部署NFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统环境"><span class="nav-number">2.1.</span> <span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装NFS服务"><span class="nav-number">2.2.</span> <span class="nav-text">安装NFS服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看系统是否安装NFS"><span class="nav-number">2.2.1.</span> <span class="nav-text">查看系统是否安装NFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NFS系统守护进程"><span class="nav-number">2.2.2.</span> <span class="nav-text">NFS系统守护进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置NFS服务"><span class="nav-number">2.2.3.</span> <span class="nav-text">配置NFS服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#选项："><span class="nav-number">2.2.4.</span> <span class="nav-text">选项：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NFS-Server的启动与停止"><span class="nav-number">2.3.</span> <span class="nav-text">NFS Server的启动与停止</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#启动NFS-Server"><span class="nav-number">2.3.1.</span> <span class="nav-text">启动NFS Server</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停止NFS-Server"><span class="nav-number">2.3.2.</span> <span class="nav-text">停止NFS Server</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改配置文件exports"><span class="nav-number">3.1.</span> <span class="nav-text">修改配置文件exports</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#重启NFS"><span class="nav-number">3.1.1.</span> <span class="nav-text">重启NFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Client挂载目录"><span class="nav-number">3.1.2.</span> <span class="nav-text">Client挂载目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看NFS挂载状态"><span class="nav-number">3.1.3.</span> <span class="nav-text">查看NFS挂载状态</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

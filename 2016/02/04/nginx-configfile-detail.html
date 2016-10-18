@@ -1,0 +1,822 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nginx," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="nginx 主配置文件详解安装nginx后，会在安装目录下生成conf目录，目录中nginx.conf便是nginx的主配置文件，nginx是基于模块化的构建方式，在ningx配置文件中也有体现，可以分为核心模块、事件模块、邮件模块、HTTP模块。
+核心模块123456789user  nobody;                                // 指定nginx运行的用户和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx--配置文件详解">
+<meta property="og:url" content="http://czero000.github.io/2016/02/04/nginx-configfile-detail.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="nginx 主配置文件详解安装nginx后，会在安装目录下生成conf目录，目录中nginx.conf便是nginx的主配置文件，nginx是基于模块化的构建方式，在ningx配置文件中也有体现，可以分为核心模块、事件模块、邮件模块、HTTP模块。
+核心模块123456789user  nobody;                                // 指定nginx运行的用户和">
+<meta property="og:updated_time" content="2016-02-04T09:01:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx--配置文件详解">
+<meta name="twitter:description" content="nginx 主配置文件详解安装nginx后，会在安装目录下生成conf目录，目录中nginx.conf便是nginx的主配置文件，nginx是基于模块化的构建方式，在ningx配置文件中也有体现，可以分为核心模块、事件模块、邮件模块、HTTP模块。
+核心模块123456789user  nobody;                                // 指定nginx运行的用户和">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/02/04/nginx-configfile-detail.html"/>
+
+
+  <title> Nginx--配置文件详解 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Nginx--配置文件详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-04T15:59:49+08:00" content="2016-02-04">
+              2016-02-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/04/nginx-configfile-detail.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-configfile-detail.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/02/04/nginx-configfile-detail.html" class="leancloud_visitors" data-flag-title="Nginx--配置文件详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="nginx-主配置文件详解"><a href="#nginx-主配置文件详解" class="headerlink" title="nginx 主配置文件详解"></a>nginx 主配置文件详解</h2><p>安装nginx后，会在安装目录下生成conf目录，目录中<code>nginx.conf</code>便是nginx的主配置文件，nginx是基于模块化的构建方式，在ningx配置文件中也有体现，可以分为核心模块、事件模块、邮件模块、HTTP模块。</p>
+<h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">user  nobody;                                // 指定nginx运行的用户和组，默认为nobody</div><div class="line">worker_processes  8;                         // 开启nginx的进程数，与cpu核数一致</div><div class="line">worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 1000000; // 将每个nginx进程绑定到一个CPU上</div><div class="line">worker_rlimit_nofile 65535;                  // 指定nginx进程打开的最多文件描述符数量，受系统的最大文件打开数限制</div><div class="line"></div><div class="line">error_log  logs/error.log;  notice;          // 设定全局错误日志文件，以什么级别显示，有[debug、info、warn、error、crit]模式可选，按照实际情况设定</div><div class="line">#error_log  logs/error.log  info;            </div><div class="line"></div><div class="line">pid        logs/nginx.pid;                   // 指定进程id的存储文件位置</div></pre></td></tr></table></figure>
+<h3 id="事件模块"><a href="#事件模块" class="headerlink" title="事件模块"></a>事件模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">events &#123;</div><div class="line">    use epoll;	                             // 工作模式设定为epoll，还有select、poll、kqueue、rtsig和/dev/poll模式可选</div><div class="line">    worker_connections  65535;                // 定义每个进程的最大连接数，受系统的最大文件打开数限制</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="http模块"><a href="#http模块" class="headerlink" title="http模块"></a>http模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">    include       mime.types;                             // 文件拓展名与文件类型映射表 </div><div class="line">    default_type  application/octet-stream;               // 默认文件类型 </div><div class="line">    charset utf-8;                                        // 默认编码</div><div class="line">   #autoindex on ;                                        // 关闭目录别表访问，默认关闭</div><div class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;    // 设置日志格式</div><div class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</div><div class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</div><div class="line">  </div><div class="line">    access_log  logs/access.log  main;                                 </div><div class="line">   </div><div class="line">    sendfile        on;                                   //开启高效文件传输模式，如果进行下载等磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改成off。</div><div class="line">    #tcp_nopush     on;                                   // 开启防止网络阻塞</div><div class="line"></div><div class="line">    #keepalive_timeout  0;</div><div class="line">    keepalive_timeout  65;                                // 设置客户端连接报错活动的超时时间</div><div class="line">    tcp_nodelay         on;</div><div class="line">    </div><div class="line">    </div><div class="line">    // 反向代理设置</div><div class="line">    proxy_connect_timeout 30;                           </div><div class="line">    proxy_send_timeout 30;</div><div class="line">    proxy_read_timeout 30;</div><div class="line">    proxy_buffer_size 32k;</div><div class="line">    proxy_buffers 4 64k;</div><div class="line">    proxy_busy_buffers_size 128k;</div><div class="line">    proxy_temp_file_write_size 128k;</div><div class="line">    proxy_ignore_client_abort on;</div><div class="line">    proxy_headers_hash_max_size 51200;</div><div class="line">    proxy_headers_hash_bucket_size 6400;</div><div class="line">    proxy_set_header  Host              $host;</div><div class="line">    proxy_set_header  X-Real-IP         $remote_addr;     </div><div class="line">    proxy_set_header  x-forwarded-for   $proxy_add_x_forwarded_for; //后端的Web服务器可以通过X-Forwarded-For获取用户真实IP</div><div class="line"></div><div class="line">    server_names_hash_bucket_size 128;                  // 服务器名字的hash表大小</div><div class="line">    client_header_buffer_size 32k;                      // 指定client请求头的hearder buffers大小</div><div class="line">    large_client_header_buffers 4 32k;                  // 大请求缓冲区数量和大小</div><div class="line">    client_max_body_size 8m;                            // 设置client请求的最大单个文件字节数</div><div class="line">    client_body_temp_path /dev/shm/client_body_temp;    // 指定连接请求试图写入缓存文件的目录路径</div><div class="line"> </div><div class="line"> </div><div class="line"> // FastCGI相关参数设定</div><div class="line">    fastcgi_connect_timeout 300;</div><div class="line">    fastcgi_send_timeout 300;</div><div class="line">    fastcgi_read_timeout 300;</div><div class="line">    fastcgi_buffer_size 64k;</div><div class="line">    fastcgi_buffers 4 64k;</div><div class="line">    fastcgi_busy_buffers_size 128k;</div><div class="line">    fastcgi_temp_file_write_size 128k;</div><div class="line">    </div><div class="line">// Gzip相关参数设定    </div><div class="line">    gzip  on;                                             // 开启gzip压缩</div><div class="line">    gzip_min_length 1k;                                   // 设置允许压缩的页面最小字节</div><div class="line">    gzip_http_version 1.0;                                // 设置识别http协议的版本，默认是1.1</div><div class="line">    gzip_comp_level 2;                                    // 设置压缩比，1-9</div><div class="line">    gzip_buffers  4 16k;                                  // 设置4个单位16k的内存作为压缩结果流缓存 </div><div class="line">    gzip_proxied any;                                     // nginx 做前端代理时启用该选项，表示无论后端服务器的headers头返回什么信息，都无条件启用压缩</div><div class="line">    gzip_disable &quot;MSIE [1-6]\.&quot;;                          // 禁用IE1-6的gzip压缩</div><div class="line">    gzip_types  text/plain text/css application/x-javascript application/xml application/xml+rss text/javascript;  // 什么类型的页面或文档启用压缩</div><div class="line">    gzip_vary on;</div><div class="line">    server_name_in_redirect off;                          // nginx 在处理自己内部重定向时不默认使用  server_name 设置中的第一个域名</div><div class="line">    </div><div class="line">    include vhost/*.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="虚拟主机文件"><a href="#虚拟主机文件" class="headerlink" title="虚拟主机文件"></a>虚拟主机文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen 80;                                              // 监听端口</div><div class="line">        server_name  www.zerounix.com                           // 域名，可以多个，用空格分隔</div><div class="line">        root /data/htdocs/www.zerounix.com;                  // 虚拟主机根目录</div><div class="line">        charset uft-8;                                         // 访问编码</div><div class="line">        access_log  logs/www.zerounix.com_access.log access;   //设置虚拟主机访问日志的存放路径和格式main</div><div class="line">        error_log   logs/www.zerounix.com_error.log;            // 错误日志</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">          index index.php index.htm                          // 甚至首页索引文件类型</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        error_page  404              /404.html;              // 定义404页面</div><div class="line"></div><div class="line">        error_page   500 502 503 504  /50x.html;             // 定义50x页面</div><div class="line">        location = /50x.html &#123;</div><div class="line">            root   html;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        // php请求转发到本地9000，交给fastcig处理</div><div class="line">        location ~.*\.(php|php5)?$ &#123;</div><div class="line">          fastcgi_pass   127.0.0.1:9000;</div><div class="line">          fastcgi_index  index.php;</div><div class="line">          fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">          include        fastcgi_params;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        // 设置nginx status页面</div><div class="line">        location /status &#123;                                     </div><div class="line">           stub_status on; </div><div class="line">           access_log logs/www.zerounix.com_status.log;</div><div class="line">           auth_basic &quot;NginxStatus&quot;</div><div class="line">           auth_baaic_user_file conf/htpasswd;                // apache提供的htpasswd工具</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        // 图片缓存时间</div><div class="line">        location ~ .*\.(gif|jpg|jpeg|png|bmp|sfw)$ &#123;             </div><div class="line">          expires 10d;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        // JS和CSS缓存时间</div><div class="line">        location ~ .*\.&#123;js|css&#125;$ &#123;</div><div class="line">          expires 1h;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        //所有静态文件由nginx直接读取不经过tomcat或resin</div><div class="line">        location ~ .*.(htm|html|gif|jpg|jpeg|png|bmp|swf|ioc|rar|zip|txt|flv|mid|doc|ppt|pdf|xls|mp3|wma)$ &#123; </div><div class="line">          expires 15d; </div><div class="line">        &#125;</div><div class="line">        </div><div class="line">       </div><div class="line">        // 本地动静分离反向代理配置，所有jsp的页面均交由tomcat或resin处理</div><div class="line">        location ~ .(jsp|jspx|do)?$ &#123;</div><div class="line">          proxy_set_header Host $host;</div><div class="line">          proxy_set_header X-Real-IP $remote_addr;</div><div class="line">          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">          proxy_pass http://127.0.0.1:8080;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        #对 &quot;/&quot; 启用反向代理</div><div class="line">     	location / &#123;</div><div class="line">  proxy_pass	http://18.26.154.72:8090;</div><div class="line">          proxy_redirect off;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p><strong> <a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a> </strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag">#nginx</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/04/nginx-compiler-parameters.html" rel="next" title="Nginx编译参数详解">
+                <i class="fa fa-chevron-left"></i> Nginx编译参数详解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/04/install-nginx-php-fpm.html" rel="prev" title="Nginx+PHP-FPM取代Apache">
+                Nginx+PHP-FPM取代Apache <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/04/nginx-configfile-detail.html"
+     data-title="Nginx--配置文件详解"
+     data-content=""
+     data-url="http://czero000.github.io/2016/02/04/nginx-configfile-detail.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/04/nginx-configfile-detail.html"
+           data-title="Nginx--配置文件详解" data-url="http://czero000.github.io/2016/02/04/nginx-configfile-detail.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-主配置文件详解"><span class="nav-number">1.</span> <span class="nav-text">nginx 主配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心模块"><span class="nav-number">1.1.</span> <span class="nav-text">核心模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件模块"><span class="nav-number">1.2.</span> <span class="nav-text">事件模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http模块"><span class="nav-number">1.3.</span> <span class="nav-text">http模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟主机文件"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟主机文件</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>
