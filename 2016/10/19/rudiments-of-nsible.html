@@ -1,0 +1,1090 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ansible," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="什么是 AnsibleAnsible 是基于 python 的配置管理和应用部署工具。官方给的 title是 “Ansible is Simple IT Automation” —简单的自动化IT工具。
+架构图
+工作原理
+
+管理端支持 local、 ssh、zeromq 三种方式连接被控端，默认使用 ssh
+可以按照一定规则进行 inventory，管理节点通过模块实现对应操作–ad-hoc
+管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible-入门">
+<meta property="og:url" content="http://czero000.github.io/2016/10/19/rudiments-of-nsible.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="什么是 AnsibleAnsible 是基于 python 的配置管理和应用部署工具。官方给的 title是 “Ansible is Simple IT Automation” —简单的自动化IT工具。
+架构图
+工作原理
+
+管理端支持 local、 ssh、zeromq 三种方式连接被控端，默认使用 ssh
+可以按照一定规则进行 inventory，管理节点通过模块实现对应操作–ad-hoc
+管理">
+<meta property="og:image" content="http://czero000.github.io/images/ansible/ansible.png">
+<meta property="og:image" content="http://czero000.github.io/images/ansible/ansible-work.png">
+<meta property="og:updated_time" content="2016-10-19T06:46:07.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible-入门">
+<meta name="twitter:description" content="什么是 AnsibleAnsible 是基于 python 的配置管理和应用部署工具。官方给的 title是 “Ansible is Simple IT Automation” —简单的自动化IT工具。
+架构图
+工作原理
+
+管理端支持 local、 ssh、zeromq 三种方式连接被控端，默认使用 ssh
+可以按照一定规则进行 inventory，管理节点通过模块实现对应操作–ad-hoc
+管理">
+<meta name="twitter:image" content="http://czero000.github.io/images/ansible/ansible.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/10/19/rudiments-of-nsible.html"/>
+
+
+  <title> Ansible-入门 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ansible-入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T14:20:11+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/DevOps/Ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">Ansible</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/19/rudiments-of-nsible.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/rudiments-of-nsible.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/19/rudiments-of-nsible.html" class="leancloud_visitors" data-flag-title="Ansible-入门">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是-Ansible"><a href="#什么是-Ansible" class="headerlink" title="什么是 Ansible"></a>什么是 Ansible</h1><p>Ansible 是基于 python 的配置管理和应用部署工具。官方给的 title是 “Ansible is Simple IT Automation” —简单的自动化IT工具。</p>
+<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="http://czero000.github.io/images/ansible/ansible.png" alt="ansible架构图" title="ansible架构图"></p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="http://czero000.github.io/images/ansible/ansible-work.png" alt="工作原理" title="ansible工作原理"></p>
+<ul>
+<li>管理端支持 local、 ssh、zeromq 三种方式连接被控端，默认使用 ssh</li>
+<li>可以按照一定规则进行 inventory，管理节点通过模块实现对应操作–ad-hoc</li>
+<li>管理节点可以通过 playbook 实现对多个 task 的集合实现一类功能</li>
+</ul>
+<h1 id="安装-Ansible"><a href="#安装-Ansible" class="headerlink" title="安装 Ansible"></a>安装 Ansible</h1><ul>
+<li>源码安装</li>
+</ul>
+<p>源码安装需要 python2.6 以上版本，依赖 paramiko， PyYAML， Jinja2， simplejsion、 pycrypto模块，可以通过 pip 来安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// 获取源码</div><div class="line">git clone git://github.com/ansible/ansible.git --recursive   </div><div class="line">cd ./ansible</div><div class="line"></div><div class="line">// 设置环境变量</div><div class="line">source ./hacking/env-setup</div><div class="line">source ./hacking/env-setup.fish</div><div class="line">source ./hacking/env-setup -q</div><div class="line"></div><div class="line">// 安装 Python 依赖</div><div class="line">easy_install pip</div><div class="line">pip install paramiko PyYAML Jinja2 httplib2 six</div><div class="line"></div><div class="line">// 更新 Ansible</div><div class="line">git pull --rebase</div><div class="line">git submodule update --init --recursive</div><div class="line"></div><div class="line">// 设置inventory文件</div><div class="line">echo &quot;127.0.0.1&quot; &gt; ~/ansible_hosts</div><div class="line">export ANSIBLE_HOSTS=~/ansible_hosts</div><div class="line"></div><div class="line">// 测试命令</div><div class="line">ansible all -m ping --ask-pass</div></pre></td></tr></table></figure></p>
+<ul>
+<li>常用 Linux　发行版</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// CentOS、RHEL</div><div class="line">yum install ansible</div><div class="line"></div><div class="line">//Ubuntu、Debian</div><div class="line">sudo apt-get install software-properties-common</div><div class="line">sudo apt-add-repository ppa:ansible/ansible</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install ansible</div></pre></td></tr></table></figure>
+<ul>
+<li>通过 pip 安装最新版<br>Ansible 可以通过  <code>pip</code> 安装,同时也会安装 paramiko、PyYAML、jinja2 等 Python 依赖库。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt install python3-pip</div><div class="line">pip3 install ansible</div></pre></td></tr></table></figure>
+<h1 id="运行-Ansible"><a href="#运行-Ansible" class="headerlink" title="运行 Ansible"></a>运行 Ansible</h1><h2 id="添加被控远程主机清单"><a href="#添加被控远程主机清单" class="headerlink" title="添加被控远程主机清单"></a>添加被控远程主机清单</h2><p>已经安装好了 Ansible ，先在就可以运行 Ansible 了。 首先要在 <code>/etc/ansible/hosts</code> 文件中加入一个或者多个远程 ip 或者 domain。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">172.16.11.210</div><div class="line">172.16.11.211</div></pre></td></tr></table></figure>
+<h2 id="配置基于-SSH-key-方式-连接"><a href="#配置基于-SSH-key-方式-连接" class="headerlink" title="配置基于 SSH key 方式 连接"></a>配置基于 SSH key 方式 连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 主控端操作</div><div class="line">ssh-keygen -t rsa -q</div><div class="line">ssh-copy-id 172.16.11.210</div><div class="line">ssh-copy-id 172.16.11.211</div></pre></td></tr></table></figure>
+<h2 id="运行-Ansible-1"><a href="#运行-Ansible-1" class="headerlink" title="运行 Ansible"></a>运行 Ansible</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ansible all -m ping</div><div class="line">172.16.11.210 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false,</div><div class="line">    &quot;ping&quot;: &quot;pong&quot;</div><div class="line">&#125;</div><div class="line">172.16.11.211 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false,</div><div class="line">    &quot;ping&quot;: &quot;pong&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="配置-inventory"><a href="#配置-inventory" class="headerlink" title="配置 inventory"></a>配置 inventory</h1><p>Ansible 可以同时操纵属于一个组的多台主机，主机和组的关系是通过 inventory 文件来配置即<code>/etc/ansible/hosts</code>。<br>inventory可以通过 IP、Domain 来指定，未分组的机器要保留在 host 文件顶部，通过<code>[]</code> 来配置分组信息。</p>
+<h2 id="主机与组"><a href="#主机与组" class="headerlink" title="主机与组"></a>主机与组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// 简单分组</div><div class="line">[web1]</div><div class="line">web210.example.com</div><div class="line">web211.example.com</div><div class="line"></div><div class="line">// 配置端口号</div><div class="line">[web2]</div><div class="line">172.16.11.210:8000</div><div class="line">172.16.11.211:8000</div><div class="line"></div><div class="line">// 定义别名和端口</div><div class="line">[web]</div><div class="line">www ansible_ssh_port=1234 ansible_ssh_host=172.16.11.211  ansible_ssh_pass=passwd \\ 远程ip，ssh登陆用户、密码</div><div class="line">other1  ansible_connertion=ssh ansible_ssh_user = illlusion</div><div class="line"></div><div class="line">//执行主机，支持正则表达</div><div class="line">[web_www]</div><div class="line">www[01:10].example.com</div><div class="line">db-[a:f].erample.com</div></pre></td></tr></table></figure>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">// 主机变量，分配变量给主机，这些变量可以在之后的 playbook 中使用</div><div class="line">[web-www]</div><div class="line">www-a http_port=89 maxRequestsPerChild=808</div><div class="line">www-a http_port=303 maxRequestsPerChild=909</div><div class="line"></div><div class="line">//组的变量，组也可以赋予变量，这样组成员将继承组变量</div><div class="line"></div><div class="line">[web-www]</div><div class="line">www-a http_port=89 maxRequestsPerChild=808</div><div class="line">www-a http_port=303 maxRequestsPerChild=909</div><div class="line"></div><div class="line">[web-www:vars]</div><div class="line">ntp_server=ntp.example.com</div><div class="line">proxy=proxy.example.com</div><div class="line"></div><div class="line">// 组嵌套 可以把组作为另外一个组的子成员，已经分配变量给整个组使用。这些变量可以给 `/usr/bin/ansible-playbook` 使用，但是不能给 `/usr/bin/ansible` 使用</div><div class="line"></div><div class="line">[group1]</div><div class="line">host1</div><div class="line">host2</div><div class="line"></div><div class="line">[group2]</div><div class="line">host3</div><div class="line">host4</div><div class="line"></div><div class="line">[group3:children]</div><div class="line">group1</div><div class="line">group2</div><div class="line"></div><div class="line">[group3:vars]</div><div class="line">some_server=foo.example.com</div><div class="line">halon_system_timeout=30</div><div class="line">self_destruct_countdown=60</div><div class="line">escape_pods=2</div></pre></td></tr></table></figure>
+<h2 id="分文件定义-Host-和-group-变量"><a href="#分文件定义-Host-和-group-变量" class="headerlink" title="分文件定义 Host 和 group 变量"></a>分文件定义 Host 和 group 变量</h2><p>在 inventory 文件中保存的所有变量并不是最佳方式，还可以保存在独立的文件中， 这些文件与 inventory 关联，要求使用 <code>YAML</code>语法。host 和 gourp 变量 要求存储在与 host 和 group 相同的目录名中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//假设有一个 host 为 foosball 主机，属于两个组，一个是 raleigh,另外一个是 webserver</div><div class="line">/etc/ansible/group_vars/raleigh</div><div class="line">/etc/ansible/group_vars/webservers</div><div class="line">/etc/ansible/host_vars/foosball</div><div class="line"></div><div class="line">// raleigh 组的变量</div><div class="line">ntp_server: acme.example.org</div><div class="line">database_server: storage.example.org</div></pre></td></tr></table></figure></p>
+<p>还可以在组变量目录下创建多个文件，设置不同类型的变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/ansible/group_vars/raleigh/db_settings</div><div class="line">/etc/ansible/group_vars/raleigh/cluster_settings</div></pre></td></tr></table></figure></p>
+<h2 id="inventory-参数说明"><a href="#inventory-参数说明" class="headerlink" title="inventory 参数说明"></a>inventory 参数说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 要连接的远程主机名.与你想要设定的主机的别名不同的话,可通过此变量设置.</div><div class="line">ansible_ssh_host</div><div class="line"></div><div class="line">// ssh 端口号.如果不使用默认,通过此变量设置.</div><div class="line">ansible_ssh_port</div><div class="line"></div><div class="line">// ssh 用户名</div><div class="line">ansible_ssh_user</div><div class="line"></div><div class="line">// ssh 密码(这种明文方式并不安全,强烈建议使用 --ask-pass 或 SSH 密钥)</div><div class="line">ansible_ssh_pass</div><div class="line"></div><div class="line">// sudo 密码(这种方式并不安全,强烈建议使用 --ask-sudo-pass)</div><div class="line">ansible_sudo_pass</div><div class="line"></div><div class="line">// sudo 命令路径(适用于1.8及以上版本)</div><div class="line">ansible_sudo_exe (new in version 1.8)</div><div class="line"></div><div class="line">// 与主机的连接类型.比如:local, ssh 或者 paramiko. Ansible 1.2 以前默认使用 paramiko.1.2 以后默认使用 &apos;smart&apos;,&apos;smart&apos; 方式会根据是否支持 ControlPersist, 来判断&apos;ssh&apos; 方式是否可行.</div><div class="line">ansible_connection</div><div class="line"></div><div class="line">// ssh 使用的私钥文件.适用于有多个密钥,而你不想使用 SSH 代理的情况.</div><div class="line">ansible_ssh_private_key_file</div><div class="line"></div><div class="line">// 目标系统的 shell 类型.默认情况下,命令的执行使用 &apos;sh&apos; 语法,可设置为 &apos;csh&apos; 或 &apos;fish&apos;.      </div><div class="line">ansible_shell_type</div><div class="line"></div><div class="line">// 目标主机的 python 路径.适用于的情况: 系统中有多个 Python, 或者命令路径不是&quot;/usr/bin/python&quot;,比如  \*BSD, 或者 /usr/bin/python      </div><div class="line">ansible_python_interpreter</div></pre></td></tr></table></figure>
+<h1 id="Patterns"><a href="#Patterns" class="headerlink" title="Patterns"></a>Patterns</h1><p>在 ansible 中， patterns 是指如何确定有那些主机或组被管理，在 playbook 中，它是指对应主机应用特定的配置或执行特定进程。</p>
+<h2 id="ansible"><a href="#ansible" class="headerlink" title="ansible"></a>ansible</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 语法</div><div class="line">ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt; -a &lt;arguments&gt;</div><div class="line"></div><div class="line">// 示例</div><div class="line">ansible webservers -m service -a &quot;name=httpd state=restarted&quot;</div></pre></td></tr></table></figure>
+<p>简单的说， pattern 是一个主机筛选器，支持正则匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 所有主机</div><div class="line">all</div><div class="line">*</div><div class="line"></div><div class="line">//特定主机，支持 ip 地址和主机名</div><div class="line">web211</div><div class="line">172.16.11.211</div><div class="line"></div><div class="line">//主机组，可以指定特定组或多个组，多个组之间使用`:`分隔</div><div class="line">web_server</div><div class="line">web_server:database_server</div><div class="line"></div><div class="line">// 支持正则表达式和逻辑运算</div><div class="line">web_server:!web211</div><div class="line">web_server:&amp;db1</div><div class="line">web_server:database_server:&amp;db1:!web211</div></pre></td></tr></table></figure>
+<h2 id="playbook"><a href="#playbook" class="headerlink" title="playbook"></a>playbook</h2><p>在 playbook 中，通过使用 <code>-e</code>参数可以实现通过变量来确定 group</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">webservers:!&#123;&#123;excluded&#125;&#125;:&amp;&#123;&#123;required&#125;&#125;</div><div class="line"></div><div class="line">// 通配符</div><div class="line">*.example.com</div><div class="line">*.com</div><div class="line"></div><div class="line">//通配符和正则同时</div><div class="line">one*.com:dbservers</div><div class="line"></div><div class="line">// 在 patterns 应用正则式时，使用 `~` 开头</div><div class="line">~(web|db).*\.example\.com</div><div class="line"></div><div class="line">// 索引和切片</div><div class="line">webservers[0]</div><div class="line">webservers[0-25]</div><div class="line"></div><div class="line">// 可以在使用 `--limit` 标记来添加排除条件</div><div class="line">ansible-playbook site.yml --limit datacenter2</div><div class="line"></div><div class="line">// 如果你想从文件读取 hosts,文件名以 @ 为前缀即可.</div><div class="line">ansible-playbook site.yml --limit @retry_hosts.txt</div></pre></td></tr></table></figure>
+<h1 id="简单执行命令"><a href="#简单执行命令" class="headerlink" title="简单执行命令"></a>简单执行命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ansible  all -m ping</div><div class="line">172.16.11.210 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false,</div><div class="line">    &quot;ping&quot;: &quot;pong&quot;</div><div class="line">&#125;</div><div class="line">172.16.11.211 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false,</div><div class="line">    &quot;ping&quot;: &quot;pong&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可用该命令选项：</p>
+<ul>
+<li>-i：指定 inventory 文件，使用当前目录下的 hosts</li>
+<li>all：针对 hosts 定义的所有主机执行，这里也可以指定组名或模式</li>
+<li>-m：指定所用的模块，我们使用 Ansible 内置的 ping 模块来检查能否正常管理远端机器</li>
+<li>-u：指定远端机器的用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">ansible all -m ping     \\ping 所有的节点</div><div class="line">ansible 127* -m ping</div><div class="line">ansible -i /etc/ansible/hosts -m command -a &quot;uptime&quot;  // 指定 pattens 文件</div><div class="line">ansible all -m ping -u test</div><div class="line">ansible all -m ping -u test --sudo</div><div class="line">ansible all -m ping -u test --sudo --sudo-user tom</div><div class="line">ansible testhost -m setup -a &quot;filter=ansible_all_ipv4_addresses&quot; \\使用 filter 过滤信息   </div><div class="line">ansible testhosts -a &quot;/sbin/reboot&quot; -f 10  \\重启testhosts组的所有机器，每次重启10台</div><div class="line">ansible testhosts -m copy -a &quot;src=/etc/hosts dest=/tmp/hosts&quot; \\拷贝本地hosts 文件到testhosts组所有主机的/tmp/hosts</div><div class="line">ansible webservers -m file -a &quot;dest=/srv/foo/a.txt mode=600&quot; \\file 模块允许更改文件的用户及权限</div><div class="line">ansible webservers -m file -a &quot;dest=/srv/foo/b.txt mode=600 owner=mdehaan group=mdehaan&quot;</div><div class="line">ansible webservers -m file -a &quot;dest=/path/to/c mode=755 owner=mdehaan group=mdehaan state=directory&quot; \\使用 file 模块创建目录，类似 mkdir -p</div><div class="line">ansible webservers -m file -a &quot;dest=/path/to/c state=absent&quot; \\file 模块允许更改文件的用户及权限  </div><div class="line">ansible testhosts -a &apos;cal&apos;  \\默认是使用 command 模块，所以使用command的命令时不用添加 -m</div><div class="line">ansible webhosts -m command -a &apos;date&apos; \\在 hosts 文件中的 webhosts 组下的所有主机都使用 date 命令</div><div class="line">ansible webhosts -m command -a &apos;ping&apos; \\在 hosts 文件中的 webhosts 组下的所有主机都使用 date 命令</div><div class="line">ansible testhosts -m service -a &quot;name=ntpd state=restarted&quot;</div><div class="line"></div><div class="line">使用 user 模块对于创建新用户和更改、删除已存在用户非常方便：</div><div class="line">ansible all -m user -a &quot;name=foo password=&lt;crypted password here&gt;&quot;</div><div class="line">ansible all -m user -a &quot;name=foo state=absent&quot;</div><div class="line"></div><div class="line">// 服务管理：</div><div class="line">ansible webservers -m service -a &quot;name=httpd state=restarted&quot; \\重启 webservers 组所有主机的 httpd 服务</div><div class="line">ansible webservers -m service -a &quot;name=httpd state=started&quot;  \\确保 webservers 组所有主机的 httpd 是启动的</div><div class="line">ansible webservers -m service -a &quot;name=httpd state=stopped&quot;  \\确保 webservers 组所有主机的 httpd 是关闭的</div><div class="line"></div><div class="line">//后台运行，长时间运行的操作可以放到后台执行，ansible 会检查任务的状态；在主机上执行的同一个任务会分配同一个 job ID</div><div class="line">ansible all -B 3600 -a &quot;/usr/bin/long_running_operation --do-stuff&quot; \\后台执行命令 3600s，-B 表示后台执行的时间</div><div class="line">ansible all -m async_status -a &quot;jid=123456789&quot;  \\检查任务的状态</div><div class="line">ansible all -B 1800 -P 60 -a &quot;/usr/bin/long_running_operation --do-stuff&quot; \\后台执行命令最大时间是 1800s 即 30 分钟，-P 每 60s 检查下状态默认 15s</div><div class="line"></div><div class="line">// 搜集系统信息</div><div class="line">ansible all -m setup \\搜集主机的所有系统信息</div><div class="line">ansible all -m setup --tree /tmp/facts \\搜集系统信息并以主机名为文件名分别保存在 /tmp/facts 目录</div><div class="line">ansible all -m setup -a &apos;filter=ansible_*_mb&apos; \\搜集和内存相关的信息</div><div class="line">ansible all -m setup -a &apos;filter=ansible_eth[0-2]&apos; \\搜集网卡信息</div></pre></td></tr></table></figure>
+<h1 id="Ad-Hoc"><a href="#Ad-Hoc" class="headerlink" title="Ad-Hoc"></a>Ad-Hoc</h1><p>执行 Ad-Hoc 跟在 Linux 执行命令差不多， 用来快速完成简单的任务。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible [host or group] -m  [module_name] -a [commond] [ ansible-options ]</div></pre></td></tr></table></figure>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
+<li>执行安装程序， 安装 <code>python-simplejson</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible all -m raw -a &apos;yum -y install python-simplejson&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li>重启 web 服务<br>假如 web_server 是一个组， 这里组里面有很多webserver，先在需要在 web_server 组上的左右机器执行 reboot 命令， -f 参数会 fork 出 10 个子进程，以并行的方式执行 reboot，即每次重启 10 台</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible web_server -a &quot;/sbin/reboot&quot; -f 10</div></pre></td></tr></table></figure>
+<p>在执行时，默认是以当前用户身份去执行该命令，如果需要执行执行用户，添加 <code>-u username</code>，或者需要使用 sudo 去执行,添加 <code>-u username --sudo [--ask-sudo-pass]</code>。如果不是以 passwordless 的模式执行 sudo,应加上 –ask-sudo-pass (-K)选项,加上之后会提示你输入 密码.使用 passwordless 模式的 sudo, 更容易实现自动化,但不要求一定要使用 passwordless sudo.</p>
+<ul>
+<li>文件传输</li>
+</ul>
+<p>ansible 的另外一种用法就是可以以并行的方式同时 scp 大量的文件到多台主机。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible all -m copy -a &quot;src=/opt/ansible/test.txt dest=/opt/ansible/test.txt&quot;</div></pre></td></tr></table></figure>
+<p>如果是用 playbook，择可以利用 template 模块来实现更高级操作。</p>
+<p>使用 file 模块 可以修改文件的属主和权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible all -m file -a &apos;dest=/opt/ansible/test.txt mode=600 owner=nobody group=nobody&apos;</div></pre></td></tr></table></figure></p>
+<p>使用 file 模块还可以创建、删除目录和文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 创建目录</div><div class="line">ansible all -m file -a &apos;dest=/opt/ansible/test mode=755 owner=root group=root state=directory&apos;</div><div class="line"></div><div class="line">// 删除目录和文件</div><div class="line">ansible all -m file -a &apos;dest=/opt/ansible/test state=absent&apos;</div></pre></td></tr></table></figure></p>
+<p>更多详见<a href="http://docs.ansible.com/ansible/copy_module.html" target="_blank" rel="external">copy模块说明</a></p>
+<ul>
+<li>包管理</li>
+</ul>
+<p>ansible 提供了对 yum 和 apt 的支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> // 安装软件包</div><div class="line"> ansible all -m yum -a &apos;name=vim state=present&apos;</div><div class="line"></div><div class="line">// 卸载软件包</div><div class="line"> ansible all -m yum -a &apos;name=vim state=absent&apos;</div></pre></td></tr></table></figure></p>
+<p>在不同的发行版的软件包管理软件， ansible 有其对应的模块， 如果没有，你可以使用 command 模块去安装软件。<br>更多详见<a href="http://docs.ansible.com/ansible/list_of_packaging_modules.html" target="_blank" rel="external">package模块说明</a></p>
+<ul>
+<li>用户和组管理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 创建用户</div><div class="line">ansible all -m user -a &apos;name=charlie password=123456 state=present&apos;</div><div class="line"></div><div class="line">// 修改用户， 增加属组和修改shell</div><div class="line">ansible all -m user -a &apos;name=Cc groups=nobody shell=/sbin/nologin state=present&apos;</div><div class="line"></div><div class="line">//移除用户</div><div class="line">ansible all -m user -a &apos;name=Cc state=absent&apos;</div></pre></td></tr></table></figure>
+<p>更多参数详见<a href="http://docs.ansible.com/ansible/user_module.html" target="_blank" rel="external">user模块说明</a></p>
+<ul>
+<li>服务管理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 启动服务</div><div class="line">ansible all -m service -a &apos;name=rsyslog state=started&apos;</div><div class="line">// 重启服务</div><div class="line">ansible all -m service -a &apos;name=rsyslog state=restarted&apos;</div><div class="line">// 停止服务</div><div class="line">ansible all -m service -a &apos;name=rsyslog state=stopped&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li>系统自身变量获取</li>
+</ul>
+<p>ansible 可以通过 setup 模块来获取客户端自身的以便固有信息，叫做 facts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 获取所有 facts 变量</div><div class="line">ansible all -m setup</div><div class="line"></div><div class="line">// 通过 filter 获取某一个 fact 变量</div><div class="line">ansible all -m setup -a &apos;filter=ansible_*mb&apos;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag">#ansible</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/build-gitlab.html" rel="next" title="搭建GitLab服务器">
+                <i class="fa fa-chevron-left"></i> 搭建GitLab服务器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/ansible-loop.html" rel="prev" title="Ansible--循环">
+                Ansible--循环 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/19/rudiments-of-nsible.html"
+     data-title="Ansible-入门"
+     data-content=""
+     data-url="http://czero000.github.io/2016/10/19/rudiments-of-nsible.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/19/rudiments-of-nsible.html"
+           data-title="Ansible-入门" data-url="http://czero000.github.io/2016/10/19/rudiments-of-nsible.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-Ansible"><span class="nav-number">1.</span> <span class="nav-text">什么是 Ansible</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#架构图"><span class="nav-number">1.1.</span> <span class="nav-text">架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理"><span class="nav-number">1.2.</span> <span class="nav-text">工作原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Ansible"><span class="nav-number">2.</span> <span class="nav-text">安装 Ansible</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行-Ansible"><span class="nav-number">3.</span> <span class="nav-text">运行 Ansible</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加被控远程主机清单"><span class="nav-number">3.1.</span> <span class="nav-text">添加被控远程主机清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置基于-SSH-key-方式-连接"><span class="nav-number">3.2.</span> <span class="nav-text">配置基于 SSH key 方式 连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行-Ansible-1"><span class="nav-number">3.3.</span> <span class="nav-text">运行 Ansible</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-inventory"><span class="nav-number">4.</span> <span class="nav-text">配置 inventory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主机与组"><span class="nav-number">4.1.</span> <span class="nav-text">主机与组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">4.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分文件定义-Host-和-group-变量"><span class="nav-number">4.3.</span> <span class="nav-text">分文件定义 Host 和 group 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inventory-参数说明"><span class="nav-number">4.4.</span> <span class="nav-text">inventory 参数说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Patterns"><span class="nav-number">5.</span> <span class="nav-text">Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ansible"><span class="nav-number">5.1.</span> <span class="nav-text">ansible</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#playbook"><span class="nav-number">5.2.</span> <span class="nav-text">playbook</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单执行命令"><span class="nav-number">6.</span> <span class="nav-text">简单执行命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ad-Hoc"><span class="nav-number">7.</span> <span class="nav-text">Ad-Hoc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">7.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">7.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

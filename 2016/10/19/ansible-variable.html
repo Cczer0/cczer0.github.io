@@ -1,0 +1,1031 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ansible," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="变量自动化技术使得重复做事变的更加容易，当系统有所不同，Ansible 可以是使用相同的 template，通过变量来处理不同系统。Ansible 的变量名称可以以 字母、数字和下划线 命名，变量开头要以 字母开头
+
+在 inventory 中定义变量
+
+可以参考 「Ansible–入门」 inventory 章节介绍
+
+在 playbook 中定义变量
+
+123- hosts: web  var">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible--变量使用">
+<meta property="og:url" content="http://czero000.github.io/2016/10/19/ansible-variable.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="变量自动化技术使得重复做事变的更加容易，当系统有所不同，Ansible 可以是使用相同的 template，通过变量来处理不同系统。Ansible 的变量名称可以以 字母、数字和下划线 命名，变量开头要以 字母开头
+
+在 inventory 中定义变量
+
+可以参考 「Ansible–入门」 inventory 章节介绍
+
+在 playbook 中定义变量
+
+123- hosts: web  var">
+<meta property="og:updated_time" content="2016-10-19T07:52:18.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible--变量使用">
+<meta name="twitter:description" content="变量自动化技术使得重复做事变的更加容易，当系统有所不同，Ansible 可以是使用相同的 template，通过变量来处理不同系统。Ansible 的变量名称可以以 字母、数字和下划线 命名，变量开头要以 字母开头
+
+在 inventory 中定义变量
+
+可以参考 「Ansible–入门」 inventory 章节介绍
+
+在 playbook 中定义变量
+
+123- hosts: web  var">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/10/19/ansible-variable.html"/>
+
+
+  <title> Ansible--变量使用 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ansible--变量使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T14:38:32+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">Ansible</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/19/ansible-variable.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/ansible-variable.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/19/ansible-variable.html" class="leancloud_visitors" data-flag-title="Ansible--变量使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>自动化技术使得重复做事变的更加容易，当系统有所不同，Ansible 可以是使用相同的 template，通过变量来处理不同系统。<br>Ansible 的变量名称可以以 <strong><code>字母、数字和下划线</code></strong> 命名，变量开头要以 <strong>字母开头</strong></p>
+<ul>
+<li>在 inventory 中定义变量</li>
+</ul>
+<p>可以参考 「Ansible–入门」 inventory 章节介绍</p>
+<ul>
+<li>在 playbook 中定义变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- hosts: web</div><div class="line">  vars:</div><div class="line">    http_port: 80</div></pre></td></tr></table></figure>
+<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><p>在 template 语言 jinjia2 的语法引用，利用中括号和点号来访问子属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">foo[&apos;field1&apos;]</div><div class="line">foo.field2</div></pre></td></tr></table></figure></p>
+<h2 id="在-playbook-中使用变量"><a href="#在-playbook-中使用变量" class="headerlink" title="在 playbook 中使用变量"></a>在 playbook 中使用变量</h2><p>在 playbook 中使用，需要用两个大括号引用即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  vars:</div><div class="line">    apache_config: labs.conf</div><div class="line">  tasks:</div><div class="line">    - name: deploy haproxy config</div><div class="line">      template: src=&#123;&#123; apache_config &#125;&#125; dest=/etc/httpd/conf.d/&#123;&#123; apache_config &#125;&#125;</div></pre></td></tr></table></figure>
+<p>在 playbook 中使用变量文件定义变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  vars_files:</div><div class="line">    - vars/server_vars.yml</div><div class="line">  tasks:</div><div class="line">    - name: deploy haproxy config</div><div class="line">      template: src=&#123;&#123; apache_config &#125;&#125; dest=/etc/httpd/conf.d/&#123;&#123; apache_config &#125;&#125;</div></pre></td></tr></table></figure></p>
+<p>变量文件 <code>vars/server_vars.yml</code> 内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apache_config: labs.conf</div></pre></td></tr></table></figure></p>
+<h3 id="YAML-陷阱"><a href="#YAML-陷阱" class="headerlink" title="YAML 陷阱"></a>YAML 陷阱</h3><p>YAML 语法要求如果值以 <code></code> 开头，需要讲整行用双引号扩起来，为了确保你不是在声明一个字典。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 错误</div><div class="line">---</div><div class="line">- hosts: app_servers</div><div class="line">  vars:</div><div class="line">    app_path: &#123;&#123; base_path &#125;&#125;/22</div><div class="line">// 正确</div><div class="line">---</div><div class="line">- hosts: app_servers</div><div class="line">  vars:</div><div class="line">    app_path: &quot;&#123;&#123; base_path &#125;&#125;/22&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="使用-Facts-获取主机系统变量"><a href="#使用-Facts-获取主机系统变量" class="headerlink" title="使用 Facts 获取主机系统变量"></a>使用 Facts 获取主机系统变量</h2><p>Ansible 可以通过 module_setup 收集远程主机的系统信息–facts，通过 facts 收集的信息，可以以变量形式来使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible all -m setup</div></pre></td></tr></table></figure></p>
+<h3 id="在-playbook-中使用-facts-变量"><a href="#在-playbook-中使用-facts-变量" class="headerlink" title="在 playbook 中使用 facts 变量"></a>在 playbook 中使用 facts 变量</h3><p>命令会返回海量的变量数据，这些变量可以在 playbook 中直接使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: all</div><div class="line">  name: install some package</div><div class="line">  user: root</div><div class="line">  tasks:</div><div class="line">    - name: echo system</div><div class="line">      shell: echo &#123;&#123; ansible_os_family &#125;&#125;</div><div class="line">    - name: install Git on RedHat</div><div class="line">      yum: name=git state=present</div><div class="line">      when: ansible_os_family == &quot;RedHat&quot;</div><div class="line">    - name: install Git on Debian</div><div class="line">      apt: name=git state=installed</div><div class="line">      when: ansible_os_family == &quot;Debian&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="使用复杂的-facts-变量"><a href="#使用复杂的-facts-变量" class="headerlink" title="使用复杂的 facts 变量"></a>使用复杂的 facts 变量</h3><p>使用通过 fact 收集到复杂的、多层次的变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&quot;ansible_eth1&quot;: &#123;</div><div class="line">            &quot;active&quot;: true,</div><div class="line">            &quot;device&quot;: &quot;eth1&quot;,</div><div class="line">            &quot;ipv4&quot;: &#123;</div><div class="line">                &quot;address&quot;: &quot;172.16.11.210&quot;,</div><div class="line">                &quot;broadcast&quot;: &quot;172.16.11.255&quot;,</div><div class="line">                &quot;netmask&quot;: &quot;255.255.255.0&quot;,</div><div class="line">                &quot;network&quot;: &quot;172.16.11.0&quot;</div><div class="line">            &#125;,</div><div class="line">            &quot;ipv6&quot;: [</div><div class="line">                &#123;</div><div class="line">                    &quot;address&quot;: &quot;fe80::5054:ff:fec0:b2b3&quot;,</div><div class="line">                    &quot;prefix&quot;: &quot;64&quot;,</div><div class="line">                    &quot;scope&quot;: &quot;link&quot;</div><div class="line">                &#125;</div><div class="line">            ],</div><div class="line">            &quot;macaddress&quot;: &quot;52:54:00:c0:b2:b3&quot;,</div><div class="line">            &quot;module&quot;: &quot;virtio_net&quot;,</div><div class="line">            &quot;mtu&quot;: 1500,</div><div class="line">            &quot;pciid&quot;: &quot;virtio1&quot;,</div><div class="line">            &quot;promisc&quot;: false,</div><div class="line">            &quot;type&quot;: &quot;ether&quot;</div><div class="line">        &#125;,</div></pre></td></tr></table></figure></p>
+<p>可以通过下面两种方式访问到复杂变量的自变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 中括号</div><div class="line">&#123;&#123; ansible_eth1[&quot;ipv4&quot;][&quot;address&quot;] &#125;&#125;</div><div class="line">// 点号</div><div class="line">&#123;&#123; ansible_eth1.ipv4.address &#125;&#125;</div></pre></td></tr></table></figure>
+<h3 id="关闭facts"><a href="#关闭facts" class="headerlink" title="关闭facts"></a>关闭facts</h3><p>在 playbook 中， 可以设置是否启用 gather_facts 来获取远程系统信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  gather_facts: no</div></pre></td></tr></table></figure></p>
+<h3 id="使用被控端自定义变量"><a href="#使用被控端自定义变量" class="headerlink" title="使用被控端自定义变量"></a>使用被控端自定义变量</h3><p>在被控端可以在 <code>/etc/ansible/facts.d</code> 目录中，任何以 <code>.fact</code> 结尾的文件都可以在 Ansible 提供局部 facts。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//定义 /etc/ansible/facts.d/perferences.fact 文件</div><div class="line">[general]</div><div class="line">abcd=1</div><div class="line">bcde=2</div><div class="line"></div><div class="line">// 主控端获取变量</div><div class="line">172.16.11.210 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;ansible_facts&quot;: &#123;</div><div class="line">        &quot;ansible_local&quot;: &#123;</div><div class="line">            &quot;perferences&quot;: &#123;</div><div class="line">                &quot;general&quot;: &#123;</div><div class="line">                    &quot;abcd&quot;: &quot;1&quot;,</div><div class="line">                    &quot;bcde&quot;: &quot;2&quot;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    &quot;changed&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样就可以在 playbook 中引用变量或者覆盖掉系统的 facts 值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: all</div><div class="line">  user: root</div><div class="line">  tasks:</div><div class="line">    - name: create directory for ansible custom facts</div><div class="line">      file: state=directory recurse=yes path=/etc/ansible/facts.d/</div><div class="line">    - name: install custom ipmi fact</div><div class="line">      copy: src=/opt/ansible/playbooks/ipmi.fact dest=/etc/ansible/facts.d</div><div class="line">    - name: re-read facts after adding custom fact</div><div class="line">      setup: filter=ansible_local</div></pre></td></tr></table></figure></p>
+<h2 id="注册变量"><a href="#注册变量" class="headerlink" title="注册变量"></a>注册变量</h2><p>可以把 tasks 运行结果作为变量，供后面的 action 使用，在运行 playbook 时，可以使用 -v 参数看到结果值，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  tasks:</div><div class="line">    - shell: /bin/ls</div><div class="line">      register: result</div><div class="line">      ignore_errors: true</div><div class="line">    - shell: /bin/echo &quot;&#123;&#123; result.stdout &#125;&#125;&quot;</div><div class="line">      when: result.rc == 5</div><div class="line">    - debug: msg=&quot;&#123;&#123; result.stdout &#125;&#125;&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="在文件模板中使用变量"><a href="#在文件模板中使用变量" class="headerlink" title="在文件模板中使用变量"></a>在文件模板中使用变量</h2><p>Ansible 使用的模本是 python 的一个 jinja2 模板。在 playbook 中定义的变量，可以直接在 template 中使用。</p>
+<h3 id="template-变量的定义"><a href="#template-变量的定义" class="headerlink" title="template 变量的定义"></a>template 变量的定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">// 使用template module来拷贝文件 index.html.j2，并替换 index.html.j2 中的变量为 playbook 中定义的变量。</div><div class="line">---</div><div class="line">- hosts: web</div><div class="line">  vars:</div><div class="line">    http_port: 80</div><div class="line">    defined_name: &quot;Hello My name is Charlie&quot;</div><div class="line">  remote_user: root</div><div class="line">  tasks:</div><div class="line">  - name: ensure apache is at the latest version</div><div class="line">    yum: pkg=httpd state=latest</div><div class="line"></div><div class="line">  - name: Write the configuration file</div><div class="line">    template: src=templates/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf</div><div class="line">    notify:</div><div class="line">    - restart apache</div><div class="line"></div><div class="line">  - name: Write the default index.html file</div><div class="line">    template: src=templates/index2.html.j2 dest=/var/www/html/index.html</div><div class="line"></div><div class="line">  - name: ensure apache is running</div><div class="line">    service: name=httpd state=started</div><div class="line">  - name: insert firewalld rule for httpd</div><div class="line">    firewalld: port=&#123;&#123; http_port &#125;&#125;/tcp permanent=true state=enabled immediate=yes</div><div class="line"></div><div class="line">  handlers:</div><div class="line">    - name: restart apache</div><div class="line">      service: name=httpd state=restarted</div></pre></td></tr></table></figure>
+<h3 id="template-变量的使用"><a href="#template-变量的使用" class="headerlink" title="template 变量的使用"></a>template 变量的使用</h3><p>在 template index.html.j2 中可以直接使用系统变量和用户自定义的变量</p>
+<ul>
+<li>系统变量 <strong>, </strong></li>
+<li>用户自定义变量： <strong></strong></li>
+</ul>
+<h2 id="命令行中传递变量"><a href="#命令行中传递变量" class="headerlink" title="命令行中传递变量"></a>命令行中传递变量</h2><p>在执行 playbook 命令时可以通过 <code>vars_prompt</code> 和 <code>vars_files</code> 传递变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: &apos;&#123;&#123; hosts &#125;&#125;&apos;</div><div class="line">  remote_user: &apos;&#123;&#123; user &#125;&#125;&apos;</div><div class="line">  tasks:</div><div class="line">    - ....</div><div class="line">// 在命令行中传递参数</div><div class="line">ansible-playbook release.yml --extra-vars &quot;hosts=webservers user=web&quot;</div><div class="line"></div><div class="line">// 使用 JSON 格式传递参数</div><div class="line">ansible-playbook release.yml --extra-vars &quot;&#123;&apos;hosts&apos;:&apos;webservers&apos;, &apos;user&apos;:&apos;web&apos;&#125;&quot;</div><div class="line"></div><div class="line">// 通过文件传递参数</div><div class="line">ansible-playbook release.yml --extra-vars &quot;@vars.json&quot;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag">#ansible</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/the-advanced-ansible.html" rel="next" title="Ansible--高级技巧">
+                <i class="fa fa-chevron-left"></i> Ansible--高级技巧
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/ansible-playbook.html" rel="prev" title="Ansible-Playbooks">
+                Ansible-Playbooks <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/19/ansible-variable.html"
+     data-title="Ansible--变量使用"
+     data-content=""
+     data-url="http://czero000.github.io/2016/10/19/ansible-variable.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/19/ansible-variable.html"
+           data-title="Ansible--变量使用" data-url="http://czero000.github.io/2016/10/19/ansible-variable.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用变量"><span class="nav-number">1.1.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-playbook-中使用变量"><span class="nav-number">1.2.</span> <span class="nav-text">在 playbook 中使用变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML-陷阱"><span class="nav-number">1.2.1.</span> <span class="nav-text">YAML 陷阱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Facts-获取主机系统变量"><span class="nav-number">1.3.</span> <span class="nav-text">使用 Facts 获取主机系统变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-playbook-中使用-facts-变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">在 playbook 中使用 facts 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用复杂的-facts-变量"><span class="nav-number">1.3.2.</span> <span class="nav-text">使用复杂的 facts 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭facts"><span class="nav-number">1.3.3.</span> <span class="nav-text">关闭facts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用被控端自定义变量"><span class="nav-number">1.3.4.</span> <span class="nav-text">使用被控端自定义变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册变量"><span class="nav-number">1.4.</span> <span class="nav-text">注册变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在文件模板中使用变量"><span class="nav-number">1.5.</span> <span class="nav-text">在文件模板中使用变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#template-变量的定义"><span class="nav-number">1.5.1.</span> <span class="nav-text">template 变量的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#template-变量的使用"><span class="nav-number">1.5.2.</span> <span class="nav-text">template 变量的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行中传递变量"><span class="nav-number">1.6.</span> <span class="nav-text">命令行中传递变量</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

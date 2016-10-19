@@ -1,0 +1,1065 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ansible," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PlaybooksPlaybooks 是 Ansible 的配置、部署、编排语言，相当于控制远程主机的一系列命令的集合，通过 YAML 语言编写。Ansible-Playbook 命令根据自上而写的顺序依次执行。 Playbook 允许传输摸个命令的状态到后面的指令，或者从一台主机的文件中获取内容并赋值变量，然后传给另外一台主机使用，这是 ansible 命令无法实现的。
+YAML 语法介绍文件开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible-Playbooks">
+<meta property="og:url" content="http://czero000.github.io/2016/10/19/ansible-playbook.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="PlaybooksPlaybooks 是 Ansible 的配置、部署、编排语言，相当于控制远程主机的一系列命令的集合，通过 YAML 语言编写。Ansible-Playbook 命令根据自上而写的顺序依次执行。 Playbook 允许传输摸个命令的状态到后面的指令，或者从一台主机的文件中获取内容并赋值变量，然后传给另外一台主机使用，这是 ansible 命令无法实现的。
+YAML 语法介绍文件开">
+<meta property="og:updated_time" content="2016-10-19T06:45:43.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible-Playbooks">
+<meta name="twitter:description" content="PlaybooksPlaybooks 是 Ansible 的配置、部署、编排语言，相当于控制远程主机的一系列命令的集合，通过 YAML 语言编写。Ansible-Playbook 命令根据自上而写的顺序依次执行。 Playbook 允许传输摸个命令的状态到后面的指令，或者从一台主机的文件中获取内容并赋值变量，然后传给另外一台主机使用，这是 ansible 命令无法实现的。
+YAML 语法介绍文件开">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/10/19/ansible-playbook.html"/>
+
+
+  <title> Ansible-Playbooks | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ansible-Playbooks
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T14:41:10+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">Ansible</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/19/ansible-playbook.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/ansible-playbook.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/19/ansible-playbook.html" class="leancloud_visitors" data-flag-title="Ansible-Playbooks">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Playbooks"><a href="#Playbooks" class="headerlink" title="Playbooks"></a>Playbooks</h1><p>Playbooks 是 Ansible 的配置、部署、编排语言，相当于控制远程主机的一系列命令的集合，通过 YAML 语言编写。Ansible-Playbook 命令根据自上而写的顺序依次执行。 Playbook 允许传输摸个命令的状态到后面的指令，或者从一台主机的文件中获取内容并赋值变量，然后传给另外一台主机使用，这是 ansible 命令无法实现的。</p>
+<h2 id="YAML-语法介绍"><a href="#YAML-语法介绍" class="headerlink" title="YAML 语法介绍"></a>YAML 语法介绍</h2><h3 id="文件开始符"><a href="#文件开始符" class="headerlink" title="文件开始符"></a>文件开始符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">---</div></pre></td></tr></table></figure>
+<h3 id="数组列表"><a href="#数组列表" class="headerlink" title="数组列表"></a>数组列表</h3><p>列表中的所有成员都开始于相同缩进级别，并使用 <code>-</code> 来作为开头<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- Apple</div><div class="line">- Orange</div><div class="line">- Mango</div></pre></td></tr></table></figure></p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>字典是有一个简单的 <code>Key: value</code> 形式组成，注意 <code>:</code> 后面有<strong>空格</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">name: charlie</div><div class="line">job: Developer</div><div class="line">mail: charlie.cui127@gmail.com</div></pre></td></tr></table></figure></p>
+<p>在 playbook 中会有更为复杂的用法</p>
+<ul>
+<li>字典与字典嵌套</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">martin:</div><div class="line">    name: Martin D&apos;vloper</div><div class="line">    job: Developer</div><div class="line">    skill: Elite</div></pre></td></tr></table></figure>
+<ul>
+<li>字典与数组的嵌套</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-  martin:</div><div class="line">    name: Martin D&apos;vloper</div><div class="line">    job: Developer</div><div class="line">    skills:</div><div class="line">      - python</div><div class="line">      - perl</div><div class="line">      - pascal</div><div class="line">-  tabitha:</div><div class="line">    name: Tabitha Bitumen</div><div class="line">    job: Developer</div><div class="line">    skills:</div><div class="line">      - lisp</div><div class="line">      - fortran</div><div class="line">      - erlang</div></pre></td></tr></table></figure>
+<p>注意，如果变量里有 <code>:</code>,则需要加引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foo: &quot;&#123;&#123; variable &#125;&#125;&quot;</div></pre></td></tr></table></figure></p>
+<h1 id="Playbook-基本用法"><a href="#Playbook-基本用法" class="headerlink" title="Playbook 基本用法"></a>Playbook 基本用法</h1><p>最基本的 playbook 分为三部分：</p>
+<ol>
+<li>在什么机器上以什么身份执行<ul>
+<li>hosts</li>
+<li>users</li>
+</ul>
+</li>
+<li>定义 playbook 执行需要的变量<ul>
+<li>variable</li>
+</ul>
+</li>
+<li>执行的任务是都有什么<ul>
+<li>tasks</li>
+</ul>
+</li>
+<li>善后的任务是什么<ul>
+<li>handlers  </li>
+</ul>
+</li>
+</ol>
+<p><strong>执行 Playbook</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 执行playbook</div><div class="line">Ansible-playbook user.yaml</div><div class="line"></div><div class="line">// 查看详细输出</div><div class="line">ansible-playbook user.yaml --list-hosts</div></pre></td></tr></table></figure>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h3><p>要学习更多的 playbook 用法，可以通过<a href="https://github.com/ansible/ansible-examples" target="_blank" rel="external">Playbooks 官方示例</a>。</p>
+<h3 id="Playbook-分享平台"><a href="#Playbook-分享平台" class="headerlink" title="Playbook 分享平台"></a>Playbook 分享平台</h3><p>Ansible 提供了一个 Playbook 的分享平台，上面的例子是有 Ansible 使用者自己上传的。<br><a href="https://galaxy.ansible.com/" target="_blank" rel="external">Ansible分享平台</a></p>
+<h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><ul>
+<li>创建用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 新增一个用户</div><div class="line">cat user.yaml</div><div class="line">---</div><div class="line">- name: create user           </div><div class="line">  hosts: all                \\ host or group</div><div class="line">  user: root</div><div class="line">  gather_facts: false</div><div class="line">  vars:                     \\ variable</div><div class="line">  - user: &quot;charlie&quot;</div><div class="line">  tasks:                     \\ tasks</div><div class="line">  - name: create user</div><div class="line">    user: name= &quot;&#123;&#123; user &#125;&#125;&quot;</div><div class="line">    notify: create user ok</div><div class="line">  handlers:</div><div class="line">    - name: create user ok</div><div class="line">      debug: msg= &quot;Create User OK&quot;</div></pre></td></tr></table></figure>
+<ol>
+<li>name 参数对该 playbook 实现功能的一个概述，后面执行过程中会打印 name 变量值</li>
+<li>hosts 参数指定了那些主机</li>
+<li>user 参数执行了使用什么用户登陆远程主机</li>
+<li>gather_facts 参数指定了下面任务执行前，是否先执行 setup 模块获取主机相关信息，这些后面 task 会使用 setup 获取的信息</li>
+<li>vars 参数指定了变量， 变量 user，值为 charlie，值得注意的是参数要用引号</li>
+<li>task 指定了一个任务，下面的 name 参数同样是对任务的描述，在执行过程中打印出来。user 指定了调用 user模块，name 是user模块中的参数，增加的用户名是上面 user 的值</li>
+</ol>
+<p>执行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">ansible-playbook user.yaml</div><div class="line">PLAY [create user] *************************************************************</div><div class="line"></div><div class="line">TASK [create user] *************************************************************</div><div class="line">changed: [172.16.11.210]</div><div class="line">changed: [172.16.11.211]</div><div class="line"></div><div class="line">RUNNING HANDLER [create user] **************************************************</div><div class="line">ok: [172.16.11.210] =&gt; &#123;</div><div class="line">    &quot;msg&quot;: &quot;Create User OK&quot;</div><div class="line">&#125;</div><div class="line">ok: [172.16.11.211] =&gt; &#123;</div><div class="line">    &quot;msg&quot;: &quot;Create User OK&quot;</div><div class="line">&#125;</div><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=1    changed=1    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=1    changed=1    unreachable=0    failed=0</div></pre></td></tr></table></figure></p>
+<ul>
+<li>安装apache</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cat apache.yaml</div><div class="line">---</div><div class="line">- hosts: all</div><div class="line"> vars:</div><div class="line">   http_port: 80</div><div class="line">   max_clients: 2048</div><div class="line"> user: root</div><div class="line"> tasks:</div><div class="line"> - name: ensure apache is at latest version</div><div class="line">   yum: pkg=httpd state=latest</div><div class="line"> - name: write the apache config file</div><div class="line">   template: src=/srv/httpd.j2 dest=/etc/httpd.conf</div><div class="line">   notify:</div><div class="line">   - restart apache</div><div class="line"> - name: ensure apache is running</div><div class="line">   service: name=httpd state=started</div><div class="line"> handlers:</div><div class="line">   - name: restart apache</div><div class="line">     service: name=httpd state=restarted</div></pre></td></tr></table></figure>
+<h2 id="主机和用户-Host-and-User"><a href="#主机和用户-Host-and-User" class="headerlink" title="主机和用户 Host and User"></a>主机和用户 Host and User</h2><p>在执行 playbook 时，可以选择操作的目标主机是那些，以那个用户执行<br>host 行的内容是一个或多个主机的 patterns， 以逗号分隔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: 172.16.11.210, 172.16.11.211, [all]</div><div class="line">  remote_user: root</div></pre></td></tr></table></figure></p>
+<p>还可以在每个 task 中，定义远程执行用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: all</div><div class="line">  user: root</div><div class="line">  tasks:</div><div class="line">  - name: test connection</div><div class="line">    ping:</div><div class="line">    remote_user: root</div></pre></td></tr></table></figure></p>
+<p>也支持 sudo 方法,在 task中同样支持,在 sudo 需要密码时，可以加上选项 –ask-sudo-pass<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: all</div><div class="line">  remote_user: charlie</div><div class="line">  sudo: yes</div><div class="line">  task：</div><div class="line">    - service： name=nginx state=started</div><div class="line">      sudo: yes</div><div class="line">      sudo_user: root</div></pre></td></tr></table></figure></p>
+<h2 id="任务列表-Tasks"><a href="#任务列表-Tasks" class="headerlink" title="任务列表 Tasks"></a>任务列表 Tasks</h2><ul>
+<li>tasks 是从上到下顺序执行，如果中间发生错误，整个 playbook 便会中断。</li>
+<li>每一个 task 是对module的一次调用,通常会带有特定参数，参数可以使用变量。</li>
+<li>每一个 task 必须有一个 name 属性，name 值会在命令行中输出，以提示用户，如果没有定义，aciton 的值会作为输出信息来标记task</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">tasks:</div><div class="line">  - name: make sure apache is running</div><div class="line">    service: name=httpd state=running</div><div class="line"></div><div class="line">// 如果参数过长，可以使用空格或者缩进分隔为多行</div><div class="line">tasks:</div><div class="line">  - name: copy ansible inventory file to client</div><div class="line">    copy: src=/etc/ansible/hosts dest=/etc/ansible/hosts</div><div class="line">          owner=root group=root mode=0644</div><div class="line"></div><div class="line">// 或者使用 yaml 的字典作为参数</div><div class="line">tasks:</div><div class="line">  - name: copy ansible inventory file to client</div><div class="line">    copy:</div><div class="line">      src: /etc/ansible/hosts</div><div class="line">      dest: /etc/ansible/hosts</div><div class="line">      owner: root</div><div class="line">      group: root</div><div class="line">      mode: 0644</div><div class="line"></div><div class="line">// 大部分的模块都是使用 `key-value` 这种格式的，其中有两个比较特殊，command 和 shell 模块。</div><div class="line">tasks:</div><div class="line">  - name: disable selinux</div><div class="line">    command: /sbin/setenforce 0</div><div class="line">tasks:</div><div class="line">  - name: run this command and ignore the result</div><div class="line">    shell: /usr/bin/command || /bin/true</div><div class="line">tasks:</div><div class="line">  - name: run some command and ignore the reslut</div><div class="line">    shell: /usr/bin/somecommadn</div><div class="line">    ignore_error: True</div></pre></td></tr></table></figure>
+<h3 id="执行状态"><a href="#执行状态" class="headerlink" title="执行状态"></a>执行状态</h3><p>task 中每个 action 会调用一个 module，在 module 中会去检查当前系统状态是否需要重新执行，具体判断需要有各个 module 自己来实现。</p>
+<ul>
+<li>如果执行那么 action 会得到返回值 changed；</li>
+<li>如果部执行，那么 action 会得到返回值 OK</li>
+</ul>
+<p><strong>状态实例 以一个 copy 文件为例</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">// playbook</div><div class="line">copy.yaml                 </div><div class="line">---</div><div class="line">- name: copy a test file</div><div class="line">  hosts: all</div><div class="line">  user: root</div><div class="line">  tasks:</div><div class="line">    - name: copy a test file to /opt/ansible</div><div class="line">      copy: src=/opt/ansible/test.txt dest=/opt/ansible/</div><div class="line"></div><div class="line">// 第一次执行结果</div><div class="line">ansible-playbook copy.yaml</div><div class="line">PLAY [copy a test file] ********************************************************</div><div class="line"></div><div class="line">TASK [setup] *******************************************************************</div><div class="line">ok: [172.16.11.211]</div><div class="line">ok: [172.16.11.210]</div><div class="line"></div><div class="line">TASK [copy a test file to /opt/ansible] ****************************************</div><div class="line">changed: [172.16.11.210]</div><div class="line">changed: [172.16.11.211]</div><div class="line"></div><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=2    changed=1    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=2    changed=1    unreachable=0    failed=0   </div><div class="line"></div><div class="line">// 第二次执行结果</div><div class="line">ansible-playbook copy.yaml</div><div class="line"></div><div class="line">PLAY [copy a test file] ********************************************************</div><div class="line"></div><div class="line">TASK [setup] *******************************************************************</div><div class="line">ok: [172.16.11.211]</div><div class="line">ok: [172.16.11.210]</div><div class="line"></div><div class="line">TASK [copy a test file to /opt/ansible] ****************************************</div><div class="line">ok: [172.16.11.210]</div><div class="line">ok: [172.16.11.211]</div><div class="line"></div><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=2    changed=0    unreachable=0    failed=0</div></pre></td></tr></table></figure></p>
+<p>可以看到第一次 task的状态是 changed 状态，第二次再次执行，task 状态是 OK，说明文件已经存在，避免 ansible 再次重复执行。</p>
+<h2 id="响应事件-Handler"><a href="#响应事件-Handler" class="headerlink" title="响应事件 Handler"></a>响应事件 Handler</h2><h3 id="什么是-handler"><a href="#什么是-handler" class="headerlink" title="什么是 handler"></a>什么是 handler</h3><p>每个主流的变成语言都会有 event 机制，那么 handler 就是 playbook 的 event。Handler 里面的每个 handler，也是对 module 的一次调用。不同的是 handler 不会默认的按照顺序执行。<br>Tasks 中的任务是有状态的，changed 或者 ok。 在 Ansible 中，只有 task 的执行状态为 changed 时，才会触发，这就是 handler。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>如果在 tasks 中修改了某个服务的配置文件，就需要重新启动服务，重新启动服务就可以设计成为一个 handler</p>
+<h3 id="触发Handlers"><a href="#触发Handlers" class="headerlink" title="触发Handlers"></a>触发Handlers</h3><p><strong>只有 action 是 changed 时，才会执行 handler</strong></p>
+<ul>
+<li>第一次执行时，tasks 的状态是 changed， 回触发 handler</li>
+<li>第二次执行时，task 的状态是 OK， 那么就不会触发 handler</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">// 一个 handler 最多被执行一次,在任务执行中，有多个 task notify 同一个 handler， 那么只执行一次</div><div class="line">---</div><div class="line">- name: handler state</div><div class="line">  hosts: all</div><div class="line">  remote_user: root</div><div class="line">  vars:</div><div class="line">    random_number1: &quot;&#123;&#123; 10 | random &#125;&#125;&quot;</div><div class="line">    random_number2: &quot;&#123;&#123; 100 | random &#125;&#125;&quot;</div><div class="line">  tasks:</div><div class="line">  - name: Copy the /etc/hosts to /opt/ansible/host.&#123;&#123; random_number1 &#125;&#125;</div><div class="line">    copy: src=/etc/hosts dest=/opt/ansible/host.&#123;&#123; random_number1 &#125;&#125;</div><div class="line">    notify:</div><div class="line">      - call in every action</div><div class="line">  - name: Copy the /etc/hosts to /opt/ansible/host.&#123;&#123; random_number2 &#125;&#125;</div><div class="line">    copy: src=/etc/hosts dest=/opt/ansible/host.&#123;&#123; random_number2 &#125;&#125;</div><div class="line">    notify:</div><div class="line">      - call in every action</div><div class="line">  handlers:</div><div class="line">    - name: call in every action</div><div class="line">      debug: msg=&apos;call in every action, but execute only one time&apos;</div><div class="line"></div><div class="line">// 按照 handler 的定义顺序执行,handlers 是按照在 handlers 中定义的顺序执行的， 而不是按照 notify 的顺序执行的</div><div class="line">// notify 的定义顺序是 3 &gt; 2 &gt; 1，而实际 handler 结果是 handler 定义的顺序 1 &gt; 2 &gt; 3。</div><div class="line">cat handler_notify.yaml                 </div><div class="line">---</div><div class="line">- hosts: all</div><div class="line">  gather_facts: no</div><div class="line">  remote_user: root</div><div class="line">  vars:</div><div class="line">    random_number1: &quot;&#123;&#123; 10 | random &#125;&#125;&quot;</div><div class="line">    random_number2: &quot;&#123;&#123; 100 | random &#125;&#125;&quot;</div><div class="line">    random_number3: &quot;&#123;&#123; 1000 | random &#125;&#125;&quot;</div><div class="line">  tasks:</div><div class="line">    - name: copy the /ets/hosts to /tmp/hosts.&#123;&#123; random_number1 &#125;&#125;</div><div class="line">      copy: src=/etc/hosts dest=/tmp/hosts.&#123;&#123; random_number1 &#125;&#125;</div><div class="line">      notify:</div><div class="line">        - define the 3nd handler</div><div class="line"></div><div class="line">    - name: copy the /ets/hosts to /tmp/hosts.&#123;&#123; random_number2 &#125;&#125;</div><div class="line">      copy: src=/etc/hosts dest=/tmp/hosts.&#123;&#123; random_number2 &#125;&#125;</div><div class="line">      notify:</div><div class="line">        - define the 2nd handler</div><div class="line"></div><div class="line">    - name: copy the /ets/hosts to /tmp/hosts.&#123;&#123; random_number3 &#125;&#125;</div><div class="line">      copy: src=/etc/hosts dest=/tmp/hosts.&#123;&#123; random_number3 &#125;&#125;</div><div class="line">      notify:</div><div class="line">        - define the 1nd handler</div><div class="line">  handlers:</div><div class="line">    - name: define the 1nd handler</div><div class="line">      debug: msg=&quot; defind the 1nd handler&quot;</div><div class="line"></div><div class="line">    - name: define the 2nd handler</div><div class="line">      debug: msg=&quot; defind the 2nd handler&quot;</div><div class="line"></div><div class="line">    - name: define the 3nd handler</div><div class="line">      debug: msg=&quot; defind the 3nd handler&quot;</div></pre></td></tr></table></figure>
+<h1 id="playbook-roles-和-include"><a href="#playbook-roles-和-include" class="headerlink" title="playbook roles 和 include"></a>playbook roles 和 include</h1><p>在刚开始使用 playbook 时，习惯性会把 playbook 写成一个很大的文件，然而在实际情况下， 有些文件是可以重用的。playbook 可以使用 include，把其他 playbook 文件中的 variables、tasks 或者 handlers 从其他文件拉取过来。</p>
+<h2 id="规划目录组织结构"><a href="#规划目录组织结构" class="headerlink" title="规划目录组织结构"></a>规划目录组织结构</h2><p>通过目录规格，可以使 playbook 模块化，使代码易读、可以重用、层次清晰。</p>
+<p>可以通过 <code>ansible-galaxy</code> 工具，初始化一个 role 目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">// init</div><div class="line">ansible-galaxy init httpd</div><div class="line"></div><div class="line">// tree</div><div class="line">.</div><div class="line">├── defaults</div><div class="line">│   └── main.yml</div><div class="line">├── files</div><div class="line">├── handlers</div><div class="line">│   └── main.yml</div><div class="line">├── meta</div><div class="line">│   └── main.yml</div><div class="line">├── README.md</div><div class="line">├── tasks</div><div class="line">│   └── main.yml</div><div class="line">├── templates</div><div class="line">├── tests</div><div class="line">│   ├── inventory</div><div class="line">│   └── test.yml</div><div class="line">└── vars</div><div class="line">    └── main.yml</div></pre></td></tr></table></figure></p>
+<h2 id="include-语句"><a href="#include-语句" class="headerlink" title="include 语句"></a>include 语句</h2><h3 id="普通用法"><a href="#普通用法" class="headerlink" title="普通用法"></a>普通用法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 可以像其他 include 语句一样， 直接include</div><div class="line"># possibly saved as tasks/firewall_httpd_default.yaml</div><div class="line">- name: insert firewalld rule for httpd</div><div class="line">  firewalld: port=80/tcp permanent=true state=enable immediate=yes</div><div class="line"></div><div class="line">// main.yml</div><div class="line">tasks:</div><div class="line">  - include: tasks/firewall_httpd_default.yml</div></pre></td></tr></table></figure>
+<h3 id="高级用法，传递参数"><a href="#高级用法，传递参数" class="headerlink" title="高级用法，传递参数"></a>高级用法，传递参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 添加参数</div><div class="line">tasks:</div><div class="line">  - include: tasks/firewall.yml port=80</div><div class="line">  - include: tasks/firewall.yml port=3306</div><div class="line"></div><div class="line">//  支持结构化</div><div class="line">tasks:</div><div class="line">  - include: tasks/firewall.yml</div><div class="line">    vars:</div><div class="line">      wp_user: charlie</div><div class="line">      ssh_key:</div><div class="line">        - key/one.txt</div><div class="line">        - key/two.txt</div><div class="line">// json格式</div><div class="line">tasks:</div><div class="line">  - &#123; include: wordpress.yml, wp_user: timmy, ssh_keys: [ &apos;key/one.txt&apos;, &apos;key/two.txt&apos; ] &#125;</div></pre></td></tr></table></figure>
+<h3 id="在-handlers-section-中定义"><a href="#在-handlers-section-中定义" class="headerlink" title="在 handlers section 中定义"></a>在 handlers section 中定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// handlers.yml</div><div class="line">// this might be in a file line handlers/handlers.yml</div><div class="line">- name: restart apache</div><div class="line">  service: name = apache state=restarted</div><div class="line">// 在一个 playbook 中引用 handlers.yml</div><div class="line">handlers:</div><div class="line">  - include: handlers/handlers.yml</div></pre></td></tr></table></figure>
+<p>include 语句可以和其他非 include 的 tasks 和 handlers 混合使用。</p>
+<p><strong>例如：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- name: this is a play at the top level of a file</div><div class="line">  host: all</div><div class="line">  remote_user: root</div><div class="line">  tasks:</div><div class="line">    - name: say hi</div><div class="line">      tags: foo</div><div class="line">      shell: echo &quot;Hi &quot;</div><div class="line">- include: load_balancers.yml</div><div class="line">- include: webservers.yml</div><div class="line">- include: dbservers.yml</div></pre></td></tr></table></figure></p>
+<h2 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h2><p>Ansible 中还有一个比 include 更为强大的代码重用机制，那就是roles！。Roles 基于一个已知的文件结构，去自动加载某些 var_files, tasks, handlers，基于 roles 对内容进行分组，更有利于与其他用户分享 roles。<br>Ansible提供了一个分享role的平台, <a href="https://galaxy.ansible.com/" target="_blank" rel="external">https://galaxy.ansible.com/</a>, 在galaxy上可以找到别人写好的role.</p>
+<h3 id="Roled的目录结构"><a href="#Roled的目录结构" class="headerlink" title="Roled的目录结构"></a>Roled的目录结构</h3><p>在 ansible 中，通过遵循特定的目录结构，可以实现对 role 的定义。下面的目录结构是定义了两个 role， 一个名字是 common，另外一个是 webserver，并在 site.yml 中调用这两个 role。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">// role 的目录结构</div><div class="line">site.yml</div><div class="line">webservers.yml</div><div class="line">fooservers.yml</div><div class="line">roles/</div><div class="line">   common/</div><div class="line">     files/</div><div class="line">     templates/</div><div class="line">     tasks/</div><div class="line">     handlers/</div><div class="line">     vars/</div><div class="line">     defaults/</div><div class="line">     meta/</div><div class="line">   webservers/</div><div class="line">     files/</div><div class="line">     templates/</div><div class="line">     tasks/</div><div class="line">     handlers/</div><div class="line">     vars/</div><div class="line">     defaults/</div><div class="line">     meta/</div><div class="line"></div><div class="line">// site.yml 中使用</div><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - common</div><div class="line">    - webservers</div></pre></td></tr></table></figure></p>
+<h3 id="使用带参数的-role"><a href="#使用带参数的-role" class="headerlink" title="使用带参数的 role"></a>使用带参数的 role</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - common</div><div class="line">    - &#123; role: foo_app_instance, dir: &apos;/opt/a&apos;, port: 5000 &#125;</div><div class="line">    - &#123; role: foo_app_instance, dir: &apos;/opt/b&apos;, port: 5001 &#125;</div><div class="line">// 设置触发条件,条件语句应用到 role 中的每个 task上。</div><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - &#123; role: some_role, when: &quot;ansible_os_family == &apos;RedHat&apos;&quot; &#125;</div><div class="line">// 分配 tags</div><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - &#123; role: foo, tags: [ &quot;bar&quot; , &quot;baz&quot; ] &#125;</div></pre></td></tr></table></figure>
+<h3 id="指定默认的参数"><a href="#指定默认的参数" class="headerlink" title="指定默认的参数"></a>指定默认的参数</h3><p>在指定默认参数后，如果在调用时传参数，那么就使用传入的参数值，否则使用默认参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//指定默认参数</div><div class="line">main.yml</div><div class="line">roles:</div><div class="line">  role_with_var</div><div class="line">    tasks:</div><div class="line">      main.yml</div><div class="line">    vars:</div><div class="line">      main.yml</div><div class="line">// roles/role_with_var/vars/main.yml</div><div class="line">param: &quot;I am the default value&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="与条件语句一起执行"><a href="#与条件语句一起执行" class="headerlink" title="与条件语句一起执行"></a>与条件语句一起执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//定义只有在 RedHat 系列才执行的 role</div><div class="line">---</div><div class="line">- host: webservers</div><div class="line">  roles:</div><div class="line">    - &#123; role: some_role, when: &quot;ansible_os_family == &apos;RedHat&apos;&quot; &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag">#ansible</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/ansible-variable.html" rel="next" title="Ansible--变量使用">
+                <i class="fa fa-chevron-left"></i> Ansible--变量使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/19/ansible-playbook.html"
+     data-title="Ansible-Playbooks"
+     data-content=""
+     data-url="http://czero000.github.io/2016/10/19/ansible-playbook.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/19/ansible-playbook.html"
+           data-title="Ansible-Playbooks" data-url="http://czero000.github.io/2016/10/19/ansible-playbook.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Playbooks"><span class="nav-number">1.</span> <span class="nav-text">Playbooks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#YAML-语法介绍"><span class="nav-number">1.1.</span> <span class="nav-text">YAML 语法介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件开始符"><span class="nav-number">1.1.1.</span> <span class="nav-text">文件开始符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组列表"><span class="nav-number">1.1.2.</span> <span class="nav-text">数组列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典"><span class="nav-number">1.1.3.</span> <span class="nav-text">字典</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Playbook-基本用法"><span class="nav-number">2.</span> <span class="nav-text">Playbook 基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">2.1.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方示例"><span class="nav-number">2.1.1.</span> <span class="nav-text">官方示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Playbook-分享平台"><span class="nav-number">2.1.2.</span> <span class="nav-text">Playbook 分享平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单示例"><span class="nav-number">2.1.3.</span> <span class="nav-text">简单示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主机和用户-Host-and-User"><span class="nav-number">2.2.</span> <span class="nav-text">主机和用户 Host and User</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务列表-Tasks"><span class="nav-number">2.3.</span> <span class="nav-text">任务列表 Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">2.3.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行状态"><span class="nav-number">2.3.2.</span> <span class="nav-text">执行状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应事件-Handler"><span class="nav-number">2.4.</span> <span class="nav-text">响应事件 Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-handler"><span class="nav-number">2.4.1.</span> <span class="nav-text">什么是 handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">2.4.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发Handlers"><span class="nav-number">2.4.3.</span> <span class="nav-text">触发Handlers</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#playbook-roles-和-include"><span class="nav-number">3.</span> <span class="nav-text">playbook roles 和 include</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#规划目录组织结构"><span class="nav-number">3.1.</span> <span class="nav-text">规划目录组织结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#include-语句"><span class="nav-number">3.2.</span> <span class="nav-text">include 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通用法"><span class="nav-number">3.2.1.</span> <span class="nav-text">普通用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级用法，传递参数"><span class="nav-number">3.2.2.</span> <span class="nav-text">高级用法，传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-handlers-section-中定义"><span class="nav-number">3.2.3.</span> <span class="nav-text">在 handlers section 中定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Roles"><span class="nav-number">3.3.</span> <span class="nav-text">Roles</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Roled的目录结构"><span class="nav-number">3.3.1.</span> <span class="nav-text">Roled的目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用带参数的-role"><span class="nav-number">3.3.2.</span> <span class="nav-text">使用带参数的 role</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定默认的参数"><span class="nav-number">3.3.3.</span> <span class="nav-text">指定默认的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与条件语句一起执行"><span class="nav-number">3.3.4.</span> <span class="nav-text">与条件语句一起执行</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

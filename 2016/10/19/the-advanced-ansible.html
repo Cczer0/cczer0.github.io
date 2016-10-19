@@ -1,0 +1,1002 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ansible," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Ansible 性能优化在使用 Ansible 过程中，当管理的服务器数量增加，就会有一个无法避免的问题–执行效率慢。下面是一些解决方法
+优化前的准备–收集数据在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 ansible-profile， 安装这个插件之后， 会显示 ansible-playbook 执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible--高级技巧">
+<meta property="og:url" content="http://czero000.github.io/2016/10/19/the-advanced-ansible.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="Ansible 性能优化在使用 Ansible 过程中，当管理的服务器数量增加，就会有一个无法避免的问题–执行效率慢。下面是一些解决方法
+优化前的准备–收集数据在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 ansible-profile， 安装这个插件之后， 会显示 ansible-playbook 执行">
+<meta property="og:updated_time" content="2016-10-19T06:46:32.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible--高级技巧">
+<meta name="twitter:description" content="Ansible 性能优化在使用 Ansible 过程中，当管理的服务器数量增加，就会有一个无法避免的问题–执行效率慢。下面是一些解决方法
+优化前的准备–收集数据在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 ansible-profile， 安装这个插件之后， 会显示 ansible-playbook 执行">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/10/19/the-advanced-ansible.html"/>
+
+
+  <title> Ansible--高级技巧 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ansible--高级技巧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T14:37:23+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">Ansible</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/19/the-advanced-ansible.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/the-advanced-ansible.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/19/the-advanced-ansible.html" class="leancloud_visitors" data-flag-title="Ansible--高级技巧">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Ansible-性能优化"><a href="#Ansible-性能优化" class="headerlink" title="Ansible 性能优化"></a>Ansible 性能优化</h1><p>在使用 Ansible 过程中，当管理的服务器数量增加，就会有一个无法避免的问题–执行效率慢。下面是一些解决方法</p>
+<h2 id="优化前的准备–收集数据"><a href="#优化前的准备–收集数据" class="headerlink" title="优化前的准备–收集数据"></a>优化前的准备–收集数据</h2><p>在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 <code>ansible-profile</code>， 安装这个插件之后， 会显示 ansible-playbook 执行每个任务话费的时间。项目地址: <a href="https://github.com/jlafon/ansible-profile" target="_blank" rel="external">https://github.com/jlafon/ansible-profile</a> 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir callback_plugins</div><div class="line">cd callback_plugins</div><div class="line">wget https://raw.githubusercontent.com/jlafon/ansible-profile/master/callback_plugins/profile_tasks.py</div><div class="line">edit /etc/ansible/ansible.cfg</div><div class="line">#callback_whitelist = timer, mail =&gt; callback_whitelist = profile_tasks</div></pre></td></tr></table></figure></p>
+<p>先在执行 ansible-playbook 既可以看到每个 tasks 的用时情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line"></div><div class="line">Sunday 18 September 2016  16:03:26 +0800 (0:00:00.204)       0:00:07.061 ******</div><div class="line">===============================================================================</div><div class="line">setup ------------------------------------------------------------------- 6.82s</div><div class="line">print phone records ----------------------------------------------------- 0.20s</div></pre></td></tr></table></figure></p>
+<h2 id="关闭-gathering-facts"><a href="#关闭-gathering-facts" class="headerlink" title="关闭 gathering facts"></a>关闭 gathering facts</h2><p>在执行 ansible-playbook 的过程中，ansible-playbook 第一步骤总是执行 gather_facts，不论你是否在 playbook 中定义这个 tasks。如果执行 playbook 不需要 fact 的数据，可以关闭 fact 数据功能，以加快 ansible-playbook 的执行速度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 在 playbook 中关闭 facts,只需要添加 `gather_facts: no`</div><div class="line">---</div><div class="line">- hosts: 172.16..11.210</div><div class="line">  gather_facts: no</div><div class="line">  remote_user: root</div></pre></td></tr></table></figure></p>
+<p>关闭执行继续执行上面的 playbook,效果十分明显<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=1    changed=0    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=1    changed=0    unreachable=0    failed=0   </div><div class="line"></div><div class="line">Sunday 18 September 2016  16:12:05 +0800 (0:00:00.195)       0:00:00.235 ******</div><div class="line">===============================================================================</div><div class="line">print phone records ----------------------------------------------------- 0.20s</div></pre></td></tr></table></figure></p>
+<h2 id="SSH-PIPElinING"><a href="#SSH-PIPElinING" class="headerlink" title="SSH PIPElinING"></a>SSH PIPElinING</h2><p>SSH PIPElinING 是一个加速 Ansible 执行速度的简单方法。SSH PIPElinING 默认是关闭的，因为要兼容不同的 sudo 配置，主要是 requiretty 选项。如果不适用 sudo 建议开启。打开此选项可以减少 ansible 执行没有传输时 ssh 在被控机器上执行任务的连接数，如果使用 sudo，必须关闭 requiretty 选项， 修改 <code>/etc/ansible/ansible.cfg</code> 开启 pipelineing<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pipelining=False =&gt;   pipelining=True</div></pre></td></tr></table></figure></p>
+<h2 id="ControlPersist"><a href="#ControlPersist" class="headerlink" title="ControlPersist"></a>ControlPersist</h2><p>ControlPersist 特性需要高版本的 SSH 才支持，CentOS 6 默认是不支持的，如果需要使用，需要自行升级 openssh。ControlPersist 即持久化 socket，一次验证，多次通信。并且只需要修改 ssh 客户端就行，也就是 Ansible 机器即可。<br>升级 openssh 的过程这里不做介绍。这里只介绍下 ControlPersist 设置的办法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/config</div><div class="line"> Host *</div><div class="line">  Compression yes</div><div class="line">  ServerAliveInterval 60</div><div class="line">  ServerAliveCountMax 5</div><div class="line">  ControlMaster auto</div><div class="line">  ControlPath ~/.ssh/sockets/%r@%h-%p</div><div class="line">  ControlPersist 4h</div></pre></td></tr></table></figure></p>
+<p>在开启了 ControlPersist 特性后，SSH 在建立了 sockets 之后，节省了每次验证和创建的时间。在网络状况不是特别理想，尤其是跨互联网的情况下，所带来的性能提升是非常可观的。有这边需求的，试试就知道了。</p>
+<h1 id="ansible-playbook-技巧"><a href="#ansible-playbook-技巧" class="headerlink" title="ansible-playbook 技巧"></a>ansible-playbook 技巧</h1><h2 id="获取命令行输出"><a href="#获取命令行输出" class="headerlink" title="获取命令行输出"></a>获取命令行输出</h2><p>在使用 ansible-playbook 中，当使用 common 或者 shell 模块执行自定义脚本，这些脚本都会有输出，用来表示执行正常或者是失败，在 ansible-playbook 中， 可以使用 register 来存储执行命令输出结果，将结果保存到变量中，在通过访问这个变量来获取输出结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">---                    </div><div class="line">- hosts: all           </div><div class="line">  gather_facts: no     </div><div class="line">  tasks:               </div><div class="line">    - name: echo date  </div><div class="line">      command: date    </div><div class="line">      register: date_output</div><div class="line">    - name: echo data_output</div><div class="line">      command: echo 30</div><div class="line">      notify: Hello      </div><div class="line">      when: date_output.stdout.split(&apos; &apos;)[2] == &quot;18&quot;</div><div class="line">  handlers:            </div><div class="line">    - name: Hello        </div><div class="line">      debug: msg=&quot;Hello&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="delegate-to-任务委派"><a href="#delegate-to-任务委派" class="headerlink" title="delegate_to 任务委派"></a>delegate_to 任务委派</h2><p>当要在 A 组服务器上执行 playbook 时，需要同时在另外一个不在 A 组的　B 服务器上执行另外操作，这里就可以使用 delegate_to 功能，用来委派任务给 B 服务器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tasks:</div><div class="line">  - name: add host records</div><div class="line">    shell: &apos;echo &quot;172.16.11.1 api.abc.com&quot; &gt;&gt; /etc/hosts&apos;</div><div class="line">  - name: add hosts records to center Server</div><div class="line">    shell: ‘echo &quot;172.16.11.1 api.abc.com&quot; &gt;&gt; /etc/hosts’</div><div class="line">    delegate_to: 172.16.11.211</div></pre></td></tr></table></figure></p>
+<h2 id="本地操作功能"><a href="#本地操作功能" class="headerlink" title="本地操作功能"></a>本地操作功能</h2><p>ansible 默认只会对定义好的被控机执行命令，如果要在本地也执行操作，可以使用 delegate_to 功能，当然还有另外一种更好的方式：<code>local_action</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// local_action</div><div class="line">- name: add host record to center server</div><div class="line">  local_action: shell &apos;echo &quot;192.168.1.100 test.xyz.com &quot; &gt;&gt; /etc/hosts&apos;</div><div class="line">// 当然您也可以使用 connection:local</div><div class="line">- name: add host record to center server</div><div class="line">  shell: &apos;echo &quot;192.168.1.100 test.xyz.com &quot; &gt;&gt; /etc/hosts&apos;</div></pre></td></tr></table></figure></p>
+<h2 id="check-模式"><a href="#check-模式" class="headerlink" title="check 模式"></a>check 模式</h2><p>使用 check 参数运行 ansible-playbook时，不会对远端主机做任何操作，并带有检测功能，报告 playbook 会对主机做出什么操作。如果 playbook 中带有执行条件，检查就会出错了。</p>
+<h2 id="使用-tag-来选择性执行"><a href="#使用-tag-来选择性执行" class="headerlink" title="使用 tag 来选择性执行"></a>使用 tag 来选择性执行</h2><p>可能由于某些原因， 在一个大型的 playbook 中，只想执行其中的特定部分，这样就会用到 tag 功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- name: yun install package</div><div class="line">  yum: name=&#123;&#123; item &#125;&#125; state=installed</div><div class="line">  with_items:</div><div class="line">     - httpd</div><div class="line">     - memcached</div><div class="line">  tags:</div><div class="line">     - packages</div><div class="line"></div><div class="line">- name: configuration modity</div><div class="line">  template: src=templates/src.j2 dest=/etc/foo.conf</div><div class="line">  tags:</div><div class="line">      - configuration</div></pre></td></tr></table></figure></p>
+<p>如果你只想运行 playbook 中的 <code>configuration</code> 和 <code>packages</code>，你可以这样做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible-playbook example.yml -tags “configuration,packages”</div></pre></td></tr></table></figure></p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>ansible 默认会检查命令和模块的返回状态，并进行相应的错误处理，默认遇到错误就会中断执行 playbook，当然这些是可以更改的</p>
+<ul>
+<li>忽略错误</li>
+</ul>
+<p>common 和 shell 模块执行的命令如果返回非零的状态码则 ansible 判断模块执行失败，通过 <code>ignore_errors</code> 忽略返回码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- name: this will not be counted as a filure</div><div class="line">  command: /bin/false</div><div class="line">  ignore_errors: true</div></pre></td></tr></table></figure></p>
+<ul>
+<li>自定义错误判定条件</li>
+</ul>
+<p>命令不依赖返回状态码来判定是否执行失败，而是要查看命令返回内容来决定，比如返回内容中包括 failed 字符串，则判定为失败。示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- name: this command prints FAILED when it fails</div><div class="line">  command: /usr/bin/example-command -x -y -z</div><div class="line">  register: command_result</div><div class="line">  failed_when: &quot;&apos;FAILED&apos; in command_result.stderr&quot;</div></pre></td></tr></table></figure></p>
+<p>ansible 会自动判断模块执行状态，command、shell 及其它模块如果修改了远程主机状态则被判定为 change 状态，不过也可以自己决定达到 changed 状态的条件，示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- name: copy in nginx conf</div><div class="line">  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf</div><div class="line"></div><div class="line">- name: validate nginx conf</div><div class="line">  shell: &quot;/data/app/nginx/sbin/nginx -t&quot;</div><div class="line">  register: command_result</div><div class="line">  changed_when: command_result.stdout.find(&apos;successful&apos;)</div></pre></td></tr></table></figure></p>
+<p>命令返回中有“successful”字符串，则为 changed 状态，下面这个设定将永远也不会达到 changed 状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- name: validate nginx conf</div><div class="line">  shell: &quot;/data/app/nginx/sbin/nginx -t&quot;</div><div class="line">  changed_when: false</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag">#ansible</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/ansible-loop.html" rel="next" title="Ansible--循环">
+                <i class="fa fa-chevron-left"></i> Ansible--循环
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/ansible-variable.html" rel="prev" title="Ansible--变量使用">
+                Ansible--变量使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/19/the-advanced-ansible.html"
+     data-title="Ansible--高级技巧"
+     data-content=""
+     data-url="http://czero000.github.io/2016/10/19/the-advanced-ansible.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/19/the-advanced-ansible.html"
+           data-title="Ansible--高级技巧" data-url="http://czero000.github.io/2016/10/19/the-advanced-ansible.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ansible-性能优化"><span class="nav-number">1.</span> <span class="nav-text">Ansible 性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化前的准备–收集数据"><span class="nav-number">1.1.</span> <span class="nav-text">优化前的准备–收集数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关闭-gathering-facts"><span class="nav-number">1.2.</span> <span class="nav-text">关闭 gathering facts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-PIPElinING"><span class="nav-number">1.3.</span> <span class="nav-text">SSH PIPElinING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ControlPersist"><span class="nav-number">1.4.</span> <span class="nav-text">ControlPersist</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ansible-playbook-技巧"><span class="nav-number">2.</span> <span class="nav-text">ansible-playbook 技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取命令行输出"><span class="nav-number">2.1.</span> <span class="nav-text">获取命令行输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delegate-to-任务委派"><span class="nav-number">2.2.</span> <span class="nav-text">delegate_to 任务委派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地操作功能"><span class="nav-number">2.3.</span> <span class="nav-text">本地操作功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#check-模式"><span class="nav-number">2.4.</span> <span class="nav-text">check 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-tag-来选择性执行"><span class="nav-number">2.5.</span> <span class="nav-text">使用 tag 来选择性执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">2.6.</span> <span class="nav-text">错误处理</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>
