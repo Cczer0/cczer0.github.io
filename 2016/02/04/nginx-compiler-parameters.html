@@ -107,11 +107,11 @@
 
 
 –pid-path=
-指向pid文件（nginx.pid）
+指向 pid 文件（nginx.pid）
 
 
 –lock-path=
-指向lock文件（nginx.lock）（安装文件锁定，防止">
+指向 lock 文件（nginx.lock）（安装文件锁定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx编译参数详解">
 <meta property="og:url" content="http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html">
@@ -139,12 +139,12 @@
 
 
 –pid-path=
-指向pid文件（nginx.pid）
+指向 pid 文件（nginx.pid）
 
 
 –lock-path=
-指向lock文件（nginx.lock）（安装文件锁定，防止">
-<meta property="og:updated_time" content="2016-02-04T07:58:40.000Z">
+指向 lock 文件（nginx.lock）（安装文件锁定">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx编译参数详解">
 <meta name="twitter:description" content="编译参数
@@ -170,11 +170,11 @@
 
 
 –pid-path=
-指向pid文件（nginx.pid）
+指向 pid 文件（nginx.pid）
 
 
 –lock-path=
-指向lock文件（nginx.lock）（安装文件锁定，防止">
+指向 lock 文件（nginx.lock）（安装文件锁定">
 
 
 
@@ -312,9 +312,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -381,6 +404,18 @@
 
                 
                 
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
 
               
             </span>
@@ -423,8 +458,7 @@
       
 
       
-        <a id="more"></a>
-<table>
+        <table>
 <thead>
 <tr>
 <th>编译参数</th>
@@ -450,11 +484,11 @@
 </tr>
 <tr>
 <td>–pid-path=</td>
-<td>指向pid文件（nginx.pid）</td>
+<td>指向 pid 文件（nginx.pid）</td>
 </tr>
 <tr>
 <td>–lock-path=</td>
-<td>指向lock文件（nginx.lock）（安装文件锁定，防止安装文件被别人利用，或自己误操作）</td>
+<td>指向 lock 文件（nginx.lock）（安装文件锁定，防止安装文件被别人利用，或自己误操作）</td>
 </tr>
 <tr>
 <td>–user=</td>
@@ -470,19 +504,19 @@
 </tr>
 <tr>
 <td>–with-rtsig_module</td>
-<td>启用rtsig模块支持（实时信号）</td>
+<td>启用 rtsig 模块支持（实时信号）</td>
 </tr>
 <tr>
 <td>–with-select_module</td>
-<td>启用select模块支持（一种轮询模式,不推荐在高载环境下使用）禁用：–without-select_module</td>
+<td>启用 select 模块支持（一种轮询模式,不推荐在高载环境下使用）禁用：–without-select_module</td>
 </tr>
 <tr>
 <td>–with-poll_module</td>
-<td>启用poll模块支持（功能与select相同，与select特性相同，为一种轮询模式,不推荐在高载环境下使用）</td>
+<td>启用 poll 模块支持（功能与 select 相同，与select特性相同，为一种轮询模式,不推荐在高载环境下使用）</td>
 </tr>
 <tr>
 <td>–with-file-aio</td>
-<td>启用file aio支持（一种APL文件传输格式）</td>
+<td>启用 file aio 支持（一种APL文件传输格式）</td>
 </tr>
 <tr>
 <td>–with-ipv6</td>
@@ -506,27 +540,27 @@
 </tr>
 <tr>
 <td>–with-http_image_filter_module</td>
-<td>启用ngx_http_image_filter_module支持（传输JPEG/GIF/PNG 图片的一个过滤器）（默认为不启用。gd库要用到）</td>
+<td>启用 ngx_http_image_filter_module支持（传输JPEG/GIF/PNG 图片的一个过滤器）（默认为不启用。gd库要用到）</td>
 </tr>
 <tr>
 <td>–with-http_geoip_module</td>
-<td>启用ngx_http_geoip_module支持（该模块创建基于与MaxMind GeoIP二进制文件相配的客户端IP地址的ngx_http_geoip_module变量）</td>
+<td>启用 ngx_http_geoip_module支持（该模块创建基于与MaxMind GeoIP二进制文件相配的客户端IP地址的ngx_http_geoip_module变量）</td>
 </tr>
 <tr>
 <td>–with-http_sub_module</td>
-<td>启用ngx_http_sub_module支持（允许用一些其他文本替换nginx响应中的一些文本）</td>
+<td>启用 ngx_http_sub_module支持（允许用一些其他文本替换nginx响应中的一些文本）</td>
 </tr>
 <tr>
 <td>–with-http_dav_module</td>
-<td>启用ngx_http_dav_module支持（增加PUT,DELETE,MKCOL：创建集合,COPY和MOVE方法）默认情况下为关闭，需编译开启</td>
+<td>启用 ngx_http_dav_module支持（增加PUT,DELETE,MKCOL：创建集合,COPY和MOVE方法）默认情况下为关闭，需编译开启</td>
 </tr>
 <tr>
 <td>–with-http_flv_module</td>
-<td>启用ngx_http_flv_module支持（提供寻求内存使用基于时间的偏移量文件）</td>
+<td>启用 ngx_http_flv_module支持（提供寻求内存使用基于时间的偏移量文件）</td>
 </tr>
 <tr>
 <td>–with-http_gzip_static_module</td>
-<td>启用ngx_http_gzip_static_module支持（在线实时压缩输出数据流）</td>
+<td>启用 ngx_http_gzip_static_module支持（在线实时压缩输出数据流）</td>
 </tr>
 <tr>
 <td>–with-http_random_index_module</td>
@@ -794,8 +828,6 @@
 </tr>
 </tbody>
 </table>
-<hr>
-<p><strong> <a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a> </strong></p>
 
       
     </div>
@@ -827,16 +859,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/27/Web/Nginx/Nginx--源码安装.html" rel="next" title="Nginx--源码安装">
-                <i class="fa fa-chevron-left"></i> Nginx--源码安装
+              <a href="/2016/02/04/nginx-loadbalance.html" rel="next" title="Nginx负载均衡">
+                <i class="fa fa-chevron-left"></i> Nginx负载均衡
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/02/04/nginx-configfile-detail.html" rel="prev" title="Nginx--配置文件详解">
-                Nginx--配置文件详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/02/04/nginx-configfile-detail.html" rel="prev" title="Nginx配置文件详解">
+                Nginx配置文件详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -928,7 +960,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -936,7 +968,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -969,6 +1001,20 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -1131,6 +1177,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

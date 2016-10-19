@@ -96,7 +96,7 @@ Parted 命令分为两种模式：命令行模式和交互模式。
 Parted 命令分为两种模式：命令行模式和交互模式。
 
 命令行模式： parted [option] device [command] ,该模式可以直接在命令行下对磁盘进行分区操作，比较">
-<meta property="og:updated_time" content="2016-01-18T09:15:38.000Z">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建大于2TB分区">
 <meta name="twitter:description" content="parted命令介绍parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。
@@ -240,9 +240,32 @@ Parted 命令分为两种模式：命令行模式和交互模式。
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -302,8 +325,20 @@ Parted 命令分为两种模式：命令行模式和交互模式。
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -370,8 +405,6 @@ Parted 命令分为两种模式：命令行模式和交互模式。
 <h5 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkfs.ext4 -q /dev/sdb1</div><div class="line">mkfs.ext4 -q /dev/sdc1</div><div class="line">mkfs.ext4 -q /dev/sdd1</div></pre></td></tr></table></figure>
 <h4 id="挂载目录"><a href="#挂载目录" class="headerlink" title="挂载目录"></a>挂载目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /MFS_DATA1; mount /dev/sdb1 /MFS_DATA1;echo &quot;mount /dev/sdb1 /MFS_DATA1&quot; &gt;&gt; /etc/rc.local</div><div class="line">mkdir /MFS_DATA2; mount /dev/sdc1 /MFS_DATA2;echo &quot;mount /dev/sdc1 /MFS_DATA2&quot; &gt;&gt; /etc/rc.local</div><div class="line">mkdir /MFS_DATA3; mount /dev/sdd1 /MFS_DATA3;echo &quot;mount /dev/sdd1 /MFS_DATA3&quot; &gt;&gt; /etc/rc.local</div></pre></td></tr></table></figure>
 <h4 id="查看磁盘挂载"><a href="#查看磁盘挂载" class="headerlink" title="查看磁盘挂载"></a>查看磁盘挂载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">/dev/sda5       127G  1.1G  120G   1% /</div><div class="line">tmpfs           7.8G   12K  7.8G   1% /dev/shm</div><div class="line">/dev/sda1       194M   29M  155M  16% /boot</div><div class="line">/dev/sda3       4.0G  254M  3.5G   7% /var</div><div class="line">/dev/sdb1       3.6T  196M  3.4T   1% /MFS_DATA1</div><div class="line">/dev/sdc1       3.6T  196M  3.4T   1% /MFS_DATA2</div><div class="line">/dev/sdd1       3.6T  196M  3.4T   1% /MFS_DATA3</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
       
     </div>
 
@@ -404,8 +437,8 @@ Parted 命令分为两种模式：命令行模式和交互模式。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/20/smokeping-support-chinese.html" rel="next" title="Smokeping页面支持中文">
-                <i class="fa fa-chevron-left"></i> Smokeping页面支持中文
+              <a href="/2015/12/20/centos7-install-smokeping.html" rel="next" title="Centos7安装smokeping">
+                <i class="fa fa-chevron-left"></i> Centos7安装smokeping
               </a>
             
           </div>
@@ -505,7 +538,7 @@ Parted 命令分为两种模式：命令行模式和交互模式。
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -513,7 +546,7 @@ Parted 命令分为两种模式：命令行模式和交互模式。
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -547,6 +580,20 @@ Parted 命令分为两种模式：命令行模式和交互模式。
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -557,7 +604,7 @@ Parted 命令分为两种模式：命令行模式和交互模式。
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#parted命令介绍"><span class="nav-number">1.</span> <span class="nav-text">parted命令介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战演练"><span class="nav-number">2.</span> <span class="nav-text">实战演练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始磁盘信息"><span class="nav-number">2.1.</span> <span class="nav-text">初始磁盘信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试通过fdisk命令进行分区"><span class="nav-number">2.2.</span> <span class="nav-text">尝试通过fdisk命令进行分区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过parted命令进行分区"><span class="nav-number">3.</span> <span class="nav-text">通过parted命令进行分区</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#更改分区表类型"><span class="nav-number">3.0.1.</span> <span class="nav-text">更改分区表类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘分区"><span class="nav-number">3.0.2.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#格式化分区"><span class="nav-number">3.0.3.</span> <span class="nav-text">格式化分区</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载目录"><span class="nav-number">3.1.</span> <span class="nav-text">挂载目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘挂载"><span class="nav-number">3.2.</span> <span class="nav-text">查看磁盘挂载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#parted命令介绍"><span class="nav-number">1.</span> <span class="nav-text">parted命令介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战演练"><span class="nav-number">2.</span> <span class="nav-text">实战演练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始磁盘信息"><span class="nav-number">2.1.</span> <span class="nav-text">初始磁盘信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试通过fdisk命令进行分区"><span class="nav-number">2.2.</span> <span class="nav-text">尝试通过fdisk命令进行分区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过parted命令进行分区"><span class="nav-number">3.</span> <span class="nav-text">通过parted命令进行分区</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#更改分区表类型"><span class="nav-number">3.0.1.</span> <span class="nav-text">更改分区表类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘分区"><span class="nav-number">3.0.2.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#格式化分区"><span class="nav-number">3.0.3.</span> <span class="nav-text">格式化分区</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载目录"><span class="nav-number">3.1.</span> <span class="nav-text">挂载目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘挂载"><span class="nav-number">3.2.</span> <span class="nav-text">查看磁盘挂载</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -708,6 +755,132 @@ Parted 命令分为两种模式：命令行模式和交互模式。
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

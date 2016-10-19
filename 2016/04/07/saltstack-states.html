@@ -86,20 +86,20 @@
 
 <meta name="description" content="SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。
 
-It is all just data其实sls文件只是一个数据结构，对">
+It is all just data其实sls文件只是一个数据结构，对于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SaltStack-States">
 <meta property="og:url" content="http://czero000.github.io/2016/04/07/saltstack-states.html">
 <meta property="og:site_name" content="Czero's Blog">
 <meta property="og:description" content="SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。
 
-It is all just data其实sls文件只是一个数据结构，对">
-<meta property="og:updated_time" content="2016-04-07T03:44:26.000Z">
+It is all just data其实sls文件只是一个数据结构，对于">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SaltStack-States">
 <meta name="twitter:description" content="SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。
 
-It is all just data其实sls文件只是一个数据结构，对">
+It is all just data其实sls文件只是一个数据结构，对于">
 
 
 
@@ -237,9 +237,32 @@ It is all just data其实sls文件只是一个数据结构，对">
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -360,8 +383,7 @@ It is all just data其实sls文件只是一个数据结构，对">
       
 
       
-        <a id="more"></a>
-<h2 id="SaltStack的state"><a href="#SaltStack的state" class="headerlink" title="SaltStack的state"></a>SaltStack的state</h2><p>SaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。</p>
+        <h2 id="SaltStack的state"><a href="#SaltStack的state" class="headerlink" title="SaltStack的state"></a>SaltStack的state</h2><p>SaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这些数据，称为配置管理。</p>
 <ul>
 <li><p>It is all just data<br>其实sls文件只是一个数据结构，对于sls文件的深入理解会有助于对salt state的深入理解和应用。sls文件事实上只是一个字典、列表、字符串或者数字。通过对配置进行数据结构化，使其满足开发者的各种需求，写的越多，越易于理解。</p>
 </li>
@@ -561,7 +583,7 @@ It is all just data其实sls文件只是一个数据结构，对">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -569,7 +591,7 @@ It is all just data其实sls文件只是一个数据结构，对">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -602,6 +624,20 @@ It is all just data其实sls文件只是一个数据结构，对">
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -764,6 +800,132 @@ It is all just data其实sls文件只是一个数据结构，对">
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

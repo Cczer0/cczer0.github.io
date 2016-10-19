@@ -232,9 +232,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -269,8 +292,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/introduce-megacli-command.html" itemprop="url">
-                  Megacli命令指南
+                <a class="post-title-link" href="/2015/12/29/download-centos-iso.html" itemprop="url">
+                  CetnOS各个版本下载
                 </a>
               
             
@@ -283,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T22:58:15+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T11:04:54+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -297,8 +320,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -313,8 +348,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/introduce-megacli-command.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/introduce-megacli-command.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/download-centos-iso.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/download-centos-iso.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +359,7 @@
 
           
           
-             <span id="/2015/12/21/introduce-megacli-command.html" class="leancloud_visitors" data-flag-title="Megacli命令指南">
+             <span id="/2015/12/29/download-centos-iso.html" class="leancloud_visitors" data-flag-title="CetnOS各个版本下载">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -348,94 +383,16 @@
       
         
           
-            <a id="more"></a>
-<p> MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Count: 0 这两个数值来确定阵列中磁盘是否有问题；Medai Error Count 表示磁盘可能错误，可能是磁盘有坏道，这个值不为0值得注意，数值越大，危险系数越高，Other Error Count 表示磁盘可能存在松动，可能需要重新再插入。MegaCli 可以对阵列中所有的磁盘进行检测，我们可以通过脚本的方式来检测相关参数，从而通知管理人员。</p>
-<p>下载MegCli,目前针对公司DB数据库是IBM的服务器，直接从IBM官方下载，如果其它服务器的，使用各官方下载或者 LSI网站上进行相关下载。一般来说，是通用的。这个包适用32 /64位操作系统平台</p>
-<p>下载地址：ftp://download2.boulder.ibm.com/ecc/sar/CMA/XSA/ibm_utl_sraidmr_megacli-8.00.48_linux_32-64.zip</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unzip ibm_utl_sraidmr_megacli-8.00.48_linux_32-64.zip</div><div class="line">cd linux</div><div class="line">rpm -ivh Lib_Utils-1.00-09.noarch.rpm  MegaCli-8.00.48-1.i386.rpm</div></pre></td></tr></table></figure>
-<h3 id="使用命令及参数"><a href="#使用命令及参数" class="headerlink" title="使用命令及参数"></a>使用命令及参数</h3><h4 id="命令使用："><a href="#命令使用：" class="headerlink" title="命令使用："></a>命令使用：</h4><ul>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -Lall -aALL 查raid级别</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpAllInfo -aALL 查raid卡信息</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -PDList -aALL 查看硬盘信息</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -aAll 查看电池信息</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -FwTermLog -Dsply -aALL 查看raid卡日志</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -adpCount 【显示适配器个数】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpGetTime –aALL 【显示适配器时间】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpAllInfo -aAll 【显示所有适配器信息】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -LALL -aAll 【显示所有逻辑磁盘组信息】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -PDList -aAll 【显示所有的物理信息】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuStatus -aALL |grep ‘Charger Status’ 【查看充电状态】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuStatus -aALL【显示BBU状态信息】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuCapacityInfo -aALL【显示BBU容量信息】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuDesignInfo -aALL 【显示BBU设计参数】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -GetBbuProperties -aALL 【显示当前BBU属性】</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -cfgdsply -aALL 【显示Raid卡型号，Raid设置，Disk相关信息】</li>
-</ul>
-<h4 id="磁带状态的变化，从拔盘，到插盘的过程中。"><a href="#磁带状态的变化，从拔盘，到插盘的过程中。" class="headerlink" title="磁带状态的变化，从拔盘，到插盘的过程中。"></a>磁带状态的变化，从拔盘，到插盘的过程中。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
-<h4 id="查看磁盘缓存策略"><a href="#查看磁盘缓存策略" class="headerlink" title="查看磁盘缓存策略"></a>查看磁盘缓存策略</h4><ul>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -L0 -a0</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -L1 -a0</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -LALL -a0</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -Cache -LALL -aALL</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDGetProp -DskCache -LALL -aALL</li>
-</ul>
-<h4 id="设置磁盘缓存策略"><a href="#设置磁盘缓存策略" class="headerlink" title="设置磁盘缓存策略"></a>设置磁盘缓存策略</h4><p>缓存策略解释：</p>
-<ul>
-<li>WT (Write through</li>
-<li>WB (Write back)</li>
-<li>NORA (No read ahead)</li>
-<li>RA (Read ahead)</li>
-<li>ADRA (Adaptive read ahead)</li>
-<li>Cached</li>
-<li>Direct<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDSetProp WT|WB|NORA|RA|ADRA -L0 -a0</div><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDSetProp -Cached|-Direct -L0 -a0 enable / disable disk cache</div><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDSetProp -EnDskCache|-DisDskCache -L0 -a0</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5"><a href="#创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5" class="headerlink" title="创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5"></a>创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -CfgLdAdd -r5 [1:2,1:3,1:4] WB Direct -Hsp[1:5] -a0</div></pre></td></tr></table></figure>
-<h4 id="创建阵列，不指定热备"><a href="#创建阵列，不指定热备" class="headerlink" title="创建阵列，不指定热备"></a>创建阵列，不指定热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -CfgLdAdd -r5 [1:2,1:3,1:4] WB Direct -a0</div></pre></td></tr></table></figure>
-<h4 id="删除阵列"><a href="#删除阵列" class="headerlink" title="删除阵列"></a>删除阵列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -CfgLdDel -L1 -a0</div></pre></td></tr></table></figure>
-<h4 id="在线添加磁盘"><a href="#在线添加磁盘" class="headerlink" title="在线添加磁盘"></a>在线添加磁盘</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDRecon -Start -r5 -Add -PhysDrv[1:4] -L1 -a0</div></pre></td></tr></table></figure>
-<h4 id="阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"><a href="#阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。" class="headerlink" title="阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"></a>阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。</h4><ul>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInit -ShowProg -LALL -aALL 或者以动态可视化文字界面显示</li>
-<li>/opt/MegaRAID/MegaCli/MegaCli64 -LDInit -ProgDsply -LALL -aALL</li>
-</ul>
-<h4 id="查看阵列后台初始化进度"><a href="#查看阵列后台初始化进度" class="headerlink" title="查看阵列后台初始化进度"></a>查看阵列后台初始化进度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDBI -ShowProg -LALL -aALL</div></pre></td></tr></table></figure>
-<p>或者以动态可视化文字界面显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -LDBI -ProgDsply -LALL -aALL</div></pre></td></tr></table></figure></p>
-<h4 id="指定第-5-块盘作为全局热备"><a href="#指定第-5-块盘作为全局热备" class="headerlink" title="指定第 5 块盘作为全局热备"></a>指定第 5 块盘作为全局热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDHSP -Set [-EnclAffinity] [-nonRevertible] -PhysDrv[1:5] -a0</div></pre></td></tr></table></figure>
-<h4 id="指定为某个阵列的专用热备"><a href="#指定为某个阵列的专用热备" class="headerlink" title="指定为某个阵列的专用热备"></a>指定为某个阵列的专用热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDHSP -Set [-Dedicated [-Array1]] [-EnclAffinity] [-nonRevertible] -PhysDrv[1:5] -a0</div></pre></td></tr></table></figure>
-<h4 id="删除全局热备"><a href="#删除全局热备" class="headerlink" title="删除全局热备"></a>删除全局热备</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDHSP -Rmv -PhysDrv[1:5] -a0</div></pre></td></tr></table></figure>
-<h4 id="将某块物理盘下线-上线"><a href="#将某块物理盘下线-上线" class="headerlink" title="将某块物理盘下线/上线"></a>将某块物理盘下线/上线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDOffline -PhysDrv [1:4] -a0</div><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDOnline -PhysDrv [1:4] -a0</div></pre></td></tr></table></figure>
-<h4 id="查看物理磁盘重建进度"><a href="#查看物理磁盘重建进度" class="headerlink" title="查看物理磁盘重建进度"></a>查看物理磁盘重建进度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDRbld -ShowProg -PhysDrv [1:5] -a0</div></pre></td></tr></table></figure>
-<p>或者以动态可视化文字界面显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/MegaRAID/MegaCli/MegaCli64 -PDRbld -ProgDsply -PhysDrv [1:5] -a0</div></pre></td></tr></table></figure></p>
-<h4 id="磁带状态的变化，从拔盘，到插盘的过程中："><a href="#磁带状态的变化，从拔盘，到插盘的过程中：" class="headerlink" title="磁带状态的变化，从拔盘，到插盘的过程中："></a>磁带状态的变化，从拔盘，到插盘的过程中：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
-<h4 id="raid-电池设置相关"><a href="#raid-电池设置相关" class="headerlink" title="raid 电池设置相关"></a>raid 电池设置相关</h4><p>查看电池状态信息(Display BBU Status Information)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuStatus -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuStatus -aALL</div></pre></td></tr></table></figure></p>
-<p>查看电池容量（Display BBU Capacity Information）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuCapacityInfo -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuCapacityInfo –aALL</div></pre></td></tr></table></figure></p>
-<p>查看电池设计参数(Display BBU Design Parameters)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuDesignInfo -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuDesignInfo –aALL</div></pre></td></tr></table></figure></p>
-<p>查看电池属性（Display Current BBU Properties）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuProperties -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -AdpBbuCmd -GetBbuProperties –aALL</div></pre></td></tr></table></figure></p>
-<p>设置电池为学习模式为循环模式（Start BBU Learning Cycle）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Description Starts the learning cycle on the BBU.</div><div class="line">No parameter is needed for this option.</div><div class="line">MegaCli -AdpBbuCmd -BbuLearn -aN|-a0,1,2|-aALL</div></pre></td></tr></table></figure></p>
-<p>设置磁盘的缓存模式和访问方式 （Change Virtual Disk Cache and Access Parameters）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Description Allows you to change the following virtual disk parameters:</div><div class="line">-WT (Write through), WB (Write back): Selects write policy.</div><div class="line">-NORA (No read ahead), RA (Read ahead), ADRA (Adaptive read ahead): Selects read policy.</div><div class="line">-Cached, -Direct: Selects cache policy.</div><div class="line">-RW, -RO, Blocked: Selects access policy.</div><div class="line">-EnDskCache: Enables disk cache.</div><div class="line">-DisDskCache: Disables disk cache.</div><div class="line">MegaCli -LDSetProp &#123; WT | WB|NORA |RA | ADRA|-Cached|Direct&#125; |</div><div class="line">&#123;-RW|RO|Blocked&#125; |</div><div class="line">&#123;-Name[string]&#125; |</div><div class="line">&#123;-EnDskCache|DisDskCache&#125; –Lx |</div><div class="line">-L0,1,2|-Lall -aN|-a0,1,2|-aALL</div><div class="line">MegaCli -LDSetProp WT -L0 -a0</div></pre></td></tr></table></figure></p>
-<p>显示磁盘缓存和访问方式（Display Virtual Disk Cache and Access Parameters）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">MegaCli -LDGetProp -Cache | -Access | -Name | -DskCache -Lx|-L0,1,2|</div><div class="line">-Lall -aN|-a0,1,2|-aALL</div><div class="line">Displays the cache and access policies of the virtual disk(s):</div><div class="line">-WT (Write through), WB (Write back): Selects write policy.</div><div class="line">-NORA (No read ahead), RA (Read ahead), ADRA (Adaptive read ahead): Selects read policy.</div><div class="line">-Cache, -Cached, Direct: Displays cache policy.</div><div class="line">-Access, -RW, -RO, Blocked: Displays access policy.</div><div class="line">-DskCache: Displays physical disk cache policy.</div></pre></td></tr></table></figure></p>
-<p>Megaraid 必知必会 使用LSI的megaraid可以对raid进行有效监控。别的厂商比如HP,IBM也有自己的raid API</p>
-<ul>
-<li>MegaCli -ldinfo -lall -aall 查询raid级别，磁盘数量，容量，条带大小</li>
-<li>MegaCli -cfgdsply -aALL |grep Policy 查询控制器cache策略</li>
-<li>MegaCli -LDSetProp WB -L0 -a0 设置write back功能</li>
-<li>MegaCli -LDSetProp CachedBadBBU -L0 -a0 设置即使电池坏了还是保持WB功能</li>
-<li>MegaCli -AdpBbuCmd -BbuLearn a0 手动充电</li>
-<li>MegaCli -FwTermLog -Dsply -aALL 查询日志</li>
-<li>MegaCli -adpCount 显示适配器个数</li>
-</ul>
-<p>显示所有适配器信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpAllInfo -aAll</div><div class="line">Critical Disks : 0</div><div class="line">Failed Disks : 0</div></pre></td></tr></table></figure>
-<p>显示所有逻辑磁盘组信息： <code>MegaCli -LDInfo -LALL -aAll</code><br>显示所有的物理信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MegaCli -PDList -aAll</div><div class="line">Media Error Count: 0</div><div class="line">Other Error Count: 0</div></pre></td></tr></table></figure></p>
-<p>查看充电状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MegaCli -AdpBbuCmd -GetBbuStatus -aALL</div><div class="line">Learn Cycle Requested : No</div><div class="line">Fully Charged : Yes</div></pre></td></tr></table></figure></p>
-<p>显示BBU(后备电池)状态信息： <code>MegaCli -AdpBbuCmd -GetBbuStatus -aALL</code><br>显示BBU容量信息： <code>MegaCli -AdpBbuCmd -GetBbuCapacityInfo -aALL</code><br>显示BBU设计参数： <code>MegaCli -AdpBbuCmd -GetBbuDesignInfo -aALL</code><br>显示当前BBU属性： <code>MegaCli -AdpBbuCmd -GetBbuProperties -aALL</code><br>显示Raid卡型号，Raid设置，Disk相关信息： <code>MegaCli -cfgdsply -aALL</code><br>查看Cache 策略设置： <code>MegaCli -cfgdsply -aALL |grep -i Policy
-Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BBU</code><br>查看充电进度百分比： <code>MegaCli -AdpBbuCmd -GetBbuStatus -aALL</code></p>
-<p>各种设备和磁盘的不同状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
-<h4 id="通过脚本检测RAID-磁盘状态"><a href="#通过脚本检测RAID-磁盘状态" class="headerlink" title="通过脚本检测RAID 磁盘状态"></a>通过脚本检测RAID 磁盘状态</h4><p>Linux下脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#check raid disk status</div><div class="line">MEGACLI=&quot;/opt/MegaRAID/MegaCli/MegaCli64 &quot;</div><div class="line">$MEGACLI -pdlist -aALL  | grep &quot;Firmware state&quot; | awk -F : &apos;&#123;print $2&#125;&apos; | awk -F , &apos;&#123;print $1&#125;&apos; &gt;/tmp/fireware.log</div><div class="line">$MEGACLI -pdlist -aALL  | grep -E &quot;Media Error|Other Error&quot; | awk -F : &apos;&#123;print $2&#125;&apos; &gt;/tmp/disk.log</div><div class="line">for i in `cat &lt; /tmp/disk.log`</div><div class="line">do</div><div class="line">if [ $i -ne 0 ]</div><div class="line">        then</div><div class="line">curl &quot;http://xxxxxxB&amp;state=ALARM&amp;description=raid_disk_error&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">for i in `cat &lt; /tmp/fireware.log`</div><div class="line">do</div><div class="line">if [ $i !=  Online ]</div><div class="line">        then</div><div class="line">curl &quot;http://xxxxxxstate=ALARM&amp;description=raid_disk_offline&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">Windows 下脚本</div><div class="line">Windows下脚本用的工具是gnu for windows平台的一些软件，如 bash grep awk cat</div><div class="line">通过bash直接调用脚本</div><div class="line">如：G:\raid_check\unixtools&gt;bash.exe  G:\disk.sh</div><div class="line">#check raid disk status</div><div class="line">MEGACLI=&quot;//G/raid_check/MegaCli.exe&quot;</div><div class="line">GREP=&quot;//G/raid_check/unixtools/grep.exe&quot;</div><div class="line">AWK=&quot;//G/raid_check/unixtools/awk.exe&quot;</div><div class="line">CAT=&quot;//G/raid_check/unixtools/cat.exe&quot;</div><div class="line">CURL=&quot;//G/raid_check/unixtools/curl.exe&quot;</div><div class="line">$MEGACLI -pdlist -aALL  | $GREP &quot;Firmware state&quot; |$AWK -F: &apos;&#123;print $2&#125;&apos; |$AWK -F , &apos;&#123;print $1&#125;&apos; &gt;//c/fireware.log</div><div class="line">$MEGACLI -pdlist -aALL  | $GREP -E &quot;Media Error|Other Error&quot; | $AWK -F : &apos;&#123;print $2&#125;&apos; &gt; //c/disk.log</div><div class="line">for i in `$CAT c:/disk.log`</div><div class="line">do</div><div class="line">if [ $i -ne 0 ]</div><div class="line">        then</div><div class="line">$CURL &quot;http://xxxxxx&amp;description=raid_disk_error&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">for i in `$CAT c:/fireware.log`</div><div class="line">do</div><div class="line">if [ $i != Online ]</div><div class="line">        then</div><div class="line">$CURL &quot;http://xxxxx&amp;state=ALARM&amp;description=raid_disk_offline&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+          CentOS 官方镜像源中镜像版本并不完全，只有各个系列较新的版本iso提供下载，下面网站提供各个版本的iso下载，网站为国外网站，下载较慢
+http://archive.kernel.org/centos-vault/
+
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/download-centos-iso.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -483,8 +440,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/passwd-command-failed.html" itemprop="url">
-                  passwd修改密码失败
+                <a class="post-title-link" href="/2015/12/29/change-em1-to-eth0.html" itemprop="url">
+                  网卡em恢复为eth
                 </a>
               
             
@@ -497,8 +454,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T22:54:41+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T11:02:45+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -511,8 +468,20 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -527,8 +496,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/passwd-command-failed.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/passwd-command-failed.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/change-em1-to-eth0.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/change-em1-to-eth0.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -538,7 +507,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 
           
           
-             <span id="/2015/12/21/passwd-command-failed.html" class="leancloud_visitors" data-flag-title="passwd修改密码失败">
+             <span id="/2015/12/29/change-em1-to-eth0.html" class="leancloud_visitors" data-flag-title="网卡em恢复为eth">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -562,15 +531,16 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
       
         
           
-            <a id="more"></a>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>今天增加一用户时，出现以下情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@ssq-54-104 ~]# passwd root</div><div class="line">Changing password for user root.</div><div class="line">New UNIX password:</div><div class="line">/usr/share/cracklib/pw_dict: error reading header</div><div class="line">PWOpen: Success</div></pre></td></tr></table></figure></p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum reinstall -y cracklib-dicts</div></pre></td></tr></table></figure>
-<blockquote>
-<p>CrackLib是一个可用于类UNIX系统下的函数库,   一般来说,   通常只使用其中的一个函数.它可以用于编写和passwd有关的程序中,   其基本思想是很简单的,   就是防止用户使用过于简单,   容易被猜测出来或容易被一些工具搜索到的密码.CrackLib并不是一个可以直接运行使用的程序,   它是一个函数库,   你可以利用其中的函数写自己的程序,   或是加入其它程序中,   用来提高安全性.   比如,   你可以重写passwd,使用户在选择密码时受到限制CrackLib使用一个字典,   它查找字典以判断所选用密码是否是不安全的密码,   所以你也可以加入其它信息,   使用自己的字典.比如,   加入公司的名称,   实验室墙上的单词等等潜在的不安全密码.</p>
-</blockquote>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+随之服务器系统从CentOS5.x逐步升级到CentOS6.x，发现原来熟悉的eth0、eth1全部变成了em1、em2。接口名变化并不会对平时的运维工作有影响，不过某些应用可能会收到影响，所以还是改过来，比较好。经过资料整理，有两种方式：
+更改配置文件dmesg中看到如下一行信息：kernel:
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/change-em1-to-eth0.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -618,8 +588,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/update-python.html" itemprop="url">
-                  Python2.4升级
+                <a class="post-title-link" href="/2015/12/29/centos-install-xz.html" itemprop="url">
+                  安装XZ解压工具
                 </a>
               
             
@@ -632,8 +602,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T22:04:46+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T11:01:28+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -646,8 +616,20 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -662,8 +644,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/update-python.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/update-python.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/centos-install-xz.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-xz.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -673,7 +655,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 
           
           
-             <span id="/2015/12/21/update-python.html" class="leancloud_visitors" data-flag-title="Python2.4升级">
+             <span id="/2015/12/29/centos-install-xz.html" class="leancloud_visitors" data-flag-title="安装XZ解压工具">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -697,20 +679,17 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
       
         
           
-            <p>RHEL5.4系统中自带的Python版本是2.4，但是目前许多基于Python的应用要求的Python版本都要高于2.4，在升级Python版本时不要卸载Python2.4在安装Python2.7，这样会有很多的问题，保守的方法是直接安装Python2.7的源码包（系统中有很多程序依赖Python）</p>
-<h4 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">lsb_release -a</div><div class="line">LSB Version:    :core-3.1-ia32:core-3.1-noarch:graphics-3.1-ia32:graphics-3.1-noarch</div><div class="line">Distributor ID: RedHatEnterpriseServer</div><div class="line">Description:    Red Hat Enterprise Linux Server release 5.4 (Tikanga)</div><div class="line">Release:        5.4</div><div class="line">Codename:       Tikanga</div></pre></td></tr></table></figure>
-<h4 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python -V</div><div class="line">Python 2.4.3</div></pre></td></tr></table></figure>
-<h4 id="下载并安装Python2-7"><a href="#下载并安装Python2-7" class="headerlink" title="下载并安装Python2.7"></a>下载并安装Python2.7</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div><div class="line">wget www.python.org/ftp/python/2.7.2/Python-2.7.2.tar.bz2</div><div class="line">tar -jxf Python-2.7.2.tar.bz2  </div><div class="line">cd Python-2.7.2</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<p>Python2.7安装后路径默认是/usr/local/lib/python2.7，查看Python版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/python2.7 -V</div><div class="line">Python 2.7.2</div></pre></td></tr></table></figure>
-<h4 id="建立软连接，使系统默认的Python指向Python2-7"><a href="#建立软连接，使系统默认的Python指向Python2-7" class="headerlink" title="建立软连接，使系统默认的Python指向Python2.7"></a>建立软连接，使系统默认的Python指向Python2.7</h4><p>正常情况下，即使Python2.7安装成功后，系统默认的Python版本仍然是2.4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python -V</div><div class="line">Python 2.4.3</div></pre></td></tr></table></figure></p>
-<h4 id="将系统默认的Python指到2-7"><a href="#将系统默认的Python指到2-7" class="headerlink" title="将系统默认的Python指到2.7"></a>将系统默认的Python指到2.7</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv /usr/bin/python /usr/bin/python.bak</div><div class="line">ln -s /usr/local/bin/python2.7 /usr/bin/python</div></pre></td></tr></table></figure>
-<h4 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python -V</div><div class="line">Python 2.7.2</div></pre></td></tr></table></figure>
-<h4 id="yum工具是基于Python2-4才能运行"><a href="#yum工具是基于Python2-4才能运行" class="headerlink" title="yum工具是基于Python2.4才能运行"></a>yum工具是基于Python2.4才能运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">edit /usr/bin/yum</div><div class="line">#!/usr/bin/python =&gt; #!/usr/bin/python2.4</div></pre></td></tr></table></figure>
-<p>这样yum工具就可以正常使</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+从www.kernel.org下载内核安装包，准备CentOS6.5内核升级到3.x，下载后发现是一个以.xz结尾的压缩包。
+
+xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip与bzip2一样，同样支持多文件压缩，但是约定不能将多于一个的目标文件压缩进同一个档案文件。 相反，
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/centos-install-xz.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -758,8 +737,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/centos6.5-install-vncserver.html" itemprop="url">
-                  CentOS6.5安装VNC
+                <a class="post-title-link" href="/2015/12/29/centos-install-chromium.html" itemprop="url">
+                  安装Chromium浏览器
                 </a>
               
             
@@ -772,8 +751,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T22:00:59+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T11:00:02+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -786,8 +765,20 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -802,8 +793,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/centos6.5-install-vncserver.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/centos6.5-install-vncserver.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/centos-install-chromium.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-chromium.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -813,7 +804,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 
           
           
-             <span id="/2015/12/21/centos6.5-install-vncserver.html" class="leancloud_visitors" data-flag-title="CentOS6.5安装VNC">
+             <span id="/2015/12/29/centos-install-chromium.html" class="leancloud_visitors" data-flag-title="安装Chromium浏览器">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -837,18 +828,15 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
       
         
           
-            <h3 id="安装图形支持"><a href="#安装图形支持" class="headerlink" title="安装图形支持"></a>安装图形支持</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall -y  &apos;X Window System&apos; &apos;Desktop&apos; &apos;Desktop Platform&apos;</div></pre></td></tr></table></figure>
-<h3 id="安装VNC"><a href="#安装VNC" class="headerlink" title="安装VNC"></a>安装VNC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y tigervnc-server</div></pre></td></tr></table></figure>
-<h3 id="配置VNC"><a href="#配置VNC" class="headerlink" title="配置VNC"></a>配置VNC</h3><h4 id="编辑vnc服务配置文件"><a href="#编辑vnc服务配置文件" class="headerlink" title="编辑vnc服务配置文件"></a>编辑vnc服务配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/vncservers</div><div class="line">VNCSERVERS=&quot;1:root&quot;</div><div class="line">VNCSERVERARGS[1]=&quot;-geometry 1024x768 -nolisten tcp &quot;</div></pre></td></tr></table></figure>
-<h5 id="配置vnc密码"><a href="#配置vnc密码" class="headerlink" title="配置vnc密码"></a>配置vnc密码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vncpasswd</div></pre></td></tr></table></figure>
-<h4 id="启动vnc服务"><a href="#启动vnc服务" class="headerlink" title="启动vnc服务"></a>启动vnc服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/vncserver start</div><div class="line">Starting VNC server: 1:root xauth:  creating new authority file /root/.Xauthority</div><div class="line"></div><div class="line">New &apos;localhost.localdomain:1 (root)&apos; desktop is localhost.localdomain:1</div><div class="line"></div><div class="line">Creating default startup script /root/.vnc/xstartup</div><div class="line">Starting applications specified in /root/.vnc/xstartup</div><div class="line">Log file is /root/.vnc/localhost.localdomain:1.log</div><div class="line"></div><div class="line">                                                           [  OK  ]</div></pre></td></tr></table></figure>
-<h4 id="设置vnc自动启动"><a href="#设置vnc自动启动" class="headerlink" title="设置vnc自动启动"></a>设置vnc自动启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig vncserver on</div></pre></td></tr></table></figure>
-<p><strong>注：~/.vnc/xstartup在CentOS 6下无需增加<code>gnome-session &amp;</code> </strong></p>
-<h4 id="多用户设置"><a href="#多用户设置" class="headerlink" title="多用户设置"></a>多用户设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">\\ vnc配置文件</div><div class="line">vim /etc/sysconfig/vncservers</div><div class="line">VNCSERVERS=”1:userA 2:userB”</div><div class="line">VNCSERVERARGS[1]=&quot;-geometry 1024x768 -nolisten tcp &quot;</div><div class="line">VNCSERVERARGS[2]=&quot;-geometry 1024x768 -nolisten tcp &quot;</div><div class="line"></div><div class="line">\\ vnc密码</div><div class="line">su - userA</div><div class="line">vncpasswd</div><div class="line"></div><div class="line">su - userB</div><div class="line">vncpasswd</div></pre></td></tr></table></figure>
-<h3 id="实用命令"><a href="#实用命令" class="headerlink" title="实用命令"></a>实用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">usage: vncserver [:] [-name ] [-depth ]</div><div class="line">                 [-geometry x]</div><div class="line">                 [-pixelformat rgbNNN|bgrNNN]</div><div class="line">                 [-fp ]</div><div class="line">                 [-fg]</div><div class="line">                 ...</div><div class="line"></div><div class="line"></div><div class="line">       vncserver -kill </div><div class="line">       vncserver -list</div><div class="line">vncserver[:n]             \\开启服务</div><div class="line">vncserver -list           \\查看运行列表</div><div class="line">vncserver -kill :n        \\杀掉第几个x-display</div><div class="line">vncpasswd                 \\修改密码</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+之前Google就说了，由于CentOS/RHEL 6已经是过期的系统，所以不再会有Chrome了。 虽然后来由于引起了社区的抗议，从而改口，不再提CentOS/RHEL 6是过期系统了；但是，目前在CentOS/RHEL 6上已经没有Chrome可以下载使用了。  其实，根本的原因不是CentO
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/centos-install-chromium.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -896,8 +884,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/nfs-detail.html" itemprop="url">
-                  NFS详解
+                <a class="post-title-link" href="/2015/12/29/centos-install-transmission.html" itemprop="url">
+                  安装BT软件Transmission
                 </a>
               
             
@@ -910,8 +898,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T21:56:33+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T10:58:16+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -924,8 +912,20 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -940,8 +940,8 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/nfs-detail.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/nfs-detail.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/centos-install-transmission.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-transmission.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -951,7 +951,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 
           
           
-             <span id="/2015/12/21/nfs-detail.html" class="leancloud_visitors" data-flag-title="NFS详解">
+             <span id="/2015/12/29/centos-install-transmission.html" class="leancloud_visitors" data-flag-title="安装BT软件Transmission">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -975,892 +975,14 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
       
         
           
-            <h3 id="NFS服务简介"><a href="#NFS服务简介" class="headerlink" title="NFS服务简介"></a>NFS服务简介</h3><h4 id="NFS简介"><a href="#NFS简介" class="headerlink" title="NFS简介"></a>NFS简介</h4><blockquote>
-<p>NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。<br>  NFS 的基本原则是“允许不同的客户端及服务端通过一组RPC分享相同的文件系统”，它是独立于操作系统，允许不同硬件及操作系统的系统共同进行文件的分享。<br>  NFS在文件传送或信息传送过程中依赖于RPC协议。RPC，远程过程调用 (Remote Procedure Call) 是能使客户端执行其他系统中程序的一种机制。NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，这是因为NFS使用了一些其它的传输协议。而这些传输协议用到这个RPC功能的。可以说NFS本身就是使用RPC的一个程序。或者说NFS也是一个RPC SERVER。所以只要用到  NFS的地方都要启动RPC服务，不论是NFS SERVER或者NFS CLIENT。这样SERVER和CLIENT才能通过RPC来实现PROGRAM PORT的对应。可以这么理解RPC和NFS的关系：NFS是一个文件系统，而RPC是负责负责信息的传输。</p>
-</blockquote>
-<p>NFS协议从诞生到现在为止，已经有多个版本，如NFS V2（rfc1094）,NFS V3（rfc1813）（最新的版本是V4（rfc3010）。</p>
-<h4 id="各NFS协议版本的主要区别"><a href="#各NFS协议版本的主要区别" class="headerlink" title="各NFS协议版本的主要区别"></a>各NFS协议版本的主要区别</h4><p>V3相对V2的主要区别：</p>
-<ul>
-<li>文件尺寸<br>  V2最大只支持32BIT的文件大小(4G),而NFS V3新增加了支持64BIT文件大小的技术。</li>
-<li>文件传输尺寸<br>  V3没有限定传输尺寸，V2最多只能设定为8k，可以使用-rsize and -wsize 来进行设定。</li>
-<li>完整的信息返回<br>  V3增加和完善了许多错误和成功信息的返回，对于服务器的设置和管理能带来很大好处。</li>
-<li>增加了对TCP传输协议的支持<br>  V2只提供了对UDP协议的支持，在一些高要求的网络环境中有很大限制，V3增加了对TCP协议的支持</li>
-<li>异步写入特性</li>
-<li>改进了SERVER的mount性能</li>
-<li>有更好的I/O WRITES 性能。</li>
-<li>更强网络运行效能，使得网络运作更为有效</li>
-<li>更强的灾难恢复功能。</li>
-</ul>
-<p>异步写入特性（v3新增加）介绍：<br>  NFS V3 能否使用异步写入，这是可选择的一种特性。NFS V3客户端发发送一个异步写入请求到服务器，在给客户端答复之前服务器并不是必须要将数据写入到存储器中（稳定的）。服务器能确定何时去写入数据或者将多个写入请求聚合到一起并加以处理，然后写入。客户端能保持一个数据的copy以防万一服务器不能完整的将数据写入。当客户端希望释放这个copy的时候，它会向服务器通过这个操作过程，以确保每个操作步骤的完整。异步写入能够使服务器去确定最好的同步数据的策略。使数据能尽可能的同步的提交何到达。与V2比较来看，这样的机制能更好的实现数据缓冲和更多的平行（平衡）。而NFS V2的SERVER在将数据写入存储器之前不能再相应任何的写入请求。</p>
-<p>V4相对V3的改进：</p>
-<ul>
-<li>改进了INTERNET上的存取和执行效能</li>
-<li>在协议中增强了安全方面的特性</li>
-<li>增强的跨平台特性</li>
-</ul>
-<h3 id="安装部署NFS"><a href="#安装部署NFS" class="headerlink" title="安装部署NFS"></a>安装部署NFS</h3><h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>系统平台：<code>Red Hat Enterprise Linux Server release 5.4 (Tikanga)</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NFS Server IP：172.16.7.56</div><div class="line">NFS Client IP：172.16.7.57</div></pre></td></tr></table></figure></p>
-<h4 id="安装NFS服务"><a href="#安装NFS服务" class="headerlink" title="安装NFS服务"></a>安装NFS服务</h4><p>  NFS服务的安装非常简单，只需要两个软件包即可，在通常情况下，作为系统的默认软件包安装。</p>
-<ul>
-<li>nfs-utils-*    :包括基本的NFS命令与监控程序</li>
-<li>portmap-*    ：支持安全NFS RPC服务的连接</li>
-</ul>
-<h5 id="查看系统是否安装NFS"><a href="#查看系统是否安装NFS" class="headerlink" title="查看系统是否安装NFS"></a>查看系统是否安装NFS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm -qa nfs-utils</div><div class="line"> nfs-utils-1.0.9-42.el5</div><div class="line">rpm -qa portmap</div><div class="line"> portmap-4.0-65.2.2.1</div></pre></td></tr></table></figure>
-<p>系统已经默认安装了nfs-utils、portmap 两个软件包，如果没有安装，可以通过rpm和yum命令安装</p>
-<h5 id="NFS系统守护进程"><a href="#NFS系统守护进程" class="headerlink" title="NFS系统守护进程"></a>NFS系统守护进程</h5><blockquote>
-<p>RPC（Remote Procedure Call） NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，这是因为NFS使用了一些其它的传输协议。而这些传输协议勇士用到这个RPC功能的。可以说NFS本身就是使用RPC的一个程序。或者说NFS也是一个RPC SERVER.所以只要用到NFS的地方都要启动RPC服务，不论是NFS SERVER或者NFS CLIENT。这样SERVER和CLIENT才能通过RPC来实现PROGRAM PORT的对应。可以这么理解RPC和NFS的关系：NFS是一个文件系统，而RPC是负责负责信息的传输。</p>
-</blockquote>
-<ul>
-<li><p>NFS需要启动的Daemons：</p>
-<ul>
-<li>pc.nfsd:    基本的NFS守护进程，主要负责Clinet登录权限检查。</li>
-<li>rpm.mountd:    RPC安装守护进程，负责NFS的文件系统，当Client端通过rpc.nfsd登录NFS Server后，对Client存取Server的文件前，还必须通过文件使用权限的验证，他会读取NFS的配置文件/etc/exports来对比Client权限。</li>
-</ul>
-</li>
-<li><p>NFS Server 在Red Hat平台下需要两个NFS Daemons套件</p>
-<ul>
-<li>nfs-utils：    提供rpc.nfsd及rpc.mountd这两个NFS Daemons的套件</li>
-<li>portmap：    NFS其实可以看作一个RPC Server Program，主要功能是进行端口映射。当Client尝试连接并使用RPC服务提供的服务（NFS）时，portmap会将所管理的服务对应的端口提供给客户点，从而是Client可以通过该端口请求服务。</li>
-</ul>
-</li>
-</ul>
-<h5 id="配置NFS服务"><a href="#配置NFS服务" class="headerlink" title="配置NFS服务"></a>配置NFS服务</h5><p>NFS服务的配置相对简单，只需要在对应文件中进行配置，然后启动NFS服务即可。<br>NFS常用文件：</p>
-<ul>
-<li>/etc/exports                              NFS服务的主要配置文件</li>
-<li>/usr/sbin/exportfs                        NFS服务的管理命令</li>
-<li>/usr/sbin/showmount                       客户端的查看命令</li>
-<li>/var/lib/nfs/etab                         记录NFS分享出来的目录的完整权限设定值</li>
-<li>/var/lib/nfs/xtab                         记录曾经登录过的Clinent 信息</li>
-</ul>
-<p>NFS服务的配置文件是<code>/ext/exports</code>，这个文件是NFS的主要配置文件，不过系统并没有默认值，所以这个文件不一定存在，可能要自己手动创建，写入相应配置内容。</p>
-<p>/etc/exports文件内容格式：</p>
-<p> [客户端1 选项（访问权限,用户映射,其他）] [客户端2 选项（访问权限,用户映射,其他）]</p>
-<ul>
-<li>输出目录：<br>  输出目录是指NFS系统中需要共享给客户端使用的目录</li>
-<li>客户端：<br> 客户端是指网络中可以访问这个NFS Server的主机，客户端常用的指定方式如下：</li>
-<li>指定IP地址：172.16.7.57<ul>
-<li>指定子网中的主机：172.16.7.0/24</li>
-<li>指定域名的主机：ssq-54-57.zerounix.com</li>
-<li>指定域中的所有主机：*.zerounix.com</li>
-<li>所有主机：*</li>
-</ul>
-</li>
-</ul>
-<h5 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h5><p>  选项用来设置输出目录的访问权限、用户映射等。<br>NFS主要有3类选项：</p>
-<ul>
-<li><p>访问权限选项：</p>
-<ul>
-<li>设置输出目录只读：ro</li>
-<li>设置输出目录读写：rw</li>
-</ul>
-</li>
-<li><p>用户映射选项：</p>
-<ul>
-<li>all_squash：                  将远程访问的所有普通用户及属组都映射为匿名用户或用户组(nfsnobody)；</li>
-<li>no_all_squash：            与all_squash相反（default）；</li>
-<li>root_squash：                将root用户及属组都映射问匿名用户或用户组（default）；</li>
-<li>no_root_squash：</li>
-<li>anonuid=xxx：                将远程访问的所有用户都映射为匿名用户，并指定用户问本地用户（UID=xxx）；</li>
-<li>anongid=xxx：                将远程访问的所有用户都映射为匿名用户组，并指定用户问本地用户组（GID=xxx）；</li>
-</ul>
-</li>
-<li>其他选项：<ul>
-<li>secure：        限制客户端只能从小于1024的tcp端口连接NFS Server（default）；</li>
-<li>insecure：    允许客户端从大于1024的tcp端口连接NFS Server；</li>
-<li>sync：            将数据同步下乳内存缓冲区与磁盘中，效率低，但是可以保证数据的一致性；</li>
-<li>async：           将数据先保存在内存缓冲区中，必要时才写入磁盘；</li>
-<li>wdelay：        检查是否有相关的写操作，如果有则见这些写操作一起执行，可以提高效率（default）；</li>
-<li>no_wdelay：  若有写操作立即执行，应与sync配合使用；</li>
-<li>subtree：        若输出目录是一个子目录，则NFS Server将检查其父目录权限（default）；</li>
-<li>no_subtree：   若输出目录是一个子目录，则NFS Server将不检查其父目录权限；</li>
-</ul>
-</li>
-</ul>
-<p>例如：编辑/etc/exports 为：<br>/tmp        *(rw,no_root_squash)<br>/home/public    172.16.7.57(rw)    172.16.7.0/24(ro)</p>
-<h4 id="NFS-Server的启动与停止"><a href="#NFS-Server的启动与停止" class="headerlink" title="NFS Server的启动与停止"></a>NFS Server的启动与停止</h4><p>在对exports文件进行了正确的配置后，就可以启动NFS Server了。</p>
-<h5 id="启动NFS-Server"><a href="#启动NFS-Server" class="headerlink" title="启动NFS Server"></a>启动NFS Server</h5><p>为了使NFS 服务可以正常工作，需要启动portmap和nfs两个服务，并且portmap要先于nfs启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service portmap start</div><div class="line">service nfs start</div></pre></td></tr></table></figure></p>
-<h5 id="停止NFS-Server"><a href="#停止NFS-Server" class="headerlink" title="停止NFS Server"></a>停止NFS Server</h5><p>要停止NFS时，要先停止NFS服务在停止portmap，对于系统中有其他服务（如NIS）需要使用时，不要停止portmap。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">service portmap start</div><div class="line">Starting portmap:</div><div class="line"></div><div class="line">service nfs start</div><div class="line">Starting NFS services:</div><div class="line">Starting NFS quotas:</div><div class="line">Starting NFS daemon:</div><div class="line">Starting NFS mountd:</div></pre></td></tr></table></figure></p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将NFS Server的/data/charlie/ 共享给172.16.7.57，权限读写</p>
-<h4 id="修改配置文件exports"><a href="#修改配置文件exports" class="headerlink" title="修改配置文件exports"></a>修改配置文件exports</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /etc/exports</div><div class="line">/data/charlie   172.16.7.57(rw,no_root_squash)</div></pre></td></tr></table></figure>
-<h5 id="重启NFS"><a href="#重启NFS" class="headerlink" title="重启NFS"></a>重启NFS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service portmap start</div><div class="line">service nfs start</div></pre></td></tr></table></figure>
-<p>查看是否应用配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">exportfs</div><div class="line">/data/charlie   172.16.7.57</div></pre></td></tr></table></figure></p>
-<h5 id="Client挂载目录"><a href="#Client挂载目录" class="headerlink" title="Client挂载目录"></a>Client挂载目录</h5><p>命令格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount options NFS_IP:共享目录 本地挂载点</div><div class="line">mount -t nfs -o nolock 172.16.7.56:/data/zerounix /mnt</div></pre></td></tr></table></figure></p>
-<h5 id="查看NFS挂载状态"><a href="#查看NFS挂载状态" class="headerlink" title="查看NFS挂载状态"></a>查看NFS挂载状态</h5><p>Server 端：<br>显示已经被Client挂载的目录信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">showmount -a</div><div class="line">All mount points on ssq-54.56.zerounix.com:</div><div class="line">172.16.7.57:/data/zerounix</div></pre></td></tr></table></figure></p>
-<p>Client端：<br>查看NFS共享状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">showmount -a</div><div class="line">Export list for 172.16.7.56</div><div class="line">/data/zerounix 172.16.7.57</div></pre></td></tr></table></figure></p>
-<p>查看文件是否统一</p>
-<p>NFS有很多默认的参数，打开/var/lib/nfs/etab 查看分享出来的/home/david/ 完整权限设定值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /var/lib/nfs/etab</div><div class="line">/data/zerounix    172.16.7.57(rw,sync,wdelay,hide,nocrossmnt,secure,no_root_squash,no_all_squash,no_subtree_check,secure_locks,acl,mapping=identity,anonuid=65534,anongid=65534)</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/21/create-2t-partition.html" itemprop="url">
-                  创建大于2TB分区
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T17:56:56+08:00" content="2015-12-21">
-              2015-12-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/21/create-2t-partition.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/create-2t-partition.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/21/create-2t-partition.html" class="leancloud_visitors" data-flag-title="创建大于2TB分区">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="parted命令介绍"><a href="#parted命令介绍" class="headerlink" title="parted命令介绍"></a>parted命令介绍</h3><p>parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。</p>
-<p>Parted 命令分为两种模式：命令行模式和交互模式。</p>
-<ul>
-<li>命令行模式： parted [option] device [command] ,该模式可以直接在命令行下对磁盘进行分区操作，比较适合编程应用。</li>
-<li>交互模式：parted [option] device 类似于使用fdisk /dev/xxx</li>
-<li>MBR：MBR分区表(即主引导记录)大家都很熟悉。所支持的最大卷：2T，而且对分区有限制：最多4个主分区或3个主分区加一个扩展分区</li>
-<li>GPT： GPT（即GUID分区表）。是源自EFI标准的一种较新的磁盘分区表结构的标准，是未来磁盘分区的主要形式。与MBR分区方式相比，具有如下优点。突破MBR 4个主分区限制，每个磁盘最多支持128个分区。支持大于2T的分区，最大卷可达18EB。</li>
-</ul>
-<p>parted是一个可以分区并进行分区调整的工具，他可以创建，破坏，移动，复制，调整<code>ext2 linux-swap fat fat32 reiserfs</code>类型的分区，可以创建，调整，移动<code>Macintosh</code>的HFS分区，检测<code>jfs，ntfs，ufs，xfs</code>分区。</p>
-<p>使用方法：<code>parted [options] [device [command [options...]...]]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">options</div><div class="line">-h  显示帮助信息</div><div class="line">-l  显示所有块设备上的分区</div><div class="line">device 对哪个块设备进行操作，如果没有指定则使用第一个块设备</div><div class="line">command [options...]</div><div class="line"></div><div class="line">check partition  对分区做一个简单的检测</div><div class="line"></div><div class="line">cp [source-device] source dest  复制source-device设备上的source分区到当前设备的dest分区</div><div class="line"></div><div class="line">mklabel label-type 创建新分区表类型，label-type可以是：&quot;bsd&quot;, &quot;dvh&quot;, &quot;gpt&quot;,  &quot;loop&quot;,&quot;mac&quot;, &quot;msdos&quot;, &quot;pc98&quot;, or &quot;sun&quot; 一般的pc机都是msdos格式，如果分区大于2T则需要选用gpt格式的分区表。</div><div class="line"></div><div class="line">mkfs partition fs-type   在partition分区上创建一个fs-type文件系统，fs-type可以是：&quot;fat16&quot;, &quot;fat32&quot;, &quot;ext2&quot;, &quot;linux-swap&quot;,&quot;reiserfs&quot; 注意不支持ext3格式的文件系统，只能先分区然后用专有命令进行格式化。</div><div class="line"></div><div class="line">mkpart part-type [fs-type] start end  创建一个part-type类型的分区，part-type可以是：&quot;primary&quot;, &quot;logical&quot;, or &quot;extended&quot; 如果指定fs-type则在创建分区的同时进行格式化。start和end指的是分区的起始位置，单位默认是M。</div><div class="line"></div><div class="line">eg：</div><div class="line">mkpart  primary  0  -1   0表示分区的开始  -1表示分区的结尾  意思是划分整个硬盘空间为主分区</div><div class="line">mkpartfs part-type fs-type start end 创建一个fs-type类型的part-type分区，不推荐使用，最好是使用mkpart分区完成后使用mke2fs进行格式化。</div><div class="line">name partition name 给分区设置一个名字，这种设置只能用在Mac, PC98, and GPT类型的分区表，设置时名字用引号括起来</div><div class="line">select device 在机器上有多个硬盘时，选择操作那个硬盘</div><div class="line">resize partition start end  调整分区大小</div><div class="line">rm partition  删除一个分区</div><div class="line">rescue start end  拯救一个位于stat和end之间的分区</div><div class="line">unit unit 在前面分区时，默认分区时数值的单位是M，这个参数卡伊改变默认单位，&quot;kB&quot;, &quot;MB&quot;,  &quot;GB&quot;,  &quot;TB&quot;</div><div class="line">move partition start end 移动partition分区</div><div class="line">print  显示分区表信息  </div><div class="line">quit 退出parted</div></pre></td></tr></table></figure>
-<h3 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h3><h4 id="初始磁盘信息"><a href="#初始磁盘信息" class="headerlink" title="初始磁盘信息"></a>初始磁盘信息</h4><p>服务器新增3块4TB硬盘<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">fdisk -l                                                                                                                             </div><div class="line"></div><div class="line">Disk /dev/sdd: 4000.8 GB, 4000787030016 bytes</div><div class="line">255 heads, 63 sectors/track, 486401 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sdb: 4000.8 GB, 4000787030016 bytes</div><div class="line">255 heads, 63 sectors/track, 486401 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sdc: 4000.8 GB, 4000787030016 bytes</div><div class="line">255 heads, 63 sectors/track, 486401 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sda: 146.8 GB, 146815733760 bytes</div><div class="line">255 heads, 63 sectors/track, 17849 cylinders</div><div class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000081</div><div class="line"></div><div class="line">Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sda1   *           1          26      204800   83  Linux</div><div class="line">Partition 1 does not end on cylinder boundary.</div><div class="line">/dev/sda2              26         548     4194304   82  Linux swap / Solaris</div><div class="line">Partition 2 does not end on cylinder boundary.</div><div class="line">/dev/sda3             548        1070     4194304   83  Linux</div><div class="line">/dev/sda4            1070       17850   134780308    5  Extended</div><div class="line">/dev/sda5            1071       17850   134778880   83  Linux</div></pre></td></tr></table></figure></p>
-<h4 id="尝试通过fdisk命令进行分区"><a href="#尝试通过fdisk命令进行分区" class="headerlink" title="尝试通过fdisk命令进行分区"></a>尝试通过fdisk命令进行分区</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb </div><div class="line">Device contains neither a valid DOS partition table, nor Sun, SGI or OSF disklabel</div><div class="line">Building a new DOS disklabel with disk identifier 0x6001e0a2.</div><div class="line">Changes will remain in memory only, until you decide to write them.</div><div class="line">After that, of course, the previous content won&apos;t be recoverable.</div><div class="line"></div><div class="line">Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)</div><div class="line"></div><div class="line">WARNING: The size of this disk is 4.0 TB (4000787030016 bytes).</div><div class="line">DOS partition table format can not be used on drives for volumes</div><div class="line">larger than (2199023255040 bytes) for 512-byte sectors. Use parted(1) and GUID </div><div class="line">partition table format (GPT).</div><div class="line"></div><div class="line"></div><div class="line">WARNING: DOS-compatible mode is deprecated. It&apos;s strongly recommended to</div><div class="line">         switch off the mode (command &apos;c&apos;) and change display units to</div><div class="line">         sectors (command &apos;u&apos;)</div></pre></td></tr></table></figure>
-<p>fdisk 命令无法对大于2TB以上的硬盘进行分区</p>
-<h3 id="通过parted命令进行分区"><a href="#通过parted命令进行分区" class="headerlink" title="通过parted命令进行分区"></a>通过parted命令进行分区</h3><h5 id="更改分区表类型"><a href="#更改分区表类型" class="headerlink" title="更改分区表类型"></a>更改分区表类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parted -s /dev/sdb mklabel gpt</div><div class="line">parted -s /dev/sdc mklabel gpt</div><div class="line">parted -s /dev/sdd mklabel gpt</div></pre></td></tr></table></figure>
-<h5 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">parted /dev/sdb &apos;mkpart primary 0 -1&apos;</div><div class="line">parted /dev/sdc &apos;mkpart primary 0 -1&apos;</div><div class="line">parted /dev/sdd &apos;mkpart primary 0 -1&apos;</div></pre></td></tr></table></figure>
-<h5 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkfs.ext4 -q /dev/sdb1</div><div class="line">mkfs.ext4 -q /dev/sdc1</div><div class="line">mkfs.ext4 -q /dev/sdd1</div></pre></td></tr></table></figure>
-<h4 id="挂载目录"><a href="#挂载目录" class="headerlink" title="挂载目录"></a>挂载目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /MFS_DATA1; mount /dev/sdb1 /MFS_DATA1;echo &quot;mount /dev/sdb1 /MFS_DATA1&quot; &gt;&gt; /etc/rc.local</div><div class="line">mkdir /MFS_DATA2; mount /dev/sdc1 /MFS_DATA2;echo &quot;mount /dev/sdc1 /MFS_DATA2&quot; &gt;&gt; /etc/rc.local</div><div class="line">mkdir /MFS_DATA3; mount /dev/sdd1 /MFS_DATA3;echo &quot;mount /dev/sdd1 /MFS_DATA3&quot; &gt;&gt; /etc/rc.local</div></pre></td></tr></table></figure>
-<h4 id="查看磁盘挂载"><a href="#查看磁盘挂载" class="headerlink" title="查看磁盘挂载"></a>查看磁盘挂载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">df -h</div><div class="line">Filesystem      Size  Used Avail Use% Mounted on</div><div class="line">/dev/sda5       127G  1.1G  120G   1% /</div><div class="line">tmpfs           7.8G   12K  7.8G   1% /dev/shm</div><div class="line">/dev/sda1       194M   29M  155M  16% /boot</div><div class="line">/dev/sda3       4.0G  254M  3.5G   7% /var</div><div class="line">/dev/sdb1       3.6T  196M  3.4T   1% /MFS_DATA1</div><div class="line">/dev/sdc1       3.6T  196M  3.4T   1% /MFS_DATA2</div><div class="line">/dev/sdd1       3.6T  196M  3.4T   1% /MFS_DATA3</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/20/smokeping-support-chinese.html" itemprop="url">
-                  Smokeping页面支持中文
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:47:57+08:00" content="2015-12-20">
-              2015-12-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/20/smokeping-support-chinese.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-support-chinese.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/20/smokeping-support-chinese.html" class="leancloud_visitors" data-flag-title="Smokeping页面支持中文">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="smokeping页面和rrdtool图片支持中文"><a href="#smokeping页面和rrdtool图片支持中文" class="headerlink" title="smokeping页面和rrdtool图片支持中文"></a>smokeping页面和rrdtool图片支持中文</h3><p>smokeping默认不支持中文，只需要修改如下便可：</p>
-<h4 id="页面支持中文"><a href="#页面支持中文" class="headerlink" title="页面支持中文"></a>页面支持中文</h4><p>在配置文件的<code>*** Presentation ***</code>下面添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">charset = utf-8</div></pre></td></tr></table></figure></p>
-<h4 id="rrd图片支持中文"><a href="#rrd图片支持中文" class="headerlink" title="rrd图片支持中文"></a>rrd图片支持中文</h4><h5 id="安装中文支持"><a href="#安装中文支持" class="headerlink" title="安装中文支持"></a>安装中文支持</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall &quot;chinese support&quot;</div></pre></td></tr></table></figure>
-<h5 id="查看中文字体支持："><a href="#查看中文字体支持：" class="headerlink" title="查看中文字体支持："></a>查看中文字体支持：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fc-list :lang=zh</div><div class="line">AR PL ZenKai Uni,文鼎PL中楷Uni:style=Medium</div><div class="line">AR PL ShanHeiSun Uni,文鼎PL細上海宋Uni,文鼎PL细上海宋Uni:style=Regular</div></pre></td></tr></table></figure>
-<h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><p>编辑 /usr/local/smokeping/lib/Smokeping/Graphs.pm</p>
-<pre><code>插入 &quot;&apos;--font TITLE:20:AR PL ShanHeiSun Uni&apos;，&quot;
-if ($mode =~ /[anc]/){
-        my $val = 0;
-        for my $host (@hosts){
-            my ($graphret,$xs,$ys) = RRDs::graph
-            (&quot;dummy&quot;,
-            &apos;--start&apos;, $tasks[0][1],
-            &apos;--end&apos;, $tasks[0][2],
-            &apos;--font TITLE:20:AR PL ShanHeiSun Uni&apos;,
-            &quot;DEF:maxping=$cfg-&gt;{General}{datadir}${host}.rrd:median:AVERAGE&quot;,
-            &apos;PRINT:maxping:MAX:%le&apos; );
-            my $ERROR = RRDs::error();
-            return &quot;
-RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
-            $val = $graphret-&gt;[0] if $val  [0];
-        }
-        $val = 1e-6 if $val =~ /nan/i;
-        $max = { $tasks[0][1] =&gt; $val * 1.5 };
-    }
-</code></pre><hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/20/smokeping-master-slave.html" itemprop="url">
-                  Smokeping-主辅
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:47:57+08:00" content="2015-12-20">
-              2015-12-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/20/smokeping-master-slave.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-master-slave.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/20/smokeping-master-slave.html" class="leancloud_visitors" data-flag-title="Smokeping-主辅">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="smokeping-Master-Slave分布式模式"><a href="#smokeping-Master-Slave分布式模式" class="headerlink" title="smokeping Master/Slave分布式模式"></a>smokeping Master/Slave分布式模式</h3><p>在使用smokeping过程中，很容易发现，如果从单个节点去探测网络性能，并不能充分检测到整个网络的一个状态。smokeping提供了基于多节点的分布式模式，可以从多个节点去探测到网络的状态，这样我们才能全面客观的监控真个网络。<br>smokeping的分布式为主从模式，M/S模式配置起来很简单，slave的配置基本与master的配置相同，只是slave不需要config文件，而是在启动过程中请求master上面的config文件，这样只需要维护master上面的config文件即可。<br>  smokeping分布式的检测方式为被动方式，由slave节点在启动时从master上获取config文件，然后进行探测，探测后的数据在通过cgi提交给master。slave可为多个，M/S直接通信认证是通过<code>--shared-secret=filename</code>来和<code>master</code>进行密码认证。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[slave 1]     [slave 2]      [slave 3]</div><div class="line">        |             |              |</div><div class="line">        +-------+     |     +--------+</div><div class="line">                |     |     |</div><div class="line">                v     v     v</div><div class="line">              +---------------+</div><div class="line">              |    master     |</div><div class="line">              +---------------+</div></pre></td></tr></table></figure></p>
-<h3 id="Smokeping主从通信认证"><a href="#Smokeping主从通信认证" class="headerlink" title="Smokeping主从通信认证"></a>Smokeping主从通信认证</h3><p>smokeping主从验证通过Master和和Slave的/usr/local/smokeping/etc/smokeping_secrets文件进行的，但是Master和Slave的验证文件书写方式是有所不同。</p>
-<h4 id="Master验证文件格式"><a href="#Master验证文件格式" class="headerlink" title="Master验证文件格式"></a>Master验证文件格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SlaveName:Password</div></pre></td></tr></table></figure>
-<p>SlaveName是在Master配置文件中定义slave是指定的名称，这个名称要唯一。</p>
-<p><strong>注:<code>/usr/local/smokeping/etc/smokeping_secrets</code> 文件属性必须是600</strong></p>
-<h4 id="Slave验证文件格式"><a href="#Slave验证文件格式" class="headerlink" title="Slave验证文件格式"></a>Slave验证文件格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Password</div></pre></td></tr></table></figure>
-<p>Slave的secrets文件在启动时要指定，Master和Slave的密码要保持一致。</p>
-<p><strong>注: <code>/usr/local/smokeping/etc/smokeping_secrets</code> 文件属性必须是600</strong></p>
-<h3 id="配置Slave"><a href="#配置Slave" class="headerlink" title="配置Slave"></a>配置Slave</h3><h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>配置主从主要有两步，一是修改smokeping_secrets文件，添加SlaveName和Password。二是修改Master上面的config文件</p>
-<p>在配置文件中添加如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">*** Slaves ***                               </div><div class="line">secrets=/usr/local/smokeping/etc/smokeping_secrets            ###验证文件</div><div class="line">+boomer                                                       ###SlaveName，要和smokeping_secrets保持一致，slave启动时也是这个名字</div><div class="line">display_name=boomer                                           ###页面显示的名字</div><div class="line">color=0000ff                                                  ###绘图颜色，要小写</div><div class="line">``` </div><div class="line">slave可以配置多个，名字要唯一，颜色也要不同，配置完slave后，还要在监控节点上面添加slave</div><div class="line"> </div><div class="line"> </div><div class="line">#### 部署slave</div><div class="line"> </div><div class="line">部署slave和Master步骤相同，可以参考Master 的部署过程。</div><div class="line"></div><div class="line"> </div><div class="line">#### 启动Slave</div><div class="line"></div><div class="line">slave并不需要config配置文件，在启动时要指定master地址等相关信息，格式如下：</div><div class="line">``` </div><div class="line">/usr/local/smokeping/bin/smokeping --master-url=http://masterip/ping/smokeping.cgi  --cache-dir=/var/smokeping --shared-secret=/usr/local/smokeping/etc/secrets  --slave-name=SlaveName</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/20/centos7-install-smokeping.html" itemprop="url">
-                  Centos7安装smokeping
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:47:57+08:00" content="2015-12-20">
-              2015-12-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/20/centos7-install-smokeping.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/centos7-install-smokeping.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/20/centos7-install-smokeping.html" class="leancloud_visitors" data-flag-title="Centos7安装smokeping">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I am using Centos7 + smokeping-2.6.9 lets start up by install needed package before that, we will need to enable Epel repo You can install EPEL by running yum install epel-release. The package is included in the CentOS Extras repository, enabled by default.</p>
-<h3 id="install-epel"><a href="#install-epel" class="headerlink" title="install epel"></a>install epel</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install epel-release</div></pre></td></tr></table></figure>
-<p>Then follow up by the package for:</p>
-<ul>
-<li>mod_fcgid</li>
-<li>httpd</li>
-<li>httpd-devel</li>
-<li>rrdtool</li>
-<li>perl-CGI-SpeedyCGI</li>
-<li>fping</li>
-<li>rrdtool-perl</li>
-<li>perl</li>
-<li>perl-Sys-Syslog</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mod_fcgid httpd httpd-devel rrdtool perl-CGI-SpeedyCGI fping rrdtool-perl perl perl-Sys-Syslog</div></pre></td></tr></table></figure>
-<h3 id="install-perl-modules"><a href="#install-perl-modules" class="headerlink" title="install perl modules"></a>install perl modules</h3><p>Then we will needed some package for Cpan to install perl stuff<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install perl-CPAN perl-local-lib perl-Time-HiRes</div></pre></td></tr></table></figure></p>
-<p>The last one is the package to create installation for smokeping<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># yum groupinstall &quot;Development tools&quot;</div></pre></td></tr></table></figure></p>
-<h3 id="install-smokeping"><a href="#install-smokeping" class="headerlink" title="install smokeping"></a>install smokeping</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">\\ Now lets download the latest smokeping at http://oss.oetiker.ch/smokeping/pub currently the latest i saw is 2.6.9, so i just download that</div><div class="line">wget http://oss.oetiker.ch/smokeping/pub/smokeping-2.6.9.tar.gz</div><div class="line"></div><div class="line">\\ then extract it</div><div class="line">tar -zxvf smokeping-2.6.9.tar.gz</div><div class="line"></div><div class="line">\\ Install the smokeping perl stuff</div><div class="line">cd smokeping-2.6.9/setup</div><div class="line">./build-perl-modules.sh</div><div class="line"></div><div class="line">\\ it will auto install needed perl</div><div class="line">\\ Once done, back to smokeping-2.6.9 folder and you will notice a folder name thirdparty is created</div><div class="line">\\ we will need to move it to /usr/local/smokeping folder, but before that, lets create smokeping folder at /usr/local/smokeping first</div><div class="line">\\ then copy the thirdparty folder into it</div><div class="line">mkdir /urs/local/smokeping</div><div class="line">cp -r thirdparty /usr/lcoal/smokeping/</div><div class="line"></div><div class="line">./configure --prefix=/usr/local/smokeping PERL5LIB=/usr/lib64/perl5/</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure>
-<p><strong>Note:  if you encounter problem, please try make install again<br>this is because for my situation when i first make install, it pop some error but when i try make install again, the error gone</strong></p>
-<p>Now you can go to /usr/local/smokeping/etc and prepare the config file</p>
-<h3 id="install-httpd"><a href="#install-httpd" class="headerlink" title="install httpd"></a>install httpd</h3><p>Now is time to prepare for the interface make sure you had install apache else please install it using yum install httpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install httpd -y</div></pre></td></tr></table></figure></p>
-<h3 id="smokeping-config"><a href="#smokeping-config" class="headerlink" title="smokeping config"></a>smokeping config</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/smokeping/etc</div><div class="line">for foo in *.dist; do cp $foo `basename $foo .dist`; done</div><div class="line">mv /usr/local/smokeping/htdocs/smokeping.fcgi.dist /usr/local/smokeping/htdocs/smokeping.fcgi</div><div class="line"></div><div class="line">\\edit smokeping.conf</div><div class="line">vim /etc/httpd/conf.d/smokeping.conf</div><div class="line"></div><div class="line">Alias /ping /usr/local/smokeping/htdocs/</div><div class="line"></div><div class="line">       DirectoryIndex index.html smokeping.fcgi</div><div class="line">       Options +ExecCGI</div><div class="line">       #AllowOverride None</div><div class="line">       AddHandler cgi-script .cgi .fcgi</div><div class="line">       Order allow,deny</div><div class="line">       Allow from all</div><div class="line">       AuthName &quot;Smokeping Access&quot;</div><div class="line">       AuthType Basic</div><div class="line">       AuthUserFile /usr/local/smokeping/htdocs/htpasswd.user</div><div class="line">       Require valid-user</div><div class="line"></div><div class="line"></div><div class="line">chmod 600 /usr/local/smokeping/etc/smokeping_secrets</div><div class="line">mkdir -p /usr/local/smokeping/htdocs/cache</div><div class="line">mkdir /usr/local/smokeping/data</div><div class="line">mkdir /usr/local/smokeping/var</div><div class="line"></div><div class="line"></div><div class="line">chown nobody:nobody /usr/local/smokeping/var</div><div class="line">chown nobody:nobody /usr/local/smokeping/data</div><div class="line">chown nobody:nobody /usr/local/smokeping/htdocs/cache</div><div class="line"></div><div class="line">\\Before we start smokeping, please edit your configuration first edit the smokeping config to your need (change the part in Red color word</div><div class="line"></div><div class="line">vim /usr/local/smokeping/etc/config</div><div class="line">*** General ***</div><div class="line"></div><div class="line">owner    = Charlie.cui</div><div class="line">contact  = some@address.nowhere</div><div class="line">mailhost = my.mail.host (Ignore if you do not have smtp server)</div><div class="line">sendmail = /usr/sbin/sendmail</div><div class="line"># NOTE: do not put the Image Cache below cgi-bin</div><div class="line"># since all files under cgi-bin will be executed ... this is not</div><div class="line"># good for images.</div><div class="line">imgcache = /usr/local/smokeping/cache</div><div class="line">imgurl   = cache</div><div class="line">datadir  = /usr/local/smokeping/data</div><div class="line">piddir  = /usr/lcoal/smokeping/var</div><div class="line">cgiurl   = http://some.url/smokeping.cgi</div><div class="line">smokemail = /usr/local/smokeping/etc/smokemail.dist</div><div class="line">tmail = /usr/local/smokeping/etc/tmail.dist</div><div class="line"># specify this to get syslog logging</div><div class="line">syslogfacility = local0</div><div class="line"># each probe is now run in its own process</div><div class="line"># disable this to revert to the old behaviour</div><div class="line"># concurrentprobes = no</div><div class="line"></div><div class="line">*** Alerts ***</div><div class="line">to = alertee@address.somewhere</div><div class="line">from = smokealert@company.xy</div><div class="line"></div><div class="line">+someloss</div><div class="line">type = loss</div><div class="line"># in percent</div><div class="line">pattern = &gt;0%,*12*,&gt;0%,*12*,&gt;0%</div><div class="line">comment = loss 3 times  in a row</div><div class="line"></div><div class="line">*** Database ***</div><div class="line"></div><div class="line">step     = 300</div><div class="line">pings    = 20</div><div class="line"></div><div class="line"># consfn mrhb steps total</div><div class="line"></div><div class="line">AVERAGE  0.5   1  1008</div><div class="line">AVERAGE  0.5  12  4320</div><div class="line">    MIN  0.5  12  4320</div><div class="line">    MAX  0.5  12  4320</div><div class="line">AVERAGE  0.5 144   720</div><div class="line">    MAX  0.5 144   720</div><div class="line">    MIN  0.5 144   720</div><div class="line"></div><div class="line">*** Presentation ***</div><div class="line"></div><div class="line">template = /usr/local/smokeping/etc/basepage.html.dist</div><div class="line"></div><div class="line">+ charts</div><div class="line"></div><div class="line">menu = Charts</div><div class="line">title = The most interesting destinations</div><div class="line"></div><div class="line">++ stddev</div><div class="line">sorter = StdDev(entries=&gt;4)</div><div class="line">title = Top Standard Deviation</div><div class="line">menu = Std Deviation</div><div class="line">format = Standard Deviation %f</div><div class="line"></div><div class="line">++ max</div><div class="line">sorter = Max(entries=&gt;5)</div><div class="line">title = Top Max Roundtrip Time</div><div class="line">menu = by Max</div><div class="line">format = Max Roundtrip Time %f seconds</div><div class="line"></div><div class="line">++ loss</div><div class="line">sorter = Loss(entries=&gt;5)</div><div class="line">title = Top Packet Loss</div><div class="line">menu = Loss</div><div class="line">format = Packets Lost %f</div><div class="line"></div><div class="line">++ median</div><div class="line">sorter = Median(entries=&gt;5)</div><div class="line">title = Top Median Roundtrip Time</div><div class="line">menu = by Median</div><div class="line">format = Median RTT %f seconds</div><div class="line"></div><div class="line">+ overview</div><div class="line"></div><div class="line">width = 600</div><div class="line">height = 50</div><div class="line">range = 10h</div><div class="line"></div><div class="line">+ detail</div><div class="line"></div><div class="line">width = 600</div><div class="line">height = 200</div><div class="line">unison_tolerance = 2</div><div class="line"></div><div class="line">&quot;Last 3 Hours&quot;    3h</div><div class="line">&quot;Last 30 Hours&quot;   30h</div><div class="line">&quot;Last 10 Days&quot;    10d</div><div class="line">&quot;Last 400 Days&quot;   400d</div><div class="line"></div><div class="line">#+ hierarchies</div><div class="line">#++ owner</div><div class="line">#title = Host Owner</div><div class="line">#++ location</div><div class="line">#title = Location</div><div class="line"></div><div class="line">*** Probes ***</div><div class="line"></div><div class="line">+ FPing</div><div class="line"></div><div class="line">binary = /usr/sbin/fping</div><div class="line"></div><div class="line">*** Slaves ***</div><div class="line">secrets=/usr/local/smokeping/etc/smokeping_secrets.dist</div><div class="line">+boomer</div><div class="line">display_name=boomer</div><div class="line">color=0000ff</div><div class="line"></div><div class="line">+slave2</div><div class="line">display_name=another</div><div class="line">color=00ff00</div><div class="line"></div><div class="line">*** Targets ***</div><div class="line"></div><div class="line">probe = FPing</div><div class="line"></div><div class="line">menu = Top</div><div class="line">title = Network Latency Grapher</div><div class="line">remark = Welcome to the SmokePing website of xxx Company. \</div><div class="line">         Here you will learn all about the latency of our network.</div><div class="line"></div><div class="line">+ Server</div><div class="line">menu= Targets</div><div class="line"></div><div class="line">++ google</div><div class="line"></div><div class="line">menu = google.com</div><div class="line">title = google.com</div><div class="line">alerts = someloss</div><div class="line">host = www.google.com</div></pre></td></tr></table></figure>
-<p>###Start the apache service<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start httpd</div></pre></td></tr></table></figure></p>
-<p>start the smokeping services<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/smokeping/bin/smokeping --config=/usr/local/smokeping/etc/config --logfile=/var/log/smokeing.log</div></pre></td></tr></table></figure></p>
-<h3 id="For-startup-script"><a href="#For-startup-script" class="headerlink" title="For startup script"></a>For startup script</h3><p>you can get it from here<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/smokeping/pub/contrib/smokeping-start-script</div><div class="line">\\ just edit the smokeping path then put at /etc/init.d/</div><div class="line">chmod 755 /etc/init.d/smokeping</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/20/install-smokeping.html" itemprop="url">
-                  Smokeping-安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:41:31+08:00" content="2015-12-20">
-              2015-12-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/20/install-smokeping.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-smokeping.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/20/install-smokeping.html" class="leancloud_visitors" data-flag-title="Smokeping-安装">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Smokeping-监控网络质量"><a href="#Smokeping-监控网络质量" class="headerlink" title="Smokeping 监控网络质量"></a>Smokeping 监控网络质量</h3><h4 id="什么是Smokeping"><a href="#什么是Smokeping" class="headerlink" title="什么是Smokeping"></a>什么是Smokeping</h4><p>Smokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：</p>
-<ul>
-<li>多种探测方式，包括 fping、echoping、dig、curl 等；</li>
-<li>易用可扩展的插件；master/slave 的工作方式，可以在多个节点收集同一个监测点的数据；</li>
-<li>很有特色的 alert 设置，不只是简单的设置一个阀值。</li>
-</ul>
-<h4 id="Smokeping架构组件"><a href="#Smokeping架构组件" class="headerlink" title="Smokeping架构组件"></a>Smokeping架构组件</h4><p>smokeping 是一个用 perl 写的程序，所以不需要安装，但是他需要使用一些工具。Smokeping 有以下组件组成：RRDtool、Fping、Echoping、Curl、Dig、SSh、Perl 模块，Perl、FCGI、Apache 等。</p>
-<h4 id="Smokeping-相关资源"><a href="#Smokeping-相关资源" class="headerlink" title="Smokeping 相关资源"></a>Smokeping 相关资源</h4><ul>
-<li>Smokeping官方网站：<a href="http://oss.oetiker.ch/smokeping/" target="_blank" rel="external">http://oss.oetiker.ch/smokeping/</a></li>
-<li>Smokeping官方文档：<a href="http://oss.oetiker.ch/smokeping/doc/index.en.html" target="_blank" rel="external">http://oss.oetiker.ch/smokeping/doc/index.en.html</a></li>
-</ul>
-<h3 id="安装Smokeping"><a href="#安装Smokeping" class="headerlink" title="安装Smokeping"></a>安装Smokeping</h3><h4 id="安装RRDTOOL"><a href="#安装RRDTOOL" class="headerlink" title="安装RRDTOOL"></a>安装RRDTOOL</h4><p>  RRDTool 是由Tobias Oetiker 开发的开源软件，它使用RRD（Round Rebin Databases）作为存储格式，Round robin 是一种处理定量数据以及当前元素指针的技术，RRDTool 主要用来跟踪对象的变化情况，生成改对象变化的趋势图。</p>
-<p>  依赖软件包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install cairo-devel libxml2-devel pango-devel pango libpng-devel freetype freetype-devel libart_lgpl-devel libidn libidn-devel httpd httpd-devel apr-util-devel apr-devel -y</div></pre></td></tr></table></figure></p>
-<p>如果nginx作为webserver，则要安装perl模块<code>perl-Net-Telnet perl-Net-DNS perl-LDAP perl-CGI-SpeedyCGI perl-libwww-perl perl-RadiusPerl perl-IO-Socket-SSL perl-Socket</code></p>
-<p>执行安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.7.tar.gz</div><div class="line">tar -zxf rrdtool-1.4.7.tar.gz</div><div class="line">cd rrdtool-1.4.7</div><div class="line">./configure --prefix=/usr/local/rrdtool</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure></p>
-<p> 检验安装是否成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/usr/local/rrdtool/bin/rrdtool</div><div class="line">RRDtool 1.4.7  Copyright 1997-2012 by Tobias Oetiker </div><div class="line">               Compiled May 21 2013 13:42:05</div><div class="line"> </div><div class="line">Usage: rrdtool [options] command command_options</div><div class="line">Valid commands: create, update, updatev, graph, graphv,  dump, restore,</div><div class="line">                last, lastupdate, first, info, fetch, tune,</div><div class="line">                resize, xport, flushcached</div><div class="line"> </div><div class="line">RRDtool is distributed under the Terms of the GNU General</div><div class="line">Public License Version 2. (www.gnu.org/copyleft/gpl.html)</div><div class="line"> </div><div class="line">For more information read the RRD manpages</div></pre></td></tr></table></figure></p>
-<p>执行命令如果出现以上输出，表示安装成功，并列出了使用该命令的帮助信息。</p>
-<h4 id="安装fping"><a href="#安装fping" class="headerlink" title="安装fping"></a>安装fping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/smokeping/pub/fping-2.4b2_to3-ipv6.tar.gz</div><div class="line">tar -zxf fping-2.4b2_to3-ipv6.tar.gz</div><div class="line">cd fping-2.4b2_to3-ipv6</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h4 id="安装echoping"><a href="#安装echoping" class="headerlink" title="安装echoping"></a>安装echoping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://sourceforge.net/projects/echoping/files/latest/download</div><div class="line">tar -zxf echoping-6.0.2.tar.gz</div><div class="line">cd echoping-6.0.2</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h4 id="安装fcgi"><a href="#安装fcgi" class="headerlink" title="安装fcgi"></a>安装fcgi</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://cpan.communilink.net/authors/id/F/FL/FLORA/FCGI-0.74.tar.gz</div><div class="line">tar -zxf FCGI-0.74.tar.gz</div><div class="line">cd FCGI-0.74</div><div class="line">perl Makefile.PL</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h4 id="安装mod-fastcgi"><a href="#安装mod-fastcgi" class="headerlink" title="安装mod_fastcgi"></a>安装mod_fastcgi</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wget http://www.fastcgi.com/dist/mod_fastcgi-2.4.6.tar.gz</div><div class="line">tar zxf mod_fastcgi-2.4.6.tar.gz</div><div class="line">cd mod_fastcgi-2.4.6</div><div class="line">	apxs -o mod_fastcgi.so -c *.c</div><div class="line">apxs -i -a -n fastcgi .libs/mod_fastcgi.so</div><div class="line">确保httpd.conf有如下配置：</div><div class="line">LoadModule fastcgi_module     /usr/lib/httpd/modules/mod_fastcgi.so</div></pre></td></tr></table></figure>
-<p>如果apache为源码安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://www.fastcgi.com/dist/mod_fastcgi-2.4.6.tar.gz</div><div class="line">tar -zxf mod_fastcgi-2.4.6.tar.gz</div><div class="line">cd mod_fastcgi-2.4.6</div><div class="line">cp Makefile.AP2 Makefile</div><div class="line">make top_dir=/usr/local/apache</div><div class="line">make install top_dir=/usr/local/apache</div></pre></td></tr></table></figure></p>
-<h4 id="安装smokeping"><a href="#安装smokeping" class="headerlink" title="安装smokeping"></a>安装smokeping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget http://oss.oetiker.ch/smokeping/pub/smokeping-2.6.9.tar.gz</div><div class="line">tar -zxf smokeping-2.6.9.tar.gz</div><div class="line">cd smokeping-2.6.9</div><div class="line">./configure --prefix=/usr/local/smokeping PERL5LIB=/usr/lib/perl5/</div></pre></td></tr></table></figure>
-<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">checking checking for gnu make availablility... /usr/bin/gmake is GNU make</div><div class="line">checking checking for perl module &apos;RRDs&apos;... Failed</div><div class="line">checking checking for perl module &apos;FCGI&apos;... Ok</div><div class="line">checking checking for perl module &apos;CGI&apos;... Ok</div><div class="line">checking checking for perl module &apos;CGI::Fast&apos;... Ok</div><div class="line">checking checking for perl module &apos;Config::Grammar&apos;... Failed</div><div class="line">checking checking for perl module &apos;Digest::HMAC_MD5&apos;... Ok</div><div class="line">checking checking for perl module &apos;LWP&apos;... Ok</div></pre></td></tr></table></figure></p>
-<p>解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> ./setup/build-perl-modules.sh /usr/local/smokeping/thirdparty</div></pre></td></tr></table></figure></p>
-<p>或者<code>yum –y install perl-[FAIL-MOUDLES]</code></p>
-<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">checking checking for perl module &apos;RRDs&apos;... Failed</div></pre></td></tr></table></figure></p>
-<p>解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">32位：</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/i386-linux-thread-multi/RRDs.pm /usr/lib/perl5/</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/i386-linux-thread-multi/auto/RRDs/RRDs.so /usr/lib/perl5/</div><div class="line"> 64位：</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/x86_64-linux-thread-multi/RRDs.pm /usr/lib64/perl5/</div><div class="line">ln -s /usr/local/rrdtool/lib/perl/5.10.1/x86_64-linux-thread-multi/auto/RRDs/RRDs.so /usr/lib64//perl5/</div></pre></td></tr></table></figure></p>
-<p>在执行下面操作，完成安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make clean</div><div class="line">./configure –prefix=/usr/local/smokeping</div><div class="line">/usr/bin/gmake install</div></pre></td></tr></table></figure></p>
-<h3 id="配置smokeping"><a href="#配置smokeping" class="headerlink" title="配置smokeping"></a>配置smokeping</h3><h4 id="修改相关文件"><a href="#修改相关文件" class="headerlink" title="修改相关文件"></a>修改相关文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/usr/local/smokeping/bin/smokeping</div><div class="line">/usr/local/smokeping/bin/smokeping_cgi</div><div class="line">将第八行         use lib qw(); # PERL5LIB</div><div class="line">修改为：         use lib qw(/usr/local/rrdtool/lib/perl); # PERL5LIB</div><div class="line"> </div><div class="line">/usr/local/smokeping/htdocs/smokeping.fcgi.dist：</div><div class="line">mv /usr/local/smokeping/htdocs/smokeping.fcgi.dist /usr/local/smokeping/htdocs/smokeping.fcgi</div><div class="line"> </div><div class="line">进入 /usr/local/smokeping/etc</div><div class="line">mv config.dist config</div><div class="line">mv basepage.html.dist basepage.html</div><div class="line">mv smokemail.dist smokemail</div><div class="line">mv tmail.dist tmail</div><div class="line">mv smokeping_secrets.dist smokeping_secrets</div></pre></td></tr></table></figure>
-<h4 id="修改主配置config"><a href="#修改主配置config" class="headerlink" title="修改主配置config"></a>修改主配置config</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div></pre></td><td class="code"><pre><div class="line">*** General ***                                                         ##全局配置</div><div class="line">owner    = charlie.cui@zerounix.com                                          ##联系人（显示在网页上）</div><div class="line">contact  = charlie.cui@zerounix.com                                         ##联系人邮箱</div><div class="line">mailhost = mail.zerounix.com                                                ##邮件服务主机</div><div class="line">sendmail = /usr/sbin/sendmail                                           ##发送邮件件的二进制可执行程序</div><div class="line"># NOTE: do not put the Image Cache below cgi-bin</div><div class="line"># since all files under cgi-bin will be executed ... this is not</div><div class="line"># good for images.</div><div class="line">imgcache = /usr/local/smokeping/cache                                   ##生成图片的缓存</div><div class="line">imgurl   = cache                                                ##cache 定义cgi程序显示图片的url目录</div><div class="line">datadir  = /usr/local/smokeping/data                                    ##rrd文件的位置</div><div class="line">piddir  = /usr/local/smokeping/var</div><div class="line">cgiurl   = http://some.url/smokeping.cgi                        ##smokeping访问地址</div><div class="line">smokemail = /usr/local/smokeping/etc/smokemail                          ##发送邮件的邮件内容模板</div><div class="line">tmail = /usr/local/smokeping/etc/tmail                                  ##HTML邮件模板的路径</div><div class="line"># specify this to get syslog logging</div><div class="line">syslogfacility = local0                                                 ##syslog日志记录的设备编号</div><div class="line"># each probe is now run in its own process</div><div class="line"># disable this to revert to the old behaviour</div><div class="line"># concurrentprobes = no</div><div class="line"> </div><div class="line">*** Alerts ***                                                          ##报警配置</div><div class="line">to =  monitor@zerounix.com                                    </div><div class="line">from = mon@zerounix.com</div><div class="line"> </div><div class="line">+网络中断</div><div class="line">type = rtt</div><div class="line">pattern = !=U,==U</div><div class="line">comment = 网络中断</div><div class="line">priority = 1</div><div class="line"> </div><div class="line">+中断恢复</div><div class="line">type = rtt</div><div class="line">pattern = ==U,!=U,!=U</div><div class="line">comment = 中断恢复</div><div class="line">priority = 2</div><div class="line"> </div><div class="line">+严重丢包</div><div class="line">type = loss</div><div class="line">pattern = &gt;50%</div><div class="line">comment = 丢包大于50%</div><div class="line">priority = 3</div><div class="line"> </div><div class="line">+丢包报警</div><div class="line">type = loss</div><div class="line">pattern = &gt;10%,&gt;10%,&gt;10%</div><div class="line">comment = 连续3次丢包10%以上</div><div class="line">priority = 4</div><div class="line"> </div><div class="line">+网络延迟</div><div class="line">type = rtt</div><div class="line">pattern = &gt;180,&gt;180,&gt;180</div><div class="line">comment = 连续3次延时180以上</div><div class="line">priority = 5</div><div class="line"> </div><div class="line"> </div><div class="line">*** Database ***</div><div class="line"> </div><div class="line">step     = 60</div><div class="line">pings    = 10</div><div class="line"> </div><div class="line"># consfn mrhb steps total</div><div class="line"> </div><div class="line">AVERAGE  0.5   1  1008</div><div class="line">AVERAGE  0.5  12  4320</div><div class="line">    MIN  0.5  12  4320</div><div class="line">    MAX  0.5  12  4320</div><div class="line">AVERAGE  0.5 144   720</div><div class="line">    MAX  0.5 144   720</div><div class="line">    MIN  0.5 144   720</div><div class="line"> </div><div class="line">*** Presentation ***</div><div class="line"> </div><div class="line">template = /usr/local/smokeping/etc/basepage.html</div><div class="line"> </div><div class="line">+ charts</div><div class="line"> </div><div class="line">menu = Charts</div><div class="line">title = The most interesting destinations</div><div class="line"> </div><div class="line">++ stddev</div><div class="line">sorter = StdDev(entries=&gt;4)</div><div class="line">title = Top Standard Deviation</div><div class="line">menu = Std Deviation</div><div class="line">format = Standard Deviation %f</div><div class="line"> </div><div class="line">++ max</div><div class="line">sorter = Max(entries=&gt;5)</div><div class="line">title = Top Max Roundtrip Time</div><div class="line">menu = by Max</div><div class="line">format = Max Roundtrip Time %f seconds</div><div class="line"> </div><div class="line">++ loss</div><div class="line">sorter = Loss(entries=&gt;5)</div><div class="line">title = Top Packet Loss</div><div class="line">menu = Loss</div><div class="line">format = Packets Lost %f</div><div class="line"> </div><div class="line">++ median</div><div class="line">sorter = Median(entries=&gt;5)</div><div class="line">title = Top Median Roundtrip Time</div><div class="line">menu = by Median</div><div class="line">format = Median RTT %f seconds</div><div class="line"> </div><div class="line">+ overview</div><div class="line"> </div><div class="line">width = 600</div><div class="line">height = 50</div><div class="line">range = 10h</div><div class="line"> </div><div class="line">+ detail</div><div class="line"> </div><div class="line">width = 600</div><div class="line">height = 200</div><div class="line">unison_tolerance = 2</div><div class="line"> </div><div class="line">&quot;Last 3 Hours&quot;    3h</div><div class="line">&quot;Last 30 Hours&quot;   30h</div><div class="line">&quot;Last 10 Days&quot;    10d</div><div class="line">&quot;Last 400 Days&quot;   400d</div><div class="line"> </div><div class="line">#+ hierarchies</div><div class="line">#++ owner</div><div class="line">#title = Host Owner</div><div class="line">#++ location</div><div class="line">#title = Location</div><div class="line"> </div><div class="line">*** Probes ***</div><div class="line"> </div><div class="line">+ FPing</div><div class="line"> </div><div class="line">binary = /usr/local/sbin/fping</div><div class="line"> </div><div class="line">+ DNS</div><div class="line">binary = /usr/bin/dig</div><div class="line">lookup = name.example</div><div class="line">*** Slaves ***</div><div class="line">secrets=/usr/local/smokeping/etc/smokeping_secrets</div><div class="line">+boomer</div><div class="line">display_name=boomer</div><div class="line">color=0000ff</div><div class="line"> </div><div class="line">+slave2</div><div class="line">display_name=another</div><div class="line">color=00ff00</div><div class="line"> </div><div class="line">*** Targets ***</div><div class="line"> </div><div class="line">probe = FPing</div><div class="line"> </div><div class="line">menu = Top</div><div class="line">title = Network Latency Grapher</div><div class="line">remark = Welcome to the SmokePing website of xxx Company. \</div><div class="line">         Here you will learn all about the latency of our network.</div><div class="line"> </div><div class="line">+ Test</div><div class="line">menu= Targets</div><div class="line">#parents = owner:/Test/James location:/</div><div class="line"> </div><div class="line">++ James</div><div class="line"> </div><div class="line">menu = James</div><div class="line">title =James</div><div class="line">alerts = someloss</div><div class="line">slaves = boomer slave2</div><div class="line">host = james.address</div><div class="line"> </div><div class="line">++ MultiHost</div><div class="line"> </div><div class="line">menu = Multihost</div><div class="line">title = James and James as seen from Boomer</div><div class="line">host = /Test/James /Test/James~boomer</div></pre></td></tr></table></figure>
-<p>监控主机是分层结构，用+表示<br>例如第一层“+”，第二层“++”一次类推</p>
-<p>master/slave的方式，后面会介绍。</p>
-<h4 id="修改其他配置"><a href="#修改其他配置" class="headerlink" title="修改其他配置"></a>修改其他配置</h4><p>根据配置文件所写的，创建数据文件目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/smokeping/&#123;htdocs/var,cache,data&#125;</div></pre></td></tr></table></figure></p>
-<p>修改数据文件目录的属主及属组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown nobody:nobody /usr/local/smokeping/&#123;htdocs/var,cache,data&#125;</div></pre></td></tr></table></figure></p>
-<p><code>/usr/local/smokeping/etc/smokeping_secrets</code>这个文件存放的是<code>master/slave</code>之间的验证密码，现在暂时不用</p>
-<h4 id="启动smokeping"><a href="#启动smokeping" class="headerlink" title="启动smokeping"></a>启动smokeping</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo -u nobody /usr/local/smokeping/bin/smokeping --logfile=/var/log/smokeping.log --restart</div></pre></td></tr></table></figure>
-<p>报错：<code>ERROR: FPing must be installed setuid root or it will not work
- at (eval 29) line 1</code><br>解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">whereis fping</div><div class="line">fping: /usr/local/sbin/fping</div><div class="line">chmod +s /usr/local/sbin/fping</div></pre></td></tr></table></figure></p>
-<h4 id="配置apache的配置文件"><a href="#配置apache的配置文件" class="headerlink" title="配置apache的配置文件"></a>配置apache的配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Alias /ping /usr/local/smokeping/htdocs/</div><div class="line">&lt;Directory &quot;/usr/local/smokeping/htdocs&quot;&gt;</div><div class="line">       DirectoryIndex index.html smokeping.fcgi</div><div class="line">       Options FollowSymLinks ExecCGI</div><div class="line">       AllowOverride None</div><div class="line">       AddHandler cgi-script .cgi .fcgi</div><div class="line">       Order allow,deny</div><div class="line">       Allow from all</div><div class="line">       AuthName &quot;Smokeping Access&quot;</div><div class="line">       AuthType Basic</div><div class="line">       AuthUserFile /usr/local/smokeping/htdocs/htpasswd.user</div><div class="line">       Require valid-user</div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure>
-<h3 id="FAQ："><a href="#FAQ：" class="headerlink" title="FAQ："></a>FAQ：</h3><p>不出图解决思路</p>
-<ul>
-<li>使用–debug方式启动smokeping，排查错误</li>
-<li>查看smokeping的log</li>
-<li>查看apache的error.log</li>
-<li>查看文件权限，包括数据文件目录及数据文件，apache和smokeping的启动用户，rrd文件是否有数据</li>
-</ul>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libe
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/centos-install-transmission.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1891,7 +1013,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1932,7 +1054,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1940,7 +1062,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1973,6 +1095,20 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -2120,6 +1256,132 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

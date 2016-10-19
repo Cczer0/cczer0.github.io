@@ -84,16 +84,25 @@
 
 
 
-<meta name="description" content="nginx服务自启动脚本脚本内容1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969">
+<meta name="description" content="nginx服务自启动脚本
+CentOS/RHEL 5、6系列
+
+脚本内容12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx--INIT启动脚本">
+<meta property="og:title" content="Nginx INIT启动脚本">
 <meta property="og:url" content="http://czero000.github.io/2015/10/21/nginx-init-scripts.html">
 <meta property="og:site_name" content="Czero's Blog">
-<meta property="og:description" content="nginx服务自启动脚本脚本内容1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969">
-<meta property="og:updated_time" content="2016-01-27T03:40:52.000Z">
+<meta property="og:description" content="nginx服务自启动脚本
+CentOS/RHEL 5、6系列
+
+脚本内容12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
+<meta property="og:updated_time" content="2016-07-27T14:31:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx--INIT启动脚本">
-<meta name="twitter:description" content="nginx服务自启动脚本脚本内容1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969">
+<meta name="twitter:title" content="Nginx INIT启动脚本">
+<meta name="twitter:description" content="nginx服务自启动脚本
+CentOS/RHEL 5、6系列
+
+脚本内容12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
 
 
 
@@ -117,7 +126,7 @@
   <link rel="canonical" href="http://czero000.github.io/2015/10/21/nginx-init-scripts.html"/>
 
 
-  <title> Nginx--INIT启动脚本 | Czero's Blog </title>
+  <title> Nginx INIT启动脚本 | Czero's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -231,9 +240,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -267,7 +299,7 @@
             
             
               
-                Nginx--INIT启动脚本
+                Nginx INIT启动脚本
               
             
           </h1>
@@ -300,6 +332,18 @@
 
                 
                 
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
 
               
             </span>
@@ -320,7 +364,7 @@
 
           
           
-             <span id="/2015/10/21/nginx-init-scripts.html" class="leancloud_visitors" data-flag-title="Nginx--INIT启动脚本">
+             <span id="/2015/10/21/nginx-init-scripts.html" class="leancloud_visitors" data-flag-title="Nginx INIT启动脚本">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -342,9 +386,16 @@
       
 
       
-        <h3 id="nginx服务自启动脚本"><a href="#nginx服务自启动脚本" class="headerlink" title="nginx服务自启动脚本"></a>nginx服务自启动脚本</h3><h3 id="脚本内容"><a href="#脚本内容" class="headerlink" title="脚本内容"></a>脚本内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># nginx - this script starts and stops the nginx daemin</div><div class="line">#</div><div class="line"># chkconfig:   - 85 15</div><div class="line"># description:  Nginx is an HTTP(S) server, HTTP(S) reverse</div><div class="line">#               proxy and IMAP/POP3 proxy server</div><div class="line"># processname: nginx</div><div class="line"># config:      /usr/local/nginx/conf/nginx.conf</div><div class="line"># pidfile:     /usr/local/nginx/logs/nginx.pid</div><div class="line"> </div><div class="line"># Source function library.</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"> </div><div class="line"># Source networking configuration.</div><div class="line">. /etc/sysconfig/network</div><div class="line"> </div><div class="line"># Check that networking is up.</div><div class="line">[ &quot;$NETWORKING&quot; = &quot;no&quot; ] &amp;&amp; exit 0</div><div class="line"> </div><div class="line">nginx=&quot;/usr/local/nginx/sbin/nginx&quot;</div><div class="line">prog=$(basename $nginx)</div><div class="line"> </div><div class="line">NGINX_CONF_FILE=&quot;/usr/local/nginx/conf/nginx.conf&quot;</div><div class="line"> </div><div class="line">lockfile=/var/lock/subsys/nginx</div><div class="line"> </div><div class="line">start() &#123;</div><div class="line">    [ -x $nginx ] || exit 5</div><div class="line">    [ -f $NGINX_CONF_FILE ] || exit 6</div><div class="line">    echo -n $&quot;Starting $prog: &quot;</div><div class="line">    daemon $nginx -c $NGINX_CONF_FILE</div><div class="line">    retval=$?</div><div class="line">    echo</div><div class="line">    [ $retval -eq 0 ] &amp;&amp; touch $lockfile</div><div class="line">    return $retval</div><div class="line">&#125;</div><div class="line"> </div><div class="line">stop() &#123;</div><div class="line">    echo -n $&quot;Stopping $prog: &quot;</div><div class="line">    killproc $prog -QUIT</div><div class="line">    retval=$?</div><div class="line">    echo</div><div class="line">    [ $retval -eq 0 ] &amp;&amp; rm -f $lockfile</div><div class="line">    return $retval</div><div class="line">&#125;</div><div class="line"> </div><div class="line">restart() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    stop</div><div class="line">    start</div><div class="line">&#125;</div><div class="line"> </div><div class="line">reload() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    echo -n $&quot;Reloading $prog: &quot;</div><div class="line">    killproc $nginx -HUP</div><div class="line">    RETVAL=$?</div><div class="line">    echo</div><div class="line">&#125;</div><div class="line"> </div><div class="line">force_reload() &#123;</div><div class="line">    restart</div><div class="line">&#125;</div><div class="line"> </div><div class="line">configtest() &#123;</div><div class="line">  $nginx -t -c $NGINX_CONF_FILE</div><div class="line">&#125;</div><div class="line"> </div><div class="line">rh_status() &#123;</div><div class="line">    status $prog</div><div class="line">&#125;</div><div class="line"> </div><div class="line">rh_status_q() &#123;</div><div class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</div><div class="line">&#125;</div><div class="line"> </div><div class="line">case &quot;$1&quot; in</div><div class="line">    start)</div><div class="line">        rh_status_q &amp;&amp; exit 0</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    stop)</div><div class="line">        rh_status_q || exit 0</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    restart|configtest)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    reload)</div><div class="line">        rh_status_q || exit 7</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    force-reload)</div><div class="line">        force_reload</div><div class="line">        ;;</div><div class="line">    status)</div><div class="line">        rh_status</div><div class="line">        ;;</div><div class="line">    condrestart|try-restart)</div><div class="line">        rh_status_q || exit 0</div><div class="line">            ;;</div><div class="line">    *)</div><div class="line">        echo $&quot;Usage: $0 &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;&quot;</div><div class="line">        exit 2</div><div class="line">esac</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+        <h3 id="nginx服务自启动脚本"><a href="#nginx服务自启动脚本" class="headerlink" title="nginx服务自启动脚本"></a>nginx服务自启动脚本</h3><ul>
+<li>CentOS/RHEL 5、6系列</li>
+</ul>
+<p>脚本内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># nginx - this script starts and stops the nginx daemin</div><div class="line">#</div><div class="line"># chkconfig:   - 85 15</div><div class="line"># description:  Nginx is an HTTP(S) server, HTTP(S) reverse</div><div class="line">#               proxy and IMAP/POP3 proxy server</div><div class="line"># processname: nginx</div><div class="line"># config:      /usr/local/nginx/conf/nginx.conf</div><div class="line"># pidfile:     /usr/local/nginx/logs/nginx.pid</div><div class="line"></div><div class="line"># Source function library.</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"></div><div class="line"># Source networking configuration.</div><div class="line">. /etc/sysconfig/network</div><div class="line"></div><div class="line"># Check that networking is up.</div><div class="line">[ &quot;$NETWORKING&quot; = &quot;no&quot; ] &amp;&amp; exit 0</div><div class="line"></div><div class="line">nginx=&quot;/usr/local/nginx/sbin/nginx&quot;</div><div class="line">prog=$(basename $nginx)</div><div class="line">NGINX_CONF_FILE=&quot;/usr/local/nginx/conf/nginx.conf&quot;</div><div class="line">lockfile=/var/lock/subsys/nginx</div><div class="line">start() &#123;</div><div class="line">    [ -x $nginx ] || exit 5</div><div class="line">    [ -f $NGINX_CONF_FILE ] || exit 6</div><div class="line">    echo -n $&quot;Starting $prog: &quot;</div><div class="line">    daemon $nginx -c $NGINX_CONF_FILE</div><div class="line">    retval=$?</div><div class="line">    echo</div><div class="line">    [ $retval -eq 0 ] &amp;&amp; touch $lockfile</div><div class="line">    return $retval</div><div class="line">&#125;</div><div class="line"></div><div class="line">stop() &#123;</div><div class="line">    echo -n $&quot;Stopping $prog: &quot;</div><div class="line">    killproc $prog -QUIT</div><div class="line">    retval=$?</div><div class="line">    echo</div><div class="line">    [ $retval -eq 0 ] &amp;&amp; rm -f $lockfile</div><div class="line">    return $retval</div><div class="line">&#125;</div><div class="line"></div><div class="line">restart() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    stop</div><div class="line">    start</div><div class="line">&#125;</div><div class="line"></div><div class="line">reload() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    echo -n $&quot;Reloading $prog: &quot;</div><div class="line">    killproc $nginx -HUP</div><div class="line">    RETVAL=$?</div><div class="line">    echo</div><div class="line">&#125;</div><div class="line"></div><div class="line">force_reload() &#123;</div><div class="line">    restart</div><div class="line">&#125;</div><div class="line"></div><div class="line">configtest() &#123;</div><div class="line">  $nginx -t -c $NGINX_CONF_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line">rh_status() &#123;</div><div class="line">    status $prog</div><div class="line">&#125;</div><div class="line"></div><div class="line">rh_status_q() &#123;</div><div class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</div><div class="line">&#125;</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">    start)</div><div class="line">        rh_status_q &amp;&amp; exit 0</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    stop)</div><div class="line">        rh_status_q || exit 0</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    restart|configtest)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    reload)</div><div class="line">        rh_status_q || exit 7</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    force-reload)</div><div class="line">        force_reload</div><div class="line">        ;;</div><div class="line">    status)</div><div class="line">        rh_status</div><div class="line">        ;;</div><div class="line">    condrestart|try-restart)</div><div class="line">        rh_status_q || exit 0</div><div class="line">            ;;</div><div class="line">    *)</div><div class="line">        echo $&quot;Usage: $0 &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;&quot;</div><div class="line">        exit 2</div><div class="line">esac</div></pre></td></tr></table></figure></p>
+<p>在Centos7 或者 相应的Ubuntu版本中添加如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">vim /lib/systemd/system/nginx.service   </div><div class="line">[Unit]  </div><div class="line">Description=nginx  </div><div class="line">After=network.target  </div><div class="line"></div><div class="line">[Service]  </div><div class="line">Type=forking  </div><div class="line">ExecStart=/etc/init.d/nginx start  </div><div class="line">ExecReload=/etc/init.d/nginx restart  </div><div class="line">ExecStop=/etc/init.d/nginx  stop  </div><div class="line">PrivateTmp=true  </div><div class="line"></div><div class="line">[Install]  </div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"># Stop dance for nginx</div><div class="line"># =======================</div><div class="line">#</div><div class="line"># ExecStop sends SIGSTOP (graceful stop) to the nginx process.</div><div class="line"># If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control</div><div class="line"># and sends SIGTERM (fast shutdown) to the main process.</div><div class="line"># After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends</div><div class="line"># SIGKILL to all the remaining processes in the process group (KillMode=mixed).</div><div class="line">#</div><div class="line"># nginx signals reference doc:</div><div class="line"># http://nginx.org/en/docs/control.html</div><div class="line">#</div><div class="line">[Unit]</div><div class="line">Description=A high performance web server and a reverse proxy server</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</div><div class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t -q -g &apos;daemon on; master_process on;&apos;</div><div class="line">ExecStart=/usr/local/nginx/sbin/nginx -g &apos;daemon on; master_process on;&apos;</div><div class="line">ExecReload=/usr/local/nginx/sbin/nginx -g &apos;daemon on; master_process on;&apos; -s reload</div><div class="line">ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /usr/local/nginx/logs/nginx.pid</div><div class="line">TimeoutStopSec=5</div><div class="line">KillMode=mixed</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure>
+<ul>
+<li>Ubuntu</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div></pre></td><td class="code"><pre><div class="line">#! /bin/sh</div><div class="line">### BEGIN INIT INFO</div><div class="line"># Provides:          nginx</div><div class="line"># Required-Start:    $remote_fs $syslog</div><div class="line"># Required-Stop:     $remote_fs $syslog</div><div class="line"># Default-Start:     2 3 4 5</div><div class="line"># Default-Stop:      0 1 6</div><div class="line"># Short-Description: nginx init.d dash script for Ubuntu or other *nix.</div><div class="line"># Description:       nginx init.d dash script for Ubuntu or other *nix.</div><div class="line">### END INIT INFO        </div><div class="line">#------------------------------------------------------------------------------</div><div class="line"># nginx - this Debian Almquist shell (dash) script, starts and stops the nginx</div><div class="line">#         daemon for Ubuntu and other *nix releases.</div><div class="line">#</div><div class="line"># description:  Nginx is an HTTP(S) server, HTTP(S) reverse \</div><div class="line">#               proxy and IMAP/POP3 proxy server.  This \</div><div class="line">#               script will manage the initiation of the \</div><div class="line">#               server and it&apos;s process state.</div><div class="line">#</div><div class="line"># processname: nginx</div><div class="line"># config:      /usr/local/nginx/conf/nginx.conf</div><div class="line"># pidfile:     /usr/local/nginx/logs/nginx.pid</div><div class="line"># Provides:    nginx</div><div class="line">#</div><div class="line"># Author:  Jason Giedymin</div><div class="line">#          &lt;jason.giedymin AT gmail.com&gt;.</div><div class="line">#</div><div class="line"># Version: 3.5.1 11-NOV-2013 jason.giedymin AT gmail.com</div><div class="line"># Notes: nginx init.d dash script for Ubuntu.</div><div class="line"># Tested with: Ubuntu 13.10, nginx-1.4.3</div><div class="line">#</div><div class="line"># This script&apos;s project home is:</div><div class="line">#   [url]http://github.com/JasonGiedymin/nginx-init-ubuntu[/url]</div><div class="line">#</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#                               MIT X11 License</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#</div><div class="line"># Copyright (c) 2008-2013 Jason Giedymin, [url]http://jasongiedymin.com[/url]</div><div class="line">#</div><div class="line"># Permission is hereby granted, free of charge, to any person obtaining</div><div class="line"># a copy of this software and associated documentation files (the</div><div class="line"># &quot;Software&quot;), to deal in the Software without restriction, including</div><div class="line"># without limitation the rights to use, copy, modify, merge, publish,</div><div class="line"># distribute, sublicense, and/or sell copies of the Software, and to</div><div class="line"># permit persons to whom the Software is furnished to do so, subject to</div><div class="line"># the following conditions:</div><div class="line">#</div><div class="line"># The above copyright notice and this permission notice shall be</div><div class="line"># included in all copies or substantial portions of the Software.</div><div class="line">#</div><div class="line"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</div><div class="line"># EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</div><div class="line"># MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</div><div class="line"># NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE</div><div class="line"># LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION</div><div class="line"># OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION</div><div class="line"># WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</div><div class="line"></div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#                               Functions</div><div class="line">#------------------------------------------------------------------------------</div><div class="line"></div><div class="line">LSB_FUNC=/lib/lsb/init-functions</div><div class="line"># Test that init functions exists</div><div class="line">test -r $LSB_FUNC || &#123;</div><div class="line">    echo &quot;$0: Cannot find $LSB_FUNC! Script exiting.&quot; 1&gt;&amp;2</div><div class="line">    exit 5</div><div class="line">&#125;</div><div class="line"></div><div class="line">. $LSB_FUNC</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#                               Consts</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin</div><div class="line">DAEMON=/usr/local/nginx/sbin/nginx</div><div class="line"></div><div class="line">PS=&quot;nginx&quot;</div><div class="line">PIDNAME=&quot;nginx&quot;                     #lets you do $PS-slave</div><div class="line">PIDFILE=$PIDNAME.pid                #pid file</div><div class="line">PIDSPATH=/usr/local/nginx/logs      #default pid location, you should change it</div><div class="line">DESCRIPTION=&quot;Nginx Server...&quot;</div><div class="line">RUNAS=root                          #user to run as</div><div class="line">SCRIPT_OK=0                         #ala error codes</div><div class="line">SCRIPT_ERROR=1                      #ala error codes</div><div class="line">TRUE=1                              #boolean</div><div class="line">FALSE=0                             #boolean</div><div class="line"></div><div class="line">lockfile=/var/lock/subsys/nginx</div><div class="line">NGINX_CONF_FILE=&quot;/usr/local/nginx/conf/nginx.conf&quot;</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#                               Simple Tests</div><div class="line">#------------------------------------------------------------------------------</div><div class="line"></div><div class="line"># Test if nginx is a file and executable</div><div class="line">test -x $DAEMON || &#123;</div><div class="line">    echo &quot;$0: You don&apos;t have permissions to execute nginx.&quot; 1&gt;&amp;2</div><div class="line">    exit 4</div><div class="line">&#125;</div><div class="line"></div><div class="line"># Include nginx defaults if available</div><div class="line">if [ -f /etc/default/nginx ]; then</div><div class="line">    . /etc/default/nginx</div><div class="line">fi</div><div class="line"></div><div class="line">#set exit condition</div><div class="line">#set -e</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">#                               Functions</div><div class="line">#------------------------------------------------------------------------------</div><div class="line">setFilePerms()&#123;</div><div class="line">    if [ -f $PIDSPATH/$PIDFILE ]; then</div><div class="line">        chmod 400 $PIDSPATH/$PIDFILE</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">configtest() &#123;</div><div class="line">    $DAEMON -t -c $NGINX_CONF_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line">getPSCount() &#123;</div><div class="line">    return `pgrep -f $PS | wc -l`</div><div class="line">&#125;</div><div class="line"></div><div class="line">isRunning() &#123;</div><div class="line">    if [ $1 ]; then</div><div class="line">        pidof_daemon $1</div><div class="line">        PID=$?</div><div class="line">        if [ $PID -gt 0 ]; then</div><div class="line">            return 1</div><div class="line">        else</div><div class="line">            return 0</div><div class="line">        fi</div><div class="line">    else</div><div class="line">        pidof_daemon</div><div class="line">        PID=$?</div><div class="line"></div><div class="line">        if [ $PID -gt 0 ]; then</div><div class="line">            return 1</div><div class="line">        else</div><div class="line">            return 0</div><div class="line">        fi</div><div class="line">    fi</div><div class="line">&#125;         </div><div class="line"></div><div class="line">#courtesy of php-fpm</div><div class="line">wait_for_pid () &#123;</div><div class="line">    try=0         </div><div class="line">    while test $try -lt 35 ; do</div><div class="line">        case &quot;$1&quot; in</div><div class="line">            &apos;created&apos;)</div><div class="line">            if [ -f &quot;$2&quot; ]; then</div><div class="line">                try=&apos;&apos;</div><div class="line">                break</div><div class="line">            fi</div><div class="line">            ;;</div><div class="line"></div><div class="line">            &apos;removed&apos;)</div><div class="line">            if [ ! -f &quot;$2&quot; ]; then</div><div class="line">                try=&apos;&apos;</div><div class="line">                break</div><div class="line">            fi</div><div class="line">            ;;</div><div class="line">        esac</div><div class="line">        try=`expr $try + 1`</div><div class="line">        sleep 1</div><div class="line">    done</div><div class="line">&#125;</div><div class="line"></div><div class="line">status()&#123;</div><div class="line">    isRunning</div><div class="line">    isAlive=$?</div><div class="line"></div><div class="line">    if [ &quot;$&#123;isAlive&#125;&quot; -eq $TRUE ]; then</div><div class="line">        log_warning_msg &quot;$DESCRIPTION found running with processes:  `pidof $PS`&quot;</div><div class="line">        rc=0</div><div class="line">    else</div><div class="line">        log_warning_msg &quot;$DESCRIPTION is NOT running.&quot;</div><div class="line">        rc=3</div><div class="line">    fi</div><div class="line">    return</div><div class="line">&#125;</div><div class="line"></div><div class="line">removePIDFile()&#123;</div><div class="line">    if [ $1 ]; then</div><div class="line">        if [ -f $1 ]; then</div><div class="line">            rm -f $1</div><div class="line">        fi</div><div class="line">    else</div><div class="line">        #Do default removal</div><div class="line">        if [ -f $PIDSPATH/$PIDFILE ]; then</div><div class="line">            rm -f $PIDSPATH/$PIDFILE</div><div class="line">        fi</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">start() &#123;</div><div class="line">    log_daemon_msg &quot;Starting $DESCRIPTION&quot;</div><div class="line">    isRunning</div><div class="line">    isAlive=$?</div><div class="line">    if [ &quot;$&#123;isAlive&#125;&quot; -eq $TRUE ]; then</div><div class="line">        log_end_msg $SCRIPT_ERROR</div><div class="line">        rc=0</div><div class="line">     else</div><div class="line">        start-stop-daemon --start --quiet --chuid \</div><div class="line">        $RUNAS --pidfile $PIDSPATH/$PIDFILE --exec $DAEMON \</div><div class="line">        -- -c $NGINX_CONF_FILE</div><div class="line">        setFilePerms</div><div class="line">        log_end_msg $SCRIPT_OK</div><div class="line">        rc=0</div><div class="line">    fi</div><div class="line"></div><div class="line">    return</div><div class="line">&#125;</div><div class="line"></div><div class="line">stop() &#123;</div><div class="line">    log_daemon_msg &quot;Stopping $DESCRIPTION&quot;</div><div class="line">    isRunning</div><div class="line">    isAlive=$?</div><div class="line">    if [ &quot;$&#123;isAlive&#125;&quot; -eq $TRUE ]; then</div><div class="line">        start-stop-daemon --stop --quiet --pidfile $PIDSPATH/$PIDFILE</div><div class="line">        wait_for_pid &apos;removed&apos; $PIDSPATH/$PIDFILE</div><div class="line"></div><div class="line">        if [ -n &quot;$try&quot; ]; then</div><div class="line">            log_end_msg $SCRIPT_ERROR</div><div class="line">            rc=0 # lsb states 1, but under status it is 2 (which is more prescriptive). Deferring to standard.</div><div class="line">        else</div><div class="line">            removePIDFile</div><div class="line">            log_end_msg $SCRIPT_OK</div><div class="line">            rc=0</div><div class="line">        fi</div><div class="line">    else</div><div class="line">        log_end_msg $SCRIPT_ERROR</div><div class="line">        rc=7</div><div class="line">    fi</div><div class="line"></div><div class="line">    return</div><div class="line">&#125;</div><div class="line"></div><div class="line">reload() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    log_daemon_msg &quot;Reloading (via HUP) $DESCRIPTION&quot;</div><div class="line">    isRunning</div><div class="line">    if [ $? -eq $TRUE ]; then</div><div class="line">        kill -HUP `cat $PIDSPATH/$PIDFILE`</div><div class="line">        log_end_msg $SCRIPT_OK</div><div class="line">        rc=0</div><div class="line">    else</div><div class="line">        log_end_msg $SCRIPT_ERROR</div><div class="line">        rc=7</div><div class="line">    fi</div><div class="line">    return</div><div class="line">&#125;</div><div class="line"></div><div class="line">quietupgrade() &#123;</div><div class="line">    log_daemon_msg &quot;Peforming Quiet Upgrade $DESCRIPTION&quot;</div><div class="line">    isRunning</div><div class="line">    isAlive=$?</div><div class="line">    if [ &quot;$&#123;isAlive&#125;&quot; -eq $TRUE ]; then</div><div class="line">        kill -USR2 `cat $PIDSPATH/$PIDFILE`</div><div class="line">        kill -WINCH `cat $PIDSPATH/$PIDFILE.oldbin`</div><div class="line">        isRunning</div><div class="line">        isAlive=$?</div><div class="line">        if [ &quot;$&#123;isAlive&#125;&quot; -eq $TRUE ]; then</div><div class="line">            kill -QUIT `cat $PIDSPATH/$PIDFILE.oldbin`</div><div class="line">            wait_for_pid &apos;removed&apos; $PIDSPATH/$PIDFILE.oldbin</div><div class="line">            removePIDFile $PIDSPATH/$PIDFILE.oldbin</div><div class="line">            log_end_msg $SCRIPT_OK</div><div class="line">            rc=0</div><div class="line">        else</div><div class="line">            log_end_msg $SCRIPT_ERROR</div><div class="line">            log_daemon_msg &quot;ERROR! Reverting back to original $DESCRIPTION&quot;</div><div class="line">            kill -HUP `cat $PIDSPATH/$PIDFILE`</div><div class="line">            kill -TERM `cat $PIDSPATH/$PIDFILE.oldbin`</div><div class="line">            kill -QUIT `cat $PIDSPATH/$PIDFILE.oldbin`</div><div class="line">            wait_for_pid &apos;removed&apos; $PIDSPATH/$PIDFILE.oldbin</div><div class="line">            removePIDFile $PIDSPATH/$PIDFILE.oldbin</div><div class="line">            log_end_msg $SCRIPT_OK</div><div class="line">            rc=0</div><div class="line">        fi</div><div class="line">    else</div><div class="line">        log_end_msg $SCRIPT_ERROR</div><div class="line">        rc=7</div><div class="line">    fi</div><div class="line">    return</div><div class="line">&#125;</div><div class="line"></div><div class="line">terminate() &#123;</div><div class="line">    log_daemon_msg &quot;Force terminating (via KILL) $DESCRIPTION&quot;</div><div class="line">    PIDS=`pidof $PS` || true</div><div class="line">    [ -e $PIDSPATH/$PIDFILE ] &amp;&amp; PIDS2=`cat $PIDSPATH/$PIDFILE`</div><div class="line">    for i in $PIDS; do</div><div class="line">        if [ &quot;$i&quot; = &quot;$PIDS2&quot; ]; then</div><div class="line">            kill $i</div><div class="line">            wait_for_pid &apos;removed&apos; $PIDSPATH/$PIDFILE</div><div class="line">            removePIDFile</div><div class="line">        fi</div><div class="line">    done</div><div class="line">    log_end_msg $SCRIPT_OK</div><div class="line">    rc=0</div><div class="line">&#125;</div><div class="line"></div><div class="line">destroy() &#123;</div><div class="line">    log_daemon_msg &quot;Force terminating and may include self (via KILLALL) $DESCRIPTION&quot;</div><div class="line">    killall $PS -q &gt;&gt; /dev/null 2&gt;&amp;1</div><div class="line">    log_end_msg $SCRIPT_OK</div><div class="line">    rc=0</div><div class="line">&#125;</div><div class="line"></div><div class="line">pidof_daemon() &#123;</div><div class="line">    PIDS=`pidof $PS` || true</div><div class="line">    [ -e $PIDSPATH/$PIDFILE ] &amp;&amp; PIDS2=`cat $PIDSPATH/$PIDFILE`</div><div class="line"></div><div class="line">    for i in $PIDS; do</div><div class="line">        if [ &quot;$i&quot; = &quot;$PIDS2&quot; ]; then</div><div class="line">            return 1</div><div class="line">        fi</div><div class="line">    done</div><div class="line">    return 0</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">action=&quot;$1&quot;</div><div class="line">case &quot;$1&quot; in</div><div class="line">    start)</div><div class="line">        start</div><div class="line">        ;;</div><div class="line">    stop)</div><div class="line">        stop</div><div class="line">        ;;</div><div class="line">    restart|force-reload)</div><div class="line">        stop</div><div class="line">        # if [ $rc -ne 0 ]; then</div><div class="line">        #     script_exit</div><div class="line">        # fi</div><div class="line">        sleep 1</div><div class="line">        start</div><div class="line">        ;;</div><div class="line">    reload)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    status)</div><div class="line">        status</div><div class="line">        ;;</div><div class="line">    configtest)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    quietupgrade)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    terminate)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    destroy)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    *)</div><div class="line">        FULLPATH=/etc/init.d/$PS</div><div class="line">        echo &quot;Usage: $FULLPATH &#123;start|stop|restart|force-reload|status|configtest|quietupgrade|terminate|destroy&#125;&quot;</div><div class="line">        echo &quot;       The &apos;destroy&apos; command should only be used as a last resort.&quot;</div><div class="line">        exit 3</div><div class="line">        ;;</div><div class="line">esac</div><div class="line">exit $rc</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -383,8 +434,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/21/vim-nginx-hight-light.html" rel="prev" title="Nginx--VIM代码高亮">
-                Nginx--VIM代码高亮 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/10/21/vim-nginx-hight-light.html" rel="prev" title="Nginx代码高亮">
+                Nginx代码高亮 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -401,7 +452,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2015/10/21/nginx-init-scripts.html"
-     data-title="Nginx--INIT启动脚本"
+     data-title="Nginx INIT启动脚本"
      data-content=""
      data-url="http://czero000.github.io/2015/10/21/nginx-init-scripts.html">
   <div class="ds-share-inline">
@@ -431,7 +482,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/10/21/nginx-init-scripts.html"
-           data-title="Nginx--INIT启动脚本" data-url="http://czero000.github.io/2015/10/21/nginx-init-scripts.html">
+           data-title="Nginx INIT启动脚本" data-url="http://czero000.github.io/2015/10/21/nginx-init-scripts.html">
       </div>
     
   </div>
@@ -476,7 +527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -484,7 +535,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -518,6 +569,20 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -528,7 +593,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx服务自启动脚本"><span class="nav-number">1.</span> <span class="nav-text">nginx服务自启动脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本内容"><span class="nav-number">2.</span> <span class="nav-text">脚本内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx服务自启动脚本"><span class="nav-number">1.</span> <span class="nav-text">nginx服务自启动脚本</span></a></li></ol></div>
             
           </div>
         </section>
@@ -679,6 +744,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

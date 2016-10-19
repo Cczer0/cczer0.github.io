@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Czero's Blog">
 <meta property="og:description" content="安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel
 下载tran">
-<meta property="og:updated_time" content="2016-01-21T03:49:14.000Z">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装BT软件Transmission">
 <meta name="twitter:description" content="安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel
@@ -234,9 +234,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -296,8 +319,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -360,8 +395,7 @@
 <p>配置文件位于<code>/var/lib/transmission/.config/transmission-daemon/settings.json(CentOS 5)</code><br>或<code>/var/lib/transmission/settings.json(CentOS 6)</code><br>修改配置文件前要先用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service transmission-daemon stop</div></pre></td></tr></table></figure></p>
 <p>关掉Transmission，否则配置不会生效。<br>具体的配置网上有很多，就不详细说了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    &quot;rpc-authentication-required&quot;: true,</div><div class="line">    &quot;rpc-enabled&quot;: true,</div><div class="line">    &quot;rpc-password&quot;: &quot;管理密码密码&quot;,</div><div class="line">    &quot;rpc-username&quot;: &quot;管理用户名&quot;,</div><div class="line">    &quot;rpc-whitelist-enabled&quot;: false,</div></pre></td></tr></table></figure></p>
 <p>主要是把这几项改成我上面的样子就可以了，然后你就可以通过<code>http://你的IP地址:9091</code>的方式连接了。<br>远程管理建议使用<em>Transmission-Remote-GUI</em></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+
       
     </div>
 
@@ -493,7 +527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -501,7 +535,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -535,6 +569,20 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -545,7 +593,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖包"><span class="nav-number">1.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载transmission及必要软件"><span class="nav-number">2.</span> <span class="nav-text">下载transmission及必要软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装软件包"><span class="nav-number">3.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。"><span class="nav-number">5.</span> <span class="nav-text">执行transmission-daemon -g /usr/local/transmission，通过浏览器登陆（http://yourIP:9091/）就可以控制了。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yum安装Transmission"><span class="nav-number">5.1.</span> <span class="nav-text">yum安装Transmission</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装依赖包"><span class="nav-number">1.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载transmission及必要软件"><span class="nav-number">2.</span> <span class="nav-text">下载transmission及必要软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装软件包"><span class="nav-number">3.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。"><span class="nav-number">5.</span> <span class="nav-text">执行transmission-daemon -g /usr/local/transmission，通过浏览器登陆（http://yourIP:9091/）就可以控制了。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yum安装Transmission"><span class="nav-number">5.1.</span> <span class="nav-text">yum安装Transmission</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -696,6 +744,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

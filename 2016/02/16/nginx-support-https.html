@@ -84,21 +84,21 @@
 
 
 
-<meta name="description" content="HTTPSHTTPS目前已经是所有重视隐私和安全性的网站的首选，例如国外的Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
-随着技术的发展，HTTPS网站已不再是大型网站的专利，所有普通的个人站点和blog可以以自己动">
+<meta name="description" content="HTTPSHTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
+随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过HTTPS访问Web">
 <meta property="og:url" content="http://czero000.github.io/2016/02/16/nginx-support-https.html">
 <meta property="og:site_name" content="Czero's Blog">
-<meta property="og:description" content="HTTPSHTTPS目前已经是所有重视隐私和安全性的网站的首选，例如国外的Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
-随着技术的发展，HTTPS网站已不再是大型网站的专利，所有普通的个人站点和blog可以以自己动">
-<meta property="og:image" content="http://www.zerounix.com/images/web/nginx/https_title.jpg">
-<meta property="og:updated_time" content="2016-02-16T03:24:20.000Z">
+<meta property="og:description" content="HTTPSHTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
+随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以">
+<meta property="og:image" content="https://czero000.github.io/images/web/nginx/https_title.jpg">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过HTTPS访问Web">
-<meta name="twitter:description" content="HTTPSHTTPS目前已经是所有重视隐私和安全性的网站的首选，例如国外的Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
-随着技术的发展，HTTPS网站已不再是大型网站的专利，所有普通的个人站点和blog可以以自己动">
-<meta name="twitter:image" content="http://www.zerounix.com/images/web/nginx/https_title.jpg">
+<meta name="twitter:description" content="HTTPSHTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
+随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以">
+<meta name="twitter:image" content="https://czero000.github.io/images/web/nginx/https_title.jpg">
 
 
 
@@ -236,9 +236,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -298,7 +321,19 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Nginx/" itemprop="url" rel="index">
                     <span itemprop="name">Nginx</span>
                   </a>
                 </span>
@@ -347,27 +382,26 @@
       
 
       
-        <a id="more"></a>
-<p><img src="http://www.zerounix.com/images/web/nginx/https_title.jpg" alt="HTTPS_Title"></p>
-<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS目前已经是所有重视隐私和安全性的网站的首选，例如国外的Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。</p>
-<p>随着技术的发展，HTTPS网站已不再是大型网站的专利，所有普通的个人站点和blog可以以自己动手搭建一个安全加密的网站。</p>
-<h3 id="什么是HTTPS、SSL证书"><a href="#什么是HTTPS、SSL证书" class="headerlink" title="什么是HTTPS、SSL证书"></a>什么是HTTPS、SSL证书</h3><ul>
-<li>HTTPS</li>
-</ul>
+        <p><img src="https://czero000.github.io/images/web/nginx/https_title.jpg" alt="HTTPS_Title"></p>
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。</p>
+<p>随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以自己动手搭建一个安全加密的网站。</p>
+<h3 id="什么是-HTTPS、SSL-证书"><a href="#什么是-HTTPS、SSL-证书" class="headerlink" title="什么是 HTTPS、SSL 证书"></a>什么是 HTTPS、SSL 证书</h3><ul>
+<li><p>HTTPS</p>
 <blockquote>
-<p>超文本传输安全协议（缩写：HTTPS，英语：Hypertext Transfer Protocol Secure）是超文本传输协议和SSL/TLS的组合，用以提供加密通讯及对网络服务器身份的鉴定。HTTPS连接经常被用于万维网上的交易支付和企业信息系统中敏感信息的传输。HTTPS不应与在RFC 2660中定义的安全超文本传输协议（S-HTTP）相混。</p>
+<p>超文本传输安全协议（缩写：HTTPS，英语：Hypertext Transfer Protocol Secure）是超文本传输协议和 SSL/TLS 的组合，用以提供加密通讯及对网络服务器身份的鉴定。HTTPS 连接经常被用于万维网上的交易支付和企业信息系统中敏感信息的传输。HTTPS 不应与在 RFC 2660 中定义的安全超文本传输协议 （S-HTTP） 相混。</p>
 </blockquote>
-<ul>
-<li>SSL证书</li>
+</li>
+<li><p>SSL 证书</p>
+</li>
 </ul>
-<p>SSL证书是数字证书的一种，遵守SSL协议，使用 Secure Socket Layer 协议在浏览器和 Web 服务器之间建立一条安全通道，从而实现数据信息在客户端和服务器之间的加密传输，保证双方传递信息的安全性，不可被第三方窃听；用户可以通过服务器证书验证他所访问的网站是否真实可靠。</p>
-<p>等多关于HTTPS、SSl证书的信息，请Google.</p>
-<h2 id="使用OpenSSL-生成自签名证书"><a href="#使用OpenSSL-生成自签名证书" class="headerlink" title="使用OpenSSL 生成自签名证书"></a>使用OpenSSL 生成自签名证书</h2><h3 id="制作CA证书"><a href="#制作CA证书" class="headerlink" title="制作CA证书"></a>制作CA证书</h3><ul>
-<li>修改CA配置文件</li>
+<p>SSL 证书是数字证书的一种，遵守 SSL 协议，使用 Secure Socket Layer 协议在浏览器和 Web 服务器之间建立一条安全通道，从而实现数据信息在客户端和服务器之间的加密传输，保证双方传递信息的安全性，不可被第三方窃听；用户可以通过服务器证书验证他所访问的网站是否真实可靠。</p>
+<p>等多关于 HTTPS、SSl 证书的信息，请 Google.</p>
+<h2 id="使用-OpenSSL-生成自签名证书"><a href="#使用-OpenSSL-生成自签名证书" class="headerlink" title="使用 OpenSSL 生成自签名证书"></a>使用 OpenSSL 生成自签名证书</h2><h3 id="制作-CA-证书"><a href="#制作-CA-证书" class="headerlink" title="制作 CA 证书"></a>制作 CA 证书</h3><ul>
+<li>修改 CA 配置文件</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">vim /etc/pki/tls/openssl.conf</div><div class="line">[ CA_default ]</div><div class="line"></div><div class="line">dir             = /etc/pki/CA           # Where everything is kept</div><div class="line">certs           = $dir/certs            # Where the issued certs are kept</div><div class="line">crl_dir         = $dir/crl              # Where the issued crl are kept</div><div class="line">database        = $dir/index.txt        # database index file.</div><div class="line">#unique_subject = no                    # Set to &apos;no&apos; to allow creation of</div><div class="line">                                        # several ctificates with same subject.</div><div class="line">new_certs_dir   = $dir/newcerts         # default place for new certs.</div><div class="line"></div><div class="line">certificate     = $dir/cacert.pem       # The CA certificate</div><div class="line">serial          = $dir/serial           # The current serial number</div><div class="line">crlnumber       = $dir/crlnumber        # the current crl number</div><div class="line">                                        # must be commented out to leave a V1 CRL</div><div class="line">crl             = $dir/crl.pem          # The current CRL</div><div class="line">private_key     = $dir/private/cakey.pem# The private key</div><div class="line">RANDFILE        = $dir/private/.rand    # private random number file</div><div class="line"></div><div class="line"></div><div class="line">default_days    = 3650                   # how long to certify for</div><div class="line"></div><div class="line">[ policy_match ]</div><div class="line">countryName             = match</div><div class="line">stateOrProvinceName     = optional</div><div class="line">localityName            = optional</div><div class="line">organizationName        = optional</div><div class="line">organizationalUnitName  = optional</div><div class="line">commonName              = supplied</div><div class="line">emailAddress            = optional</div><div class="line"></div><div class="line"></div><div class="line">[ req_distinguished_name ]</div><div class="line">countryName                     = Country Name (2 letter code)</div><div class="line">countryName_default             = CN</div><div class="line">countryName_min                 = 2</div><div class="line">countryName_max                 = 2</div><div class="line"></div><div class="line"></div><div class="line">stateOrProvinceName             = State or Province Name (full name)</div><div class="line">stateOrProvinceName_default     = BJ</div></pre></td></tr></table></figure>
 <ul>
-<li>在CA目录下创建两个初始文件</li>
+<li>在 CA 目录下创建两个初始文件</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">touch index.txt serial</div><div class="line">echo 01 &gt; serial</div></pre></td></tr></table></figure>
 <ul>
@@ -378,29 +412,29 @@
 <li>生成根证书</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(umask 077;openssl req -new -x509 -key private/cakey.pem -out cacert.pem)</div></pre></td></tr></table></figure>
-<p>会提示输入一些内容，因为是私有的，所以可以随便输入（之前修改的openssl.cnf会在这里呈现），最好记住能与后面保持一致。上面的自签证书<code>cacert.pem</code>应该生成在<code>/etc/pki/CA</code>下</p>
+<p>会提示输入一些内容，因为是私有的，所以可以随便输入（之前修改的 openssl.cnf 会在这里呈现），最好记住能与后面保持一致。上面的自签证书 <code>cacert.pem</code> 应该生成在 <code>/etc/pki/CA</code> 下</p>
 <h3 id="制作服务器证书"><a href="#制作服务器证书" class="headerlink" title="制作服务器证书"></a>制作服务器证书</h3><ul>
-<li>生成服务器ssl密钥</li>
+<li>生成服务器 ssl 密钥</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/nginx/ssl</div><div class="line">cd /usr/local/nginx/ssl</div><div class="line">openssl genrsa -out nginx.key 2048</div></pre></td></tr></table></figure>
 <ul>
-<li>为ningx生成证书签署请求</li>
+<li>为 ningx 生成证书签署请求</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 同样会提示输入一些内容，其它随便，除了`Commone Name`一定要是你要授予证书的服务器域名或主机名，challenge password不填。</div><div class="line">openssl req -new -key nginx.key -out nginx.csr</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 同样会提示输入一些内容，其它随便，除了 `Commone Name` 一定要是你要授予证书的服务器域名或主机名，challenge password 不填。</div><div class="line">openssl req -new -key nginx.key -out nginx.csr</div></pre></td></tr></table></figure>
 <ul>
-<li>用私有CA来签署证书</li>
+<li>用私有 CA 来签署证书</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">openssl ca -in nginx.csr -out nginx.crt</div><div class="line">Using configuration from /etc/pki/tls/openssl.cnf</div><div class="line">Check that the request matches the signature</div><div class="line">Signature ok</div><div class="line">Certificate Details:</div><div class="line">        Serial Number: 1 (0x1)</div><div class="line">        Validity</div><div class="line">            Not Before: Feb  5 07:17:48 2016 GMT</div><div class="line">            Not After : Feb  2 07:17:48 2026 GMT</div><div class="line">        Subject:</div><div class="line">            countryName               = CN</div><div class="line">            stateOrProvinceName       = BJ</div><div class="line">            localityName              = BJ</div><div class="line">            organizationName          = Default Company Ltd</div><div class="line">            commonName                = *.zerounix.com</div><div class="line">        X509v3 extensions:</div><div class="line">            X509v3 Basic Constraints: </div><div class="line">                CA:FALSE</div><div class="line">            Netscape Comment: </div><div class="line">                OpenSSL Generated Certificate</div><div class="line">            X509v3 Subject Key Identifier: </div><div class="line">                18:A2:A4:B8:69:03:23:FE:94:7C:D8:95:A8:B9:95:B6:E7:28:D7:58</div><div class="line">            X509v3 Authority Key Identifier: </div><div class="line">                keyid:0D:01:60:ED:AF:82:A6:DB:46:42:BB:D7:F5:BD:4C:22:B8:6E:9F:33</div><div class="line"></div><div class="line">Certificate is to be certified until Feb  2 07:17:48 2026 GMT (3650 days)</div><div class="line">Sign the certificate? [y/n]:y</div><div class="line"></div><div class="line"></div><div class="line">1 out of 1 certificate requests certified, commit? [y/n]y</div><div class="line">Write out database with 1 new entries</div><div class="line">Data Base Updated</div><div class="line"></div><div class="line">另外在极少数情况下，上面的命令生成的证书不能识别，试试下面的命令：</div><div class="line">openssl x509 -req -in server.csr -CA /etc/pki/CA/cacert.pem -CAkey /etc/pki/CA/private/cakey.pem -CAcreateserial -out server.crt</div></pre></td></tr></table></figure>
-<p>上面签发过程其实默认使用了<code>-cert cacert.pem -keyfile cakey.pem</code>，这两个文件就是前两步生成的位于<code>/etc/pki/CA</code>下的根密钥和根证书。将生成的crt证书发回nginx服务器使用。</p>
+<p>上面签发过程其实默认使用了 <code>-cert cacert.pem -keyfile cakey.pem</code> ，这两个文件就是前两步生成的位于 <code>/etc/pki/CA</code> 下的根密钥和根证书。将生成的 crt 证书发回 nginx 服务器使用。</p>
 <ul>
 <li>精简上面的步骤如下</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/ngnix/ssl</div><div class="line">cd /usr/lcoal/nginx/ssl</div><div class="line">// 创建根证书私钥</div><div class="line">openssl genrsa -des3 -out ca.key 2048</div><div class="line">// 创建根证书 (这里/C表示国家(Country)，只能是国家字母缩写，如CN、US等；/ST表示州或者省(State/Provice)；/L表示城市或者地区(Locality)；/O表示组织名(Organization Name)；/OU其他显示内容，一般会显示在颁发者这栏)</div><div class="line">openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj &quot;/C=CN/ST=BeiJing/L=BeiJing/O=Your Company Name/OU=Your Root CA&quot;</div><div class="line">// 创建服务器ssl证书私钥</div><div class="line">openssl genrsa -des3 -out server.key 2048</div><div class="line">// 建立SSL证书(/O字段内容必须与刚才的CA根证书相同；/CN字段为公用名称(Common Name)，必须为网站的域名(不带www)；/OU字段最好也与为网站域名，当然选择其他名字也没关系)</div><div class="line">openssl req -new -key server.key -out server.csr -subj &quot;/C=CN/ST=BeiJing/L=BeiJing/O=Your Company Name/OU=zerounix.com/CN=zerounix.com&quot;</div><div class="line">// 准备</div><div class="line">mkdir demoCA</div><div class="line">cd demoCA</div><div class="line">mkdir newcerts</div><div class="line">touch index.txt</div><div class="line">echo &apos;01&apos; &gt; serial</div><div class="line">cd ..</div><div class="line">// 自签名证书</div><div class="line">openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/ngnix/ssl</div><div class="line">cd /usr/lcoal/nginx/ssl</div><div class="line">// 创建根证书私钥</div><div class="line">openssl genrsa -des3 -out ca.key 2048</div><div class="line">// 创建根证书 (这里 /C 表示国家 (Country)，只能是国家字母缩写，如 CN、US 等； /ST 表示州或者省 (State/Provice)； /L 表示城市或者地区(Locality)；/O 表示组织名 (Organization Name)；/OU 其他显示内容，一般会显示在颁发者这栏)</div><div class="line">openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj &quot;/C=CN/ST=BeiJing/L=BeiJing/O=Your Company Name/OU=Your Root CA&quot;</div><div class="line">// 创建服务器 ssl 证书私钥</div><div class="line">openssl genrsa -des3 -out server.key 2048</div><div class="line">// 建立 SSL 证书( /O 字段内容必须与刚才的 CA 根证书相同；/CN 字段为公用名称 (Common Name) ，必须为网站的域名(不带 www)；/OU 字段最好也与为网站域名，当然选择其他名字也没关系)</div><div class="line">openssl req -new -key server.key -out server.csr -subj &quot;/C=CN/ST=BeiJing/L=BeiJing/O=Your Company Name/OU=zerounix.com/CN=zerounix.com&quot;</div><div class="line">// 准备</div><div class="line">mkdir demoCA</div><div class="line">cd demoCA</div><div class="line">mkdir newcerts</div><div class="line">touch index.txt</div><div class="line">echo &apos;01&apos; &gt; serial</div><div class="line">cd ..</div><div class="line">// 自签名证书</div><div class="line">openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key</div></pre></td></tr></table></figure>
 <p>更为简单的步骤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">openssl genrsa -des3 -out server.key 2048</div><div class="line">openssl req -new -key server.key -out server.csr</div></pre></td></tr></table></figure></p>
-<h2 id="配置Nginx支持SSL"><a href="#配置Nginx支持SSL" class="headerlink" title="配置Nginx支持SSL"></a>配置Nginx支持SSL</h2><h3 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 443 ssl;</div><div class="line">    server_name www.zerounix.com;</div><div class="line">    root /data/website/www.zerounix.com;</div><div class="line">    charset utf-8;</div><div class="line">    index index.php index.html;</div><div class="line">    ssl on;                                                    // 开启ssl支持</div><div class="line">    ssl_certificate      /usr/local/nginx/ssl/nginx.crt;       // 证书位置</div><div class="line">    ssl_certificate_key  /usr/local/nginx/ssl/nginx.key;       // 私钥</div><div class="line">    ssl_session_timeout  5m;</div><div class="line">    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;                  // 指定密码为openssl支持的格式</div><div class="line">    ssl_ciphers         HIGH:!aNULL:!MD5;                      // 加密方法</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line">    access_log  logs/www.zerounix.com_access.log access;</div><div class="line">    error_log   logs/www.zerounix.com_error.log;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ /index.php$is_args$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ .*\.(php|php5)$ &#123;</div><div class="line">        #fastcgi_pass 127.0.0.1:9000;</div><div class="line">        fastcgi_pass   unix:/dev/shm/php-fpm.socket;</div><div class="line">        include        fastcgi.conf;</div><div class="line">        try_files $uri =404;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="通过第三方SSL签发机构签发SSL证书"><a href="#通过第三方SSL签发机构签发SSL证书" class="headerlink" title="通过第三方SSL签发机构签发SSL证书"></a>通过第三方SSL签发机构签发SSL证书</h2><h3 id="使用-OpenSSL-生成-SSL-Key-和-CSR"><a href="#使用-OpenSSL-生成-SSL-Key-和-CSR" class="headerlink" title="使用 OpenSSL 生成 SSL Key 和 CSR"></a>使用 OpenSSL 生成 SSL Key 和 CSR</h3><p>由于只有浏览器或者系统信赖的 CA 才可以让所有的访问者通畅的访问你的加密网站，而不是出现证书错误的提示。所以我们跳过自签证书的步骤，直接开始签署第三方可信任的 SSL 证书吧。<br>OpenSSL 在 Linux、OS X 等常规的系统下默认都安装了，因为一些安全问题，一般现在的第三方 SSL 证书签发机构都要求起码 2048 位的 RSA 加密的私钥。同时，普通的 SSL 证书认证分两种形式，一种是 DV（Domain Validated），还有一种是 OV （Organization Validated），前者只需要验证域名，后者需要验证你的组织或公司，在安全性方面，肯定是后者要好。无论你用 DV 还是 OV 生成私钥，都需要填写一些基本信息，这里我们假设如下：<br>域名，也称为 Common Name，因为特殊的证书不一定是域名：example.com</p>
+<h2 id="配置-Nginx-支持-SSL"><a href="#配置-Nginx-支持-SSL" class="headerlink" title="配置 Nginx 支持 SSL"></a>配置 Nginx 支持 SSL</h2><h3 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 443 ssl;</div><div class="line">    server_name www.zerounix.com;</div><div class="line">    root /data/website/www.zerounix.com;</div><div class="line">    charset utf-8;</div><div class="line">    index index.php index.html;</div><div class="line">    ssl on;                                                    // 开启 ssl 支持</div><div class="line">    ssl_certificate      /usr/local/nginx/ssl/nginx.crt;       // 证书位置</div><div class="line">    ssl_certificate_key  /usr/local/nginx/ssl/nginx.key;       // 私钥</div><div class="line">    ssl_session_timeout  5m;</div><div class="line">    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;                  // 指定密码为 openssl 支持的格式</div><div class="line">    ssl_ciphers         HIGH:!aNULL:!MD5;                      // 加密方法</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line">    access_log  logs/www.zerounix.com_access.log access;</div><div class="line">    error_log   logs/www.zerounix.com_error.log;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        try_files $uri $uri/ /index.php$is_args$args;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location ~ .*\.(php|php5)$ &#123;</div><div class="line">        #fastcgi_pass 127.0.0.1:9000;</div><div class="line">        fastcgi_pass   unix:/dev/shm/php-fpm.socket;</div><div class="line">        include        fastcgi.conf;</div><div class="line">        try_files $uri =404;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="通过第三方-SSL-签发机构签发SSL证书"><a href="#通过第三方-SSL-签发机构签发SSL证书" class="headerlink" title="通过第三方 SSL 签发机构签发SSL证书"></a>通过第三方 SSL 签发机构签发SSL证书</h2><h3 id="使用-OpenSSL-生成-SSL-Key-和-CSR"><a href="#使用-OpenSSL-生成-SSL-Key-和-CSR" class="headerlink" title="使用 OpenSSL 生成 SSL Key 和 CSR"></a>使用 OpenSSL 生成 SSL Key 和 CSR</h3><p>由于只有浏览器或者系统信赖的 CA 才可以让所有的访问者通畅的访问你的加密网站，而不是出现证书错误的提示。所以我们跳过自签证书的步骤，直接开始签署第三方可信任的 SSL 证书吧。<br>OpenSSL 在 Linux、OS X 等常规的系统下默认都安装了，因为一些安全问题，一般现在的第三方 SSL 证书签发机构都要求起码 2048 位的 RSA 加密的私钥。同时，普通的 SSL 证书认证分两种形式，一种是 DV（Domain Validated），还有一种是 OV （Organization Validated），前者只需要验证域名，后者需要验证你的组织或公司，在安全性方面，肯定是后者要好。无论你用 DV 还是 OV 生成私钥，都需要填写一些基本信息，这里我们假设如下：<br>域名，也称为 Common Name，因为特殊的证书不一定是域名：example.com</p>
 <ul>
-<li>组织或公司名字（Organization）：Example, Inc.</li>
+<li>组织或公司名字 （Organization）：Example, Inc.</li>
 <li>部门（Department）：可以不填写，这里我们写 Web Security</li>
 <li>城市（City）：Beijing</li>
 <li>省份（State / Province）：Beijing</li>
@@ -430,8 +464,6 @@
 <p>在 Nginx 配置里使用 example_com.signed.crt 即可</p>
 <p>如果是一般常见的 AplhaSSL 泛域名证书，他们是不会发给你 CA 证书链的，那么在你的 CRT 文件后面需要加入 AlphaSSL 的 CA 证书链</p>
 <p><a href="https://www.alphassl.com/support/install-root-certificate.html" target="_blank" rel="external">AlphaSSL Intermediate CA</a></p>
-<hr>
-<p><strong> <a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a> </strong></p>
 
       
     </div>
@@ -473,8 +505,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html" rel="prev" title="Nginx--玩转反向代理">
-                Nginx--玩转反向代理 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html" rel="prev" title="Nginx玩转反向代理">
+                Nginx玩转反向代理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -566,7 +598,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -574,7 +606,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -608,6 +640,20 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -618,7 +664,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是HTTPS、SSL证书"><span class="nav-number">1.1.</span> <span class="nav-text">什么是HTTPS、SSL证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用OpenSSL-生成自签名证书"><span class="nav-number">2.</span> <span class="nav-text">使用OpenSSL 生成自签名证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作CA证书"><span class="nav-number">2.1.</span> <span class="nav-text">制作CA证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制作服务器证书"><span class="nav-number">2.2.</span> <span class="nav-text">制作服务器证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nginx支持SSL"><span class="nav-number">3.</span> <span class="nav-text">配置Nginx支持SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">编辑配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过第三方SSL签发机构签发SSL证书"><span class="nav-number">4.</span> <span class="nav-text">通过第三方SSL签发机构签发SSL证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-OpenSSL-生成-SSL-Key-和-CSR"><span class="nav-number">4.1.</span> <span class="nav-text">使用 OpenSSL 生成 SSL Key 和 CSR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-配置-HTTPS-网站以及增加安全的配置"><span class="nav-number">4.2.</span> <span class="nav-text">Nginx 配置 HTTPS 网站以及增加安全的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可靠的第三方-SSL-签发机构"><span class="nav-number">4.3.</span> <span class="nav-text">可靠的第三方 SSL 签发机构</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-HTTPS、SSL-证书"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 HTTPS、SSL 证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-OpenSSL-生成自签名证书"><span class="nav-number">2.</span> <span class="nav-text">使用 OpenSSL 生成自签名证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#制作-CA-证书"><span class="nav-number">2.1.</span> <span class="nav-text">制作 CA 证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制作服务器证书"><span class="nav-number">2.2.</span> <span class="nav-text">制作服务器证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Nginx-支持-SSL"><span class="nav-number">3.</span> <span class="nav-text">配置 Nginx 支持 SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">编辑配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过第三方-SSL-签发机构签发SSL证书"><span class="nav-number">4.</span> <span class="nav-text">通过第三方 SSL 签发机构签发SSL证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-OpenSSL-生成-SSL-Key-和-CSR"><span class="nav-number">4.1.</span> <span class="nav-text">使用 OpenSSL 生成 SSL Key 和 CSR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx-配置-HTTPS-网站以及增加安全的配置"><span class="nav-number">4.2.</span> <span class="nav-text">Nginx 配置 HTTPS 网站以及增加安全的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可靠的第三方-SSL-签发机构"><span class="nav-number">4.3.</span> <span class="nav-text">可靠的第三方 SSL 签发机构</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -769,6 +815,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="proxy,shadowsocks,socks5," />
+  <meta name="keywords" content="proxy,socks5,shadowsocks," />
 
 
 
@@ -92,13 +92,13 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <meta property="og:site_name" content="Czero's Blog">
 <meta property="og:description" content="什么是ShadowSocks
 Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。其流行起来的一大原因，多亏">
-<meta property="og:image" content="http://www.zerounix.com/images/system/proxy/shadowsocks-software.png">
-<meta property="og:updated_time" content="2016-01-22T03:13:00.000Z">
+<meta property="og:image" content="https://czero000.github.io/images/system/proxy/shadowsocks-software.png">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks搭建Sock5代理">
 <meta name="twitter:description" content="什么是ShadowSocks
 Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。其流行起来的一大原因，多亏">
-<meta name="twitter:image" content="http://www.zerounix.com/images/system/proxy/shadowsocks-software.png">
+<meta name="twitter:image" content="https://czero000.github.io/images/system/proxy/shadowsocks-software.png">
 
 
 
@@ -236,9 +236,32 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -298,8 +321,20 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Proxy/" itemprop="url" rel="index">
+                    <span itemprop="name">Proxy</span>
                   </a>
                 </span>
 
@@ -354,7 +389,7 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <h2 id="Shadowsocks优势"><a href="#Shadowsocks优势" class="headerlink" title="Shadowsocks优势"></a>Shadowsocks优势</h2><ul>
 <li>如前面所说，使用SSH来创建本地socks5代理的方法容易被发现，某些地区干脆进行了封锁，而Shadowsocks的代理方式更为隐蔽和安全。</li>
 <li>无需保持实时连接，不用考虑断线问题。在使用SSH时，总会发生断开连接的情况，如网络不稳定、电脑休眠、切换wifi等，此时SSH连接将断开，浏览网页什么的会提示无法连接到代理服务器。虽然客户端大都支持断线重连，但是反应经常不太灵敏，平均需要30秒左右的时间（而且这个时间是从你点开网页开始算的）。如果你用的是手机的话，鉴于手机网络的多变性，人一旦动起来就几乎不可用了。</li>
-<li>更丰富的客户端支持。目前Shadowsocks官网（是shadowsocks.org，不是.com那个，.com那个是售卖账号的，并非官网，有假冒官网的嫌疑）提供几乎全平台支持，包括linux和非越狱iPhone在内。尤其是OS X版的自动代理模式（PAC）非常稳定，胜过GoAgentX，完美支持safari。同时，各个平台上的客户端使用都十分简单，基本上就是填写一下地址端口密码什么的，就能开始使用了，连点击连接都不用。另外，大部分客户端支持扫描屏幕二维码完成配置，这个指导新手不要太爽。<br><a href="https://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">shadowsocks软件覆盖</a><br><img src="http://www.zerounix.com/images/system/proxy/shadowsocks-software.png" alt="shadowsocks" title="shadowsocks软件覆盖"></li>
+<li>更丰富的客户端支持。目前Shadowsocks官网（是shadowsocks.org，不是.com那个，.com那个是售卖账号的，并非官网，有假冒官网的嫌疑）提供几乎全平台支持，包括linux和非越狱iPhone在内。尤其是OS X版的自动代理模式（PAC）非常稳定，胜过GoAgentX，完美支持safari。同时，各个平台上的客户端使用都十分简单，基本上就是填写一下地址端口密码什么的，就能开始使用了，连点击连接都不用。另外，大部分客户端支持扫描屏幕二维码完成配置，这个指导新手不要太爽。<br><a href="https://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">shadowsocks软件覆盖</a><br><img src="https://czero000.github.io/images/system/proxy/shadowsocks-software.png" alt="shadowsocks" title="shadowsocks软件覆盖"></li>
 </ul>
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="安装ShadowSocks"><a href="#安装ShadowSocks" class="headerlink" title="安装ShadowSocks"></a>安装ShadowSocks</h3><ul>
 <li>shadowsocks开发语言有Node.JS、go、pthon、c</li>
@@ -385,8 +420,8 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <p>TIPS: 加密方式推荐使用<code>rc4-md5</code>，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看<a href="https://github.com/clowwindy/shadowsocks/issues/178" target="_blank" rel="external">issue</a>。</p>
 <h2 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h2><h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Shadowsocks官网下载链接：<a href="http://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">http://shadowsocks.org/en/download/clients.html</a><br>如果打不开官方下载地址，可以在这里下载（不能保证为最新版本）</p>
 <ul>
-<li><strong>Windows</strong> <a href="http://www.zerounix.com/upload/proxy/Shadowsocks-2.5.8.zip" target="_blank" rel="external">Windows 7 or above: 2.5.8.zip</a></li>
-<li><strong>Mac OS</strong>  <a href="http://www.zerounix.com/upload/proxy/ShadowsocksX-2.6.3.dmg" target="_blank" rel="external">ShadowsocksX: 2.6.3.dmg</a></li>
+<li><strong>Windows</strong> <a href="https://czero000.github.io/upload/proxy/Shadowsocks-2.5.8.zip">Windows 7 or above: 2.5.8.zip</a></li>
+<li><strong>Mac OS</strong>  <a href="https://czero000.github.io/upload/proxy/ShadowsocksX-2.6.3.dmg">ShadowsocksX: 2.6.3.dmg</a></li>
 </ul>
 <h3 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h3><p>客户端都是免安装，打开就可以使用，可以参考这篇文章<a href="http://www.jianshu.com/p/08ba65d1f91a" target="_blank" rel="external">Shadowsocks快速安装与配置指南</a></p>
 <h2 id="ShadowSocks优化"><a href="#ShadowSocks优化" class="headerlink" title="ShadowSocks优化"></a>ShadowSocks优化</h2><p>首先将内核升级到3.5或者以上</p>
@@ -394,7 +429,6 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <p>在启动Shadowsocks服务前，设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ulimit -n 51200</div></pre></td></tr></table></figure></p>
 <h3 id="调整内核参数"><a href="#调整内核参数" class="headerlink" title="调整内核参数"></a>调整内核参数</h3><p>编辑<code>/etc/sysctl.conf</code>，修改以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">fs.file-max = 51200</div><div class="line"></div><div class="line">net.core.rmem_max = 67108864</div><div class="line">net.core.wmem_max = 67108864</div><div class="line">net.core.netdev_max_backlog = 250000</div><div class="line">net.core.somaxconn = 4096</div><div class="line"></div><div class="line">net.ipv4.tcp_syncookies = 1</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_tw_recycle = 0</div><div class="line">net.ipv4.tcp_fin_timeout = 30</div><div class="line">net.ipv4.tcp_keepalive_time = 1200</div><div class="line">net.ipv4.ip_local_port_range = 10000 65000</div><div class="line">net.ipv4.tcp_max_syn_backlog = 8192</div><div class="line">net.ipv4.tcp_max_tw_buckets = 5000</div><div class="line">net.ipv4.tcp_fastopen = 3</div><div class="line">net.ipv4.tcp_mem = 25600 51200 102400</div><div class="line">net.ipv4.tcp_rmem = 4096 87380 67108864</div><div class="line">net.ipv4.tcp_wmem = 4096 65536 67108864</div><div class="line">net.ipv4.tcp_mtu_probing = 1</div><div class="line">net.ipv4.tcp_congestion_control = hybla</div></pre></td></tr></table></figure></p>
 <p>最后执行<code>sysctl -p</code>使配置生效</p>
-<p>###推荐使用<a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，注册即得10$,免费使用2个月</a></p>
 
       
     </div>
@@ -419,9 +453,9 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
           
             <a href="/tags/proxy/" rel="tag">#proxy</a>
           
-            <a href="/tags/shadowsocks/" rel="tag">#shadowsocks</a>
-          
             <a href="/tags/socks5/" rel="tag">#socks5</a>
+          
+            <a href="/tags/shadowsocks/" rel="tag">#shadowsocks</a>
           
         </div>
       
@@ -531,7 +565,7 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -539,7 +573,7 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -572,6 +606,20 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -734,6 +782,132 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

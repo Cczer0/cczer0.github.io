@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://czero000.github.io/2015/12/21/introduce-megacli-command.html">
 <meta property="og:site_name" content="Czero's Blog">
 <meta property="og:description" content="MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Cou">
-<meta property="og:updated_time" content="2016-01-21T03:51:00.000Z">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Megacli命令指南">
 <meta name="twitter:description" content="MegaCli是一款管理维护硬件RAID软件，可以通过它来了解当前raid卡的所有信息，包括 raid卡的型号，raid的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做到，一般通过 MegaCli 的Media Error Count: 1 Other Error Cou">
@@ -231,9 +231,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -293,8 +316,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Command/" itemprop="url" rel="index">
+                    <span itemprop="name">Command</span>
                   </a>
                 </span>
 
@@ -427,8 +462,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 <p>各种设备和磁盘的不同状态：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Device |Normal|Damage|Rebuild|Normal</div><div class="line">Virtual Drive |Optimal|Degraded|Degraded|Optimal</div><div class="line">Physical Drive |Online|Failed –&gt; Unconfigured|Rebuild|Online</div></pre></td></tr></table></figure>
 <h4 id="通过脚本检测RAID-磁盘状态"><a href="#通过脚本检测RAID-磁盘状态" class="headerlink" title="通过脚本检测RAID 磁盘状态"></a>通过脚本检测RAID 磁盘状态</h4><p>Linux下脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#check raid disk status</div><div class="line">MEGACLI=&quot;/opt/MegaRAID/MegaCli/MegaCli64 &quot;</div><div class="line">$MEGACLI -pdlist -aALL  | grep &quot;Firmware state&quot; | awk -F : &apos;&#123;print $2&#125;&apos; | awk -F , &apos;&#123;print $1&#125;&apos; &gt;/tmp/fireware.log</div><div class="line">$MEGACLI -pdlist -aALL  | grep -E &quot;Media Error|Other Error&quot; | awk -F : &apos;&#123;print $2&#125;&apos; &gt;/tmp/disk.log</div><div class="line">for i in `cat &lt; /tmp/disk.log`</div><div class="line">do</div><div class="line">if [ $i -ne 0 ]</div><div class="line">        then</div><div class="line">curl &quot;http://xxxxxxB&amp;state=ALARM&amp;description=raid_disk_error&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">for i in `cat &lt; /tmp/fireware.log`</div><div class="line">do</div><div class="line">if [ $i !=  Online ]</div><div class="line">        then</div><div class="line">curl &quot;http://xxxxxxstate=ALARM&amp;description=raid_disk_offline&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">Windows 下脚本</div><div class="line">Windows下脚本用的工具是gnu for windows平台的一些软件，如 bash grep awk cat</div><div class="line">通过bash直接调用脚本</div><div class="line">如：G:\raid_check\unixtools&gt;bash.exe  G:\disk.sh</div><div class="line">#check raid disk status</div><div class="line">MEGACLI=&quot;//G/raid_check/MegaCli.exe&quot;</div><div class="line">GREP=&quot;//G/raid_check/unixtools/grep.exe&quot;</div><div class="line">AWK=&quot;//G/raid_check/unixtools/awk.exe&quot;</div><div class="line">CAT=&quot;//G/raid_check/unixtools/cat.exe&quot;</div><div class="line">CURL=&quot;//G/raid_check/unixtools/curl.exe&quot;</div><div class="line">$MEGACLI -pdlist -aALL  | $GREP &quot;Firmware state&quot; |$AWK -F: &apos;&#123;print $2&#125;&apos; |$AWK -F , &apos;&#123;print $1&#125;&apos; &gt;//c/fireware.log</div><div class="line">$MEGACLI -pdlist -aALL  | $GREP -E &quot;Media Error|Other Error&quot; | $AWK -F : &apos;&#123;print $2&#125;&apos; &gt; //c/disk.log</div><div class="line">for i in `$CAT c:/disk.log`</div><div class="line">do</div><div class="line">if [ $i -ne 0 ]</div><div class="line">        then</div><div class="line">$CURL &quot;http://xxxxxx&amp;description=raid_disk_error&quot;</div><div class="line">fi</div><div class="line">done</div><div class="line">for i in `$CAT c:/fireware.log`</div><div class="line">do</div><div class="line">if [ $i != Online ]</div><div class="line">        then</div><div class="line">$CURL &quot;http://xxxxx&amp;state=ALARM&amp;description=raid_disk_offline&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+
       
     </div>
 
@@ -562,7 +596,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -570,7 +604,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -604,6 +638,20 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -614,7 +662,7 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用命令及参数"><span class="nav-number">2.</span> <span class="nav-text">使用命令及参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令使用："><span class="nav-number">2.1.</span> <span class="nav-text">命令使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带状态的变化，从拔盘，到插盘的过程中。"><span class="nav-number">2.2.</span> <span class="nav-text">磁带状态的变化，从拔盘，到插盘的过程中。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘缓存策略"><span class="nav-number">2.3.</span> <span class="nav-text">查看磁盘缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置磁盘缓存策略"><span class="nav-number">2.4.</span> <span class="nav-text">设置磁盘缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5"><span class="nav-number">2.5.</span> <span class="nav-text">创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建阵列，不指定热备"><span class="nav-number">2.6.</span> <span class="nav-text">创建阵列，不指定热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除阵列"><span class="nav-number">2.7.</span> <span class="nav-text">删除阵列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在线添加磁盘"><span class="nav-number">2.8.</span> <span class="nav-text">在线添加磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"><span class="nav-number">2.9.</span> <span class="nav-text">阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看阵列后台初始化进度"><span class="nav-number">2.10.</span> <span class="nav-text">查看阵列后台初始化进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定第-5-块盘作为全局热备"><span class="nav-number">2.11.</span> <span class="nav-text">指定第 5 块盘作为全局热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定为某个阵列的专用热备"><span class="nav-number">2.12.</span> <span class="nav-text">指定为某个阵列的专用热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除全局热备"><span class="nav-number">2.13.</span> <span class="nav-text">删除全局热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将某块物理盘下线-上线"><span class="nav-number">2.14.</span> <span class="nav-text">将某块物理盘下线/上线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看物理磁盘重建进度"><span class="nav-number">2.15.</span> <span class="nav-text">查看物理磁盘重建进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带状态的变化，从拔盘，到插盘的过程中："><span class="nav-number">2.16.</span> <span class="nav-text">磁带状态的变化，从拔盘，到插盘的过程中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#raid-电池设置相关"><span class="nav-number">2.17.</span> <span class="nav-text">raid 电池设置相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过脚本检测RAID-磁盘状态"><span class="nav-number">2.18.</span> <span class="nav-text">通过脚本检测RAID 磁盘状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用命令及参数"><span class="nav-number">2.</span> <span class="nav-text">使用命令及参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令使用："><span class="nav-number">2.1.</span> <span class="nav-text">命令使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带状态的变化，从拔盘，到插盘的过程中。"><span class="nav-number">2.2.</span> <span class="nav-text">磁带状态的变化，从拔盘，到插盘的过程中。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看磁盘缓存策略"><span class="nav-number">2.3.</span> <span class="nav-text">查看磁盘缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置磁盘缓存策略"><span class="nav-number">2.4.</span> <span class="nav-text">设置磁盘缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个-raid5-阵列，由物理盘-2-3-4-构成，该阵列的热备盘是物理盘-5"><span class="nav-number">2.5.</span> <span class="nav-text">创建一个 raid5 阵列，由物理盘 2,3,4 构成，该阵列的热备盘是物理盘 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建阵列，不指定热备"><span class="nav-number">2.6.</span> <span class="nav-text">创建阵列，不指定热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除阵列"><span class="nav-number">2.7.</span> <span class="nav-text">删除阵列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在线添加磁盘"><span class="nav-number">2.8.</span> <span class="nav-text">在线添加磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。"><span class="nav-number">2.9.</span> <span class="nav-text">阵列创建完后，会有一个初始化同步块的过程，可以看看其进度。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看阵列后台初始化进度"><span class="nav-number">2.10.</span> <span class="nav-text">查看阵列后台初始化进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定第-5-块盘作为全局热备"><span class="nav-number">2.11.</span> <span class="nav-text">指定第 5 块盘作为全局热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定为某个阵列的专用热备"><span class="nav-number">2.12.</span> <span class="nav-text">指定为某个阵列的专用热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除全局热备"><span class="nav-number">2.13.</span> <span class="nav-text">删除全局热备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将某块物理盘下线-上线"><span class="nav-number">2.14.</span> <span class="nav-text">将某块物理盘下线/上线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看物理磁盘重建进度"><span class="nav-number">2.15.</span> <span class="nav-text">查看物理磁盘重建进度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁带状态的变化，从拔盘，到插盘的过程中："><span class="nav-number">2.16.</span> <span class="nav-text">磁带状态的变化，从拔盘，到插盘的过程中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#raid-电池设置相关"><span class="nav-number">2.17.</span> <span class="nav-text">raid 电池设置相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过脚本检测RAID-磁盘状态"><span class="nav-number">2.18.</span> <span class="nav-text">通过脚本检测RAID 磁盘状态</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -765,6 +813,132 @@ Current Cache Policy: WriteBack, ReadAheadNone, Direct, Write Cache OK if Bad BB
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

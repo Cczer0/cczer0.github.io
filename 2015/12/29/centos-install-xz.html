@@ -94,7 +94,7 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
 <meta property="og:description" content="从www.kernel.org下载内核安装包，准备CentOS6.5内核升级到3.x，下载后发现是一个以.xz结尾的压缩包。
 
 xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip与bzip2一样，同样支持多文件压缩，但是约定不能将多于一个的目标文件压缩进同一个档案文件。 相反，xz通常作为一种归档文件自身的压缩格式，例如使用tar或cpioUnix程序创建的归档。 xz 在G">
-<meta property="og:updated_time" content="2016-01-21T03:49:16.000Z">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装XZ解压工具">
 <meta name="twitter:description" content="从www.kernel.org下载内核安装包，准备CentOS6.5内核升级到3.x，下载后发现是一个以.xz结尾的压缩包。
@@ -237,9 +237,32 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -299,8 +322,20 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -359,8 +394,6 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
 <h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./configure  </div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"> xz --help</div><div class="line">Usage: xz [OPTION]... [FILE]...</div><div class="line">Compress or decompress FILEs in the .xz format.</div><div class="line"></div><div class="line">  -z, --compress      force compression</div><div class="line">  -d, --decompress    force decompression</div><div class="line">  -t, --test          test compressed file integrity</div><div class="line">  -l, --list          list information about .xz files</div><div class="line">  -k, --keep          keep (don&apos;t delete) input files</div><div class="line">  -f, --force         force overwrite of output file and (de)compress links</div><div class="line">  -c, --stdout        write to standard output and don&apos;t delete input files</div><div class="line">  -0 ... -9           compression preset; default is 6; take compressor *and*</div><div class="line">                      decompressor memory usage into account before using 7-9!</div><div class="line">  -e, --extreme       try to improve compression ratio by using more CPU time;</div><div class="line">                      does not affect decompressor memory requirements</div><div class="line">  -T, --threads=NUM   use at most NUM threads; the default is 1; set to 0</div><div class="line">                      to use as many threads as there are processor cores</div><div class="line">  -q, --quiet         suppress warnings; specify twice to suppress errors too</div><div class="line">  -v, --verbose       be verbose; specify twice for even more verbose</div><div class="line">  -h, --help          display this short help and exit</div><div class="line">  -H, --long-help     display the long help (lists also the advanced options)</div><div class="line">  -V, --version       display the version number and exit</div><div class="line"></div><div class="line">With no FILE, or when FILE is -, read standard input.</div><div class="line"></div><div class="line">Report bugs to  (in English or Finnish).</div><div class="line">XZ Utils home page:</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">解压： xz -d linux-3.12.50.tar.xz </div><div class="line">压缩： xz -z linux-3.12.50.tar</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
       
     </div>
 
@@ -492,7 +525,7 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -500,7 +533,7 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -534,6 +567,20 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -544,7 +591,7 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载软件包"><span class="nav-number">1.</span> <span class="nav-text">下载软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压"><span class="nav-number">2.</span> <span class="nav-text">解压</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装"><span class="nav-number"></span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number"></span> <span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载软件包"><span class="nav-number">1.</span> <span class="nav-text">下载软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压"><span class="nav-number">2.</span> <span class="nav-text">解压</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装"><span class="nav-number"></span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number"></span> <span class="nav-text">使用方法</span></a></div>
             
           </div>
         </section>
@@ -695,6 +742,132 @@ xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip�
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

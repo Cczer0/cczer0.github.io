@@ -104,9 +104,9 @@
 
 暂存区(Index)像个缓存区域，临时保存你的改动
 版本库(Repository)分为本地仓库（Local)和远程仓库(Remote)几乎所有常用命令就是围绕这几个概念来操作的，一图胜千">
-<meta property="og:image" content="http://www.zerounix.com/images/system/git/git-simple.png">
-<meta property="og:image" content="http://www.zerounix.com/images/system/git/git-advance.jpg">
-<meta property="og:updated_time" content="2016-04-18T07:54:30.000Z">
+<meta property="og:image" content="https://czero000.github.io/images/system/git/git-simple.png">
+<meta property="og:image" content="https://czero000.github.io/images/system/git/git-advance.jpg">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git常用命令">
 <meta name="twitter:description" content="Git已经成为程序员日常工具之一，那些Git基本的命令，每天都要用的命令你都记住了吗？如果还没的话，笔者整理了一份清单，以备不时之需所用。
@@ -117,7 +117,7 @@
 
 暂存区(Index)像个缓存区域，临时保存你的改动
 版本库(Repository)分为本地仓库（Local)和远程仓库(Remote)几乎所有常用命令就是围绕这几个概念来操作的，一图胜千">
-<meta name="twitter:image" content="http://www.zerounix.com/images/system/git/git-simple.png">
+<meta name="twitter:image" content="https://czero000.github.io/images/system/git/git-simple.png">
 
 
 
@@ -255,9 +255,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -317,7 +340,19 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Git/" itemprop="url" rel="index">
                     <span itemprop="name">Git</span>
                   </a>
                 </span>
@@ -376,46 +411,46 @@
 <li>暂存区(Index)像个缓存区域，临时保存你的改动</li>
 <li>版本库(Repository)分为本地仓库（Local)和远程仓库(Remote)<br>几乎所有常用命令就是围绕这几个概念来操作的，一图胜千言，下面是一张比较简单的图，包括了最基本的命令</li>
 </ul>
-<p><img src="http://www.zerounix.com/images/system/git/git-simple.png" alt="simple"></p>
-<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br> <img src="http://www.zerounix.com/images/system/git/git-advance.jpg" alt="git-advance"></p>
+<p><img src="https://czero000.github.io/images/system/git/git-simple.png" alt="simple"></p>
+<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br> <img src="https://czero000.github.io/images/system/git/git-advance.jpg" alt="git-advance"></p>
 <p>下面的命令结合上面两张图来理解、练习、记忆效果更加。暂时用不着的命令记不住，不理解也没关系，哪天遇到问题，再来找找有没有合适的方法也不迟。</p>
 <ul>
 <li>新建/克隆代码库</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git init                                          #当前目录新建一个Git代码库</div><div class="line"></div><div class="line">git init [project-name]                             #新建一个目录，将其初始化为Git代码库</div><div class="line"></div><div class="line">git clone [url]                                     #下载一个项目和它的整个代码历史</div><div class="line"></div><div class="line">git fetch [url]                                     #下载/同步项目到</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git init                                          #当前目录新建一个Git代码库</div><div class="line">git init [project-name]                             #新建一个目录，将其初始化为Git代码库</div><div class="line">git clone [url]                                     #下载一个项目和它的整个代码历史</div><div class="line">git fetch [url]                                     #下载/同步项目到</div></pre></td></tr></table></figure>
 <ul>
 <li>添加/删除文件</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git add [file1] [file2] ...                       # 添加指定文件到暂存区</div><div class="line"></div><div class="line">git add [dir]                                     # 添加指定目录到暂存区，包括子目录</div><div class="line"></div><div class="line">git add .                                           # 添加当前目录的所有文件到暂存区</div><div class="line"></div><div class="line">git rm [file1] [file2] ...                       # 删除工作区文件，并且将这次删除放入暂存区</div><div class="line"></div><div class="line">git rm --cached [file]                           # 停止追踪指定文件，但该文件会保留在工作区</div><div class="line"></div><div class="line">git mv [file-original] [file-renamed]              # 改名文件，并且将这个改名放入暂存区</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git add [file1] [file2] ...                       # 添加指定文件到暂存区</div><div class="line">git add [dir]                                     # 添加指定目录到暂存区，包括子目录</div><div class="line">git add .                                           # 添加当前目录的所有文件到暂存区</div><div class="line">git rm [file1] [file2] ...                       # 删除工作区文件，并且将这次删除放入暂存区</div><div class="line">git rm --cached [file]                           # 停止追踪指定文件，但该文件会保留在工作区</div><div class="line">git mv [file-original] [file-renamed]              # 改名文件，并且将这个改名放入暂存区</div></pre></td></tr></table></figure>
 <ul>
 <li>代码提交</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git commit -m [message]                          # 提交暂存区所有文件到仓库区，并指定提交说明</div><div class="line"></div><div class="line">git commit [file1] [file2] ... -m [message]       # 提交暂存区的指定文件到仓库区，并指定提交说明</div><div class="line"></div><div class="line">git commit -a   # 提交工作区自上次commit之后的变化，直接到仓库区。是git add 和 git commit的组合操作</div><div class="line"></div><div class="line">git commit -v                                      # 提交时显示所有diff信息</div><div class="line"></div><div class="line">git commit --amend -m [message]                   # 使用一次新的commit，替代上一次提交</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git commit -m [message]                          # 提交暂存区所有文件到仓库区，并指定提交说明</div><div class="line">git commit [file1] [file2] ... -m [message]       # 提交暂存区的指定文件到仓库区，并指定提交说明</div><div class="line">git commit -a   # 提交工作区自上次commit之后的变化，直接到仓库区。是git add 和 git commit的组合操作</div><div class="line">git commit -v                                      # 提交时显示所有diff信息</div><div class="line">git commit --amend -m [message]                   # 使用一次新的commit，替代上一次提交</div></pre></td></tr></table></figure>
 <ul>
 <li>分支</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">git branch                                       # 列出所有本地分支</div><div class="line"></div><div class="line">git branch -r                                    # 列出所有远程分支</div><div class="line"></div><div class="line">git branch -a                                     # 列出所有本地分支和远程分支</div><div class="line"></div><div class="line">git branch [branch-name]                          # 新建一个分支，但依然停留在当前分支</div><div class="line"></div><div class="line">git checkout -b [branch]                          # 新建一个分支，并切换到该分支</div><div class="line"></div><div class="line">git branch [branch] [commit]                      # 新建一个分支，指向指定commit</div><div class="line"></div><div class="line">git checkout [branch-name]                          # 切换到指定分支</div><div class="line"></div><div class="line">git merge [branch]                                  # 合并指定分支到当前分支</div><div class="line"></div><div class="line">git branch -d [branch-name]                      # 删除本地分支</div><div class="line"></div><div class="line">git push origin --delete [branch-name]              # 方法一：删除远程分支</div><div class="line">git branch -dr [remote/branch]                      # 方法二：删除远程分支</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git branch                                       # 列出所有本地分支</div><div class="line">git branch -r                                    # 列出所有远程分支</div><div class="line">git branch -a                                     # 列出所有本地分支和远程分支</div><div class="line">git branch [branch-name]                          # 新建一个分支，但依然停留在当前分支</div><div class="line">git checkout -b [branch]                          # 新建一个分支，并切换到该分支</div><div class="line">git branch [branch] [commit]                      # 新建一个分支，指向指定commit</div><div class="line">git checkout [branch-name]                          # 切换到指定分支</div><div class="line">git merge [branch]                                  # 合并指定分支到当前分支</div><div class="line">git branch -d [branch-name]                      # 删除本地分支</div><div class="line">git push origin --delete [branch-name]              # 方法一：删除远程分支</div><div class="line">git branch -dr [remote/branch]                      # 方法二：删除远程分支</div></pre></td></tr></table></figure>
 <ul>
 <li>撤销</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">git checkout [file]                               # 恢复暂存区的指定文件到工作区（注意区别分支操作中得checkout命令）</div><div class="line"></div><div class="line">git checkout [commit] [file]                      # 恢复某个commit的指定文件到暂存区和工作区</div><div class="line"></div><div class="line">git checkout .                                   # 恢复暂存区的所有文件到工作区</div><div class="line"></div><div class="line">git reset [file]                                  # 重置暂存区的指定文件，与最新的commit保持一致，但工作区不变</div><div class="line"></div><div class="line">git reset --hard                                    # 重置暂存区与工作区，与最新的commit保持一致</div><div class="line"></div><div class="line">git reset [commit]                               # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</div><div class="line"></div><div class="line">git reset --hard [commit]                          # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</div><div class="line"></div><div class="line">git reset --keep [commit]                           # 重置当前HEAD为指定commit，但保持暂存区和工作区不变</div><div class="line"></div><div class="line">git revert [commit]                              # 新建一个commit，用来撤销指定commit</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git checkout [file]                               # 恢复暂存区的指定文件到工作区（注意区别分支操作中得checkout命令）</div><div class="line">git checkout [commit] [file]                      # 恢复某个commit的指定文件到暂存区和工作区</div><div class="line">git checkout .                                   # 恢复暂存区的所有文件到工作区</div><div class="line">git reset [file]                                  # 重置暂存区的指定文件，与最新的commit保持一致，但工作区不变</div><div class="line">git reset --hard                                    # 重置暂存区与工作区，与最新的commit保持一致</div><div class="line">git reset [commit]                               # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</div><div class="line">git reset --hard [commit]                          # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</div><div class="line">git reset --keep [commit]                           # 重置当前HEAD为指定commit，但保持暂存区和工作区不变</div><div class="line">git revert [commit]                              # 新建一个commit，用来撤销指定commit</div></pre></td></tr></table></figure>
 <ul>
 <li>标签</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">git tag                                          # 列出所有tag</div><div class="line"></div><div class="line">git tag [tag]                                     # 在当前commit新建一个tag</div><div class="line"></div><div class="line">git tag [tag] [commit]                             # 在指定commit新建一个tag</div><div class="line"></div><div class="line">git tag -d [tag]                                   # 删除本地tag</div><div class="line"></div><div class="line">git push origin :refs/tags/[tagName]              # 删除远程tag</div><div class="line"></div><div class="line">git show [tag]                                      # 查看tag信息</div><div class="line"></div><div class="line">git push [remote] [tag]                          # 提交指定tag</div><div class="line"></div><div class="line">git push [remote] --tags                          # 提交所有tag</div><div class="line"></div><div class="line">git checkout -b [branch] [tag]                   # 新建一个分支，指向某个tag</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git tag                                          # 列出所有tag</div><div class="line">git tag [tag]                                     # 在当前commit新建一个tag</div><div class="line">git tag [tag] [commit]                             # 在指定commit新建一个tag</div><div class="line">git tag -d [tag]                                   # 删除本地tag</div><div class="line">git push origin :refs/tags/[tagName]              # 删除远程tag</div><div class="line">git show [tag]                                      # 查看tag信息</div><div class="line">git push [remote] [tag]                          # 提交指定tag</div><div class="line">git push [remote] --tags                          # 提交所有tag</div><div class="line">git checkout -b [branch] [tag]                   # 新建一个分支，指向某个tag</div></pre></td></tr></table></figure>
 <ul>
 <li>查看日志</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">git status                                     # 显示所有变更文件</div><div class="line"></div><div class="line">git log                                          # 显示当前分支的版本历史</div><div class="line"></div><div class="line">git log --stat                                 # 显示当前分支的版本历史，以及发生变更的文件</div><div class="line"></div><div class="line">git blame [file]                                # 显示指定文件是什么人在什么时间修改过</div><div class="line"></div><div class="line">git log -p [file]                                # 显示指定文件相关的每一次diff</div><div class="line"></div><div class="line">git diff                                         # 显示暂存区和工作区的差异</div><div class="line"></div><div class="line">git diff --cached [commit]                    # 显示暂存区和某个commit的差异</div><div class="line"></div><div class="line">git diff HEAD                                 # 显示工作区与当前分支最新commit之间的差异</div><div class="line"></div><div class="line">git show [commit]                                # 显示某次提交的元数据和内容变化</div><div class="line"></div><div class="line">git show --name-only [commit]                    # 显示某次提交发生变化的文件</div><div class="line"></div><div class="line">git show [commit]:[filename]                    # 显示某次提交时，某个文件的内容</div><div class="line"></div><div class="line">git reflog                                    # 显示当前分支的最近几次提交</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">git status                                     # 显示所有变更文件</div><div class="line">git log                                          # 显示当前分支的版本历史</div><div class="line">git log --stat                                 # 显示当前分支的版本历史，以及发生变更的文件</div><div class="line">git blame [file]                                # 显示指定文件是什么人在什么时间修改过</div><div class="line">git log -p [file]                                # 显示指定文件相关的每一次diff</div><div class="line">git diff                                         # 显示暂存区和工作区的差异</div><div class="line">git diff --cached [commit]                    # 显示暂存区和某个commit的差异</div><div class="line">git diff HEAD                                 # 显示工作区与当前分支最新commit之间的差异</div><div class="line">git show [commit]                                # 显示某次提交的元数据和内容变化</div><div class="line">git show --name-only [commit]                    # 显示某次提交发生变化的文件</div><div class="line">git show [commit]:[filename]                    # 显示某次提交时，某个文件的内容</div><div class="line">git reflog                                    # 显示当前分支的最近几次提交</div></pre></td></tr></table></figure>
 <ul>
 <li>远程同步</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">git fetch [remote]                            # 下载远程仓库的所有变动到暂存区</div><div class="line"></div><div class="line">git remote -v                                 # 显示所有远程仓库</div><div class="line"></div><div class="line">git remote show [remote]                        # 显示某个远程仓库的信息</div><div class="line"></div><div class="line">git remote add [shortname] [url]                # 增加一个新的远程仓库，并命名</div><div class="line"></div><div class="line">git pull [remote] [branch]                    # 取回远程仓库的变化，并与本地分支合并</div><div class="line"></div><div class="line">git push [remote] [branch]                    # 上传本地指定分支到远程仓库</div><div class="line"></div><div class="line">git push [remote] --force                        # 即使有冲突，强行推送当前分支到远程仓库</div><div class="line"></div><div class="line">git push [remote] --all                        # 推送所有分支到远程仓库</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git fetch [remote]                            # 下载远程仓库的所有变动到暂存区</div><div class="line">git remote -v                                 # 显示所有远程仓库</div><div class="line">git remote show [remote]                        # 显示某个远程仓库的信息</div><div class="line">git remote add [shortname] [url]                # 增加一个新的远程仓库，并命名</div><div class="line">git pull [remote] [branch]                    # 取回远程仓库的变化，并与本地分支合并</div><div class="line">git push [remote] [branch]                    # 上传本地指定分支到远程仓库</div><div class="line">git push [remote] --force                        # 即使有冲突，强行推送当前分支到远程仓库</div><div class="line">git push [remote] --all                        # 推送所有分支到远程仓库</div></pre></td></tr></table></figure>
 <ul>
 <li>设置</li>
 </ul>
 <p>git的配置文件是.gitconfig，支持全局配置和项目配置，全部配置对所有项目有效，用 –global选择指定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git config --list                                  #显示配置</div><div class="line"></div><div class="line">git config -e [--global]                           #编辑(全局)配置文件</div><div class="line"></div><div class="line">git config [--global] user.name &quot;xx&quot;               #设置 commit 的用户</div><div class="line"></div><div class="line">git config [--global] user.email &quot;xx@xx.com&quot;       #设置 commit 的邮箱</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git config --list                                  #显示配置</div><div class="line">git config -e [--global]                           #编辑(全局)配置文件</div><div class="line">git config [--global] user.name &quot;xx&quot;               #设置 commit 的用户</div><div class="line">git config [--global] user.email &quot;xx@xx.com&quot;       #设置 commit 的邮箱</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -447,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/12/python-exceptions.html" rel="next" title="Python学习--异常处理">
-                <i class="fa fa-chevron-left"></i> Python学习--异常处理
+              <a href="/2016/04/07/saltstack-nodegroup.html" rel="next" title="SaltStack-Nodegroup">
+                <i class="fa fa-chevron-left"></i> SaltStack-Nodegroup
               </a>
             
           </div>
@@ -548,7 +583,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -556,7 +591,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -589,6 +624,20 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -751,6 +800,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

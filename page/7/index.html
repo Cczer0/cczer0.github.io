@@ -232,9 +232,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -269,8 +292,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos7-support-chinese.html" itemprop="url">
-                  CentOS7安装中文支持
+                <a class="post-title-link" href="/2016/01/04/glusterfs-administrator-guide.html" itemprop="url">
+                  gulsterfs系统管理
                 </a>
               
             
@@ -283,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T10:43:05+08:00" content="2015-12-29">
-              2015-12-29
+            <time itemprop="dateCreated" datetime="2016-01-04T12:42:12+08:00" content="2016-01-04">
+              2016-01-04
             </time>
           </span>
 
@@ -297,8 +320,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/运维技术/" itemprop="url" rel="index">
+                    <span itemprop="name">运维技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维技术/GlusterFS/" itemprop="url" rel="index">
+                    <span itemprop="name">GlusterFS</span>
                   </a>
                 </span>
 
@@ -313,8 +348,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/29/centos7-support-chinese.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos7-support-chinese.html" itemprop="commentsCount"></span>
+                <a href="/2016/01/04/glusterfs-administrator-guide.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/glusterfs-administrator-guide.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +359,7 @@
 
           
           
-             <span id="/2015/12/29/centos7-support-chinese.html" class="leancloud_visitors" data-flag-title="CentOS7安装中文支持">
+             <span id="/2016/01/04/glusterfs-administrator-guide.html" class="leancloud_visitors" data-flag-title="gulsterfs系统管理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -348,464 +383,33 @@
       
         
           
-            <p>Centos7是Centos系列的最新版本，与老版本出现了较大操作差异，下面是安装中文支持</p>
-<p>###中文支持</p>
-<ul>
-<li><p>安装语言包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install kde-l10n-Chinese -y</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改系统默认语言</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">localectl set-locale LANG=zh_CN.utf8</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装中文字体</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install ibus-table-chinese*</div></pre></td></tr></table></figure>
-<ul>
-<li><p>查看已安装的字体</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">fc-list :lang=zh</div><div class="line">/usr/share/fonts/cjkuni-ukai/ukai.ttc: AR PL UKai TW:style=Book</div><div class="line">/usr/share/fonts/cjkuni-ukai/ukai.ttc: AR PL UKai HK:style=Book</div><div class="line">/usr/share/fonts/cjkuni-ukai/ukai.ttc: AR PL UKai CN:style=Book</div><div class="line">/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc: 文泉驿点阵正黑,文泉驛點陣正黑,WenQuanYi Zen Hei Sharp:style=Regular</div><div class="line">/usr/share/fonts/cjkuni-uming/uming.ttc: AR PL UMing TW MBE:style=Light</div><div class="line">/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc: 文泉驿等宽正黑,文泉驛等寬正黑,WenQuanYi Zen Hei Mono:style=Regular</div><div class="line">/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc: 文泉驿正黑,文泉驛正黑,WenQuanYi Zen Hei:style=Regular</div><div class="line">/usr/share/fonts/cjkuni-ukai/ukai.ttc: AR PL UKai TW MBE:style=Book</div><div class="line">/usr/share/fonts/cjkuni-uming/uming.ttc: AR PL UMing TW:style=Light</div><div class="line">/usr/share/fonts/cjkuni-uming/uming.ttc: AR PL UMing HK:style=Light</div><div class="line">/usr/share/fonts/cjkuni-uming/uming.ttc: AR PL UMing CN:style=Light</div></pre></td></tr></table></figure>
-</li>
-<li><p>重新连接终端即可</p>
-</li>
-</ul>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
+          glusterfs 系统部署系统环境介绍
+OS版本：CentOS 6.5 x86_64
+软件版本： 3.7.3
+系统节点 
 
-    <div>
-      
-    </div>
 
-    <div>
-      
-    </div>
 
-    <footer class="post-footer">
-      
 
-      
+ip地址
+挂载路径
 
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
 
 
-    
-      
 
-  
-  
+172.161.8.241
+/export/brick1/gv0
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+172.161.8.242
+/export/brick1/gv0
 
-    
-      <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/22/install-shadowsocks.html" itemprop="url">
-                  Shadowsocks搭建Sock5代理
-                </a>
-              
-            
-          </h1>
-        
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T11:33:08+08:00" content="2015-12-22">
-              2015-12-22
-            </time>
-          </span>
+          ...
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/22/install-shadowsocks.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-shadowsocks.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/22/install-shadowsocks.html" class="leancloud_visitors" data-flag-title="Shadowsocks搭建Sock5代理">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h2 id="什么是ShadowSocks"><a href="#什么是ShadowSocks" class="headerlink" title="什么是ShadowSocks"></a>什么是ShadowSocks</h2><blockquote>
-<p>Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。其流行起来的一大原因，多亏了国内不科学的防火长城和某些地区的SSH Tunnel连接被禁用。</p>
-</blockquote>
-<h2 id="Shadowsocks优势"><a href="#Shadowsocks优势" class="headerlink" title="Shadowsocks优势"></a>Shadowsocks优势</h2><ul>
-<li>如前面所说，使用SSH来创建本地socks5代理的方法容易被发现，某些地区干脆进行了封锁，而Shadowsocks的代理方式更为隐蔽和安全。</li>
-<li>无需保持实时连接，不用考虑断线问题。在使用SSH时，总会发生断开连接的情况，如网络不稳定、电脑休眠、切换wifi等，此时SSH连接将断开，浏览网页什么的会提示无法连接到代理服务器。虽然客户端大都支持断线重连，但是反应经常不太灵敏，平均需要30秒左右的时间（而且这个时间是从你点开网页开始算的）。如果你用的是手机的话，鉴于手机网络的多变性，人一旦动起来就几乎不可用了。</li>
-<li>更丰富的客户端支持。目前Shadowsocks官网（是shadowsocks.org，不是.com那个，.com那个是售卖账号的，并非官网，有假冒官网的嫌疑）提供几乎全平台支持，包括linux和非越狱iPhone在内。尤其是OS X版的自动代理模式（PAC）非常稳定，胜过GoAgentX，完美支持safari。同时，各个平台上的客户端使用都十分简单，基本上就是填写一下地址端口密码什么的，就能开始使用了，连点击连接都不用。另外，大部分客户端支持扫描屏幕二维码完成配置，这个指导新手不要太爽。<br><a href="https://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">shadowsocks软件覆盖</a><br><img src="http://www.zerounix.com/images/system/proxy/shadowsocks-software.png" alt="shadowsocks" title="shadowsocks软件覆盖"></li>
-</ul>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="安装ShadowSocks"><a href="#安装ShadowSocks" class="headerlink" title="安装ShadowSocks"></a>安装ShadowSocks</h3><ul>
-<li>shadowsocks开发语言有Node.JS、go、pthon、c</li>
-<li>shadowsocks python语言版 <a href="https://github.com/clowwindy/shadowsocks" target="_blank" rel="external">https://github.com/clowwindy/shadowsocks</a></li>
-<li>shadowsocks go语言版 <a href="https://github.com/hugozhu/shadowsocks-go" target="_blank" rel="external">https://github.com/hugozhu/shadowsocks-go</a></li>
-<li>shadowsocks nodejs语言版 <a href="https://github.com/clowwindy/shadowsocks-nodejs" target="_blank" rel="external">https://github.com/clowwindy/shadowsocks-nodejs</a></li>
-<li>shadowsocks libev版（使用C语言+libev库+openssl开发） <a href="https://github.com/madeye/shadowsocks-libev" target="_blank" rel="external">https://github.com/madeye/shadowsocks-libev</a></li>
-<li>shadowsocks libuv版（很久没更新了） <a href="https://github.com/dndx/shadowsocks-libuv" target="_blank" rel="external">https://github.com/dndx/shadowsocks-libuv</a></li>
-</ul>
-<p>网上推荐安装python版和Shadowsocks-libev版，这里安装标准python版，系统为CentOS7。</p>
-<h4 id="检查服务器python，确保python-版本高于2-6"><a href="#检查服务器python，确保python-版本高于2-6" class="headerlink" title="检查服务器python，确保python 版本高于2.6"></a>检查服务器python，确保python 版本高于2.6</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">python --version</div><div class="line"></div><div class="line">Python 2.7.5</div></pre></td></tr></table></figure>
-<h4 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install m2crypto python-setuptools</div></pre></td></tr></table></figure>
-<h4 id="安装PIP"><a href="#安装PIP" class="headerlink" title="安装PIP"></a>安装PIP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div><div class="line">或者</div><div class="line">wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py</div><div class="line">python get-pip.py</div></pre></td></tr></table></figure>
-<h4 id="安装Shadowsocks"><a href="#安装Shadowsocks" class="headerlink" title="安装Shadowsocks"></a>安装Shadowsocks</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure>
-<h3 id="配置ShadowSocks"><a href="#配置ShadowSocks" class="headerlink" title="配置ShadowSocks"></a>配置ShadowSocks</h3><p>安装ShadowSocks之后可以在后天直接启动<code>ssserver -p 8000 -k password -m rc4-md5 -d start</code><br>当然也可以使用配置文件进行配置，创建<code>/etc/shadowsocks/shadowsocks.json</code>文件，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;server&quot;:&quot;my_server_ip&quot;,</div><div class="line">    &quot;server_port&quot;:8388,</div><div class="line">    &quot;local_port&quot;:1080,</div><div class="line">    &quot;password&quot;:&quot;barfoo!&quot;,</div><div class="line">    &quot;timeout&quot;:600,</div><div class="line">    &quot;method&quot;:&quot;table&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>字段解释：</p>
-<ul>
-<li>server:         服务器ip地址(IPV4/IPV6)，即为端口监听ip        </li>
-<li>server_port：   Shadowsocks服务监听端口</li>
-<li>local_port：    本地端口</li>
-<li>password：      密码</li>
-<li>timeout         超时时间</li>
-<li>method          加密方法(“bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4”)、默认为table，但是它并不安全，官方建议”aes-256-cfb”</li>
-</ul>
-<p>shadowsockv 支持多端口多用户模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;server&quot;:&quot;my_server_ip&quot;,</div><div class="line">  &quot;local_port&quot;:1080,</div><div class="line">  &quot;timeout&quot;:600,</div><div class="line">  &quot;method&quot;: &quot;aes-256-cfb&quot;,</div><div class="line">  &quot;port_password&quot;:</div><div class="line">  &#123;</div><div class="line">    &quot;9123&quot;:&quot;passwd1&quot;,</div><div class="line">    &quot;9124&quot;:&quot;passwd2&quot;</div><div class="line">  &#125;</div><div class="line">  &quot;_comment&quot;:</div><div class="line">  &#123;</div><div class="line">    &quot;9123&quot;:&quot;hanmeimei&quot;,</div><div class="line">    &quot;9124&quot;:&quot;lilei&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="启动Shadowsocks"><a href="#启动Shadowsocks" class="headerlink" title="启动Shadowsocks"></a>启动Shadowsocks</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> ssserver -c /etc/shadowsocks/shadowsocks.json -d start</div><div class="line">INFO: loading config from /etc/shadowsocks/shadowsocks.json</div><div class="line">2015-10-10 04:40:30 INFO     loading libcrypto from libcrypto.so.10</div><div class="line">started</div></pre></td></tr></table></figure>
-<p>如果要停止Shadowsocks，将命令中<code>start</code>变更为<code>stop</code>即可</p>
-<p>TIPS: 加密方式推荐使用<code>rc4-md5</code>，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看<a href="https://github.com/clowwindy/shadowsocks/issues/178" target="_blank" rel="external">issue</a>。</p>
-<h2 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h2><h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Shadowsocks官网下载链接：<a href="http://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">http://shadowsocks.org/en/download/clients.html</a><br>如果打不开官方下载地址，可以在这里下载（不能保证为最新版本）</p>
-<ul>
-<li><strong>Windows</strong> <a href="http://www.zerounix.com/upload/proxy/Shadowsocks-2.5.8.zip" target="_blank" rel="external">Windows 7 or above: 2.5.8.zip</a></li>
-<li><strong>Mac OS</strong>  <a href="http://www.zerounix.com/upload/proxy/ShadowsocksX-2.6.3.dmg" target="_blank" rel="external">ShadowsocksX: 2.6.3.dmg</a></li>
-</ul>
-<h3 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h3><p>客户端都是免安装，打开就可以使用，可以参考这篇文章<a href="http://www.jianshu.com/p/08ba65d1f91a" target="_blank" rel="external">Shadowsocks快速安装与配置指南</a></p>
-<h2 id="ShadowSocks优化"><a href="#ShadowSocks优化" class="headerlink" title="ShadowSocks优化"></a>ShadowSocks优化</h2><p>首先将内核升级到3.5或者以上</p>
-<h3 id="增加系统文件描述符的最大数量"><a href="#增加系统文件描述符的最大数量" class="headerlink" title="增加系统文件描述符的最大数量"></a>增加系统文件描述符的最大数量</h3><p>编辑<code>/etc/secritylimits.conf</code>文件增加以下两行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">* soft nofile 51200</div><div class="line">* hard nofile 51200</div></pre></td></tr></table></figure></p>
-<p>在启动Shadowsocks服务前，设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ulimit -n 51200</div></pre></td></tr></table></figure></p>
-<h3 id="调整内核参数"><a href="#调整内核参数" class="headerlink" title="调整内核参数"></a>调整内核参数</h3><p>编辑<code>/etc/sysctl.conf</code>，修改以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">fs.file-max = 51200</div><div class="line"></div><div class="line">net.core.rmem_max = 67108864</div><div class="line">net.core.wmem_max = 67108864</div><div class="line">net.core.netdev_max_backlog = 250000</div><div class="line">net.core.somaxconn = 4096</div><div class="line"></div><div class="line">net.ipv4.tcp_syncookies = 1</div><div class="line">net.ipv4.tcp_tw_reuse = 1</div><div class="line">net.ipv4.tcp_tw_recycle = 0</div><div class="line">net.ipv4.tcp_fin_timeout = 30</div><div class="line">net.ipv4.tcp_keepalive_time = 1200</div><div class="line">net.ipv4.ip_local_port_range = 10000 65000</div><div class="line">net.ipv4.tcp_max_syn_backlog = 8192</div><div class="line">net.ipv4.tcp_max_tw_buckets = 5000</div><div class="line">net.ipv4.tcp_fastopen = 3</div><div class="line">net.ipv4.tcp_mem = 25600 51200 102400</div><div class="line">net.ipv4.tcp_rmem = 4096 87380 67108864</div><div class="line">net.ipv4.tcp_wmem = 4096 65536 67108864</div><div class="line">net.ipv4.tcp_mtu_probing = 1</div><div class="line">net.ipv4.tcp_congestion_control = hybla</div></pre></td></tr></table></figure></p>
-<p>最后执行<code>sysctl -p</code>使配置生效</p>
-<p>###推荐使用<a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，注册即得10$,免费使用2个月</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/22/pptp-username-log.html" itemprop="url">
-                  pptpvpn记录登录用户名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T11:31:13+08:00" content="2015-12-22">
-              2015-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/22/pptp-username-log.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/pptp-username-log.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/22/pptp-username-log.html" class="leancloud_visitors" data-flag-title="pptpvpn记录登录用户名">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<p>  pptpd的日志主要大部分都在/var/log/messages, /var/log/daemon等文件里面，但是仔细看了发现里面没有用户名，不知道用户是用了哪一个帐号登录上来的。于是就看了一下pppd的man，里面发现了一些环境变量如：IPLOCAL, IPREMOTE等，经过测试发现 PEERNAME就是用户名，这样在/etc/ppp/ip-up和/etc/ppp/ip-down里面记录一下就可以了，另外没有发现用户的ip。后来发现pppd是spawn出一个子进程来控制pptpd连接的，子进程的命令行里面已经带有了用户的ip，经过多次试验，发现ip-up被调用的时候是有命令行参数的，$6就是用户ip，于是在ip-up里面手工用echo命令写了一下，算是pptpd的比较完整日志，里面有时间，有来源ip，有用户名，有被分配的ppp的ip等<br> 在<code>/etc/ppp/ip-up</code>和<code>/etc/ppp/ip-down</code>中加入脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">echo &quot;time: `date -d today +%F_%T`&quot; &gt;&gt; /var/log/pptpd.log  </div><div class="line">echo &quot;clientIP: $6&quot; &gt;&gt; /var/log/pptpd.log  </div><div class="line">echo &quot;username: $PEERNAME&quot; &gt;&gt; /var/log/pptpd.log  </div><div class="line">echo &quot;device: $1&quot; &gt;&gt; /var/log/pptpd.log  </div><div class="line">echo &quot;vpnIP: $4&quot; &gt;&gt; /var/log/pptpd.log  </div><div class="line">echo &quot;assignIP: $5&quot; &gt;&gt; /var/log/pptpd.log</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/22/install-pptpd-by-scripts.html" itemprop="url">
-                  PPTP VPN安装脚本
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T11:29:23+08:00" content="2015-12-22">
-              2015-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/22/install-pptpd-by-scripts.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-pptpd-by-scripts.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/22/install-pptpd-by-scripts.html" class="leancloud_visitors" data-flag-title="PPTP VPN安装脚本">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>pptp vpn 一键安装脚本，适用 rhel5.x_86-64 系统<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/install-pptpd-by-scripts.html#more" rel="contents">
+            <a class="btn" href="/2016/01/04/glusterfs-administrator-guide.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -856,8 +460,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/install-ss5-proxy.html" itemprop="url">
-                  安装ss5代理
+                <a class="post-title-link" href="/2015/12/29/apache-add-moudle-cgi.html" itemprop="url">
+                  Apache添加cgi模块
                 </a>
               
             
@@ -870,8 +474,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T11:27:07+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2015-12-29T14:07:33+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -884,8 +488,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Apache/" itemprop="url" rel="index">
+                    <span itemprop="name">Apache</span>
                   </a>
                 </span>
 
@@ -900,8 +516,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/22/install-ss5-proxy.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-ss5-proxy.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/apache-add-moudle-cgi.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/apache-add-moudle-cgi.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -911,7 +527,7 @@
 
           
           
-             <span id="/2015/12/22/install-ss5-proxy.html" class="leancloud_visitors" data-flag-title="安装ss5代理">
+             <span id="/2015/12/29/apache-add-moudle-cgi.html" class="leancloud_visitors" data-flag-title="Apache添加cgi模块">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -935,19 +551,14 @@
       
         
           
-            <a id="more"></a>
-<h3 id="socks5代理服务"><a href="#socks5代理服务" class="headerlink" title="socks5代理服务"></a>socks5代理服务</h3><p>官网：<a href="http://ss5.sourceforge.net/" target="_blank" rel="external">http://ss5.sourceforge.net/</a></p>
-<h3 id="安装gcc编译环境和相关依赖包"><a href="#安装gcc编译环境和相关依赖包" class="headerlink" title="安装gcc编译环境和相关依赖包"></a>安装gcc编译环境和相关依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install pam-devel openldap-devel cyrus-sasl-devel gcc gcc-c++ automake make openssl openssl-devel</div></pre></td></tr></table></figure>
-<h3 id="下载ss5"><a href="#下载ss5" class="headerlink" title="下载ss5"></a>下载ss5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://cznic.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</div></pre></td></tr></table></figure>
-<h3 id="编译安装ss5"><a href="#编译安装ss5" class="headerlink" title="编译安装ss5"></a>编译安装ss5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tar -zxf ss5-3.8.9-8.tar.gz</div><div class="line">cd ss5-3.8.9</div><div class="line">./configure      </div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h3 id="配置ss5"><a href="#配置ss5" class="headerlink" title="配置ss5"></a>配置ss5</h3><p>编译安装后的配置文件在/etc/opt/ss5下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ss5.conf  ss5.ha  ss5.passwd</div></pre></td></tr></table></figure></p>
-<p>添加用户和密码<br>ss5.passwd的用法是：<br><strong><em>用户 密码</em></strong></p>
-<p>配置代理权限<br>ss5.conf 用法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth    0.0.0.0/0               -               -</div><div class="line">#      Auth     SHost           SPort   DHost           DPort   Fixup   Group   Band    ExpDate</div><div class="line">permit -       0.0.0.0/0       -       0.0.0.0/0       -       -       test       -       -</div></pre></td></tr></table></figure></p>
-<p>修改/etc/init.d/ss5文件自定义端口，默认为1080<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">daemon /usr/sbin/ss5 -t $SS5_OPTS -b 0.0.0.0:1081</div></pre></td></tr></table></figure></p>
-<p>在<code>/etc/sysconfig/ss5</code>中，取消注释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SS5_OPTS=&quot; -u root&quot;</div><div class="line">``` </div><div class="line"></div><div class="line">### 启动ss5 ###</div></pre></td></tr></table></figure></p>
-<p>/etc/init.d/ss5 start<br>doneting ss5…                                            [  OK  ]</p>
-<h2 id=""><a href="#" class="headerlink" title="```"></a>```</h2><h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          apache 添加 cgi 模块Apache 需要运行 cgi 程序的，却发现先前编译安装 Apache 的时候，没有安装 Apache 的 cgi 模块。12cd /usr/local/src/httpd-2.2.25/modules/generators/usr/local/apache/bin
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/apache-add-moudle-cgi.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -995,8 +606,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/22/create-yum-mirrors-by-self.html" itemprop="url">
-                  自建yum仓库同步脚本
+                <a class="post-title-link" href="/2015/12/29/ubuntu-install-megacli.html" itemprop="url">
+                  Ubuntu安装Megacli
                 </a>
               
             
@@ -1009,8 +620,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-22T11:20:27+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2015-12-29T12:13:23+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -1023,8 +634,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Debian/" itemprop="url" rel="index">
+                    <span itemprop="name">Debian</span>
                   </a>
                 </span>
 
@@ -1039,8 +662,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/22/create-yum-mirrors-by-self.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/create-yum-mirrors-by-self.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/ubuntu-install-megacli.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/ubuntu-install-megacli.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1050,7 +673,7 @@
 
           
           
-             <span id="/2015/12/22/create-yum-mirrors-by-self.html" class="leancloud_visitors" data-flag-title="自建yum仓库同步脚本">
+             <span id="/2015/12/29/ubuntu-install-megacli.html" class="leancloud_visitors" data-flag-title="Ubuntu安装Megacli">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1074,13 +697,16 @@
       
         
           
-            <a id="more"></a>
-<h3 id="自建yum仓库"><a href="#自建yum仓库" class="headerlink" title="自建yum仓库"></a>自建yum仓库</h3><p>自建内部yum仓库，提高软件安装速度和方便性，同时不需要对新服务器开通对公网的访问权限，也提高了安全性。</p>
-<h3 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h3><p>安装httpd作为web server，提供文件下载。安装环境请参考cobbler安装。</p>
-<h3 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">######################################################</div><div class="line">## Title: Rsync CentOS\EPEL Yum Mirrors Script      ##</div><div class="line">## Version: 1.0                                     ##</div><div class="line">## Date: 2015-12-17                                 ##</div><div class="line">## Author: Charlie.Cui                              ##</div><div class="line">## Email: charlie.cui127@gmail.com</div><div class="line">## License: General Public License (GPL)            ##</div><div class="line">## Copyright© 2015, Charlie.Cui All Rights Reserved ##</div><div class="line">######################################################</div><div class="line">Date=`date +%Y%m%d`</div><div class="line">LogFile=&quot;/tmp/update_mirror.log&quot;</div><div class="line">_TrunkVer=&quot;epel centos ubuntu ubuntu-releases archlinux&quot;</div><div class="line">COMMAND=/usr/bin/rsync</div><div class="line">Option=&quot;-vazrtopg --progress --delete&quot;</div><div class="line">YumWebsite=&quot;rsync://mirrors.yun-idc.com&quot;</div><div class="line">for Class in $_TrunkVer;do</div><div class="line">echo &quot;----$Date `date +%T` Begin Rsync $Class-------&quot;&gt;&gt; $LogFile</div><div class="line">_Path=/data/mirrors/$Class/</div><div class="line">$COMMAND $Option $YumWebsite/$Class/ $_Path &gt;&gt; $LogFile</div><div class="line">echo &quot;----$Date `date +%T` Complate Rsync $Class--------&quot;&gt;&gt; $LogFile</div><div class="line">done</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+MegaCli这个命令可以用来监控raid状态、磁盘状况等，最近上了一批ubuntu系统，问题是MegaCli在官网上只有rpm格式的包，没有deb的包，但是还是有办法解决的，rpm包也是可以在debian&amp;&amp;ubuntu上安装的。
+下载最新的zip文件1http://www.ls
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/ubuntu-install-megacli.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1128,8 +754,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/sourcecode-install-ntp.html" itemprop="url">
-                  编译安装ntp服务
+                <a class="post-title-link" href="/2015/12/29/debian-support-chinese.html" itemprop="url">
+                  debian添加中文支持
                 </a>
               
             
@@ -1142,8 +768,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T23:21:36+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T12:10:41+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -1156,8 +782,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Debian/" itemprop="url" rel="index">
+                    <span itemprop="name">Debian</span>
                   </a>
                 </span>
 
@@ -1172,8 +810,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/sourcecode-install-ntp.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/sourcecode-install-ntp.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/debian-support-chinese.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/debian-support-chinese.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1183,7 +821,7 @@
 
           
           
-             <span id="/2015/12/21/sourcecode-install-ntp.html" class="leancloud_visitors" data-flag-title="编译安装ntp服务">
+             <span id="/2015/12/29/debian-support-chinese.html" class="leancloud_visitors" data-flag-title="debian添加中文支持">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1207,40 +845,15 @@
       
         
           
-            <a id="more"></a>
-<h2 id="升级背景"><a href="#升级背景" class="headerlink" title="升级背景"></a>升级背景</h2><h3 id="NTP服务漏洞"><a href="#NTP服务漏洞" class="headerlink" title="NTP服务漏洞"></a>NTP服务漏洞</h3><p><img src="http://www.zerounix.com/system/ntp/ntp-bug.png" alt="NTP.BUG"></p>
-<blockquote>
-<p>“未经过身份验证的攻击者能够迫使网络时间协议守护进程（ntpd）与恶意的时间服务器源进行同步，这样一来，攻击者就可以随意修改目标 系统的系统时间了。网络时间协议守护进程（ntpd）在处理某些经过加密的、没有得到应答的网络数据包时，会发生错误。”<br>总的来说，恶意攻击者能够迫使目标主机的网络时间协议守护进程（ntpd）与恶意的时间同步源进行同步，并且干扰目标系统的系统时钟。<br>除此之外，网络时间协议守护进程（ntpd）也可以与特定类型的同步请求进行响应。<br>根据思科Talos安全情报研究团队的描述：“在大多数的配置文件下，如果网络时间协议守护进程（ntpd）接收到了这样的一个数据包，如果网络时间协议守 护进程（ntpd）能够验证这个数据包的有效性，那么它就会让计算机与请求的发送端建立一个短暂的链接。比如说，当网络时间协议守护进程（ntpd）接收 到一个请求数据包时，ntpd会对数据包的有效性进行一系列的检测。” 在某些操作系统中，恶意地更改系统时间将会带来非常严重的影响，攻击者可以利用这一漏洞来实现：</p>
-<ul>
-<li>利用过期的账号和密码进行身份验证；</li>
-<li>让TLS客户端接收已经过期作废的证书，并拒绝当前有效的证书；</li>
-<li>绕过现代Web安全防御机制，例如证书绑定以及HTTP安全传输机制；</li>
-<li>强制刷新缓存系统中的缓存数据，从而导致系统性能显著下降，例如DNS和CDN等；</li>
-<li>攻击基于物理的实时网络系统；</li>
-</ul>
-</blockquote>
-<h3 id="谁将受到这些问题的影响？"><a href="#谁将受到这些问题的影响？" class="headerlink" title="谁将受到这些问题的影响？"></a>谁将受到这些问题的影响？</h3><blockquote>
-<p>这一漏洞将会影响ntp 4.2.8p3，正如Talos团队的专家所述，这一漏洞早在2009年的ntp 4.2.5p186版本中就已经存在了。<br>因此，在所有ntp-4发行版的版本中，4.2.5p186至4.2.8p3版本的ntp都存在这一漏洞。在所有ntp－4开发版的版本中，4.3.0至4.3.76版本的ntp也存在这一漏洞。除此之外，所有整合了上述版本ntpd的产品也将会受到这一漏洞的影响。<br>除此之外，Talos安全情报研究团队的专家们还发现了下列漏洞：</p>
-</blockquote>
-<ul>
-<li>整型溢出将引起守护进程的崩溃；</li>
-<li>NTP的密码管理器中存在一个用后释放（UAF）漏洞和一个缓冲区溢出漏洞；</li>
-<li>一个VMS目录遍历漏洞；</li>
-<li>NTPQ中的一个漏洞；</li>
-<li>远程攻击者可以向目标主机发送一个恶意的配置文件，从而对目标主机发动拒绝服务（DoS）攻击；</li>
-<li>守护进程中存在一个缓冲区溢出漏洞；</li>
-</ul>
-<p>NTP项目小组建议广大用户应当尽快安装ntp-4.2.8p4来修复这一问题，并且采用BCP 38数据包输入输出过滤。</p>
-<h2 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h2><h3 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h3><p>测试主机：CentOS release 6.5 (Final) i386</p>
-<h3 id="卸载系统自带软件"><a href="#卸载系统自带软件" class="headerlink" title="卸载系统自带软件"></a>卸载系统自带软件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm -qa ntp</div><div class="line">ntp-4.2.6p5-1.el6.centos.i686</div><div class="line">rpm -e ntp-4.2.6p5-1.el6.centos.i686 --nodeps</div><div class="line">warning: /etc/ntp.conf saved as /etc/ntp.conf.rpmsave</div></pre></td></tr></table></figure>
-<h3 id="下载软件源码"><a href="#下载软件源码" class="headerlink" title="下载软件源码"></a>下载软件源码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p4.tar.gz</div></pre></td></tr></table></figure>
-<h3 id="安装NTP"><a href="#安装NTP" class="headerlink" title="安装NTP"></a>安装NTP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tar -zxf ntp-4.2.8p4.tar.gz </div><div class="line">cd ntp-4.2.8p4</div><div class="line">./configure --enable-all-clocks --enable-parse-clocks --enable-linuxcaps </div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h3 id="配置NTP"><a href="#配置NTP" class="headerlink" title="配置NTP"></a>配置NTP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">cat /etc/ntp.conf         </div><div class="line"># For more information about this file, see the man pages</div><div class="line"># ntp.conf(5), ntp_acc(5), ntp_auth(5), ntp_clock(5), ntp_misc(5), ntp_mon(5).</div><div class="line"></div><div class="line">driftfile /var/lib/ntp/drift</div><div class="line"></div><div class="line"># Permit time synchronization with our time source, but do not</div><div class="line"># permit the source to query or modify the service on this system.</div><div class="line">restrict default kod nomodify notrap nopeer noquery</div><div class="line">restrict -6 default kod nomodify notrap nopeer noquery</div><div class="line"></div><div class="line"># Permit all access over the loopback interface.  This could</div><div class="line"># be tightened as well, but to do so would effect some of</div><div class="line"># the administrative functions.</div><div class="line">restrict 127.0.0.1 </div><div class="line">restrict -6 ::1</div><div class="line"></div><div class="line"># Hosts on local network are less restricted.</div><div class="line">restrict 172.16.0.0 mask 255.255.0.0 nomodify notrap</div><div class="line"></div><div class="line"># Use public servers from the pool.ntp.org project.</div><div class="line"># Please consider joining the pool (http://www.pool.ntp.org/join.html).</div><div class="line">server 3.cn.pool.ntp.org perfer  </div><div class="line">server 1.cn.pool.ntp.org</div><div class="line">server 0.asia.pool.ntp.org</div><div class="line"></div><div class="line">#broadcast 192.168.1.255 autokey        # broadcast server</div><div class="line">#broadcastclient                        # broadcast client</div><div class="line">#broadcast 224.0.1.1 autokey            # multicast server</div><div class="line">#multicastclient 224.0.1.1              # multicast client</div><div class="line">#manycastserver 239.255.254.254         # manycast server</div><div class="line">#manycastclient 239.255.254.254 autokey # manycast client</div><div class="line"></div><div class="line">restrict 3.cn.pool.ntp.org nomodify notrap noquery</div><div class="line">restrict 1.cn.pool.ntp.org nomodify notrap noquery</div><div class="line">restrict 0.asia.pool.ntp.org nomodify notrap noquery</div><div class="line"></div><div class="line"></div><div class="line">server  127.127.1.0     # local clock</div><div class="line">fudge   127.127.1.0 stratum 10</div><div class="line"></div><div class="line"># Enable public key cryptography.</div><div class="line">#crypto</div><div class="line"></div><div class="line">includefile /etc/ntp/crypto/pw</div><div class="line"></div><div class="line"># Key file containing the keys and key identifiers used when operating</div><div class="line"># with symmetric key cryptography. </div><div class="line">keys /etc/ntp/keys</div><div class="line"></div><div class="line"># Specify the key identifiers which are trusted.</div><div class="line">#trustedkey 4 8 42</div><div class="line"></div><div class="line"># Specify the key identifier to use with the ntpdc utility.</div><div class="line">#requestkey 8</div><div class="line"></div><div class="line"># Specify the key identifier to use with the ntpq utility.</div><div class="line">#controlkey 8</div><div class="line"></div><div class="line"># Enable writing of statistics records.</div><div class="line">#statistics clockstats cryptostats loopstats peerstats</div></pre></td></tr></table></figure>
-<h3 id="启动NTP"><a href="#启动NTP" class="headerlink" title="启动NTP"></a>启动NTP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/ntp/bin/ntpd -c /etc/ntp.conf</div></pre></td></tr></table></figure>
-<h3 id="增加启动脚本"><a href="#增加启动脚本" class="headerlink" title="增加启动脚本"></a>增加启动脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"># ntpd          This shell script takes care of starting and stopping</div><div class="line">#               ntpd (NTPv4 daemon).</div><div class="line">#</div><div class="line"># chkconfig: - 58 74</div><div class="line"># description: ntpd is the NTPv4 daemon. \</div><div class="line"># The Network Time Protocol (NTP) is used to synchronize the time of \</div><div class="line"># a computer client or server to another server or reference time source, \</div><div class="line"># such as a radio or satellite receiver or modem.</div><div class="line"></div><div class="line">NTPD=/usr/local/bin/ntpd</div><div class="line">PIDFILE=/var/run/ntpd.pid</div><div class="line">USER=ntp</div><div class="line">GROUP=ntp</div><div class="line">NTPD_OPTS=&quot;-g -u ntp:ntp -p $PIDFILE&quot;</div><div class="line"></div><div class="line">ntpd_start() &#123;</div><div class="line">    if [ -r $PIDFILE ]; then</div><div class="line">        echo &quot;ntpd seems to be already running under pid `cat $PIDFILE`.&quot;</div><div class="line">        echo &quot;Delete $PIDFILE if this is not the case.&quot;;</div><div class="line">        return 1;</div><div class="line">    fi</div><div class="line">    echo -n &quot;Starting NTP daemon... &quot;</div><div class="line"></div><div class="line">    $NTPD $NTPD_OPTS</div><div class="line"></div><div class="line">    # You can&apos;t always rely on the ntpd exit code, see Bug #2420</div><div class="line">    # case &quot;$?&quot; in</div><div class="line">    #     0) echo &quot;OK!&quot;</div><div class="line">    #         return 0;;</div><div class="line">    #     *) echo &quot;FAILED!&quot;</div><div class="line">    #         return 1;;</div><div class="line">    # esac</div><div class="line"></div><div class="line">    sleep 1</div><div class="line"></div><div class="line">    if ps -Ao args|grep -q &quot;^$NTPD $NTPD_OPTS&quot;; then</div><div class="line">        echo &quot;OK!&quot;</div><div class="line">        return 0</div><div class="line">    else</div><div class="line">        echo &quot;FAILED!&quot;</div><div class="line">        [ -e $PIDFILE ] &amp;&amp; rm $PIDFILE</div><div class="line">        return 1</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">ntpd_stop() &#123;</div><div class="line">    if [ ! -r $PIDFILE ]; then</div><div class="line">        echo &quot;ntpd doesn&apos;t seem to be running, cannot read the pid file.&quot;</div><div class="line">        return 1;</div><div class="line">    fi</div><div class="line">    echo -n &quot;Stopping NTP daemon...&quot;;</div><div class="line">    PID=`cat $PIDFILE`</div><div class="line"></div><div class="line">    if kill -TERM $PID 2&gt; /dev/null;then</div><div class="line">        # Give ntp 15 seconds to exit</div><div class="line">        for i in `seq 1 15`; do</div><div class="line">            if [ -n &quot;`ps -p $PID|grep -v PID`&quot; ]; then</div><div class="line">                echo -n .</div><div class="line">                sleep 1</div><div class="line">            else</div><div class="line">                echo &quot; OK!&quot;</div><div class="line">                rm $PIDFILE</div><div class="line">                return 0</div><div class="line">            fi</div><div class="line">        done</div><div class="line">    fi</div><div class="line"></div><div class="line">    echo &quot; FAILED! ntpd is still running&quot;;</div><div class="line">    return 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">ntpd_status() &#123;</div><div class="line">    if [ -r $PIDFILE ]; then</div><div class="line">        echo &quot;NTP daemon is running as `cat $PIDFILE`&quot;</div><div class="line">    else</div><div class="line">        echo &quot;NTP daemon is not running&quot;</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">    &apos;start&apos;)</div><div class="line">        ntpd_start</div><div class="line">        ;;</div><div class="line">    &apos;stop&apos;)</div><div class="line">        ntpd_stop</div><div class="line">        ;;</div><div class="line">    &apos;restart&apos;)</div><div class="line">        ntpd_stop &amp;&amp; ntpd_start</div><div class="line">        ;;</div><div class="line">    &apos;status&apos;)</div><div class="line">        ntpd_status</div><div class="line">        ;;</div><div class="line">    *)</div><div class="line">        echo &quot;Usage: $0 (start|stop|restart|status)&quot;</div><div class="line">esac</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+debian与ubuntu有很大的相似性，但是debian相对更原始，比如在语言支持这一块，如果在安装ubuntu的时候，选择的系统语言是英文，那么系统显示的肯定是英文，但是查看中文文件的时候，肯定还是能查看的，因为系统默认支持了中文，中文字体，语言包等已经安装好了，但是 debian不同，如果你
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/debian-support-chinese.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1288,8 +901,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/inotify-command.html" itemprop="url">
-                  初识inotify
+                <a class="post-title-link" href="/2015/12/29/scripts-heard-info.html" itemprop="url">
+                  脚本描述头信息
                 </a>
               
             
@@ -1302,8 +915,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T23:04:05+08:00" content="2015-12-21">
-              2015-12-21
+            <time itemprop="dateCreated" datetime="2015-12-29T11:48:42+08:00" content="2015-12-29">
+              2015-12-29
             </time>
           </span>
 
@@ -1316,8 +929,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
                   </a>
                 </span>
 
@@ -1332,8 +957,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/21/inotify-command.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/inotify-command.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/29/scripts-heard-info.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/scripts-heard-info.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1343,7 +968,7 @@
 
           
           
-             <span id="/2015/12/21/inotify-command.html" class="leancloud_visitors" data-flag-title="初识inotify">
+             <span id="/2015/12/29/scripts-heard-info.html" class="leancloud_visitors" data-flag-title="脚本描述头信息">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1367,383 +992,15 @@
       
         
           
-            <a id="more"></a>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在工作中，人们往往需要知道在某些文件、目录上都有那些变化，比如：</p>
-<ul>
-<li>通知配置文件的改变</li>
-<li>追踪某些关键的系统文件变化</li>
-<li>系统崩溃时进行自动清理</li>
-<li>自动触发备份进程</li>
-<li>向服务器上传文件结束时发出通知</li>
-</ul>
-<p>通常使用文件轮询的通知机制，但是这种机制只适用经常改变的文件（因为它可以确保没过x秒就可以得到i/o），其他情况下都非常低效，并且有时候会丢失某些类型的变化，例如文件的修改时间没有改变。像Tripwire这样的数据完整性系统，他们基于时间调度来追踪文件变化，但是如果想实时监控文件的变化，那么时间调度就束手无策了，Inotify就这样应运而生了。</p>
-<h3 id="Inorify是什么"><a href="#Inorify是什么" class="headerlink" title="Inorify是什么"></a>Inorify是什么</h3><p>  在日常的运维过程中，经常需要备份某些文件，或者对系统的某些文件进行监控，比如重大服务的配置文件。如果需要做到实时同步或是监控，就需要使用内核的inotify机制。Linux内核从2.6.13开始引入Inotify，现在几乎所有的主流Linux发行版都已经支持Inotify机制，Inotify是基于inode级别的文件系统监控技术，是一种强大的、细粒度的、异步的机制，他满足各种各样的文件监控需要，不仅限于安全和性能。<br>Inotify不需要对监视的目标打开文件描述符，而且如果被监视目录在可移动介质上，那么在umount该介质的文件系统后，被监视目标的watch将被自动删除，并且会产生一个umount事件。</p>
-<ul>
-<li>Inotify既可以监视文件，亦可以监视目录</li>
-<li>Inotify使用系统调用而非Sigio来通知文件系统事件</li>
-<li>Inotify使用文件描述符作为接口，因而可以使用通常的文件I/O操作select和poll来监视文件系统的变化</li>
-</ul>
-<p>如何知道你的Linux内核是否支持Inotify机制呢，执行下面命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">grep INOTIFY_USER /boot/config-$(uname -r)</div><div class="line">CONFIG_INOTIFY_USER=y</div></pre></td></tr></table></figure></p>
-<p>如果输出<code>CONFIG_INOTIFY_USER=y</code>，那么就可以享受Inotify之旅了。</p>
-<h3 id="安装inotify-tools"><a href="#安装inotify-tools" class="headerlink" title="安装inotify-tools"></a>安装inotify-tools</h3><h4 id="软件下载地址"><a href="#软件下载地址" class="headerlink" title="软件下载地址"></a>软件下载地址</h4><p>官方地址：<code>[https://github.com/rvoicilas/inotify-tools/wiki]([https://github.com/rvoicilas/inotify-tools/wiki)</code></p>
-<h4 id="下载安装软件包"><a href="#下载安装软件包" class="headerlink" title="下载安装软件包"></a>下载安装软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</div><div class="line">tar -zxf inotify-tools-3.14.tar.gz </div><div class="line">cd inotify-tools-3.14</div><div class="line">./configure --prefix=/usr/local/inotify</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h3 id="使用Inotify"><a href="#使用Inotify" class="headerlink" title="使用Inotify"></a>使用Inotify</h3><h4 id="Inotify可监视的文件系统事件"><a href="#Inotify可监视的文件系统事件" class="headerlink" title="Inotify可监视的文件系统事件"></a>Inotify可监视的文件系统事件</h4><ul>
-<li>IN_ACCESS：   即文件被访问</li>
-<li>IN_MODIFY：    文件被write</li>
-<li>IN_ATTRIB：    文件属性被修改，如chmod、chown、touch等</li>
-<li>IN_CLOSE_WRITE：    可以文件被close</li>
-<li>IN_CLOSE_NOWRITE：   不可写文件被close</li>
-<li>IN_OPEN：    文件被打开</li>
-<li>IN_MOVED_FROM：    文件被移走，如mv</li>
-<li>IN_MOVED_TO：    文件被移来，如mv、cp</li>
-<li>IN_CREATE：    创建新文件</li>
-<li>IN_DELETE：    文件被删除，如rm</li>
-<li>IN__DELETE_SELF： 自删除，挤一个可执行文件在执行时删除自己</li>
-<li>IN_MOVE_SELF：    自移动，即一个可执行文件在执行时移动自己</li>
-<li>IN_UNMOUNT：    宿主文件系统被umount</li>
-<li>IN_CLOSE：    文件被关闭，等同于（IN_CLOSE_WRITE|IN_CLOSE_NOWRITE）</li>
-<li>IN_MOVE：     文件被移动，等同于（IN_MOVED_FROM|IN_MOVED_TO）</li>
-</ul>
-<h4 id="inotify的默认内核参数"><a href="#inotify的默认内核参数" class="headerlink" title="inotify的默认内核参数"></a>inotify的默认内核参数</h4><ul>
-<li><strong>/proc/sys/fs/inotify/max_queued_events</strong>     默认值：16384 该文件中的值为调用inotify_init时分配给inotify instatnce中可排队的event的数目最大值，超出这个值的时间被丢弃，但会触发IN_Q_OVERFLOW事件</li>
-<li><strong>/proc/sys/fs/inotify/max_user_instances</strong>     默认值：128 指定了每个read user ID可创建的inotify instatnces的数量上限</li>
-<li><strong>/proc/sys/fs/inotify/max_user_watches</strong>         默认值：8192 指定了每个inotify instance相关的watches的上限</li>
-</ul>
-<p><strong>PS：max_queued_events是Inotify管理的队列的最大长度，文件系统变化越频繁，这个值就应该越大<br>如果在日志中看到Event Queue Overflow，说明max_queued_events大小需要调整参数后再次使用</strong></p>
-<h4 id="使用incron实现重要配置文件监控"><a href="#使用incron实现重要配置文件监控" class="headerlink" title="使用incron实现重要配置文件监控"></a>使用incron实现重要配置文件监控</h4><p>incron是inotify的cron系统，与本身的cron一样，包含一个后台守护进程（incrond）和一个事件编辑器（incrontab）与系统本身的cron不同的仅仅是触发时间的是os对某个文件或者文件夹的操作而不再是时间，由于系统事件触发的机制，对于应用系统来说，几乎做到实时性。<br>安装incron包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirrors.sohu.com/fedora-epel/5Server/i386/incron-0.5.5-2.el5.i386.rpm</div></pre></td></tr></table></figure></p>
-<p>查看incron支持的事件类型：<code>incrontab -t</code>，编辑配置文件使用<code>incrontab -e</code><br>配置文件爱你格式说明：（默认配置在/var/spool/incron/ 目录下）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure></p>
-<p>选项说明：</p>
-<ul>
-<li>path ：    需要监控的文件和目录</li>
-<li>event ：    系统对监控对象发生的事件，多个事件可以用逗号隔离，</li>
-<li>command  ：    command可以是系统命令，也可以是脚本，不能使用系统的重定向，除非重定向写在脚本中</li>
-<li>command 还可以使用下面变量：<ul>
-<li>$@ ：代表 ，即监控对象</li>
-<li>$#：    发生系统时间的对象（如果监控的是某个文件夹，某个文件发生变化，那么$#就代表了该文件）</li>
-<li>$%：    代表 ，即发生的事件</li>
-</ul>
-</li>
-<li>event  监控事件如下：<ul>
-<li>IN_ACCESS</li>
-<li>IN_MODIFY</li>
-<li>IN_ATTRIB</li>
-<li>IN_CLOSE_WRITE</li>
-<li>IN_CLOSE_NOWRITE</li>
-<li>IN_OPEN</li>
-<li>IN_MOVED_FROM</li>
-<li>IN_MOVED_TO</li>
-<li>IN_CREATE</li>
-<li>IN_DELETE</li>
-<li>IN_DELETE_SELF</li>
-<li>IN_CLOSE</li>
-<li>IN_MOVE</li>
-<li>IN_ONESHOT</li>
-<li>IN_ALL_EVENTS</li>
-<li>IN_DONT_FOLLOW    ：</li>
-<li>IN_ONLYDIR            ：只监控目录</li>
-<li>IN_MOVE_SELF        ：仅监控一次事件</li>
-</ul>
-</li>
-</ul>
-<p>配置举例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">incrontab -e</div><div class="line">/opt/test/a.txt IN_MODIFY           echo &quot;$@ $#&quot;             表示文件a.txt一旦被修改，就执行echo &quot;$@ $#&quot;</div><div class="line">/opt/test/        IN_ALL_EVENTS   echo &quot;$@ $# $%&quot;       表示目录下文件任何事件触发，就执行echo &quot;$@ $# $%&quot;</div></pre></td></tr></table></figure></p>
-<p>启动incrond<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/incrond start），然后在/opt/test/ 目录创建a.txt，并修改、删除，查看/var/log/cron，如下输出：</div><div class="line">Nov 10 18:12:28 ssq-54-100 incrond[11908]: stopping service</div><div class="line">Nov 10 18:12:28 ssq-54-100 incrond[12072]: starting service (version 0.5.5, built on Oct  2 2009 12:18:20)</div><div class="line">Nov 10 18:12:28 ssq-54-100 incrond[12073]: loading system tables</div><div class="line">Nov 10 18:12:28 ssq-54-100 incrond[12073]: loading user tables</div><div class="line">Nov 10 18:12:28 ssq-54-100 incrond[12073]: loading table for user root</div><div class="line">Nov 10 18:12:28 ssq-54-100 incrond[12073]: ready to process filesystem events</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test  IN_OPEN,IN_ISDIR&quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test  IN_CLOSE_NOWRITE,IN_ISDIR&quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo  &quot;/opt/test/a.txt &quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test a.txt IN_MODIFY&quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test a.txt IN_OPEN&quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test a.txt IN_MODIFY&quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo  &quot;/opt/test/a.txt &quot;)</div><div class="line">Nov 10 18:12:41 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test a.txt IN_CLOSE_WRITE&quot;)</div><div class="line">Nov 10 18:12:45 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test  IN_OPEN,IN_ISDIR&quot;)</div><div class="line">Nov 10 18:12:45 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test  IN_CLOSE_NOWRITE,IN_ISDIR&quot;)</div><div class="line">Nov 10 18:12:53 ssq-54-100 incrond[12073]: (root) CMD (echo &quot;/opt/test a.txt IN_DELETE&quot;)</div></pre></td></tr></table></figure></p>
-<p>总体来说，文件和目录的监控还是很有效的</p>
-<h3 id="linux下使用inotify"><a href="#linux下使用inotify" class="headerlink" title="linux下使用inotify"></a>linux下使用inotify</h3><p><code>/usr/local/inotify/bin/inotifywait</code>仅执行阻塞，等待inotify事件。可以监视任何一组文件和目录，或监控这个目录树（目录、子目录）</p>
-<p>脚本示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">inotifywait=&apos;/usr/local/inotify/bin/inotifywait&apos;</div><div class="line">$inotifywait -mrq --timefmt &apos;%y-%m-%d %H:%M&apos; --format &apos;%T %w%f %e&apos; --event modify,delete,create,attrib /opt/test | while read date t</div><div class="line">ime file event </div><div class="line">do      </div><div class="line">        case $event in </div><div class="line">                MODIFY|CREATE|MOVE|MODIFY,ISDIR|CREATE,ISDIR|MODIFY,ISDIR)</div><div class="line">                        echo $event&apos;-&apos;$file</div><div class="line">                ;;</div><div class="line">                MOVED_FROM|MOVED_FROM,ISDIR|DELETE|DELETE,ISDIR)</div><div class="line">                        echo $event&apos;-&apos;$file</div><div class="line">                ;;</div><div class="line">        esac</div><div class="line">done</div></pre></td></tr></table></figure></p>
-<p>执行脚本输出如下：<code>touch test.txt、echo &quot;This is a test&quot; &gt; test.txt rm test.txt -f</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sh inotifywaith.sh </div><div class="line">CREATE-/opt/test/test.txt</div><div class="line">MODIFY-/opt/test/test.txt</div><div class="line">DELETE-/opt/test/test.txt</div></pre></td></tr></table></figure></p>
-<p>inotifywait命令常用选项如下：</p>
-<ul>
-<li>–exclude        排除某些文件</li>
-<li>–excludei        排除某些文件,并忽略大小写</li>
-<li>-m|–monitor    持续行的监控</li>
-<li>-q|-quiet        打印出监控事件</li>
-<li>-d|–daemon </li>
-<li>-r|–recursive  　递归监控指定目录下的所有文件，包括新建的文件或子目录；如果要监控的目录中文件数量巨大，则通常需要修改/proc/sys/fs/inotify/max_users_watchs内核参数</li>
-</ul>
-<p><code>/usr/local/inotify/bin/inotifywatch</code>收集关于被监视的文件系统的统计数据，包括每个inotify时间发生多少次<br>假如想知道某个指定文件夹上有什么操作，可以这么做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">inotifywatch=&apos;/usr/local/inotify/bin/inotifywatch&apos;</div><div class="line">$inotifywatch  -v -e access,modify,attrib,close_write,close_nowrite,close,open,moved_to,moved_from,move,create,delete,delete_self</div><div class="line"> -t 120 -r /opt/test</div><div class="line">sh inotifywatch.sh  </div><div class="line">Establishing watches...</div><div class="line">Setting up watch(es) on /opt/test</div><div class="line">OK, /opt/test is now being watched.</div><div class="line">Total of 1 watches.</div><div class="line">Finished establishing watches, now collecting statistics.</div><div class="line">Will listen for events for 120 seconds.</div><div class="line">total  modify  attrib  close_write  close_nowrite  open  moved_from  moved_to  create  delete  filename</div><div class="line">19     2       1       2            4              6     1           1         1       1       /opt/test/</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
-        
-      
-    </div>
+添加脚本描述头信息当编写脚本或者其他程序是，在脚本开头添加脚本描述信息，更方便的向阅读脚本的人来解释脚本用途并提供他们需要了解的其他信息123456789#!/bin/bash######################################################## Desc
+          ...
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/21/rsync-inotify-backup.html" itemprop="url">
-                  rsync+inotify实现实时备份
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T23:02:15+08:00" content="2015-12-21">
-              2015-12-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/21/rsync-inotify-backup.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/rsync-inotify-backup.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/21/rsync-inotify-backup.html" class="leancloud_visitors" data-flag-title="rsync+inotify实现实时备份">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h3 id="rsync的优点和缺点"><a href="#rsync的优点和缺点" class="headerlink" title="rsync的优点和缺点"></a>rsync的优点和缺点</h3><p>  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。<br>  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件将耗费大量事件，而发生变化的往往是其中极少的一部分，这是非常低效的方式，其次rsync不能实时去监测、同步数据，虽然可以通过守护进程方式或者是crontab等方式进行触发，但是动作会有一定的时间差，这会导致两地数据可能会出现不一致，无法保证数据或者应用的安全性。</p>
-<h3 id="inotify简介"><a href="#inotify简介" class="headerlink" title="inotify简介"></a>inotify简介</h3><p>  Inotify 是一种强大的、细粒度的、异步的文件系统事件监控机制，linux内核从2.6.13起，加入了Inotify支持，通过Inotify可以监控文件系统中添加、删除，修改、移动等各种细微事件，利用这个内核接口，第三方软件就可以监控文件系统下文件的各种变化情况，而inotify-tools就是这样的一个第三方软件。rsync可以实现触发式的文件同步，但是通过crontab守护进程方式进行触发，同步的数据和实际数据会有差异，而inotify可以监控文件系统的各种变化，当文件有任何变动时，就触发rsync同步，这样刚好解决了同步数据的实时性问题。</p>
-<h3 id="安装inotfiy工具inotifytools"><a href="#安装inotfiy工具inotifytools" class="headerlink" title="安装inotfiy工具inotifytools"></a>安装inotfiy工具inotifytools</h3><p>  由于inotofy需要Linux内核的支持，在安装inotify-tools前要先确认系统内核师傅支持，如果Linux内核低于2.6.13版本，就需要重启编译内核加入inotify的支持，如何知道你的Linux内核是否支持Inotify机制呢，执行下面命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grep INOTIFY_USER /boot/config-$(uname -r)</div><div class="line">CONFIG_INOTIFY_USER=y</div><div class="line">如果输出“CONFIG_INOTIFY_USER=y”，那么就可以享受Inotify之旅了。</div></pre></td></tr></table></figure></p>
-<h4 id="软件下载地址"><a href="#软件下载地址" class="headerlink" title="软件下载地址"></a>软件下载地址</h4><p>官方地址：<a href="https://github.com/rvoicilas/inotify-tools/wiki" target="_blank" rel="external">https://github.com/rvoicilas/inotify-tools/wiki</a></p>
-<h4 id="下载安装软件包"><a href="#下载安装软件包" class="headerlink" title="下载安装软件包"></a>下载安装软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</div><div class="line">tar -zxf inotify-tools-3.14.tar.gz </div><div class="line">cd inotify-tools-3.14</div><div class="line">./configure --prefix=/usr/local/inotify</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h3 id="配置rsync、inotify"><a href="#配置rsync、inotify" class="headerlink" title="配置rsync、inotify"></a>配置rsync、inotify</h3><h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>CentOS_5.4_i386<br>更新服务器：172.16.6.100<br>目标服务器：172.16.6.98</p>
-<h4 id="配置目标服务器"><a href="#配置目标服务器" class="headerlink" title="配置目标服务器"></a>配置目标服务器</h4><h5 id="检查rsync是否安装"><a href="#检查rsync是否安装" class="headerlink" title="检查rsync是否安装"></a>检查rsync是否安装</h5><p>如果没有安装可以源码安装或者<code>yum -y install rsync</code>，rsync3.0相对与2.0有很多的改进，3.0是边对边边同步，2.0是完全对比之后在同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -qa rsync</div><div class="line">rsync-2.6.8-3.1</div></pre></td></tr></table></figure></p>
-<h5 id="定义rsync配置文件-etc-rsyncd-conf"><a href="#定义rsync配置文件-etc-rsyncd-conf" class="headerlink" title="定义rsync配置文件/etc/rsyncd.conf"></a>定义rsync配置文件/etc/rsyncd.conf</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat &gt;&gt; /etc/rsyncd.conf &lt;uid=nobody </div><div class="line">gid=nobody</div><div class="line">use chroot = no </div><div class="line">max connections = 100</div><div class="line">timeout = 600</div><div class="line">pid file = /var/run/rsyncd.pid</div><div class="line">lock file = /var/run/rsyncd.lock</div><div class="line">log file = /var/log/rsyncd.log</div><div class="line">secrets file = /etc/rsyncd.passwd</div><div class="line">hosts allow = 172.16.6.100</div><div class="line">[website]</div><div class="line">path = /data/website/</div><div class="line">comment = Web Site</div><div class="line">read only = no</div><div class="line">ignore errors</div><div class="line">list = no</div><div class="line">auth users = website</div><div class="line">EOF</div></pre></td></tr></table></figure>
-<h5 id="配置rsync密码文件，修改密码文件权限，是其他用户无权查看"><a href="#配置rsync密码文件，修改密码文件权限，是其他用户无权查看" class="headerlink" title="配置rsync密码文件，修改密码文件权限，是其他用户无权查看"></a>配置rsync密码文件，修改密码文件权限，是其他用户无权查看</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cat &gt;&gt; /etc/rsyncd.passwd &lt;&lt; EOF</div><div class="line">website:website</div><div class="line">EOF</div><div class="line">chmod 600 /etc/rsyncd.passwd</div></pre></td></tr></table></figure>
-<h5 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/usr/bin/rsync --daemon --config=/etc/rsyncd.conf </div><div class="line">lsof -i:873</div><div class="line">COMMAND   PID USER   FD   TYPE     DEVICE SIZE NODE NAME</div><div class="line">rsync   25469 root    3u  IPv6 1038838496       TCP *:rsync (LISTEN)</div><div class="line">rsync   25469 root    5u  IPv4 1038838497       TCP *:rsync (LISTEN)</div></pre></td></tr></table></figure>
-<h5 id="客户端测试，同步代码"><a href="#客户端测试，同步代码" class="headerlink" title="客户端测试，同步代码"></a>客户端测试，同步代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rsync -vzrtopg --progress website@172.16.6.98::website --password-file=/etc/rsync.passwd /data/website/</div><div class="line">sent 26731 bytes  received 6831971 bytes  4572468.00 bytes/sec</div><div class="line">total size is 19027624  speedup is 2.77</div></pre></td></tr></table></figure>
-<h5 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">inotifywait=&apos;/usr/local/inotify/bin/inotifywait&apos;</div><div class="line">LOCAL=172.16.6.98</div><div class="line">SRC=/data/website/</div><div class="line">USER=website</div><div class="line">COMMAND=/usr/bin/rsync </div><div class="line">Option=&quot;-vzrtopg --progress --delete&quot; </div><div class="line">Module=website</div><div class="line">PASSFILE=/etc/rsync.passwd</div><div class="line">$inotifywait -mrq --timefmt &apos;%y-%m-%d %H:%M&apos; --format &apos;%T %w%f %e&apos; --event modify,delete,create,attrib $SRC | while read date time files</div><div class="line">do</div><div class="line">        $COMMAND $Option --password-file=$PASSFILE $SRC $USER@$LOCAL::$Module</div><div class="line">        echo &quot;$files was rsyncd&quot; &gt;&gt; /var/log/rsync.log 2&gt;&amp;1</div><div class="line">done</div></pre></td></tr></table></figure>
-<p>把脚本使用nohup放入后台执行nohup ./rsync.sh &amp;<br>这样将更新的文件提交到更新源服务器上，就可以通过Inotify和rsync的配合批量的将更新文件同步到所有服务器中。</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/21/update-openssl.html" itemprop="url">
-                  Openssl升级
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-21T23:00:58+08:00" content="2015-12-21">
-              2015-12-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/21/update-openssl.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/update-openssl.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/21/update-openssl.html" class="leancloud_visitors" data-flag-title="Openssl升级">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h4 id="查看当前版本信息"><a href="#查看当前版本信息" class="headerlink" title="查看当前版本信息"></a>查看当前版本信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">openssl version</div><div class="line">OpenSSL 0.9.8e-fips-rhel5 01 Jul 2008</div></pre></td></tr></table></figure>
-<h4 id="安装新版本openssl"><a href="#安装新版本openssl" class="headerlink" title="安装新版本openssl"></a>安装新版本openssl</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@Charlie ~]# wget http://www.openssl.org/source/openssl-1.0.1g.tar.gz -O /usr/local/src/openssl-1.0.1g.tar.gz</div><div class="line">[root@Charlie ~]# cd /usr/local/src/</div><div class="line">[root@Charlie src]# cd openssl-1.0.1g</div><div class="line">[root@Charlie openssl-1.0.1g]# ./config shared zlib</div><div class="line">[root@Charlie openssl-1.0.1g]# make &amp;&amp; make install</div><div class="line">[root@Charlie openssl-1.0.1g]# mv /usr/bin/openssl /usr/bin/openssl.bak</div><div class="line">[root@Charlie openssl-1.0.1g]# mv /usr/include/openssl /usr/include/openssl.bak</div><div class="line">[root@Charlie openssl-1.0.1g]# ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl</div><div class="line">[root@Charlie openssl-1.0.1g]# ln -s /usr/local/ssl/include/openssl /usr/include/openssl</div></pre></td></tr></table></figure>
-<h4 id="配置库文件搜索路径"><a href="#配置库文件搜索路径" class="headerlink" title="配置库文件搜索路径"></a>配置库文件搜索路径</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@Charlie openssl-1.0.1g]# echo &quot;/usr/local/ssl/lib&quot; &gt;&gt; /etc/ld.so.conf</div><div class="line">[root@Charlie openssl-1.0.1g]# ldconfig -v</div></pre></td></tr></table></figure>
-<h4 id="验证升级"><a href="#验证升级" class="headerlink" title="验证升级"></a>验证升级</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@Charlie openssl-1.0.1g]# openssl version -a</div><div class="line">OpenSSL 1.0.1g 7 Apr 2014</div><div class="line">built on: Tue Apr 15 15:47:31 CST 2014</div><div class="line">platform: linux-elf</div><div class="line">options:  bn(64,32) rc4(8x,mmx) des(ptr,risc1,16,long) idea(int) blowfish(idx)</div><div class="line">compiler: gcc -fPIC -DOPENSSL_PIC -DZLIB -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -Wa,--noexecstack -DL_ENDIAN -DTERMIO -O3 -fomit-frame-pointer -Wall -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DVPAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM</div><div class="line">OPENSSLDIR: &quot;/usr/local/ssl&quot;</div></pre></td></tr></table></figure>
-<p>在升级了openssl后，我们还要升级一下SSH<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@Charlie openssl-1.0.1g]# ssh -V</div><div class="line">OpenSSH_4.3p2, OpenSSL 0.9.8e-fips-rhel5 01 Jul 2008</div></pre></td></tr></table></figure></p>
-<h4 id="安装openssh"><a href="#安装openssh" class="headerlink" title="安装openssh"></a>安装openssh</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@Charlie src]# wget http://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/openssh-6.6p1.tar.gz</div><div class="line">[root@Charlie src]# tar -zxf openssh-6.6p1.tar.gz</div><div class="line">[root@Charlie src]# cd openssh-6.6p1</div><div class="line">[root@Charlie openssh-6.6p1]# ./configure  --prefix=/usr --sysconfdir=/etc/ssh --with-zlib --with-pam  --with-ssl-dir=/usr/local/ssl --with-md5-passwords --mandir=/usr/share/man</div><div class="line">[root@Charlie openssh-6.6p1]# make &amp;&amp; make install </div><div class="line">[root@Charlie openssh-6.6p1]# ssh -V</div><div class="line">OpenSSH_6.6p1, OpenSSL 1.0.1g 7 Apr 2014</div></pre></td></tr></table></figure>
-<h4 id="TroubleShooting"><a href="#TroubleShooting" class="headerlink" title="TroubleShooting"></a>TroubleShooting</h4><p>报错：<code>configure: error: PAM headers not found</code><br>解决：<code>yum install -y pam-devel</code></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/29/scripts-heard-info.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1774,7 +1031,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1815,7 +1072,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1823,7 +1080,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1856,6 +1113,20 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -2003,6 +1274,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://czero000.github.io/2015/12/29/debian-support-chinese.html">
 <meta property="og:site_name" content="Czero's Blog">
 <meta property="og:description" content="debian与ubuntu有很大的相似性，但是debian相对更原始，比如在语言支持这一块，如果在安装ubuntu的时候，选择的系统语言是英文，那么系统显示的肯定是英文，但是查看中文文件的时候，肯定还是能查看的，因为系统默认支持了中文，中文字体，语言包等已经安装好了，但是 debian不同，如果你安装的时候选择了英文，那么进入系统之后，只要查看不是英文的东西都是乱码，就连网页上的汉字都是一个个的">
-<meta property="og:updated_time" content="2016-01-21T03:51:26.000Z">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="debian添加中文支持">
 <meta name="twitter:description" content="debian与ubuntu有很大的相似性，但是debian相对更原始，比如在语言支持这一块，如果在安装ubuntu的时候，选择的系统语言是英文，那么系统显示的肯定是英文，但是查看中文文件的时候，肯定还是能查看的，因为系统默认支持了中文，中文字体，语言包等已经安装好了，但是 debian不同，如果你安装的时候选择了英文，那么进入系统之后，只要查看不是英文的东西都是乱码，就连网页上的汉字都是一个个的">
@@ -231,9 +231,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -293,8 +316,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Debian/" itemprop="url" rel="index">
+                    <span itemprop="name">Debian</span>
                   </a>
                 </span>
 
@@ -356,8 +391,7 @@
 <p><strong>PS:如果你在启动之后执行这条命令不会有效，只能重启并在加载X window之前执行才有效，这就是为什么把它写入文件的原因（这个文件在X window启动前被加载。）</strong></p>
 <p>这样一来，你的系统菜单等也会变成中文，如果你还是想要英文菜单，但是只要能显示中文，那么就要多设置几个变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ENCODING=&quot;en_US&quot;</div><div class="line">#export LC_ALL=$ENCODING</div><div class="line">export LC_MESSAGES=$ENCODING</div><div class="line">#export LC_COLLATE=$ENCODING</div><div class="line">#export LC_CTYPE=$ENCODING</div><div class="line">export LC_TIME=$ENCODING</div><div class="line">export LC_NUMERIC=$ENCODING</div><div class="line">#export LC_MONETARY=$ENCODING</div><div class="line">#export LC_PAPER=$ENCODING</div><div class="line">#export LC_NAME=$ENCODING</div><div class="line">export LC_ADDRESS=$ENCODING</div><div class="line">export LC_TELEPHONE=$ENCODING</div><div class="line">export LC_MEASUREMENT=$ENCODING</div><div class="line">export LC_IDENTIFICATION=$ENCODING</div></pre></td></tr></table></figure></p>
 <p>同样把这些写入<code>/etc/X11/Xsession.d/95xinput</code>文件，重启就行了。<br>最后要说一下终端对中文的支持：<br>KDE默认的终端是konsole, 默认就支持中文，而且还支持得不错，gnome默认的终端是gnome-terminal, 要支持中文的话只要在菜单里选上中文相应的编码就行了。</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+
       
     </div>
 
@@ -491,7 +525,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -499,7 +533,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -533,6 +567,20 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -543,7 +591,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成locales"><span class="nav-number">1.</span> <span class="nav-text">生成locales:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成locales"><span class="nav-number">1.</span> <span class="nav-text">生成locales:</span></a></li></ol></div>
             
           </div>
         </section>
@@ -694,6 +742,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

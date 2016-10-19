@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://czero000.github.io/2015/12/21/rsync-inotify-backup.html">
 <meta property="og:site_name" content="Czero's Blog">
 <meta property="og:description" content="rsync的优点和缺点  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件">
-<meta property="og:updated_time" content="2016-01-18T09:15:04.000Z">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsync+inotify实现实时备份">
 <meta name="twitter:description" content="rsync的优点和缺点  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsync同步数据时，需要扫描所有文件后进行比对，进行差量传输。如果数据达到百万或者是千万的量级，扫描文件">
@@ -231,9 +231,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -293,8 +316,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -356,8 +391,7 @@
 <h5 id="客户端测试，同步代码"><a href="#客户端测试，同步代码" class="headerlink" title="客户端测试，同步代码"></a>客户端测试，同步代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rsync -vzrtopg --progress website@172.16.6.98::website --password-file=/etc/rsync.passwd /data/website/</div><div class="line">sent 26731 bytes  received 6831971 bytes  4572468.00 bytes/sec</div><div class="line">total size is 19027624  speedup is 2.77</div></pre></td></tr></table></figure>
 <h5 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">inotifywait=&apos;/usr/local/inotify/bin/inotifywait&apos;</div><div class="line">LOCAL=172.16.6.98</div><div class="line">SRC=/data/website/</div><div class="line">USER=website</div><div class="line">COMMAND=/usr/bin/rsync </div><div class="line">Option=&quot;-vzrtopg --progress --delete&quot; </div><div class="line">Module=website</div><div class="line">PASSFILE=/etc/rsync.passwd</div><div class="line">$inotifywait -mrq --timefmt &apos;%y-%m-%d %H:%M&apos; --format &apos;%T %w%f %e&apos; --event modify,delete,create,attrib $SRC | while read date time files</div><div class="line">do</div><div class="line">        $COMMAND $Option --password-file=$PASSFILE $SRC $USER@$LOCAL::$Module</div><div class="line">        echo &quot;$files was rsyncd&quot; &gt;&gt; /var/log/rsync.log 2&gt;&amp;1</div><div class="line">done</div></pre></td></tr></table></figure>
 <p>把脚本使用nohup放入后台执行nohup ./rsync.sh &amp;<br>这样将更新的文件提交到更新源服务器上，就可以通过Inotify和rsync的配合批量的将更新文件同步到所有服务器中。</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+
       
     </div>
 
@@ -491,7 +525,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -499,7 +533,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -533,6 +567,20 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -543,7 +591,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的优点和缺点"><span class="nav-number">1.</span> <span class="nav-text">rsync的优点和缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inotify简介"><span class="nav-number">2.</span> <span class="nav-text">inotify简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装inotfiy工具inotifytools"><span class="nav-number">3.</span> <span class="nav-text">安装inotfiy工具inotifytools</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件下载地址"><span class="nav-number">3.1.</span> <span class="nav-text">软件下载地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载安装软件包"><span class="nav-number">3.2.</span> <span class="nav-text">下载安装软件包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置rsync、inotify"><span class="nav-number">4.</span> <span class="nav-text">配置rsync、inotify</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统环境"><span class="nav-number">4.1.</span> <span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置目标服务器"><span class="nav-number">4.2.</span> <span class="nav-text">配置目标服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#检查rsync是否安装"><span class="nav-number">4.2.1.</span> <span class="nav-text">检查rsync是否安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义rsync配置文件-etc-rsyncd-conf"><span class="nav-number">4.2.2.</span> <span class="nav-text">定义rsync配置文件/etc/rsyncd.conf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置rsync密码文件，修改密码文件权限，是其他用户无权查看"><span class="nav-number">4.2.3.</span> <span class="nav-text">配置rsync密码文件，修改密码文件权限，是其他用户无权查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动服务"><span class="nav-number">4.2.4.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#客户端测试，同步代码"><span class="nav-number">4.2.5.</span> <span class="nav-text">客户端测试，同步代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步脚本"><span class="nav-number">4.2.6.</span> <span class="nav-text">同步脚本</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的优点和缺点"><span class="nav-number">1.</span> <span class="nav-text">rsync的优点和缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inotify简介"><span class="nav-number">2.</span> <span class="nav-text">inotify简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装inotfiy工具inotifytools"><span class="nav-number">3.</span> <span class="nav-text">安装inotfiy工具inotifytools</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件下载地址"><span class="nav-number">3.1.</span> <span class="nav-text">软件下载地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载安装软件包"><span class="nav-number">3.2.</span> <span class="nav-text">下载安装软件包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置rsync、inotify"><span class="nav-number">4.</span> <span class="nav-text">配置rsync、inotify</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统环境"><span class="nav-number">4.1.</span> <span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置目标服务器"><span class="nav-number">4.2.</span> <span class="nav-text">配置目标服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#检查rsync是否安装"><span class="nav-number">4.2.1.</span> <span class="nav-text">检查rsync是否安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义rsync配置文件-etc-rsyncd-conf"><span class="nav-number">4.2.2.</span> <span class="nav-text">定义rsync配置文件/etc/rsyncd.conf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置rsync密码文件，修改密码文件权限，是其他用户无权查看"><span class="nav-number">4.2.3.</span> <span class="nav-text">配置rsync密码文件，修改密码文件权限，是其他用户无权查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动服务"><span class="nav-number">4.2.4.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#客户端测试，同步代码"><span class="nav-number">4.2.5.</span> <span class="nav-text">客户端测试，同步代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步脚本"><span class="nav-number">4.2.6.</span> <span class="nav-text">同步脚本</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -694,6 +742,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

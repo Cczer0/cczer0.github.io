@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Redis," />
+  <meta name="keywords" content="redis," />
 
 
 
@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API
-下载安装redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz tar -zxf redis-3.0.2.tar.gzcd redis-3.0.2make &amp;amp;&amp;amp; ma">
+<meta name="description" content="Redis 是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、 Key-Value 数据库，并提供多种语言的 API
+下载安装 redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz tar -zxf redis-3.0.2.tar.gzcd redis-3.0.2make &amp;amp;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装Redis">
 <meta property="og:url" content="http://czero000.github.io/2015/10/14/install-redis.html">
 <meta property="og:site_name" content="Czero's Blog">
-<meta property="og:description" content="Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API
-下载安装redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz tar -zxf redis-3.0.2.tar.gzcd redis-3.0.2make &amp;amp;&amp;amp; ma">
-<meta property="og:updated_time" content="2016-10-18T07:52:09.375Z">
+<meta property="og:description" content="Redis 是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、 Key-Value 数据库，并提供多种语言的 API
+下载安装 redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz tar -zxf redis-3.0.2.tar.gzcd redis-3.0.2make &amp;amp;&amp;">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装Redis">
-<meta name="twitter:description" content="Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API
-下载安装redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz tar -zxf redis-3.0.2.tar.gzcd redis-3.0.2make &amp;amp;&amp;amp; ma">
+<meta name="twitter:description" content="Redis 是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、 Key-Value 数据库，并提供多种语言的 API
+下载安装 redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz tar -zxf redis-3.0.2.tar.gzcd redis-3.0.2make &amp;amp;&amp;">
 
 
 
@@ -234,9 +234,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -296,8 +319,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Database/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -345,17 +380,17 @@
       
 
       
-        <p>Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API</p>
-<h2 id="下载安装redis"><a href="#下载安装redis" class="headerlink" title="下载安装redis"></a>下载安装redis</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/releases/redis-3.0.2.tar.gz </div><div class="line">tar -zxf redis-3.0.2.tar.gz</div><div class="line">cd redis-3.0.2</div><div class="line">make &amp;&amp; make install </div><div class="line">cp redis.conf /etc/</div></pre></td></tr></table></figure>
-<p>参数介绍：<br><code>make install</code>命令执行完成后，会在<code>/usr/local/bin</code>目录下生成本个可执行文件，分别是<code>redis-server、redis-cli、redis-benchmark、redis-check-aof 、redis-check-dump</code>，它们的作用如下：</p>
+        <p>Redis 是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、 Key-Value 数据库，并提供多种语言的 API</p>
+<h1 id="下载安装-redis"><a href="#下载安装-redis" class="headerlink" title="下载安装 redis"></a>下载安装 redis</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/releases/redis-3.0.2.tar.gz </div><div class="line">tar -zxf redis-3.0.2.tar.gz</div><div class="line">cd redis-3.0.2</div><div class="line">make &amp;&amp; make install </div><div class="line">cp redis.conf /etc/</div></pre></td></tr></table></figure>
+<p>参数介绍：<br><code>make install</code> 命令执行完成后，会在 <code>/usr/local/bin</code> 目录下生成本个可执行文件，分别是 <code>redis-server、redis-cli、redis-benchmark、redis-check-aof 、redis-check-dump</code>，它们的作用如下：</p>
 <ul>
-<li><code>redis-server</code>：Redis服务器的daemon启动程序</li>
-<li><code>redis-cli</code>：Redis命令行操作工具。也可以用telnet根据其纯文本协议来操作</li>
-<li><code>redis-benchmark</code>：Redis性能测试工具，测试Redis在当前系统下的读写性能</li>
+<li><code>redis-server</code>：Redis 服务器的 daemon启动程序</li>
+<li><code>redis-cli</code>：Redis 命令行操作工具。也可以用 telnet 根据其纯文本协议来操作</li>
+<li><code>redis-benchmark</code>：Redis 性能测试工具，测试 Redis 在当前系统下的读写性能</li>
 <li><code>redis-check-aof</code>：数据修复</li>
 <li><code>redis-check-dump</code>：检查导出工具</li>
 </ul>
-<h2 id="修改系统配置"><a href="#修改系统配置" class="headerlink" title="修改系统配置"></a>修改系统配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo vm.overcommit_memory=1 &gt;&gt; /etc/sysctl.conf</div><div class="line">sysctl vm.overcommit_memory=1 或执行echo vm.overcommit_memory=1 &gt;&gt;/proc/sys/vm/overcommit_memory</div></pre></td></tr></table></figure>
+<h1 id="修改系统配置"><a href="#修改系统配置" class="headerlink" title="修改系统配置"></a>修改系统配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo vm.overcommit_memory=1 &gt;&gt; /etc/sysctl.conf</div><div class="line">sysctl vm.overcommit_memory=1 或执行 echo vm.overcommit_memory=1 &gt;&gt;/proc/sys/vm/overcommit_memory</div></pre></td></tr></table></figure>
 <p>使用数字含义：</p>
 <ul>
 <li>0，表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。</li>
@@ -364,19 +399,19 @@
 </ul>
 <h2 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a>修改配置文件：</h2><p>edit /etc/redis.conf<br>daemonize yes<br>参数说明：参数介绍：</p>
 <ul>
-<li><code>daemonize</code>：是否以后台daemon方式运行</li>
-<li><code>pidfile</code>：pid文件位置</li>
+<li><code>daemonize</code>：是否以后台 daemon 方式运行</li>
+<li><code>pidfile</code>：pid 文件位置</li>
 <li><code>port</code>：监听的端口号</li>
 <li><code>timeout</code>：请求超时时间</li>
-<li><code>loglevel</code>：log信息级别</li>
-<li><code>logfile</code>：log文件位置</li>
+<li><code>loglevel</code>：log 信息级别</li>
+<li><code>logfile</code>：log 文件位置</li>
 <li><code>databases</code>：开启数据库的数量</li>
-<li><code>save</code> <em> </em>：保存快照的频率，第一个<em>表示多长时间，第三个</em>表示执行多少次写操作。在一定时间内执行一定数量的写操作时，自动保存快照。可设置多个条件。</li>
+<li><code>save</code> <em> ：保存快照的频率，第一个\</em>表示多长时间，第三个*表示执行多少次写操作。在一定时间内执行一定数量的写操作时，自动保存快照。可设置多个条件。</li>
 <li><code>rdbcompression</code>：是否使用压缩</li>
 <li><code>dbfilename</code>：数据快照文件名（只是文件名，不包括目录）</li>
 <li><code>dir</code>：数据快照的保存目录（这个是目录）</li>
-<li><code>appendonly</code>：是否开启appendonlylog，开启的话每次写操作会记一条log，这会提高数据抗风险能力，但影响效率。</li>
-<li><code>appendfsync</code>：appendonlylog如何同步到磁盘（三个选项，分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步）</li>
+<li><code>appendonly</code>：是否开启 appendonlylog，开启的话每次写操作会记一条 log，这会提高数据抗风险能力，但影响效率。</li>
+<li><code>appendfsync</code>：appendonlylog 如何同步到磁盘（三个选项，分别是每次写都强制调用 fsync、每秒启用一次 fsync、不调用 fsync等待系统自己同步）</li>
 </ul>
 <h2 id="启动redis"><a href="#启动redis" class="headerlink" title="启动redis"></a>启动redis</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/redis-server /etc/redis.conf</div></pre></td></tr></table></figure>
 
@@ -401,7 +436,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Redis/" rel="tag">#Redis</a>
+            <a href="/tags/redis/" rel="tag">#redis</a>
           
         </div>
       
@@ -511,7 +546,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -519,7 +554,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -553,6 +588,20 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -563,7 +612,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装redis"><span class="nav-number">1.</span> <span class="nav-text">下载安装redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改系统配置"><span class="nav-number">2.</span> <span class="nav-text">修改系统配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件："><span class="nav-number">3.</span> <span class="nav-text">修改配置文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动redis"><span class="nav-number">4.</span> <span class="nav-text">启动redis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载安装-redis"><span class="nav-number">1.</span> <span class="nav-text">下载安装 redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改系统配置"><span class="nav-number">2.</span> <span class="nav-text">修改系统配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件："><span class="nav-number">2.1.</span> <span class="nav-text">修改配置文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动redis"><span class="nav-number">2.2.</span> <span class="nav-text">启动redis</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -714,6 +763,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

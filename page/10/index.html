@@ -232,9 +232,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -269,8 +292,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/11/centos6.5-install-cobbler.html" itemprop="url">
-                  CentOS6.5部署Cobbler(安装)
+                <a class="post-title-link" href="/2015/12/22/install-pptpd-by-scripts.html" itemprop="url">
+                  PPTP VPN安装脚本
                 </a>
               
             
@@ -283,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-11T15:36:17+08:00" content="2015-11-11">
-              2015-11-11
+            <time itemprop="dateCreated" datetime="2015-12-22T11:29:23+08:00" content="2015-12-22">
+              2015-12-22
             </time>
           </span>
 
@@ -297,8 +320,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维自动化/" itemprop="url" rel="index">
-                    <span itemprop="name">运维自动化</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Proxy/" itemprop="url" rel="index">
+                    <span itemprop="name">Proxy</span>
                   </a>
                 </span>
 
@@ -313,8 +348,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/11/centos6.5-install-cobbler.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/11/centos6.5-install-cobbler.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/22/install-pptpd-by-scripts.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-pptpd-by-scripts.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +359,7 @@
 
           
           
-             <span id="/2015/11/11/centos6.5-install-cobbler.html" class="leancloud_visitors" data-flag-title="CentOS6.5部署Cobbler(安装)">
+             <span id="/2015/12/22/install-pptpd-by-scripts.html" class="leancloud_visitors" data-flag-title="PPTP VPN安装脚本">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -347,50 +382,12 @@
 
       
         
-          
-            <h3 id="Cobbler介绍"><a href="#Cobbler介绍" class="headerlink" title="Cobbler介绍"></a>Cobbler介绍</h3><p>Cobbler是一个快速网络安装linux的服务，而且在经过调整也可以支持安装windows。该工具使用python开发，小巧轻便，使用简单的命令即可完成PXE网络安装环境的配置，同时还可以管&gt;理DHCP、DNS，以及yum包镜像。Cobbler支持命令行管理、web界面管理，还提供了API接口，方便二次开发。和kickstart不同的是，使用Cobbler不会因为在局域网中启用DHCP而导致有些机器<br>因为默认从PXE启动在重启服务器后加载tftp内容导致启动终止.</p>
-<h3 id="系统环境准备"><a href="#系统环境准备" class="headerlink" title="系统环境准备"></a>系统环境准备</h3><h4 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h4><p>CentOS release 6.5 (Final) x86_64</p>
-<h4 id="软件包"><a href="#软件包" class="headerlink" title="软件包"></a>软件包</h4><p>软件包采用yum 安装方式，yum源采用自建的yum源</p>
-<h3 id="安装Cobbler"><a href="#安装Cobbler" class="headerlink" title="安装Cobbler"></a>安装Cobbler</h3><h4 id="安装cobbler相关软件包"><a href="#安装cobbler相关软件包" class="headerlink" title="安装cobbler相关软件包"></a>安装cobbler相关软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y cobbler cobbler-web pykickstart fence-agents</div></pre></td></tr></table></figure>
-<h4 id="安装debmirror（需要用debmirror来下载ubuntu源，用于本地安装）"><a href="#安装debmirror（需要用debmirror来下载ubuntu源，用于本地安装）" class="headerlink" title="安装debmirror（需要用debmirror来下载ubuntu源，用于本地安装）"></a>安装debmirror（需要用debmirror来下载ubuntu源，用于本地安装）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y debmirror</div></pre></td></tr></table></figure>
-<h3 id="配置-Cobbler"><a href="#配置-Cobbler" class="headerlink" title="配置 Cobbler"></a>配置 Cobbler</h3><h4 id="设置-tftp-服务和-rsync-服务"><a href="#设置-tftp-服务和-rsync-服务" class="headerlink" title="设置 tftp 服务和 rsync 服务"></a>设置 tftp 服务和 rsync 服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;/disable/c\\tdisable\t\t\t= no&apos; /etc/xinetd.d/tftp</div><div class="line">sed -i -e &apos;s/\=\ yes/\=\ no/g&apos; /etc/xinetd.d/rsync </div><div class="line">/etc/init.d/xinetd restart</div><div class="line">chkconfig --level 3 xinetd on</div></pre></td></tr></table></figure>
-<h4 id="设置Web登录"><a href="#设置Web登录" class="headerlink" title="设置Web登录"></a>设置Web登录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/authn_denyall/authn_configfile/g&apos; /etc/cobbler/modules.conf</div></pre></td></tr></table></figure>
-<p>之前版本都是需要更改认证设置，但是2.6版本默认就是这样设置</p>
-<h4 id="设置Cobbler-Web登录用户登录密码"><a href="#设置Cobbler-Web登录用户登录密码" class="headerlink" title="设置Cobbler Web登录用户登录密码"></a>设置Cobbler Web登录用户登录密码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">htdigest /etc/cobbler/users.digest &quot;Cobbler&quot; cobbler</div><div class="line">Changing password for user cobbler in realm Cobbler</div><div class="line">New password: </div><div class="line">Re-type new password:</div></pre></td></tr></table></figure>
-<h4 id="设置Cobbler登录服务器地址"><a href="#设置Cobbler登录服务器地址" class="headerlink" title="设置Cobbler登录服务器地址"></a>设置Cobbler登录服务器地址</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;/^server: /s/server: 127.0.0.1/server: 10.10.3.64/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure>
-<h4 id="ks脚本关闭pxe，这样就不会重复安装"><a href="#ks脚本关闭pxe，这样就不会重复安装" class="headerlink" title="ks脚本关闭pxe，这样就不会重复安装"></a>ks脚本关闭pxe，这样就不会重复安装</h4><p>  pxe_just_once预防由于服务器设置从网络引导，导致循环安装，激活此设置，机器会告诉Cobbler安装也完成。Cobbler会将对象的netboot标志改为false，这会强制服务器从本地引导。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/pxe_just_once: 0/pxe_just_once: 1/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure></p>
-<h4 id="设置TFTP服务器IP地址"><a href="#设置TFTP服务器IP地址" class="headerlink" title="设置TFTP服务器IP地址"></a>设置TFTP服务器IP地址</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/next_server: 127.0.0.1/next_server: 10.10.3.64/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure>
-<h4 id="设置Cobbler管理rsync"><a href="#设置Cobbler管理rsync" class="headerlink" title="设置Cobbler管理rsync"></a>设置Cobbler管理rsync</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/manage_rsync: 0/manage_rsync: 1/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure>
-<h4 id="设置Cobbler管理DHCP"><a href="#设置Cobbler管理DHCP" class="headerlink" title="设置Cobbler管理DHCP"></a>设置Cobbler管理DHCP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/manage_dhcp: 0/manage_dhcp: 1/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure>
-<p>DHCP服务由Cobbler来管理， /etc/cobbler/dhcp.template.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">ddns-update-style interim;</div><div class="line"></div><div class="line">allow booting;</div><div class="line">allow bootp;</div><div class="line"></div><div class="line">ignore client-updates;</div><div class="line">set vendorclass = option vendor-class-identifier;</div><div class="line"></div><div class="line">option pxe-system-type code 93 = unsigned integer 16;</div><div class="line"></div><div class="line">subnet 10.10.3.0 netmask 255.255.255.0 &#123;</div><div class="line">     option routers             10.10.3.64;</div><div class="line">     option domain-name-servers 10.10.3.64;</div><div class="line">     option subnet-mask         255.255.255.0;</div><div class="line">     range dynamic-bootp        10.10.3.168 10.10.3.191;</div><div class="line">     default-lease-time         21600;</div><div class="line">     max-lease-time             43200;</div><div class="line">     next-server                $next_server;</div><div class="line">     class &quot;pxeclients&quot; &#123;</div><div class="line">          match if substring (option vendor-class-identifier, 0, 9) = &quot;PXEClient&quot;;</div><div class="line">          if option pxe-system-type = 00:02 &#123;</div><div class="line">                  filename &quot;ia64/elilo.efi&quot;;</div><div class="line">          &#125; else if option pxe-system-type = 00:06 &#123;</div><div class="line">                  filename &quot;grub/grub-x86.efi&quot;;</div><div class="line">          &#125; else if option pxe-system-type = 00:07 &#123;</div><div class="line">                  filename &quot;grub/grub-x86_64.efi&quot;;</div><div class="line">          &#125; else &#123;</div><div class="line">                  filename &quot;pxelinux.0&quot;;</div><div class="line">          &#125;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="设置Cobbler管理DNS（可选）"><a href="#设置Cobbler管理DNS（可选）" class="headerlink" title="设置Cobbler管理DNS（可选）"></a>设置Cobbler管理DNS（可选）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/manage_dns: 0/manage_dns: 1/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure>
-<h4 id="设置root默认密码"><a href="#设置root默认密码" class="headerlink" title="设置root默认密码"></a>设置root默认密码</h4><p>这个设置只对CentOS/RHEL有效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl passwd -1 -salt &apos;random-phrase-here&apos; &apos;your-password-here&apos;</div></pre></td></tr></table></figure></p>
-<p>修改<code>/etc/cobbler/settings</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">default_password_crypted: &quot;$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.&quot;</div></pre></td></tr></table></figure></p>
-<h4 id="启动相关服务"><a href="#启动相关服务" class="headerlink" title="启动相关服务"></a>启动相关服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/cobblerd start</div><div class="line">/etc/init.d/httpd start</div><div class="line">chkconfig httpd on</div><div class="line">chkconfig cobblerd on</div></pre></td></tr></table></figure>
-<h4 id="设置debmirror"><a href="#设置debmirror" class="headerlink" title="设置debmirror"></a>设置debmirror</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sed -i -e &apos;s/@dists=/#@dists=/g&apos; /etc/debmirror.conf</div><div class="line">sed -i -e &apos;s/@arches=/#@arches=/g&apos; /etc/debmirror.conf</div></pre></td></tr></table></figure>
-<h4 id="开启动态更新"><a href="#开启动态更新" class="headerlink" title="开启动态更新"></a>开启动态更新</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &apos;s/allow_dynamic_settings: 0/allow_dynamic_settings: 1/g&apos; /etc/cobbler/settings</div></pre></td></tr></table></figure>
-<h4 id="下载启动菜单"><a href="#下载启动菜单" class="headerlink" title="下载启动菜单"></a>下载启动菜单</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cobbler get-loaders</div></pre></td></tr></table></figure>
-<h4 id="检查Cobbler-“cobbler-check”"><a href="#检查Cobbler-“cobbler-check”" class="headerlink" title="检查Cobbler “cobbler check”"></a>检查Cobbler “cobbler check”</h4><p>Cobbler提供了一个检查工具，检查你的设置，有问题会提示给你。按照提示去修复问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cobbler check      </div><div class="line">No configuration problems found.  All systems go.</div></pre></td></tr></table></figure></p>
-<h4 id="命令行查看、修改setting文件"><a href="#命令行查看、修改setting文件" class="headerlink" title="命令行查看、修改setting文件"></a>命令行查看、修改<em>setting</em>文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line">cobbler setting report      </div><div class="line">allow_duplicate_hostnames               : 0</div><div class="line">allow_duplicate_ips                     : 0</div><div class="line">allow_duplicate_macs                    : 0</div><div class="line">allow_dynamic_settings                  : 1</div><div class="line">always_write_dhcp_entries               : 0</div><div class="line">anamon_enabled                          : 0</div><div class="line">auth_token_expiration                   : 3600</div><div class="line">authn_pam_service                       : login</div><div class="line">bind_chroot_path                        : </div><div class="line">bind_master                             : 127.0.0.1</div><div class="line">build_reporting_email                   : [&apos;root@localhost&apos;]</div><div class="line">build_reporting_enabled                 : 0</div><div class="line">build_reporting_ignorelist              : [&apos;&apos;]</div><div class="line">build_reporting_sender                  : </div><div class="line">build_reporting_smtp_server             : localhost</div><div class="line">build_reporting_subject                 : </div><div class="line">build_reporting_to_address              : </div><div class="line">buildisodir                             : /var/cache/cobbler/buildiso</div><div class="line">cheetah_import_whitelist                : [&apos;random&apos;, &apos;re&apos;, &apos;time&apos;]</div><div class="line">client_use_https                        : 0</div><div class="line">client_use_localhost                    : 0</div><div class="line">cobbler_master                          : </div><div class="line">consoles                                : /var/consoles</div><div class="line">createrepo_flags                        : -c cache -s sha</div><div class="line">default_deployment_method               : ssh</div><div class="line">default_kickstart                       : /var/lib/cobbler/kickstarts/default.ks</div><div class="line">default_name_servers                    : []</div><div class="line">default_name_servers_search             : []</div><div class="line">default_ownership                       : [&apos;admin&apos;]</div><div class="line">default_password_crypted                : $1$7NQM/hse$Uh9IBVPme4E1E3dTo3kH/1</div><div class="line">default_template_type                   : cheetah</div><div class="line">default_virt_bridge                     : xenbr0</div><div class="line">default_virt_disk_driver                : raw</div><div class="line">default_virt_file_size                  : 5</div><div class="line">default_virt_ram                        : 512</div><div class="line">default_virt_type                       : xenpv</div><div class="line">enable_gpxe                             : 0</div><div class="line">enable_menu                             : 1</div><div class="line">func_auto_setup                         : 0</div><div class="line">func_master                             : overlord.example.org</div><div class="line">http_port                               : 80</div><div class="line">isc_set_host_name                       : 0</div><div class="line">iso_template_dir                        : /etc/cobbler/iso</div><div class="line">kerberos_realm                          : EXAMPLE.COM</div><div class="line">kernel_options                          : &#123;&apos;ksdevice&apos;: &apos;eth1&apos;, &apos;lang&apos;: &apos; &apos;, &apos;text&apos;: &apos;~&apos;&#125;</div><div class="line">kernel_options_s390x                    : &#123;&apos;vnc&apos;: &apos;~&apos;, &apos;ip&apos;: False, &apos;RUNKS&apos;: 1, &apos;ramdisk_size&apos;: 40000, &apos;ro&apos;: &apos;~&apos;, &apos;root&apos;: &apos;/dev/ram0&apos;&#125;</div><div class="line">ldap_anonymous_bind                     : 1</div><div class="line">ldap_base_dn                            : DC=example,DC=com</div><div class="line">ldap_management_default_type            : authconfig</div><div class="line">ldap_port                               : 389</div><div class="line">ldap_search_bind_dn                     : </div><div class="line">ldap_search_passwd                      : </div><div class="line">ldap_search_prefix                      : uid=</div><div class="line">ldap_server                             : ldap.example.com</div><div class="line">ldap_tls                                : 1</div><div class="line">ldap_tls_cacertfile                     : </div><div class="line">ldap_tls_certfile                       : </div><div class="line">ldap_tls_keyfile                        : </div><div class="line">manage_dhcp                             : 1</div><div class="line">manage_dns                              : 0</div><div class="line">manage_forward_zones                    : []</div><div class="line">manage_reverse_zones                    : []</div><div class="line">manage_rsync                            : 1</div><div class="line">manage_tftp                             : 1</div><div class="line">manage_tftpd                            : 1</div><div class="line">mgmt_classes                            : []</div><div class="line">mgmt_parameters                         : &#123;&apos;from_cobbler&apos;: 1&#125;</div><div class="line">next_server                             : 10.10.3.64</div><div class="line">power_management_default_type           : ipmitool</div><div class="line">power_template_dir                      : /etc/cobbler/power</div><div class="line">puppet_auto_setup                       : 0</div><div class="line">puppet_parameterized_classes            : 1</div><div class="line">puppet_server                           : puppet</div><div class="line">puppet_version                          : 2</div><div class="line">puppetca_path                           : /usr/bin/puppet</div><div class="line">pxe_just_once                           : 1</div><div class="line">pxe_template_dir                        : /etc/cobbler/pxe</div><div class="line">redhat_management_key                   : </div><div class="line">redhat_management_permissive            : 0</div><div class="line">redhat_management_server                : xmlrpc.rhn.redhat.com</div><div class="line">redhat_management_type                  : off</div><div class="line">register_new_installs                   : 0</div><div class="line">remove_old_puppet_certs_automatically   : 0</div><div class="line">replicate_repo_rsync_options            : -avzH</div><div class="line">replicate_rsync_options                 : -avzH</div><div class="line">reposync_flags                          : -l -n -d</div><div class="line">restart_dhcp                            : 1</div><div class="line">restart_dns                             : 1</div><div class="line">restart_xinetd                          : 1</div><div class="line">run_install_triggers                    : 1</div><div class="line">scm_track_enabled                       : 0</div><div class="line">scm_track_mode                          : git</div><div class="line">serializer_pretty_json                  : 0</div><div class="line">server                                  : 10.10.3.64</div><div class="line">sign_puppet_certs_automatically         : 0</div><div class="line">signature_path                          : /var/lib/cobbler/distro_signatures.json</div><div class="line">signature_url                           : http://www.cobblerd.org/signatures/latest.json</div><div class="line">snippetsdir                             : /var/lib/cobbler/snippets</div><div class="line">template_remote_kickstarts              : 0</div><div class="line">virt_auto_boot                          : 1</div><div class="line">webdir                                  : /var/www/cobbler</div><div class="line">xmlrpc_port                             : 25151</div><div class="line">yum_distro_priority                     : 1</div><div class="line">yum_post_install_mirror                 : 1</div><div class="line">yumdownloader_flags                     : --resolv</div></pre></td></tr></table></figure>
-<p>通过命令行编辑setting<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cobbler setting edit --name=option --value=value</div></pre></td></tr></table></figure></p>
-<h3 id="Web登录"><a href="#Web登录" class="headerlink" title="Web登录"></a>Web登录</h3><p>访问<em><a href="http://10.10.3.64/cobbler_web" target="_blank" rel="external">http://10.10.3.64/cobbler_web</a></em>用户密码就是上面设置的</p>
-<ul>
-<li>Cobbler的使用，主要集中在Web界面的几个菜单里：</li>
-<li>Distros：这个其实就是发行版，类似CentOS、Ubuntu、SUSE。CenOS6.2和Centos6.5，是不同的Distros</li>
-<li>Porfiles：针对Distors设置的，一个Distros可以对应多个Profiles，包括不同的kickstart文件。</li>
-<li>Systems：针对每个节点，可以指定节点IP地址，DNS、还有就是ipmi的用户和密码，实现远程开机关机。这个是个重点，对机器的操作可以全部在System的菜单里实现。System可以指定节点使用那个Profile</li>
-<li>Repos：针对Redhat和CentOS，可以管理源，并且这些源可以在profile里面添加。对ubuntu的源，只能在kickstart脚本里指定</li>
-<li>Images：针对不能pxe的服务器，采用ISO启动</li>
-<li>Kickstart Templates：Cobbler内置了几个KS文件模版，导入一个Distros，Cobbler 会默认关联一个KS文件。不需要任何设置，就可以把os自动安装完毕</li>
-<li>Snippets：这个是Cobbler的精华。一些常用的设置，写成一个模块，让ks文件来调用，方便灵活。例如CentOS网络固定IP地址的设置，就是通过这里来实现</li>
-</ul>
-<h3 id="设置Apache根目录访问"><a href="#设置Apache根目录访问" class="headerlink" title="设置Apache根目录访问"></a>设置Apache根目录访问</h3><p>希望直接访问ip地址，就可以看到源的目录，尤其对与ubuntu来说，这样这样看起来更加规范<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cat /etc/httpd/conf.d/welcome.conf </div><div class="line"># </div><div class="line"># This configuration file enables the default &quot;Welcome&quot;</div><div class="line"># page if there is no default index page present for</div><div class="line"># the root URL.  To disable the Welcome page, comment</div><div class="line"># out all the lines below.</div><div class="line">#</div><div class="line">    </div><div class="line">    &lt;LocationMatch &quot;^/+$&quot;&gt;</div><div class="line">    Options Indexes FollowSymLinks</div><div class="line">        Order allow,deny</div><div class="line">        Allow from all</div><div class="line">    &lt;/LocationMatch&gt;</div></pre></td></tr></table></figure></p>
-<p>重启apache，登录<a href="http://10.10.3.64看到的目录，实际就是/var/www/html" target="_blank" rel="external">http://10.10.3.64看到的目录，实际就是/var/www/html</a></p>
-<h3 id="安装常见问题"><a href="#安装常见问题" class="headerlink" title="安装常见问题"></a>安装常见问题</h3><h4 id="校验cobbler-check出错"><a href="#校验cobbler-check出错" class="headerlink" title="校验cobbler check出错"></a>校验cobbler check出错</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cobbler check</div><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;/usr/bin/cobbler&quot;, line 36, in </div><div class="line">    sys.exit(app.main())</div><div class="line">  File &quot;/usr/lib/python2.6/site-packages/cobbler/cli.py&quot;, line 655, in main</div><div class="line">    rc = cli.run(sys.argv)</div><div class="line">  File &quot;/usr/lib/python2.6/site-packages/cobbler/cli.py&quot;, line 270, in run</div><div class="line">    self.token         = self.remote.login(&quot;&quot;, self.shared_secret)</div><div class="line">  File &quot;/usr/lib/python2.6/xmlrpclib.py&quot;, line 1199, in __call__</div><div class="line">    return self.__send(self.__name, args)</div><div class="line">  File &quot;/usr/lib/python2.6/xmlrpclib.py&quot;, line 1489, in __request</div><div class="line">    verbose=self.__verbose</div><div class="line">  File &quot;/usr/lib/python2.6/xmlrpclib.py&quot;, line 1253, in request</div><div class="line">    return self._parse_response(h.getfile(), sock)</div><div class="line">  File &quot;/usr/lib/python2.6/xmlrpclib.py&quot;, line 1392, in _parse_response</div><div class="line">    return u.close()</div><div class="line">  File &quot;/usr/lib/python2.6/xmlrpclib.py&quot;, line 838, in close</div><div class="line">    raise Fault(**self._stack[0])</div><div class="line">xmlrpclib.Fault: :&apos;login failed&apos;&quot;&gt;</div></pre></td></tr></table></figure>
-<p>解决方法：此为BUG，按照下面方法即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">etc/init.d/cobblerd restart</div><div class="line">cobbler get-loaders</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          <p>pptp vpn 一键安装脚本，适用 rhel5.x_86-64 系统<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/install-pptpd-by-scripts.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -438,8 +435,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/22/logstash-forwarder-transmission.html" itemprop="url">
-                  通过Logstash-Forwarder传输数据
+                <a class="post-title-link" href="/2015/12/22/install-ss5-proxy.html" itemprop="url">
+                  安装ss5代理
                 </a>
               
             
@@ -452,8 +449,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-22T16:06:57+08:00" content="2015-10-22">
-              2015-10-22
+            <time itemprop="dateCreated" datetime="2015-12-22T11:27:07+08:00" content="2015-12-22">
+              2015-12-22
             </time>
           </span>
 
@@ -466,8 +463,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维技术/" itemprop="url" rel="index">
-                    <span itemprop="name">运维技术</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Proxy/" itemprop="url" rel="index">
+                    <span itemprop="name">Proxy</span>
                   </a>
                 </span>
 
@@ -482,8 +491,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/22/logstash-forwarder-transmission.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/22/logstash-forwarder-transmission.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/22/install-ss5-proxy.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-ss5-proxy.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -493,7 +502,7 @@
 
           
           
-             <span id="/2015/10/22/logstash-forwarder-transmission.html" class="leancloud_visitors" data-flag-title="通过Logstash-Forwarder传输数据">
+             <span id="/2015/12/22/install-ss5-proxy.html" class="leancloud_visitors" data-flag-title="安装ss5代理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -517,30 +526,16 @@
       
         
           
-            <p>logstash 作为无状态的软件，配合消息队列系统，可以很轻松的做到线性扩,Redis 已经帮我们解决了很多的问题，而且也很轻量，为什么我们还需要 logstash-forwarder 呢? 简而言之它很好，但是它不安全。下面开始配置Logstash-forwarder</p>
-<blockquote>
-<p>Redis provides simple authentication but no transport-layer encryption or authorization. This is perfectly fine in trusted environments. However, if you’re connecting to Redis between datacenters you will probably want to use encryption.</p>
-</blockquote>
-<p>简而言之它很好，但是它不安全。下面开始配置Logstash-forwarder</p>
-<h2 id="indexer端配置"><a href="#indexer端配置" class="headerlink" title="indexer端配置"></a>indexer端配置</h2><p>在logstash作为index server角色这端，首先要生成证书：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/pki/tls/</div><div class="line">openssl req -subj &apos;/CN=elk.mydomain.com/&apos; -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt</div></pre></td></tr></table></figure></p>
-<p>如果按照官方文档操作，<code>logstsh-forwarder</code>会报错:<code>Failure connecting to 172.16.11.230: dial tcp elk.mydomain.com:5000: connection refused</code>，为了避免报错，这里比官方的增加了<strong><em>“ -subj ‘/CN=elk.mydomain.com/‘“</em></strong>。 </p>
-<p>然后把证书发送到logstash-forwarder的shipper端服务器上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scp private/logstash-forwarder.key 172.16.11.175:/etc/pki/tls/private </div><div class="line">scp certs/logstash-forwarder.crt 172.16.11.175:/etc/pki/tls/certs</div></pre></td></tr></table></figure></p>
-<p>创建logstash的配置文件：</p>
-<blockquote>
-<p>I’m a lumberjack and I’m ok! I sleep when idle, then I ship logs all day! I parse your logs, I eat the JVM agent for lunch! ♫</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">input &#123;</div><div class="line">  lumberjack &#123;</div><div class="line">    port =&gt; 5000</div><div class="line">    type =&gt; &quot;syslog&quot;</div><div class="line">   ssl_certificate =&gt; &quot;/etc/pki/tls/certs/logstash-forwarder.crt&quot;</div><div class="line">   ssl_key =&gt; &quot;/etc/pki/tls/private/logstash-forwarder.key&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">filter &#123;</div><div class="line">  if [type] == &quot;syslog&quot; &#123;</div><div class="line">    grok &#123;</div><div class="line">      match =&gt; &#123; &quot;message&quot; =&gt; &quot;%&#123;SYSLOGTIMESTAMP:syslog_timestamp&#125; %&#123;SYSLOGHOST:syslog_hostname&#125; %&#123;DATA:syslog_program&#125;(?:\[%&#123;POSINT:syslog_pid&#125;\])?: %&#123;GREEDYDATA:syslog_message&#125;&quot; &#125;</div><div class="line">      add_field =&gt; [ &quot;received_at&quot;, &quot;%&#123;@timestamp&#125;&quot; ]</div><div class="line">      add_field =&gt; [ &quot;received_from&quot;, &quot;%&#123;host&#125;&quot; ]</div><div class="line">    &#125;</div><div class="line">    syslog_pri &#123; &#125;</div><div class="line">    date &#123;</div><div class="line">      match =&gt; [ &quot;syslog_timestamp&quot;, &quot;MMM  d HH:mm:ss&quot;, &quot;MMM dd HH:mm:ss&quot; ]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output &#123;</div><div class="line">  stdout &#123; codec =&gt; rubydebug &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样，logstash index端已经配置完</p>
-<blockquote>
-<p>lumberjack 是 logstash-forwarder 还没用 Golang 重写之前的名字</p>
-</blockquote>
-<p><strong>默认安装的logstash会报错：<code>&quot;The error reported is: uninitialized constant Concurrent::D elay::Executor&quot;</code>，需要更新<code>logstash-input-lumberjack</code>这个插件（国内需要变更更gem 安装的源为<a href="https://ruby.taobao.org）" target="_blank" rel="external">https://ruby.taobao.org）</a></strong></p>
-<h2 id="shipper端安装"><a href="#shipper端安装" class="headerlink" title="shipper端安装"></a>shipper端安装</h2><p>先安装logstash-forwarder软件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://download.elastic.co/logstash-forwarder/binaries/logstash-forwarder-0.4.0-1.x86_64.rpm</div><div class="line">rpm -ivh logstash-forwarder-0.4.0-1.x86_64.rpm</div></pre></td></tr></table></figure></p>
-<p>配置logstash-forwarder<br>logstash-frowarder的配置文件是纯JSON格式。配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat /etc/logstash-forwarder.conf</div><div class="line">&#123;</div><div class="line">  &quot;network&quot;: &#123;</div><div class="line">    &quot;servers&quot;: [ &quot;elk.mydomain.com:5000&quot; ],</div><div class="line">      &quot;timeout&quot;: 15,</div><div class="line">      &quot;ssl ca&quot; : &quot;/etc/pki/tls/certs/logstash-forwarder.crt&quot;,</div><div class="line">      &quot;ssl key&quot;: &quot;/etc/pki/tls/private/logstash-forwarder.key&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;files&quot;: [</div><div class="line">    &#123;</div><div class="line">      &quot;paths&quot;: [</div><div class="line">        &quot;/var/log/message&quot;,</div><div class="line">        &quot;/var/log/secure&quot;</div><div class="line">        ],</div><div class="line">      &quot;fields&quot;: &#123; &quot;type&quot;: &quot;syslog&quot; &#125;</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样就可以在index端接受到数据，在通过kibana将数据可视化</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+socks5代理服务官网：http://ss5.sourceforge.net/
+安装gcc编译环境和相关依赖包1yum -y install pam-devel openldap-devel cyrus-sasl-devel gcc gcc-c++ automake make openssl o
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/install-ss5-proxy.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -588,8 +583,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/21/nginx-logrotate.html" itemprop="url">
-                  Nginx--日志轮滚
+                <a class="post-title-link" href="/2015/12/22/create-yum-mirrors-by-self.html" itemprop="url">
+                  自建yum仓库同步脚本
                 </a>
               
             
@@ -602,8 +597,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-21T18:22:59+08:00" content="2015-10-21">
-              2015-10-21
+            <time itemprop="dateCreated" datetime="2015-12-22T11:20:27+08:00" content="2015-12-22">
+              2015-12-22
             </time>
           </span>
 
@@ -616,8 +611,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -632,8 +639,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/21/nginx-logrotate.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/nginx-logrotate.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/22/create-yum-mirrors-by-self.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/create-yum-mirrors-by-self.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -643,7 +650,7 @@
 
           
           
-             <span id="/2015/10/21/nginx-logrotate.html" class="leancloud_visitors" data-flag-title="Nginx--日志轮滚">
+             <span id="/2015/12/22/create-yum-mirrors-by-self.html" class="leancloud_visitors" data-flag-title="自建yum仓库同步脚本">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -667,12 +674,17 @@
       
         
           
-            <p>Nginx默认不支持日志轮滚，通过下面方法解决</p>
-<h3 id="脚本方式"><a href="#脚本方式" class="headerlink" title="脚本方式"></a>脚本方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash                                                                                                                         </div><div class="line">log_dir=&apos;/usr/local/nginx/logs&apos;                                                                                                     </div><div class="line">nginx_pid=&apos;/usr/local/nginx/logs/nginx.pid&apos;</div><div class="line">date_yesterday=`date -d &quot;yesterday&quot; +%Y%m%d`</div><div class="line">for logfile in `ls $log_dir/*.log | awk -F&apos;/&apos; &apos;&#123;print $6&#125;&apos;`                                                                         </div><div class="line">do</div><div class="line">        mv $log_dir/$logfile $log_dir/$&#123;logfile&#125;_$&#123;date_yesterday&#125;                                                                  </div><div class="line">done</div><div class="line">find $log_dir -ctime +15 | xargs rm -f</div><div class="line">kill -USR1 `ps axu | grep &quot;nginx: master process&quot; | grep -v grep | awk &apos;&#123;print $2&#125;&apos;`</div></pre></td></tr></table></figure>
-<h3 id="系统logrotate"><a href="#系统logrotate" class="headerlink" title="系统logrotate"></a>系统logrotate</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cat /etc/logrotate.d/nginx</div><div class="line">/usr/local/nginx/logs/*.log &#123;</div><div class="line">    daily</div><div class="line">    missingok</div><div class="line">    rotate 99</div><div class="line">    compress</div><div class="line">    delaycompress</div><div class="line">    notifempty</div><div class="line">    create 640 nobody nobody</div><div class="line">    sharedscripts</div><div class="line">    prerotate</div><div class="line">    sleep 59</div><div class="line">    endscript</div><div class="line">    postrotate</div><div class="line">        if [ -f /usr/local/nginx/logs/nginx.pid ]; then</div><div class="line">                kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`</div><div class="line">        fi</div><div class="line">    endscript</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+自建yum仓库自建内部yum仓库，提高软件安装速度和方便性，同时不需要对新服务器开通对公网的访问权限，也提高了安全性。
+系统环境安装httpd作为web server，提供文件下载。安装环境请参考cobbler安装。
+同步脚本12345678910111213141516171819202122#
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/create-yum-mirrors-by-self.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -720,8 +732,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/21/vim-nginx-hight-light.html" itemprop="url">
-                  Nginx--VIM代码高亮
+                <a class="post-title-link" href="/2015/12/21/sourcecode-install-ntp.html" itemprop="url">
+                  编译安装ntp服务
                 </a>
               
             
@@ -734,8 +746,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-21T12:14:37+08:00" content="2015-10-21">
-              2015-10-21
+            <time itemprop="dateCreated" datetime="2015-12-21T23:21:36+08:00" content="2015-12-21">
+              2015-12-21
             </time>
           </span>
 
@@ -748,8 +760,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -764,8 +788,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/21/vim-nginx-hight-light.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/vim-nginx-hight-light.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/21/sourcecode-install-ntp.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/sourcecode-install-ntp.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -775,7 +799,7 @@
 
           
           
-             <span id="/2015/10/21/vim-nginx-hight-light.html" class="leancloud_visitors" data-flag-title="Nginx--VIM代码高亮">
+             <span id="/2015/12/21/sourcecode-install-ntp.html" class="leancloud_visitors" data-flag-title="编译安装ntp服务">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -799,18 +823,17 @@
       
         
           
-            <p>配置Vim 支持Nginx 配置文件高亮显示</p>
-<ul>
-<li>下载 Nginx 配置文件的 Vim 语法高亮：<code>http://www.vim.org/scripts/script.php?script_id=1886</code></li>
-<li>将下载的<code>nginx.vim</code>复制到<code>~/.vim/syntax/</code>文件夹下，并且在<code>~/.vim/filetype.vim</code>文件中</li>
-<li><p><code>echo &quot;au BufRead,BufNewFile /usr/local/nginx/* set ft=nginx&quot; &gt;&gt; /root/.vim/filetype.vim</code></p>
-<h3 id="配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。"><a href="#配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。" class="headerlink" title="配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。"></a>配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">[[ -d ~/.vim/syntax ]] || mkdir  -p ~/.vim/syntax</div><div class="line">wget http://www.vim.org/scripts/download_script.php?src_id=19394 -O ~/.vim/syntaxnginx.vim/</div><div class="line">echo &quot;au BufRead,BufNewFile /usr/local/nginx/* set ft=nginx&quot; &gt;&gt; ~/.vim/filetype.vim</div></pre></td></tr></table></figure>
-<p><a href="http://www.zerounix.com/upload/web/nginx/nginx.vim" target="_blank" rel="external">nginx.vim文件下载链接</a></p>
-</li>
-</ul>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+升级背景NTP服务漏洞
+
+“未经过身份验证的攻击者能够迫使网络时间协议守护进程（ntpd）与恶意的时间服务器源进行同步，这样一来，攻击者就可以随意修改目标 系统的系统时间了。网络时间协议守护进程（ntpd）在处理某些经过加密的、没有得到应答的网络数据包时，会发生错误。”总的来说，恶意攻击者能够迫使
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/21/sourcecode-install-ntp.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -858,8 +881,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/21/nginx-init-scripts.html" itemprop="url">
-                  Nginx--INIT启动脚本
+                <a class="post-title-link" href="/2015/12/21/inotify-command.html" itemprop="url">
+                  初识inotify
                 </a>
               
             
@@ -872,8 +895,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-21T10:33:09+08:00" content="2015-10-21">
-              2015-10-21
+            <time itemprop="dateCreated" datetime="2015-12-21T23:04:05+08:00" content="2015-12-21">
+              2015-12-21
             </time>
           </span>
 
@@ -886,8 +909,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
                   </a>
                 </span>
 
@@ -902,8 +937,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/21/nginx-init-scripts.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/nginx-init-scripts.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/21/inotify-command.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/inotify-command.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -913,7 +948,7 @@
 
           
           
-             <span id="/2015/10/21/nginx-init-scripts.html" class="leancloud_visitors" data-flag-title="Nginx--INIT启动脚本">
+             <span id="/2015/12/21/inotify-command.html" class="leancloud_visitors" data-flag-title="初识inotify">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -937,874 +972,23 @@
       
         
           
-            <h3 id="nginx服务自启动脚本"><a href="#nginx服务自启动脚本" class="headerlink" title="nginx服务自启动脚本"></a>nginx服务自启动脚本</h3><h3 id="脚本内容"><a href="#脚本内容" class="headerlink" title="脚本内容"></a>脚本内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># nginx - this script starts and stops the nginx daemin</div><div class="line">#</div><div class="line"># chkconfig:   - 85 15</div><div class="line"># description:  Nginx is an HTTP(S) server, HTTP(S) reverse</div><div class="line">#               proxy and IMAP/POP3 proxy server</div><div class="line"># processname: nginx</div><div class="line"># config:      /usr/local/nginx/conf/nginx.conf</div><div class="line"># pidfile:     /usr/local/nginx/logs/nginx.pid</div><div class="line"> </div><div class="line"># Source function library.</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"> </div><div class="line"># Source networking configuration.</div><div class="line">. /etc/sysconfig/network</div><div class="line"> </div><div class="line"># Check that networking is up.</div><div class="line">[ &quot;$NETWORKING&quot; = &quot;no&quot; ] &amp;&amp; exit 0</div><div class="line"> </div><div class="line">nginx=&quot;/usr/local/nginx/sbin/nginx&quot;</div><div class="line">prog=$(basename $nginx)</div><div class="line"> </div><div class="line">NGINX_CONF_FILE=&quot;/usr/local/nginx/conf/nginx.conf&quot;</div><div class="line"> </div><div class="line">lockfile=/var/lock/subsys/nginx</div><div class="line"> </div><div class="line">start() &#123;</div><div class="line">    [ -x $nginx ] || exit 5</div><div class="line">    [ -f $NGINX_CONF_FILE ] || exit 6</div><div class="line">    echo -n $&quot;Starting $prog: &quot;</div><div class="line">    daemon $nginx -c $NGINX_CONF_FILE</div><div class="line">    retval=$?</div><div class="line">    echo</div><div class="line">    [ $retval -eq 0 ] &amp;&amp; touch $lockfile</div><div class="line">    return $retval</div><div class="line">&#125;</div><div class="line"> </div><div class="line">stop() &#123;</div><div class="line">    echo -n $&quot;Stopping $prog: &quot;</div><div class="line">    killproc $prog -QUIT</div><div class="line">    retval=$?</div><div class="line">    echo</div><div class="line">    [ $retval -eq 0 ] &amp;&amp; rm -f $lockfile</div><div class="line">    return $retval</div><div class="line">&#125;</div><div class="line"> </div><div class="line">restart() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    stop</div><div class="line">    start</div><div class="line">&#125;</div><div class="line"> </div><div class="line">reload() &#123;</div><div class="line">    configtest || return $?</div><div class="line">    echo -n $&quot;Reloading $prog: &quot;</div><div class="line">    killproc $nginx -HUP</div><div class="line">    RETVAL=$?</div><div class="line">    echo</div><div class="line">&#125;</div><div class="line"> </div><div class="line">force_reload() &#123;</div><div class="line">    restart</div><div class="line">&#125;</div><div class="line"> </div><div class="line">configtest() &#123;</div><div class="line">  $nginx -t -c $NGINX_CONF_FILE</div><div class="line">&#125;</div><div class="line"> </div><div class="line">rh_status() &#123;</div><div class="line">    status $prog</div><div class="line">&#125;</div><div class="line"> </div><div class="line">rh_status_q() &#123;</div><div class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</div><div class="line">&#125;</div><div class="line"> </div><div class="line">case &quot;$1&quot; in</div><div class="line">    start)</div><div class="line">        rh_status_q &amp;&amp; exit 0</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    stop)</div><div class="line">        rh_status_q || exit 0</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    restart|configtest)</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    reload)</div><div class="line">        rh_status_q || exit 7</div><div class="line">        $1</div><div class="line">        ;;</div><div class="line">    force-reload)</div><div class="line">        force_reload</div><div class="line">        ;;</div><div class="line">    status)</div><div class="line">        rh_status</div><div class="line">        ;;</div><div class="line">    condrestart|try-restart)</div><div class="line">        rh_status_q || exit 0</div><div class="line">            ;;</div><div class="line">    *)</div><div class="line">        echo $&quot;Usage: $0 &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;&quot;</div><div class="line">        exit 2</div><div class="line">esac</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/19/install-bind-ms.html" itemprop="url">
-                  Centos6配置主辅DNS
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-19T17:43:54+08:00" content="2015-10-19">
-              2015-10-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/19/install-bind-ms.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/19/install-bind-ms.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/19/install-bind-ms.html" class="leancloud_visitors" data-flag-title="Centos6配置主辅DNS">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Master响应zone transfer请求并传送结果，直到整个slave更新完成。</p>
-<h2 id="安装软件包-主从服务器"><a href="#安装软件包-主从服务器" class="headerlink" title="安装软件包(主从服务器)"></a>安装软件包(主从服务器)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install bind bind-chroot bind-utils bind-libs</div></pre></td></tr></table></figure>
-<h2 id="配置Master服务器"><a href="#配置Master服务器" class="headerlink" title="配置Master服务器"></a>配置Master服务器</h2><h3 id="编辑bind主配置文件"><a href="#编辑bind主配置文件" class="headerlink" title="编辑bind主配置文件"></a>编辑bind主配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">cat /var/named/chroot/etc/named.conf</div><div class="line">//</div><div class="line">// named.conf</div><div class="line">//</div><div class="line">// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS</div><div class="line">// server as a caching only nameserver (as a localhost DNS resolver only).</div><div class="line">//</div><div class="line">// See /usr/share/doc/bind*/sample/ for example named configuration files.</div><div class="line">//</div><div class="line"></div><div class="line">options &#123;</div><div class="line">        listen-on port 53 &#123; 162.243.134.106; &#125;;                    \\监听ip及端口</div><div class="line">        directory       &quot;/var/named&quot;;                              \\dns工作目录</div><div class="line">        dump-file       &quot;/var/named/data/cache_dump.db&quot;;           \\ 缓存转存文件</div><div class="line">        statistics-file &quot;/var/named/data/named_stats.txt&quot;;         \\内存使用统计信息</div><div class="line">        allow-query     &#123; any; &#125;;                                  \\ 允许查询的主机，默认是localhost</div><div class="line">        recursion no;                                              \\是否递归查询</div><div class="line">        allow-transfer  &#123; 162.243.134.107; &#125;;                      \\允许同步ip</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;                                                          \\定义bind服务日志</div><div class="line">        channel &quot;named_log&quot; &#123;</div><div class="line">        file &quot;logs/named.log&quot; versions 10 size 5m;</div><div class="line">        severity dynamic;</div><div class="line">        print-category yes;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">channel &quot;query_log&quot; &#123;                                              \\定义查询日志</div><div class="line">        file &quot;logs/query.log&quot; versions 10 size 5m;</div><div class="line">        severity debug;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">category default &#123; named_log; &#125;;</div><div class="line">category queries &#123; query_log; &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone &quot;.&quot; IN &#123;</div><div class="line">        type hint;                                                 \\定义根区域</div><div class="line">        file &quot;named.ca&quot;;                                           \\区域文件  </div><div class="line">&#125;;</div><div class="line"></div><div class="line">include &quot;/etc/rndc.key&quot;; </div><div class="line"></div><div class="line">zone &quot;zerounix.com&quot; IN &#123;                                           \\用户区域文件                    </div><div class="line">        type master;</div><div class="line">        masters &#123; 162.243.134.106; &#125;;</div><div class="line">        file &quot;zerounix.com.db&quot;;</div><div class="line">&#125;;</div><div class="line">rm -f /etc/named.conf</div><div class="line">ls -s /var/named/chroot/etc/named.conf /etc/named.conf</div></pre></td></tr></table></figure>
-<h3 id="增加zerounix-com区域文件"><a href="#增加zerounix-com区域文件" class="headerlink" title="增加zerounix.com区域文件"></a>增加zerounix.com区域文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cat /var/named/chroot/var/named/zerounix.com.db </div><div class="line">$TTL    60</div><div class="line">@       IN      SOA     ns1.zerounix.com.    hostmaster.zerounix.com. (</div><div class="line">                        2015101702</div><div class="line">                        3600</div><div class="line">                        300</div><div class="line">                        604800</div><div class="line">                        600</div><div class="line">                        )</div><div class="line"></div><div class="line">                IN      NS      ns1.zerounix.com.</div><div class="line">                IN      NS      ns2.zerounix.com.</div><div class="line">                IN      MX      5       mail.zerounix.com.</div><div class="line">                IN              A       162.243.134.106</div><div class="line">www             IN              CNAME   web.zerounix.com</div><div class="line">web             IN              A       162.243.134.106</div></pre></td></tr></table></figure>
-<h3 id="启动bind服务"><a href="#启动bind服务" class="headerlink" title="启动bind服务"></a>启动bind服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/named start</div></pre></td></tr></table></figure>
-<h3 id="测试解析是否正常"><a href="#测试解析是否正常" class="headerlink" title="测试解析是否正常"></a>测试解析是否正常</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">dig www.zerounix.com @162.243.134.106</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.37.rc1.el6_7.4 &lt;&lt;&gt;&gt; www.zerounix.com</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20243</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;www.zerounix.com.              IN      A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">www.zerounix.com.       9       IN      CNAME   web.zerounix.com.</div><div class="line">web.zerounix.com.       9       IN      A       162.243.134.106</div><div class="line"></div><div class="line">;; Query time: 362 msec</div><div class="line">;; SERVER: 162.243.134.106#53(162.243.134.106)</div><div class="line">;; WHEN: Mon Oct 19 17:22:21 2015</div><div class="line">;; MSG SIZE  rcvd: 68</div></pre></td></tr></table></figure>
-<h2 id="配置Slave服务器"><a href="#配置Slave服务器" class="headerlink" title="配置Slave服务器"></a>配置Slave服务器</h2><h3 id="编辑bind配置文件"><a href="#编辑bind配置文件" class="headerlink" title="编辑bind配置文件"></a>编辑bind配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"> cat /var/named/chroot/etc/named.conf</div><div class="line">//</div><div class="line">// named.conf</div><div class="line">//</div><div class="line">// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS</div><div class="line">// server as a caching only nameserver (as a localhost DNS resolver only).</div><div class="line">//</div><div class="line">// See /usr/share/doc/bind*/sample/ for example named configuration files.</div><div class="line">//</div><div class="line"></div><div class="line">options &#123;</div><div class="line">        listen-on port 53 &#123; 162.243.134.107; &#125;;</div><div class="line">        directory       &quot;/var/named&quot;;</div><div class="line">        dump-file       &quot;/var/named/data/cache_dump.db&quot;;</div><div class="line">        statistics-file &quot;/var/named/data/named_stats.txt&quot;;</div><div class="line">        allow-query     &#123; any; &#125;;</div><div class="line">        recursion no;</div><div class="line">        allow-transfer  &#123; 162.243.134.106; 162.243.134.107;&#125;;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;</div><div class="line">        channel &quot;named_log&quot; &#123;</div><div class="line">        file &quot;logs/named.log&quot; versions 10 size 5m;</div><div class="line">        severity dynamic;</div><div class="line">        print-category yes;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">channel &quot;query_log&quot; &#123;</div><div class="line">        file &quot;logs/query.log&quot; versions 10 size 5m;</div><div class="line">        severity debug;</div><div class="line">        print-severity yes;</div><div class="line">        print-time yes;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">category default &#123; named_log; &#125;;</div><div class="line">category queries &#123; query_log; &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone &quot;.&quot; IN &#123;</div><div class="line">        type hint;</div><div class="line">        file &quot;named.ca&quot;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">include &quot;/etc/rndc.key&quot;;</div><div class="line"></div><div class="line">zone &quot;zerounix.com&quot; IN &#123;</div><div class="line">        type slave;</div><div class="line">        masters &#123; 162.243.134.106; &#125;;</div><div class="line">        file &quot;zerounix.com.db&quot;;</div><div class="line">        transfer-source 162.243.134.107;</div><div class="line">&#125;;</div><div class="line">rm -f /etc/named.conf</div><div class="line">ls -s /var/named/chroot/etc/named.conf /etc/named.conf</div></pre></td></tr></table></figure>
-<h3 id="启动bind服务-1"><a href="#启动bind服务-1" class="headerlink" title="启动bind服务"></a>启动bind服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/named start</div></pre></td></tr></table></figure>
-<h3 id="验证主辅同步"><a href="#验证主辅同步" class="headerlink" title="验证主辅同步"></a>验证主辅同步</h3><h4 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tail -f /var/named/chroot/var/named/logs/named.log</div><div class="line">19-Oct-2015 17:39:42.825 notify: info: client 162.243.134.106#3133: received notify for zone &apos;zerounix.com&apos;</div><div class="line">19-Oct-2015 17:39:42.827 general: info: zone zerounix.com/IN: Transfer started.</div><div class="line">19-Oct-2015 17:39:42.828 xfer-in: info: transfer of &apos;zerounix.com/IN&apos; from 162.243.134.106#53: connected using 162.243.134.107#50919</div><div class="line">19-Oct-2015 17:39:42.830 general: info: zone zerounix.com/IN: transferred serial 2015101701</div><div class="line">19-Oct-2015 17:39:42.830 xfer-in: info: transfer of &apos;zerounix.com&apos; from 162.243.134.106#53: Transfer completed: 1 messages, 7 record</div><div class="line">s, 222 bytes, 0.001 secs (222000 bytes/sec)</div></pre></td></tr></table></figure>
-<h4 id="查看zone文件"><a href="#查看zone文件" class="headerlink" title="查看zone文件"></a>查看zone文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat /var/named/chroot/var/named/zerounix.com.db </div><div class="line">$ORIGIN .</div><div class="line">$ORIGIN .</div><div class="line">$TTL 60 ; 1 minute</div><div class="line">zerounix.com              IN SOA  ns1.zerounix.com. hostmaster.zerounix.com. (</div><div class="line">                                2015101702 ; serial</div><div class="line">                                3600       ; refresh (1 hour)</div><div class="line">                                300        ; retry (5 minutes)</div><div class="line">                                604800     ; expire (1 week)</div><div class="line">                                600        ; minimum (10 minutes)</div><div class="line">                                )</div><div class="line">                        NS      ns1.zerounix.com.</div><div class="line">                        NS      ns2.zerounix.com.</div><div class="line">                        A       162.243.134.106</div><div class="line">                        MX      5 mail.zerounix.com.</div><div class="line">$ORIGIN zerounix.com.</div><div class="line">www                     CNAME   web.zerounix.com.</div><div class="line">web                     A       162.243.134.106</div></pre></td></tr></table></figure>
-<h3 id="测试解析"><a href="#测试解析" class="headerlink" title="测试解析"></a>测试解析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">dig www.zerounix.com @162.243.134.107</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.37.rc1.el6_7.4 &lt;&lt;&gt;&gt; www.zerounix.com</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20272</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;www.zerounix.com.              IN      A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">www.zerounix.com.       9       IN      CNAME   web.zerounix.com.</div><div class="line">web.zerounix.com.       9       IN      A       162.243.134.106</div><div class="line"></div><div class="line">;; Query time: 379 msec</div><div class="line">;; SERVER: 162.243.134.107#53(162.243.134.107)</div><div class="line">;; WHEN: Mon Oct 19 17:35:21 2015</div><div class="line">;; MSG SIZE  rcvd: 68</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/14/install-redis.html" itemprop="url">
-                  安装Redis
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-14T18:26:05+08:00" content="2015-10-14">
-              2015-10-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/14/install-redis.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/install-redis.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/14/install-redis.html" class="leancloud_visitors" data-flag-title="安装Redis">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API</p>
-<h2 id="下载安装redis"><a href="#下载安装redis" class="headerlink" title="下载安装redis"></a>下载安装redis</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/releases/redis-3.0.2.tar.gz </div><div class="line">tar -zxf redis-3.0.2.tar.gz</div><div class="line">cd redis-3.0.2</div><div class="line">make &amp;&amp; make install </div><div class="line">cp redis.conf /etc/</div></pre></td></tr></table></figure>
-<p>参数介绍：<br><code>make install</code>命令执行完成后，会在<code>/usr/local/bin</code>目录下生成本个可执行文件，分别是<code>redis-server、redis-cli、redis-benchmark、redis-check-aof 、redis-check-dump</code>，它们的作用如下：</p>
-<ul>
-<li><code>redis-server</code>：Redis服务器的daemon启动程序</li>
-<li><code>redis-cli</code>：Redis命令行操作工具。也可以用telnet根据其纯文本协议来操作</li>
-<li><code>redis-benchmark</code>：Redis性能测试工具，测试Redis在当前系统下的读写性能</li>
-<li><code>redis-check-aof</code>：数据修复</li>
-<li><code>redis-check-dump</code>：检查导出工具</li>
-</ul>
-<h2 id="修改系统配置"><a href="#修改系统配置" class="headerlink" title="修改系统配置"></a>修改系统配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo vm.overcommit_memory=1 &gt;&gt; /etc/sysctl.conf</div><div class="line">sysctl vm.overcommit_memory=1 或执行echo vm.overcommit_memory=1 &gt;&gt;/proc/sys/vm/overcommit_memory</div></pre></td></tr></table></figure>
-<p>使用数字含义：</p>
-<ul>
-<li>0，表示内核将检查是否有足够的可用内存供应用进程使用；如果有足够的可用内存，内存申请允许；否则，内存申请失败，并把错误返回给应用进程。</li>
-<li>1，表示内核允许分配所有的物理内存，而不管当前的内存状态如何。</li>
-<li>2，表示内核允许分配超过所有物理内存和交换空间总和的内存</li>
-</ul>
-<h2 id="修改配置文件："><a href="#修改配置文件：" class="headerlink" title="修改配置文件："></a>修改配置文件：</h2><p>edit /etc/redis.conf<br>daemonize yes<br>参数说明：参数介绍：</p>
-<ul>
-<li><code>daemonize</code>：是否以后台daemon方式运行</li>
-<li><code>pidfile</code>：pid文件位置</li>
-<li><code>port</code>：监听的端口号</li>
-<li><code>timeout</code>：请求超时时间</li>
-<li><code>loglevel</code>：log信息级别</li>
-<li><code>logfile</code>：log文件位置</li>
-<li><code>databases</code>：开启数据库的数量</li>
-<li><code>save</code> <em> </em>：保存快照的频率，第一个<em>表示多长时间，第三个</em>表示执行多少次写操作。在一定时间内执行一定数量的写操作时，自动保存快照。可设置多个条件。</li>
-<li><code>rdbcompression</code>：是否使用压缩</li>
-<li><code>dbfilename</code>：数据快照文件名（只是文件名，不包括目录）</li>
-<li><code>dir</code>：数据快照的保存目录（这个是目录）</li>
-<li><code>appendonly</code>：是否开启appendonlylog，开启的话每次写操作会记一条log，这会提高数据抗风险能力，但影响效率。</li>
-<li><code>appendfsync</code>：appendonlylog如何同步到磁盘（三个选项，分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步）</li>
-</ul>
-<h2 id="启动redis"><a href="#启动redis" class="headerlink" title="启动redis"></a>启动redis</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/redis-server /etc/redis.conf</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html" itemprop="url">
-                  Elasticsearch配置文件详解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-13T18:12:58+08:00" content="2015-10-13">
-              2015-10-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维技术/" itemprop="url" rel="index">
-                    <span itemprop="name">运维技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/elasticsearch-config-file-explain-in-detail.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/13/elasticsearch-config-file-explain-in-detail.html" class="leancloud_visitors" data-flag-title="Elasticsearch配置文件详解">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> elasticsearch的config文件夹里面有两个配置文件：elasticsearch.yml和logging.yml，第一个是es的基本配置文件，第二个是日志配置文件，es也是使用log4j来记录日志的，所以logging.yml里的设置按普通log4j配置文件来设置就行了。下面主要讲解下elasticsearch.yml这个文件中可配置的东西。</p>
-<ul>
-<li>cluster.name: elasticsearch</li>
-</ul>
-<p>配置es的集群名称，默认是elasticsearch，es会自动发现在同一网段下的es，如果在同一网段下有多个集群，就可以用这个属性来区分不同的集群。</p>
-<ul>
-<li>node.name: “Franz Kafka”</li>
-</ul>
-<p>节点名，默认随机指定一个name列表中名字，该列表在es的jar包中config文件夹里name.txt文件中，其中有很多作者添加的有趣名字。</p>
-<ul>
-<li>node.master: true</li>
-</ul>
-<p>指定该节点是否有资格被选举成为node，默认是true，es是默认集群中的第一台机器为master，如果这台机挂了就会重新选举master。</p>
-<ul>
-<li>node.data: true</li>
-</ul>
-<p>指定该节点是否存储索引数据，默认为true。</p>
-<ul>
-<li>index.number_of_shards: 6</li>
-</ul>
-<p>设置默认索引分片个数，默认为5片。</p>
-<ul>
-<li>index.number_of_replicas: 1</li>
-</ul>
-<p>设置默认索引副本个数，默认为1个副本。</p>
-<ul>
-<li>path.conf: /path/to/conf</li>
-</ul>
-<p>设置配置文件的存储路径，默认是es根目录下的config文件夹。</p>
-<ul>
-<li>path.data: /path/to/data</li>
-</ul>
-<p>设置索引数据的存储路径，默认是es根目录下的data文件夹，可以设置多个存储路径，用逗号隔开，例：<code>path.data: /path/to/data1,/path/to/data2</code></p>
-<ul>
-<li>path.work: /path/to/work</li>
-</ul>
-<p>设置临时文件的存储路径，默认是es根目录下的work文件夹。</p>
-<ul>
-<li>path.logs: /path/to/logs</li>
-</ul>
-<p>设置日志文件的存储路径，默认是es根目录下的logs文件夹</p>
-<ul>
-<li>path.plugins: /path/to/plugins</li>
-</ul>
-<p>设置插件的存放路径，默认是es根目录下的plugins文件夹</p>
-<ul>
-<li>bootstrap.mlockall: true</li>
-</ul>
-<p>设置为true来锁住内存。因为当jvm开始swapping时es的效率会降低，所以要保证它不swap，可以把ES_MIN_MEM和ES_MAX_MEM两个环境变量设置成同一个值，并且保证机器有足够的内存分配给es。同时也要允许elasticsearch的进程可以锁住内存，linux下可以通过<code>ulimit -l unlimited</code>命令。</p>
-<ul>
-<li>network.bind_host: 192.168.0.1</li>
-</ul>
-<p>设置绑定的ip地址，可以是ipv4或ipv6的，默认为0.0.0.0。</p>
-<ul>
-<li>network.publish_host: 192.168.0.1</li>
-</ul>
-<p>设置其它节点和该节点交互的ip地址，如果不设置它会自动判断，值必须是个真实的ip地址。</p>
-<ul>
-<li>network.host: 192.168.0.1</li>
-</ul>
-<p>这个参数是用来同时设置bind_host和publish_host上面两个参数。</p>
-<ul>
-<li>vtransport.tcp.port: 9300</li>
-</ul>
-<p>设置节点间交互的tcp端口，默认是9300。</p>
-<ul>
-<li>transport.tcp.compress: true</li>
-</ul>
-<p>设置是否压缩tcp传输时的数据，默认为false，不压缩。</p>
-<ul>
-<li>http.port: 9200</li>
-</ul>
-<p>设置对外服务的http端口，默认为9200。</p>
-<ul>
-<li>http.max_content_length: 100mb</li>
-</ul>
-<p>设置内容的最大容量，默认100mb</p>
-<ul>
-<li>http.enabled: false</li>
-</ul>
-<p>是否使用http协议对外提供服务，默认为true，开启。</p>
-<ul>
-<li>gateway.type: local</li>
-</ul>
-<p>gateway的类型，默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，hadoop的HDFS，和amazon的s3服务器，其它文件系统的设置方法下次再详细说。</p>
-<ul>
-<li>gateway.recover_after_nodes: 1</li>
-</ul>
-<p>设置集群中N个节点启动时进行数据恢复，默认为1。</p>
-<ul>
-<li>gateway.recover_after_time: 5m</li>
-</ul>
-<p>设置初始化数据恢复进程的超时时间，默认是5分钟。</p>
-<ul>
-<li>gateway.expected_nodes: 2</li>
-</ul>
-<p>设置这个集群中节点的数量，默认为2，一旦这N个节点启动，就会立即进行数据恢复。</p>
-<ul>
-<li>cluster.routing.allocation.node_initial_primaries_recoveries: 4</li>
-</ul>
-<p>初始化数据恢复时，并发恢复线程的个数，默认为4。</p>
-<ul>
-<li>cluster.routing.allocation.node_concurrent_recoveries: 2</li>
-</ul>
-<p>添加删除节点或负载均衡时并发恢复线程的个数，默认为4。</p>
-<ul>
-<li>indices.recovery.max_size_per_sec: 0</li>
-</ul>
-<p>设置数据恢复时限制的带宽，如入100mb，默认为0，即无限制。</p>
-<ul>
-<li>indices.recovery.concurrent_streams: 5</li>
-</ul>
-<p>设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数，默认为5。</p>
-<ul>
-<li>discovery.zen.minimum_master_nodes: 1</li>
-</ul>
-<p>设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）</p>
-<ul>
-<li>discovery.zen.ping.timeout: 3s</li>
-</ul>
-<p>设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。</p>
-<ul>
-<li>discovery.zen.ping.multicast.enabled: false</li>
-</ul>
-<p>设置是否打开多播发现节点，默认是true。</p>
-<ul>
-<li>discovery.zen.ping.unicast.hosts: [“host1”, “host2:port”, “host3[portX-portY]”]</li>
-</ul>
-<p>设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点。<br>下面是一些查询时的慢日志参数设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">index.search.slowlog.level: TRACE</div><div class="line">index.search.slowlog.threshold.query.warn: 10s</div><div class="line">index.search.slowlog.threshold.query.info: 5s</div><div class="line">index.search.slowlog.threshold.query.debug: 2s</div><div class="line">index.search.slowlog.threshold.query.trace: 500ms</div><div class="line">index.search.slowlog.threshold.fetch.warn: 1s</div><div class="line">index.search.slowlog.threshold.fetch.info: 800ms</div><div class="line">index.search.slowlog.threshold.fetch.debug:500ms</div><div class="line">index.search.slowlog.threshold.fetch.trace: 200ms</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/13/elasticsearch-install-service-wrapper.html" itemprop="url">
-                  ElasticSearch 安装service wrapper插件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-13T17:59:45+08:00" content="2015-10-13">
-              2015-10-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维技术/" itemprop="url" rel="index">
-                    <span itemprop="name">运维技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/13/elasticsearch-install-service-wrapper.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/elasticsearch-install-service-wrapper.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/13/elasticsearch-install-service-wrapper.html" class="leancloud_visitors" data-flag-title="ElasticSearch 安装service wrapper插件">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>使用elasticsearch-servicewrapper这个es插件，它支持通过参数，指定是在后台或前台运行es，并且支持启动，停止，重启es服务（默认es脚本只能通过ctrl+c关闭es）</p>
-<h3 id="下载软件包："><a href="#下载软件包：" class="headerlink" title="下载软件包："></a>下载软件包：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/elasticsearch/elasticsearch-servicewrapper/archive/master.zip -O elasticsearch-servicewrapper.zip</div></pre></td></tr></table></figure>
-<h3 id="解压、拷贝："><a href="#解压、拷贝：" class="headerlink" title="解压、拷贝："></a>解压、拷贝：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">unzip elasticsearch-servicewrapper.zip </div><div class="line">mv elasticsearch-servicewrapper-master/service/ /usr/local/elasticsearch/bin/</div></pre></td></tr></table></figure>
-<h3 id="执行："><a href="#执行：" class="headerlink" title="执行："></a>执行：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">bin/service/elasticsearch +</div><div class="line">console 在前台运行es</div><div class="line">start 在后台运行es</div><div class="line">stop 停止es</div><div class="line">install 使es作为服务在服务器启动时自动启动</div><div class="line">remove 取消启动时自动启动</div></pre></td></tr></table></figure>
-<p>在service目录下有个elasticsearch.conf配置文件，主要是设置一些java运行环境参数，其中比较重要的是下面的<br>参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#es的home路径，不用用默认值就可以</div><div class="line">set.default.ES_HOME=</div><div class="line">#分配给es的最小内存</div><div class="line">set.default.ES_MIN_MEM=256</div><div class="line">#分配给es的最大内存</div><div class="line">set.default.ES_MAX_MEM=1024</div><div class="line"></div><div class="line"># 启动等待超时时间（以秒为单位）</div><div class="line">wrapper.startup.timeout=300</div><div class="line"># 关闭等待超时时间（以秒为单位）</div><div class="line">wrapper.shutdown.timeout=300</div><div class="line"># ping超时时间(以秒为单位)</div><div class="line">wrapper.ping.timeout=300</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/13/install-elk.html" itemprop="url">
-                  安装ELK日志服务
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-13T17:21:58+08:00" content="2015-10-13">
-              2015-10-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维技术/" itemprop="url" rel="index">
-                    <span itemprop="name">运维技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/13/install-elk.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/install-elk.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/13/install-elk.html" class="leancloud_visitors" data-flag-title="安装ELK日志服务">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="什么是ELK"><a href="#什么是ELK" class="headerlink" title="什么是ELK"></a>什么是ELK</h2><p>  ELK是ElasticSearch、Logstash、Kibana三个开源软件的组合，这三个产品可以单独使用，但当他们组合在一起使用时，你会发现一个强大的、可扩展的日志服务，而且都是归于Elastic.co公司名下，所以有此简称。<br>  ELK具有如下几个优点：</p>
-<ul>
-<li>处理方式灵活：Elasticsearch是实时全文索引，不需要像storm那样预先编程才能使用；</li>
-<li>配置简、易上手：ElasticSearch全部采用JSON接口，Logstash是Ruby DSL设计，都是目前业界最 通用的配置语法设计；</li>
-<li>检索性能高效：虽然每次查询都是实时计算，但是优秀的设计和实现基本可以到达百亿级数据查询的秒级响应；</li>
-<li>集群线性扩展：不管是ElasticSearch集群还是Logstash集群都是可以线性扩展；</li>
-<li>前端操作绚丽：Kibana界面，只需要点击鼠标，就可以完成搜索、聚合、生成绚丽的仪表盘；</li>
-</ul>
-<p>软件介绍：</p>
-<ul>
-<li>ElasticSearch：数据实时检索、分析</li>
-<li>Logstash：  收集、分析、存储数据</li>
-<li>Kibana： 可视化数据</li>
-<li>redis: 日志队列</li>
-</ul>
-<p>ELK Stack示意图：<br><img src="http://www.zerounix.com/images/opstech/elk/elk_for_log.png" alt="ELK Stack示意图" title="THe ELK Platform for log management"></p>
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><h3 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h3><h4 id="查看系统："><a href="#查看系统：" class="headerlink" title="查看系统："></a>查看系统：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /etc/redhat-release </div><div class="line">CentOS Linux release 7.1.1503 (Core)</div></pre></td></tr></table></figure>
-<h4 id="设置selinux状态"><a href="#设置selinux状态" class="headerlink" title="设置selinux状态"></a>设置selinux状态</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">getenforce </div><div class="line">Disabled`</div></pre></td></tr></table></figure>
-<h4 id="安装EPEL源"><a href="#安装EPEL源" class="headerlink" title="安装EPEL源"></a>安装EPEL源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install epel-release</div></pre></td></tr></table></figure>
-<h3 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h3><ul>
-<li><a href="https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.2.tar.gz" target="_blank" rel="external">ElasticSearch</a></li>
-<li><a href="https://download.elastic.co/logstash/logstash/logstash-1.5.4.tar.gz" target="_blank" rel="external">Logstash</a></li>
-<li><a href="https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz" target="_blank" rel="external">kabana</a></li>
-<li><a href="http://download.redis.io/releases/redis-3.0.4.tar.gz" target="_blank" rel="external">redis</a></li>
-</ul>
-<h3 id="安装java支持（ELK-Stack需要JAVA支持）"><a href="#安装java支持（ELK-Stack需要JAVA支持）" class="headerlink" title="安装java支持（ELK Stack需要JAVA支持）"></a>安装java支持（ELK Stack需要JAVA支持）</h3><h4 id="安装JAVA（ORACLE）"><a href="#安装JAVA（ORACLE）" class="headerlink" title="安装JAVA（ORACLE）"></a>安装JAVA（ORACLE）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">wget --no-cookies --no-check-certificate --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie&quot; &quot;http://download.oracle.com/otn-pub/java/jdk/8u40-b25/jre-8u40-linux-x64.tar.gz&quot;</div><div class="line">tar -zxf jre-8u40-linux-x64.tar.gz </div><div class="line">chown -R root: jre1.8.0_40 </div><div class="line">mv jre1.8.0_40/ /usr/local/java</div><div class="line">cat &gt;&gt; /etc/profile export JAVA_HOME=/usr/local/java</div><div class="line">export JAVA_BIN=/usr/local/java/bin</div><div class="line">export PATH=$PATH:$JAVA_HOME/bin</div><div class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</div><div class="line">export JAVA_HOME JAVA_BIN PATH CLASSPATH</div><div class="line">EOF</div><div class="line">source /etc/profile</div><div class="line">java -version</div><div class="line">java version &quot;1.8.0_40&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_40-b25)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.40-b25, mixed mode)</div></pre></td></tr></table></figure>
-<h4 id="安装OpenJDK"><a href="#安装OpenJDK" class="headerlink" title="安装OpenJDK"></a>安装OpenJDK</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y java-1.8.0-openjdk</div></pre></td></tr></table></figure>
-<h2 id="安装ELK-Stack"><a href="#安装ELK-Stack" class="headerlink" title="安装ELK Stack"></a>安装ELK Stack</h2><h3 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install redis</div></pre></td></tr></table></figure>
-<h3 id="安装ElasticSearch"><a href="#安装ElasticSearch" class="headerlink" title="安装ElasticSearch"></a>安装ElasticSearch</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar -zxf elasticsearch-1.7.2.tar.gz</div><div class="line">mv elasticsearch-1.7.2 /usr/local/elasticsearch</div><div class="line">sed -i &apos;s/#network.host: 192.168.0.1/network.host: 172.16.11.230/g&apos; /usr/local/elasticsearch/config/elasticsearch.yml</div></pre></td></tr></table></figure>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/elasticsearch/bin/elasticsearch -d</div></pre></td></tr></table></figure>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">curl -XGET http://172.16.11.230:9200</div><div class="line">&#123;</div><div class="line">  &quot;status&quot; : 200,</div><div class="line">  &quot;name&quot; : &quot;Chemistro&quot;,</div><div class="line">  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,</div><div class="line">  &quot;version&quot; : &#123;</div><div class="line">    &quot;number&quot; : &quot;1.7.2&quot;,</div><div class="line">    &quot;build_hash&quot; : &quot;e43676b1385b8125d647f593f7202acbd816e8ec&quot;,</div><div class="line">    &quot;build_timestamp&quot; : &quot;2015-09-14T09:49:53Z&quot;,</div><div class="line">    &quot;build_snapshot&quot; : false,</div><div class="line">    &quot;lucene_version&quot; : &quot;4.10.4&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这说明你的ElasticSearch集群已经启动并且正常运行。</p>
-<h3 id="安装kibana"><a href="#安装kibana" class="headerlink" title="安装kibana"></a>安装kibana</h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tar -zxf kibana-4.1.2-linux-x64.tar.gz </div><div class="line">mv kibana-4.1.2-linux-x64 /usr/local/kibana</div><div class="line">sed -i &apos;/host/ s/0.0.0.0/172.16.11.230/g&apos; /usr/local/kibana/config/kibana.yml</div><div class="line">sed -i &apos;/elasticsearch_url/ s/localhost/172.16.11.230/g&apos; /usr/local/kibana/config/kibana.yml</div></pre></td></tr></table></figure>
-<h4 id="配置启动（通过Systemctl来控制）"><a href="#配置启动（通过Systemctl来控制）" class="headerlink" title="配置启动（通过Systemctl来控制）"></a>配置启动（通过Systemctl来控制）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cat &gt;&gt; /etc/systemd/system/kibana4.service  [Service]</div><div class="line">ExecStart=/usr/local/kibana/bin/kibana</div><div class="line">Restart=always</div><div class="line">StandardOutput=syslog</div><div class="line">StandardError=syslog</div><div class="line">SyslogIdentifier=kibana4</div><div class="line">User=root</div><div class="line">Group=root</div><div class="line">Environment=NODE_ENV=production</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div><div class="line">EOF</div></pre></td></tr></table></figure>
-<h4 id="启动kabana"><a href="#启动kabana" class="headerlink" title="启动kabana"></a>启动kabana</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">systemctl enable kibana4.service       </div><div class="line">ln -s &apos;/etc/systemd/system/kibana4.service&apos; &apos;/etc/systemd/system/multi-user.target.wants/kibana4.service&apos;</div><div class="line">systemctl start kibana4</div></pre></td></tr></table></figure>
-<p>登录<code>172.16.11.230:5601</code>出现下面界面说明安装成功<br><img src="http://www.zerounix.com/images/opstech/elk/kibana_logo.png?imageView/2/w/619/q/90" alt="kibana_logo" title="kibani登录界面"></p>
-<h3 id="安装Logstash"><a href="#安装Logstash" class="headerlink" title="安装Logstash"></a>安装Logstash</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar -zxf logstash-1.5.4.tar.gz </div><div class="line">mv logstash-1.5.4 /usr/local/logstash</div></pre></td></tr></table></figure>
-<h3 id="安装nginx服务（反向代理）"><a href="#安装nginx服务（反向代理）" class="headerlink" title="安装nginx服务（反向代理）"></a>安装nginx服务（反向代理）</h3><h4 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum install openssl-devel pcre-devel -y</div><div class="line">tar -zxf nginx-1.7.3.tar.gz</div><div class="line">cd nginx-1.7.3/</div><div class="line">./configure --prefix=/usr/local/nginx --group=nobody --user=nobody --with-http_stub_status_module --with-http_ssl_module --with-pcre</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">cat kibana.conf </div><div class="line">server &#123;</div><div class="line">       listen  80;</div><div class="line">        server_name     elk.mydomain.com;</div><div class="line">        charset utf-8;</div><div class="line">        index index.html;</div><div class="line">        root /usr/local/nginx/html;</div><div class="line">        access_log  logs/elk.mydomain.com_access.log combined;</div><div class="line">        error_log   logs/elk.mydomain.com_error.log;</div><div class="line">        location / &#123;</div><div class="line">                proxy_pass      http://172.16.11.230:5601$request_uri;</div><div class="line">                proxy_set_header Host $http_host;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="配置启动脚本"><a href="#配置启动脚本" class="headerlink" title="配置启动脚本"></a>配置启动脚本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat /etc/systemd/system/nginx.service</div><div class="line">[Unit]</div><div class="line">Description=The nginx HTTP and reverse proxy server</div><div class="line">After=network.target remote-fs.target nss-lookup.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">PIDFile=/usr/local/nginx/logs/nginx.pid</div><div class="line">ExecStartPre=/usr/local/nginx/sbin/nginx -t</div><div class="line">ExecStart=/usr/local/nginx/sbin/nginx</div><div class="line">ExecReload=/bin/kill -s HUP $MAINPID</div><div class="line">KillMode=process</div><div class="line">KillSignal=SIGQUIT</div><div class="line">TimeoutStopSec=5</div><div class="line">PrivateTmp=true</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure>
-<p>启动nginx，访问<code>elk.mydomain.com</code>是不是就跳转到kibana的界面了呢</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+在工作中，人们往往需要知道在某些文件、目录上都有那些变化，比如：
+
+通知配置文件的改变
+追踪某些关键的系统文件变化
+系统崩溃时进行自动清理
+自动触发备份进程
+向服务器上传文件结束时发出通知
+
+通常使用文件轮询的通知机制，但是这种机制只适用经常改变的文件（因为它可以确保没过x秒就可以得到i/o），其
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/21/inotify-command.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1835,7 +1019,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1876,7 +1060,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1884,7 +1068,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1917,6 +1101,20 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -2064,6 +1262,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

@@ -84,24 +84,24 @@
 
 
 
-<meta name="description" content="本篇接上篇文章，继续介绍cobbler的使用方法。
-RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
-导入ISO镜像由于CentOS镜像信息较多，所以导入的时候，会同时创建distro，profile，并且还会设置repo，不过这个repo只包含DVD1，如果想要包含D">
+<meta name="description" content="本篇接上篇文章，继续介绍 cobbler 的使用方法。
+RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
+导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的时候，会同时创建 distro，profile，并且还会设置 repo，不过这个 repo只包含 D">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS6.5部署Cobbler(使用)">
 <meta property="og:url" content="http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html">
 <meta property="og:site_name" content="Czero's Blog">
-<meta property="og:description" content="本篇接上篇文章，继续介绍cobbler的使用方法。
-RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
-导入ISO镜像由于CentOS镜像信息较多，所以导入的时候，会同时创建distro，profile，并且还会设置repo，不过这个repo只包含DVD1，如果想要包含D">
-<meta property="og:image" content="http://www.zerounix.com/images/devops/cobbler/cobbler-profile.png">
-<meta property="og:updated_time" content="2016-01-21T03:46:22.000Z">
+<meta property="og:description" content="本篇接上篇文章，继续介绍 cobbler 的使用方法。
+RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
+导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的时候，会同时创建 distro，profile，并且还会设置 repo，不过这个 repo只包含 D">
+<meta property="og:image" content="https://czero000.github.io/images/devops/cobbler/cobbler-profile.png">
+<meta property="og:updated_time" content="2016-10-19T02:15:36.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS6.5部署Cobbler(使用)">
-<meta name="twitter:description" content="本篇接上篇文章，继续介绍cobbler的使用方法。
-RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
-导入ISO镜像由于CentOS镜像信息较多，所以导入的时候，会同时创建distro，profile，并且还会设置repo，不过这个repo只包含DVD1，如果想要包含D">
-<meta name="twitter:image" content="http://www.zerounix.com/images/devops/cobbler/cobbler-profile.png">
+<meta name="twitter:description" content="本篇接上篇文章，继续介绍 cobbler 的使用方法。
+RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
+导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的时候，会同时创建 distro，profile，并且还会设置 repo，不过这个 repo只包含 D">
+<meta name="twitter:image" content="https://czero000.github.io/images/devops/cobbler/cobbler-profile.png">
 
 
 
@@ -239,9 +239,32 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -308,6 +331,18 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
 
                 
                 
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维自动化/Cobbler/" itemprop="url" rel="index">
+                    <span itemprop="name">Cobbler</span>
+                  </a>
+                </span>
+
+                
+                
 
               
             </span>
@@ -350,9 +385,9 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
       
 
       
-        <p>本篇接上篇文章，继续介绍cobbler的使用方法。</p>
-<h3 id="RedHat-CentOS"><a href="#RedHat-CentOS" class="headerlink" title="RedHat/CentOS"></a>RedHat/CentOS</h3><h4 id="导入CentOS6-5-ISO镜像"><a href="#导入CentOS6-5-ISO镜像" class="headerlink" title="导入CentOS6.5 ISO镜像"></a>导入CentOS6.5 ISO镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/</div></pre></td></tr></table></figure>
-<p>导入ISO镜像<br>由于CentOS镜像信息较多，所以导入的时候，会同时创建distro，profile，并且还会设置repo，不过这个repo只包含DVD1，如果想要包含DVD2，还需要做设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cobbler import --path=/mnt --name=CentOS6.5 --arch=x86_64</div><div class="line">task started: 2014-11-19_175649_import</div><div class="line">task started (id=Media import, time=Wed Nov 19 17:56:49 2014)</div><div class="line">Found a candidate signature: breed=redhat, version=rhel6</div><div class="line">Found a matching signature: breed=redhat, version=rhel6</div><div class="line">Adding distros from path /var/www/cobbler/ks_mirror/CenOS6.5-x86_64:</div><div class="line">creating new distro: CenOS6.5-x86_64</div><div class="line">trying symlink: /var/www/cobbler/ks_mirror/CenOS6.5-x86_64 -&gt; /var/www/cobbler/links/CenOS6.5-x86_64</div><div class="line">creating new profile: CenOS6.5-x86_64</div><div class="line">associating repos</div><div class="line">checking for rsync repo(s)</div><div class="line">checking for rhn repo(s)</div><div class="line">checking for yum repo(s)</div><div class="line">starting descent into /var/www/cobbler/ks_mirror/CenOS6.5-x86_64 for CenOS6.5-x86_64</div><div class="line">processing repo at : /var/www/cobbler/ks_mirror/CenOS6.5-x86_64</div><div class="line">need to process repo/comps: /var/www/cobbler/ks_mirror/CenOS6.5-x86_64</div><div class="line">looking for /var/www/cobbler/ks_mirror/CenOS6.5-x86_64/repodata/*comps*.xml</div><div class="line">Keeping repodata as-is :/var/www/cobbler/ks_mirror/CenOS6.5-x86_64/repodata</div><div class="line">*** TASK COMPLETE ***</div></pre></td></tr></table></figure></p>
+        <p>本篇接上篇文章，继续介绍 cobbler 的使用方法。</p>
+<h3 id="RedHat-CentOS"><a href="#RedHat-CentOS" class="headerlink" title="RedHat/CentOS"></a>RedHat/CentOS</h3><h4 id="导入CentOS6-5-ISO-镜像"><a href="#导入CentOS6-5-ISO-镜像" class="headerlink" title="导入CentOS6.5 ISO 镜像"></a>导入CentOS6.5 ISO 镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/</div></pre></td></tr></table></figure>
+<p>导入 ISO 镜像<br>由于 CentOS 镜像信息较多，所以导入的时候，会同时创建 distro，profile，并且还会设置 repo，不过这个 repo只包含 DVD1，如果想要包含 DVD2，还需要做设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cobbler import --path=/mnt --name=CentOS6.5 --arch=x86_64</div><div class="line">task started: 2014-11-19_175649_import</div><div class="line">task started (id=Media import, time=Wed Nov 19 17:56:49 2014)</div><div class="line">Found a candidate signature: breed=redhat, version=rhel6</div><div class="line">Found a matching signature: breed=redhat, version=rhel6</div><div class="line">Adding distros from path /var/www/cobbler/ks_mirror/CenOS6.5-x86_64:</div><div class="line">creating new distro: CenOS6.5-x86_64</div><div class="line">trying symlink: /var/www/cobbler/ks_mirror/CenOS6.5-x86_64 -&gt; /var/www/cobbler/links/CenOS6.5-x86_64</div><div class="line">creating new profile: CenOS6.5-x86_64</div><div class="line">associating repos</div><div class="line">checking for rsync repo(s)</div><div class="line">checking for rhn repo(s)</div><div class="line">checking for yum repo(s)</div><div class="line">starting descent into /var/www/cobbler/ks_mirror/CenOS6.5-x86_64 for CenOS6.5-x86_64</div><div class="line">processing repo at : /var/www/cobbler/ks_mirror/CenOS6.5-x86_64</div><div class="line">need to process repo/comps: /var/www/cobbler/ks_mirror/CenOS6.5-x86_64</div><div class="line">looking for /var/www/cobbler/ks_mirror/CenOS6.5-x86_64/repodata/*comps*.xml</div><div class="line">Keeping repodata as-is :/var/www/cobbler/ks_mirror/CenOS6.5-x86_64/repodata</div><div class="line">*** TASK COMPLETE ***</div></pre></td></tr></table></figure></p>
 <h4 id="在profile文件中设置Kickstart文件"><a href="#在profile文件中设置Kickstart文件" class="headerlink" title="在profile文件中设置Kickstart文件"></a>在<em>profile</em>文件中设置<em>Kickstart</em>文件</h4><p><em>profile</em>文件中默认采用<em>/var/lib/cobbler/kickstarts/sample.ks</em>作为ks文件。可以指定自己之前的ks文件也可以改这个文件来用<br>修改profile文件中ks可以用几种方法：</p>
 <ul>
 <li><p>直接修改profile文件</p>
@@ -361,7 +396,7 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
 <li><p>通过命令行修改profile文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cobbler profile edit --name=CentOS6.5-x86_64 --kickstart=/data/htdocs/kscfg/ks.cfg-CentOS6.5-x86_64</div></pre></td></tr></table></figure>
 </li>
-<li><p>通过Web界面修改profile文件<br><img src="http://www.zerounix.com/images/devops/cobbler/cobbler-profile.png" alt="cobbler-profile"></p>
+<li><p>通过Web界面修改profile文件<br><img src="https://czero000.github.io/images/devops/cobbler/cobbler-profile.png" alt="cobbler-profile"></p>
 </li>
 </ul>
 <p>修改之后，可以通过下面命令来查看自己修改的信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">cobbler profile report    </div><div class="line">Name                           : CentOS6.5-x86_64</div><div class="line">TFTP Boot Files                : &#123;&#125;</div><div class="line">Comment                        : </div><div class="line">DHCP Tag                       : default</div><div class="line">Distribution                   : CentOS6.5-x86_64</div><div class="line">Enable gPXE?                   : 0</div><div class="line">Enable PXE Menu?               : 1</div><div class="line">Fetchable Files                : &#123;&#125;</div><div class="line">Kernel Options                 : &#123;&#125;</div><div class="line">Kernel Options (Post Install)  : &#123;&#125;</div><div class="line">Kickstart                      : /data/htdocs/kscfg/ks.cfg-CentOS6.5-x86_64</div><div class="line">Kickstart Metadata             : &#123;&#125;</div><div class="line">Management Classes             : []</div><div class="line">Management Parameters          :  &lt;&gt;</div><div class="line">Name Servers                   : []</div><div class="line">Name Servers Search Path       : []</div><div class="line">Owners                         : [&apos;admin&apos;]</div><div class="line">Parent Profile                 : </div><div class="line">Proxy                          : </div><div class="line">Red Hat Management Key         :  &lt;&gt;</div><div class="line">Red Hat Management Server      :  &lt;&gt;</div><div class="line">Repos                          : []</div><div class="line">Server Override                :  &lt;&gt;</div><div class="line">Template Files                 : &#123;&#125;</div><div class="line">Virt Auto Boot                 : 1</div><div class="line">Virt Bridge                    : xenbr0</div><div class="line">Virt CPUs                      : 1</div><div class="line">Virt Disk Driver Type          : raw</div><div class="line">Virt File Size(GB)             : 5</div><div class="line">Virt Path                      : </div><div class="line">Virt RAM (MB)                  : 512</div><div class="line">Virt Type                      : kvm</div></pre></td></tr></table></figure></p>
@@ -382,8 +417,7 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
 <p>当然还可以看其他信息，<strong><em>Systems</em></strong>、<strong><em>Profiles</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">koan --server=10.10.3.64 --display --system=ssq-54-157</div><div class="line">- looking for Cobbler at http://10.10.3.64/cobbler_api</div><div class="line">- reading URL: http://10.10.3.64/cblr/svc/op/ks/system/ssq-54-157</div><div class="line">install_tree: http://10.10.3.64/cblr/links/CentOS6.5-x86_64</div><div class="line">                name  : ssq-54-157</div><div class="line">              distro  : CentOS6.5-x86_64</div><div class="line">             profile  : CentOS6.5-x86_64</div><div class="line">           kickstart  : http://10.10.3.64/cblr/svc/op/ks/system/ssq-54-157</div><div class="line">             ks_meta  : tree=http://@@http_server@@/cblr/links/CentOS6.5-x86_64 </div><div class="line">        install_tree  : http://10.10.3.64/cblr/links/CentOS6.5-x86_64</div><div class="line">              kernel  : /var/www/cobbler/ks_mirror/CentOS6.5-x86_64/images/pxeboot/vmlinuz</div><div class="line">              initrd  : /var/www/cobbler/ks_mirror/CentOS6.5-x86_64/images/pxeboot/initrd.img</div><div class="line">     netboot_enabled  : False</div><div class="line">      kernel_options  : ks=http://10.10.3.64/cblr/svc/op/ks/system/ssq-54-157 ksdevice=eth1 kssendmac lang= text </div><div class="line">               repos  : epel6-x86_64</div><div class="line">            virt_ram  : 512</div><div class="line">           virt_type  : xenpv</div><div class="line">           virt_path  : </div><div class="line">      virt_auto_boot  : 0</div></pre></td></tr></table></figure></p>
 <p>重装系统就可以使用下面命令，当然也可以指定<em>Profil</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">koan --server=10.10.3.64 --system=ssq-54-157 --replace-self</div></pre></td></tr></table></figure></p>
 <p>这个时候，重启系统，不需要指定PXE启动，他就会自动安装系统。</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
+
       
     </div>
 
@@ -515,7 +549,7 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -523,7 +557,7 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -557,6 +591,20 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
       </section>
 
@@ -567,7 +615,7 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RedHat-CentOS"><span class="nav-number">1.</span> <span class="nav-text">RedHat/CentOS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入CentOS6-5-ISO镜像"><span class="nav-number">1.1.</span> <span class="nav-text">导入CentOS6.5 ISO镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在profile文件中设置Kickstart文件"><span class="nav-number">1.2.</span> <span class="nav-text">在profile文件中设置Kickstart文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加一个System"><span class="nav-number">1.3.</span> <span class="nav-text">添加一个System</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加epel源到Cobbler"><span class="nav-number">1.4.</span> <span class="nav-text">添加epel源到Cobbler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过koan重装系统"><span class="nav-number">1.5.</span> <span class="nav-text">通过koan重装系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><span class="nav-number"></span> <span class="nav-text">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RedHat-CentOS"><span class="nav-number">1.</span> <span class="nav-text">RedHat/CentOS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入CentOS6-5-ISO-镜像"><span class="nav-number">1.1.</span> <span class="nav-text">导入CentOS6.5 ISO 镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在profile文件中设置Kickstart文件"><span class="nav-number">1.2.</span> <span class="nav-text">在profile文件中设置Kickstart文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加一个System"><span class="nav-number">1.3.</span> <span class="nav-text">添加一个System</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加epel源到Cobbler"><span class="nav-number">1.4.</span> <span class="nav-text">添加epel源到Cobbler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过koan重装系统"><span class="nav-number">1.5.</span> <span class="nav-text">通过koan重装系统</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -718,6 +766,132 @@ RedHat/CentOS导入CentOS6.5 ISO镜像1mount -t auto -o loop CentOS-6.5-x86
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

@@ -232,9 +232,32 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -269,8 +292,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/ubuntu-install-megacli.html" itemprop="url">
-                  Ubuntu安装Megacli
+                <a class="post-title-link" href="/2016/01/27/source-buile-nginx.html" itemprop="url">
+                  Nginx源码安装
                 </a>
               
             
@@ -283,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T12:13:23+08:00" content="2015-12-29">
-              2015-12-29
+            <time itemprop="dateCreated" datetime="2016-01-27T11:39:34+08:00" content="2016-01-27">
+              2016-01-27
             </time>
           </span>
 
@@ -297,8 +320,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
                   </a>
                 </span>
 
@@ -313,8 +348,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/29/ubuntu-install-megacli.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/ubuntu-install-megacli.html" itemprop="commentsCount"></span>
+                <a href="/2016/01/27/source-buile-nginx.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/27/source-buile-nginx.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -324,7 +359,7 @@
 
           
           
-             <span id="/2015/12/29/ubuntu-install-megacli.html" class="leancloud_visitors" data-flag-title="Ubuntu安装Megacli">
+             <span id="/2016/01/27/source-buile-nginx.html" class="leancloud_visitors" data-flag-title="Nginx源码安装">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -348,430 +383,12 @@
       
         
           
-            <a id="more"></a>
-<p>MegaCli这个命令可以用来监控raid状态、磁盘状况等，最近上了一批ubuntu系统，问题是MegaCli在官网上只有rpm格式的包，没有deb的包，但是还是有办法解决的，rpm包也是可以在debian&amp;&amp;ubuntu上安装的。</p>
-<h3 id="下载最新的zip文件"><a href="#下载最新的zip文件" class="headerlink" title="下载最新的zip文件"></a>下载最新的zip文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.lsi.com/Search/Pages/results.aspx?k=MegaCLI&amp;r=productfacet%3D%22AQxNZWdhUkFJRCBTQVMMcHJvZHVjdGZhY2V0AQJeIgIiJA%3D%3D%22%20os%3D%22AQVMaW51eAJvcwEBXgEk%22</div></pre></td></tr></table></figure>
-<p>我下载的是8.00.48_Linux_MegaCLI.zip</p>
-<h3 id="预先安装需要的其他包"><a href="#预先安装需要的其他包" class="headerlink" title="预先安装需要的其他包"></a>预先安装需要的其他包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get -y install  rpm2cpio libsysfs2 libsysfs-dev unzip</div></pre></td></tr></table></figure>
-<h3 id="安装完成后执行如下命令"><a href="#安装完成后执行如下命令" class="headerlink" title="安装完成后执行如下命令"></a>安装完成后执行如下命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /lib/x86_64-linux-gnu/</div><div class="line">ln -s libsysfs.so.2.0.1 libsysfs.so.2.0.2</div></pre></td></tr></table></figure>
-<h3 id="进入-8-00-48-Linux-MegaCLI-zip包所在的目录，执行如下命令"><a href="#进入-8-00-48-Linux-MegaCLI-zip包所在的目录，执行如下命令" class="headerlink" title="进入 8.00.48_Linux_MegaCLI.zip包所在的目录，执行如下命令"></a>进入 8.00.48_Linux_MegaCLI.zip包所在的目录，执行如下命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">unzip 8.00.48_Linux_MegaCLI.zip</div><div class="line">unzip MegaCliLin.zip</div><div class="line">rpm2cpio Lib_Utils-1.00-09.noarch.rpm | cpio -idmv</div><div class="line">rpm2cpio MegaCli-8.00.48-1.i386.rpm | cpio -idmv</div><div class="line">cp opt/MegaRAID/MegaCli/MegaCli64 /sbin/</div><div class="line">cp opt/MegaRAID/MegaCli/MegaCli /sbin/</div></pre></td></tr></table></figure>
-<p>MegaCli不但能查询raid的状态，还能设置raid的状态，所以还是由管理员掌握比较好，这样就安装完毕了。</p>
-<p>下面几个是常用的检查raid状态的命令：</p>
-<ul>
-<li>MegaCli64 -LDInfo -Lall -aALL    可以检查raid级别</li>
-<li>MegaCli64 -PDList -aALL    可以检查所有物理盘的状态</li>
-<li>MegaCli64 -AdpAllInfo -aALL    显示所有的raid信息</li>
-<li>MegaCli64  -cfgdsply -aALL     显示所有的磁盘信息</li>
-<li>MegaCli64 -FwTermLog -Dsply -aALL    这个包含一些用于的日志</li>
-<li>MegaCli的其他强大功能还请查看官方文档。</li>
-</ul>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
+          环境介绍系统版本系统环境默认采用 CentOS Linux release 7.1.1503 (Core)，
+软件获取官方网站：http://nginx.org最新稳定版本：nginx-1.8.1.tar.gz帮助文档：http://nginx.org/en/docs编译参数说明：http://ng
+          ...
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/29/debian-support-chinese.html" itemprop="url">
-                  debian添加中文支持
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T12:10:41+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/29/debian-support-chinese.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/debian-support-chinese.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/29/debian-support-chinese.html" class="leancloud_visitors" data-flag-title="debian添加中文支持">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<p>debian与ubuntu有很大的相似性，但是debian相对更原始，比如在语言支持这一块，如果在安装ubuntu的时候，选择的系统语言是英文，那么系统显示的肯定是英文，但是查看中文文件的时候，肯定还是能查看的，因为系统默认支持了中文，中文字体，语言包等已经安装好了，但是 debian不同，如果你安装的时候选择了英文，那么进入系统之后，只要查看不是英文的东西都是乱码，就连网页上的汉字都是一个个的方块。</p>
-<p>要解决这个问题，只能自己手动添加中文支持：</p>
-<h4 id="生成locales"><a href="#生成locales" class="headerlink" title="生成locales:"></a>生成locales:</h4><p>运行 dpkg-reconfigure locales，选择上以下选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">en_US ISO-8859-1</div><div class="line">zh_CN GB2312</div><div class="line">zh_CN.GBK GBK</div><div class="line">zh_CN.UTF-8 UTF-8</div><div class="line">zh_TW BIG5</div><div class="line">zh_TW.UTF-8 UTF-8</div></pre></td></tr></table></figure></p>
-<p>接下来要安装中文字体，一共有以下几个包需要安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ttf-arphic-gbsn00lp (AR PL SungtiL GB)</div><div class="line">ttf-arphic-gkai00mp (AR PL KaitiM GB)</div><div class="line">ttf-arphic-bsmi00lp (AR PL Mingti2L Big5)</div><div class="line">ttf-arphic-bkai00mp (AR PL KaitiM Big5)</div></pre></td></tr></table></figure></p>
-<p>前面两个是简体的，后面两个是繁体的，但是最好都装上，否则到时候很可能乱码。</p>
-<p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ttf-arphic-gbsn00lp ttf-arphic-gkai00mp ttf-arphic-bsmi00lp ttf-arphic-bkai00mp</div></pre></td></tr></table></figure></p>
-<p><strong>PS:这些只是基本字体，只能保证中文正常显示，如果要说好看那是谈不上的。如果要好看一点的话，可以在软件中心搜索安装xfonts</strong></p>
-<p>接下来就是安装中文输入法，个人推荐使用ibus，比较好用而且兼容性也还行，可以参考<a href="http://www.cnblogs.com/pengdonglin137/p/3280520.html" target="_blank" rel="external">http://www.cnblogs.com/pengdonglin137/p/3280520.html</a></p>
-<p>当然，在X环境下还要设置locale变量：</p>
-<p>可以在<code>/etc/X11/Xsession.d/95xinput</code>这个文件里写上如下语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export LANG=zh_CN.gb2312</div></pre></td></tr></table></figure></p>
-<p><strong>PS:如果你在启动之后执行这条命令不会有效，只能重启并在加载X window之前执行才有效，这就是为什么把它写入文件的原因（这个文件在X window启动前被加载。）</strong></p>
-<p>这样一来，你的系统菜单等也会变成中文，如果你还是想要英文菜单，但是只要能显示中文，那么就要多设置几个变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ENCODING=&quot;en_US&quot;</div><div class="line">#export LC_ALL=$ENCODING</div><div class="line">export LC_MESSAGES=$ENCODING</div><div class="line">#export LC_COLLATE=$ENCODING</div><div class="line">#export LC_CTYPE=$ENCODING</div><div class="line">export LC_TIME=$ENCODING</div><div class="line">export LC_NUMERIC=$ENCODING</div><div class="line">#export LC_MONETARY=$ENCODING</div><div class="line">#export LC_PAPER=$ENCODING</div><div class="line">#export LC_NAME=$ENCODING</div><div class="line">export LC_ADDRESS=$ENCODING</div><div class="line">export LC_TELEPHONE=$ENCODING</div><div class="line">export LC_MEASUREMENT=$ENCODING</div><div class="line">export LC_IDENTIFICATION=$ENCODING</div></pre></td></tr></table></figure></p>
-<p>同样把这些写入<code>/etc/X11/Xsession.d/95xinput</code>文件，重启就行了。<br>最后要说一下终端对中文的支持：<br>KDE默认的终端是konsole, 默认就支持中文，而且还支持得不错，gnome默认的终端是gnome-terminal, 要支持中文的话只要在菜单里选上中文相应的编码就行了。</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/29/scripts-heard-info.html" itemprop="url">
-                  脚本描述头信息
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T11:48:42+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/29/scripts-heard-info.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/scripts-heard-info.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/29/scripts-heard-info.html" class="leancloud_visitors" data-flag-title="脚本描述头信息">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h2 id="添加脚本描述头信息"><a href="#添加脚本描述头信息" class="headerlink" title="添加脚本描述头信息"></a>添加脚本描述头信息</h2><p>当编写脚本或者其他程序是，在脚本开头添加脚本描述信息，更方便的向阅读脚本的人来解释脚本用途并提供他们需要了解的其他信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">######################################################</div><div class="line">## Description: CentOS5.4 Initialization Script     ##</div><div class="line">## Version: 1.0                                     ##</div><div class="line">## Date: 2015-09-01                                 ##</div><div class="line">## Author: Charlie.Cui                              ##</div><div class="line">## Mail: Charlie.cui127@gmail.com                   ##  </div><div class="line">## License: General Public License (GPL)            ##</div><div class="line">######################################################</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="通过脚本生成脚本描述头"><a href="#通过脚本生成脚本描述头" class="headerlink" title="通过脚本生成脚本描述头"></a>通过脚本生成脚本描述头</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">if ! grep &quot;^#!&quot; $1 &amp;&gt;/dev/null</div><div class="line">then</div><div class="line">cat &gt;&gt; $1 &lt;&lt; EOF</div><div class="line">#!/bin/bash</div><div class="line">####################################################</div><div class="line">## Title: $1                                        </div><div class="line">## Description: Please Write Scripts Describing</div><div class="line">## Version: 1.0                                     </div><div class="line">## Date: `date +%F`                                 </div><div class="line">## Author: Charlie.Cui                              </div><div class="line">## Mail: Charlie.cui127@gmail.com                     </div><div class="line">## License: General Public License (GPL)            </div><div class="line">####################################################</div><div class="line">EOF</div><div class="line">fi</div><div class="line">vim +4 $1</div></pre></td></tr></table></figure>
-<p>增加执行权限，然后通过<code>./makescripts scriptsname.sh</code>生成脚本。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/29/download-centos-iso.html" itemprop="url">
-                  CetnOS各个版本下载
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T11:04:54+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/29/download-centos-iso.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/download-centos-iso.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/29/download-centos-iso.html" class="leancloud_visitors" data-flag-title="CetnOS各个版本下载">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>CentOS 官方镜像源中镜像版本并不完全，只有各个系列较新的版本iso提供下载，下面网站提供各个版本的iso下载，网站为国外网站，下载较慢<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/download-centos-iso.html#more" rel="contents">
+            <a class="btn" href="/2016/01/27/source-buile-nginx.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -822,8 +439,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/change-em1-to-eth0.html" itemprop="url">
-                  网卡em恢复为eth
+                <a class="post-title-link" href="/2016/01/22/regex_fast_reference.html" itemprop="url">
+                  常用正则速查
                 </a>
               
             
@@ -836,8 +453,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T11:02:45+08:00" content="2015-12-29">
-              2015-12-29
+            <time itemprop="dateCreated" datetime="2016-01-22T10:45:08+08:00" content="2016-01-22">
+              2016-01-22
             </time>
           </span>
 
@@ -850,8 +467,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Bash/" itemprop="url" rel="index">
+                    <span itemprop="name">Bash</span>
                   </a>
                 </span>
 
@@ -866,8 +495,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/29/change-em1-to-eth0.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/change-em1-to-eth0.html" itemprop="commentsCount"></span>
+                <a href="/2016/01/22/regex_fast_reference.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/22/regex_fast_reference.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -877,7 +506,7 @@
 
           
           
-             <span id="/2015/12/29/change-em1-to-eth0.html" class="leancloud_visitors" data-flag-title="网卡em恢复为eth">
+             <span id="/2016/01/22/regex_fast_reference.html" class="leancloud_visitors" data-flag-title="常用正则速查">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -901,29 +530,15 @@
       
         
           
-            <a id="more"></a>
-<p>随之服务器系统从CentOS5.x逐步升级到CentOS6.x，发现原来熟悉的eth0、eth1全部变成了em1、em2。接口名变化并不会对平时的运维工作有影响，不过某些应用可能会收到影响，所以还是改过来，比较好。<br>经过资料整理，有两种方式：</p>
-<h3 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h3><p>dmesg中看到如下一行信息：<code>kernel: udev: renamed network interface eth0 to em1</code></p>
-<p>原来是udev这个设备管理进程在开机过程中将系统默认的eth0改名为em1了，其实em1对应的就是系统原本的eth0网卡；由于我在mini安装过程中没有对网络进行配置，所以系统默认没有将网卡激活导致ifconfig看不到任何网卡；只需要在<code>/etc/sysconfig/network-scripts/ifcfg-em1</code>中将参数<code>ONBOOT=no</code>改为yes，然后<code>service network restart</code> 网卡em1就出现了！</p>
-<p>总觉得Linux的网卡代号变成了em1不习惯，想还原为一直以来熟悉的eth0也是可以的，调整udev的网卡命名规则配置文件<code>/etc/udev/rules.d/70-persistent-net.rules</code>,将文件中em2 替换为eth1，em1替换为eth0，这样系统就会把网卡命名还原回来，还要把网卡配置文件中的设备名改回来。重启系统，这样熟悉的eth0、eth1就回来了</p>
-<h3 id="修改系统grub"><a href="#修改系统grub" class="headerlink" title="修改系统grub"></a>修改系统grub</h3><ul>
-<li>增加biosdevname=0 启动参数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">     kernel /vmlinuz-2.6.32-431.el6.i686 ro root=UUID=84316edf-b537-486c-bf2e-616aa51ede2f rd_NO_LUKS rd_NO_L</div><div class="line"></div><div class="line">VM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM biosdevname=0 rhgb quiet</div></pre></td></tr></table></figure>
-<ul>
-<li><p>删除udev的配置文件 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -f /etc/udev/rules.d/70-persistent-net.rules</div></pre></td></tr></table></figure>
-</li>
-<li><p>重命名当前网卡配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv ifcfg-em1 ifcfg-eth0</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改网卡配置文件内容，将em1替换为eth0</p>
-</li>
-</ul>
-<p>重启服务器，这样熟悉的eth0、eth1就回来了</p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
           
+常用正则匹配12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/22/regex_fast_reference.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -971,8 +586,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos-install-xz.html" itemprop="url">
-                  安装XZ解压工具
+                <a class="post-title-link" href="/2016/01/21/http-status-code.html" itemprop="url">
+                  HTTP状态码详解
                 </a>
               
             
@@ -985,8 +600,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T11:01:28+08:00" content="2015-12-29">
-              2015-12-29
+            <time itemprop="dateCreated" datetime="2016-01-21T16:05:14+08:00" content="2016-01-21">
+              2016-01-21
             </time>
           </span>
 
@@ -999,8 +614,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
                   </a>
                 </span>
 
@@ -1015,8 +630,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/29/centos-install-xz.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-xz.html" itemprop="commentsCount"></span>
+                <a href="/2016/01/21/http-status-code.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/21/http-status-code.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1026,7 +641,7 @@
 
           
           
-             <span id="/2015/12/29/centos-install-xz.html" class="leancloud_visitors" data-flag-title="安装XZ解压工具">
+             <span id="/2016/01/21/http-status-code.html" class="leancloud_visitors" data-flag-title="HTTP状态码详解">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1050,20 +665,14 @@
       
         
           
-            <a id="more"></a>
-<p>从www.kernel.org下载内核安装包，准备CentOS6.5内核升级到3.x，下载后发现是一个以.xz结尾的压缩包。</p>
-<blockquote>
-<p>xz 是一个使用 LZMA压缩算法的无损数据压缩文件格式。 和gzip与bzip2一样，同样支持多文件压缩，但是约定不能将多于一个的目标文件压缩进同一个档案文件。 相反，xz通常作为一种归档文件自身的压缩格式，例如使用tar或cpioUnix程序创建的归档。 xz 在GNU coreutils（版本 7.1 或更新）[1]中被使用。 xz 作为压缩软件包被收录在 Fedora (自Fedora 12起)[2], Arch Linux[3], FreeBSD、 Slackware Linux、CRUX和 Funtoo Linux中。<br>xz 以其优异的性能和压缩比[4]成为了不少开源软件（例如 Linux 内核源码、Debian deb[5] 和 Fedora rpm）的压缩方式之一，甚至是默认压缩方式。xz 命令行程序曾有过一个名为 pxz 的分支，提供多线程压缩功能，后来 xz 在 5.2 时本身就直接提供多线程了.</p>
-</blockquote>
-<p><a href="http://tukaani.org/xz/" target="_blank" rel="external">XZ Utils官方网站</a></p>
-<h4 id="下载软件包"><a href="#下载软件包" class="headerlink" title="下载软件包"></a>下载软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://tukaani.org/xz/xz-5.2.2.tar.gz</div></pre></td></tr></table></figure>
-<h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxf xz-5.2.2.tar.gz</div></pre></td></tr></table></figure>
-<h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./configure  </div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"> xz --help</div><div class="line">Usage: xz [OPTION]... [FILE]...</div><div class="line">Compress or decompress FILEs in the .xz format.</div><div class="line"></div><div class="line">  -z, --compress      force compression</div><div class="line">  -d, --decompress    force decompression</div><div class="line">  -t, --test          test compressed file integrity</div><div class="line">  -l, --list          list information about .xz files</div><div class="line">  -k, --keep          keep (don&apos;t delete) input files</div><div class="line">  -f, --force         force overwrite of output file and (de)compress links</div><div class="line">  -c, --stdout        write to standard output and don&apos;t delete input files</div><div class="line">  -0 ... -9           compression preset; default is 6; take compressor *and*</div><div class="line">                      decompressor memory usage into account before using 7-9!</div><div class="line">  -e, --extreme       try to improve compression ratio by using more CPU time;</div><div class="line">                      does not affect decompressor memory requirements</div><div class="line">  -T, --threads=NUM   use at most NUM threads; the default is 1; set to 0</div><div class="line">                      to use as many threads as there are processor cores</div><div class="line">  -q, --quiet         suppress warnings; specify twice to suppress errors too</div><div class="line">  -v, --verbose       be verbose; specify twice for even more verbose</div><div class="line">  -h, --help          display this short help and exit</div><div class="line">  -H, --long-help     display the long help (lists also the advanced options)</div><div class="line">  -V, --version       display the version number and exit</div><div class="line"></div><div class="line">With no FILE, or when FILE is -, read standard input.</div><div class="line"></div><div class="line">Report bugs to  (in English or Finnish).</div><div class="line">XZ Utils home page:</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">解压： xz -d linux-3.12.50.tar.xz </div><div class="line">压缩： xz -z linux-3.12.50.tar</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          什么是 HTTP 状态码HTTP 状态码 （HTTP Status Code）是用以表示网页服务器 HTTP 响应状态的 3 位数字代码。它由 RFC 2616 规范定义的，并得到 「RFC 2518、RFC 2817、RFC 2295、RFC 2774、RFC 4918」等规范扩展。所有状态码的第
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/21/http-status-code.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1111,8 +720,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos-install-chromium.html" itemprop="url">
-                  安装Chromium浏览器
+                <a class="post-title-link" href="/2016/01/19/glances-monitor-system.html" itemprop="url">
+                  使用glances监控系统
                 </a>
               
             
@@ -1125,8 +734,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T11:00:02+08:00" content="2015-12-29">
-              2015-12-29
+            <time itemprop="dateCreated" datetime="2016-01-19T10:16:05+08:00" content="2016-01-19">
+              2016-01-19
             </time>
           </span>
 
@@ -1139,8 +748,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Command/" itemprop="url" rel="index">
+                    <span itemprop="name">Command</span>
                   </a>
                 </span>
 
@@ -1155,8 +776,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/29/centos-install-chromium.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-chromium.html" itemprop="commentsCount"></span>
+                <a href="/2016/01/19/glances-monitor-system.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/19/glances-monitor-system.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1166,7 +787,7 @@
 
           
           
-             <span id="/2015/12/29/centos-install-chromium.html" class="leancloud_visitors" data-flag-title="安装Chromium浏览器">
+             <span id="/2016/01/19/glances-monitor-system.html" class="leancloud_visitors" data-flag-title="使用glances监控系统">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1190,29 +811,14 @@
       
         
           
-            <a id="more"></a>
-<p>之前Google就说了，由于CentOS/RHEL 6已经是过期的系统，所以不再会有Chrome了。 虽然后来由于引起了社区的抗议，从而改口，不再提CentOS/RHEL 6是过期系统了；但是，目前在CentOS/RHEL 6上已经没有Chrome可以下载使用了。<br>  其实，根本的原因不是CentOS/RHEL 6有多老，连Windows XP和停止更新的Ubuntu 10.04都能继续使用Chrome呢。实际的原因是，Chrome由于种种考虑，使用了CentOS/RHEL 6中所不支持的C++ 11，所以才不能继续更新CentOS/RHEL 6上的Chrome。<br>  那么，如果希望在CentOS/RHEL 7出来之前继续使用Chrome怎么办？使用Chrome的开源版本：<strong>Chromium</strong></p>
-<h4 id="切换到root"><a href="#切换到root" class="headerlink" title="切换到root"></a>切换到root</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - 或者 sudo -i</div></pre></td></tr></table></figure>
-<h4 id="下载新的软件源定义"><a href="#下载新的软件源定义" class="headerlink" title="下载新的软件源定义"></a>下载新的软件源定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/yum.repos.d</div><div class="line">wget http://people.centos.org/hughesjr/chromium/6/chromium-el6.repo</div></pre></td></tr></table></figure>
-<h4 id="安装Chromium"><a href="#安装Chromium" class="headerlink" title="安装Chromium"></a>安装Chromium</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y chromium</div></pre></td></tr></table></figure>
-<p>这样就安装完成了。可以通过菜单来启动浏览器<br><img src="http://www.zerounix.com/images/system/centos/chromium-1.png" alt="启动浏览器"></p>
-<p>启动后</p>
-<p><img src="http://www.zerounix.com/images/system/centos/chromium-2.png" alt="启动后"></p>
-<p>如果需要查看Flash和PDF，可以继续下面两步来安装插件。</p>
-<h4 id="安装Pepper-Flash插件："><a href="#安装Pepper-Flash插件：" class="headerlink" title="安装Pepper Flash插件："></a>安装Pepper Flash插件：</h4><h5 id="下载-hughesjr-辅助安装脚本"><a href="#下载-hughesjr-辅助安装脚本" class="headerlink" title="下载 hughesjr 辅助安装脚本"></a>下载 hughesjr 辅助安装脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget https://raw.github.com/hughesjr/chromium_el_builder/master/chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
-<h5 id="设置-chrome-pepperflash-copy-sh-为可执行"><a href="#设置-chrome-pepperflash-copy-sh-为可执行" class="headerlink" title="设置 chrome_pepperflash_copy.sh 为可执行"></a>设置 chrome_pepperflash_copy.sh 为可执行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
-<h5 id="安装（你可以查看一下脚本内容来了解发生了什么）"><a href="#安装（你可以查看一下脚本内容来了解发生了什么）" class="headerlink" title="安装（你可以查看一下脚本内容来了解发生了什么）"></a>安装（你可以查看一下脚本内容来了解发生了什么）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
-<p>安装后，如果需要通过命令行方式启动（带有Flash支持），可以输入以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/chromium/chrome-wrapper %U --ppapi-flash-path=/opt/chromium/PepperFlash/libpepflashplayer.so --ppapi-flash-version=$(grep &apos;&quot;version&quot;:&apos; /opt/chromium/PepperFlash/manifest.json | grep -Po &apos;(?&lt;=version&quot;: &quot;)(?:\d|\.)*&apos;)</div></pre></td></tr></table></figure>
-<p> 也可以修改系统菜单中的对应命令</p>
-<p><img src="http://www.zerounix.com/images/system/centos/chromium-3.png" alt="Flash plugin "></p>
-<h4 id="安装Google-Chrome-PDF-Viewer插件："><a href="#安装Google-Chrome-PDF-Viewer插件：" class="headerlink" title="安装Google Chrome PDF Viewer插件："></a>安装Google Chrome PDF Viewer插件：</h4><h5 id="下载-hughesjr-辅助安装脚本-1"><a href="#下载-hughesjr-辅助安装脚本-1" class="headerlink" title="下载 hughesjr 辅助安装脚本"></a>下载 hughesjr 辅助安装脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget https://raw.github.com/hughesjr/chromium_el_builder/master/chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
-<h5 id="设置-chrome-libpdf-copy-sh-为可执行"><a href="#设置-chrome-libpdf-copy-sh-为可执行" class="headerlink" title="设置 chrome_libpdf_copy.sh 为可执行"></a>设置 chrome_libpdf_copy.sh 为可执行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
-<h5 id="执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）"><a href="#执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）" class="headerlink" title="执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）"></a>执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
-<p><img src="http://www.zerounix.com/images/system/centos/chromium-3.png" alt="pdf plugin"></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          使用Glances监控系统Glances 是一个用于监控系统的跨平台、基于文本模式的命令行工具。它是用 Python 编写的，使用 psutil 库从系统获取信息。你可以用它来监控 CPU、平均负载、内存、网络接口、磁盘 I/O，文件系统空间利用率、挂载的设备、所有活动进程以及消耗资源最多的进程。G
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/19/glances-monitor-system.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1260,8 +866,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos-install-transmission.html" itemprop="url">
-                  安装BT软件Transmission
+                <a class="post-title-link" href="/2016/01/06/kvm-pool-manage.html" itemprop="url">
+                  CentOS6.5安装kvm
                 </a>
               
             
@@ -1274,8 +880,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T10:58:16+08:00" content="2015-12-29">
-              2015-12-29
+            <time itemprop="dateCreated" datetime="2016-01-06T17:51:27+08:00" content="2016-01-06">
+              2016-01-06
             </time>
           </span>
 
@@ -1288,8 +894,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/虚拟化/" itemprop="url" rel="index">
+                    <span itemprop="name">虚拟化</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/虚拟化/KVM/" itemprop="url" rel="index">
+                    <span itemprop="name">KVM</span>
                   </a>
                 </span>
 
@@ -1304,8 +922,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/29/centos-install-transmission.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-transmission.html" itemprop="commentsCount"></span>
+                <a href="/2016/01/06/kvm-pool-manage.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/06/kvm-pool-manage.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1315,7 +933,7 @@
 
           
           
-             <span id="/2015/12/29/centos-install-transmission.html" class="leancloud_visitors" data-flag-title="安装BT软件Transmission">
+             <span id="/2016/01/06/kvm-pool-manage.html" class="leancloud_visitors" data-flag-title="CentOS6.5安装kvm">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1339,290 +957,14 @@
       
         
           
-            <h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libevent-devel libevent libidn-devel zlib-devel</div></pre></td></tr></table></figure>
-<h3 id="下载transmission及必要软件"><a href="#下载transmission及必要软件" class="headerlink" title="下载transmission及必要软件"></a>下载transmission及必要软件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget http://download-origin.transmissionbt.com/files/transmission-2.84.tar.xz</div><div class="line">wget http://ftp.acc.umu.se/pub/gnome/sources/intltool/0.40/intltool-0.40.6.tar.gz</div><div class="line">wget http://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz</div><div class="line">wget https://cloud.github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz</div></pre></td></tr></table></figure>
-<h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">tar -zxf intltool-0.40.6.tar.gz </div><div class="line">cd intltool-0.40.6</div><div class="line">./configure </div><div class="line">make &amp;&amp; make install</div><div class="line"> cd ..</div><div class="line">tar -zxf libiconv-1.14.tar.gz </div><div class="line">./configure </div><div class="line">make &amp;&amp; make install </div><div class="line">echo &quot;/usr/local/lib&quot; &gt;&gt; /etc/ld.so.conf</div><div class="line"> ldconfig </div><div class="line">cd ..</div><div class="line">tar -zxf libevent-2.0.21-stable.tar.gz </div><div class="line">cd libevent-2.0.21-stable</div><div class="line">./configure </div><div class="line">make &amp;&amp; make install </div><div class="line">export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig</div><div class="line">cd ..</div><div class="line">xz -d transmission-2.84.tar.xz </div><div class="line">tar -xf transmission-2.84.tar </div><div class="line">cd transmission-2.84</div><div class="line">./configure --prefix=/usr/local/transmission CFLAGS=-liconv</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">transmission-daemon -g /usr/local/transmission</div><div class="line">killall transmission-daemon</div></pre></td></tr></table></figure>
-<p>以上命令需执行两次</p>
-<p>然后就可以进行配置了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">cat /usr/local/transmission/settings.json</div><div class="line">&#123;</div><div class="line">    &quot;alt-speed-down&quot;: 50,</div><div class="line">    &quot;alt-speed-enabled&quot;: false,</div><div class="line">    &quot;alt-speed-time-begin&quot;: 540,</div><div class="line">    &quot;alt-speed-time-day&quot;: 127,</div><div class="line">    &quot;alt-speed-time-enabled&quot;: false,</div><div class="line">    &quot;alt-speed-time-end&quot;: 1020,</div><div class="line">    &quot;alt-speed-up&quot;: 50,</div><div class="line">    &quot;bind-address-ipv4&quot;: &quot;0.0.0.0&quot;,</div><div class="line">    &quot;bind-address-ipv6&quot;: &quot;::&quot;,</div><div class="line">    &quot;blocklist-enabled&quot;: true,                </div><div class="line">    &quot;blocklist-url&quot;: &quot;http://www.example.com/blocklist&quot;,</div><div class="line">    &quot;cache-size-mb&quot;: 4,</div><div class="line">    &quot;dht-enabled&quot;: true,                 //DHT支持</div><div class="line">    &quot;download-dir&quot;: &quot;/data/transmission/Downloads&quot;,     //下载完成的保存路径</div><div class="line">    &quot;encryption&quot;: 1,</div><div class="line">    &quot;idle-seeding-limit&quot;: 30,</div><div class="line">    &quot;idle-seeding-limit-enabled&quot;: false,</div><div class="line">    &quot;incomplete-dir&quot;: &quot;/data/transmission/Downloads&quot;,     //未下载完成的保存路径</div><div class="line">    &quot;incomplete-dir-enabled&quot;: false,</div><div class="line">    &quot;lazy-bitfield-enabled&quot;: true,</div><div class="line">    &quot;lpd-enabled&quot;: false,</div><div class="line">    &quot;message-level&quot;: 2,</div><div class="line">    &quot;open-file-limit&quot;: 32,</div><div class="line">    &quot;peer-congestion-algorithm&quot;: &quot;&quot;,</div><div class="line">    &quot;peer-limit-global&quot;: 240,                //全局种子最大连接数</div><div class="line">    &quot;peer-limit-per-torrent&quot;: 60,          //单一种子最大连接数</div><div class="line">    &quot;peer-port&quot;: 51413,</div><div class="line">    &quot;peer-port-random-high&quot;: 65535,</div><div class="line">    &quot;peer-port-random-low&quot;: 49152,</div><div class="line">    &quot;peer-port-random-on-start&quot;: false,</div><div class="line">    &quot;peer-socket-tos&quot;: &quot;default&quot;,</div><div class="line">    &quot;pex-enabled&quot;: true,</div><div class="line">    &quot;port-forwarding-enabled&quot;: true,</div><div class="line">    &quot;preallocation&quot;: 1,</div><div class="line">    &quot;prefetch-enabled&quot;: 1,</div><div class="line">    &quot;ratio-limit&quot;: 2,</div><div class="line">    &quot;ratio-limit-enabled&quot;: false,</div><div class="line">    &quot;rename-partial-files&quot;: true,</div><div class="line">    &quot;rpc-authentication-required&quot;: true,</div><div class="line">    &quot;rpc-bind-address&quot;: &quot;0.0.0.0&quot;,</div><div class="line">    &quot;rpc-enabled&quot;: true,</div><div class="line">    &quot;rpc-password&quot;: &quot;&#123;096110376f678fa59ac93b4ba2ef383fba6a9edcBELB4tYF&quot;,         //密码</div><div class="line">    &quot;rpc-port&quot;: 9091,                            //网页GUI使用的端口</div><div class="line">    &quot;rpc-url&quot;: &quot;/transmission/&quot;,</div><div class="line">    &quot;rpc-username&quot;: &quot;&quot;,                   //用户名</div><div class="line">    &quot;rpc-whitelist&quot;: &quot;*.*.*.*&quot;,              </div><div class="line">    &quot;rpc-whitelist-enabled&quot;: true,</div><div class="line">    &quot;script-torrent-done-enabled&quot;: false,</div><div class="line">    &quot;script-torrent-done-filename&quot;: &quot;&quot;,</div><div class="line">    &quot;speed-limit-down&quot;: 100,</div><div class="line">    &quot;speed-limit-down-enabled&quot;: false,</div><div class="line">    &quot;speed-limit-up&quot;: 100,</div><div class="line">    &quot;speed-limit-up-enabled&quot;: false,</div><div class="line">    &quot;start-added-torrents&quot;: true,</div><div class="line">    &quot;trash-original-torrent-files&quot;: false,</div><div class="line">    &quot;umask&quot;: 18,           //这里改为0，可以控制默认下载文件权限为777</div><div class="line">    &quot;upload-slots-per-torrent&quot;: 14           //每个种子上传连接数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。"><a href="#执行transmission-daemon-g-usr-local-transmission，通过浏览器登陆（http-yourIP-9091-）就可以控制了。" class="headerlink" title="执行transmission-daemon -g /usr/local/transmission，通过浏览器登陆（http://yourIP:9091/）就可以控制了。"></a>执行<code>transmission-daemon -g /usr/local/transmission</code>，通过浏览器登陆<code>（http://yourIP:9091/）</code>就可以控制了。</h3><h4 id="yum安装Transmission"><a href="#yum安装Transmission" class="headerlink" title="yum安装Transmission"></a>yum安装Transmission</h4><p>以前装在VPS上安装Transmission当Seedbox使大多使用一些一键包，或者使用rpm包的方式安装，一键包的方式我一直不喜欢，经常出问题，而且一般版本都很旧。<br>rpm包的方式可以参考这篇文章，不过这里的版本也已经很旧了，geekery现在提供更加方便yum repo的方式安装，自动解决依赖问题，版本很新(目前是2.71)，并可通过yum更新。</p>
-<p>安装方法非常简单，简单翻译了一下，原文可以参考这里:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">cd /etc/yum.repos.d/</div><div class="line">CentOS 5 x86</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el5-i386.repo</div><div class="line">CentOS 5 x86_64</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el5-x86_64.repo</div><div class="line">CentOS 6 x86</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el6-i686.repo</div><div class="line">CentOS 6 x86_64</div><div class="line"></div><div class="line">wget http://geekery.altervista.org/geekery-el6-x86_64.repo</div></pre></td></tr></table></figure></p>
-<p>然后:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y transmission transmission-daemon</div></pre></td></tr></table></figure></p>
-<p>提示导入GPG Key的时候输y同意即可</p>
-<p>注意：如果之前通过RPM包的方式安装过Transmission，需要卸载后再用yum安装。<br>装好后可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service transmission-daemon start</div></pre></td></tr></table></figure></p>
-<p>来启动Transmission</p>
-<p>配置文件位于<code>/var/lib/transmission/.config/transmission-daemon/settings.json(CentOS 5)</code><br>或<code>/var/lib/transmission/settings.json(CentOS 6)</code><br>修改配置文件前要先用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service transmission-daemon stop</div></pre></td></tr></table></figure></p>
-<p>关掉Transmission，否则配置不会生效。<br>具体的配置网上有很多，就不详细说了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    &quot;rpc-authentication-required&quot;: true,</div><div class="line">    &quot;rpc-enabled&quot;: true,</div><div class="line">    &quot;rpc-password&quot;: &quot;管理密码密码&quot;,</div><div class="line">    &quot;rpc-username&quot;: &quot;管理用户名&quot;,</div><div class="line">    &quot;rpc-whitelist-enabled&quot;: false,</div></pre></td></tr></table></figure></p>
-<p>主要是把这几项改成我上面的样子就可以了，然后你就可以通过<code>http://你的IP地址:9091</code>的方式连接了。<br>远程管理建议使用<em>Transmission-Remote-GUI</em></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
+          什么是KVM  KVM 是指基于 Linux 内核的虚拟机（Kernel-based Virtual Machine）。 2006 年 10 月，由以色列的Qumranet 组织开发的一种新的“虚拟机”实现方案。 2007 年 2 月发布的 Linux 2.6.20 内核第一次包含了 KVM 。增加
+          ...
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/29/update-kernel.html" itemprop="url">
-                  CentOS6.5升级内核
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T10:46:37+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/29/update-kernel.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/update-kernel.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/29/update-kernel.html" class="leancloud_visitors" data-flag-title="CentOS6.5升级内核">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="查看当前系统内核"><a href="#查看当前系统内核" class="headerlink" title="查看当前系统内核"></a>查看当前系统内核</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname -r</div><div class="line">2.6.32-431.el6.x86_64</div></pre></td></tr></table></figure>
-<h3 id="下载linux内核包"><a href="#下载linux内核包" class="headerlink" title="下载linux内核包"></a>下载linux内核包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://www.kernel.org/pub/linux/kernel/v3.0/linux-3.18.20.tar.gz</div><div class="line">tar -zxf linux-3.18.20.tar.gz </div><div class="line">cd linux-3.18.20</div></pre></td></tr></table></figure>
-<h3 id="配置内核并安装"><a href="#配置内核并安装" class="headerlink" title="配置内核并安装"></a>配置内核并安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">make mrproper  //清除环境变量，清除配置文件</div><div class="line">cp /boot/config-2.6.32-431.el6.x86_64 .config  //复制原有系统的内核配置文件</div><div class="line">make oldconfig  //读取当前目录下的.config文件，在.config文件里没有找到的选项则提示用户填写 sh -c &apos;yes &quot;&quot; | make oldconfig&apos;</div><div class="line">make menuconfig  //在菜单模式下选择需要编译的内核模块（未选择此类型）</div><div class="line">make clean //确保所有都是最新状态</div><div class="line">make bzImage //生成内核文件</div><div class="line">make modules //编译模块</div><div class="line">make modules_install //安装模块</div></pre></td></tr></table></figure>
-<h3 id="修改grub引导，重启服务器"><a href="#修改grub引导，重启服务器" class="headerlink" title="修改grub引导，重启服务器"></a>修改grub引导，重启服务器</h3><p>修改grub引导顺序，让新安装的内核作为默认内核，新安装的内核在第一位置，所以default=0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">cat /boot/grub/grub.conf </div><div class="line"># grub.conf generated by anaconda</div><div class="line">#</div><div class="line"># Note that you do not have to rerun grub after making changes to this file</div><div class="line"># NOTICE:  You have a /boot partition.  This means that</div><div class="line">#          all kernel and initrd paths are relative to /boot/, eg.</div><div class="line">#          root (hd0,0)</div><div class="line">#          kernel /vmlinuz-version ro root=/dev/sda5</div><div class="line">#          initrd /initrd-[generic-]version.img</div><div class="line">#boot=/dev/sda</div><div class="line">default=0</div><div class="line">timeout=5</div><div class="line">splashimage=(hd0,0)/grub/splash.xpm.gz</div><div class="line">hiddenmenu</div><div class="line">title CentOS (3.18.20)</div><div class="line">        root (hd0,0)</div><div class="line">        kernel /vmlinuz-3.18.20 ro root=UUID=0303a1aa-552b-4de9-ac52-6bc95361d832 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet</div><div class="line">        initrd /initramfs-3.18.20.img</div><div class="line">title CentOS (2.6.32-431.el6.x86_64)</div><div class="line">        root (hd0,0)</div><div class="line">        kernel /vmlinuz-2.6.32-431.el6.x86_64 ro root=UUID=304a1aa-552b-4de9-ac52-6bc95361d832 rd_NO_LUKS rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 crashkernel=auto  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM rhgb quiet</div><div class="line">        initrd /initramfs-2.6.32-431.el6.x86_64.img</div></pre></td></tr></table></figure></p>
-<h3 id="重启系统"><a href="#重启系统" class="headerlink" title="重启系统"></a>重启系统</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">reboot</div></pre></td></tr></table></figure>
-<h3 id="确认当前内核版本"><a href="#确认当前内核版本" class="headerlink" title="确认当前内核版本"></a>确认当前内核版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uname -r</div><div class="line">3.18.20</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/29/install-epel.html" itemprop="url">
-                  epel安装地址
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-29T10:45:21+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/29/install-epel.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/install-epel.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/29/install-epel.html" class="leancloud_visitors" data-flag-title="epel安装地址">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>entOS7<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirrors.yun-idc.com/epel/7/x86_64/e/epel-release-7-5.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>###CentOS6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\\ 32位</div><div class="line">rpm -Uvh http://mirrors.yun-idc.com/epel/6/i386/epel-release-6-8.noarch.rpm</div><div class="line">\\ 64位</div><div class="line">rpm -Uvh http://mirrors.yun-idc.com/epel/6/x86_64/epel-release-6-8.noarch.rpm</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月"><a href="#DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10-免费玩2个月" class="headerlink" title="DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月"></a><a href="https://www.digitalocean.com/?refcode=9e4ab85e22ec" target="_blank" rel="external">DigitalOcean的VPS，稳定、便宜，用于搭建自己的站点和梯子，现在注册即得10$,免费玩2个月</a></h2>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/06/kvm-pool-manage.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1653,7 +995,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1694,7 +1036,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">86</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1702,7 +1044,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1735,6 +1077,20 @@
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
       </section>
@@ -1882,6 +1238,132 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 
