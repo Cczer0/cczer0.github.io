@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="proxy,socks5,ss5," />
+  <meta name="keywords" content="proxy,ss5,socks5," />
 
 
 
@@ -94,7 +94,7 @@
 <meta property="og:description" content="socks5代理服务官网：http://ss5.sourceforge.net/
 安装gcc编译环境和相关依赖包1yum -y install pam-devel openldap-devel cyrus-sasl-devel gcc gcc-c++ automake make openssl openssl-devel
 下载ss51wget http://cznic.dl.sourceforg">
-<meta property="og:updated_time" content="2016-10-19T02:15:36.265Z">
+<meta property="og:updated_time" content="2016-10-19T02:28:49.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装ss5代理">
 <meta name="twitter:description" content="socks5代理服务官网：http://ss5.sourceforge.net/
@@ -393,8 +393,8 @@
 <p>配置代理权限<br>ss5.conf 用法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">auth    0.0.0.0/0               -               -</div><div class="line">#      Auth     SHost           SPort   DHost           DPort   Fixup   Group   Band    ExpDate</div><div class="line">permit -       0.0.0.0/0       -       0.0.0.0/0       -       -       test       -       -</div></pre></td></tr></table></figure></p>
 <p>修改/etc/init.d/ss5文件自定义端口，默认为1080<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">daemon /usr/sbin/ss5 -t $SS5_OPTS -b 0.0.0.0:1081</div></pre></td></tr></table></figure></p>
 <p>在<code>/etc/sysconfig/ss5</code>中，取消注释</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SS5_OPTS=&quot; -u root&quot;</div><div class="line">``` </div><div class="line"></div><div class="line">### 启动ss5</div></pre></td></tr></table></figure>
-<p>/etc/init.d/ss5 start<br>doneting ss5…                                            [  OK  ]<br>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SS5_OPTS=&quot; -u root&quot;</div></pre></td></tr></table></figure>
+<h3 id="启动ss5"><a href="#启动ss5" class="headerlink" title="启动ss5"></a>启动ss5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/ss5 start</div><div class="line">doneting ss5...                                            [  OK  ]</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -419,9 +419,9 @@
           
             <a href="/tags/proxy/" rel="tag">#proxy</a>
           
-            <a href="/tags/socks5/" rel="tag">#socks5</a>
-          
             <a href="/tags/ss5/" rel="tag">#ss5</a>
+          
+            <a href="/tags/socks5/" rel="tag">#socks5</a>
           
         </div>
       
@@ -597,7 +597,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#socks5代理服务"><span class="nav-number">1.</span> <span class="nav-text">socks5代理服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装gcc编译环境和相关依赖包"><span class="nav-number">2.</span> <span class="nav-text">安装gcc编译环境和相关依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载ss5"><span class="nav-number">3.</span> <span class="nav-text">下载ss5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装ss5"><span class="nav-number">4.</span> <span class="nav-text">编译安装ss5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ss5"><span class="nav-number">5.</span> <span class="nav-text">配置ss5</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#socks5代理服务"><span class="nav-number">1.</span> <span class="nav-text">socks5代理服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装gcc编译环境和相关依赖包"><span class="nav-number">2.</span> <span class="nav-text">安装gcc编译环境和相关依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载ss5"><span class="nav-number">3.</span> <span class="nav-text">下载ss5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装ss5"><span class="nav-number">4.</span> <span class="nav-text">编译安装ss5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ss5"><span class="nav-number">5.</span> <span class="nav-text">配置ss5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动ss5"><span class="nav-number">6.</span> <span class="nav-text">启动ss5</span></a></li></ol></div>
             
           </div>
         </section>
