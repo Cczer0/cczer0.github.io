@@ -92,14 +92,14 @@
 <meta property="og:url" content="http://czero000.github.io/2016/01/19/glances-monitor-system.html">
 <meta property="og:site_name" content="Zero's Blog">
 <meta property="og:description" content="使用Glances监控系统Glances 是一个用于监控系统的跨平台、基于文本模式的命令行工具。它是用 Python 编写的，使用 psutil 库从系统获取信息。你可以用它来监控 CPU、平均负载、内存、网络接口、磁盘 I/O，文件系统空间利用率、挂载的设备、所有活动进程以及消耗资源最多的进程。Glances 有很多有趣的选项。它的主要特性之一是可以在配置文件中设置阀值(careful小心、wa">
-<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_monitor.jpg">
-<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_output.jpg">
-<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_remote_output.jpg">
-<meta property="og:updated_time" content="2016-10-20T10:50:11.093Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/command/glances_monitor.jpg">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/command/glances_output.jpg">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/command/glances_remote_output.jpg">
+<meta property="og:updated_time" content="2016-10-20T11:03:13.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用glances监控系统">
 <meta name="twitter:description" content="使用Glances监控系统Glances 是一个用于监控系统的跨平台、基于文本模式的命令行工具。它是用 Python 编写的，使用 psutil 库从系统获取信息。你可以用它来监控 CPU、平均负载、内存、网络接口、磁盘 I/O，文件系统空间利用率、挂载的设备、所有活动进程以及消耗资源最多的进程。Glances 有很多有趣的选项。它的主要特性之一是可以在配置文件中设置阀值(careful小心、wa">
-<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_monitor.jpg">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/command/glances_monitor.jpg">
 
 
 
@@ -382,7 +382,7 @@
       
 
       
-        <h2 id="使用Glances监控系统"><a href="#使用Glances监控系统" class="headerlink" title="使用Glances监控系统"></a>使用Glances监控系统</h2><p><img src="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_monitor.jpg" alt="glances_monitor"><br>Glances 是一个用于监控系统的跨平台、基于文本模式的命令行工具。它是用 Python 编写的，使用 psutil 库从系统获取信息。你可以用它来监控 CPU、平均负载、内存、网络接口、磁盘 I/O，文件系统空间利用率、挂载的设备、所有活动进程以及消耗资源最多的进程。Glances 有很多有趣的选项。它的主要特性之一是可以在配置文件中设置阀值(careful小心、warning警告、critical致命)，然后它会用不同颜色显示信息以表明系统的瓶颈。</p>
+        <h2 id="使用Glances监控系统"><a href="#使用Glances监控系统" class="headerlink" title="使用Glances监控系统"></a>使用Glances监控系统</h2><p><img src="http://ofc9x1ccn.bkt.clouddn.com/command/glances_monitor.jpg" alt="glances_monitor"><br>Glances 是一个用于监控系统的跨平台、基于文本模式的命令行工具。它是用 Python 编写的，使用 psutil 库从系统获取信息。你可以用它来监控 CPU、平均负载、内存、网络接口、磁盘 I/O，文件系统空间利用率、挂载的设备、所有活动进程以及消耗资源最多的进程。Glances 有很多有趣的选项。它的主要特性之一是可以在配置文件中设置阀值(careful小心、warning警告、critical致命)，然后它会用不同颜色显示信息以表明系统的瓶颈。</p>
 <h3 id="Glances的功能"><a href="#Glances的功能" class="headerlink" title="Glances的功能"></a>Glances的功能</h3><ul>
 <li>CPU 平均负载</li>
 <li>不同状态(如活动、休眠)进程的数量</li>
@@ -395,7 +395,7 @@
 </ul>
 <h3 id="安装-Glances"><a href="#安装-Glances" class="headerlink" title="安装 Glances"></a>安装 Glances</h3><p>Glances 在 Ubuntu 的软件仓库中，所以安装很简单。执行下面的命令安装 Glances<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install glances </div><div class="line"></div><div class="line">//若安装后无法正常使用，可考虑使用 pip 安装/升级 glances：</div><div class="line">sudo pip install --upgrade glances</div></pre></td></tr></table></figure></p>
 <h3 id="Glances-使用方法"><a href="#Glances-使用方法" class="headerlink" title="Glances 使用方法"></a>Glances 使用方法</h3><p>安装完成后，可以执行下面的命令启动 Glances：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glances</div></pre></td></tr></table></figure></p>
-<p>你将看到类似下图的输出：<br><img src="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_output.jpg" alt="glances_output" title="glances monitor system output"></p>
+<p>你将看到类似下图的输出：<br><img src="http://ofc9x1ccn.bkt.clouddn.com/command/glances_output.jpg" alt="glances_output" title="glances monitor system output"></p>
 <p>要退出<code>Glances</code>终端，按 <code>ESC 键或 Ctrl + C</code>。</p>
 <p>默认情况下，时间间隔(显示数据刷新的时间间隔)是 1 秒，不过你可以在从终端启动 Glances 时自定义时间间隔。</p>
 <p>要把时间间隔设为 5 秒，执行下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glances -t 5</div></pre></td></tr></table></figure></p>
@@ -427,7 +427,7 @@
 <li>w：删除警告记录</li>
 </ul>
 <h3 id="使用-Glances-监控远程系统"><a href="#使用-Glances-监控远程系统" class="headerlink" title="使用 Glances 监控远程系统"></a>使用 Glances 监控远程系统</h3><p>你也可以使用 Glances 监控远程系统。要在远程系统上使用它，使用下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glances -s</div></pre></td></tr></table></figure></p>
-<p>你会看到类似下面的输出：<br><img src="http://ofc9x1ccn.bkt.clouddn.com/glances/glances_remote_output.jpg" alt="glances_remote_output" title="glances monitor system remote output"></p>
+<p>你会看到类似下面的输出：<br><img src="http://ofc9x1ccn.bkt.clouddn.com/command/glances_remote_output.jpg" alt="glances_remote_output" title="glances monitor system remote output"></p>
 <p>如你所见，Glances 运行在 61209 端口。</p>
 <p>现在，到远程机器上执行下面的命令以连接到指定 IP 地址的 Glances 服务器上。假设 192.168.1.10 是你的 Glances 服务器 IP 地址。</p>
 <p>glances -c 192.168.1.10<br>结论</p>
