@@ -104,14 +104,14 @@ MyCli 使用 Python Prompt Toolkit 编写。
 支持语法高亮
 当你输入 SQL 关键字，数据库的表格和列时可自动补全。
 智能补全(默认启用)，会提示文本感应的 context-sensitive 补">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/auto-complite.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/smart-completion.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/columns.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/alias.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/syntax.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/pager.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/main.gif">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.888Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/auto-complite.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/smart-completion.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/columns.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/alias.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/syntax.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/pager.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/main.gif">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源MySQL自动补全客户端">
 <meta name="twitter:description" content="介绍MyCli 是一个 MySQL 的命令行客户端，可以实现自动补全 auto-completion 和语法高亮，同时也可应用于 MariaDB 和 Percona。
@@ -121,7 +121,7 @@ MyCli 使用 Python Prompt Toolkit 编写。
 支持语法高亮
 当你输入 SQL 关键字，数据库的表格和列时可自动补全。
 智能补全(默认启用)，会提示文本感应的 context-sensitive 补">
-<meta name="twitter:image" content="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/auto-complite.png">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/mysql/auto-complite.png">
 
 
 
@@ -428,11 +428,11 @@ MyCli 使用 Python Prompt Toolkit 编写。
 <li><strong>Linux</strong></li>
 </ul>
 <p><strong>Debian/Ubuntu Package</strong><br>mycli托管在debian软件包<a href="packagecloud.io.">packagecloud.io.</a><br>添加gpg密钥packagecloud包验证。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl https://packagecloud.io/gpg.key | apt-key add -</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl http://packagecloud.io/gpg.key | apt-key add -</div></pre></td></tr></table></figure>
 <p>安装 apt-transport-https 包，支持 apt 使用 https 下载包</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apt-get install -y apt-transport-https</div></pre></td></tr></table></figure>
 <p>添加 mycli 安装源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;deb https://packagecloud.io/amjith/mycli/ubuntu/ trusty main&quot; | sudo tee -a /etc/apt/sources.list</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;deb http://packagecloud.io/amjith/mycli/ubuntu/ trusty main&quot; | sudo tee -a /etc/apt/sources.list</div></pre></td></tr></table></figure>
 <p>更新 mycli 的安装源，然后安装 mycli</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install mycli</div></pre></td></tr></table></figure>
 <p>现在使用 <code>sudo apt-get upgrade mycli</code>很容易使 mycli 升级！</p>
@@ -446,31 +446,31 @@ MyCli 使用 Python Prompt Toolkit 编写。
 <ul>
 <li>自动补全<br>简单的完成如关键字和sql函数。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/auto-complite.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/auto-complite.png" alt=""></p>
 <ul>
 <li>智能提示<br>Table name completions after the ‘FROM’ keyword.</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/smart-completion.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/smart-completion.png" alt=""></p>
 <ul>
 <li>列名中引用的表的查询范围</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/columns.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/columns.png" alt=""></p>
 <ul>
 <li>别名支持<br>列完成将即使工作表名称别名。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/alias.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/alias.png" alt=""></p>
 <ul>
 <li>语法高亮显示<br>sql 的语法高亮显示。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/syntax.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/syntax.png" alt=""></p>
 <ul>
 <li>pager<br>一个 sql 命令的输出是通过更少的命令自动输送。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/pager.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/pager.png" alt=""></p>
 <ul>
 <li>动态效果图如下</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/main.gif" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/main.gif" alt=""></p>
 
       
     </div>

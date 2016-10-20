@@ -108,7 +108,7 @@
 1useradd git
 
 创建证书登录所有需要登录的用户，将他们自己的id_rsa.pub文件及公钥，导">
-<meta property="og:updated_time" content="2016-10-19T02:15:36.273Z">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git仓库搭建">
 <meta name="twitter:description" content="Github就是一个提供免费托管开源代码的远程仓库，但对于一些敏感代码或者不想开源的源代码，有不舍得付费，那么就需要自己搭建一台Git服务器作为私有仓库来使用。下面是搭建Git服务器过程。
@@ -420,8 +420,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git clone git@172.16.11.211:/opt/GitWork/sample.git</div><div class="line">Cloning into &apos;sample&apos;...</div><div class="line">warning: You appear to have cloned an empty repository.</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="公钥管理"><a href="#公钥管理" class="headerlink" title="公钥管理"></a>公钥管理</h2><p>  如果团队很小，把每个人的公钥收集起来放到服务器的/home/git/.ssh/authorized_keys文件里就是可行的。如果团队有几百号人，就没法这么玩了，这时，可以用<a href="https://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a>来管理公钥。</p>
-<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><p>有很多不但视源代码如生命，而且视员工为窃贼的公司，会在版本控制系统里设置一套完善的权限控制，每个人是否有读写权限会精确到每个分支甚至每个目录下。因为Git是为Linux源代码托管而开发的，所以Git也继承了开源社区的精神，不支持权限控制。不过，因为Git支持钩子（hook），所以，可以在服务器端编写一系列脚本来控制提交等操作，达到权限控制的目的。<a href="https://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a>就是这个工具。</p>
+<h2 id="公钥管理"><a href="#公钥管理" class="headerlink" title="公钥管理"></a>公钥管理</h2><p>  如果团队很小，把每个人的公钥收集起来放到服务器的/home/git/.ssh/authorized_keys文件里就是可行的。如果团队有几百号人，就没法这么玩了，这时，可以用<a href="http://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a>来管理公钥。</p>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><p>有很多不但视源代码如生命，而且视员工为窃贼的公司，会在版本控制系统里设置一套完善的权限控制，每个人是否有读写权限会精确到每个分支甚至每个目录下。因为Git是为Linux源代码托管而开发的，所以Git也继承了开源社区的精神，不支持权限控制。不过，因为Git支持钩子（hook），所以，可以在服务器端编写一系列脚本来控制提交等操作，达到权限控制的目的。<a href="http://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a>就是这个工具。</p>
 
       
     </div>

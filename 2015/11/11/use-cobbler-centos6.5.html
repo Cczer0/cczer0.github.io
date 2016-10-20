@@ -96,14 +96,14 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
 <meta property="og:description" content="本篇接上篇文章，继续介绍 cobbler 的使用方法。
 RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
 导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的时候，会同时创建 distro，profile，并且还会设置 repo，不过这个 repo只包含 D">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/devops/cobbler/cobbler-profile.png">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.920Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/cobbler/cobbler-profile.png">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS6.5部署Cobbler(使用)">
 <meta name="twitter:description" content="本篇接上篇文章，继续介绍 cobbler 的使用方法。
 RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
 导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的时候，会同时创建 distro，profile，并且还会设置 repo，不过这个 repo只包含 D">
-<meta name="twitter:image" content="https://ofc9x1ccn.bkt.clouddn.com/devops/cobbler/cobbler-profile.png">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/cobbler/cobbler-profile.png">
 
 
 
@@ -397,7 +397,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
 <li><p>通过命令行修改profile文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cobbler profile edit --name=CentOS6.5-x86_64 --kickstart=/data/htdocs/kscfg/ks.cfg-CentOS6.5-x86_64</div></pre></td></tr></table></figure>
 </li>
-<li><p>通过Web界面修改profile文件<br><img src="https://ofc9x1ccn.bkt.clouddn.com/devops/cobbler/cobbler-profile.png" alt="cobbler-profile"></p>
+<li><p>通过Web界面修改profile文件<br><img src="http://ofc9x1ccn.bkt.clouddn.com/cobbler/cobbler-profile.png" alt="cobbler-profile"></p>
 </li>
 </ul>
 <p>修改之后，可以通过下面命令来查看自己修改的信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">cobbler profile report    </div><div class="line">Name                           : CentOS6.5-x86_64</div><div class="line">TFTP Boot Files                : &#123;&#125;</div><div class="line">Comment                        : </div><div class="line">DHCP Tag                       : default</div><div class="line">Distribution                   : CentOS6.5-x86_64</div><div class="line">Enable gPXE?                   : 0</div><div class="line">Enable PXE Menu?               : 1</div><div class="line">Fetchable Files                : &#123;&#125;</div><div class="line">Kernel Options                 : &#123;&#125;</div><div class="line">Kernel Options (Post Install)  : &#123;&#125;</div><div class="line">Kickstart                      : /data/htdocs/kscfg/ks.cfg-CentOS6.5-x86_64</div><div class="line">Kickstart Metadata             : &#123;&#125;</div><div class="line">Management Classes             : []</div><div class="line">Management Parameters          :  &lt;&gt;</div><div class="line">Name Servers                   : []</div><div class="line">Name Servers Search Path       : []</div><div class="line">Owners                         : [&apos;admin&apos;]</div><div class="line">Parent Profile                 : </div><div class="line">Proxy                          : </div><div class="line">Red Hat Management Key         :  &lt;&gt;</div><div class="line">Red Hat Management Server      :  &lt;&gt;</div><div class="line">Repos                          : []</div><div class="line">Server Override                :  &lt;&gt;</div><div class="line">Template Files                 : &#123;&#125;</div><div class="line">Virt Auto Boot                 : 1</div><div class="line">Virt Bridge                    : xenbr0</div><div class="line">Virt CPUs                      : 1</div><div class="line">Virt Disk Driver Type          : raw</div><div class="line">Virt File Size(GB)             : 5</div><div class="line">Virt Path                      : </div><div class="line">Virt RAM (MB)                  : 512</div><div class="line">Virt Type                      : kvm</div></pre></td></tr></table></figure></p>

@@ -94,13 +94,13 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <meta property="og:site_name" content="Zero's Blog">
 <meta property="og:description" content="什么是ShadowSocks
 Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。其流行起来的一大原因，多亏">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/proxy/shadowsocks-software.png">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.892Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/proxy/shadowsocks-software.png">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks搭建Sock5代理">
 <meta name="twitter:description" content="什么是ShadowSocks
 Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。其流行起来的一大原因，多亏">
-<meta name="twitter:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/proxy/shadowsocks-software.png">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/proxy/shadowsocks-software.png">
 
 
 
@@ -390,20 +390,20 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <h2 id="Shadowsocks优势"><a href="#Shadowsocks优势" class="headerlink" title="Shadowsocks优势"></a>Shadowsocks优势</h2><ul>
 <li>如前面所说，使用SSH来创建本地socks5代理的方法容易被发现，某些地区干脆进行了封锁，而Shadowsocks的代理方式更为隐蔽和安全。</li>
 <li>无需保持实时连接，不用考虑断线问题。在使用SSH时，总会发生断开连接的情况，如网络不稳定、电脑休眠、切换wifi等，此时SSH连接将断开，浏览网页什么的会提示无法连接到代理服务器。虽然客户端大都支持断线重连，但是反应经常不太灵敏，平均需要30秒左右的时间（而且这个时间是从你点开网页开始算的）。如果你用的是手机的话，鉴于手机网络的多变性，人一旦动起来就几乎不可用了。</li>
-<li>更丰富的客户端支持。目前Shadowsocks官网（是shadowsocks.org，不是.com那个，.com那个是售卖账号的，并非官网，有假冒官网的嫌疑）提供几乎全平台支持，包括linux和非越狱iPhone在内。尤其是OS X版的自动代理模式（PAC）非常稳定，胜过GoAgentX，完美支持safari。同时，各个平台上的客户端使用都十分简单，基本上就是填写一下地址端口密码什么的，就能开始使用了，连点击连接都不用。另外，大部分客户端支持扫描屏幕二维码完成配置，这个指导新手不要太爽。<br><a href="https://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">shadowsocks软件覆盖</a><br><img src="https://ofc9x1ccn.bkt.clouddn.com/system/proxy/shadowsocks-software.png" alt="shadowsocks" title="shadowsocks软件覆盖"></li>
+<li>更丰富的客户端支持。目前Shadowsocks官网（是shadowsocks.org，不是.com那个，.com那个是售卖账号的，并非官网，有假冒官网的嫌疑）提供几乎全平台支持，包括linux和非越狱iPhone在内。尤其是OS X版的自动代理模式（PAC）非常稳定，胜过GoAgentX，完美支持safari。同时，各个平台上的客户端使用都十分简单，基本上就是填写一下地址端口密码什么的，就能开始使用了，连点击连接都不用。另外，大部分客户端支持扫描屏幕二维码完成配置，这个指导新手不要太爽。<br><a href="http://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">shadowsocks软件覆盖</a><br><img src="http://ofc9x1ccn.bkt.clouddn.com/proxy/shadowsocks-software.png" alt="shadowsocks" title="shadowsocks软件覆盖"></li>
 </ul>
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="安装ShadowSocks"><a href="#安装ShadowSocks" class="headerlink" title="安装ShadowSocks"></a>安装ShadowSocks</h3><ul>
 <li>shadowsocks开发语言有Node.JS、go、pthon、c</li>
-<li>shadowsocks python语言版 <a href="https://github.com/clowwindy/shadowsocks" target="_blank" rel="external">https://github.com/clowwindy/shadowsocks</a></li>
-<li>shadowsocks go语言版 <a href="https://github.com/hugozhu/shadowsocks-go" target="_blank" rel="external">https://github.com/hugozhu/shadowsocks-go</a></li>
-<li>shadowsocks nodejs语言版 <a href="https://github.com/clowwindy/shadowsocks-nodejs" target="_blank" rel="external">https://github.com/clowwindy/shadowsocks-nodejs</a></li>
-<li>shadowsocks libev版（使用C语言+libev库+openssl开发） <a href="https://github.com/madeye/shadowsocks-libev" target="_blank" rel="external">https://github.com/madeye/shadowsocks-libev</a></li>
-<li>shadowsocks libuv版（很久没更新了） <a href="https://github.com/dndx/shadowsocks-libuv" target="_blank" rel="external">https://github.com/dndx/shadowsocks-libuv</a></li>
+<li>shadowsocks python语言版 <a href="http://github.com/clowwindy/shadowsocks" target="_blank" rel="external">http://github.com/clowwindy/shadowsocks</a></li>
+<li>shadowsocks go语言版 <a href="http://github.com/hugozhu/shadowsocks-go" target="_blank" rel="external">http://github.com/hugozhu/shadowsocks-go</a></li>
+<li>shadowsocks nodejs语言版 <a href="http://github.com/clowwindy/shadowsocks-nodejs" target="_blank" rel="external">http://github.com/clowwindy/shadowsocks-nodejs</a></li>
+<li>shadowsocks libev版（使用C语言+libev库+openssl开发） <a href="http://github.com/madeye/shadowsocks-libev" target="_blank" rel="external">http://github.com/madeye/shadowsocks-libev</a></li>
+<li>shadowsocks libuv版（很久没更新了） <a href="http://github.com/dndx/shadowsocks-libuv" target="_blank" rel="external">http://github.com/dndx/shadowsocks-libuv</a></li>
 </ul>
 <p>网上推荐安装python版和Shadowsocks-libev版，这里安装标准python版，系统为CentOS7。</p>
 <h4 id="检查服务器python，确保python-版本高于2-6"><a href="#检查服务器python，确保python-版本高于2-6" class="headerlink" title="检查服务器python，确保python 版本高于2.6"></a>检查服务器python，确保python 版本高于2.6</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">python --version</div><div class="line"></div><div class="line">Python 2.7.5</div></pre></td></tr></table></figure>
 <h4 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install m2crypto python-setuptools</div></pre></td></tr></table></figure>
-<h4 id="安装PIP"><a href="#安装PIP" class="headerlink" title="安装PIP"></a>安装PIP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div><div class="line">或者</div><div class="line">wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py</div><div class="line">python get-pip.py</div></pre></td></tr></table></figure>
+<h4 id="安装PIP"><a href="#安装PIP" class="headerlink" title="安装PIP"></a>安装PIP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div><div class="line">或者</div><div class="line">wget http://raw.github.com/pypa/pip/master/contrib/get-pip.py</div><div class="line">python get-pip.py</div></pre></td></tr></table></figure>
 <h4 id="安装Shadowsocks"><a href="#安装Shadowsocks" class="headerlink" title="安装Shadowsocks"></a>安装Shadowsocks</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure>
 <h3 id="配置ShadowSocks"><a href="#配置ShadowSocks" class="headerlink" title="配置ShadowSocks"></a>配置ShadowSocks</h3><p>安装ShadowSocks之后可以在后天直接启动<code>ssserver -p 8000 -k password -m rc4-md5 -d start</code><br>当然也可以使用配置文件进行配置，创建<code>/etc/shadowsocks/shadowsocks.json</code>文件，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;server&quot;:&quot;my_server_ip&quot;,</div><div class="line">    &quot;server_port&quot;:8388,</div><div class="line">    &quot;local_port&quot;:1080,</div><div class="line">    &quot;password&quot;:&quot;barfoo!&quot;,</div><div class="line">    &quot;timeout&quot;:600,</div><div class="line">    &quot;method&quot;:&quot;table&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>字段解释：</p>
@@ -418,11 +418,11 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <p>shadowsockv 支持多端口多用户模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;server&quot;:&quot;my_server_ip&quot;,</div><div class="line">  &quot;local_port&quot;:1080,</div><div class="line">  &quot;timeout&quot;:600,</div><div class="line">  &quot;method&quot;: &quot;aes-256-cfb&quot;,</div><div class="line">  &quot;port_password&quot;:</div><div class="line">  &#123;</div><div class="line">    &quot;9123&quot;:&quot;passwd1&quot;,</div><div class="line">    &quot;9124&quot;:&quot;passwd2&quot;</div><div class="line">  &#125;</div><div class="line">  &quot;_comment&quot;:</div><div class="line">  &#123;</div><div class="line">    &quot;9123&quot;:&quot;hanmeimei&quot;,</div><div class="line">    &quot;9124&quot;:&quot;lilei&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="启动Shadowsocks"><a href="#启动Shadowsocks" class="headerlink" title="启动Shadowsocks"></a>启动Shadowsocks</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> ssserver -c /etc/shadowsocks/shadowsocks.json -d start</div><div class="line">INFO: loading config from /etc/shadowsocks/shadowsocks.json</div><div class="line">2015-10-10 04:40:30 INFO     loading libcrypto from libcrypto.so.10</div><div class="line">started</div></pre></td></tr></table></figure>
 <p>如果要停止Shadowsocks，将命令中<code>start</code>变更为<code>stop</code>即可</p>
-<p>TIPS: 加密方式推荐使用<code>rc4-md5</code>，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看<a href="https://github.com/clowwindy/shadowsocks/issues/178" target="_blank" rel="external">issue</a>。</p>
+<p>TIPS: 加密方式推荐使用<code>rc4-md5</code>，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看<a href="http://github.com/clowwindy/shadowsocks/issues/178" target="_blank" rel="external">issue</a>。</p>
 <h2 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h2><h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Shadowsocks官网下载链接：<a href="http://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">http://shadowsocks.org/en/download/clients.html</a><br>如果打不开官方下载地址，可以在这里下载（不能保证为最新版本）</p>
 <ul>
-<li><strong>Windows</strong> <a href="https://czero000.github.io/upload/proxy/Shadowsocks-2.5.8.zip">Windows 7 or above: 2.5.8.zip</a></li>
-<li><strong>Mac OS</strong>  <a href="https://czero000.github.io/upload/proxy/ShadowsocksX-2.6.3.dmg">ShadowsocksX: 2.6.3.dmg</a></li>
+<li><strong>Windows</strong> <a href="http://czero000.github.io/upload/proxy/Shadowsocks-2.5.8.zip">Windows 7 or above: 2.5.8.zip</a></li>
+<li><strong>Mac OS</strong>  <a href="http://czero000.github.io/upload/proxy/ShadowsocksX-2.6.3.dmg">ShadowsocksX: 2.6.3.dmg</a></li>
 </ul>
 <h3 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h3><p>客户端都是免安装，打开就可以使用，可以参考这篇文章<a href="http://www.jianshu.com/p/08ba65d1f91a" target="_blank" rel="external">Shadowsocks快速安装与配置指南</a></p>
 <h2 id="ShadowSocks优化"><a href="#ShadowSocks优化" class="headerlink" title="ShadowSocks优化"></a>ShadowSocks优化</h2><p>首先将内核升级到3.5或者以上</p>

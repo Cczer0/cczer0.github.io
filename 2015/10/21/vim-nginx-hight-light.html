@@ -100,7 +100,7 @@ echo &amp;quot;au BufRead,BufNewFile /usr/">
 下载 Nginx 配置文件的 Vim 语法高亮：http://www.vim.org/scripts/script.php?script_id=1886
 将下载的nginx.vim复制到~/.vim/syntax/文件夹下，并且在~/.vim/filetype.vim文件中
 echo &amp;quot;au BufRead,BufNewFile /usr/">
-<meta property="og:updated_time" content="2016-10-19T02:15:36.289Z">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx代码高亮">
 <meta name="twitter:description" content="配置Vim 支持Nginx 配置文件高亮显示
@@ -396,7 +396,7 @@ echo &amp;quot;au BufRead,BufNewFile /usr/">
 <li>将下载的<code>nginx.vim</code>复制到<code>~/.vim/syntax/</code>文件夹下，并且在<code>~/.vim/filetype.vim</code>文件中</li>
 <li><p><code>echo &quot;au BufRead,BufNewFile /usr/local/nginx/* set ft=nginx&quot; &gt;&gt; /root/.vim/filetype.vim</code></p>
 <h3 id="配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。"><a href="#配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。" class="headerlink" title="配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。"></a>配置Vim的Nginx配置文件语法高亮的脚本，写成脚本，免得每次都手动配置。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">[[ -d ~/.vim/syntax ]] || mkdir  -p ~/.vim/syntax</div><div class="line">wget http://www.vim.org/scripts/download_script.php?src_id=19394 -O ~/.vim/syntaxnginx.vim/</div><div class="line">echo &quot;au BufRead,BufNewFile /usr/local/nginx/* set ft=nginx&quot; &gt;&gt; ~/.vim/filetype.vim</div></pre></td></tr></table></figure>
-<p><a href="https://illusion.github.io/resource/upload/web/nginx/nginx.vim" target="_blank" rel="external">nginx.vim文件下载链接</a></p>
+<p><a href="http://ofc9x1ccn.bkt.clouddn.com/upload/nginx/nginx.vim" target="_blank" rel="external">nginx.vim文件下载链接</a></p>
 </li>
 </ul>
 

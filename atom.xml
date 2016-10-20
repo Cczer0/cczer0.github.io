@@ -137,7 +137,7 @@
     <link href="http://czero000.github.io/2016/10/20/docker-blog.html"/>
     <id>http://czero000.github.io/2016/10/20/docker-blog.html</id>
     <published>2016-10-20T02:45:00.000Z</published>
-    <updated>2016-10-20T02:47:23.146Z</updated>
+    <updated>2016-10-20T10:50:11.133Z</updated>
     
     <content type="html"><![CDATA[<p>Docker 是一个有趣的技术，在过去的两年已经从一个想法变成了全世界的机构都在采用来部署应用的技术。下面会通过 docker 来创建一个blog。</p>
 <h1 id="什么是-Docker"><a href="#什么是-Docker" class="headerlink" title="什么是 Docker"></a>什么是 Docker</h1><p>Docker 是一个操作系统容器管理工具，通过将应用打包到操作系统容器里面，从而让你能轻松管理和部署应用。</p>
@@ -149,7 +149,7 @@
 <h1 id="通过-Dockerfile-方式部署一个-blog-转载"><a href="#通过-Dockerfile-方式部署一个-blog-转载" class="headerlink" title="通过 Dockerfile 方式部署一个 blog (转载)"></a>通过 Dockerfile 方式部署一个 blog (转载)</h1><ul>
 <li>获取 blog 源码</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/madflojo/blog.git</div><div class="line">cd blog</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone http://github.com/madflojo/blog.git</div><div class="line">cd blog</div></pre></td></tr></table></figure>
 <ul>
 <li>使用 FROM 继承一个 docker 镜像<br>Dockerfile的第一条命令是 <code>FROM</code> 指令。这用来将存在的 Docker 镜像指定为基础镜像，这会让docker 使用 nginx 镜像。如果想使用最原始的空白状态。可以制定 <code>ubuntu:latest</code>使用 ubuntu 镜像。</li>
 </ul>
@@ -297,12 +297,12 @@
     <link href="http://czero000.github.io/2016/10/20/rudiments-of-docker.html"/>
     <id>http://czero000.github.io/2016/10/20/rudiments-of-docker.html</id>
     <published>2016-10-20T02:43:29.000Z</published>
-    <updated>2016-10-20T10:27:19.964Z</updated>
+    <updated>2016-10-20T10:50:11.133Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Docker-简介"><a href="#Docker-简介" class="headerlink" title="Docker 简介"></a>Docker 简介</h1><h2 id="Docker-是什么"><a href="#Docker-是什么" class="headerlink" title="Docker 是什么"></a>Docker 是什么</h2><blockquote>
 <p>Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.</p>
 </blockquote>
-<p>Docker[<a href="https://www.docker.com/" target="_blank" rel="external">https://www.docker.com/</a>] 是 PaaS 提供商 <a href="https://www.dotcloud.com/" target="_blank" rel="external">dotCloud</a> 开源的一个基于 LXC 的高级容器引擎， <a href="https://github.com/docker/docker" target="_blank" rel="external">]源代码</a>托管在 <a href="https://www.github.com" target="_blank" rel="external">Github</a> 上, 基于go语言并遵从Apache2.0协议开源。Docker近期非常火热，无论是从 GitHub 上的代码活跃度，还是Redhat宣布在 <a href="http://server.cnw.com.cn/server-os/htm2014/20140616_303249.shtml" target="_blank" rel="external">RHEL7中正式支持Docker</a>，都给业界一个信号，这是一项创新型的技术解决方案。就连 Google 公司的 Compute Engine 也支持 docker 在其之上运行，国内 “BAT” 先锋企业百度 Baidu App Engine(BAE) 平台也是<a href="http://blog.docker.com/2013/12/baidu-using-docker-for-its-paas/" target="_blank" rel="external">以Docker作为其PaaS云基础</a>。</p>
+<p>Docker[<a href="http://www.docker.com/" target="_blank" rel="external">http://www.docker.com/</a>] 是 PaaS 提供商 <a href="http://www.dotcloud.com/" target="_blank" rel="external">dotCloud</a> 开源的一个基于 LXC 的高级容器引擎， <a href="http://github.com/docker/docker" target="_blank" rel="external">]源代码</a>托管在 <a href="http://www.github.com" target="_blank" rel="external">Github</a> 上, 基于go语言并遵从Apache2.0协议开源。Docker近期非常火热，无论是从 GitHub 上的代码活跃度，还是Redhat宣布在 <a href="http://server.cnw.com.cn/server-os/htm2014/20140616_303249.shtml" target="_blank" rel="external">RHEL7中正式支持Docker</a>，都给业界一个信号，这是一项创新型的技术解决方案。就连 Google 公司的 Compute Engine 也支持 docker 在其之上运行，国内 “BAT” 先锋企业百度 Baidu App Engine(BAE) 平台也是<a href="http://blog.docker.com/2013/12/baidu-using-docker-for-its-paas/" target="_blank" rel="external">以Docker作为其PaaS云基础</a>。</p>
 <p>Docker产生的目的就是为了解决以下问题：</p>
 <ol>
 <li><p>环境管理复杂：从各种 OS 到各种中间件再到各种 App，一款产品能够成功发布，作为开发者需要关心的东西太多，且难于管理，这个问题在软件行业中普遍存在并需要直接面对。Docker可以简化部署多种应用实例工作，比如 Web 应用、后台应用、数据库应用、大数据应用比如 Hadoop 集群、消息队列等等都可以打包成一个 Image 部署。</p>
@@ -434,7 +434,7 @@
 <ul>
 <li>公开仓库</li>
 </ul>
-<p>docker团队控制的top-level的顶级repository，即<a href="https://registry.hub.docker.com/" target="_blank" rel="external">Docker Hub</a>，存放了数量庞大的镜像供用户下载，任何人都能读取，里面包含了许多常用的镜像，如ubuntu, mysql ,redis, python等。</p>
+<p>docker团队控制的top-level的顶级repository，即<a href="http://registry.hub.docker.com/" target="_blank" rel="external">Docker Hub</a>，存放了数量庞大的镜像供用户下载，任何人都能读取，里面包含了许多常用的镜像，如ubuntu, mysql ,redis, python等。</p>
 <ul>
 <li>个人仓库</li>
 </ul>
@@ -497,7 +497,7 @@
 <ul>
 <li>增加安装源</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/apt/sources.list.d/docker.list</div><div class="line">// On Ubuntu Precise 12.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-precise main</div><div class="line">// On Ubuntu Trusty 14.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-trusty main</div><div class="line">// Ubuntu Wily 15.10</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-wily main</div><div class="line">// Ubuntu Xenial 16.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-xenial main</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/apt/sources.list.d/docker.list</div><div class="line">// On Ubuntu Precise 12.04 (LTS)</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-precise main</div><div class="line">// On Ubuntu Trusty 14.04 (LTS)</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-trusty main</div><div class="line">// Ubuntu Wily 15.10</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-wily main</div><div class="line">// Ubuntu Xenial 16.04 (LTS)</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-xenial main</div></pre></td></tr></table></figure>
 <ul>
 <li>安装docker</li>
 </ul>
@@ -620,7 +620,7 @@
     <link href="http://czero000.github.io/2016/10/19/ansible-playbook.html"/>
     <id>http://czero000.github.io/2016/10/19/ansible-playbook.html</id>
     <published>2016-10-19T06:41:10.000Z</published>
-    <updated>2016-10-19T09:16:47.601Z</updated>
+    <updated>2016-10-20T10:50:11.117Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Playbooks"><a href="#Playbooks" class="headerlink" title="Playbooks"></a>Playbooks</h1><p>Playbooks 是 Ansible 的配置、部署、编排语言，相当于控制远程主机的一系列命令的集合，通过 YAML 语言编写。Ansible-Playbook 命令根据自上而写的顺序依次执行。 Playbook 允许传输摸个命令的状态到后面的指令，或者从一台主机的文件中获取内容并赋值变量，然后传给另外一台主机使用，这是 ansible 命令无法实现的。</p>
 <h2 id="YAML-语法介绍"><a href="#YAML-语法介绍" class="headerlink" title="YAML 语法介绍"></a>YAML 语法介绍</h2><h3 id="文件开始符"><a href="#文件开始符" class="headerlink" title="文件开始符"></a>文件开始符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">---</div></pre></td></tr></table></figure>
@@ -658,8 +658,8 @@
 </ol>
 <p><strong>执行 Playbook</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 执行playbook</div><div class="line">Ansible-playbook user.yaml</div><div class="line"></div><div class="line">// 查看详细输出</div><div class="line">ansible-playbook user.yaml --list-hosts</div></pre></td></tr></table></figure>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h3><p>要学习更多的 playbook 用法，可以通过<a href="https://github.com/ansible/ansible-examples" target="_blank" rel="external">Playbooks 官方示例</a>。</p>
-<h3 id="Playbook-分享平台"><a href="#Playbook-分享平台" class="headerlink" title="Playbook 分享平台"></a>Playbook 分享平台</h3><p>Ansible 提供了一个 Playbook 的分享平台，上面的例子是有 Ansible 使用者自己上传的。<br><a href="https://galaxy.ansible.com/" target="_blank" rel="external">Ansible分享平台</a></p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h3><p>要学习更多的 playbook 用法，可以通过<a href="http://github.com/ansible/ansible-examples" target="_blank" rel="external">Playbooks 官方示例</a>。</p>
+<h3 id="Playbook-分享平台"><a href="#Playbook-分享平台" class="headerlink" title="Playbook 分享平台"></a>Playbook 分享平台</h3><p>Ansible 提供了一个 Playbook 的分享平台，上面的例子是有 Ansible 使用者自己上传的。<br><a href="http://galaxy.ansible.com/" target="_blank" rel="external">Ansible分享平台</a></p>
 <h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><ul>
 <li>创建用户</li>
 </ul>
@@ -709,7 +709,7 @@
 <h3 id="在-handlers-section-中定义"><a href="#在-handlers-section-中定义" class="headerlink" title="在 handlers section 中定义"></a>在 handlers section 中定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// handlers.yml</div><div class="line">// this might be in a file line handlers/handlers.yml</div><div class="line">- name: restart apache</div><div class="line">  service: name = apache state=restarted</div><div class="line">// 在一个 playbook 中引用 handlers.yml</div><div class="line">handlers:</div><div class="line">  - include: handlers/handlers.yml</div></pre></td></tr></table></figure>
 <p>include 语句可以和其他非 include 的 tasks 和 handlers 混合使用。</p>
 <p><strong>例如：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- name: this is a play at the top level of a file</div><div class="line">  host: all</div><div class="line">  remote_user: root</div><div class="line">  tasks:</div><div class="line">    - name: say hi</div><div class="line">      tags: foo</div><div class="line">      shell: echo &quot;Hi &quot;</div><div class="line">- include: load_balancers.yml</div><div class="line">- include: webservers.yml</div><div class="line">- include: dbservers.yml</div></pre></td></tr></table></figure></p>
-<h2 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h2><p>Ansible 中还有一个比 include 更为强大的代码重用机制，那就是roles！。Roles 基于一个已知的文件结构，去自动加载某些 var_files, tasks, handlers，基于 roles 对内容进行分组，更有利于与其他用户分享 roles。<br>Ansible提供了一个分享role的平台, <a href="https://galaxy.ansible.com/" target="_blank" rel="external">https://galaxy.ansible.com/</a>, 在galaxy上可以找到别人写好的role.</p>
+<h2 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h2><p>Ansible 中还有一个比 include 更为强大的代码重用机制，那就是roles！。Roles 基于一个已知的文件结构，去自动加载某些 var_files, tasks, handlers，基于 roles 对内容进行分组，更有利于与其他用户分享 roles。<br>Ansible提供了一个分享role的平台, <a href="http://galaxy.ansible.com/" target="_blank" rel="external">http://galaxy.ansible.com/</a>, 在galaxy上可以找到别人写好的role.</p>
 <h3 id="Roled的目录结构"><a href="#Roled的目录结构" class="headerlink" title="Roled的目录结构"></a>Roled的目录结构</h3><p>在 ansible 中，通过遵循特定的目录结构，可以实现对 role 的定义。下面的目录结构是定义了两个 role， 一个名字是 common，另外一个是 webserver，并在 site.yml 中调用这两个 role。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">// role 的目录结构</div><div class="line">site.yml</div><div class="line">webservers.yml</div><div class="line">fooservers.yml</div><div class="line">roles/</div><div class="line">   common/</div><div class="line">     files/</div><div class="line">     templates/</div><div class="line">     tasks/</div><div class="line">     handlers/</div><div class="line">     vars/</div><div class="line">     defaults/</div><div class="line">     meta/</div><div class="line">   webservers/</div><div class="line">     files/</div><div class="line">     templates/</div><div class="line">     tasks/</div><div class="line">     handlers/</div><div class="line">     vars/</div><div class="line">     defaults/</div><div class="line">     meta/</div><div class="line"></div><div class="line">// site.yml 中使用</div><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - common</div><div class="line">    - webservers</div></pre></td></tr></table></figure></p>
 <h3 id="使用带参数的-role"><a href="#使用带参数的-role" class="headerlink" title="使用带参数的 role"></a>使用带参数的 role</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - common</div><div class="line">    - &#123; role: foo_app_instance, dir: &apos;/opt/a&apos;, port: 5000 &#125;</div><div class="line">    - &#123; role: foo_app_instance, dir: &apos;/opt/b&apos;, port: 5001 &#125;</div><div class="line">// 设置触发条件,条件语句应用到 role 中的每个 task上。</div><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - &#123; role: some_role, when: &quot;ansible_os_family == &apos;RedHat&apos;&quot; &#125;</div><div class="line">// 分配 tags</div><div class="line">---</div><div class="line">- hosts: webservers</div><div class="line">  roles:</div><div class="line">    - &#123; role: foo, tags: [ &quot;bar&quot; , &quot;baz&quot; ] &#125;</div></pre></td></tr></table></figure>
 <h3 id="指定默认的参数"><a href="#指定默认的参数" class="headerlink" title="指定默认的参数"></a>指定默认的参数</h3><p>在指定默认参数后，如果在调用时传参数，那么就使用传入的参数值，否则使用默认参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//指定默认参数</div><div class="line">main.yml</div><div class="line">roles:</div><div class="line">  role_with_var</div><div class="line">    tasks:</div><div class="line">      main.yml</div><div class="line">    vars:</div><div class="line">      main.yml</div><div class="line">// roles/role_with_var/vars/main.yml</div><div class="line">param: &quot;I am the default value&quot;</div></pre></td></tr></table></figure></p>
@@ -793,10 +793,10 @@
     <link href="http://czero000.github.io/2016/10/19/the-advanced-ansible.html"/>
     <id>http://czero000.github.io/2016/10/19/the-advanced-ansible.html</id>
     <published>2016-10-19T06:37:23.000Z</published>
-    <updated>2016-10-19T09:17:15.092Z</updated>
+    <updated>2016-10-20T10:50:11.113Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Ansible-性能优化"><a href="#Ansible-性能优化" class="headerlink" title="Ansible 性能优化"></a>Ansible 性能优化</h1><p>在使用 Ansible 过程中，当管理的服务器数量增加，就会有一个无法避免的问题–执行效率慢。下面是一些解决方法</p>
-<h2 id="优化前的准备–收集数据"><a href="#优化前的准备–收集数据" class="headerlink" title="优化前的准备–收集数据"></a>优化前的准备–收集数据</h2><p>在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 <code>ansible-profile</code>， 安装这个插件之后， 会显示 ansible-playbook 执行每个任务话费的时间。项目地址: <a href="https://github.com/jlafon/ansible-profile" target="_blank" rel="external">https://github.com/jlafon/ansible-profile</a> 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir callback_plugins</div><div class="line">cd callback_plugins</div><div class="line">wget https://raw.githubusercontent.com/jlafon/ansible-profile/master/callback_plugins/profile_tasks.py</div><div class="line">edit /etc/ansible/ansible.cfg</div><div class="line">#callback_whitelist = timer, mail =&gt; callback_whitelist = profile_tasks</div></pre></td></tr></table></figure></p>
+<h2 id="优化前的准备–收集数据"><a href="#优化前的准备–收集数据" class="headerlink" title="优化前的准备–收集数据"></a>优化前的准备–收集数据</h2><p>在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 <code>ansible-profile</code>， 安装这个插件之后， 会显示 ansible-playbook 执行每个任务话费的时间。项目地址: <a href="http://github.com/jlafon/ansible-profile" target="_blank" rel="external">http://github.com/jlafon/ansible-profile</a> 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir callback_plugins</div><div class="line">cd callback_plugins</div><div class="line">wget http://raw.githubusercontent.com/jlafon/ansible-profile/master/callback_plugins/profile_tasks.py</div><div class="line">edit /etc/ansible/ansible.cfg</div><div class="line">#callback_whitelist = timer, mail =&gt; callback_whitelist = profile_tasks</div></pre></td></tr></table></figure></p>
 <p>先在执行 ansible-playbook 既可以看到每个 tasks 的用时情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line"></div><div class="line">Sunday 18 September 2016  16:03:26 +0800 (0:00:00.204)       0:00:07.061 ******</div><div class="line">===============================================================================</div><div class="line">setup ------------------------------------------------------------------- 6.82s</div><div class="line">print phone records ----------------------------------------------------- 0.20s</div></pre></td></tr></table></figure></p>
 <h2 id="关闭-gathering-facts"><a href="#关闭-gathering-facts" class="headerlink" title="关闭 gathering facts"></a>关闭 gathering facts</h2><p>在执行 ansible-playbook 的过程中，ansible-playbook 第一步骤总是执行 gather_facts，不论你是否在 playbook 中定义这个 tasks。如果执行 playbook 不需要 fact 的数据，可以关闭 fact 数据功能，以加快 ansible-playbook 的执行速度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 在 playbook 中关闭 facts,只需要添加 `gather_facts: no`</div><div class="line">---</div><div class="line">- hosts: 172.16..11.210</div><div class="line">  gather_facts: no</div><div class="line">  remote_user: root</div></pre></td></tr></table></figure></p>
 <p>关闭执行继续执行上面的 playbook,效果十分明显<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.210              : ok=1    changed=0    unreachable=0    failed=0   </div><div class="line">172.16.11.211              : ok=1    changed=0    unreachable=0    failed=0   </div><div class="line"></div><div class="line">Sunday 18 September 2016  16:12:05 +0800 (0:00:00.195)       0:00:00.235 ******</div><div class="line">===============================================================================</div><div class="line">print phone records ----------------------------------------------------- 0.20s</div></pre></td></tr></table></figure></p>
@@ -1001,13 +1001,13 @@
     <link href="http://czero000.github.io/2016/10/19/build-gitlab.html"/>
     <id>http://czero000.github.io/2016/10/19/build-gitlab.html</id>
     <published>2016-10-19T06:00:16.000Z</published>
-    <updated>2016-10-19T06:01:33.007Z</updated>
+    <updated>2016-10-20T10:50:11.105Z</updated>
     
     <content type="html"><![CDATA[<p>﻿Gitlab 是一个基于 <code>Ruby on Rails</code> 开发的开源项目管理程序，可以通过 WEB 界面进行访问公开的或者私人项目，实现一个自托管的 Git 项目仓库。它拥有与 GitHub 类似的功能，可以浏览代码，管理缺陷和注释。</p>
 <h2 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install curl openssh-server ca-certificates postfix</div></pre></td></tr></table></figure>
-<h2 id="添加-GitLab仓库-安装软件包"><a href="#添加-GitLab仓库-安装软件包" class="headerlink" title="添加　GitLab仓库 ,安装软件包"></a>添加　GitLab仓库 ,安装软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</div><div class="line">apt-get install gitlab-ce</div></pre></td></tr></table></figure>
-<p>如果不习惯使用命令行管道的安装方式，官方提供了<a href="http://packages.gitlab.cc/install/gitlab-ce/" target="_blank" rel="external">安装脚本</a> 或者 <a href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/" target="_blank" rel="external">手动下载相应平台及版本的软件包</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -LJO https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/xenial/gitlab-ce-XXX.deb/download</div><div class="line">dpkg -i gitlab-ce-XXX.deb</div></pre></td></tr></table></figure></p>
-<p>如果访问速度慢，可以使用国内的镜像站如：<code>https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/</code></p>
+<h2 id="添加-GitLab仓库-安装软件包"><a href="#添加-GitLab仓库-安装软件包" class="headerlink" title="添加　GitLab仓库 ,安装软件包"></a>添加　GitLab仓库 ,安装软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sS http://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</div><div class="line">apt-get install gitlab-ce</div></pre></td></tr></table></figure>
+<p>如果不习惯使用命令行管道的安装方式，官方提供了<a href="http://packages.gitlab.cc/install/gitlab-ce/" target="_blank" rel="external">安装脚本</a> 或者 <a href="http://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/" target="_blank" rel="external">手动下载相应平台及版本的软件包</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -LJO http://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/xenial/gitlab-ce-XXX.deb/download</div><div class="line">dpkg -i gitlab-ce-XXX.deb</div></pre></td></tr></table></figure></p>
+<p>如果访问速度慢，可以使用国内的镜像站如：<code>http://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/</code></p>
 <h2 id="启动-GitLab"><a href="#启动-GitLab" class="headerlink" title="启动 GitLab"></a>启动 GitLab</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gitlab-cli reconfigure</div></pre></td></tr></table></figure>
 <p>可以通过 <code>gitlab-clt status</code> 查看 GitLab 安装是否成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gitlab-ctl status</div><div class="line">run: gitlab-workhorse: (pid 17111) 276s; run: log: (pid 17010) 298s</div><div class="line">run: logrotate: (pid 17034) 294s; run: log: (pid 17033) 294s</div><div class="line">run: nginx: (pid 17019) 296s; run: log: (pid 17018) 296s</div><div class="line">run: postgresql: (pid 16863) 383s; run: log: (pid 16862) 383s</div><div class="line">run: redis: (pid 16776) 389s; run: log: (pid 16775) 389s</div><div class="line">run: sidekiq: (pid 17001) 300s; run: log: (pid 17000) 300s</div><div class="line">run: unicorn: (pid 16970) 302s; run: log: (pid 16969) 302s</div></pre></td></tr></table></figure></p>
 <h2 id="访问-GitLab"><a href="#访问-GitLab" class="headerlink" title="访问 GitLab"></a>访问 GitLab</h2><p>访问 <code>http:gitlab_serverip</code>，即可访问 GitLab 的　Web 界面</p>
@@ -1037,16 +1037,16 @@
     <link href="http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html"/>
     <id>http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html</id>
     <published>2016-10-19T05:51:50.000Z</published>
-    <updated>2016-10-20T10:27:19.904Z</updated>
+    <updated>2016-10-20T10:50:11.105Z</updated>
     
     <content type="html"><![CDATA[<h1 id="使用-gitolite-管理-git-服务器"><a href="#使用-gitolite-管理-git-服务器" class="headerlink" title="使用 gitolite 管理 git 服务器"></a>使用 gitolite 管理 git 服务器</h1><p>由于Git的设计初衷，在使用 Git 在面向团队服务时，如果需要对权限控制，就需要第三方的工具来帮助 Git。在 Git 管理工具中，有三个解决方案。</p>
 <ul>
-<li><a href="https://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a> 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级别的权限控制。现在项目已经停止开发，不在维护；</li>
-<li><a href="https://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a> 轻量级、开源项目，使用 SSH 公钥认证，可以做到对分支级的权限控制；</li>
+<li><a href="http://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a> 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级别的权限控制。现在项目已经停止开发，不在维护；</li>
+<li><a href="http://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a> 轻量级、开源项目，使用 SSH 公钥认证，可以做到对分支级的权限控制；</li>
 <li>[<a href="http://git-scm.com/" target="_blank" rel="external">Git</a> + <a href="http://source.android.com/source/downloading.html" target="_blank" rel="external">Repo</a> + <a href="http://code.google.com/p/gerrit/" target="_blank" rel="external">Gerrit</a>] 重量级，集版本控制、库管理和代码审核。可以用来管理大型项目</li>
 </ul>
 <p>由于 gitosis 不在提供更新，新建项目使用 gitolite 配置 git 的访问控制。</p>
-<h1 id="安装-Gitolite"><a href="#安装-Gitolite" class="headerlink" title="安装 Gitolite"></a>安装 Gitolite</h1><p>Gitolite 的安装步骤如下如：<br><img src="https://ofc9x1ccn.bkt.clouddn.com/system/git/gitolite.png" alt="gitolite" title="Gitolite"></p>
+<h1 id="安装-Gitolite"><a href="#安装-Gitolite" class="headerlink" title="安装 Gitolite"></a>安装 Gitolite</h1><p>Gitolite 的安装步骤如下如：<br><img src="http://ofc9x1ccn.bkt.clouddn.com/git/gitolite.png" alt="gitolite" title="Gitolite"></p>
 <h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><p>系统采用最新的 <code>Ubuntu-16-04 LTS</code></p>
 <table>
 <thead>
@@ -1108,14 +1108,14 @@
     <link href="http://czero000.github.io/2016/07/30/awk-mindmap.html"/>
     <id>http://czero000.github.io/2016/07/30/awk-mindmap.html</id>
     <published>2016-07-30T10:16:23.000Z</published>
-    <updated>2016-10-20T10:27:19.908Z</updated>
+    <updated>2016-10-20T10:50:11.109Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="awk-思维导图"><a href="#awk-思维导图" class="headerlink" title="awk 思维导图"></a>awk 思维导图</h1><p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/bash/awk_mind_map.png" alt="awk_mind_map"></p>
+    <content type="html"><![CDATA[<h1 id="awk-思维导图"><a href="#awk-思维导图" class="headerlink" title="awk 思维导图"></a>awk 思维导图</h1><p><img src="http://ofc9x1ccn.bkt.clouddn.com/bash/awk_mind_map.png" alt="awk_mind_map"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;awk-思维导图&quot;&gt;&lt;a href=&quot;#awk-思维导图&quot; class=&quot;headerlink&quot; title=&quot;awk 思维导图&quot;&gt;&lt;/a&gt;awk 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://ofc9x1ccn.bkt.clouddn.com/sy
+      &lt;h1 id=&quot;awk-思维导图&quot;&gt;&lt;a href=&quot;#awk-思维导图&quot; class=&quot;headerlink&quot; title=&quot;awk 思维导图&quot;&gt;&lt;/a&gt;awk 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://ofc9x1ccn.bkt.clouddn.com/bas
     
     </summary>
     
@@ -1137,14 +1137,14 @@
     <link href="http://czero000.github.io/2016/07/26/bash-mindmap.html"/>
     <id>http://czero000.github.io/2016/07/26/bash-mindmap.html</id>
     <published>2016-07-26T13:48:12.000Z</published>
-    <updated>2016-10-20T10:27:19.908Z</updated>
+    <updated>2016-10-20T10:50:11.109Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Bash-思维导图"><a href="#Bash-思维导图" class="headerlink" title="Bash 思维导图"></a>Bash 思维导图</h1><p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/bash/bash_mind_map.png" alt="Bash Mind Map"></p>
+    <content type="html"><![CDATA[<h1 id="Bash-思维导图"><a href="#Bash-思维导图" class="headerlink" title="Bash 思维导图"></a>Bash 思维导图</h1><p><img src="http://ofc9x1ccn.bkt.clouddn.com/bash/bash_mind_map.png" alt="Bash Mind Map"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Bash-思维导图&quot;&gt;&lt;a href=&quot;#Bash-思维导图&quot; class=&quot;headerlink&quot; title=&quot;Bash 思维导图&quot;&gt;&lt;/a&gt;Bash 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://ofc9x1ccn.bkt.clouddn.co
+      &lt;h1 id=&quot;Bash-思维导图&quot;&gt;&lt;a href=&quot;#Bash-思维导图&quot; class=&quot;headerlink&quot; title=&quot;Bash 思维导图&quot;&gt;&lt;/a&gt;Bash 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://ofc9x1ccn.bkt.clouddn.com
     
     </summary>
     
@@ -1164,7 +1164,7 @@
     <link href="http://czero000.github.io/2016/07/22/bash-change-to-zsh.html"/>
     <id>http://czero000.github.io/2016/07/22/bash-change-to-zsh.html</id>
     <published>2016-07-22T05:54:29.000Z</published>
-    <updated>2016-10-19T02:20:53.583Z</updated>
+    <updated>2016-10-20T10:50:11.109Z</updated>
     
     <content type="html"><![CDATA[<p>号称终极 Shell 的 Zsh 兼容 Bash，在命令补全方面有很好的体验，丰富的插件和主题可提供使用，配合 Oh-my-zsh 更加强大。</p>
 <p>Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装前可以查看系统安装了哪些 Shell</p>
@@ -1181,7 +1181,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chsh -s /bin/zsh</div></pre></td></tr></table></figure>
 <h1 id="安装-Oh-my-zsh"><a href="#安装-Oh-my-zsh" class="headerlink" title="安装 Oh-my-zsh"></a>安装 Oh-my-zsh</h1><p>需要使用到 Git，安装方法同上</p>
 <p>下面通过自动安装的方式安装 Oh-my-zsh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c &quot;$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c &quot;$(wget http://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;</div></pre></td></tr></table></figure>
 <p>或者使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</div><div class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure>
 <p>安装完成用户目录下会出现 .zshrc 文件，环境变量和别名都在这里定义，更改主题需要修改</p>
@@ -1213,7 +1213,7 @@
     <link href="http://czero000.github.io/2016/05/31/autocompletion-of-opensource-mysqlclient.html"/>
     <id>http://czero000.github.io/2016/05/31/autocompletion-of-opensource-mysqlclient.html</id>
     <published>2016-05-31T07:19:48.000Z</published>
-    <updated>2016-10-20T10:27:19.888Z</updated>
+    <updated>2016-10-20T10:50:11.089Z</updated>
     
     <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>MyCli 是一个 MySQL 的命令行客户端，可以实现自动补全 <code>auto-completion</code> 和语法高亮，同时也可应用于 MariaDB 和 Percona。</p>
 <p><strong>功能特征</strong></p>
@@ -1239,11 +1239,11 @@
 <li><strong>Linux</strong></li>
 </ul>
 <p><strong>Debian/Ubuntu Package</strong><br>mycli托管在debian软件包<a href="packagecloud.io.">packagecloud.io.</a><br>添加gpg密钥packagecloud包验证。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl https://packagecloud.io/gpg.key | apt-key add -</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl http://packagecloud.io/gpg.key | apt-key add -</div></pre></td></tr></table></figure>
 <p>安装 apt-transport-https 包，支持 apt 使用 https 下载包</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ apt-get install -y apt-transport-https</div></pre></td></tr></table></figure>
 <p>添加 mycli 安装源</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;deb https://packagecloud.io/amjith/mycli/ubuntu/ trusty main&quot; | sudo tee -a /etc/apt/sources.list</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;deb http://packagecloud.io/amjith/mycli/ubuntu/ trusty main&quot; | sudo tee -a /etc/apt/sources.list</div></pre></td></tr></table></figure>
 <p>更新 mycli 的安装源，然后安装 mycli</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install mycli</div></pre></td></tr></table></figure>
 <p>现在使用 <code>sudo apt-get upgrade mycli</code>很容易使 mycli 升级！</p>
@@ -1257,31 +1257,31 @@
 <ul>
 <li>自动补全<br>简单的完成如关键字和sql函数。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/auto-complite.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/auto-complite.png" alt=""></p>
 <ul>
 <li>智能提示<br>Table name completions after the ‘FROM’ keyword.</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/smart-completion.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/smart-completion.png" alt=""></p>
 <ul>
 <li>列名中引用的表的查询范围</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/columns.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/columns.png" alt=""></p>
 <ul>
 <li>别名支持<br>列完成将即使工作表名称别名。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/alias.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/alias.png" alt=""></p>
 <ul>
 <li>语法高亮显示<br>sql 的语法高亮显示。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/syntax.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/syntax.png" alt=""></p>
 <ul>
 <li>pager<br>一个 sql 命令的输出是通过更少的命令自动输送。</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/pager.png" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/pager.png" alt=""></p>
 <ul>
 <li>动态效果图如下</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/main.gif" alt=""></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/mysql/main.gif" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -1357,7 +1357,7 @@
     <link href="http://czero000.github.io/2016/05/09/git-repo.html"/>
     <id>http://czero000.github.io/2016/05/09/git-repo.html</id>
     <published>2016-05-09T07:20:57.000Z</published>
-    <updated>2016-10-19T02:15:36.273Z</updated>
+    <updated>2016-10-20T10:50:11.105Z</updated>
     
     <content type="html"><![CDATA[<p>Github就是一个提供免费托管开源代码的远程仓库，但对于一些敏感代码或者不想开源的源代码，有不舍得付费，那么就需要自己搭建一台Git服务器作为私有仓库来使用。下面是搭建Git服务器过程。</p>
 <h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><ul>
@@ -1377,8 +1377,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git clone git@172.16.11.211:/opt/GitWork/sample.git</div><div class="line">Cloning into &apos;sample&apos;...</div><div class="line">warning: You appear to have cloned an empty repository.</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="公钥管理"><a href="#公钥管理" class="headerlink" title="公钥管理"></a>公钥管理</h2><p>  如果团队很小，把每个人的公钥收集起来放到服务器的/home/git/.ssh/authorized_keys文件里就是可行的。如果团队有几百号人，就没法这么玩了，这时，可以用<a href="https://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a>来管理公钥。</p>
-<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><p>有很多不但视源代码如生命，而且视员工为窃贼的公司，会在版本控制系统里设置一套完善的权限控制，每个人是否有读写权限会精确到每个分支甚至每个目录下。因为Git是为Linux源代码托管而开发的，所以Git也继承了开源社区的精神，不支持权限控制。不过，因为Git支持钩子（hook），所以，可以在服务器端编写一系列脚本来控制提交等操作，达到权限控制的目的。<a href="https://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a>就是这个工具。</p>
+<h2 id="公钥管理"><a href="#公钥管理" class="headerlink" title="公钥管理"></a>公钥管理</h2><p>  如果团队很小，把每个人的公钥收集起来放到服务器的/home/git/.ssh/authorized_keys文件里就是可行的。如果团队有几百号人，就没法这么玩了，这时，可以用<a href="http://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a>来管理公钥。</p>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><p>有很多不但视源代码如生命，而且视员工为窃贼的公司，会在版本控制系统里设置一套完善的权限控制，每个人是否有读写权限会精确到每个分支甚至每个目录下。因为Git是为Linux源代码托管而开发的，所以Git也继承了开源社区的精神，不支持权限控制。不过，因为Git支持钩子（hook），所以，可以在服务器端编写一系列脚本来控制提交等操作，达到权限控制的目的。<a href="http://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a>就是这个工具。</p>
 ]]></content>
     
     <summary type="html">
@@ -1402,7 +1402,7 @@
     <link href="http://czero000.github.io/2016/04/27/mfs-Technology.html"/>
     <id>http://czero000.github.io/2016/04/27/mfs-Technology.html</id>
     <published>2016-04-27T01:37:56.000Z</published>
-    <updated>2016-10-20T10:27:19.960Z</updated>
+    <updated>2016-10-20T10:50:11.133Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="MFS-概述"><a href="#MFS-概述" class="headerlink" title="MFS 概述"></a>MFS 概述</h1><p>MooseFS是一款具有冗余容错功能的分布式文件系统。它把数据分散在多台服务器上，确保一份数据多个备份副本，对外提供统一的结构。</p>
@@ -1433,16 +1433,16 @@
 <h2 id="MFS工作图解"><a href="#MFS工作图解" class="headerlink" title="MFS工作图解"></a>MFS工作图解</h2><ul>
 <li>网络架构</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/moosefs-network.png" alt="MooseFS-NetWork.png" title="MooseFS-NetWork"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/moosefs-network.png" alt="MooseFS-NetWork.png" title="MooseFS-NetWork"></p>
 <ul>
 <li>工作原理</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/moosefs-write-process.png" alt="moosefs-write-process.png" title="MooseFS Write Process"></p>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/moosefs-read-process.png" alt="moosefs-read-process.png" title="MooseFS Read Process"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/moosefs-write-process.png" alt="moosefs-write-process.png" title="MooseFS Write Process"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/moosefs-read-process.png" alt="moosefs-read-process.png" title="MooseFS Read Process"></p>
 <ul>
 <li>集群拓扑</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/mfs-topology.png" alt="mfs-topology.png" title="MooseFS-Topology"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/mfs-topology.png" alt="mfs-topology.png" title="MooseFS-Topology"></p>
 <hr>
 <h1 id="安装配置MFS"><a href="#安装配置MFS" class="headerlink" title="安装配置MFS"></a>安装配置MFS</h1><h2 id="系统环境介绍"><a href="#系统环境介绍" class="headerlink" title="系统环境介绍"></a>系统环境介绍</h2><ul>
 <li>OS：<code>CentOS Linux release 7.2.1511 (Core)</code></li>
@@ -1503,7 +1503,7 @@
 <ul>
 <li>启动服务</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//To start process manually:</div><div class="line">mfsmaster start</div><div class="line">mfschunkserver start</div><div class="line"></div><div class="line">//For systemd OS family - EL7:</div><div class="line">systemctl start moosefs-master.service</div><div class="line">systemctl start moosefs-chunkserver.service</div><div class="line"></div><div class="line">//For SysV OS family - EL6:</div><div class="line">service moosefs-master start </div><div class="line">service moosefs-chunkserver start</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//To start process manually:</div><div class="line">mfsmaster start</div><div class="line">mfschunkserver start</div><div class="line"></div><div class="line">//For systemd OS family - EL7:</div><div class="line">systemctl start moosefs-master.service</div><div class="line">systemctl start moosefs-chunkserver.service</div><div class="line"></div><div class="line">//For SysV OS family - EL6:</div><div class="line">service moosefs-master start</div><div class="line">service moosefs-chunkserver start</div></pre></td></tr></table></figure>
 <hr>
 <h3 id="从源码安装MFS"><a href="#从源码安装MFS" class="headerlink" title="从源码安装MFS"></a>从源码安装MFS</h3><ul>
 <li>下载软件包</li>
@@ -1516,7 +1516,7 @@
 <ul>
 <li>安装软件包</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">tar-zxf moosefs-2.0.88-1.tar.gz</div><div class="line">cd moosefs-2.0.88</div><div class="line"></div><div class="line">// For master</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfschunkserver --disable-mfsmount</div><div class="line"></div><div class="line">// For metalogger</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfschunkserver --disable-mfsmount </div><div class="line"></div><div class="line">// For chunk</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfsmaster --disable-mfsmount --disable-mfscgi --disable-mfscgiserv</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">tar-zxf moosefs-2.0.88-1.tar.gz</div><div class="line">cd moosefs-2.0.88</div><div class="line"></div><div class="line">// For master</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfschunkserver --disable-mfsmount</div><div class="line"></div><div class="line">// For metalogger</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfschunkserver --disable-mfsmount</div><div class="line"></div><div class="line">// For chunk</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfsmaster --disable-mfsmount --disable-mfscgi --disable-mfscgiserv</div></pre></td></tr></table></figure>
 <ul>
 <li>安装MFS client</li>
 </ul>
@@ -1571,7 +1571,7 @@
 <p>Mountpoint：是指先前创建的用来挂接mfs 的目录。<br>在开始mfsmount 进程时，用一个-m 或-o mfsmeta 的选项，这样可以挂接一个辅助的文件系统<br>MFSMETA，这么做的目的是对于意外的从MooseFS 卷上删除文件或者是为了释放磁盘空间而移动的<br>文件而又此文件又过去了垃圾文件存放期的恢复，例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/bin/mfsmount -m /MFS_meta/ -H 172.16.18.137</div></pre></td></tr></table></figure>
 <h3 id="设定副本数量"><a href="#设定副本数量" class="headerlink" title="设定副本数量"></a>设定副本数量</h3><p>目标（goal），是指文件被拷贝副本的份数，设定了拷贝的份数后是可以通过mfsgetgoal 命令来证实的，也可以通过mfsrsetgoal 来改变设定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mfssetgoal 3 /MFS_data/test/ </div><div class="line">mfssetgoal 3 /MFS_data/test/</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mfssetgoal 3 /MFS_data/test/</div><div class="line">mfssetgoal 3 /MFS_data/test/</div></pre></td></tr></table></figure>
 <p>用<code>mfsgetgoal –r</code> 和<code>mfssetgoal –r</code> 同样的操作可以对整个树形目录递归操作，其等效于<code>mfsrsetgoal</code>命令。实际的拷贝份数可以通过<code>mfscheckfile</code> 和<code>mfsfile info</code>命令来证实。</p>
 <p><strong>注意以下几种特殊情况：</strong></p>
 <ul>
@@ -1580,7 +1580,7 @@
 <li>对一个目录设定“目标”，此目录下的新创建文件和子目录均会继承此目录的设定，但不会改变已经存在的文件及目录的拷贝份数。</li>
 </ul>
 <p>可以通过mfsdirinfo来查看整个目录树的信息摘要。</p>
-<h3 id="垃圾回收站"><a href="#垃圾回收站" class="headerlink" title="垃圾回收站"></a>垃圾回收站</h3><p>一个被删除文件能够存放在一个“ 垃圾箱”的时间就是一个隔离时间， 这个时间可以用<code>mfsgettrashtime</code> 命令来验证，也可以使用`mfssettrashtime 命令来设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mfssettrashtime 64800 /MFS_data/test/test1 </div><div class="line">mfsgettrashtime /MFS_data/test/test1</div></pre></td></tr></table></figure></p>
+<h3 id="垃圾回收站"><a href="#垃圾回收站" class="headerlink" title="垃圾回收站"></a>垃圾回收站</h3><p>一个被删除文件能够存放在一个“ 垃圾箱”的时间就是一个隔离时间， 这个时间可以用<code>mfsgettrashtime</code> 命令来验证，也可以使用`mfssettrashtime 命令来设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mfssettrashtime 64800 /MFS_data/test/test1</div><div class="line">mfsgettrashtime /MFS_data/test/test1</div></pre></td></tr></table></figure></p>
 <p>时间的单位是秒(有用的值有:1 小时是3600 秒,24 - 86400 秒,1天 - 604800 秒)。就像文件被存储的份数一样, 为一个目录设定存放时间是要被新创建的文件和目录所继承的。数字0 意味着一个文件被删除后, 将立即被彻底删除，在想回收是不可能的。</p>
 <p>删除文件可以通过一个单独安装MFSMETA 文件系统。特别是它包含目录/ trash (包含任然可以被还原的被删除文件的信息)和/ trash/undel (用于获取文件)。只有管理员有权限访问MFSMETA(用户的uid 0，通常是root)。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/bin/mfsmount -m /MFS_meta/ -H 172.16.18.137</div></pre></td></tr></table></figure>
@@ -1648,7 +1648,7 @@
     <link href="http://czero000.github.io/2016/04/18/git-common.html"/>
     <id>http://czero000.github.io/2016/04/18/git-common.html</id>
     <published>2016-04-18T06:19:55.000Z</published>
-    <updated>2016-10-20T10:27:19.904Z</updated>
+    <updated>2016-10-20T10:50:11.105Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <p>Git已经成为程序员日常工具之一，那些Git基本的命令，每天都要用的命令你都记住了吗？如果还没的话，笔者整理了一份清单，以备不时之需所用。</p>
@@ -1660,8 +1660,8 @@
 <li>暂存区(Index)像个缓存区域，临时保存你的改动</li>
 <li>版本库(Repository)分为本地仓库（Local)和远程仓库(Remote)<br>几乎所有常用命令就是围绕这几个概念来操作的，一图胜千言，下面是一张比较简单的图，包括了最基本的命令</li>
 </ul>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/git/git-simple.png" alt="simple"></p>
-<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br> <img src="https://ofc9x1ccn.bkt.clouddn.com/system/git/git-advance.jpg" alt="git-advance"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/git/git-simple.png" alt="simple"></p>
+<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br> <img src="http://ofc9x1ccn.bkt.clouddn.com/git/git-advance.jpg" alt="git-advance"></p>
 <p>下面的命令结合上面两张图来理解、练习、记忆效果更加。暂时用不着的命令记不住，不理解也没关系，哪天遇到问题，再来找找有没有合适的方法也不迟。</p>
 <ul>
 <li>新建/克隆代码库</li>

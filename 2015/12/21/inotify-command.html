@@ -108,7 +108,7 @@
 向服务器上传文件结束时发出通知
 
 通常使用文件轮询的通知机制，但是这种机制只适用经常改变的文件（因为它可以确保没过x秒就可以得到i/o），其他情况下都非常低效，并且有时候会丢失某些类型的变化，例如文件的修改时间没有改变。像Tripwire这">
-<meta property="og:updated_time" content="2016-10-19T02:15:36.273Z">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识inotify">
 <meta name="twitter:description" content="在工作中，人们往往需要知道在某些文件、目录上都有那些变化，比如：
@@ -420,8 +420,8 @@
 </ul>
 <p>如何知道你的Linux内核是否支持Inotify机制呢，执行下面命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">grep INOTIFY_USER /boot/config-$(uname -r)</div><div class="line">CONFIG_INOTIFY_USER=y</div></pre></td></tr></table></figure></p>
 <p>如果输出<code>CONFIG_INOTIFY_USER=y</code>，那么就可以享受Inotify之旅了。</p>
-<h3 id="安装inotify-tools"><a href="#安装inotify-tools" class="headerlink" title="安装inotify-tools"></a>安装inotify-tools</h3><h4 id="软件下载地址"><a href="#软件下载地址" class="headerlink" title="软件下载地址"></a>软件下载地址</h4><p>官方地址：<code>[https://github.com/rvoicilas/inotify-tools/wiki]([https://github.com/rvoicilas/inotify-tools/wiki)</code></p>
-<h4 id="下载安装软件包"><a href="#下载安装软件包" class="headerlink" title="下载安装软件包"></a>下载安装软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate https://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</div><div class="line">tar -zxf inotify-tools-3.14.tar.gz </div><div class="line">cd inotify-tools-3.14</div><div class="line">./configure --prefix=/usr/local/inotify</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<h3 id="安装inotify-tools"><a href="#安装inotify-tools" class="headerlink" title="安装inotify-tools"></a>安装inotify-tools</h3><h4 id="软件下载地址"><a href="#软件下载地址" class="headerlink" title="软件下载地址"></a>软件下载地址</h4><p>官方地址：<code>[http://github.com/rvoicilas/inotify-tools/wiki]([http://github.com/rvoicilas/inotify-tools/wiki)</code></p>
+<h4 id="下载安装软件包"><a href="#下载安装软件包" class="headerlink" title="下载安装软件包"></a>下载安装软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz</div><div class="line">tar -zxf inotify-tools-3.14.tar.gz </div><div class="line">cd inotify-tools-3.14</div><div class="line">./configure --prefix=/usr/local/inotify</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
 <h3 id="使用Inotify"><a href="#使用Inotify" class="headerlink" title="使用Inotify"></a>使用Inotify</h3><h4 id="Inotify可监视的文件系统事件"><a href="#Inotify可监视的文件系统事件" class="headerlink" title="Inotify可监视的文件系统事件"></a>Inotify可监视的文件系统事件</h4><ul>
 <li>IN_ACCESS：   即文件被访问</li>
 <li>IN_MODIFY：    文件被write</li>

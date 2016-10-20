@@ -92,15 +92,15 @@
 <meta property="og:url" content="http://czero000.github.io/2015/12/29/centos-install-chromium.html">
 <meta property="og:site_name" content="Zero's Blog">
 <meta property="og:description" content="之前Google就说了，由于CentOS/RHEL 6已经是过期的系统，所以不再会有Chrome了。 虽然后来由于引起了社区的抗议，从而改口，不再提CentOS/RHEL 6是过期系统了；但是，目前在CentOS/RHEL 6上已经没有Chrome可以下载使用了。  其实，根本的原因不是CentOS/RHEL 6有多老，连Windows XP和停止更新的Ubuntu 10.04都能继续使用Chr">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-1.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-2.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-3.png">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-3.png">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.904Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-1.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-2.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-3.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-3.png">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装Chromium浏览器">
 <meta name="twitter:description" content="之前Google就说了，由于CentOS/RHEL 6已经是过期的系统，所以不再会有Chrome了。 虽然后来由于引起了社区的抗议，从而改口，不再提CentOS/RHEL 6是过期系统了；但是，目前在CentOS/RHEL 6上已经没有Chrome可以下载使用了。  其实，根本的原因不是CentOS/RHEL 6有多老，连Windows XP和停止更新的Ubuntu 10.04都能继续使用Chr">
-<meta name="twitter:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-1.png">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-1.png">
 
 
 
@@ -388,21 +388,21 @@
 <h4 id="切换到root"><a href="#切换到root" class="headerlink" title="切换到root"></a>切换到root</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - 或者 sudo -i</div></pre></td></tr></table></figure>
 <h4 id="下载新的软件源定义"><a href="#下载新的软件源定义" class="headerlink" title="下载新的软件源定义"></a>下载新的软件源定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/yum.repos.d</div><div class="line">wget http://people.centos.org/hughesjr/chromium/6/chromium-el6.repo</div></pre></td></tr></table></figure>
 <h4 id="安装Chromium"><a href="#安装Chromium" class="headerlink" title="安装Chromium"></a>安装Chromium</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y chromium</div></pre></td></tr></table></figure>
-<p>这样就安装完成了。可以通过菜单来启动浏览器<br><img src="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-1.png" alt="启动浏览器"></p>
+<p>这样就安装完成了。可以通过菜单来启动浏览器<br><img src="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-1.png" alt="启动浏览器"></p>
 <p>启动后</p>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-2.png" alt="启动后"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-2.png" alt="启动后"></p>
 <p>如果需要查看Flash和PDF，可以继续下面两步来安装插件。</p>
-<h4 id="安装Pepper-Flash插件："><a href="#安装Pepper-Flash插件：" class="headerlink" title="安装Pepper Flash插件："></a>安装Pepper Flash插件：</h4><h5 id="下载-hughesjr-辅助安装脚本"><a href="#下载-hughesjr-辅助安装脚本" class="headerlink" title="下载 hughesjr 辅助安装脚本"></a>下载 hughesjr 辅助安装脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget https://raw.github.com/hughesjr/chromium_el_builder/master/chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
+<h4 id="安装Pepper-Flash插件："><a href="#安装Pepper-Flash插件：" class="headerlink" title="安装Pepper Flash插件："></a>安装Pepper Flash插件：</h4><h5 id="下载-hughesjr-辅助安装脚本"><a href="#下载-hughesjr-辅助安装脚本" class="headerlink" title="下载 hughesjr 辅助安装脚本"></a>下载 hughesjr 辅助安装脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget http://raw.github.com/hughesjr/chromium_el_builder/master/chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
 <h5 id="设置-chrome-pepperflash-copy-sh-为可执行"><a href="#设置-chrome-pepperflash-copy-sh-为可执行" class="headerlink" title="设置 chrome_pepperflash_copy.sh 为可执行"></a>设置 chrome_pepperflash_copy.sh 为可执行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
 <h5 id="安装（你可以查看一下脚本内容来了解发生了什么）"><a href="#安装（你可以查看一下脚本内容来了解发生了什么）" class="headerlink" title="安装（你可以查看一下脚本内容来了解发生了什么）"></a>安装（你可以查看一下脚本内容来了解发生了什么）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./chrome_pepperflash_copy.sh</div></pre></td></tr></table></figure>
 <p>安装后，如果需要通过命令行方式启动（带有Flash支持），可以输入以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/chromium/chrome-wrapper %U --ppapi-flash-path=/opt/chromium/PepperFlash/libpepflashplayer.so --ppapi-flash-version=$(grep &apos;&quot;version&quot;:&apos; /opt/chromium/PepperFlash/manifest.json | grep -Po &apos;(?&lt;=version&quot;: &quot;)(?:\d|\.)*&apos;)</div></pre></td></tr></table></figure>
 <p> 也可以修改系统菜单中的对应命令</p>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-3.png" alt="Flash plugin "></p>
-<h4 id="安装Google-Chrome-PDF-Viewer插件："><a href="#安装Google-Chrome-PDF-Viewer插件：" class="headerlink" title="安装Google Chrome PDF Viewer插件："></a>安装Google Chrome PDF Viewer插件：</h4><h5 id="下载-hughesjr-辅助安装脚本-1"><a href="#下载-hughesjr-辅助安装脚本-1" class="headerlink" title="下载 hughesjr 辅助安装脚本"></a>下载 hughesjr 辅助安装脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget https://raw.github.com/hughesjr/chromium_el_builder/master/chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-3.png" alt="Flash plugin "></p>
+<h4 id="安装Google-Chrome-PDF-Viewer插件："><a href="#安装Google-Chrome-PDF-Viewer插件：" class="headerlink" title="安装Google Chrome PDF Viewer插件："></a>安装Google Chrome PDF Viewer插件：</h4><h5 id="下载-hughesjr-辅助安装脚本-1"><a href="#下载-hughesjr-辅助安装脚本-1" class="headerlink" title="下载 hughesjr 辅助安装脚本"></a>下载 hughesjr 辅助安装脚本</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /tmp</div><div class="line">wget http://raw.github.com/hughesjr/chromium_el_builder/master/chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
 <h5 id="设置-chrome-libpdf-copy-sh-为可执行"><a href="#设置-chrome-libpdf-copy-sh-为可执行" class="headerlink" title="设置 chrome_libpdf_copy.sh 为可执行"></a>设置 chrome_libpdf_copy.sh 为可执行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
 <h5 id="执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）"><a href="#执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）" class="headerlink" title="执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）"></a>执行脚本进行安装（你可以查看一下脚本内容来了解发生了什么）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./chrome_libpdf_copy.sh</div></pre></td></tr></table></figure>
-<p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/centos/chromium-3.png" alt="pdf plugin"></p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/centos/chromium-3.png" alt="pdf plugin"></p>
 
       
     </div>

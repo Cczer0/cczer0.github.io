@@ -96,7 +96,7 @@
 <meta property="og:description" content="Docker 是一个有趣的技术，在过去的两年已经从一个想法变成了全世界的机构都在采用来部署应用的技术。下面会通过 docker 来创建一个blog。
 什么是 DockerDocker 是一个操作系统容器管理工具，通过将应用打包到操作系统容器里面，从而让你能轻松管理和部署应用。
 容器 vs 虚拟机容器可能不如虚拟机一样为人所熟知，但是它们是另外的一种提供操作系统虚拟化的方法。然而，他们与标准的虚拟机">
-<meta property="og:updated_time" content="2016-10-20T02:47:23.146Z">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Dockerfile创建blog">
 <meta name="twitter:description" content="Docker 是一个有趣的技术，在过去的两年已经从一个想法变成了全世界的机构都在采用来部署应用的技术。下面会通过 docker 来创建一个blog。
@@ -394,7 +394,7 @@
 <h1 id="通过-Dockerfile-方式部署一个-blog-转载"><a href="#通过-Dockerfile-方式部署一个-blog-转载" class="headerlink" title="通过 Dockerfile 方式部署一个 blog (转载)"></a>通过 Dockerfile 方式部署一个 blog (转载)</h1><ul>
 <li>获取 blog 源码</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/madflojo/blog.git</div><div class="line">cd blog</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone http://github.com/madflojo/blog.git</div><div class="line">cd blog</div></pre></td></tr></table></figure>
 <ul>
 <li>使用 FROM 继承一个 docker 镜像<br>Dockerfile的第一条命令是 <code>FROM</code> 指令。这用来将存在的 Docker 镜像指定为基础镜像，这会让docker 使用 nginx 镜像。如果想使用最原始的空白状态。可以制定 <code>ubuntu:latest</code>使用 ubuntu 镜像。</li>
 </ul>

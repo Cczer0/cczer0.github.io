@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Zero's Blog">
 <meta property="og:description" content="HTTPSHTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
 随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/web/nginx/https_title.jpg">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.948Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/nginx/https_title.jpg">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过HTTPS访问Web">
 <meta name="twitter:description" content="HTTPSHTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。
 随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以">
-<meta name="twitter:image" content="https://ofc9x1ccn.bkt.clouddn.com/web/nginx/https_title.jpg">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/nginx/https_title.jpg">
 
 
 
@@ -383,7 +383,7 @@
       
 
       
-        <p><img src="https://ofc9x1ccn.bkt.clouddn.com/web/nginx/https_title.jpg" alt="HTTPS_Title"></p>
+        <p><img src="http://ofc9x1ccn.bkt.clouddn.com/nginx/https_title.jpg" alt="HTTPS_Title"></p>
 <h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS 目前已经是所有重视隐私和安全性的网站的首选，例如国外的 Google、Facebook、Twitter，国内则是淘宝、百度、京东等都已都支持了全站 HTTPS，可以想象以下，如果一个网站没有加密，那么你的所有账户密码都是通过明文来传输，当涉及到隐私和金融问题，不加密是多么可怕的事情。</p>
 <p>随着技术的发展，HTTPS 网站已不再是大型网站的专利，所有普通的个人站点和blog可以以自己动手搭建一个安全加密的网站。</p>
 <h3 id="什么是-HTTPS、SSL-证书"><a href="#什么是-HTTPS、SSL-证书" class="headerlink" title="什么是 HTTPS、SSL 证书"></a>什么是 HTTPS、SSL 证书</h3><ul>
@@ -452,19 +452,19 @@
 <p>首先，进入 /etc/ssl/certs 目录并生成一个 dhparam.pem<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/ssl/certs  </div><div class="line">openssl dhparam -out dhparam.pem 2048 # 如果你的机器性能足够强大，可以用 4096 位加密</div></pre></td></tr></table></figure></p>
 <p>生成完毕后，在 Nginx 的 SSL 配置后面加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ssl_prefer_server_ciphers on;</div><div class="line">ssl_dhparam /etc/ssl/certs/dhparam.pem;</div><div class="line">ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;;</div><div class="line">keepalive_timeout 70;</div><div class="line">ssl_session_cache shared:SSL:10m;</div><div class="line">ssl_session_timeout 10m;</div></pre></td></tr></table></figure></p>
 <p>同时，如果是全站 HTTPS 并且不考虑 HTTP 的话，可以加入 HSTS 告诉你的浏览器本网站全站加密，并且强制用 HTTPS 访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">add_header Strict-Transport-Security max-age=63072000;</div><div class="line">add_header X-Frame-Options DENY;</div><div class="line">add_header X-Content-Type-Options nosniff;</div></pre></td></tr></table></figure></p>
-<p>同时也可以单独开一个 Nginx 配置，把 HTTP 的访问请求都用 301 跳转到 HTTPS<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">server &#123;  </div><div class="line">        listen 80;</div><div class="line">        listen [::]:80 ipv6only=on;</div><div class="line">        server_name     example.com;</div><div class="line">        return 301 https://example.com$request_uri;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>同时也可以单独开一个 Nginx 配置，把 HTTP 的访问请求都用 301 跳转到 HTTPS<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">server &#123;  </div><div class="line">        listen 80;</div><div class="line">        listen [::]:80 ipv6only=on;</div><div class="line">        server_name     example.com;</div><div class="line">        return 301 http://example.com$request_uri;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="可靠的第三方-SSL-签发机构"><a href="#可靠的第三方-SSL-签发机构" class="headerlink" title="可靠的第三方 SSL 签发机构"></a>可靠的第三方 SSL 签发机构</h3><p>众所周知，前段时间某 NIC 机构爆出过针对 Google 域名的证书签发的丑闻，所以可见选择一家靠谱的第三方 SSL 签发机构是多么的重要。</p>
 <p>目前一般市面上针对中小站长和企业的 SSL 证书颁发机构有：</p>
-<p><a href="https://www.startssl.com/" target="_blank" rel="external">StartSSL</a></p>
-<p><a href="https://www.comodo.com/" target="_blank" rel="external">Comodo</a> / 子品牌 <a href="https://www.positivessl.com/" target="_blank" rel="external">Positive SSL</a></p>
-<p><a href="https://www.globalsign.com/en/" target="_blank" rel="external">GlobalSign</a> / 子品牌<a href="https://www.alphassl.com/" target="_blank" rel="external">AlphaSSL</a></p>
-<p><a href="https://www.geotrust.com/" target="_blank" rel="external">GeoTrust</a> / 子品牌 <a href="https://www.rapidssl.com/" target="_blank" rel="external">RapidSSL</a></p>
+<p><a href="http://www.startssl.com/" target="_blank" rel="external">StartSSL</a></p>
+<p><a href="http://www.comodo.com/" target="_blank" rel="external">Comodo</a> / 子品牌 <a href="http://www.positivessl.com/" target="_blank" rel="external">Positive SSL</a></p>
+<p><a href="http://www.globalsign.com/en/" target="_blank" rel="external">GlobalSign</a> / 子品牌<a href="http://www.alphassl.com/" target="_blank" rel="external">AlphaSSL</a></p>
+<p><a href="http://www.geotrust.com/" target="_blank" rel="external">GeoTrust</a> / 子品牌 <a href="http://www.rapidssl.com/" target="_blank" rel="external">RapidSSL</a></p>
 <p>其中 Postivie SSL、AlphaSSL、RapidSSL 等都是子品牌，一般都是三级四级证书，所以你会需要增加 CA 证书链到你的 CRT 文件里。</p>
 <p>以 Comodo Positive SSL 为例，需要串联 CA 证书，假设你的域名是 example.com</p>
 <p>那么，串联的命令是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat example_com.crt COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt AddTrustExternalCARoot.crt &gt; example_com.signed.crt</div></pre></td></tr></table></figure></p>
 <p>在 Nginx 配置里使用 example_com.signed.crt 即可</p>
 <p>如果是一般常见的 AplhaSSL 泛域名证书，他们是不会发给你 CA 证书链的，那么在你的 CRT 文件后面需要加入 AlphaSSL 的 CA 证书链</p>
-<p><a href="https://www.alphassl.com/support/install-root-certificate.html" target="_blank" rel="external">AlphaSSL Intermediate CA</a></p>
+<p><a href="http://www.alphassl.com/support/install-root-certificate.html" target="_blank" rel="external">AlphaSSL Intermediate CA</a></p>
 
       
     </div>

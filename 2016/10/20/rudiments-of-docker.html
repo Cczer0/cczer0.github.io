@@ -101,7 +101,7 @@ Docker[htt">
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/docker/vm.png">
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/docker/docker.png">
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/docker/make_docker.png">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.964Z">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门介绍">
 <meta name="twitter:description" content="Docker 简介Docker 是什么
@@ -394,7 +394,7 @@ Docker[htt">
         <h1 id="Docker-简介"><a href="#Docker-简介" class="headerlink" title="Docker 简介"></a>Docker 简介</h1><h2 id="Docker-是什么"><a href="#Docker-是什么" class="headerlink" title="Docker 是什么"></a>Docker 是什么</h2><blockquote>
 <p>Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.</p>
 </blockquote>
-<p>Docker[<a href="https://www.docker.com/" target="_blank" rel="external">https://www.docker.com/</a>] 是 PaaS 提供商 <a href="https://www.dotcloud.com/" target="_blank" rel="external">dotCloud</a> 开源的一个基于 LXC 的高级容器引擎， <a href="https://github.com/docker/docker" target="_blank" rel="external">]源代码</a>托管在 <a href="https://www.github.com" target="_blank" rel="external">Github</a> 上, 基于go语言并遵从Apache2.0协议开源。Docker近期非常火热，无论是从 GitHub 上的代码活跃度，还是Redhat宣布在 <a href="http://server.cnw.com.cn/server-os/htm2014/20140616_303249.shtml" target="_blank" rel="external">RHEL7中正式支持Docker</a>，都给业界一个信号，这是一项创新型的技术解决方案。就连 Google 公司的 Compute Engine 也支持 docker 在其之上运行，国内 “BAT” 先锋企业百度 Baidu App Engine(BAE) 平台也是<a href="http://blog.docker.com/2013/12/baidu-using-docker-for-its-paas/" target="_blank" rel="external">以Docker作为其PaaS云基础</a>。</p>
+<p>Docker[<a href="http://www.docker.com/" target="_blank" rel="external">http://www.docker.com/</a>] 是 PaaS 提供商 <a href="http://www.dotcloud.com/" target="_blank" rel="external">dotCloud</a> 开源的一个基于 LXC 的高级容器引擎， <a href="http://github.com/docker/docker" target="_blank" rel="external">]源代码</a>托管在 <a href="http://www.github.com" target="_blank" rel="external">Github</a> 上, 基于go语言并遵从Apache2.0协议开源。Docker近期非常火热，无论是从 GitHub 上的代码活跃度，还是Redhat宣布在 <a href="http://server.cnw.com.cn/server-os/htm2014/20140616_303249.shtml" target="_blank" rel="external">RHEL7中正式支持Docker</a>，都给业界一个信号，这是一项创新型的技术解决方案。就连 Google 公司的 Compute Engine 也支持 docker 在其之上运行，国内 “BAT” 先锋企业百度 Baidu App Engine(BAE) 平台也是<a href="http://blog.docker.com/2013/12/baidu-using-docker-for-its-paas/" target="_blank" rel="external">以Docker作为其PaaS云基础</a>。</p>
 <p>Docker产生的目的就是为了解决以下问题：</p>
 <ol>
 <li><p>环境管理复杂：从各种 OS 到各种中间件再到各种 App，一款产品能够成功发布，作为开发者需要关心的东西太多，且难于管理，这个问题在软件行业中普遍存在并需要直接面对。Docker可以简化部署多种应用实例工作，比如 Web 应用、后台应用、数据库应用、大数据应用比如 Hadoop 集群、消息队列等等都可以打包成一个 Image 部署。</p>
@@ -526,7 +526,7 @@ Docker[htt">
 <ul>
 <li>公开仓库</li>
 </ul>
-<p>docker团队控制的top-level的顶级repository，即<a href="https://registry.hub.docker.com/" target="_blank" rel="external">Docker Hub</a>，存放了数量庞大的镜像供用户下载，任何人都能读取，里面包含了许多常用的镜像，如ubuntu, mysql ,redis, python等。</p>
+<p>docker团队控制的top-level的顶级repository，即<a href="http://registry.hub.docker.com/" target="_blank" rel="external">Docker Hub</a>，存放了数量庞大的镜像供用户下载，任何人都能读取，里面包含了许多常用的镜像，如ubuntu, mysql ,redis, python等。</p>
 <ul>
 <li>个人仓库</li>
 </ul>
@@ -589,7 +589,7 @@ Docker[htt">
 <ul>
 <li>增加安装源</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/apt/sources.list.d/docker.list</div><div class="line">// On Ubuntu Precise 12.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-precise main</div><div class="line">// On Ubuntu Trusty 14.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-trusty main</div><div class="line">// Ubuntu Wily 15.10</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-wily main</div><div class="line">// Ubuntu Xenial 16.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-xenial main</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/apt/sources.list.d/docker.list</div><div class="line">// On Ubuntu Precise 12.04 (LTS)</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-precise main</div><div class="line">// On Ubuntu Trusty 14.04 (LTS)</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-trusty main</div><div class="line">// Ubuntu Wily 15.10</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-wily main</div><div class="line">// Ubuntu Xenial 16.04 (LTS)</div><div class="line">deb http://apt.dockerproject.org/repo ubuntu-xenial main</div></pre></td></tr></table></figure>
 <ul>
 <li>安装docker</li>
 </ul>

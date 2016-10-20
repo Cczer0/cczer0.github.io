@@ -96,14 +96,14 @@
 <meta property="og:description" content="升级背景NTP服务漏洞
 
 “未经过身份验证的攻击者能够迫使网络时间协议守护进程（ntpd）与恶意的时间服务器源进行同步，这样一来，攻击者就可以随意修改目标 系统的系统时间了。网络时间协议守护进程（ntpd）在处理某些经过加密的、没有得到应答的网络数据包时，会发生错误。”总的来说，恶意攻击者能够迫使目标主机的网络时间协议守护进程（ntpd）与恶意的时间同步源进行同步，并且干扰目标系统的系统时钟。除">
-<meta property="og:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/ntp/ntp-bug.png">
-<meta property="og:updated_time" content="2016-10-20T10:27:19.900Z">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/ntp/ntp-bug.png">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译安装ntp服务">
 <meta name="twitter:description" content="升级背景NTP服务漏洞
 
 “未经过身份验证的攻击者能够迫使网络时间协议守护进程（ntpd）与恶意的时间服务器源进行同步，这样一来，攻击者就可以随意修改目标 系统的系统时间了。网络时间协议守护进程（ntpd）在处理某些经过加密的、没有得到应答的网络数据包时，会发生错误。”总的来说，恶意攻击者能够迫使目标主机的网络时间协议守护进程（ntpd）与恶意的时间同步源进行同步，并且干扰目标系统的系统时钟。除">
-<meta name="twitter:image" content="https://ofc9x1ccn.bkt.clouddn.com/system/ntp/ntp-bug.png">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/ntp/ntp-bug.png">
 
 
 
@@ -387,7 +387,7 @@
 
       
         <a id="more"></a>
-<h2 id="升级背景"><a href="#升级背景" class="headerlink" title="升级背景"></a>升级背景</h2><h3 id="NTP服务漏洞"><a href="#NTP服务漏洞" class="headerlink" title="NTP服务漏洞"></a>NTP服务漏洞</h3><p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/ntp/ntp-bug.png" alt="NTP.BUG"></p>
+<h2 id="升级背景"><a href="#升级背景" class="headerlink" title="升级背景"></a>升级背景</h2><h3 id="NTP服务漏洞"><a href="#NTP服务漏洞" class="headerlink" title="NTP服务漏洞"></a>NTP服务漏洞</h3><p><img src="http://ofc9x1ccn.bkt.clouddn.com/ntp/ntp-bug.png" alt="NTP.BUG"></p>
 <blockquote>
 <p>“未经过身份验证的攻击者能够迫使网络时间协议守护进程（ntpd）与恶意的时间服务器源进行同步，这样一来，攻击者就可以随意修改目标 系统的系统时间了。网络时间协议守护进程（ntpd）在处理某些经过加密的、没有得到应答的网络数据包时，会发生错误。”<br>总的来说，恶意攻击者能够迫使目标主机的网络时间协议守护进程（ntpd）与恶意的时间同步源进行同步，并且干扰目标系统的系统时钟。<br>除此之外，网络时间协议守护进程（ntpd）也可以与特定类型的同步请求进行响应。<br>根据思科Talos安全情报研究团队的描述：“在大多数的配置文件下，如果网络时间协议守护进程（ntpd）接收到了这样的一个数据包，如果网络时间协议守 护进程（ntpd）能够验证这个数据包的有效性，那么它就会让计算机与请求的发送端建立一个短暂的链接。比如说，当网络时间协议守护进程（ntpd）接收 到一个请求数据包时，ntpd会对数据包的有效性进行一系列的检测。” 在某些操作系统中，恶意地更改系统时间将会带来非常严重的影响，攻击者可以利用这一漏洞来实现：</p>
 <ul>
