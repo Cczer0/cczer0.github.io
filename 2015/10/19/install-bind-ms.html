@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://czero000.github.io/2015/10/19/install-bind-ms.html">
 <meta property="og:site_name" content="Zero's Blog">
 <meta property="og:description" content="主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Ma">
-<meta property="og:updated_time" content="2016-10-19T02:15:36.277Z">
+<meta property="og:updated_time" content="2016-10-20T10:50:11.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos6配置主辅DNS">
 <meta name="twitter:description" content="主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果serial值大于本机的话，slave将发送zone transfer请求要求（AXFR/IXFR）。Ma">
@@ -520,7 +520,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">99</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
