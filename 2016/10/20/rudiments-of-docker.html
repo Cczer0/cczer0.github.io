@@ -1,0 +1,1309 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="docker," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Docker 简介Docker 是什么
+Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.
+
+Docker[htt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker入门介绍">
+<meta property="og:url" content="http://czero000.github.io/2016/10/20/rudiments-of-docker.html">
+<meta property="og:site_name" content="Czero's Blog">
+<meta property="og:description" content="Docker 简介Docker 是什么
+Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.
+
+Docker[htt">
+<meta property="og:image" content="http://czero000.github.io/images/docker/vm.png">
+<meta property="og:image" content="http://czero000.github.io/images/docker/docker.png">
+<meta property="og:image" content="http://czero000.github.io/images/docker/make_docker.png">
+<meta property="og:updated_time" content="2016-10-20T02:46:02.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker入门介绍">
+<meta name="twitter:description" content="Docker 简介Docker 是什么
+Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.
+
+Docker[htt">
+<meta name="twitter:image" content="http://czero000.github.io/images/docker/vm.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/10/20/rudiments-of-docker.html"/>
+
+
+  <title> Docker入门介绍 | Czero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Czero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Docker入门介绍
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T10:43:29+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维技术/" itemprop="url" rel="index">
+                    <span itemprop="name">运维技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维技术/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/20/rudiments-of-docker.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/rudiments-of-docker.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/20/rudiments-of-docker.html" class="leancloud_visitors" data-flag-title="Docker入门介绍">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Docker-简介"><a href="#Docker-简介" class="headerlink" title="Docker 简介"></a>Docker 简介</h1><h2 id="Docker-是什么"><a href="#Docker-是什么" class="headerlink" title="Docker 是什么"></a>Docker 是什么</h2><blockquote>
+<p>Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.</p>
+</blockquote>
+<p>Docker[<a href="https://www.docker.com/" target="_blank" rel="external">https://www.docker.com/</a>] 是 PaaS 提供商 <a href="https://www.dotcloud.com/" target="_blank" rel="external">dotCloud</a> 开源的一个基于 LXC 的高级容器引擎， <a href="https://github.com/docker/docker" target="_blank" rel="external">]源代码</a>托管在 <a href="https://www.github.com" target="_blank" rel="external">Github</a> 上, 基于go语言并遵从Apache2.0协议开源。Docker近期非常火热，无论是从 GitHub 上的代码活跃度，还是Redhat宣布在 <a href="http://server.cnw.com.cn/server-os/htm2014/20140616_303249.shtml" target="_blank" rel="external">RHEL7中正式支持Docker</a>，都给业界一个信号，这是一项创新型的技术解决方案。就连 Google 公司的 Compute Engine 也支持 docker 在其之上运行，国内 “BAT” 先锋企业百度 Baidu App Engine(BAE) 平台也是<a href="http://blog.docker.com/2013/12/baidu-using-docker-for-its-paas/" target="_blank" rel="external">以Docker作为其PaaS云基础</a>。</p>
+<p>Docker产生的目的就是为了解决以下问题：</p>
+<ol>
+<li><p>环境管理复杂：从各种 OS 到各种中间件再到各种 App，一款产品能够成功发布，作为开发者需要关心的东西太多，且难于管理，这个问题在软件行业中普遍存在并需要直接面对。Docker可以简化部署多种应用实例工作，比如 Web 应用、后台应用、数据库应用、大数据应用比如 Hadoop 集群、消息队列等等都可以打包成一个 Image 部署。</p>
+</li>
+<li><p>云计算时代的到来：AWS 的成功，引导开发者将应用转移到云上, 解决了硬件管理的问题，然而软件配置和管理相关的问题依然存在 (AWS cloudformation是这个方向的业界标准, 样例模板可参考这里)。Docker 的出现正好能帮助软件开发者开阔思路，尝试新的软件管理方法来解决这个问题。</p>
+</li>
+<li><p>虚拟化手段的变化：云时代采用标配硬件来降低成本，采用虚拟化手段来满足用户按需分配的资源需求以及保证可用性和隔离性。然而无论是 KVM 还是 Xen，在 Docker 看来都在浪费资源，因为用户需要的是高效运行环境而非OS，GuestOS 既浪费资源又难于管理，更加轻量级的 LXC 更加灵活和快速。<br><img src="http://czero000.github.io/images/docker/vm.png" alt="vm"><br><img src="http://czero000.github.io/images/docker/docker.png" alt="docker"></p>
+</li>
+<li><p>LXC 的便携性：LXC 在 Linux 2.6 的 Kernel 里就已经存在了，但是其设计之初并非为云计算考虑的，缺少标准化的描述手段和容器的可便携性，决定其构建出的环境难于分发和标准化管理(相对于 KVM 之类 image 和 snapshot 的概念)。Docker 就在这个问题上做出了实质性的创新方法。</p>
+</li>
+</ol>
+<h2 id="Docker的主要特性"><a href="#Docker的主要特性" class="headerlink" title="Docker的主要特性"></a>Docker的主要特性</h2><ul>
+<li>文件系统隔离： 每个进程容器运行在完全独立的根文件系统里。</li>
+<li>资源隔离： 可以使用 cgroup 为每个进程容器分配不同的系统资源，例如 CPU 和内存。</li>
+<li>网络隔离： 每个进程容器运行在自己的网络命名空间里，拥有自己的虚拟接口和 IP 地址。</li>
+<li>写时复制： 采用写时复制方式创建根文件系统，这让部署变得极其快捷，并且节省内存和硬盘空间。</li>
+<li>日志记录： Docker 将会收集和记录每个进程容器的标准流（stdout/stderr/stdin），用于实时检索或批量检索。</li>
+<li>变更管理： 容器文件系统的变更可以提交到新的映像中，并可重复使用以创建更多的容器。无需使用模板或手动配置。</li>
+<li>交互式 Shell： Docker 可以分配一个虚拟终端并关联到任何容器的标准输入上，例如运行一个一次性交互 shell。</li>
+</ul>
+<h2 id="Docker-vs-传统虚拟化技术"><a href="#Docker-vs-传统虚拟化技术" class="headerlink" title="Docker vs 传统虚拟化技术"></a>Docker vs 传统虚拟化技术</h2><p>作为一种新兴的虚拟化方式，Docker 跟传统的虚拟化方式（xen、kvm、vmware）相比具有众多的优势。</p>
+<p>首先，Docker 容器的启动可以在秒级实现，这相比传统的虚拟机方式要快得多。 其次，Docker 对系统资源的利用率很高，一台主机上可以同时运行数千个 Docker 容器。容器除了运行其中应用外，基本不消耗额外的系统资源，使得应用的性能很高，同时系统的开销尽量小。传统虚拟机方式运行 10 个不同的应用就要起 10 个虚拟机，而 Docker 只需要启动 10 个隔离的应用即可。</p>
+<p>具体说来，Docker 在如下几个方面具有较大的优势。</p>
+<ul>
+<li><p>更快速的交付和部署<br>对开发和运维（devop）人员来说，最希望的就是一次创建或配置，可以在任意地方正常运行。<br>开发者可以使用一个标准的镜像来构建一套开发容器，开发完成之后，运维人员可以直接使用这个容器来部署代码。 Docker 可以快速创建容器，快速迭代应用程序，并让整个过程全程可见，使团队中的其他成员更容易理解应用程序是如何创建和工作的。 Docker 容器很轻很快！容器的启动时间是秒级的，大量地节约开发、测试、部署的时间。</p>
+</li>
+<li><p>更高效的虚拟化<br>Docker 容器的运行不需要额外的 hypervisor 支持，它是内核级的虚拟化，因此可以实现更高的性能和效率。</p>
+</li>
+<li><p>更轻松的迁移和扩展<br>Docker 容器几乎可以在任意的平台上运行，包括物理机、虚拟机、公有云、私有云、个人电脑、服务器等。 这种兼容性可以让用户把一个应用程序从一个平台直接迁移到另外一个。</p>
+</li>
+<li><p>更简单的管理<br>使用 Docker，只需要小小的修改，就可以替代以往大量的更新工作。所有的修改都以增量的方式被分发和更新，从而实现自动化并且高效的管理。</p>
+</li>
+</ul>
+<p>对比传统虚拟机总结：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>容器</th>
+<th>虚拟机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启动</td>
+<td>秒级</td>
+<td>分钟级</td>
+</tr>
+<tr>
+<td>硬盘使用</td>
+<td>一般为 MB</td>
+<td>一般为 GB</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>接近原生</td>
+<td>弱于</td>
+</tr>
+<tr>
+<td>系统支持量</td>
+<td>单机支持上千个容器</td>
+<td>一般几十个</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Docker-vs-lxc"><a href="#Docker-vs-lxc" class="headerlink" title="Docker vs lxc"></a>Docker vs lxc</h2><p>Docker 以 Linux 容器 LXC 为基础，实现轻量级的操作系统虚拟化解决方案。在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器的管理，使得操作更为简便，具体改进有</p>
+<ul>
+<li>Portable deployment across machines</li>
+</ul>
+<p>Docker 提供了一种可移植的配置标准化机制，允许你一致性地在不同的机器上运行同一个 Container；而 LXC 本身可能因为不同机器的不同配置而无法方便地移植运行；</p>
+<ul>
+<li>Application-centric</li>
+</ul>
+<p>Docker 以 App 为中心，为应用的部署做了很多优化，而 LXC 的帮助脚本主要是聚焦于如何机器启动地更快和耗更少的内存；</p>
+<ul>
+<li><p>Automatic build<br>Docker 为 App 提供了一种自动化构建机制（Dockerfile），包括打包，基础设施依赖管理和安装等等；</p>
+</li>
+<li><p>Versioning</p>
+</li>
+</ul>
+<p>Docker 提供了一种类似 git 的 Container 版本化的机制，允许你对你创建过的容器进行版本管理，依靠这种机制，你还可以下载别人创建的 Container，甚至像 git 那样进行合并；</p>
+<ul>
+<li>Component reuse</li>
+</ul>
+<p>Docker Container 是可重用的，依赖于版本化机制，你很容易重用别人的 Container，作为基础版本进行扩展；</p>
+<ul>
+<li>Sharing</li>
+</ul>
+<p>Docker Container 是可共享的，有点类似 github 一样，Docker 有自己的 INDEX，你可以创建自己的 Docker 用户并上传和下载 Docker Image；</p>
+<ul>
+<li>Tool ecosystem</li>
+</ul>
+<p>Docker 提供了很多的工具链，形成了一个生态系统；这些工具的目标是自动化、个性化和集成化，包括对 PAAS 平台的支持等。</p>
+<h2 id="docker-应用场景"><a href="#docker-应用场景" class="headerlink" title="docker 应用场景"></a>docker 应用场景</h2><p>Docker 作为一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。Docker 可以自动化打包和部署任何应用、创建一个轻量级私有 PaaS 云、搭建开发测试环境、部署可扩展的 Web 应用等。这决定了它在企业中的应用场景是有限的，Docker 将自己定位为“分发应用的开放平台”，其网站上也明确地提到了 Docker的典型应用场景</p>
+<blockquote>
+<ul>
+<li>Automating the packaging and deployment of applications</li>
+<li>Creation of lightweight, private PAAS environments</li>
+<li>Automated testing and continuous integration/deployment</li>
+<li>Deploying and scaling web apps, databases and backend services</li>
+</ul>
+</blockquote>
+<p>对应用进行自动打包和部署，创建轻量、私有的 PAAS 环境，自动化测试和持续整合与部署，部署和扩展Web应用、数据库和后端服务。</p>
+<p>平台即服务一般与大数据量系统同在，反观当前我司各 IT 系统，可以在以下情形下使用 docker 替代方案：</p>
+<ol>
+<li><p>结合 vagrant 或 supervisor，搭建统一的开发、测试环境<br>多个开发人员共同进行一个项目，就必须保持开发环境完全一致，部署到测试环境、正式环境后，最好都是同一套环境，通过容器来保存状态，分发给开发人员或部署，可以让“代码在我机子上运行没有问题”这种说辞将成为历史。</p>
+</li>
+<li><p>对 memcached、mysql 甚至 tomcat，打包成一个个容器，避免重复配置<br>比如将一个稳定版本的、已配置完善的 mysql，固化在一个镜像中，假如有新的环境要用到 mysql 数据库，便不需要重新安装、配置，而只需要启动一个容器瞬间完成。tomcat 应用场景更多，可以将不同版本的 jvm 和 tomcat 打包分发，应用于多 tomcat 集群，或在测试服务器上隔离多个不同运行环境要求的测试应用（例如旧系统采用的是 jdk6，新系统在jdk7上开发，但共用同一套测试环境）。</p>
+</li>
+</ol>
+<p><strong>docker不足</strong></p>
+<ul>
+<li><p>LXC 是基于 cgroup 等 linux kernel 功能的，因此 container 的 guest 系统只能是 linux base 的</p>
+</li>
+<li><p>隔离性相比 KVM之类的虚拟化方案还是有些欠缺，所有 container公用一部分的运行库</p>
+</li>
+<li><p>网络管理相对简单，主要是基于 namespace 隔离</p>
+</li>
+<li><p>cgroup 的 cpu 和 cpuset 提供的 cpu 功能相比 KVM 的等虚拟化方案相比难以度量(所以 dotcloud 主要是安内存收费)</p>
+</li>
+<li><p>container 随着用户进程的停止而销毁，container 中的 log 等用户数据不便收集</p>
+</li>
+</ul>
+<p>另外，Docker 是面向应用的，其终极目标是构建 PAAS 平台，而现有虚拟机主要目的是提供一个灵活的计算资源池，是面向架构的，其终极目标是构建一个 IAAS 平台，所以它不能替代传统虚拟化解决方案。目前在容器可管理性方面，对于方便运维，提供 UI 来管理监控各个 containers的功能还不足，还都是第三方实现如 DockerUI、Dockland、Shipyard 等。</p>
+<h2 id="docker-组成部分"><a href="#docker-组成部分" class="headerlink" title="docker 组成部分"></a>docker 组成部分</h2><p><img src="http://czero000.github.io/images/docker/make_docker.png" alt="make_docker"><br>Docker 使用客户端-服务器 (client-server) 架构模式。Docker 客户端会与 Docker 守护进程进行通信。Docker 守护进程会处理复杂繁重的任务，例如建立、运行、发布你的Docker 容器。Docker 客户端和守护进程可以运行在同一个系统上，当然你也可以使用 Docker 客户端去连接一个远程的 Docker 守护进程。Docker 客户端和守护进程之间通过socket或者 RESTful API 进行通信。</p>
+<h3 id="images-镜像"><a href="#images-镜像" class="headerlink" title="images 镜像"></a>images 镜像</h3><p>Docker 镜像就是一个只读的模板。例如，一个镜像可以包含一个完整的 ubuntu 操作系统环境，里面仅安装了 Apache 或用户需要的其它应用程序。<br>镜像可以用来创建 Docker 容器。<br>Docker 提供了一个很简单的机制来创建镜像或者更新现有的镜像，用户甚至可以直接从其他人那里下载一个已经做好的镜像来直接使用。</p>
+<h3 id="container-容器"><a href="#container-容器" class="headerlink" title="container 容器"></a>container 容器</h3><p>Docker 利用容器来运行应用。容器是从镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。可以把容器看做是一个简易版的 Linux 环境（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。 镜像是只读的，容器在启动的时候创建一层可写层作为最上层。</p>
+<h3 id="repository-仓库"><a href="#repository-仓库" class="headerlink" title="repository 仓库"></a>repository 仓库</h3><p>仓库是集中存放镜像文件的场所。有时候会把仓库和仓库注册服务器（Registry）混为一谈，并不严格区分。实际上，仓库注册服务器上往往存放着多个仓库，每个仓库中又包含了多个镜像，每个镜像有不同的标签（tag）。</p>
+<ul>
+<li>公开仓库</li>
+</ul>
+<p>docker团队控制的top-level的顶级repository，即<a href="https://registry.hub.docker.com/" target="_blank" rel="external">Docker Hub</a>，存放了数量庞大的镜像供用户下载，任何人都能读取，里面包含了许多常用的镜像，如ubuntu, mysql ,redis, python等。</p>
+<ul>
+<li>个人仓库</li>
+</ul>
+<p>个人公共库也是被托管在Docker Hub上，网络上的其它用户也可以pull你的仓库（如docker pull seanloook/centos6）你可以在修改完自己的container之后，通过commit命令把它变成本地的一个image，push到自己的个人公共库。（在此之前你需要docker login登录，或者vi ~/.dockercfg。）</p>
+<ul>
+<li>私有仓库</li>
+</ul>
+<p>首先与另外一种仓库区分——Docker Hub Private Repository，它简单理解为公网上的个人私有库，与上面的个人公共库相对应，在Docker Hub上Create Repository时选择Private便是，只有你自己才可以读写。<br>这里所说的私有仓库是指自己在本地服务器上搭建的专属自己的内部仓库docker-registry，俗称“私服”，供无法访问互联网的内部网络使用，或者镜像到本地一份以加快pull、push的速度。<br>它与公共仓库最明显的区分就是repository的命名，如必须使用带.的主机名或域名，后面必须接:port，如sean.tp-link.net:5000/centos6:your_tag_name，而公共仓库第一个斜杠前表示的是登录用户名。命名关系到推送到哪个服务器的哪个位置，</p>
+<h2 id="运行一个容器的内部过程"><a href="#运行一个容器的内部过程" class="headerlink" title="运行一个容器的内部过程"></a>运行一个容器的内部过程</h2><p>docker client告诉docker daemon运行一个容器，例如：docker run -i -t ubuntu /bin/bash<br>让我们分解一下这个命令，docker client启动使用一个二进制的docker命令，最小的docker client需要你告诉docker daemon你的容器是从哪个docker镜像构建的，你希望在容器内部运行哪个命令。所以启动过程如下：</p>
+<ul>
+<li>Pulling the ubuntu image</li>
+</ul>
+<p>docker检查是否存在ubuntu镜像，如果本地不存在ubuntu镜像，则docker会到docker index下载。</p>
+<ul>
+<li>Creates a new container</li>
+</ul>
+<p>利用镜像创建容器</p>
+<ul>
+<li>Allocates a filesystem and mounts a read-write layer</li>
+</ul>
+<p>为镜像创建文件系统层和read-write层</p>
+<ul>
+<li>Allocates a network / bridge interface</li>
+</ul>
+<p>为容器创建网络接口，使容器和本地机器可以通讯</p>
+<ul>
+<li>Sets up an IP address</li>
+</ul>
+<p>在地址池中为容器分配一个可用的IP地址</p>
+<ul>
+<li>Executes a process that you specify</li>
+</ul>
+<p>运行你的应用</p>
+<ul>
+<li>Captures and provides application output</li>
+</ul>
+<p>连接log的标准输入、输出、错误，以使你直到你的应用是否正常运行</p>
+<h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><p>Docker可以运行在Ubuntu16.04 LTS 和 CentOS7.x上，可能会和其他的二进制 EL7 兼容工作，但是 Docker 官方并没有去做测试。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>先决条件：</p>
+<ul>
+<li>运行64为CPU架构（x86_64和amd64），不支持32位</li>
+<li>运行Linux3.8 或更高版本，老版本的2.6.x及之后版本也可以运行，但是运行结果大不相同</li>
+<li>内核必须支持合适的存储驱动（storagedriver）<ul>
+<li>Device Manager</li>
+<li>AUFS</li>
+<li>vfs</li>
+<li>btrfs</li>
+</ul>
+</li>
+<li>内核必须支持并开启cgroup和命名空间功能</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>更新系统</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt install linux-image-extra-$(uname -r) linux-image-extra-virtual</div><div class="line">apt-get install apt-transport-https ca-certificates</div></pre></td></tr></table></figure>
+<ul>
+<li>添加 GPG Key</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</div></pre></td></tr></table></figure>
+<ul>
+<li>增加安装源</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/apt/sources.list.d/docker.list</div><div class="line">// On Ubuntu Precise 12.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-precise main</div><div class="line">// On Ubuntu Trusty 14.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-trusty main</div><div class="line">// Ubuntu Wily 15.10</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-wily main</div><div class="line">// Ubuntu Xenial 16.04 (LTS)</div><div class="line">deb https://apt.dockerproject.org/repo ubuntu-xenial main</div></pre></td></tr></table></figure>
+<ul>
+<li>安装docker</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt update</div><div class="line">apt install docker</div></pre></td></tr></table></figure>
+<ul>
+<li>启动docker</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start docker</div></pre></td></tr></table></figure>
+<ul>
+<li>验证启动</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">docker info</div><div class="line">Containers: 0</div><div class="line"> Running: 0</div><div class="line"> Paused: 0</div><div class="line"> Stopped: 0</div><div class="line">Images: 0</div><div class="line">Server Version: 1.12.2</div><div class="line">Storage Driver: aufs</div><div class="line"> Root Dir: /var/lib/docker/aufs</div><div class="line"> Backing Filesystem: extfs</div><div class="line"> Dirs: 0</div><div class="line"> Dirperm1 Supported: true</div><div class="line">Logging Driver: json-file</div><div class="line">Cgroup Driver: cgroupfs</div></pre></td></tr></table></figure>
+<h1 id="使用-Docker及-docker-命令汇总"><a href="#使用-Docker及-docker-命令汇总" class="headerlink" title="使用 Docker及 docker 命令汇总"></a>使用 Docker及 docker 命令汇总</h1><h2 id="查看-docker-信息"><a href="#查看-docker-信息" class="headerlink" title="查看 docker 信息"></a>查看 docker 信息</h2><ul>
+<li>查看 docker 版本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker Version</div></pre></td></tr></table></figure>
+<ul>
+<li>显示 docker 系统的信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker info</div></pre></td></tr></table></figure>
+<h2 id="镜像相关"><a href="#镜像相关" class="headerlink" title="镜像相关"></a>镜像相关</h2><ul>
+<li>检索 image</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// docker search image_name</div><div class="line">docker search ubuntu:16.04</div></pre></td></tr></table></figure>
+<ul>
+<li>下载一个预建立的镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// docker pull image_name</div><div class="line">docker pull ubuntu:16.04</div><div class="line">Digest: sha256:28d4c5234db8d5a634d5e621c363d900f8f241240ee0a6a978784c978fe9c737</div><div class="line">Status: Downloaded newer image for ubuntu:16.04</div></pre></td></tr></table></figure>
+<p>这个将从索引仓库中通过名字找到ubuntu镜像，并从索引仓库中心下载到本地镜像存储<br>当镜像下载成功后，你可以看到12位的hash值，如c73a085dc378，这是下载完整的镜像的精简ID，这些短的镜像ID是完整镜像ID前12个字符—可以使用docker inspect或者docker images -no-trunc=true来获取完整镜像ID</p>
+<ul>
+<li>列出镜像列表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure>
+<ul>
+<li>删除一个或者多个镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//docker rmi image_name</div><div class="line">docker rmi ubuntu:16.04</div></pre></td></tr></table></figure>
+<ul>
+<li>显示一个镜像的历史</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// docker history image_name</div><div class="line">docker history ubuntu:16.04</div></pre></td></tr></table></figure>
+<h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><ul>
+<li>创建容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//使用 docker run 命令创建容器,-i 保证容器中 STDIN 开启，-t 分配一个伪终端</div><div class="line">docker run -i -t ubuntu /bin/bash</div></pre></td></tr></table></figure>
+<p>使用 ubuntu:16.04 运行一个交互性的 shell,分配一个伪终端，附带 stdin 和 stout ,如果想要退出伪终端，使用 CTRL -p + CTRL -q,容器只有在指定的 /bin/bash 命令处于运行状态，容器才会运行，一旦退出 <code>/bin/bash</code>，容器随之停止。</p>
+<p>如果容器因为某种错误导致停止，可以通过<code>--restart</code>标志，让docker自动重启容器。–restart会检查容器的退出状态，并据此来判断是否要重启容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --restart=always --name=docker_test -i -t -d ubuntu:16,04 /bin/bash</div></pre></td></tr></table></figure></p>
+<ul>
+<li>容器命名</li>
+</ul>
+<p>容器命名可以是使用小写字母a-z、大写字母A-Z、数字0-9、下划线、圆点、横线。容器的命名必须是唯一<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name docker_test -i -t ubuntu:16.04 /bin/bash</div></pre></td></tr></table></figure></p>
+<p>可以通过增加 <code>-d</code> 参数，创建一个长时间运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name docker_test -i -t -d ubuntu:16.04 /bin/bash</div></pre></td></tr></table></figure></p>
+<ul>
+<li>查看容器状态</li>
+</ul>
+<p>通过 <code>docker ps -a</code>可以列出所有停止、运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div><div class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</div><div class="line">fd74d17e54f1        ubuntu:16.04        &quot;/bin/bash&quot;         2 minutes ago       Up 2 minutes                            docker_test</div></pre></td></tr></table></figure></p>
+<ul>
+<li>查看容器进程</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker top docker_test</div></pre></td></tr></table></figure>
+<ul>
+<li>深入容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 获取更加详细的 docker 信息</div><div class="line">docker inspect docker_test</div></pre></td></tr></table></figure>
+<ul>
+<li>启动、重启、连接容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//启动</div><div class="line">docker start docker_test</div><div class="line"></div><div class="line">//停止</div><div class="line">docker stop docker_test</div><div class="line"></div><div class="line">// 杀死</div><div class="line">docker stop docker_test</div><div class="line"></div><div class="line">// 连接</div><div class="line">docker sttach docker_test</div></pre></td></tr></table></figure>
+<ul>
+<li>在容器内部运行进程</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// -d 表明在后台运行一个进程</div><div class="line">docker exec -d docker_test touch /etc/new_config_file</div><div class="line"></div><div class="line">// 打开一个交互性的shell</div><div class="line">docker exec -i -t docker_test /bin/bash</div></pre></td></tr></table></figure>
+<ul>
+<li>查看容器输出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//到目前为止收集的输出</div><div class="line">docker logs docker_test</div><div class="line">//使用-f 可以监控docker输出</div><div class="line">docker logs -f docker_test</div><div class="line">//加上tail 命令可以查看某段输出，如最后10行</div><div class="line">docker log --tail 10 docker_tet</div><div class="line">//使用 -t 可以在每条日志加上时间戳</div><div class="line">docker log -ft docker_test</div></pre></td></tr></table></figure>
+<ul>
+<li>保存容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// docker commit id new_image_name</div><div class="line">docker commit 2194cf55f5ea docker_test</div></pre></td></tr></table></figure>
+<ul>
+<li>删除容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 所有容器</div><div class="line">docker rm `docker ps -a -q`</div><div class="line">// 指定容器</div><div class="line">docker rm name/id</div></pre></td></tr></table></figure>
+<ul>
+<li>查看容器被修改的文件或目录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker diff docker_test</div></pre></td></tr></table></figure>
+<ul>
+<li>拷贝文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker cp [name|id]:container_path  local_path</div></pre></td></tr></table></figure>
+<h2 id="保存和加载镜像"><a href="#保存和加载镜像" class="headerlink" title="保存和加载镜像"></a>保存和加载镜像</h2><ul>
+<li>保存镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker save image_name -o file_path</div></pre></td></tr></table></figure>
+<ul>
+<li>加载本地镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker load -i file_path</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag">#docker</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/ansible-playbook.html" rel="next" title="Ansible-Playbooks">
+                <i class="fa fa-chevron-left"></i> Ansible-Playbooks
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/20/docker-images.html" rel="prev" title="docker镜像">
+                docker镜像 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/20/rudiments-of-docker.html"
+     data-title="Docker入门介绍"
+     data-content=""
+     data-url="http://czero000.github.io/2016/10/20/rudiments-of-docker.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/20/rudiments-of-docker.html"
+           data-title="Docker入门介绍" data-url="http://czero000.github.io/2016/10/20/rudiments-of-docker.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">96</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yuanlong1207" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Yuminstall" target="_blank">Yuminstall</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-简介"><span class="nav-number">1.</span> <span class="nav-text">Docker 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-是什么"><span class="nav-number">1.1.</span> <span class="nav-text">Docker 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker的主要特性"><span class="nav-number">1.2.</span> <span class="nav-text">Docker的主要特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-vs-传统虚拟化技术"><span class="nav-number">1.3.</span> <span class="nav-text">Docker vs 传统虚拟化技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-vs-lxc"><span class="nav-number">1.4.</span> <span class="nav-text">Docker vs lxc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-应用场景"><span class="nav-number">1.5.</span> <span class="nav-text">docker 应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-组成部分"><span class="nav-number">1.6.</span> <span class="nav-text">docker 组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#images-镜像"><span class="nav-number">1.6.1.</span> <span class="nav-text">images 镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#container-容器"><span class="nav-number">1.6.2.</span> <span class="nav-text">container 容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repository-仓库"><span class="nav-number">1.6.3.</span> <span class="nav-text">repository 仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行一个容器的内部过程"><span class="nav-number">1.7.</span> <span class="nav-text">运行一个容器的内部过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Docker"><span class="nav-number">2.</span> <span class="nav-text">安装 Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">2.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.2.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Docker及-docker-命令汇总"><span class="nav-number">3.</span> <span class="nav-text">使用 Docker及 docker 命令汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看-docker-信息"><span class="nav-number">3.1.</span> <span class="nav-text">查看 docker 信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像相关"><span class="nav-number">3.2.</span> <span class="nav-text">镜像相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器操作"><span class="nav-number">3.3.</span> <span class="nav-text">容器操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存和加载镜像"><span class="nav-number">3.4.</span> <span class="nav-text">保存和加载镜像</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>

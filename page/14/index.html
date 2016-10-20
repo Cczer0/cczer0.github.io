@@ -292,8 +292,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/centos7-install-smokeping.html" itemprop="url">
-                  Centos7安装smokeping
+                <a class="post-title-link" href="/2015/12/21/centos6.5-install-vncserver.html" itemprop="url">
+                  CentOS6.5安装VNC
                 </a>
               
             
@@ -306,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:47:57+08:00" content="2015-12-20">
-              2015-12-20
+            <time itemprop="dateCreated" datetime="2015-12-21T22:00:59+08:00" content="2015-12-21">
+              2015-12-21
             </time>
           </span>
 
@@ -332,8 +332,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/System/Monitor/" itemprop="url" rel="index">
-                    <span itemprop="name">Monitor</span>
+                  <a href="/categories/System/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
                   </a>
                 </span>
 
@@ -348,8 +348,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/20/centos7-install-smokeping.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/centos7-install-smokeping.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/21/centos6.5-install-vncserver.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/centos6.5-install-vncserver.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -359,7 +359,7 @@
 
           
           
-             <span id="/2015/12/20/centos7-install-smokeping.html" class="leancloud_visitors" data-flag-title="Centos7安装smokeping">
+             <span id="/2015/12/21/centos6.5-install-vncserver.html" class="leancloud_visitors" data-flag-title="CentOS6.5安装VNC">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,11 +383,13 @@
       
         
           
-          I am using Centos7 + smokeping-2.6.9 lets start up by install needed package before that, we will need to enable Epel repo You can install EPEL by run
+          安装图形支持1yum groupinstall -y  &apos;X Window System&apos; &apos;Desktop&apos; &apos;Desktop Platform&apos;
+安装VNC1yum install -y tigervnc-server
+配置VNC编辑v
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/centos7-install-smokeping.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/centos6.5-install-vncserver.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -438,8 +440,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/smokeping-support-chinese.html" itemprop="url">
-                  Smokeping页面支持中文
+                <a class="post-title-link" href="/2015/12/21/nfs-detail.html" itemprop="url">
+                  NFS详解
                 </a>
               
             
@@ -452,8 +454,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:47:57+08:00" content="2015-12-20">
-              2015-12-20
+            <time itemprop="dateCreated" datetime="2015-12-21T21:56:33+08:00" content="2015-12-21">
+              2015-12-21
             </time>
           </span>
 
@@ -478,8 +480,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/System/Monitor/" itemprop="url" rel="index">
-                    <span itemprop="name">Monitor</span>
+                  <a href="/categories/System/NFS/" itemprop="url" rel="index">
+                    <span itemprop="name">NFS</span>
                   </a>
                 </span>
 
@@ -494,8 +496,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/20/smokeping-support-chinese.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-support-chinese.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/21/nfs-detail.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/nfs-detail.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -505,7 +507,7 @@
 
           
           
-             <span id="/2015/12/20/smokeping-support-chinese.html" class="leancloud_visitors" data-flag-title="Smokeping页面支持中文">
+             <span id="/2015/12/21/nfs-detail.html" class="leancloud_visitors" data-flag-title="NFS详解">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -529,13 +531,161 @@
       
         
           
-          smokeping页面和rrdtool图片支持中文smokeping默认不支持中文，只需要修改如下便可：
-页面支持中文在配置文件的*** Presentation ***下面添加1charset = utf-8
-rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
+          NFS服务简介NFS简介
+NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Un
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/smokeping-support-chinese.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/nfs-detail.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/21/create-2t-partition.html" itemprop="url">
+                  创建大于2TB分区
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-21T17:56:56+08:00" content="2015-12-21">
+              2015-12-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/" itemprop="url" rel="index">
+                    <span itemprop="name">System</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/System/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/21/create-2t-partition.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/create-2t-partition.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/21/create-2t-partition.html" class="leancloud_visitors" data-flag-title="创建大于2TB分区">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          parted命令介绍parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。
+Parted 命令分为两种模式：命令行模式和交互模式。
+
+命令行模式： parted [
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/21/create-2t-partition.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -732,8 +882,8 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/install-smokeping.html" itemprop="url">
-                  Smokeping-安装
+                <a class="post-title-link" href="/2015/12/20/centos7-install-smokeping.html" itemprop="url">
+                  Centos7安装smokeping
                 </a>
               
             
@@ -746,7 +896,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:41:31+08:00" content="2015-12-20">
+            <time itemprop="dateCreated" datetime="2015-12-20T19:47:57+08:00" content="2015-12-20">
               2015-12-20
             </time>
           </span>
@@ -788,8 +938,8 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/20/install-smokeping.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-smokeping.html" itemprop="commentsCount"></span>
+                <a href="/2015/12/20/centos7-install-smokeping.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/centos7-install-smokeping.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -799,7 +949,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
 
           
           
-             <span id="/2015/12/20/install-smokeping.html" class="leancloud_visitors" data-flag-title="Smokeping-安装">
+             <span id="/2015/12/20/centos7-install-smokeping.html" class="leancloud_visitors" data-flag-title="Centos7安装smokeping">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -823,161 +973,11 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
       
         
           
-          Smokeping 监控网络质量什么是SmokepingSmokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：
-
-多种探测方式，包括 fping、echoping、dig、curl 等；
-易用可
+          I am using Centos7 + smokeping-2.6.9 lets start up by install needed package before that, we will need to enable Epel repo You can install EPEL by run
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/install-smokeping.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/20/install-rrdtool-trubleshooting.html" itemprop="url">
-                  RRDTOOL安装报错解决
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-20T19:37:37+08:00" content="2015-12-20">
-              2015-12-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/System/" itemprop="url" rel="index">
-                    <span itemprop="name">System</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/System/RRDTOOL/" itemprop="url" rel="index">
-                    <span itemprop="name">RRDTOOL</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/20/install-rrdtool-trubleshooting.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-rrdtool-trubleshooting.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/20/install-rrdtool-trubleshooting.html" class="leancloud_visitors" data-flag-title="RRDTOOL安装报错解决">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          在安装rrdtool过程中，出现报错，原来是缺少perl模块
-报错信息123456789Can&apos;t locate ExtUtils/MakeMaker.pm in @INC (@INC contains: /usr/local/lib64/perl5 /usr/local/share/pe
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/install-rrdtool-trubleshooting.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/centos7-install-smokeping.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1011,7 +1011,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1052,7 +1052,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">96</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1060,7 +1060,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1069,7 +1069,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &quot;chine
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
