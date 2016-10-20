@@ -297,7 +297,7 @@
     <link href="http://czero000.github.io/2016/10/20/rudiments-of-docker.html"/>
     <id>http://czero000.github.io/2016/10/20/rudiments-of-docker.html</id>
     <published>2016-10-20T02:43:29.000Z</published>
-    <updated>2016-10-20T02:46:02.494Z</updated>
+    <updated>2016-10-20T10:27:19.964Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Docker-简介"><a href="#Docker-简介" class="headerlink" title="Docker 简介"></a>Docker 简介</h1><h2 id="Docker-是什么"><a href="#Docker-是什么" class="headerlink" title="Docker 是什么"></a>Docker 是什么</h2><blockquote>
 <p>Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.</p>
@@ -309,7 +309,7 @@
 </li>
 <li><p>云计算时代的到来：AWS 的成功，引导开发者将应用转移到云上, 解决了硬件管理的问题，然而软件配置和管理相关的问题依然存在 (AWS cloudformation是这个方向的业界标准, 样例模板可参考这里)。Docker 的出现正好能帮助软件开发者开阔思路，尝试新的软件管理方法来解决这个问题。</p>
 </li>
-<li><p>虚拟化手段的变化：云时代采用标配硬件来降低成本，采用虚拟化手段来满足用户按需分配的资源需求以及保证可用性和隔离性。然而无论是 KVM 还是 Xen，在 Docker 看来都在浪费资源，因为用户需要的是高效运行环境而非OS，GuestOS 既浪费资源又难于管理，更加轻量级的 LXC 更加灵活和快速。<br><img src="http://czero000.github.io/images/docker/vm.png" alt="vm"><br><img src="http://czero000.github.io/images/docker/docker.png" alt="docker"></p>
+<li><p>虚拟化手段的变化：云时代采用标配硬件来降低成本，采用虚拟化手段来满足用户按需分配的资源需求以及保证可用性和隔离性。然而无论是 KVM 还是 Xen，在 Docker 看来都在浪费资源，因为用户需要的是高效运行环境而非OS，GuestOS 既浪费资源又难于管理，更加轻量级的 LXC 更加灵活和快速。<br><img src="http://ofc9x1ccn.bkt.clouddn.com/docker/vm.png" alt="vm"><br><img src="http://ofc9x1ccn.bkt.clouddn.com/docker/docker.png" alt="docker"></p>
 </li>
 <li><p>LXC 的便携性：LXC 在 Linux 2.6 的 Kernel 里就已经存在了，但是其设计之初并非为云计算考虑的，缺少标准化的描述手段和容器的可便携性，决定其构建出的环境难于分发和标准化管理(相对于 KVM 之类 image 和 snapshot 的概念)。Docker 就在这个问题上做出了实质性的创新方法。</p>
 </li>
@@ -427,7 +427,7 @@
 </li>
 </ul>
 <p>另外，Docker 是面向应用的，其终极目标是构建 PAAS 平台，而现有虚拟机主要目的是提供一个灵活的计算资源池，是面向架构的，其终极目标是构建一个 IAAS 平台，所以它不能替代传统虚拟化解决方案。目前在容器可管理性方面，对于方便运维，提供 UI 来管理监控各个 containers的功能还不足，还都是第三方实现如 DockerUI、Dockland、Shipyard 等。</p>
-<h2 id="docker-组成部分"><a href="#docker-组成部分" class="headerlink" title="docker 组成部分"></a>docker 组成部分</h2><p><img src="http://czero000.github.io/images/docker/make_docker.png" alt="make_docker"><br>Docker 使用客户端-服务器 (client-server) 架构模式。Docker 客户端会与 Docker 守护进程进行通信。Docker 守护进程会处理复杂繁重的任务，例如建立、运行、发布你的Docker 容器。Docker 客户端和守护进程可以运行在同一个系统上，当然你也可以使用 Docker 客户端去连接一个远程的 Docker 守护进程。Docker 客户端和守护进程之间通过socket或者 RESTful API 进行通信。</p>
+<h2 id="docker-组成部分"><a href="#docker-组成部分" class="headerlink" title="docker 组成部分"></a>docker 组成部分</h2><p><img src="http://ofc9x1ccn.bkt.clouddn.com/docker/make_docker.png" alt="make_docker"><br>Docker 使用客户端-服务器 (client-server) 架构模式。Docker 客户端会与 Docker 守护进程进行通信。Docker 守护进程会处理复杂繁重的任务，例如建立、运行、发布你的Docker 容器。Docker 客户端和守护进程可以运行在同一个系统上，当然你也可以使用 Docker 客户端去连接一个远程的 Docker 守护进程。Docker 客户端和守护进程之间通过socket或者 RESTful API 进行通信。</p>
 <h3 id="images-镜像"><a href="#images-镜像" class="headerlink" title="images 镜像"></a>images 镜像</h3><p>Docker 镜像就是一个只读的模板。例如，一个镜像可以包含一个完整的 ubuntu 操作系统环境，里面仅安装了 Apache 或用户需要的其它应用程序。<br>镜像可以用来创建 Docker 容器。<br>Docker 提供了一个很简单的机制来创建镜像或者更新现有的镜像，用户甚至可以直接从其他人那里下载一个已经做好的镜像来直接使用。</p>
 <h3 id="container-容器"><a href="#container-容器" class="headerlink" title="container 容器"></a>container 容器</h3><p>Docker 利用容器来运行应用。容器是从镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。可以把容器看做是一个简易版的 Linux 环境（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。 镜像是只读的，容器在启动的时候创建一层可写层作为最上层。</p>
 <h3 id="repository-仓库"><a href="#repository-仓库" class="headerlink" title="repository 仓库"></a>repository 仓库</h3><p>仓库是集中存放镜像文件的场所。有时候会把仓库和仓库注册服务器（Registry）混为一谈，并不严格区分。实际上，仓库注册服务器上往往存放着多个仓库，每个仓库中又包含了多个镜像，每个镜像有不同的标签（tag）。</p>
@@ -894,11 +894,11 @@
     <link href="http://czero000.github.io/2016/10/19/rudiments-of-nsible.html"/>
     <id>http://czero000.github.io/2016/10/19/rudiments-of-nsible.html</id>
     <published>2016-10-19T06:20:11.000Z</published>
-    <updated>2016-10-19T09:17:15.092Z</updated>
+    <updated>2016-10-20T10:27:19.916Z</updated>
     
     <content type="html"><![CDATA[<h1 id="什么是-Ansible"><a href="#什么是-Ansible" class="headerlink" title="什么是 Ansible"></a>什么是 Ansible</h1><p>Ansible 是基于 python 的配置管理和应用部署工具。官方给的 title是 “Ansible is Simple IT Automation” —简单的自动化IT工具。</p>
-<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="http://czero000.github.io/images/ansible/ansible.png" alt="ansible架构图" title="ansible架构图"></p>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="http://czero000.github.io/images/ansible/ansible-work.png" alt="工作原理" title="ansible工作原理"></p>
+<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="http://ofc9x1ccn.bkt.clouddn.com/ansible/ansible.png" alt="ansible架构图" title="ansible架构图"></p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="http://ofc9x1ccn.bkt.clouddn.com/ansible/ansible-work.png" alt="工作原理" title="ansible工作原理"></p>
 <ul>
 <li>管理端支持 local、 ssh、zeromq 三种方式连接被控端，默认使用 ssh</li>
 <li>可以按照一定规则进行 inventory，管理节点通过模块实现对应操作–ad-hoc</li>
@@ -1037,7 +1037,7 @@
     <link href="http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html"/>
     <id>http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html</id>
     <published>2016-10-19T05:51:50.000Z</published>
-    <updated>2016-10-19T09:19:25.337Z</updated>
+    <updated>2016-10-20T10:27:19.904Z</updated>
     
     <content type="html"><![CDATA[<h1 id="使用-gitolite-管理-git-服务器"><a href="#使用-gitolite-管理-git-服务器" class="headerlink" title="使用 gitolite 管理 git 服务器"></a>使用 gitolite 管理 git 服务器</h1><p>由于Git的设计初衷，在使用 Git 在面向团队服务时，如果需要对权限控制，就需要第三方的工具来帮助 Git。在 Git 管理工具中，有三个解决方案。</p>
 <ul>
@@ -1046,7 +1046,7 @@
 <li>[<a href="http://git-scm.com/" target="_blank" rel="external">Git</a> + <a href="http://source.android.com/source/downloading.html" target="_blank" rel="external">Repo</a> + <a href="http://code.google.com/p/gerrit/" target="_blank" rel="external">Gerrit</a>] 重量级，集版本控制、库管理和代码审核。可以用来管理大型项目</li>
 </ul>
 <p>由于 gitosis 不在提供更新，新建项目使用 gitolite 配置 git 的访问控制。</p>
-<h1 id="安装-Gitolite"><a href="#安装-Gitolite" class="headerlink" title="安装 Gitolite"></a>安装 Gitolite</h1><p>Gitolite 的安装步骤如下如：<br><img src="https://czero000.github.io/images/system/git/gitolite.png" alt="gitolite" title="Gitolite"></p>
+<h1 id="安装-Gitolite"><a href="#安装-Gitolite" class="headerlink" title="安装 Gitolite"></a>安装 Gitolite</h1><p>Gitolite 的安装步骤如下如：<br><img src="https://ofc9x1ccn.bkt.clouddn.com/system/git/gitolite.png" alt="gitolite" title="Gitolite"></p>
 <h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><p>系统采用最新的 <code>Ubuntu-16-04 LTS</code></p>
 <table>
 <thead>
@@ -1108,14 +1108,14 @@
     <link href="http://czero000.github.io/2016/07/30/awk-mindmap.html"/>
     <id>http://czero000.github.io/2016/07/30/awk-mindmap.html</id>
     <published>2016-07-30T10:16:23.000Z</published>
-    <updated>2016-10-19T02:15:36.277Z</updated>
+    <updated>2016-10-20T10:27:19.908Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="awk-思维导图"><a href="#awk-思维导图" class="headerlink" title="awk 思维导图"></a>awk 思维导图</h1><p><img src="https://czero000.github.io/images/system/bash/awk_mind_map.png" alt="awk_mind_map"></p>
+    <content type="html"><![CDATA[<h1 id="awk-思维导图"><a href="#awk-思维导图" class="headerlink" title="awk 思维导图"></a>awk 思维导图</h1><p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/bash/awk_mind_map.png" alt="awk_mind_map"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;awk-思维导图&quot;&gt;&lt;a href=&quot;#awk-思维导图&quot; class=&quot;headerlink&quot; title=&quot;awk 思维导图&quot;&gt;&lt;/a&gt;awk 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://czero000.github.io/images/sy
+      &lt;h1 id=&quot;awk-思维导图&quot;&gt;&lt;a href=&quot;#awk-思维导图&quot; class=&quot;headerlink&quot; title=&quot;awk 思维导图&quot;&gt;&lt;/a&gt;awk 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://ofc9x1ccn.bkt.clouddn.com/sy
     
     </summary>
     
@@ -1137,14 +1137,14 @@
     <link href="http://czero000.github.io/2016/07/26/bash-mindmap.html"/>
     <id>http://czero000.github.io/2016/07/26/bash-mindmap.html</id>
     <published>2016-07-26T13:48:12.000Z</published>
-    <updated>2016-10-19T02:15:36.277Z</updated>
+    <updated>2016-10-20T10:27:19.908Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Bash-思维导图"><a href="#Bash-思维导图" class="headerlink" title="Bash 思维导图"></a>Bash 思维导图</h1><p><img src="https://czero000.github.io/images/system/bash/bash_mind_map.png" alt="Bash Mind Map"></p>
+    <content type="html"><![CDATA[<h1 id="Bash-思维导图"><a href="#Bash-思维导图" class="headerlink" title="Bash 思维导图"></a>Bash 思维导图</h1><p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/bash/bash_mind_map.png" alt="Bash Mind Map"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Bash-思维导图&quot;&gt;&lt;a href=&quot;#Bash-思维导图&quot; class=&quot;headerlink&quot; title=&quot;Bash 思维导图&quot;&gt;&lt;/a&gt;Bash 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://czero000.github.io/image
+      &lt;h1 id=&quot;Bash-思维导图&quot;&gt;&lt;a href=&quot;#Bash-思维导图&quot; class=&quot;headerlink&quot; title=&quot;Bash 思维导图&quot;&gt;&lt;/a&gt;Bash 思维导图&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://ofc9x1ccn.bkt.clouddn.co
     
     </summary>
     
@@ -1213,7 +1213,7 @@
     <link href="http://czero000.github.io/2016/05/31/autocompletion-of-opensource-mysqlclient.html"/>
     <id>http://czero000.github.io/2016/05/31/autocompletion-of-opensource-mysqlclient.html</id>
     <published>2016-05-31T07:19:48.000Z</published>
-    <updated>2016-10-19T02:15:36.261Z</updated>
+    <updated>2016-10-20T10:27:19.888Z</updated>
     
     <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>MyCli 是一个 MySQL 的命令行客户端，可以实现自动补全 <code>auto-completion</code> 和语法高亮，同时也可应用于 MariaDB 和 Percona。</p>
 <p><strong>功能特征</strong></p>
@@ -1257,31 +1257,31 @@
 <ul>
 <li>自动补全<br>简单的完成如关键字和sql函数。</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/auto-complite.png" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/auto-complite.png" alt=""></p>
 <ul>
 <li>智能提示<br>Table name completions after the ‘FROM’ keyword.</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/smart-completion.png" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/smart-completion.png" alt=""></p>
 <ul>
 <li>列名中引用的表的查询范围</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/columns.png" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/columns.png" alt=""></p>
 <ul>
 <li>别名支持<br>列完成将即使工作表名称别名。</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/alias.png" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/alias.png" alt=""></p>
 <ul>
 <li>语法高亮显示<br>sql 的语法高亮显示。</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/syntax.png" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/syntax.png" alt=""></p>
 <ul>
 <li>pager<br>一个 sql 命令的输出是通过更少的命令自动输送。</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/pager.png" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/pager.png" alt=""></p>
 <ul>
 <li>动态效果图如下</li>
 </ul>
-<p><img src="https://czero000.github.io/images/database/mysql/main.gif" alt=""></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/database/mysql/main.gif" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -1402,7 +1402,7 @@
     <link href="http://czero000.github.io/2016/04/27/mfs-Technology.html"/>
     <id>http://czero000.github.io/2016/04/27/mfs-Technology.html</id>
     <published>2016-04-27T01:37:56.000Z</published>
-    <updated>2016-10-19T02:15:36.297Z</updated>
+    <updated>2016-10-20T10:27:19.960Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="MFS-概述"><a href="#MFS-概述" class="headerlink" title="MFS 概述"></a>MFS 概述</h1><p>MooseFS是一款具有冗余容错功能的分布式文件系统。它把数据分散在多台服务器上，确保一份数据多个备份副本，对外提供统一的结构。</p>
@@ -1433,16 +1433,16 @@
 <h2 id="MFS工作图解"><a href="#MFS工作图解" class="headerlink" title="MFS工作图解"></a>MFS工作图解</h2><ul>
 <li>网络架构</li>
 </ul>
-<p><img src="https://czero000.github.io/images/opstech/moosefs/moosefs-network.png" alt="MooseFS-NetWork.png" title="MooseFS-NetWork"></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/moosefs-network.png" alt="MooseFS-NetWork.png" title="MooseFS-NetWork"></p>
 <ul>
 <li>工作原理</li>
 </ul>
-<p><img src="https://czero000.github.io/images/opstech/moosefs/moosefs-write-process.png" alt="moosefs-write-process.png" title="MooseFS Write Process"></p>
-<p><img src="https://czero000.github.io/images/opstech/moosefs/moosefs-read-process.png" alt="moosefs-read-process.png" title="MooseFS Read Process"></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/moosefs-write-process.png" alt="moosefs-write-process.png" title="MooseFS Write Process"></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/moosefs-read-process.png" alt="moosefs-read-process.png" title="MooseFS Read Process"></p>
 <ul>
 <li>集群拓扑</li>
 </ul>
-<p><img src="https://czero000.github.io/images/opstech/moosefs/mfs-topology.png" alt="mfs-topology.png" title="MooseFS-Topology"></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/opstech/moosefs/mfs-topology.png" alt="mfs-topology.png" title="MooseFS-Topology"></p>
 <hr>
 <h1 id="安装配置MFS"><a href="#安装配置MFS" class="headerlink" title="安装配置MFS"></a>安装配置MFS</h1><h2 id="系统环境介绍"><a href="#系统环境介绍" class="headerlink" title="系统环境介绍"></a>系统环境介绍</h2><ul>
 <li>OS：<code>CentOS Linux release 7.2.1511 (Core)</code></li>
@@ -1648,7 +1648,7 @@
     <link href="http://czero000.github.io/2016/04/18/git-common.html"/>
     <id>http://czero000.github.io/2016/04/18/git-common.html</id>
     <published>2016-04-18T06:19:55.000Z</published>
-    <updated>2016-10-19T02:15:36.273Z</updated>
+    <updated>2016-10-20T10:27:19.904Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <p>Git已经成为程序员日常工具之一，那些Git基本的命令，每天都要用的命令你都记住了吗？如果还没的话，笔者整理了一份清单，以备不时之需所用。</p>
@@ -1660,8 +1660,8 @@
 <li>暂存区(Index)像个缓存区域，临时保存你的改动</li>
 <li>版本库(Repository)分为本地仓库（Local)和远程仓库(Remote)<br>几乎所有常用命令就是围绕这几个概念来操作的，一图胜千言，下面是一张比较简单的图，包括了最基本的命令</li>
 </ul>
-<p><img src="https://czero000.github.io/images/system/git/git-simple.png" alt="simple"></p>
-<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br> <img src="https://czero000.github.io/images/system/git/git-advance.jpg" alt="git-advance"></p>
+<p><img src="https://ofc9x1ccn.bkt.clouddn.com/system/git/git-simple.png" alt="simple"></p>
+<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br> <img src="https://ofc9x1ccn.bkt.clouddn.com/system/git/git-advance.jpg" alt="git-advance"></p>
 <p>下面的命令结合上面两张图来理解、练习、记忆效果更加。暂时用不着的命令记不住，不理解也没关系，哪天遇到问题，再来找找有没有合适的方法也不迟。</p>
 <ul>
 <li>新建/克隆代码库</li>
