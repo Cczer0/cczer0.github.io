@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://czero000.github.io/"/>
-  <updated>2016-10-20T12:06:34.588Z</updated>
+  <updated>2016-10-26T04:04:13.746Z</updated>
   <id>http://czero000.github.io/</id>
   
   <author>
@@ -14,6 +14,120 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用ansible管理windows主机</title>
+    <link href="http://czero000.github.io/2016/10/26/ansible-managment-windows.html"/>
+    <id>http://czero000.github.io/2016/10/26/ansible-managment-windows.html</id>
+    <published>2016-10-26T04:01:09.000Z</published>
+    <updated>2016-10-26T04:04:13.746Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Windows下Ansible工作原理"><a href="#Windows下Ansible工作原理" class="headerlink" title="Windows下Ansible工作原理"></a>Windows下Ansible工作原理</h1><p>Ansible 从 1.7+ 版本开始支持 Windows，但前提是管理机必须为 Linux 系统，远程主机的通信方式也由 SSH 变更为 PowerShell，基于 Kerberos 认证方式，同时管理机必须预安装Python 的 Winrm 模块，方可和远程 Windows 主机正常通信，但 PowerShell 需 3.0+ 版本且 <code>Management Framework 3.0+</code>版本，实测 <code>Windows 7 SP1</code> 和<code>Windows Server 2008 R2</code>及以上版本系统经简单配置可正常与 Ansible 通信。简单总结如下：</p>
+<ul>
+<li>管理机必须为 Linux系统且需预安装 Python Winrm 模块</li>
+<li>底层通信基于 PowerShell，认证基于 Kerberos</li>
+<li>远程主机 PowerShell 版本为3.0+，Management Framework 版本为3.0+。</li>
+</ul>
+<p>如上条件满足后，方可正常和Ansible通信。</p>
+<h2 id="系统介绍"><a href="#系统介绍" class="headerlink" title="系统介绍"></a>系统介绍</h2><ul>
+<li>管理主机: 172.16.8.247 操作系统: Ubuntu16.04</li>
+<li>被控主机: 172.16.11.176 操作系统: Windows2008_R2_64</li>
+</ul>
+<h2 id="配置管理主机"><a href="#配置管理主机" class="headerlink" title="配置管理主机"></a>配置管理主机</h2><h3 id="安装-winrm-模块"><a href="#安装-winrm-模块" class="headerlink" title="安装 winrm 模块"></a>安装 winrm 模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt install python-pip</div><div class="line">pip install &quot;pywinrm&gt;=0.1.1&quot;</div></pre></td></tr></table></figure>
+<h3 id="动态目录的支持"><a href="#动态目录的支持" class="headerlink" title="动态目录的支持"></a>动态目录的支持</h3><p>如果 windows 主机是通过 活动目录的管理方式，管理机和被管理机基于 <code>kerbero</code>认证，需要安装 <code>python-kerbero</code> 和 <code>MIT krb5</code> 依赖库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get install python-dev libkrb5-dev</div><div class="line">pip install Kerberos</div></pre></td></tr></table></figure>
+<p>配置 Kerberos，在<code>/etc/krb5.conf</code>添加下面配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[realms]</div><div class="line"> MY.DOMAIN.COM = &#123;</div><div class="line">  kdc = domain-controller1.my.domain.com</div><div class="line">  kdc = domain-controller2.my.domain.com</div><div class="line"> &#125;</div><div class="line"> [domain_realm]</div><div class="line">    .my.domain.com = MY.DOMAIN.COM</div></pre></td></tr></table></figure></p>
+<p>验证域账号认证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kinit user@My.DOAMIN.COM</div></pre></td></tr></table></figure></p>
+<h3 id="配置-inventory-主机信息和group-vars-windows-yml变量信息"><a href="#配置-inventory-主机信息和group-vars-windows-yml变量信息" class="headerlink" title="配置 inventory 主机信息和group_vars/windows.yml变量信息"></a>配置 inventory 主机信息和<code>group_vars/windows.yml</code>变量信息</h3><ul>
+<li>inventory</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[windows]    </div><div class="line">172.16.11.176</div></pre></td></tr></table></figure>
+<ul>
+<li>group_vars</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">windows.yml</div><div class="line">ansible_ssh_user: Administrator</div><div class="line">ansible_ssh_password: 密码                                                                                                                                </div><div class="line">ansible_ssh_port: 5986        </div><div class="line">ansible_connection: winrm</div><div class="line">ansible_winrm_server_cert_validation: ignore</div></pre></td></tr></table></figure>
+<p>这里的 ssh_port 不是真正的SSH协议的端口</p>
+<h2 id="被控主机-Windows2008-R2-64"><a href="#被控主机-Windows2008-R2-64" class="headerlink" title="被控主机 (Windows2008_R2_64)"></a>被控主机 (Windows2008_R2_64)</h2><p>和 Linux 发版版稍有区别，远程主机为 Windows 需预先如下配置</p>
+<ul>
+<li>安装Framework 3.0+</li>
+<li>设置PowerShell本地脚本运行权限为remotesigned</li>
+<li>升级PowerShell至3.0+</li>
+<li>自动设置Windows远端管理，英文全称WS-Management（WinRM）</li>
+</ul>
+<h3 id="安装-Framework-3-0"><a href="#安装-Framework-3-0" class="headerlink" title="安装 Framework 3.0+"></a>安装 Framework 3.0+</h3><p>如果系统已经安装可以忽略</p>
+<h3 id="设置-PowerShell-本地脚本运行权限为-remotesigned"><a href="#设置-PowerShell-本地脚本运行权限为-remotesigned" class="headerlink" title="设置 PowerShell 本地脚本运行权限为 remotesigned"></a>设置 PowerShell 本地脚本运行权限为 remotesigned</h3><p>Windows 系统默认不允许非 Adminitor 外的普通用户执行 SP 脚本，即使是管理员，如下开放 SP 脚本执行权限。</p>
+<ul>
+<li>在 cmd 中执行 regedit.exe 打开注册表，在<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell</code>新建字符串值名为<code>ExecutionPolicy</code>，值为<code>remotesigned</code> <strong>或者</strong>，打开 PowerShell 执行命令：<code>set-executionpolicy -executionpolicy unrestricted</code></li>
+</ul>
+<p>这里共4种权限：</p>
+<ul>
+<li>Restricted—默认的设置， 不允许任何script运行；</li>
+<li>AllSigned—只能运行经过数字证书签名的script；</li>
+<li>RemoteSigned—运行本地的script不需要数字签名，但是运行从网络上下载的script就必须要有数字签名；</li>
+<li>Unrestricted—允许所有的script运行。</li>
+</ul>
+<h3 id="升级-powershell至3-0"><a href="#升级-powershell至3-0" class="headerlink" title="升级 powershell至3.0+"></a>升级 powershell至3.0+</h3><p><code>PowerShell 3.0+ ``需基于</code>Windows 7 Sp1<code>安装，Windows7 系统 Sp1 补丁升级请参考 http://windows.microsoft.com/installwindows7sp1。</code>Window 7 和 <code>Windows Server 2008 R2</code>默认安装的有 PowerShell，但版本号一般为<code>2.0</code>版本，所以我们需升级至3.0+，如下图中数字1部分表示PowerShell版本过低需3.0+版本，数字2部分表示当前PowerShell版本为2.0</p>
+<ul>
+<li>查询 powershell 版本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在cmd中执行命令进入powershell</div><div class="line">powershell</div><div class="line">// 检查powershell版本</div><div class="line">Get-Host</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version.png" alt="powershell_version"></p>
+<ul>
+<li>升级 powershell</li>
+</ul>
+<p><a href="https://codeload.github.com/cchurch/ansible/zip/devel" target="_blank" rel="external">下载</a>或者<a href="https://github.com/cchurch/ansible.git" target="_blank" rel="external">克隆</a>升级脚本</p>
+<p>选择使用 powershell 执行<code>ansible-devel\examples\scripts\upgrade_to_ps3</code> 脚本，执行后重启服务器，再次检查 powershell 版本。</p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version3.png" alt="powershell_version3"></p>
+<ul>
+<li>设置Windows远端管理（WS-Management，WinRM）</li>
+</ul>
+<p>选择使用 powershell 执行<code>ansible-devel\examples\scripts\ConfigureRemotingForAnsible.ps1</code> 脚本,执行结果没有返回值即为正常。如执行出现“由于此计算机上的网络连接类型之一设置为公用，因此 WinRM 防火墙例外将不运行”类似报错，请在 PowerShell 中执行命令 Enable-PSRemoting – SkipNetworkProfileCheck –Force 尝试解决。</p>
+<h2 id="验证配置"><a href="#验证配置" class="headerlink" title="验证配置"></a>验证配置</h2><ul>
+<li>在 linux 控制主机上执行命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_ping</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false,</div><div class="line">    &quot;ping&quot;: &quot;pong&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">ansible windows -m setup</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;ansible_facts&quot;: &#123;</div><div class="line">        &quot;ansible_architecture&quot;: &quot;64-bit&quot;,</div><div class="line">        &quot;ansible_date_time&quot;: &#123;</div><div class="line">            &quot;date&quot;: &quot;2016/10/25&quot;,</div><div class="line">            &quot;day&quot;: &quot;25&quot;,</div><div class="line">            &quot;hour&quot;: &quot;23&quot;,</div><div class="line">            &quot;iso8601&quot;: &quot;2016-10-25T23:21:26&quot;,</div><div class="line">            &quot;minute&quot;: &quot;21&quot;,</div><div class="line">            &quot;month&quot;: &quot;10&quot;,</div><div class="line">            &quot;year&quot;: &quot;2016&quot;</div><div class="line">        &#125;,</div><div class="line">        &quot;ansible_distribution&quot;: &quot;Microsoft Windows NT 6.1.7601 Service Pack 1&quot;,</div><div class="line">        &quot;ansible_distribution_version&quot;: &quot;6.1.7601.65536&quot;,</div><div class="line">        &quot;ansible_env&quot;: &#123;</div><div class="line">            &quot;ALLUSERSPROFILE&quot;: &quot;C:\\ProgramData&quot;,</div><div class="line">            &quot;APPDATA&quot;: &quot;C:\\Users\\Administrator\\AppData\\Roaming&quot;,</div><div class="line">            &quot;COMPUTERNAME&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">            &quot;ComSpec&quot;: &quot;C:\\Windows\\system32\\cmd.exe&quot;,</div><div class="line">            &quot;CommonProgramFiles&quot;: &quot;C:\\Program Files\\Common Files&quot;,</div><div class="line">            &quot;CommonProgramFiles(x86)&quot;: &quot;C:\\Program Files (x86)\\Common Files&quot;,</div><div class="line">            &quot;CommonProgramW6432&quot;: &quot;C:\\Program Files\\Common Files&quot;,</div><div class="line">            &quot;FP_NO_HOST_CHECK&quot;: &quot;NO&quot;,</div><div class="line">            &quot;HOMEDRIVE&quot;: &quot;C:&quot;,</div><div class="line">            &quot;HOMEPATH&quot;: &quot;\\Users\\Administrator&quot;,</div><div class="line">            &quot;LOCALAPPDATA&quot;: &quot;C:\\Users\\Administrator\\AppData\\Local&quot;,</div><div class="line">            &quot;LOGONSERVER&quot;: &quot;\\\\WIN-J33CVNTPJ41&quot;,</div><div class="line">            &quot;MODULE_COMPLEX_ARGS&quot;: &quot;&#123;\&quot;_ansible_version\&quot;: \&quot;2.1.2.0\&quot;, \&quot;_ansible_selinux_special_fs\&quot;: [\&quot;fuse\&quot;, \&quot;nfs\&quot;, \&quot;vboxsf\&quot;, \&quot;ramfs\&quot;], \&quot;_ansible_no_log\&quot;: false, \&quot;_ansible_verbosity\&quot;: 0, \&quot;_ansible_syslog_facility\&quot;: \&quot;LOG_USER\&quot;, \&quot;_ansible_diff\&quot;: false, \&quot;_ansible_debug\&quot;: false, \&quot;_ansible_check_mode\&quot;: false&#125;&quot;,</div><div class="line">            &quot;NUMBER_OF_PROCESSORS&quot;: &quot;4&quot;,</div><div class="line">            &quot;OS&quot;: &quot;Windows_NT&quot;,</div><div class="line">            &quot;PATHEXT&quot;: &quot;.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL&quot;,</div><div class="line">            &quot;PROCESSOR_ARCHITECTURE&quot;: &quot;AMD64&quot;,</div><div class="line">            &quot;PROCESSOR_IDENTIFIER&quot;: &quot;Intel64 Family 6 Model 13 Stepping 3, GenuineIntel&quot;,</div><div class="line">            &quot;PROCESSOR_LEVEL&quot;: &quot;6&quot;,</div><div class="line">            &quot;PROCESSOR_REVISION&quot;: &quot;0d03&quot;,</div><div class="line">            &quot;PROMPT&quot;: &quot;$P$G&quot;,</div><div class="line">            &quot;PSExecutionPolicyPreference&quot;: &quot;Unrestricted&quot;,</div><div class="line">            &quot;PSModulePath&quot;: &quot;C:\\Users\\Administrator\\Documents\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules&quot;,</div><div class="line">            &quot;PUBLIC&quot;: &quot;C:\\Users\\Public&quot;,</div><div class="line">            &quot;Path&quot;: &quot;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0&quot;,</div><div class="line">            &quot;ProgramData&quot;: &quot;C:\\ProgramData&quot;,</div><div class="line">            &quot;ProgramFiles&quot;: &quot;C:\\Program Files&quot;,</div><div class="line">            &quot;ProgramFiles(x86)&quot;: &quot;C:\\Program Files (x86)&quot;,</div><div class="line">            &quot;ProgramW6432&quot;: &quot;C:\\Program Files&quot;,</div><div class="line">            &quot;SystemDrive&quot;: &quot;C:&quot;,</div><div class="line">            &quot;SystemRoot&quot;: &quot;C:\\Windows&quot;,</div><div class="line">            &quot;TEMP&quot;: &quot;C:\\Users\\ADMINI~1\\AppData\\Local\\Temp&quot;,</div><div class="line">            &quot;TMP&quot;: &quot;C:\\Users\\ADMINI~1\\AppData\\Local\\Temp&quot;,</div><div class="line">            &quot;USERDOMAIN&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">            &quot;USERNAME&quot;: &quot;Administrator&quot;,</div><div class="line">            &quot;USERPROFILE&quot;: &quot;C:\\Users\\Administrator&quot;,</div><div class="line">            &quot;windir&quot;: &quot;C:\\Windows&quot;,</div><div class="line">            &quot;windows_tracing_flags&quot;: &quot;3&quot;,</div><div class="line">            &quot;windows_tracing_logfile&quot;: &quot;C:\\BVTBin\\Tests\\installpackage\\csilogfile.log&quot;</div><div class="line">        &#125;,</div><div class="line">        &quot;ansible_fqdn&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">        &quot;ansible_hostname&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">        &quot;ansible_interfaces&quot;: [</div><div class="line">            &#123;</div><div class="line">                &quot;default_gateway&quot;: &quot;42.62.9.1&quot;,</div><div class="line">                &quot;dns_domain&quot;: null,</div><div class="line">                &quot;interface_index&quot;: 11,</div><div class="line">                &quot;interface_name&quot;: &quot;Intel(R) PRO/1000 MT Network Connection&quot;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                &quot;default_gateway&quot;: null,</div><div class="line">                &quot;dns_domain&quot;: null,</div><div class="line">                &quot;interface_index&quot;: 12,</div><div class="line">                &quot;interface_name&quot;: &quot;Intel(R) PRO/1000 MT Network Connection #2&quot;</div><div class="line">            &#125;</div><div class="line">        ],</div><div class="line">        &quot;ansible_ip_addresses&quot;: [</div><div class="line">            &quot;42.62.9.176&quot;,</div><div class="line">            &quot;fe80::cd71:a280:1406:de71&quot;,</div><div class="line">            &quot;172.16.11.176&quot;,</div><div class="line">            &quot;fe80::304d:48c:4d4f:67d9&quot;</div><div class="line">        ],</div><div class="line">        &quot;ansible_lastboot&quot;: &quot;2016-10-25 22:15:20Z&quot;,</div><div class="line">        &quot;ansible_os_family&quot;: &quot;Windows&quot;,</div><div class="line">        &quot;ansible_os_name&quot;: &quot;Microsoft Windows Server 2008 R2 Enterprise&quot;,</div><div class="line">        &quot;ansible_powershell_version&quot;: 3,</div><div class="line">        &quot;ansible_system&quot;: &quot;Win32NT&quot;,</div><div class="line">        &quot;ansible_totalmem&quot;: 8589524992,</div><div class="line">        &quot;ansible_uptime_seconds&quot;: 3966,</div><div class="line">        &quot;ansible_win_rm_certificate_expires&quot;: &quot;2017-10-24 18:26:13&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;changed&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="windows-下可用的模块"><a href="#windows-下可用的模块" class="headerlink" title="windows 下可用的模块"></a>windows 下可用的模块</h2><p>与 linux 系统相比， windows 下可以使用的模块就很少了，下面是常用的一些模块</p>
+<ul>
+<li>scripts,raw,slurp,setup模块在Windows 下可正常使用</li>
+<li>win_acl (E) —设置文件/目录属主属组权限</li>
+<li>win_copy—拷贝文件到远程Windows主机</li>
+<li>win_file —创建，删除文件或目录</li>
+<li>win_lineinfile—匹配替换文件内容</li>
+<li>win_package (E) —安装/卸载本地或网络软件包</li>
+<li>win_ping —Windows系统下的ping模块，常用来测试主机是否存活</li>
+<li>win_service—管理Windows Services服务</li>
+<li>win_user —管理Windows本地用户</li>
+</ul>
+<p>更多模块介绍可以参考 <a href="http://docs.ansible.com/ansible/list_of_windows_modules.html" target="_blank" rel="external">ansible官网模块页面</a></p>
+<h2 id="windows-ansible-模块实践"><a href="#windows-ansible-模块实践" class="headerlink" title="windows ansible 模块实践"></a>windows ansible 模块实践</h2><h3 id="传输文件到指定目录"><a href="#传输文件到指定目录" class="headerlink" title="传输文件到指定目录"></a>传输文件到指定目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_copy -a &apos;src=/root/windows/files/helloworld.ps1 dest=C:\\files\\helloworld.ps1&apos;   </div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: true,</div><div class="line">    &quot;checksum&quot;: &quot;e53fa06a2ab5313165632e7c99a04af587cc6b47&quot;,</div><div class="line">    &quot;operation&quot;: &quot;file_copy&quot;,</div><div class="line">    &quot;original_basename&quot;: &quot;helloworld.ps1&quot;,</div><div class="line">    &quot;size&quot;: 112</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="删除指定文件"><a href="#删除指定文件" class="headerlink" title="删除指定文件"></a>删除指定文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_file -a &apos;path=c:\\files\\helloworld.sp1 state=absent&apos;</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="执行远程脚本"><a href="#执行远程脚本" class="headerlink" title="执行远程脚本"></a>执行远程脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ansible windows -m script -a &apos;/root/windows/files/helloworld.ps1&apos;</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: true,</div><div class="line">    &quot;rc&quot;: 0,</div><div class="line">    &quot;stderr&quot;: &quot;&quot;,</div><div class="line">    &quot;stdout&quot;: &quot;\nHello World!\nGood-bye World! \n\n&quot;,</div><div class="line">    &quot;stdout_lines&quot;: [</div><div class="line">        &quot;&quot;,</div><div class="line">        &quot;Hello World!&quot;,</div><div class="line">        &quot;Good-bye World! &quot;,</div><div class="line">        &quot;&quot;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_user -a &apos;name=Czero password=Line.kong group=Administrators&apos;   </div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">   &quot;account_disabled&quot;: false,</div><div class="line">   &quot;account_locked&quot;: false,</div><div class="line">   &quot;changed&quot;: true,</div><div class="line">   &quot;description&quot;: &quot;&quot;,</div><div class="line">   &quot;fullname&quot;: &quot;Czero&quot;,</div><div class="line">   &quot;groups&quot;: [],</div><div class="line">   &quot;name&quot;: &quot;Czero&quot;, </div><div class="line">   &quot;password_expired&quot;: false,</div><div class="line">   &quot;password_never_expires&quot;: false,</div><div class="line">   &quot;path&quot;: &quot;WinNT://WORKGROUP/WIN-J33CVNTPJ41/Czero&quot;,</div><div class="line">   &quot;sid&quot;: &quot;S-1-5-21-459422901-1284336649-1347501021-1002&quot;,</div><div class="line">   &quot;state&quot;: &quot;present&quot;,</div><div class="line">   &quot;user_cannot_change_password&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="playbook"><a href="#playbook" class="headerlink" title="playbook"></a>playbook</h3><ul>
+<li>copy 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">vim copy.yml</div><div class="line">---                                                                   </div><div class="line">- name: copy file on windows                                          </div><div class="line">  hosts: windows                                                      </div><div class="line">  tasks:                                                              </div><div class="line">    - name: copy file on remote windows                               </div><div class="line">      win_file: src=/root/windows/files/helloworld.ps1 dest=c:\\files\\helloworld.ps1</div><div class="line"></div><div class="line">ansible-playbook copy.yml</div><div class="line"></div><div class="line">PLAY [copy file on windows] ****************************************************</div><div class="line"></div><div class="line">TASK [setup] *******************************************************************</div><div class="line">Wednesday 26 October 2016  11:38:27 +0800 (0:00:00.038)       0:00:00.038 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">TASK [copy file on remote windows] *********************************************</div><div class="line">Wednesday 26 October 2016  11:38:31 +0800 (0:00:04.071)       0:00:04.110 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">PLAY RECAP *********************************************************************</div><div class="line"></div><div class="line">172.16.11.176              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line">Wednesday 26 October 2016  11:38:33 +0800 (0:00:02.329)       0:00:06.439 *****</div><div class="line">===============================================================================</div><div class="line">setup ------------------------------------------------------------------- 4.07s</div><div class="line">copy file on remote windows --------------------------------------------- 2.33s</div></pre></td></tr></table></figure>
+<ul>
+<li>执行命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">vim test_raw.yml</div><div class="line">- name: test raw module  </div><div class="line">  hosts: windows         </div><div class="line">  tasks:                 </div><div class="line">    - name: run ipconfig</div><div class="line">      raw: ipconfig      </div><div class="line">      register: ipconfig</div><div class="line">    - debug: var=ipconfig        </div><div class="line"></div><div class="line">ansible-playbook test_raw.yml</div><div class="line"></div><div class="line">PLAY [test raw module] *********************************************************</div><div class="line"></div><div class="line">TASK [setup] *******************************************************************</div><div class="line">Wednesday 26 October 2016  11:45:30 +0800 (0:00:00.037)       0:00:00.037 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">TASK [run ipconfig] ************************************************************</div><div class="line">Wednesday 26 October 2016  11:45:34 +0800 (0:00:04.076)       0:00:04.114 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">TASK [debug] *******************************************************************</div><div class="line">Wednesday 26 October 2016  11:45:35 +0800 (0:00:00.688)       0:00:04.803 *****</div><div class="line">ok: [172.16.11.176] =&gt; &#123;</div><div class="line">    &quot;ipconfig&quot;: &#123;</div><div class="line">        &quot;changed&quot;: false,</div><div class="line">        &quot;rc&quot;: 0,</div><div class="line">        &quot;stderr&quot;: &quot;&quot;,</div><div class="line">        &quot;stdout&quot;: &quot;\r\nWindows IP Configuration\r\n\r\n\r\nEthernet adapter �������� 2:\r\n\r\n   Connection-specific DNS Suffix  . : \r\n   Link-local IPv6 Address . . . . . : fe80::304d:48c:4d4f:67d9%12\r\n   IPv4 Address. . . . . . . . . . . : 172.16.11.176\r\n   Subnet Mask . . . . . . . . . . . : 255.255.255.0\r\n   Default Gateway . . . . . . . . . : \r\n\r\nEthernet adapter ��������:\r\n\r\n   Connection-specific DNS Suffix  . : \r\n   Link-local IPv6 Address . . . . . : fe80::cd71:a280:1406:de71%11\r\n   IPv4 Address. . . . . . . . . . . : 42.62.9.176\r\n   Subnet Mask . . . . . . . . . . . : 255.255.255.0\r\n   Default Gateway . . . . . . . . . : 42.62.9.1\r\n\r\nTunnel adapter isatap.&#123;9ED2F327-7AD8-488B-9D74-F8E3E8B5E2B1&#125;:\r\n\r\n   Media State . . . . . . . . . . . : Media disconnected\r\n   Connection-specific DNS Suffix  . : \r\n\r\nTunnel adapter isatap.&#123;AB02B80C-75A3-4F59-B19B-8AE4F8103DF8&#125;:\r\n\r\n   Media State . . . . . . . . . . . : Media disconnected\r\n   Connection-specific DNS Suffix  . : \r\n\r\nTunnel adapter 6TO4 Adapter:\r\n\r\n   Connection-specific DNS Suffix  . : \r\n   IPv6 Address. . . . . . . . . . . : 2002:2a3e:9b0::2a3e:9b0\r\n   Default Gateway . . . . . . . . . : \r\n&quot;,</div><div class="line">        &quot;stdout_lines&quot;: [</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Windows IP Configuration&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Ethernet adapter �������� 2:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;   Link-local IPv6 Address . . . . . : fe80::304d:48c:4d4f:67d9%12&quot;,</div><div class="line">            &quot;   IPv4 Address. . . . . . . . . . . : 172.16.11.176&quot;,</div><div class="line">            &quot;   Subnet Mask . . . . . . . . . . . : 255.255.255.0&quot;,</div><div class="line">            &quot;   Default Gateway . . . . . . . . . : &quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Ethernet adapter ��������:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;   Link-local IPv6 Address . . . . . : fe80::cd71:a280:1406:de71%11&quot;,</div><div class="line">            &quot;   IPv4 Address. . . . . . . . . . . : 42.62.9.176&quot;,</div><div class="line">            &quot;   Subnet Mask . . . . . . . . . . . : 255.255.255.0&quot;,</div><div class="line">            &quot;   Default Gateway . . . . . . . . . : 42.62.9.1&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Tunnel adapter isatap.&#123;9ED2F327-7AD8-488B-9D74-F8E3E8B5E2B1&#125;:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Media State . . . . . . . . . . . : Media disconnected&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Tunnel adapter isatap.&#123;AB02B80C-75A3-4F59-B19B-8AE4F8103DF8&#125;:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Media State . . . . . . . . . . . : Media disconnected&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Tunnel adapter 6TO4 Adapter:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;   IPv6 Address. . . . . . . . . . . : 2002:2a3e:9b0::2a3e:9b0&quot;,</div><div class="line">            &quot;   Default Gateway . . . . . . . . . : &quot;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.176              : ok=3    changed=0    unreachable=0    failed=0   </div><div class="line"></div><div class="line">Wednesday 26 October 2016  11:45:35 +0800 (0:00:00.062)       0:00:04.866 *****</div><div class="line">===============================================================================</div><div class="line">setup ------------------------------------------------------------------- 4.08s</div><div class="line">run ipconfig ------------------------------------------------------------ 0.69s</div><div class="line">debug ------------------------------------------------------------------- 0.06s</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Windows下Ansible工作原理&quot;&gt;&lt;a href=&quot;#Windows下Ansible工作原理&quot; class=&quot;headerlink&quot; title=&quot;Windows下Ansible工作原理&quot;&gt;&lt;/a&gt;Windows下Ansible工作原理&lt;/h1&gt;&lt;p&gt;An
+    
+    </summary>
+    
+      <category term="运维自动化" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+      <category term="Ansible" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/Ansible/"/>
+    
+    
+      <category term="ansible" scheme="http://czero000.github.io/tags/ansible/"/>
+    
+  </entry>
   
   <entry>
     <title>配置不同ssh-key访问不同git仓库</title>
@@ -1432,252 +1546,6 @@
     
     
       <category term="git" scheme="http://czero000.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MooseFS技术详解</title>
-    <link href="http://czero000.github.io/2016/04/27/mfs-Technology.html"/>
-    <id>http://czero000.github.io/2016/04/27/mfs-Technology.html</id>
-    <published>2016-04-27T01:37:56.000Z</published>
-    <updated>2016-10-20T10:50:11.133Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="MFS-概述"><a href="#MFS-概述" class="headerlink" title="MFS 概述"></a>MFS 概述</h1><p>MooseFS是一款具有冗余容错功能的分布式文件系统。它把数据分散在多台服务器上，确保一份数据多个备份副本，对外提供统一的结构。</p>
-<h2 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h2><p>对于标准的文件操作，MooseFS表现与其他类Unix文件系统一致。<br>支持的通过文件系统特性：</p>
-<ul>
-<li>层次结构（目录树）</li>
-<li>兼容POSIX文件属性</li>
-<li>支持特殊文件</li>
-<li>符号链接和硬链接</li>
-<li>基于IP地址和密码的访问控制</li>
-</ul>
-<h2 id="独有特性"><a href="#独有特性" class="headerlink" title="独有特性"></a>独有特性</h2><ul>
-<li>高可靠性(数据的多个副本存储在不同服务器)</li>
-<li>容量动态扩展（添加新硬盘或者服务器）</li>
-<li>可以回收在制定时间内删除的文件，类似回收站功能</li>
-<li>可以对整个文件甚至是正在被写入的文件创建文件快照</li>
-</ul>
-<h2 id="MFS整体架构的四种角色"><a href="#MFS整体架构的四种角色" class="headerlink" title="MFS整体架构的四种角色"></a>MFS整体架构的四种角色</h2><ul>
-<li><p>Master（元数据服务器）<br>负责各个数据存储服务器的管理，文件读写调度，文件空间回收以及恢复，多节点拷贝。</p>
-</li>
-<li><p>Metalogger（元数据日志服务器）<br>负责备份Master服务器的changelog。文件类型为<code>changelog.*.mfs</code>，以便在Master出问题时接替其工作</p>
-</li>
-<li><p>Chunk（数据存储服务器）<br>负责连接Master，听从Master调度，提供存储空间，并为客户端提供数据传输</p>
-</li>
-<li><p>Client（客户端挂载）<br>通过FUSE内核接口挂载远程管理服务器（master）上所管理的数据存储服务器，使用起来和本地文件系统一样</p>
-</li>
-</ul>
-<h2 id="MFS工作图解"><a href="#MFS工作图解" class="headerlink" title="MFS工作图解"></a>MFS工作图解</h2><ul>
-<li>网络架构</li>
-</ul>
-<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/moosefs-network.png" alt="MooseFS-NetWork.png" title="MooseFS-NetWork"></p>
-<ul>
-<li>工作原理</li>
-</ul>
-<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/moosefs-write-process.png" alt="moosefs-write-process.png" title="MooseFS Write Process"></p>
-<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/moosefs-read-process.png" alt="moosefs-read-process.png" title="MooseFS Read Process"></p>
-<ul>
-<li>集群拓扑</li>
-</ul>
-<p><img src="http://ofc9x1ccn.bkt.clouddn.com/moosefs/mfs-topology.png" alt="mfs-topology.png" title="MooseFS-Topology"></p>
-<hr>
-<h1 id="安装配置MFS"><a href="#安装配置MFS" class="headerlink" title="安装配置MFS"></a>安装配置MFS</h1><h2 id="系统环境介绍"><a href="#系统环境介绍" class="headerlink" title="系统环境介绍"></a>系统环境介绍</h2><ul>
-<li>OS：<code>CentOS Linux release 7.2.1511 (Core)</code></li>
-<li>软件版本：2.0.81-1</li>
-<li>节点配置</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>ip地址</th>
-<th>角色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>172.16.18.137</td>
-<td>master</td>
-</tr>
-<tr>
-<td>172.16.18.134</td>
-<td>metalogger</td>
-</tr>
-<tr>
-<td>172.16.18.183</td>
-<td>chunk</td>
-</tr>
-<tr>
-<td>172.16.18.184</td>
-<td>chunk</td>
-</tr>
-<tr>
-<td>172.16.18.185</td>
-<td>chunk</td>
-</tr>
-<tr>
-<td>172.16.18.186</td>
-<td>chunk</td>
-</tr>
-<tr>
-<td>172.16.18.187</td>
-<td>chunk</td>
-</tr>
-</tbody>
-</table>
-<p>chunk上有四块硬盘，第一块为系统，剩下三块作为数据存储，每块容量为4TB</p>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><h3 id="从官方软件库安装MFS"><a href="#从官方软件库安装MFS" class="headerlink" title="从官方软件库安装MFS"></a>从官方软件库安装MFS</h3><ul>
-<li>添加yum key</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl &quot;http://ppa.moosefs.com/RPM-GPG-KEY-MooseFS&quot; &gt; /etc/pki/rpm-gpg/RPM-GPG-KEY-MooseFS</div></pre></td></tr></table></figure>
-<ul>
-<li>下载软件库配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//For EL7 family:</div><div class="line">curl &quot;http://ppa.moosefs.com/MooseFS-stable-el7.repo&quot; &gt; /etc/yum.repos.d/MooseFS.repo</div><div class="line"></div><div class="line">//For EL6 family:</div><div class="line">curl &quot;http://ppa.moosefs.com/MooseFS-stable-el6.repo&quot; &gt; /etc/yum.repos.d/MooseFS.repo</div><div class="line"></div><div class="line">For EL5 family:</div><div class="line">Due to GPGv4 incompatibility with CentOS 5, CentOS 5 is deprecated.</div><div class="line">If you really need CentOS 5 packages, please contact support@moosefs.com.</div></pre></td></tr></table></figure>
-<ul>
-<li>安装软件包</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// For Master Server:</div><div class="line">yum install moosefs-master moosefs-cli moosefs-cgi moosefs-cgiserv</div><div class="line"></div><div class="line">// For Chunkservers:</div><div class="line">yum install moosefs-chunkserver</div><div class="line"></div><div class="line">//For Metaloggers:</div><div class="line">yum install moosefs-metalogger</div><div class="line"></div><div class="line">For Clients:</div><div class="line">//yum install moosefs-client</div></pre></td></tr></table></figure>
-<ul>
-<li>启动服务</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//To start process manually:</div><div class="line">mfsmaster start</div><div class="line">mfschunkserver start</div><div class="line"></div><div class="line">//For systemd OS family - EL7:</div><div class="line">systemctl start moosefs-master.service</div><div class="line">systemctl start moosefs-chunkserver.service</div><div class="line"></div><div class="line">//For SysV OS family - EL6:</div><div class="line">service moosefs-master start</div><div class="line">service moosefs-chunkserver start</div></pre></td></tr></table></figure>
-<hr>
-<h3 id="从源码安装MFS"><a href="#从源码安装MFS" class="headerlink" title="从源码安装MFS"></a>从源码安装MFS</h3><ul>
-<li>下载软件包</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://ppa.moosefs.com/src/moosefs-2.0.88-1.tar.gz</div></pre></td></tr></table></figure>
-<ul>
-<li>添加用户和组</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -s /sbin/nologin  -M mfs</div></pre></td></tr></table></figure>
-<ul>
-<li>安装软件包</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">tar-zxf moosefs-2.0.88-1.tar.gz</div><div class="line">cd moosefs-2.0.88</div><div class="line"></div><div class="line">// For master</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfschunkserver --disable-mfsmount</div><div class="line"></div><div class="line">// For metalogger</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfschunkserver --disable-mfsmount</div><div class="line"></div><div class="line">// For chunk</div><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfsmaster --disable-mfsmount --disable-mfscgi --disable-mfscgiserv</div></pre></td></tr></table></figure>
-<ul>
-<li>安装MFS client</li>
-</ul>
-<p>client安装需要fuse支持，fuse可以从源码和仓库中安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure --prefix=/usr/local/mfs --with-default-user=mfs --with-default-group=mfs --disable-mfsmaster --disable-mfschunkserver --disable-mfscgi --disable-mfscgiserv</div></pre></td></tr></table></figure>
-<h2 id="配置MFS"><a href="#配置MFS" class="headerlink" title="配置MFS"></a>配置MFS</h2><h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><ul>
-<li>配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">// mfsmaster.cfg</div><div class="line"># WORKING_USER = mfs 运行 master server 的用户</div><div class="line"># WORKING_GROUP = mfs 运行 master server 的组</div><div class="line"># SYSLOG_IDENT = mfsmaster master server 在 syslog中的标识，说明是由 master serve 产生的</div><div class="line"># LOCK_MEMORY = 0 是否执行 mlockall()以避免 mfsmaster 进程溢出（默认为 0）</div><div class="line"># NICE_LEVEL = -19 运行的优先级(如果可以默认是 -19; 注意: 进程必须是用 root启动)</div><div class="line"></div><div class="line"># EXPORTS_FILENAME = /usr/local/mfs/etc/mfsexports.cfg 被挂接目录及其权限控制文件的存放位置</div><div class="line"></div><div class="line"># TOPOLOGY_FILENAME = /usr/local/mfs/etc/mfs/mfstopology.cfg</div><div class="line"></div><div class="line"># DATA_PATH = /usr/local/mfs/var/mfs 数据存放路径，此目录下大致有三类文件，changelog，sessions和 stats；</div><div class="line"></div><div class="line"># BACK_LOGS = 50 metadata 的改变 log 文件数目(默认是 50);</div><div class="line"># BACK_META_KEEP_PREVIOUS = 1</div><div class="line"></div><div class="line"># REPLICATIONS_DELAY_INIT = 300 延迟复制的时间（默认是 300s）;</div><div class="line"># REPLICATIONS_DELAY_DISCONNECT = 3600 chunkserver 断开的复制延迟（默认是 3600）；</div><div class="line"></div><div class="line"># MATOML_LISTEN_HOST = * metalogger 监听的 IP 地址(默认是*，代表任何 IP)；</div><div class="line"># MATOML_LISTEN_PORT = 9419 metalogger 监听的端口地址(默认是 9419)；</div><div class="line"># MATOML_LOG_PRESERVE_SECONDS = 600</div><div class="line"></div><div class="line"># MATOCS_LISTEN_HOST = * 用于 chunkserver 连接的 IP 地址（默认是*，代表任何 IP）；</div><div class="line"># MATOCS_LISTEN_PORT = 9420 用于 chunkserver 连接的端口地址（默认是 9420）；</div><div class="line"></div><div class="line"># MATOCU_LISTEN_HOST = * 用于客户端挂接连接的 IP 地址(默认是*，代表任何 IP)；</div><div class="line"># MATOCU_LISTEN_PORT = 9421 用于客户端挂接连接的端口地址（默认是 9421）；</div><div class="line"></div><div class="line"># CHUNKS_LOOP_MAX_CPS = 100000</div><div class="line"># CHUNKS_LOOP_MIN_TIME = 300 chunks 的回环频率（默认是：300 秒）；</div><div class="line">注：原文为Chunks loop frequency in seconds (default is 300)</div><div class="line"></div><div class="line"># CHUNKS_SOFT_DEL_LIMIT = 10</div><div class="line"># CHUNKS_HARD_DEL_LIMIT = 25</div><div class="line"># CHUNKS_WRITE_REP_LIMIT = 2</div><div class="line"># CHUNKS_READ_REP_LIMIT = 10</div><div class="line"># ACCEPTABLE_DIFFERENCE = 0.1</div><div class="line"></div><div class="line"># SESSION_SUSTAIN_TIME = 86400</div><div class="line"># REJECT_OLD_CLIENTS = 0 弹出低于 1.6.0 的客户端挂接（0 或 1，默认是 0）注意mfsexports 访问控制对于那些老客户是没用的</div><div class="line"># deprecated:</div><div class="line"># CHUNKS_DEL_LIMIT - use CHUNKS_SOFT_DEL_LIMIT instead</div><div class="line"># LOCK_FILE - lock system has been changed, and this option is used only to search for old lockfile</div><div class="line"></div><div class="line"></div><div class="line">\\ mfsexport.cfg</div><div class="line">#* / ro</div><div class="line">#192.168.1.0/24 / rw</div><div class="line">#192.168.1.0/24 / rw,alldirs,maproot=0,password=passcode</div><div class="line">#10.0.0.0-10.0.0.5 /test rw,maproot=nobody,password=test</div><div class="line">* . rw</div><div class="line">#* / rw,alldirs,maproot=0</div><div class="line">172.16.18.221          .               rw                             \\ 回收站</div><div class="line">172.16.18.221          /               rw,alldirs,maproot=0</div><div class="line">172.16.18.134          /               rw,alldirs,maproot=0</div></pre></td></tr></table></figure>
-<ul>
-<li>修改配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/mfs/etc/</div><div class="line">mv mfsmaster.cfg.dist mfsmaster.cfg</div><div class="line">mv mfsexports.cfg.dist mfsexports.cfg</div></pre></td></tr></table></figure>
-<p>mfsmaster.cfg : master的主配置文件，配置文件中所有的选项都是用#注释掉的，这代表的是将会使用的选项的默认参数，如果要修改只需取消注释修改其值为你所要使用的值即可；</p>
-<p>mfsexportes.cfg 为共享mfs文件系统的控制文件，NFS要共享一个目录时，我们会使用vim /etc/exports命令，编写共享给谁，所要共享的目录，共享出去的属性这些内容，而mfsexports.cfg的作用与其类似其书写格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">client		Directory			Property</div><div class="line">*                /       	rw,alldirs,maproot=0</div><div class="line">client支持格式：ip、ip/netmask、ip/位数掩码、ip-ip、*</div></pre></td></tr></table></figure>
-<p>该文件每一个条目分为三部分：<br>第一部分：客户端的ip 地址<br>第二部分：被挂接的目录<br>第三部分：客户端拥有的权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//地址可以指定的几种表现形式：</div><div class="line">* 所有的ip 地址</div><div class="line">n.n.n.n 单个ip 地址</div><div class="line">n.n.n.n/b IP 网络地址/位数掩码</div><div class="line">n.n.n.n/m.m.m.m IP 网络地址/子网掩码</div><div class="line">f.f.f.f-t.t.t.t IP 段</div><div class="line"></div><div class="line">//目录部分需要注意两点：</div><div class="line">/ 标识MooseFS 根;</div><div class="line">. 表示MFSMETA 文件系统</div><div class="line"></div><div class="line">//权限部分：</div><div class="line">ro 只读模式共享</div><div class="line">rw 读写的方式共享</div><div class="line">alldirs 许挂载任何指定的子目录</div></pre></td></tr></table></figure></p>
-<ul>
-<li>启动服务</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/sbin/mfsmaster start</div><div class="line"></div><div class="line">//为了监控moosefs的当前运行状态，我们可以运行cgi服务，这样就可以用浏览器查看整个moosefs的运行情况</div><div class="line">/usr/local/mfs/sbin/mfscgiserv</div></pre></td></tr></table></figure>
-<h3 id="Metalogger"><a href="#Metalogger" class="headerlink" title="Metalogger"></a>Metalogger</h3><ul>
-<li>修改配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mv mfsmetalogger.cfg.dist mfsmetalogger.cfg</div><div class="line"></div><div class="line">META_DOWNLOAD_FREQ = 24 \\元数据备份下载请求频率，设置为1小时</div><div class="line">MASTER_HOST = 172.16.18.137 \\修改MASTER_HOST的值，为MASTER_HOST的ip地址</div></pre></td></tr></table></figure>
-<ul>
-<li>启动服务</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/sbin/mfsmetalogger start</div></pre></td></tr></table></figure>
-<h3 id="ChunkServer"><a href="#ChunkServer" class="headerlink" title="ChunkServer"></a>ChunkServer</h3><ul>
-<li>配置分区</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">parted -s /dev/sdb &apos;mklabel gpt&apos;;parted -s /dev/sdc &apos;mklabel gpt&apos;;parted -s /dev/sdd &apos;mklabel gpt&apos;</div><div class="line">parted -s /dev/sdb  &apos;mkpart primary 0 -1&apos;; parted -s /dev/sdc  &apos;mkpart primary 0 -1&apos;; parted -s /dev/sdd &apos;mkpart primary 0 -1&apos;</div><div class="line">mkfs.ext4 -q -T largefile /dev/sdb1;mkfs.ext4 -q -T largefile /dev/sdc1;mkfs.ext4 -q -T largefile /dev/sdd1</div><div class="line">mkdir /MFS_data&#123;1,2,3&#125;  </div><div class="line">mount /dev/sdb1 /MFS_data1; mount /dev/sdc1 /MFS_data2; mount /dev/sdd1 /MFS_data3</div><div class="line">chown mfs:mfs /MFS_data*</div></pre></td></tr></table></figure>
-<ul>
-<li>修改配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mv mfschunkserver.cfg.dist mfschunkserver.cfg</div><div class="line">修改MASTER_HOST的值，为MASTER_HOST的ip地址：</div><div class="line">MASTER_HOST = 172.16.18.137</div><div class="line"></div><div class="line">mv mfshdd.cfg.dist mfshdd.cfg</div><div class="line">增加挂载目录信息</div><div class="line">/MFS_data1</div><div class="line">/MFS_data2</div><div class="line">/MFS_data3</div></pre></td></tr></table></figure>
-<ul>
-<li>启动服务</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/sbin/mfschunkserver start</div></pre></td></tr></table></figure>
-<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><ul>
-<li>挂载MFS</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /MFS_data</div><div class="line">/usr/local/mfs/bin/mfsmount /MFS_data -H 172.16.18.137</div><div class="line">mfsmaster accepted connection with parameters: read-write,restricted_ip ; root mapped to root:root</div></pre></td></tr></table></figure>
-<p>特别需要注意的是，所有的MFS 都是挂接同一个元数据服务器master 的IP,而不是其他数据存储<br>服务器chunkserver 的IP</p>
-<hr>
-<h1 id="使用MFS"><a href="#使用MFS" class="headerlink" title="使用MFS"></a>使用MFS</h1><h2 id="MFS文件系统使用"><a href="#MFS文件系统使用" class="headerlink" title="MFS文件系统使用"></a>MFS文件系统使用</h2><p>Client通过MFS软件提供的工具来管理MFS文件系统，下面是工具介绍</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/bin/mfstools -h</div><div class="line">mfs multi tool</div><div class="line"></div><div class="line">usage:</div><div class="line">        mfstools create - create symlinks (mfs&lt;toolname&gt; -&gt; /usr/local/mfs/bin/mfstools)</div><div class="line"></div><div class="line">tools:</div><div class="line">        mfsgetgoal                               // 设定副本数</div><div class="line">        mfssetgoal                               // 获取副本数</div><div class="line">        mfsgettrashtime                          // 设定回收站时间</div><div class="line">        mfssettrashtime                          // 设定回收站时间</div><div class="line">        mfscheckfile                             // 检查文件</div><div class="line">        mfsfileinfo                              // 文件信息</div><div class="line">        mfsappendchunks                            </div><div class="line">        mfsdirinfo                                // 目录信息</div><div class="line">        mfsfilerepair                             // 文件修复</div><div class="line">        mfsmakesnapshot                           // 快照     </div><div class="line">        mfsgeteattr                               // 设置权限</div><div class="line">        mfsseteattr</div><div class="line">        mfsdeleattr</div><div class="line"></div><div class="line">deprecated tools:                                  // 递归设置</div><div class="line">        mfsrgetgoal = mfsgetgoal -r</div><div class="line">        mfsrsetgoal = mfssetgoal -r</div><div class="line">        mfsrgettrashtime = mfsgettreshtime -r</div><div class="line">        mfsrsettrashtime = mfssettreshtime -r</div></pre></td></tr></table></figure>
-<h3 id="挂载文件系统"><a href="#挂载文件系统" class="headerlink" title="挂载文件系统"></a>挂载文件系统</h3><p>MooseFS 文件系统利用下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mfsmount mountpoint [-d][-f] [-s][-m] [-n][-p] [-HMASTER][-PPORT] [-S PATH][-o OPT[,OPT...]]</div><div class="line">-H MASTER：是管理服务器（master server）的ip 地址</div><div class="line">-P PORT： 是管理服务器（ master server）的端口号，要按照mfsmaster.cfg 配置文件中的变量</div><div class="line">MATOCU_LISTEN_POR 的之填写。如果master serve 使用的是默认端口号则不用指出。</div><div class="line">-S PATH：指出被挂接mfs 目录的子目录，默认是/目录，就是挂载整个mfs 目录。</div></pre></td></tr></table></figure>
-<p>Mountpoint：是指先前创建的用来挂接mfs 的目录。<br>在开始mfsmount 进程时，用一个-m 或-o mfsmeta 的选项，这样可以挂接一个辅助的文件系统<br>MFSMETA，这么做的目的是对于意外的从MooseFS 卷上删除文件或者是为了释放磁盘空间而移动的<br>文件而又此文件又过去了垃圾文件存放期的恢复，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/bin/mfsmount -m /MFS_meta/ -H 172.16.18.137</div></pre></td></tr></table></figure>
-<h3 id="设定副本数量"><a href="#设定副本数量" class="headerlink" title="设定副本数量"></a>设定副本数量</h3><p>目标（goal），是指文件被拷贝副本的份数，设定了拷贝的份数后是可以通过mfsgetgoal 命令来证实的，也可以通过mfsrsetgoal 来改变设定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mfssetgoal 3 /MFS_data/test/</div><div class="line">mfssetgoal 3 /MFS_data/test/</div></pre></td></tr></table></figure>
-<p>用<code>mfsgetgoal –r</code> 和<code>mfssetgoal –r</code> 同样的操作可以对整个树形目录递归操作，其等效于<code>mfsrsetgoal</code>命令。实际的拷贝份数可以通过<code>mfscheckfile</code> 和<code>mfsfile info</code>命令来证实。</p>
-<p><strong>注意以下几种特殊情况：</strong></p>
-<ul>
-<li>一个不包含数据的零长度的文件,尽管没有设置为非零的目标（the non-zero “goal”）,但用mfscheckfile 命令查询将返回一个空的结果；将文件填充内容后，其会根据设置的goal创建副本；这时再将文件清空，其副本依然作为空文件存在。</li>
-<li>假如改变一个已经存在的文件的拷贝个数，那么文件的拷贝份数将会被扩大或者被删除，这个过程会有延时。可以通过mfscheckfile 命令来证实。</li>
-<li>对一个目录设定“目标”，此目录下的新创建文件和子目录均会继承此目录的设定，但不会改变已经存在的文件及目录的拷贝份数。</li>
-</ul>
-<p>可以通过mfsdirinfo来查看整个目录树的信息摘要。</p>
-<h3 id="垃圾回收站"><a href="#垃圾回收站" class="headerlink" title="垃圾回收站"></a>垃圾回收站</h3><p>一个被删除文件能够存放在一个“ 垃圾箱”的时间就是一个隔离时间， 这个时间可以用<code>mfsgettrashtime</code> 命令来验证，也可以使用`mfssettrashtime 命令来设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mfssettrashtime 64800 /MFS_data/test/test1</div><div class="line">mfsgettrashtime /MFS_data/test/test1</div></pre></td></tr></table></figure></p>
-<p>时间的单位是秒(有用的值有:1 小时是3600 秒,24 - 86400 秒,1天 - 604800 秒)。就像文件被存储的份数一样, 为一个目录设定存放时间是要被新创建的文件和目录所继承的。数字0 意味着一个文件被删除后, 将立即被彻底删除，在想回收是不可能的。</p>
-<p>删除文件可以通过一个单独安装MFSMETA 文件系统。特别是它包含目录/ trash (包含任然可以被还原的被删除文件的信息)和/ trash/undel (用于获取文件)。只有管理员有权限访问MFSMETA(用户的uid 0，通常是root)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/mfs/bin/mfsmount -m /MFS_meta/ -H 172.16.18.137</div></pre></td></tr></table></figure>
-<p>被删文件的文件名在“垃圾箱”目录里还可见,文件名由一个八位十六进制的数i-node 和被删文件的文件名组成，在文件名和i-node 之间不是用“/”,而是用了“|”替代。如果一个文件名的长度超过操作系统的限制（通常是255 个字符），那么部分将被删除。通过从挂载点起全路径的文件名被删除的文件任然可以被读写。</p>
-<p>移动这个文件到trash/undel 子目录下，将会使原始的文件恢复到正确的MooseFS 文件系统上路径下（如果路径没有改变）。如果在同一路径下有个新的同名文件，那么恢复不会成功。</p>
-<p>从“垃圾箱”中删除文件结果是释放之前被它站用的空间(删除有延迟,数据被异步删除)。</p>
-<p>在MFSMETA中还有另一个目录reserved，该目录内的是被删除但依然打开的文件。在用户关闭了这些被打开的文件后，reserved 目录中的文件将被删除，文件的数据也将被立即删除。在reserved 目录中文件的命名方法同trash 目录中的一样，但是不能有其他功能的操作。</p>
-<h3 id="快照snapshot"><a href="#快照snapshot" class="headerlink" title="快照snapshot"></a>快照snapshot</h3><p>MooseFS 系统的另一个特征是利用mfsmakesnapshot 工具给文件或者是目录树做快照<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mfsmakesnapshot source ... destination</div></pre></td></tr></table></figure></p>
-<p>Mfsmakesnapshot 是在一次执行中整合了一个或是一组文件的拷贝，而且任何修改这些文件的源文件都不会影响到源文件的快照， 就是说任何对源文件的操作,例如写入源文件，将不会修改副本(或反之亦然)。<br>也可以使用mfsappendchunks：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mfsappendchunks destination-file source-file ...</div></pre></td></tr></table></figure></p>
-<p>当有多个源文件时，它们的快照被加入到同一个目标文件中（每个chunk 的最大量是chunk）。</p>
-<h2 id="MFS集群维护"><a href="#MFS集群维护" class="headerlink" title="MFS集群维护"></a>MFS集群维护</h2><h3 id="启动MFS集群"><a href="#启动MFS集群" class="headerlink" title="启动MFS集群"></a>启动MFS集群</h3><p>安全的启动MooseFS 集群（避免任何读或写的错误数据或类似的问题）的方式是按照以下命令步骤：</p>
-<ol>
-<li>启动mfsmaster 进程</li>
-<li>启动所有的mfschunkserver 进程</li>
-<li>启动mfsmetalogger 进程（如果配置了mfsmetalogger）</li>
-<li>当所有的chunkservers 连接到MooseFS master 后，任何数目的客户端可以利用mfsmount 去挂接被export 的文件系统。（可以通过检查master 的日志或是CGI 监视器来查看是否所有的chunkserver被连接）。</li>
-</ol>
-<h3 id="停止MFS集群"><a href="#停止MFS集群" class="headerlink" title="停止MFS集群"></a>停止MFS集群</h3><p>安全的停止MooseFS 集群：</p>
-<ol>
-<li>在所有的客户端卸载MooseFS 文件系统（用umount 命令或者是其它等效的命令）</li>
-<li>用mfschunkserver stop 命令停止chunkserver 进程</li>
-<li>用mfsmetalogger stop 命令停止metalogger 进程</li>
-<li>用mfsmaster stop 命令停止master 进程</li>
-</ol>
-<h3 id="Chunkservers-的维护"><a href="#Chunkservers-的维护" class="headerlink" title="Chunkservers 的维护"></a>Chunkservers 的维护</h3><p>若每个文件的goal（目标）都不小于2，并且没有under-goal 文件（这些可以用mfsgetgoal –r和mfsdirinfo 命令来检查），那么一个单一的chunkserver 在任何时刻都可能做停止或者是重新启动。以后每当需要做停止或者是重新启动另一个chunkserver 的时候，要确定之前的chunkserver 被连接，而且要没有under-goal chunks。</p>
-<h3 id="MFS元数据备份"><a href="#MFS元数据备份" class="headerlink" title="MFS元数据备份"></a>MFS元数据备份</h3><p>通常元数据有两部分的数据：</p>
-<ul>
-<li>主要元数据文件metadata.mfs，当mfsmaster 运行的时候会被命名为metadata.mfs.back</li>
-<li>元数据改变日志changelog.*.mfs，存储了过去的N 小时的文件改变（N 的数值是由BACK_LOGS参数设置的，参数的设置在mfschunkserver.cfg 配置文件中）。</li>
-</ul>
-<p>主要的元数据文件需要定期备份，备份的频率取决于取决于多少小时changelogs 储存。元数据changelogs 实时的自动复制。1.6版本中这个工作都由metalogger完成。</p>
-<h3 id="MFS-Master的恢复"><a href="#MFS-Master的恢复" class="headerlink" title="MFS Master的恢复"></a>MFS Master的恢复</h3><p>一旦mfsmaster 崩溃（例如因为主机或电源失败），需要最后一个元数据日志changelog 并入主要的metadata 中。这个操作时通过<code>mfsmetarestore</code>工具做的，最简单的方法是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mfsmetarestore -a</div></pre></td></tr></table></figure>
-<p>如果master 数据被存储在MooseFS 编译指定地点外的路径，则要利用-d 参数指定使用，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mfsmetarestore -a -d /opt/mfsmaster</div></pre></td></tr></table></figure>
-<h3 id="从MetaLogger中恢复Master"><a href="#从MetaLogger中恢复Master" class="headerlink" title="从MetaLogger中恢复Master"></a>从MetaLogger中恢复Master</h3><p>如果mfsmetarestore -a无法修复，则使用metalogger也可能无法修复，暂时没遇到过这种情况，这里不暂不考虑。</p>
-<ol>
-<li>找回metadata.mfs.back 文件，可以从备份中找，也可以中metalogger 主机中找（如果启动了metalogger 服务），然后把metadata.mfs.back 放入data 目录，一般为{prefix}/var/mfs</li>
-<li>从在master 宕掉之前的任何运行metalogger 服务的服务器上拷贝最后metadata 文件，然后放入mfsmaster 的数据目录。</li>
-<li>利用mfsmetarestore 命令合并元数据changelogs，可以用自动恢复模式mfsmetarestore –a，也可以利用非自动化恢复模式</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mfsmetarestore -m metadata.mfs.back -o metadata.mfs changelog_ml.*.mfs</div></pre></td></tr></table></figure>
-<p>或：强制使用metadata.mfs.back创建metadata.mfs，可以启动master，但丢失的数据暂无法确定。</p>
-<h3 id="Automated-Failover"><a href="#Automated-Failover" class="headerlink" title="Automated Failover"></a>Automated Failover</h3><p>生产环境使用 MooseFS 时，需要保证 master 节点的高可用。 使用 <code>ucarp</code> 是一种比较成熟的方案，或者<code>DRBD+[hearbeat|keepalived]</code>。<code>ucarp</code> 类似于 <code>keepalived</code>，通过主备服务器间的健康检查来发现集群状态，并执行相应操作。另外 MooseFS商业版本已经支持双主配置，解决单点故障。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;MFS-概述&quot;&gt;&lt;a href=&quot;#MFS-概述&quot; class=&quot;headerlink&quot; title=&quot;MFS 概述&quot;&gt;&lt;/a&gt;MFS 概述&lt;/h1&gt;&lt;p&gt;MooseFS是一款具有冗余容错功能的分布式文件系统。它把数据分散在多台
-    
-    </summary>
-    
-      <category term="运维技术" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="MooseFS" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/MooseFS/"/>
-    
-    
-      <category term="MooseFS" scheme="http://czero000.github.io/tags/MooseFS/"/>
     
   </entry>
   

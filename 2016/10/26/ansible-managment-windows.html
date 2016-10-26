@@ -1,0 +1,1125 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googled18515fcec64d15c.html" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ansible," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Windows下Ansible工作原理Ansible 从 1.7+ 版本开始支持 Windows，但前提是管理机必须为 Linux 系统，远程主机的通信方式也由 SSH 变更为 PowerShell，基于 Kerberos 认证方式，同时管理机必须预安装Python 的 Winrm 模块，方可和远程 Windows 主机正常通信，但 PowerShell 需 3.0+ 版本且 Management">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用ansible管理windows主机">
+<meta property="og:url" content="http://czero000.github.io/2016/10/26/ansible-managment-windows.html">
+<meta property="og:site_name" content="Zero's Blog">
+<meta property="og:description" content="Windows下Ansible工作原理Ansible 从 1.7+ 版本开始支持 Windows，但前提是管理机必须为 Linux 系统，远程主机的通信方式也由 SSH 变更为 PowerShell，基于 Kerberos 认证方式，同时管理机必须预安装Python 的 Winrm 模块，方可和远程 Windows 主机正常通信，但 PowerShell 需 3.0+ 版本且 Management">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version.png">
+<meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version3.png">
+<meta property="og:updated_time" content="2016-10-26T04:04:13.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用ansible管理windows主机">
+<meta name="twitter:description" content="Windows下Ansible工作原理Ansible 从 1.7+ 版本开始支持 Windows，但前提是管理机必须为 Linux 系统，远程主机的通信方式也由 SSH 变更为 PowerShell，基于 Kerberos 认证方式，同时管理机必须预安装Python 的 Winrm 模块，方可和远程 Windows 主机正常通信，但 PowerShell 需 3.0+ 版本且 Management">
+<meta name="twitter:image" content="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/10/26/ansible-managment-windows.html"/>
+
+
+  <title> 使用ansible管理windows主机 | Zero's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71693959-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59079634";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用ansible管理windows主机
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-26T12:01:09+08:00" content="2016-10-26">
+              2016-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维自动化/" itemprop="url" rel="index">
+                    <span itemprop="name">运维自动化</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/运维自动化/Ansible/" itemprop="url" rel="index">
+                    <span itemprop="name">Ansible</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/26/ansible-managment-windows.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/ansible-managment-windows.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/26/ansible-managment-windows.html" class="leancloud_visitors" data-flag-title="使用ansible管理windows主机">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Windows下Ansible工作原理"><a href="#Windows下Ansible工作原理" class="headerlink" title="Windows下Ansible工作原理"></a>Windows下Ansible工作原理</h1><p>Ansible 从 1.7+ 版本开始支持 Windows，但前提是管理机必须为 Linux 系统，远程主机的通信方式也由 SSH 变更为 PowerShell，基于 Kerberos 认证方式，同时管理机必须预安装Python 的 Winrm 模块，方可和远程 Windows 主机正常通信，但 PowerShell 需 3.0+ 版本且 <code>Management Framework 3.0+</code>版本，实测 <code>Windows 7 SP1</code> 和<code>Windows Server 2008 R2</code>及以上版本系统经简单配置可正常与 Ansible 通信。简单总结如下：</p>
+<ul>
+<li>管理机必须为 Linux系统且需预安装 Python Winrm 模块</li>
+<li>底层通信基于 PowerShell，认证基于 Kerberos</li>
+<li>远程主机 PowerShell 版本为3.0+，Management Framework 版本为3.0+。</li>
+</ul>
+<p>如上条件满足后，方可正常和Ansible通信。</p>
+<h2 id="系统介绍"><a href="#系统介绍" class="headerlink" title="系统介绍"></a>系统介绍</h2><ul>
+<li>管理主机: 172.16.8.247 操作系统: Ubuntu16.04</li>
+<li>被控主机: 172.16.11.176 操作系统: Windows2008_R2_64</li>
+</ul>
+<h2 id="配置管理主机"><a href="#配置管理主机" class="headerlink" title="配置管理主机"></a>配置管理主机</h2><h3 id="安装-winrm-模块"><a href="#安装-winrm-模块" class="headerlink" title="安装 winrm 模块"></a>安装 winrm 模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt install python-pip</div><div class="line">pip install &quot;pywinrm&gt;=0.1.1&quot;</div></pre></td></tr></table></figure>
+<h3 id="动态目录的支持"><a href="#动态目录的支持" class="headerlink" title="动态目录的支持"></a>动态目录的支持</h3><p>如果 windows 主机是通过 活动目录的管理方式，管理机和被管理机基于 <code>kerbero</code>认证，需要安装 <code>python-kerbero</code> 和 <code>MIT krb5</code> 依赖库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get install python-dev libkrb5-dev</div><div class="line">pip install Kerberos</div></pre></td></tr></table></figure>
+<p>配置 Kerberos，在<code>/etc/krb5.conf</code>添加下面配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[realms]</div><div class="line"> MY.DOMAIN.COM = &#123;</div><div class="line">  kdc = domain-controller1.my.domain.com</div><div class="line">  kdc = domain-controller2.my.domain.com</div><div class="line"> &#125;</div><div class="line"> [domain_realm]</div><div class="line">    .my.domain.com = MY.DOMAIN.COM</div></pre></td></tr></table></figure></p>
+<p>验证域账号认证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kinit user@My.DOAMIN.COM</div></pre></td></tr></table></figure></p>
+<h3 id="配置-inventory-主机信息和group-vars-windows-yml变量信息"><a href="#配置-inventory-主机信息和group-vars-windows-yml变量信息" class="headerlink" title="配置 inventory 主机信息和group_vars/windows.yml变量信息"></a>配置 inventory 主机信息和<code>group_vars/windows.yml</code>变量信息</h3><ul>
+<li>inventory</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[windows]    </div><div class="line">172.16.11.176</div></pre></td></tr></table></figure>
+<ul>
+<li>group_vars</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">windows.yml</div><div class="line">ansible_ssh_user: Administrator</div><div class="line">ansible_ssh_password: 密码                                                                                                                                </div><div class="line">ansible_ssh_port: 5986        </div><div class="line">ansible_connection: winrm</div><div class="line">ansible_winrm_server_cert_validation: ignore</div></pre></td></tr></table></figure>
+<p>这里的 ssh_port 不是真正的SSH协议的端口</p>
+<h2 id="被控主机-Windows2008-R2-64"><a href="#被控主机-Windows2008-R2-64" class="headerlink" title="被控主机 (Windows2008_R2_64)"></a>被控主机 (Windows2008_R2_64)</h2><p>和 Linux 发版版稍有区别，远程主机为 Windows 需预先如下配置</p>
+<ul>
+<li>安装Framework 3.0+</li>
+<li>设置PowerShell本地脚本运行权限为remotesigned</li>
+<li>升级PowerShell至3.0+</li>
+<li>自动设置Windows远端管理，英文全称WS-Management（WinRM）</li>
+</ul>
+<h3 id="安装-Framework-3-0"><a href="#安装-Framework-3-0" class="headerlink" title="安装 Framework 3.0+"></a>安装 Framework 3.0+</h3><p>如果系统已经安装可以忽略</p>
+<h3 id="设置-PowerShell-本地脚本运行权限为-remotesigned"><a href="#设置-PowerShell-本地脚本运行权限为-remotesigned" class="headerlink" title="设置 PowerShell 本地脚本运行权限为 remotesigned"></a>设置 PowerShell 本地脚本运行权限为 remotesigned</h3><p>Windows 系统默认不允许非 Adminitor 外的普通用户执行 SP 脚本，即使是管理员，如下开放 SP 脚本执行权限。</p>
+<ul>
+<li>在 cmd 中执行 regedit.exe 打开注册表，在<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell</code>新建字符串值名为<code>ExecutionPolicy</code>，值为<code>remotesigned</code> <strong>或者</strong>，打开 PowerShell 执行命令：<code>set-executionpolicy -executionpolicy unrestricted</code></li>
+</ul>
+<p>这里共4种权限：</p>
+<ul>
+<li>Restricted—默认的设置， 不允许任何script运行；</li>
+<li>AllSigned—只能运行经过数字证书签名的script；</li>
+<li>RemoteSigned—运行本地的script不需要数字签名，但是运行从网络上下载的script就必须要有数字签名；</li>
+<li>Unrestricted—允许所有的script运行。</li>
+</ul>
+<h3 id="升级-powershell至3-0"><a href="#升级-powershell至3-0" class="headerlink" title="升级 powershell至3.0+"></a>升级 powershell至3.0+</h3><p><code>PowerShell 3.0+ ``需基于</code>Windows 7 Sp1<code>安装，Windows7 系统 Sp1 补丁升级请参考 http://windows.microsoft.com/installwindows7sp1。</code>Window 7 和 <code>Windows Server 2008 R2</code>默认安装的有 PowerShell，但版本号一般为<code>2.0</code>版本，所以我们需升级至3.0+，如下图中数字1部分表示PowerShell版本过低需3.0+版本，数字2部分表示当前PowerShell版本为2.0</p>
+<ul>
+<li>查询 powershell 版本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在cmd中执行命令进入powershell</div><div class="line">powershell</div><div class="line">// 检查powershell版本</div><div class="line">Get-Host</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version.png" alt="powershell_version"></p>
+<ul>
+<li>升级 powershell</li>
+</ul>
+<p><a href="https://codeload.github.com/cchurch/ansible/zip/devel" target="_blank" rel="external">下载</a>或者<a href="https://github.com/cchurch/ansible.git" target="_blank" rel="external">克隆</a>升级脚本</p>
+<p>选择使用 powershell 执行<code>ansible-devel\examples\scripts\upgrade_to_ps3</code> 脚本，执行后重启服务器，再次检查 powershell 版本。</p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/ansible/powershell_version3.png" alt="powershell_version3"></p>
+<ul>
+<li>设置Windows远端管理（WS-Management，WinRM）</li>
+</ul>
+<p>选择使用 powershell 执行<code>ansible-devel\examples\scripts\ConfigureRemotingForAnsible.ps1</code> 脚本,执行结果没有返回值即为正常。如执行出现“由于此计算机上的网络连接类型之一设置为公用，因此 WinRM 防火墙例外将不运行”类似报错，请在 PowerShell 中执行命令 Enable-PSRemoting – SkipNetworkProfileCheck –Force 尝试解决。</p>
+<h2 id="验证配置"><a href="#验证配置" class="headerlink" title="验证配置"></a>验证配置</h2><ul>
+<li>在 linux 控制主机上执行命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_ping</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false,</div><div class="line">    &quot;ping&quot;: &quot;pong&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">ansible windows -m setup</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;ansible_facts&quot;: &#123;</div><div class="line">        &quot;ansible_architecture&quot;: &quot;64-bit&quot;,</div><div class="line">        &quot;ansible_date_time&quot;: &#123;</div><div class="line">            &quot;date&quot;: &quot;2016/10/25&quot;,</div><div class="line">            &quot;day&quot;: &quot;25&quot;,</div><div class="line">            &quot;hour&quot;: &quot;23&quot;,</div><div class="line">            &quot;iso8601&quot;: &quot;2016-10-25T23:21:26&quot;,</div><div class="line">            &quot;minute&quot;: &quot;21&quot;,</div><div class="line">            &quot;month&quot;: &quot;10&quot;,</div><div class="line">            &quot;year&quot;: &quot;2016&quot;</div><div class="line">        &#125;,</div><div class="line">        &quot;ansible_distribution&quot;: &quot;Microsoft Windows NT 6.1.7601 Service Pack 1&quot;,</div><div class="line">        &quot;ansible_distribution_version&quot;: &quot;6.1.7601.65536&quot;,</div><div class="line">        &quot;ansible_env&quot;: &#123;</div><div class="line">            &quot;ALLUSERSPROFILE&quot;: &quot;C:\\ProgramData&quot;,</div><div class="line">            &quot;APPDATA&quot;: &quot;C:\\Users\\Administrator\\AppData\\Roaming&quot;,</div><div class="line">            &quot;COMPUTERNAME&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">            &quot;ComSpec&quot;: &quot;C:\\Windows\\system32\\cmd.exe&quot;,</div><div class="line">            &quot;CommonProgramFiles&quot;: &quot;C:\\Program Files\\Common Files&quot;,</div><div class="line">            &quot;CommonProgramFiles(x86)&quot;: &quot;C:\\Program Files (x86)\\Common Files&quot;,</div><div class="line">            &quot;CommonProgramW6432&quot;: &quot;C:\\Program Files\\Common Files&quot;,</div><div class="line">            &quot;FP_NO_HOST_CHECK&quot;: &quot;NO&quot;,</div><div class="line">            &quot;HOMEDRIVE&quot;: &quot;C:&quot;,</div><div class="line">            &quot;HOMEPATH&quot;: &quot;\\Users\\Administrator&quot;,</div><div class="line">            &quot;LOCALAPPDATA&quot;: &quot;C:\\Users\\Administrator\\AppData\\Local&quot;,</div><div class="line">            &quot;LOGONSERVER&quot;: &quot;\\\\WIN-J33CVNTPJ41&quot;,</div><div class="line">            &quot;MODULE_COMPLEX_ARGS&quot;: &quot;&#123;\&quot;_ansible_version\&quot;: \&quot;2.1.2.0\&quot;, \&quot;_ansible_selinux_special_fs\&quot;: [\&quot;fuse\&quot;, \&quot;nfs\&quot;, \&quot;vboxsf\&quot;, \&quot;ramfs\&quot;], \&quot;_ansible_no_log\&quot;: false, \&quot;_ansible_verbosity\&quot;: 0, \&quot;_ansible_syslog_facility\&quot;: \&quot;LOG_USER\&quot;, \&quot;_ansible_diff\&quot;: false, \&quot;_ansible_debug\&quot;: false, \&quot;_ansible_check_mode\&quot;: false&#125;&quot;,</div><div class="line">            &quot;NUMBER_OF_PROCESSORS&quot;: &quot;4&quot;,</div><div class="line">            &quot;OS&quot;: &quot;Windows_NT&quot;,</div><div class="line">            &quot;PATHEXT&quot;: &quot;.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL&quot;,</div><div class="line">            &quot;PROCESSOR_ARCHITECTURE&quot;: &quot;AMD64&quot;,</div><div class="line">            &quot;PROCESSOR_IDENTIFIER&quot;: &quot;Intel64 Family 6 Model 13 Stepping 3, GenuineIntel&quot;,</div><div class="line">            &quot;PROCESSOR_LEVEL&quot;: &quot;6&quot;,</div><div class="line">            &quot;PROCESSOR_REVISION&quot;: &quot;0d03&quot;,</div><div class="line">            &quot;PROMPT&quot;: &quot;$P$G&quot;,</div><div class="line">            &quot;PSExecutionPolicyPreference&quot;: &quot;Unrestricted&quot;,</div><div class="line">            &quot;PSModulePath&quot;: &quot;C:\\Users\\Administrator\\Documents\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules&quot;,</div><div class="line">            &quot;PUBLIC&quot;: &quot;C:\\Users\\Public&quot;,</div><div class="line">            &quot;Path&quot;: &quot;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0&quot;,</div><div class="line">            &quot;ProgramData&quot;: &quot;C:\\ProgramData&quot;,</div><div class="line">            &quot;ProgramFiles&quot;: &quot;C:\\Program Files&quot;,</div><div class="line">            &quot;ProgramFiles(x86)&quot;: &quot;C:\\Program Files (x86)&quot;,</div><div class="line">            &quot;ProgramW6432&quot;: &quot;C:\\Program Files&quot;,</div><div class="line">            &quot;SystemDrive&quot;: &quot;C:&quot;,</div><div class="line">            &quot;SystemRoot&quot;: &quot;C:\\Windows&quot;,</div><div class="line">            &quot;TEMP&quot;: &quot;C:\\Users\\ADMINI~1\\AppData\\Local\\Temp&quot;,</div><div class="line">            &quot;TMP&quot;: &quot;C:\\Users\\ADMINI~1\\AppData\\Local\\Temp&quot;,</div><div class="line">            &quot;USERDOMAIN&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">            &quot;USERNAME&quot;: &quot;Administrator&quot;,</div><div class="line">            &quot;USERPROFILE&quot;: &quot;C:\\Users\\Administrator&quot;,</div><div class="line">            &quot;windir&quot;: &quot;C:\\Windows&quot;,</div><div class="line">            &quot;windows_tracing_flags&quot;: &quot;3&quot;,</div><div class="line">            &quot;windows_tracing_logfile&quot;: &quot;C:\\BVTBin\\Tests\\installpackage\\csilogfile.log&quot;</div><div class="line">        &#125;,</div><div class="line">        &quot;ansible_fqdn&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">        &quot;ansible_hostname&quot;: &quot;WIN-J33CVNTPJ41&quot;,</div><div class="line">        &quot;ansible_interfaces&quot;: [</div><div class="line">            &#123;</div><div class="line">                &quot;default_gateway&quot;: &quot;42.62.9.1&quot;,</div><div class="line">                &quot;dns_domain&quot;: null,</div><div class="line">                &quot;interface_index&quot;: 11,</div><div class="line">                &quot;interface_name&quot;: &quot;Intel(R) PRO/1000 MT Network Connection&quot;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                &quot;default_gateway&quot;: null,</div><div class="line">                &quot;dns_domain&quot;: null,</div><div class="line">                &quot;interface_index&quot;: 12,</div><div class="line">                &quot;interface_name&quot;: &quot;Intel(R) PRO/1000 MT Network Connection #2&quot;</div><div class="line">            &#125;</div><div class="line">        ],</div><div class="line">        &quot;ansible_ip_addresses&quot;: [</div><div class="line">            &quot;42.62.9.176&quot;,</div><div class="line">            &quot;fe80::cd71:a280:1406:de71&quot;,</div><div class="line">            &quot;172.16.11.176&quot;,</div><div class="line">            &quot;fe80::304d:48c:4d4f:67d9&quot;</div><div class="line">        ],</div><div class="line">        &quot;ansible_lastboot&quot;: &quot;2016-10-25 22:15:20Z&quot;,</div><div class="line">        &quot;ansible_os_family&quot;: &quot;Windows&quot;,</div><div class="line">        &quot;ansible_os_name&quot;: &quot;Microsoft Windows Server 2008 R2 Enterprise&quot;,</div><div class="line">        &quot;ansible_powershell_version&quot;: 3,</div><div class="line">        &quot;ansible_system&quot;: &quot;Win32NT&quot;,</div><div class="line">        &quot;ansible_totalmem&quot;: 8589524992,</div><div class="line">        &quot;ansible_uptime_seconds&quot;: 3966,</div><div class="line">        &quot;ansible_win_rm_certificate_expires&quot;: &quot;2017-10-24 18:26:13&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;changed&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="windows-下可用的模块"><a href="#windows-下可用的模块" class="headerlink" title="windows 下可用的模块"></a>windows 下可用的模块</h2><p>与 linux 系统相比， windows 下可以使用的模块就很少了，下面是常用的一些模块</p>
+<ul>
+<li>scripts,raw,slurp,setup模块在Windows 下可正常使用</li>
+<li>win_acl (E) —设置文件/目录属主属组权限</li>
+<li>win_copy—拷贝文件到远程Windows主机</li>
+<li>win_file —创建，删除文件或目录</li>
+<li>win_lineinfile—匹配替换文件内容</li>
+<li>win_package (E) —安装/卸载本地或网络软件包</li>
+<li>win_ping —Windows系统下的ping模块，常用来测试主机是否存活</li>
+<li>win_service—管理Windows Services服务</li>
+<li>win_user —管理Windows本地用户</li>
+</ul>
+<p>更多模块介绍可以参考 <a href="http://docs.ansible.com/ansible/list_of_windows_modules.html" target="_blank" rel="external">ansible官网模块页面</a></p>
+<h2 id="windows-ansible-模块实践"><a href="#windows-ansible-模块实践" class="headerlink" title="windows ansible 模块实践"></a>windows ansible 模块实践</h2><h3 id="传输文件到指定目录"><a href="#传输文件到指定目录" class="headerlink" title="传输文件到指定目录"></a>传输文件到指定目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_copy -a &apos;src=/root/windows/files/helloworld.ps1 dest=C:\\files\\helloworld.ps1&apos;   </div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: true,</div><div class="line">    &quot;checksum&quot;: &quot;e53fa06a2ab5313165632e7c99a04af587cc6b47&quot;,</div><div class="line">    &quot;operation&quot;: &quot;file_copy&quot;,</div><div class="line">    &quot;original_basename&quot;: &quot;helloworld.ps1&quot;,</div><div class="line">    &quot;size&quot;: 112</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="删除指定文件"><a href="#删除指定文件" class="headerlink" title="删除指定文件"></a>删除指定文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_file -a &apos;path=c:\\files\\helloworld.sp1 state=absent&apos;</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="执行远程脚本"><a href="#执行远程脚本" class="headerlink" title="执行远程脚本"></a>执行远程脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ansible windows -m script -a &apos;/root/windows/files/helloworld.ps1&apos;</div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">    &quot;changed&quot;: true,</div><div class="line">    &quot;rc&quot;: 0,</div><div class="line">    &quot;stderr&quot;: &quot;&quot;,</div><div class="line">    &quot;stdout&quot;: &quot;\nHello World!\nGood-bye World! \n\n&quot;,</div><div class="line">    &quot;stdout_lines&quot;: [</div><div class="line">        &quot;&quot;,</div><div class="line">        &quot;Hello World!&quot;,</div><div class="line">        &quot;Good-bye World! &quot;,</div><div class="line">        &quot;&quot;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">ansible windows -m win_user -a &apos;name=Czero password=Line.kong group=Administrators&apos;   </div><div class="line">172.16.11.176 | SUCCESS =&gt; &#123;</div><div class="line">   &quot;account_disabled&quot;: false,</div><div class="line">   &quot;account_locked&quot;: false,</div><div class="line">   &quot;changed&quot;: true,</div><div class="line">   &quot;description&quot;: &quot;&quot;,</div><div class="line">   &quot;fullname&quot;: &quot;Czero&quot;,</div><div class="line">   &quot;groups&quot;: [],</div><div class="line">   &quot;name&quot;: &quot;Czero&quot;, </div><div class="line">   &quot;password_expired&quot;: false,</div><div class="line">   &quot;password_never_expires&quot;: false,</div><div class="line">   &quot;path&quot;: &quot;WinNT://WORKGROUP/WIN-J33CVNTPJ41/Czero&quot;,</div><div class="line">   &quot;sid&quot;: &quot;S-1-5-21-459422901-1284336649-1347501021-1002&quot;,</div><div class="line">   &quot;state&quot;: &quot;present&quot;,</div><div class="line">   &quot;user_cannot_change_password&quot;: false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="playbook"><a href="#playbook" class="headerlink" title="playbook"></a>playbook</h3><ul>
+<li>copy 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">vim copy.yml</div><div class="line">---                                                                   </div><div class="line">- name: copy file on windows                                          </div><div class="line">  hosts: windows                                                      </div><div class="line">  tasks:                                                              </div><div class="line">    - name: copy file on remote windows                               </div><div class="line">      win_file: src=/root/windows/files/helloworld.ps1 dest=c:\\files\\helloworld.ps1</div><div class="line"></div><div class="line">ansible-playbook copy.yml</div><div class="line"></div><div class="line">PLAY [copy file on windows] ****************************************************</div><div class="line"></div><div class="line">TASK [setup] *******************************************************************</div><div class="line">Wednesday 26 October 2016  11:38:27 +0800 (0:00:00.038)       0:00:00.038 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">TASK [copy file on remote windows] *********************************************</div><div class="line">Wednesday 26 October 2016  11:38:31 +0800 (0:00:04.071)       0:00:04.110 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">PLAY RECAP *********************************************************************</div><div class="line"></div><div class="line">172.16.11.176              : ok=2    changed=0    unreachable=0    failed=0   </div><div class="line">Wednesday 26 October 2016  11:38:33 +0800 (0:00:02.329)       0:00:06.439 *****</div><div class="line">===============================================================================</div><div class="line">setup ------------------------------------------------------------------- 4.07s</div><div class="line">copy file on remote windows --------------------------------------------- 2.33s</div></pre></td></tr></table></figure>
+<ul>
+<li>执行命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">vim test_raw.yml</div><div class="line">- name: test raw module  </div><div class="line">  hosts: windows         </div><div class="line">  tasks:                 </div><div class="line">    - name: run ipconfig</div><div class="line">      raw: ipconfig      </div><div class="line">      register: ipconfig</div><div class="line">    - debug: var=ipconfig        </div><div class="line"></div><div class="line">ansible-playbook test_raw.yml</div><div class="line"></div><div class="line">PLAY [test raw module] *********************************************************</div><div class="line"></div><div class="line">TASK [setup] *******************************************************************</div><div class="line">Wednesday 26 October 2016  11:45:30 +0800 (0:00:00.037)       0:00:00.037 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">TASK [run ipconfig] ************************************************************</div><div class="line">Wednesday 26 October 2016  11:45:34 +0800 (0:00:04.076)       0:00:04.114 *****</div><div class="line">ok: [172.16.11.176]</div><div class="line"></div><div class="line">TASK [debug] *******************************************************************</div><div class="line">Wednesday 26 October 2016  11:45:35 +0800 (0:00:00.688)       0:00:04.803 *****</div><div class="line">ok: [172.16.11.176] =&gt; &#123;</div><div class="line">    &quot;ipconfig&quot;: &#123;</div><div class="line">        &quot;changed&quot;: false,</div><div class="line">        &quot;rc&quot;: 0,</div><div class="line">        &quot;stderr&quot;: &quot;&quot;,</div><div class="line">        &quot;stdout&quot;: &quot;\r\nWindows IP Configuration\r\n\r\n\r\nEthernet adapter �������� 2:\r\n\r\n   Connection-specific DNS Suffix  . : \r\n   Link-local IPv6 Address . . . . . : fe80::304d:48c:4d4f:67d9%12\r\n   IPv4 Address. . . . . . . . . . . : 172.16.11.176\r\n   Subnet Mask . . . . . . . . . . . : 255.255.255.0\r\n   Default Gateway . . . . . . . . . : \r\n\r\nEthernet adapter ��������:\r\n\r\n   Connection-specific DNS Suffix  . : \r\n   Link-local IPv6 Address . . . . . : fe80::cd71:a280:1406:de71%11\r\n   IPv4 Address. . . . . . . . . . . : 42.62.9.176\r\n   Subnet Mask . . . . . . . . . . . : 255.255.255.0\r\n   Default Gateway . . . . . . . . . : 42.62.9.1\r\n\r\nTunnel adapter isatap.&#123;9ED2F327-7AD8-488B-9D74-F8E3E8B5E2B1&#125;:\r\n\r\n   Media State . . . . . . . . . . . : Media disconnected\r\n   Connection-specific DNS Suffix  . : \r\n\r\nTunnel adapter isatap.&#123;AB02B80C-75A3-4F59-B19B-8AE4F8103DF8&#125;:\r\n\r\n   Media State . . . . . . . . . . . : Media disconnected\r\n   Connection-specific DNS Suffix  . : \r\n\r\nTunnel adapter 6TO4 Adapter:\r\n\r\n   Connection-specific DNS Suffix  . : \r\n   IPv6 Address. . . . . . . . . . . : 2002:2a3e:9b0::2a3e:9b0\r\n   Default Gateway . . . . . . . . . : \r\n&quot;,</div><div class="line">        &quot;stdout_lines&quot;: [</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Windows IP Configuration&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Ethernet adapter �������� 2:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;   Link-local IPv6 Address . . . . . : fe80::304d:48c:4d4f:67d9%12&quot;,</div><div class="line">            &quot;   IPv4 Address. . . . . . . . . . . : 172.16.11.176&quot;,</div><div class="line">            &quot;   Subnet Mask . . . . . . . . . . . : 255.255.255.0&quot;,</div><div class="line">            &quot;   Default Gateway . . . . . . . . . : &quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Ethernet adapter ��������:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;   Link-local IPv6 Address . . . . . : fe80::cd71:a280:1406:de71%11&quot;,</div><div class="line">            &quot;   IPv4 Address. . . . . . . . . . . : 42.62.9.176&quot;,</div><div class="line">            &quot;   Subnet Mask . . . . . . . . . . . : 255.255.255.0&quot;,</div><div class="line">            &quot;   Default Gateway . . . . . . . . . : 42.62.9.1&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Tunnel adapter isatap.&#123;9ED2F327-7AD8-488B-9D74-F8E3E8B5E2B1&#125;:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Media State . . . . . . . . . . . : Media disconnected&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Tunnel adapter isatap.&#123;AB02B80C-75A3-4F59-B19B-8AE4F8103DF8&#125;:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Media State . . . . . . . . . . . : Media disconnected&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;Tunnel adapter 6TO4 Adapter:&quot;,</div><div class="line">            &quot;&quot;,</div><div class="line">            &quot;   Connection-specific DNS Suffix  . : &quot;,</div><div class="line">            &quot;   IPv6 Address. . . . . . . . . . . : 2002:2a3e:9b0::2a3e:9b0&quot;,</div><div class="line">            &quot;   Default Gateway . . . . . . . . . : &quot;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">PLAY RECAP *********************************************************************</div><div class="line">172.16.11.176              : ok=3    changed=0    unreachable=0    failed=0   </div><div class="line"></div><div class="line">Wednesday 26 October 2016  11:45:35 +0800 (0:00:00.062)       0:00:04.866 *****</div><div class="line">===============================================================================</div><div class="line">setup ------------------------------------------------------------------- 4.08s</div><div class="line">run ipconfig ------------------------------------------------------------ 0.69s</div><div class="line">debug ------------------------------------------------------------------- 0.06s</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ansible/" rel="tag">#ansible</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/git-different-sshkey.html" rel="next" title="配置不同ssh-key访问不同git仓库">
+                <i class="fa fa-chevron-left"></i> 配置不同ssh-key访问不同git仓库
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/26/ansible-managment-windows.html"
+     data-title="使用ansible管理windows主机"
+     data-content=""
+     data-url="http://czero000.github.io/2016/10/26/ansible-managment-windows.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/26/ansible-managment-windows.html"
+           data-title="使用ansible管理windows主机" data-url="http://czero000.github.io/2016/10/26/ansible-managment-windows.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://czero000.github.io/images/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yuanlong1207" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Yuminstall" target="_blank">Yuminstall</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows下Ansible工作原理"><span class="nav-number">1.</span> <span class="nav-text">Windows下Ansible工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统介绍"><span class="nav-number">1.1.</span> <span class="nav-text">系统介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置管理主机"><span class="nav-number">1.2.</span> <span class="nav-text">配置管理主机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-winrm-模块"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装 winrm 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态目录的支持"><span class="nav-number">1.2.2.</span> <span class="nav-text">动态目录的支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-inventory-主机信息和group-vars-windows-yml变量信息"><span class="nav-number">1.2.3.</span> <span class="nav-text">配置 inventory 主机信息和group_vars/windows.yml变量信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#被控主机-Windows2008-R2-64"><span class="nav-number">1.3.</span> <span class="nav-text">被控主机 (Windows2008_R2_64)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Framework-3-0"><span class="nav-number">1.3.1.</span> <span class="nav-text">安装 Framework 3.0+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置-PowerShell-本地脚本运行权限为-remotesigned"><span class="nav-number">1.3.2.</span> <span class="nav-text">设置 PowerShell 本地脚本运行权限为 remotesigned</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级-powershell至3-0"><span class="nav-number">1.3.3.</span> <span class="nav-text">升级 powershell至3.0+</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证配置"><span class="nav-number">1.4.</span> <span class="nav-text">验证配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows-下可用的模块"><span class="nav-number">1.5.</span> <span class="nav-text">windows 下可用的模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows-ansible-模块实践"><span class="nav-number">1.6.</span> <span class="nav-text">windows ansible 模块实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传输文件到指定目录"><span class="nav-number">1.6.1.</span> <span class="nav-text">传输文件到指定目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除指定文件"><span class="nav-number">1.6.2.</span> <span class="nav-text">删除指定文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行远程脚本"><span class="nav-number">1.6.3.</span> <span class="nav-text">执行远程脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户管理"><span class="nav-number">1.6.4.</span> <span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#playbook"><span class="nav-number">1.6.5.</span> <span class="nav-text">playbook</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+</body>
+</html>
