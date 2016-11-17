@@ -5,11 +5,12 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next pisces use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -64,7 +65,7 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
@@ -117,9 +118,10 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
@@ -127,20 +129,29 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
     duoshuo: {
       userId: '0',
       author: '主编大人'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://czero000.github.io/2016/04/05/glusterfs-technical-explanation.html"/>
+
+
+
 
 
   <title> GlusterFS技术详解 | Zero's Blog </title>
 </head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -189,7 +200,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
@@ -288,6 +299,8 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -301,13 +314,26 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/05/glusterfs-technical-explanation.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
 
     
       <header class="post-header">
@@ -326,54 +352,21 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-05T15:42:12+08:00" content="2016-04-05">
-              2016-04-05
-            </time>
+            
+
+            
+
+            
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维技术/" itemprop="url" rel="index">
-                    <span itemprop="name">运维技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/运维技术/GlusterFS/" itemprop="url" rel="index">
-                    <span itemprop="name">GlusterFS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
                 <a href="/2016/04/05/glusterfs-technical-explanation.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/05/glusterfs-technical-explanation.html" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/05/glusterfs-technical-explanation.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -384,21 +377,24 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
           
           
              <span id="/2016/04/05/glusterfs-technical-explanation.html" class="leancloud_visitors" data-flag-title="GlusterFS技术详解">
-               &nbsp; | &nbsp;
+               <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               <span class="post-meta-item-text">visitors </span>
+               <span class="post-meta-item-text">Visitors </span>
                <span class="leancloud-visitors-count"></span>
               </span>
           
 
           
-              &nbsp; | &nbsp;
-              <span class="page-pv"><i class="fa fa-file-o"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-              </span>
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
           
+
+          
+
         </div>
       </header>
     
@@ -757,11 +753,12 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
       
     </div>
 
+
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/glusterfs/" rel="tag">#glusterfs</a>
+            <a href="/tags/glusterfs/" rel="tag"># glusterfs</a>
           
         </div>
       
@@ -775,6 +772,8 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -860,8 +859,8 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg"
                alt="C.c" />
@@ -946,19 +945,27 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
           </div>
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是GlusterFS"><span class="nav-number">1.</span> <span class="nav-text">什么是GlusterFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GlusterFS概述"><span class="nav-number">1.1.</span> <span class="nav-text">GlusterFS概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计目标"><span class="nav-number">1.2.</span> <span class="nav-text">设计目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术特点"><span class="nav-number">1.3.</span> <span class="nav-text">技术特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总体架构和设计"><span class="nav-number">1.4.</span> <span class="nav-text">总体架构和设计 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹性哈希算法"><span class="nav-number">1.5.</span> <span class="nav-text">弹性哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Translators"><span class="nav-number">1.6.</span> <span class="nav-text">Translators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计讨论"><span class="nav-number">1.7.</span> <span class="nav-text">设计讨论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用GlusterFS"><span class="nav-number">2.</span> <span class="nav-text">使用GlusterFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语解释"><span class="nav-number">2.1.</span> <span class="nav-text">术语解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装GlusterFS"><span class="nav-number">2.2.</span> <span class="nav-text">安装GlusterFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统环境介绍"><span class="nav-number">2.2.1.</span> <span class="nav-text">系统环境介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装GlusterFS-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">安装GlusterFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装软件包"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置开机启动"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">配置开机启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置GlusterFS集群"><span class="nav-number">2.3.</span> <span class="nav-text">配置GlusterFS集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加节点到GlusterFS集群"><span class="nav-number">2.3.1.</span> <span class="nav-text">添加节点到GlusterFS集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据存储目录"><span class="nav-number">2.3.2.</span> <span class="nav-text">创建数据存储目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建GlusterFS磁盘卷"><span class="nav-number">2.3.3.</span> <span class="nav-text">创建GlusterFS磁盘卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装客户端并mount-GlusterFS文件系统"><span class="nav-number">2.3.4.</span> <span class="nav-text">安装客户端并mount GlusterFS文件系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理使用GlusterFS"><span class="nav-number">2.4.</span> <span class="nav-text">管理使用GlusterFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gluster节点管理"><span class="nav-number">2.4.1.</span> <span class="nav-text">Gluster节点管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点状态"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">节点状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加节点"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">添加节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除节点"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">删除节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gluster卷管理"><span class="nav-number">2.4.2.</span> <span class="nav-text">Gluster卷管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卷的类型"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">卷的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建卷"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">创建卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卷信息"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">卷信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卷状态"><span class="nav-number">2.4.2.4.</span> <span class="nav-text">卷状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动、停止卷"><span class="nav-number">2.4.2.5.</span> <span class="nav-text">启动、停止卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除卷"><span class="nav-number">2.4.2.6.</span> <span class="nav-text">删除卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#均衡卷"><span class="nav-number">2.4.2.7.</span> <span class="nav-text">均衡卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置卷传输端口类型"><span class="nav-number">2.4.2.8.</span> <span class="nav-text">设置卷传输端口类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Brick管理"><span class="nav-number">2.4.3.</span> <span class="nav-text">Brick管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加brick"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">添加brick</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移除brick"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">移除brick</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换brick"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">替换brick</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统拓展"><span class="nav-number">2.5.</span> <span class="nav-text">系统拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统配额"><span class="nav-number">2.5.1.</span> <span class="nav-text">系统配额</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启、关闭系统配额"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">开启、关闭系统配额</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置目录配额"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">设置目录配额</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配额查看"><span class="nav-number">2.5.1.3.</span> <span class="nav-text">配额查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#地域复制-geo-replication"><span class="nav-number">2.5.1.4.</span> <span class="nav-text">地域复制(geo-replication)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O信息查看"><span class="nav-number">2.5.1.5.</span> <span class="nav-text">I/O信息查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#top监控"><span class="nav-number">2.5.1.6.</span> <span class="nav-text">top监控</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Glusterfs冗余镜像（AFR）修复原理以及脑裂分析"><span class="nav-number">2.5.2.</span> <span class="nav-text">Glusterfs冗余镜像（AFR）修复原理以及脑裂分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是脑裂"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">什么是脑裂</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.6.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
       
 
     </div>
@@ -981,16 +988,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
   <span class="author" itemprop="copyrightHolder">C.c</span>
 </div>
 
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
 
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
 
         
 
@@ -1111,9 +1109,16 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
 
   
     
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.0.2"></script>
+    
+    
     <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
     <script src="/js/src/hook-duoshuo.js"></script>
   
+
+
 
 
 
@@ -1128,7 +1133,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
     // Search DB path;
     var search_path = "search.xml";
     if (search_path.length == 0) {
-       search_path = "search.xml";
+      search_path = "search.xml";
     }
     var path = "/" + search_path;
     // monitor main search box;
@@ -1136,96 +1141,95 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
     function proceedsearch() {
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
-
     }
     // search function;
     var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
+      'use strict';
+      $.ajax({
         url: path,
         dataType: "xml",
         async: true,
         success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
                     }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
                     }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
         }
-    });}
+      });}
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
@@ -1235,7 +1239,6 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
       } else {
         proceedsearch();
       };
-
     });
 
     $('.popup-btn-close').click(function(e){
@@ -1376,6 +1379,8 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
 })();
 </script>
 
+
+  
 
 
 </body>
