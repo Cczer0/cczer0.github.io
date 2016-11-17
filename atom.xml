@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://czero000.github.io/"/>
-  <updated>2016-10-26T04:22:06.910Z</updated>
+  <updated>2016-11-17T02:25:26.129Z</updated>
   <id>http://czero000.github.io/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git基础</title>
+    <link href="http://czero000.github.io/2016/11/17/Git-basic.html"/>
+    <id>http://czero000.github.io/2016/11/17/Git-basic.html</id>
+    <published>2016-11-17T02:24:36.000Z</published>
+    <updated>2016-11-17T02:25:26.129Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="关于版本控制"><a href="#关于版本控制" class="headerlink" title="关于版本控制"></a>关于版本控制</h1><p>什么是版本控制</p>
+<blockquote>
+<p>版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 在本书所展示的例子中，我们对保存着软件源代码的文件作版本控制，但实际上，你可以对任何类型的文件进行版本控制。</p>
+</blockquote>
+<h2 id="版本控制系统的变迁"><a href="#版本控制系统的变迁" class="headerlink" title="版本控制系统的变迁"></a>版本控制系统的变迁</h2><p>想要做好版本控制，少不了相应的系统，版本控制系统也经历了不少变迁</p>
+<h3 id="原始"><a href="#原始" class="headerlink" title="原始"></a>原始</h3><p>本地版本控制系统: 用复制整个项目目录的方式来保存不同的版本，或许还会改名加上备份时间以示区别。本地版本控制系统，大多都是采用某种简单的数据库来记录文件的历次更新差异。<br><img src="http://ofc9x1ccn.bkt.clouddn.com/git/local.png" alt="本地版本控制"></p>
+<h3 id="进化"><a href="#进化" class="headerlink" title="进化"></a>进化</h3><p>集中化版本控制: 为了让不同开发者协同工作，<code>Centralized Version Control Systems</code>应运而生，诸如 <code>CVS、Subversion</code> 以及 <code>Perforce</code> 等，都有一个单一的集中管理的服务器，保存所有文件的修订版本，而协同工作的人们都通过客户端连到这台服务器，取出最新的文件或者提交更新。</p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/git/centralized.png" alt="集中版本控制"></p>
+<p>缺点是服务器单点故障。 如果宕机一小时，那么在这一小时内，谁都无法提交更新，也就无法协同工作。 如果磁盘发生损坏，又没有做恰当备份，毫无疑问你将丢失所有数据。</p>
+<h3 id="究极进化"><a href="#究极进化" class="headerlink" title="究极进化"></a>究极进化</h3><p>分布式版本控制系统：为了解决本地版本控制的单点故障问题，<code>Distributed Version Control System</code> 便横空出世，像 Git、Mercurial、Bazaar 以及 Darcs 等，客户端并不只提取最新版本的文件快照，而是把代码仓库完整地镜像下来。 这么一来，任何一处协同工作用的服务器发生故障，事后都可以用任何一个镜像出来的本地仓库恢复。 因为每一次的克隆操作，实际上都是一次对代码仓库的完整备份。</p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/git/distributed.png" alt="分布式版本控制"></p>
+<p><code>Git</code> 不仅可以解决单点故障，还有离线提交、快速切换分支、方便合并、更少的仓库污染等特性。 在技术层面上，Git 绝对是一个无中心的分布式版本控制系统，但在管理层面上，我建议你保持一个中心版本库（Origin）<br><img src="http://ofc9x1ccn.bkt.clouddn.com/git/git-repo.jpg" alt="Git仓库"></p>
+<h2 id="Git-简史"><a href="#Git-简史" class="headerlink" title="Git 简史"></a>Git 简史</h2><p>生活中的许多伟大事物一样，<code>Git</code> 诞生于一个极富纷争大举创新的年代。<code>Linux</code> 内核开源项目有着为数众广的参与者。 绝大多数的 <code>Linux</code> 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002年间）。 到 2002 年，整个项目组开始启用一个专有的分布式版本控制系统 <code>BitKeeper</code> 来管理和维护代码。到了 2005 年，开发 BitKeeper 的商业公司同 Linux 内核开源社区的合作关系结束，他们收回了 <code>Linux</code> 内核社区免费使用 <code>BitKeeper</code> 的权力。 这就迫使 <code>Linux</code> 开源社区（特别是 <code>Linux</code> 的缔造者 <code>Linux Torvalds</code>）基于使用 <code>BitKcheper</code> 时的经验教训，开发出自己的版本系统。</p>
+<p>他们对新的系统制订了若干目标</p>
+<ul>
+<li>速度</li>
+<li>简单的设计</li>
+<li>对非线性开发模式的强力支持（允许成千上万个并行开发的分支）</li>
+<li>完全分布式</li>
+<li>有能力高效管理类似 Linux 内核一样的超大规模项目（速度和数据量）</li>
+</ul>
+<p>自诞生于 2005 年以来，Git 日臻成熟完善，在高度易用的同时，仍然保留着初期设定的目标。 它的速度飞快，极其适合管理大项目，有着令人难以置信的非线性分支管理系统</p>
+<h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><h3 id="直接记录快照，而非差异比较"><a href="#直接记录快照，而非差异比较" class="headerlink" title="直接记录快照，而非差异比较"></a>直接记录快照，而非差异比较</h3><p>与其他版本控制系统不同在于 <code>Git</code> 对待数据的方法。概念上来区分，其它大部分系统以文件变更列表的方式存储信息<br><img src="http://ofc9x1ccn.bkt.clouddn.com/git/deltas.png" alt="CVS" title="存储每个文件与初始版本的差异"><br><code>Git</code> 则不同于上面，<code>Git</code> 更像是把数据看做对小型文件系统的快照，每次你提交更新，或在 <code>Git</code> 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。 如果文件没有修改，<code>Git</code> 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。 <code>Git</code> 对待数据更像是<code>快照流</code>。<br><img src="http://ofc9x1ccn.bkt.clouddn.com/git/snapshots.png" alt="Git" title="存储项目随时间改变的快照"></p>
+<h3 id="近乎所有操作都是本地操作"><a href="#近乎所有操作都是本地操作" class="headerlink" title="近乎所有操作都是本地操作"></a>近乎所有操作都是本地操作</h3><p>在 <code>Git</code> 中的绝大多数操作都只需要访问本地文件和资源，因为你在本地磁盘上就有项目的完整历史，所以大部分操作看起来瞬间完成。</p>
+<h3 id="Git-保持完整性"><a href="#Git-保持完整性" class="headerlink" title="Git 保持完整性"></a>Git 保持完整性</h3><p><code>Git</code> 中所有数据在存储前都计算校验和，然后以校验和来引用。 这意味着不可能在 <code>Git</code> 不知情时更改任何文件内容或目录内容。</p>
+<h3 id="Git-一般只添加数据"><a href="#Git-一般只添加数据" class="headerlink" title="Git 一般只添加数据"></a>Git 一般只添加数据</h3><p>在执行的 Git 操作时，几乎只往 Git 数据库中增加数据。 很难让 Git 执行任何不可逆操作，或者让它以任何方式清除数据。</p>
+<h3 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h3><p><code>Git</code> 有三种状态，已提交（<code>committed</code>）、已修改（<code>modified</code>）和已暂存（<code>staged</code>）。- 工作区(<code>Workspace</code>)是计算机中项目的根目录</p>
+<ul>
+<li>工作区(Workspace)是计算机中项目的根目录</li>
+<li>暂存区(Index)像个缓存区域，临时保存你的改动</li>
+<li>版本库(Repository)分为本地仓库（Local)和远程仓库(Remote)<br>几乎所有常用命令就是围绕这几个概念来操作的，一图胜千言，下面是一张比较简单的图，包括了最基本的命令</li>
+</ul>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/git/git-simple.png" alt="git-simple"></p>
+<p>但只会使用以上命令是不够的，在这个复杂纷繁的程序世界，事情没你想的那么简单，不过有些事情想想就够了，不一定要去做，真要去做你也做不来，比如自己写个git来，但是，更多地的了解git是我们每个程序员都可以做得到的事。再看下图：<br><img src="http://ofc9x1ccn.bkt.clouddn.com/git/git-advance.jpg" alt="git-advance"></p>
+<p>下面的命令结合上面两张图来理解、练习、记忆效果更加。暂时用不着的命令记不住，不理解也没关系，哪天遇到问题，再来找找有没有合适的方法也不迟。</p>
+<h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><h3 id="新建-克隆代码库"><a href="#新建-克隆代码库" class="headerlink" title="新建/克隆代码库"></a>新建/克隆代码库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git init                                            # 当前目录新建一个Git代码库</div><div class="line">git init [project-name]                             # 新建一个目录，将其初始化为Git代码库</div><div class="line">git init --bare [project-name]                      # 创建远程仓库</div><div class="line">git clone /path/to/repository                       # 克隆本地仓库和它的整个代码历史</div><div class="line">git clone username@host:/path/to/repository         # 克隆远端仓库</div><div class="line">git fetch [url]                                     # 下载/同步项目到</div></pre></td></tr></table></figure>
+<h3 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git add [file1] [file2] ...                         # 添加指定文件到暂存区</div><div class="line">git add [dir]                                       # 添加指定目录到暂存区，包括子目录</div><div class="line">git add .                                           # 添加当前目录的所有文件到暂存区</div><div class="line">git rm [file1] [file2] ...                          # 删除工作区文件，并且将这次删除放入暂存区</div><div class="line">git rm --cached [file]                              # 停止追踪指定文件，但该文件会保留在工作区</div><div class="line">git mv [file-original] [file-renamed]               # 改名文件，并且将这个改名放入暂存区</div></pre></td></tr></table></figure>
+<h3 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git commit -m [message]                             # 提交暂存区所有文件到仓库区，并指定提交说明</div><div class="line">git commit [file1] [file2] ... -m [message]         # 提交暂存区的指定文件到仓库区，并指定提交说明</div><div class="line">git commit -a                                       # 提交工作区自上次commit之后的变化，直接到仓库区。是git add 和 git commit的组合操作</div><div class="line">git commit -v                                       # 提交时显示所有diff信息</div><div class="line">git commit --amend -m [message]                     # 使用一次新的commit，替代上一次提交</div></pre></td></tr></table></figure>
+<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git branch                                          # 列出所有本地分支</div><div class="line">git branch -r                                       # 列出所有远程分支</div><div class="line">git branch -a                                       # 列出所有本地分支和远程分支</div><div class="line">git branch [branch-name]                            # 新建一个分支，但依然停留在当前分支</div><div class="line">git checkout -b [branch]                            # 新建一个分支，并切换到该分支</div><div class="line">git branch [branch] [commit]                        # 新建一个分支，指向指定commit</div><div class="line">git checkout [branch-name]                          # 切换到指定分支</div><div class="line">git merge [branch]                                  # 合并指定分支到当前分支</div><div class="line">git branch -d [branch-name]                         # 删除本地分支</div><div class="line">git push origin --delete [branch-name]              # 方法一：删除远程分支</div><div class="line">git branch -dr [remote/branch]                      # 方法二：删除远程分支</div></pre></td></tr></table></figure>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git checkout [file]                                 # 恢复暂存区的指定文件到工作区（注意区别分支操作中得checkout命令）</div><div class="line">git checkout [commit] [file]                        # 恢复某个commit的指定文件到暂存区和工作区</div><div class="line">git checkout .                                      # 恢复暂存区的所有文件到工作区</div><div class="line">git reset [file]                                    # 重置暂存区的指定文件，与最新的commit保持一致，但工作区不变</div><div class="line">git reset --hard                                    # 重置暂存区与工作区，与最新的commit保持一致</div><div class="line">git reset [commit]                                  # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</div><div class="line">git reset --hard [commit]                           # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</div><div class="line">git reset --keep [commit]                           # 重置当前HEAD为指定commit，但保持暂存区和工作区不变</div><div class="line">git revert [commit]                                 # 新建一个commit，用来撤销指定commit</div></pre></td></tr></table></figure>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git tag                                             # 列出所有tag</div><div class="line">git tag [tag]                                       # 在当前commit新建一个tag</div><div class="line">git tag [tag] [commit]                              # 在指定commit新建一个tag</div><div class="line">git tag -d [tag]                                    # 删除本地tag</div><div class="line">git push origin :refs/tags/[tagName]                # 删除远程tag</div><div class="line">git show [tag]                                      # 查看tag信息</div><div class="line">git push [remote] [tag]                             # 提交指定tag</div><div class="line">git push [remote] --tags                            # 提交所有tag</div><div class="line">git checkout -b [branch] [tag]                      # 新建一个分支，指向某个tag</div></pre></td></tr></table></figure>
+<h3 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">git status                                          # 显示所有变更文件</div><div class="line">git log                                             # 显示当前分支的版本历史</div><div class="line">git log --stat                                      # 显示当前分支的版本历史，以及发生变更的文件</div><div class="line">git blame [file]                                    # 显示指定文件是什么人在什么时间修改过</div><div class="line">git log -p [file]                                   # 显示指定文件相关的每一次diff</div><div class="line">git diff                                            # 显示暂存区和工作区的差异</div><div class="line">git diff --cached [commit]                          # 显示暂存区和某个commit的差异</div><div class="line">git diff HEAD                                       # 显示工作区与当前分支最新commit之间的差异</div><div class="line">git show [commit]                                   # 显示某次提交的元数据和内容变化</div><div class="line">git show --name-only [commit]                       # 显示某次提交发生变化的文件</div><div class="line">git show [commit]:[filename]                        # 显示某次提交时，某个文件的内容</div><div class="line">git reflog                                          # 显示当前分支的最近几次提交</div></pre></td></tr></table></figure>
+<h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git fetch [remote]                                  # 下载远程仓库的所有变动到暂存区</div><div class="line">git remote -v                                       # 显示所有远程仓库</div><div class="line">git remote show [remote]                            # 显示某个远程仓库的信息</div><div class="line">git remote add [shortname] [url]                    # 增加一个新的远程仓库，并命名</div><div class="line">git pull [remote] [branch]                          # 取回远程仓库的变化，并与本地分支合并</div><div class="line">git push [remote] [branch]                          # 上传本地指定分支到远程仓库</div><div class="line">git push [remote] --force                           # 即使有冲突，强行推送当前分支到远程仓库</div><div class="line">git push [remote] --all                             # 推送所有分支到远程仓库</div></pre></td></tr></table></figure>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p><code>git</code> 的配置文件是<code>.gitconfig</code>，支持全局配置和项目配置，全部配置对所有项目有效，用 <code>--global</code>选择指定。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git config --list                                   # 显示配置</div><div class="line">git config -e [--global]                            # 编辑(全局)配置文件</div><div class="line">git config [--global] user.name &quot;xx&quot;                # 设置 commit 的用户</div><div class="line">git config [--global] user.email &quot;xx@xx.com&quot;        # 设置 commit 的邮箱</div><div class="line">gitk                                                # 内建的图形化 git</div><div class="line">git config color.ui true                            # 彩色的 git 输出</div><div class="line">git config format.pretty oneline                    # 显示历史记录时，只显示一行注释信息</div><div class="line">git add -i                                          # 交互的添加文件至缓存区</div></pre></td></tr></table></figure></p>
+<p>参考资料:</p>
+<p><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git-简易指南</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;关于版本控制&quot;&gt;&lt;a href=&quot;#关于版本控制&quot; class=&quot;headerlink&quot; title=&quot;关于版本控制&quot;&gt;&lt;/a&gt;关于版本控制&lt;/h1&gt;&lt;p&gt;什么是版本控制&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;版本控制是一种记录一个或若干文件内容变化，以便将来查
+    
+    </summary>
+    
+      <category term="System" scheme="http://czero000.github.io/categories/System/"/>
+    
+      <category term="Git" scheme="http://czero000.github.io/categories/System/Git/"/>
+    
+    
+      <category term="Git" scheme="http://czero000.github.io/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>使用ansible管理windows主机</title>
@@ -1505,51 +1577,6 @@
     
     
       <category term="python" scheme="http://czero000.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git仓库搭建</title>
-    <link href="http://czero000.github.io/2016/05/09/git-repo.html"/>
-    <id>http://czero000.github.io/2016/05/09/git-repo.html</id>
-    <published>2016-05-09T07:20:57.000Z</published>
-    <updated>2016-10-20T10:50:11.105Z</updated>
-    
-    <content type="html"><![CDATA[<p>Github就是一个提供免费托管开源代码的远程仓库，但对于一些敏感代码或者不想开源的源代码，有不舍得付费，那么就需要自己搭建一台Git服务器作为私有仓库来使用。下面是搭建Git服务器过程。</p>
-<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><ul>
-<li><p>安装git</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install git -y</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建一个<code>git</code>用户，用来运行<code>git</code>服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd git</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建证书登录<br>所有需要登录的用户，将他们自己的id_rsa.pub文件及公钥，导入到/home/git/.ssh/authorized_keys文件里，一行一个。</p>
-</li>
-<li><p>初始化git仓库<br>选当一个目录作为Git仓库，比如<code>/opt/GitWork</code>，在<code>/opt/GitWork</code>目录下创建git仓库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git init --bare  sample.git</div><div class="line">Initialized empty Git repository in /opt/GitWork/sample.git/</div></pre></td></tr></table></figure>
-<p>Git会创建一个裸仓库，仓库没有工作区。</p>
-</li>
-<li><p>克隆远程仓库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git clone git@172.16.11.211:/opt/GitWork/sample.git</div><div class="line">Cloning into &apos;sample&apos;...</div><div class="line">warning: You appear to have cloned an empty repository.</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="公钥管理"><a href="#公钥管理" class="headerlink" title="公钥管理"></a>公钥管理</h2><p>  如果团队很小，把每个人的公钥收集起来放到服务器的/home/git/.ssh/authorized_keys文件里就是可行的。如果团队有几百号人，就没法这么玩了，这时，可以用<a href="http://github.com/res0nat0r/gitosis" target="_blank" rel="external">Gitosis</a>来管理公钥。</p>
-<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><p>有很多不但视源代码如生命，而且视员工为窃贼的公司，会在版本控制系统里设置一套完善的权限控制，每个人是否有读写权限会精确到每个分支甚至每个目录下。因为Git是为Linux源代码托管而开发的，所以Git也继承了开源社区的精神，不支持权限控制。不过，因为Git支持钩子（hook），所以，可以在服务器端编写一系列脚本来控制提交等操作，达到权限控制的目的。<a href="http://github.com/sitaramc/gitolite" target="_blank" rel="external">Gitolite</a>就是这个工具。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Github就是一个提供免费托管开源代码的远程仓库，但对于一些敏感代码或者不想开源的源代码，有不舍得付费，那么就需要自己搭建一台Git服务器作为私有仓库来使用。下面是搭建Git服务器过程。&lt;/p&gt;
-&lt;h2 id=&quot;安装配置&quot;&gt;&lt;a href=&quot;#安装配置&quot; class=&quot;h
-    
-    </summary>
-    
-      <category term="System" scheme="http://czero000.github.io/categories/System/"/>
-    
-      <category term="Git" scheme="http://czero000.github.io/categories/System/Git/"/>
-    
-    
-      <category term="git" scheme="http://czero000.github.io/tags/git/"/>
     
   </entry>
   
