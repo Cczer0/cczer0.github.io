@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://czero000.github.io/"/>
-  <updated>2016-11-17T02:25:26.129Z</updated>
+  <updated>2016-11-17T03:55:09.103Z</updated>
   <id>http://czero000.github.io/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo博客显示部分内容</title>
+    <link href="http://czero000.github.io/2016/11/17/github-pages-nodisplay-vendors.html"/>
+    <id>http://czero000.github.io/2016/11/17/github-pages-nodisplay-vendors.html</id>
+    <published>2016-11-17T03:49:46.000Z</published>
+    <updated>2016-11-17T03:55:09.103Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天更新 blog，一看全是空白，debug 结果全是 error,CSS 和 javascript都丢失了,显示<code>jquery，css</code> 都是 404。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">首先修改source/vendors为source/lib，然后修改_config.yml， 将 _internal: vendors修改为_internal:lib </div><div class="line">然后修改next底下所有引用source/vendors路径为source/lib。</div><div class="line">这些地方可以通过文件查找找出来。</div><div class="line">主要集中在这几个文件中。</div><div class="line">themes\.bowerrc </div><div class="line">themes\.gitignore </div><div class="line">themes\.javascript_ignore </div><div class="line">themes\bower.json 。</div><div class="line">修改完毕后，更新部署一遍就行了</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天更新 blog，一看全是空白，debug 结果全是 error,CSS 和 javascript都丢失了,显示&lt;code&gt;jquery，css&lt;/code&gt; 都是 404。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;
+    
+    </summary>
+    
+      <category term="Blog" scheme="http://czero000.github.io/categories/Blog/"/>
+    
+    
+      <category term="blog" scheme="http://czero000.github.io/tags/blog/"/>
+    
+      <category term="hexo" scheme="http://czero000.github.io/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>Git基础</title>
@@ -1526,57 +1553,6 @@
       <category term="mysql" scheme="http://czero000.github.io/tags/mysql/"/>
     
       <category term="mycli" scheme="http://czero000.github.io/tags/mycli/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python自动补全</title>
-    <link href="http://czero000.github.io/2016/05/09/python-auto-completion.html"/>
-    <id>http://czero000.github.io/2016/05/09/python-auto-completion.html</id>
-    <published>2016-05-09T09:07:02.000Z</published>
-    <updated>2016-10-20T10:50:11.089Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h2 id="Python-自动补全"><a href="#Python-自动补全" class="headerlink" title="Python 自动补全"></a>Python 自动补全</h2><p>下面是如何实现PythonTab补全和历史命令管理方法。</p>
-<h3 id="Python的startup文件"><a href="#Python的startup文件" class="headerlink" title="Python的startup文件"></a>Python的startup文件</h3><p>为readline添加tab键自动补全功能，像shell一样管理历史命令</p>
-<ul>
-<li>获取python安装目录</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</div><div class="line">[<span class="string">''</span>, <span class="string">'/usr/lib64/python27.zip'</span>, <span class="string">'/usr/lib64/python2.7'</span>, <span class="string">'/usr/lib64/python2.7/plat-linux2'</span>, <span class="string">'/usr/lib64/python2.7/lib-tk'</span>, <span class="string">'/usr/lib64/python2.7/lib-old'</span>, <span class="string">'/usr/lib64/python2.7/lib-dynload'</span>, <span class="string">'/usr/lib64/python2.7/site-packages'</span>, <span class="string">'/usr/lib64/python2.7/site-packages/gtk-2.0'</span>, <span class="string">'/usr/lib/python2.7/site-packages'</span>]</div></pre></td></tr></table></figure>
-<p>安装目录为’/usr/lib64/python2.7’</p>
-<ul>
-<li>切换目录编写<code>startup.py</code>脚本,<code>cp startup.py /usr/lib64/python2.7/</code></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># python startup file</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> readline</div><div class="line"><span class="keyword">import</span> rlcompleter</div><div class="line"><span class="keyword">import</span> atexit</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="comment"># tab completion</span></div><div class="line">readline.parse_and_bind(<span class="string">'tab: complete'</span>)</div><div class="line"><span class="comment"># history file</span></div><div class="line">histfile = os.path.join(os.environ[<span class="string">'HOME'</span>], <span class="string">'.pythonhistory'</span>)</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    readline.read_history_file(histfile)</div><div class="line"><span class="keyword">except</span> IOError:</div><div class="line">    <span class="keyword">pass</span></div><div class="line">atexit.register(readline.write_history_file, histfile)</div><div class="line"><span class="keyword">del</span> os, histfile, readline, rlcompleter</div></pre></td></tr></table></figure>
-<ul>
-<li>增加环境变量</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">edit .bashrc</div><div class="line">// 增加下面内容</div><div class="line">export PYTHONSTARTUP=/usr/lib64/python2.7/startup.py</div><div class="line"></div><div class="line">// 变量生效</div><div class="line">source .bashrc</div></pre></td></tr></table></figure>
-<h3 id="vim增加自动补全"><a href="#vim增加自动补全" class="headerlink" title="vim增加自动补全"></a>vim增加自动补全</h3><ul>
-<li>下载插件</li>
-</ul>
-<p><a href="http://www.vim.org/scripts/script.php?script_id=850" target="_blank" rel="external">pydiction</a>:<a href="http://www.vim.org/scripts/script.php?script_id=850" target="_blank" rel="external">http://www.vim.org/scripts/script.php?script_id=850</a></p>
-<ul>
-<li>安装插件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://www.vim.org/scripts/download_script.php?src_id=21842</div><div class="line">unzip pydiction-1.2.3.zip</div><div class="line">cp pydiction/after/ftplugin/python_pydiction.vim /usr/share/vim/vim74/ftplugin/</div><div class="line">mkdir /usr/share/vim/vim74/pydiction</div><div class="line">cp pydiction/complete-dict /usr/share/vim/vim74/pydiction/</div><div class="line">cp pydiction/pydiction.py  /usr/share/vim/vim74/pydiction/</div></pre></td></tr></table></figure>
-<ul>
-<li>修改vim配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let g:pydiction_location = &apos;/usr/share/vim/vim74/pydiction/complete-dict&apos;</div><div class="line">let g:pydiction_menu_height = 20</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;Python-自动补全&quot;&gt;&lt;a href=&quot;#Python-自动补全&quot; class=&quot;headerlink&quot; title=&quot;Python 自动补全&quot;&gt;&lt;/a&gt;Python 自动补全&lt;/h2&gt;&lt;p&gt;下面是如何实现PythonTab
-    
-    </summary>
-    
-      <category term="Python" scheme="http://czero000.github.io/categories/Python/"/>
-    
-    
-      <category term="python" scheme="http://czero000.github.io/tags/python/"/>
     
   </entry>
   
