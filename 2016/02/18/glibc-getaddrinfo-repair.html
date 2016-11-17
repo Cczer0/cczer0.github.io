@@ -98,7 +98,7 @@ glibc是GNU发布的libc库，即c运行库。它是Linux系统中最底层的AP
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/security/glibc_bug.jpg">
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/security/glibc_system_version.png">
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/security/glibc_bug_info.png">
-<meta property="og:updated_time" content="2016-10-20T10:50:11.093Z">
+<meta property="og:updated_time" content="2016-11-17T02:43:15.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="glibc再爆漏洞">
 <meta name="twitter:description" content="漏洞详情近日，Google和Red Hat的安全人员发现GNU C Library (glibc)中存在严重的安全漏洞，可导致Linux软件被攻击者劫持，进而在Linux平台上执行任意代码，获取密码，监视用户，甚至控制计算机。CVE编号为CVE-2015-7547。
@@ -411,7 +411,7 @@ glibc是GNU发布的libc库，即c运行库。它是Linux系统中最底层的AP
 <p>在一定条件下，会出现栈缓冲区和新分配的堆内存的错误匹配，导致超过栈缓冲区大小的响应仍然存储在栈中，进而发生缓冲区溢出。触发该漏洞的利用向量十分普遍，并且ssh、sudo和curl等工具中。</p>
 <h3 id="缓解"><a href="#缓解" class="headerlink" title="缓解"></a>缓解</h3><p>该漏洞存在于resolv/res_send.c文件中，当getaddrinfo()函数被调用时会触发该漏洞。技术人员可以通过将TCP DNS响应的大小限制为1024字节，并丢弃所有超过512字节的UDPDNS数据包来缓解该问题。值得庆幸的是，许多嵌入式Linux设备，例如家庭路由器，更倾向于使用uclibc库，因此可以免受该漏洞的影响。</p>
 <h3 id="漏洞的成因及POC使用测试"><a href="#漏洞的成因及POC使用测试" class="headerlink" title="漏洞的成因及POC使用测试"></a>漏洞的成因及POC使用测试</h3><p>据悉，漏洞的成因在于DNS Server Response返回过量的(2048 ) 字节, 导致接下来的response 触发栈溢出。目前，Google已提供了POC，据其博客中所述，该漏洞应该是可以绕过内存防护技术，从而形成代码执行漏洞。<br>具体POC 地址如下：github.com/fjserna/CVE-2015-7547<br>  对此，乌云白帽子路人甲在自己的本地lubuntu 上进行了测试，libc 版本为 2.19。lubuntu系列也属于Debian 的一个发行版，故理论上满足漏洞条件。测试过程如下：<br>根据漏洞描述，我们可以做一个假的DNS Server 作为中间人，来验证该漏洞。更改DNS 解析为 127.0.0.1，刷新DNS 缓存 sudo /etc/init.d/nscd restart 执行 CVE-2015-7547-poc.py , 注意无需更改 ip_addr 。编译 CVE-2015-7547-client.c , 执行CVE-2015-7547-client<br>若含有漏洞，会造成Segmentation Fault。<br><img src="http://ofc9x1ccn.bkt.clouddn.com/security/glibc_bug_info.png" alt="glibc_bug_info"></p>
-<p>文件下载链接：<br><a href="http://czero000.github.io/upload/security/CVE-2015-7547-master.zip">CVE-2015-7547-master.zip</a></p>
+<p>文件下载链接：<br><a href="http://ofc9x1ccn.bkt.clouddn.com/upload/securioty/CVE-2015-7547-master.zip" target="_blank" rel="external">CVE-2015-7547-master.zip</a></p>
 <h2 id="修复过程"><a href="#修复过程" class="headerlink" title="修复过程"></a>修复过程</h2><ol>
 <li><p>更新glibc版本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//rhel¢os</div><div class="line">yum -y update glibc* nscd</div><div class="line"></div><div class="line"></div><div class="line">//debian&amp;ubuntu</div><div class="line">apt-get update</div><div class="line">apt-get install libc6; apt-get install libc-bin</div></pre></td></tr></table></figure>

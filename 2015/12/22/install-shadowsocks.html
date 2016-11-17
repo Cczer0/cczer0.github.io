@@ -96,7 +96,7 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <meta property="og:description" content="什么是ShadowSocks
 Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。其流行起来的一大原因，多亏">
 <meta property="og:image" content="http://ofc9x1ccn.bkt.clouddn.com/proxy/shadowsocks-software.png">
-<meta property="og:updated_time" content="2016-10-20T10:50:11.093Z">
+<meta property="og:updated_time" content="2016-11-17T02:44:06.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks搭建Sock5代理">
 <meta name="twitter:description" content="什么是ShadowSocks
@@ -436,8 +436,8 @@ Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一�
 <p>TIPS: 加密方式推荐使用<code>rc4-md5</code>，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看<a href="http://github.com/clowwindy/shadowsocks/issues/178" target="_blank" rel="external">issue</a>。</p>
 <h2 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h2><h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Shadowsocks官网下载链接：<a href="http://shadowsocks.org/en/download/clients.html" target="_blank" rel="external">http://shadowsocks.org/en/download/clients.html</a><br>如果打不开官方下载地址，可以在这里下载（不能保证为最新版本）</p>
 <ul>
-<li><strong>Windows</strong> <a href="http://czero000.github.io/upload/proxy/Shadowsocks-2.5.8.zip">Windows 7 or above: 2.5.8.zip</a></li>
-<li><strong>Mac OS</strong>  <a href="http://czero000.github.io/upload/proxy/ShadowsocksX-2.6.3.dmg">ShadowsocksX: 2.6.3.dmg</a></li>
+<li><strong>Windows</strong> <a href="http://ofc9x1ccn.bkt.clouddn.com/upload/proxy/Shadowsocks-2.5.8.zip" target="_blank" rel="external">Windows 7 or above: 2.5.8.zip</a></li>
+<li><strong>Mac OS</strong>  <a href="http://ofc9x1ccn.bkt.clouddn.com/upload/proxy/ShadowsocksX-2.6.3.dmg" target="_blank" rel="external">ShadowsocksX: 2.6.3.dmg</a></li>
 </ul>
 <h3 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h3><p>客户端都是免安装，打开就可以使用，可以参考这篇文章<a href="http://www.jianshu.com/p/08ba65d1f91a" target="_blank" rel="external">Shadowsocks快速安装与配置指南</a></p>
 <h2 id="ShadowSocks优化"><a href="#ShadowSocks优化" class="headerlink" title="ShadowSocks优化"></a>ShadowSocks优化</h2><p>首先将内核升级到3.5或者以上</p>
