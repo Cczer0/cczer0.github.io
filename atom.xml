@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://czero000.github.io/"/>
-  <updated>2016-11-18T09:22:13.832Z</updated>
+  <updated>2016-12-01T09:29:49.460Z</updated>
   <id>http://czero000.github.io/</id>
   
   <author>
@@ -14,6 +14,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>精简docker镜像</title>
+    <link href="http://czero000.github.io/2016/12/01/simplify-docker-image.html"/>
+    <id>http://czero000.github.io/2016/12/01/simplify-docker-image.html</id>
+    <published>2016-12-01T09:27:14.000Z</published>
+    <updated>2016-12-01T09:29:49.460Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ofc9x1ccn.bkt.clouddn.com/docker/docker-images.png" alt=""><br>图注：一张图掌握 Docker 命令 - 简化版</p>
+<p><img src="http://ofc9x1ccn.bkt.clouddn.com/docker/docker-commands.png" alt=""><br>图注：一张图掌握 Docker 命令 - 完整版</p>
+<p>在 docker 镜像的制作过程中，有不少方式可以减少容器的空间占用，甚至镜像可以精简 98%，精简 docker 镜像，既节省了存储空间，又能节省带宽，加快传输。</p>
+<h1 id="镜像层"><a href="#镜像层" class="headerlink" title="镜像层"></a>镜像层</h1><p>在开始制作镜像前，首先了解镜像的原理，而这其中最重要的概念就是镜像层(Layers)<br><img src="http://ofc9x1ccn.bkt.clouddn.com/docker/docker-image-layers.png" alt=""><br>在 <code>Dockerfile</code> 中的每条指令都会创建一个镜像层，继而会增加整体镜像的大小。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FROM busybox  </div><div class="line">RUN mkdir /tmp/foo  </div><div class="line">RUN dd if=/dev/zero of=/tmp/foo/bar bs=1048576 count=100  </div><div class="line">RUN rm /tmp/foo/bar</div></pre></td></tr></table></figure>
+<p>在上面例子中，最终容器没有变回，但是新生成的镜像会比原生镜像大。</p>
+<h1 id="精简方法"><a href="#精简方法" class="headerlink" title="精简方法"></a>精简方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">// 原始 Dockerfile　文件</div><div class="line">FROM ubuntu:trusty  </div><div class="line">ENV VER     3.0.0  </div><div class="line">ENV TARBALL http://download.redis.io/releases/redis-$VER.tar.gz  </div><div class="line"># ==&gt; Install curl and helper tools...</div><div class="line">RUN apt-get update  </div><div class="line">RUN apt-get install -y  curl make gcc  </div><div class="line"># ==&gt; Download, compile, and install...</div><div class="line">RUN curl -L $TARBALL | tar zxv  </div><div class="line">WORKDIR  redis-$VER  </div><div class="line">RUN make  </div><div class="line">RUN make install  </div><div class="line">#...</div><div class="line"># ==&gt; Clean up...</div><div class="line">WORKDIR /  </div><div class="line">RUN apt-get remove -y --auto-remove curl make gcc  </div><div class="line">RUN apt-get clean  </div><div class="line">RUN rm -rf /var/lib/apt/lists/*  /redis-$VER  </div><div class="line">#...</div><div class="line">CMD [&quot;redis-server&quot;]</div></pre></td></tr></table></figure>
+<p>通过这个例子，演示如何精简 docker 镜像大小。</p>
+<h2 id="1-优化基础镜像"><a href="#1-优化基础镜像" class="headerlink" title="1. 优化基础镜像"></a>1. 优化基础镜像</h2><p>选用更小的基础镜像，在常用的 Linux 系统镜像中，Ubuntu、Centos、Debian中，debian 更为轻量。</p>
+<h2 id="2-减少构建步骤"><a href="#2-减少构建步骤" class="headerlink" title="2. 减少构建步骤"></a>2. 减少构建步骤</h2><p>串联 Dockerfile 指令（一般为 RUN 命令）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 优化后的 Dockerfile</div><div class="line">FROM debian:jessie</div><div class="line"></div><div class="line">ENV VER     3.0.0  </div><div class="line">ENV TARBALL http://download.redis.io/releases/redis-$VER.tar.gz</div><div class="line"></div><div class="line">RUN echo &quot;==&gt; Install curl and helper tools...&quot;  &amp;&amp; \  </div><div class="line">    apt-get update                      &amp;&amp; \</div><div class="line">    apt-get install -y  curl make gcc   &amp;&amp; \</div><div class="line">    \</div><div class="line">    echo &quot;==&gt; Download, compile, and install...&quot;  &amp;&amp; \</div><div class="line">    curl -L $TARBALL | tar zxv  &amp;&amp; \</div><div class="line">    cd redis-$VER               &amp;&amp; \</div><div class="line">    make                        &amp;&amp; \</div><div class="line">    make install                &amp;&amp; \</div><div class="line">    ...</div><div class="line">    echo &quot;==&gt; Clean up...&quot;  &amp;&amp; \</div><div class="line">    apt-get remove -y --auto-remove curl make gcc  &amp;&amp; \</div><div class="line">    apt-get clean                                  &amp;&amp; \</div><div class="line">    rm -rf /var/lib/apt/lists/*  /redis-$VER</div><div class="line">#...</div><div class="line">CMD [&quot;redis-server&quot;]</div></pre></td></tr></table></figure></p>
+<h2 id="3-压缩镜像"><a href="#3-压缩镜像" class="headerlink" title="3. 压缩镜像"></a>3. 压缩镜像</h2><ul>
+<li>使用命令或者工具压缩镜像</li>
+</ul>
+<p>docker 自带的一些命令还能协助压缩镜像，比如 export 和 import<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d redis:lab-3</div><div class="line">$ docker export 71b1c0ad0a2b | docker import - redis:lab-4</div></pre></td></tr></table></figure></p>
+<p>麻烦的是需要先将容器运行起来，而且这个过程中你会丢失镜像原有的一些信息，比如：导出端口，环境变量，默认指令。</p>
+<ul>
+<li>使用 <a href="https://github.com/jwilder/docker-squash" target="_blank" rel="external">docker-squash</a></li>
+</ul>
+<p><a href="https://github.com/jwilder/docker-squash#installation" target="_blank" rel="external">下载安装</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker save redis:lab-3 \</div><div class="line"> | sudo docker-squash -verbose -t redis:lab-4  \</div><div class="line"> | docker load</div></pre></td></tr></table></figure></p>
+<h2 id="4-使用最精简的基础镜像"><a href="#4-使用最精简的基础镜像" class="headerlink" title="4. 使用最精简的基础镜像"></a>4. 使用最精简的基础镜像</h2><p>使用 scratch 或者 busybox 作为基础镜像。</p>
+<p>关于 scratch</p>
+<ul>
+<li>一个空镜像，只能用于构建镜像，通过 FROM scratch</li>
+<li>在构建一些基础镜像，比如 debian 、 busybox，非常有用</li>
+<li>用于构建超少镜像，比如构建一个包含所有库的二进制文件</li>
+</ul>
+<p>关于 busybox + 只有 1~5M 的大小 + 包含了常用的 UNIX 工具 + 非常方便构建小镜像这些超小的基础镜像，结合能生成静态原生 ELF 文件的编译语言，比如C/C++，比如 Go，特别方便构建超小的镜像。</p>
+<h2 id="5-提取动态链接的-so-文件"><a href="#5-提取动态链接的-so-文件" class="headerlink" title="5. 提取动态链接的 .so 文件"></a>5. 提取动态链接的 .so 文件</h2><ul>
+<li>查看系统信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cat /etc/os-release</div><div class="line"></div><div class="line">NAME=&quot;Ubuntu&quot;  </div><div class="line">VERSION=&quot;14.04.2 LTS, Trusty Tahr&quot;  </div><div class="line"></div><div class="line">uname -a</div><div class="line">Linux localhost 3.13.0-46-generic #77-Ubuntu SMP  </div><div class="line">Mon Mar 2 18:23:39 UTC 2015  </div><div class="line">x86_64 x86_64 x86_64 GNU/Linux</div></pre></td></tr></table></figure>
+<ul>
+<li>打印共享的依赖库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ldd  redis-3.0.0/src/redis-server</div><div class="line">    linux-vdso.so.1 =&gt;  (0x00007fffde365000)</div><div class="line">    libm.so.6 =&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007f307d5aa000)</div><div class="line">    libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f307d38c000)</div><div class="line">    libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f307cfc6000)</div><div class="line">    /lib64/ld-linux-x86-64.so.2 (0x00007f307d8b9000)</div></pre></td></tr></table></figure>
+<ul>
+<li>打包需要的库文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar ztvf rootfs.tar.gz</div><div class="line">4485167  2015-04-21 22:54  usr/local/bin/redis-server  </div><div class="line">1071552  2015-02-25 16:56  lib/x86_64-linux-gnu/libm.so.6  </div><div class="line"> 141574  2015-02-25 16:56  lib/x86_64-linux-gnu/libpthread.so.0</div><div class="line">1840928  2015-02-25 16:56  lib/x86_64-linux-gnu/libc.so.6  </div><div class="line"> 149120  2015-02-25 16:56  lib64/ld-linux-x86-64.so.2</div></pre></td></tr></table></figure>
+<ul>
+<li>制作 Dockerfile</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM scratch  </div><div class="line">ADD  rootfs.tar.gz  /  </div><div class="line">COPY redis.conf     /etc/redis/redis.conf  </div><div class="line">EXPOSE 6379  </div><div class="line">CMD [&quot;redis-server&quot;]</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ofc9x1ccn.bkt.clouddn.com/docker/docker-images.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;图注：一张图掌握 Docker 命令 - 简化版&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ofc9x1cc
+    
+    </summary>
+    
+      <category term="运维技术" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="Docker" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
+    
+    
+      <category term="docker" scheme="http://czero000.github.io/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>多容器应用栈</title>
@@ -1455,9 +1523,9 @@
     
       <category term="bash" scheme="http://czero000.github.io/tags/bash/"/>
     
-      <category term="mindmap" scheme="http://czero000.github.io/tags/mindmap/"/>
-    
       <category term="awk" scheme="http://czero000.github.io/tags/awk/"/>
+    
+      <category term="mindmap" scheme="http://czero000.github.io/tags/mindmap/"/>
     
   </entry>
   
@@ -1485,55 +1553,6 @@
       <category term="bash" scheme="http://czero000.github.io/tags/bash/"/>
     
       <category term="mindmap" scheme="http://czero000.github.io/tags/mindmap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用zsh作为默认shell</title>
-    <link href="http://czero000.github.io/2016/07/22/bash-change-to-zsh.html"/>
-    <id>http://czero000.github.io/2016/07/22/bash-change-to-zsh.html</id>
-    <published>2016-07-22T05:54:29.000Z</published>
-    <updated>2016-10-20T10:50:11.109Z</updated>
-    
-    <content type="html"><![CDATA[<p>号称终极 Shell 的 Zsh 兼容 Bash，在命令补全方面有很好的体验，丰富的插件和主题可提供使用，配合 Oh-my-zsh 更加强大。</p>
-<p>Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装前可以查看系统安装了哪些 Shell</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /etc/shells</div></pre></td></tr></table></figure>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>Debian/Ubuntu</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install zsh</div></pre></td></tr></table></figure>
-<ul>
-<li>Redhat/CentOS </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum update</div><div class="line">yum install zsh</div></pre></td></tr></table></figure>
-<p>安装完成后将 Zsh 替换 Bash 作为默认的 Shell，避免每次重启需要重新进入 Zsh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chsh -s /bin/zsh</div></pre></td></tr></table></figure>
-<h1 id="安装-Oh-my-zsh"><a href="#安装-Oh-my-zsh" class="headerlink" title="安装 Oh-my-zsh"></a>安装 Oh-my-zsh</h1><p>需要使用到 Git，安装方法同上</p>
-<p>下面通过自动安装的方式安装 Oh-my-zsh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c &quot;$(wget http://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;</div></pre></td></tr></table></figure>
-<p>或者使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</div><div class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure>
-<p>安装完成用户目录下会出现 .zshrc 文件，环境变量和别名都在这里定义，更改主题需要修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ZSH_THEME=”robbyrussell”</div><div class="line">这里改为一个比较受欢迎的一款主题</div><div class="line">ZSH_THEME=&quot;agnoster&quot;</div></pre></td></tr></table></figure>
-<p>oh my zsh 提供了数十种主题，相关文件在~/.oh-my-zsh/themes目录下，你可以随意选择，也可以编辑主题满足自己的变态需求，我采用了默认主题robbyrussell，但是做了一点小小的改动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">PROMPT=&apos;%&#123;$fg_bold[red]%&#125;➜ %&#123;$fg_bold[green]%&#125;%p%&#123;$fg[cyan]%&#125;%d %&#123;$fg_bold[blue]%&#125;$(git_prompt_info)%&#123;$fg_bold[blue]%&#125;% %&#123;$reset_color%&#125;&gt;&apos;</div><div class="line">#PROMPT=&apos;%&#123;$fg_bold[red]%&#125;➜ %&#123;$fg_bold[green]%&#125;%p %&#123;$fg[cyan]%&#125;%c %&#123;$fg_bold[blue]%&#125;$(git_prompt_info)%&#123;$fg_bold[blue]%&#125; % %&#123;$reset_color%&#125;&apos;</div></pre></td></tr></table></figure>
-<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>在这项配置项里添加需要的插件即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plugins=(git bundler osx rake ruby)</div></pre></td></tr></table></figure></p>
-<p> <strong> Zsh 的基本配置到这里结束，强大的 Zsh 还有更多功能可以发现。</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;号称终极 Shell 的 Zsh 兼容 Bash，在命令补全方面有很好的体验，丰富的插件和主题可提供使用，配合 Oh-my-zsh 更加强大。&lt;/p&gt;
-&lt;p&gt;Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装前可以查看系统安装了哪些 She
-    
-    </summary>
-    
-      <category term="System" scheme="http://czero000.github.io/categories/System/"/>
-    
-      <category term="Bash" scheme="http://czero000.github.io/categories/System/Bash/"/>
-    
-    
-      <category term="zsh" scheme="http://czero000.github.io/tags/zsh/"/>
     
   </entry>
   
