@@ -1,0 +1,1047 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googled18515fcec64d15c.html" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="blog,leanote," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="为知笔记收费了，把笔记迁移到 leanote 上，但是有担心笔记的安全，所以找到了一个备份脚本，每天备份日志到本地。
+
+备份脚本
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leanote备份脚本">
+<meta property="og:url" content="http://czero000.github.io/2016/11/17/backup-leanote.html">
+<meta property="og:site_name" content="Zero's Blog">
+<meta property="og:description" content="为知笔记收费了，把笔记迁移到 leanote 上，但是有担心笔记的安全，所以找到了一个备份脚本，每天备份日志到本地。
+
+备份脚本
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172">
+<meta property="og:updated_time" content="2017-01-11T07:19:21.812Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leanote备份脚本">
+<meta name="twitter:description" content="为知笔记收费了，把笔记迁移到 leanote 上，但是有担心笔记的安全，所以找到了一个备份脚本，每天备份日志到本地。
+
+备份脚本
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/11/17/backup-leanote.html"/>
+
+
+
+
+
+  <title> Leanote备份脚本 | Zero's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71693959-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59079634";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/11/17/backup-leanote.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Leanote备份脚本
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/11/17/backup-leanote.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/17/backup-leanote.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/17/backup-leanote.html" class="leancloud_visitors" data-flag-title="Leanote备份脚本">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为知笔记收费了，把笔记迁移到 leanote 上，但是有担心笔记的安全，所以找到了一个备份脚本，每天备份日志到本地。</p>
+<ul>
+<li><p>备份脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div></pre></td><td class="code"><pre><div class="line">cat Leanote4MD.py</div><div class="line"></div><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment">#encoding: utf8</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># author: goodbest &lt;lovegoodbest@gmail.com&gt;</span></div><div class="line"><span class="comment"># github: github.com/goodbest</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="line"><span class="keyword">import</span> dateutil.parser</div><div class="line"><span class="keyword">from</span> dateutil <span class="keyword">import</span> tz</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"><span class="keyword">from</span> StringIO <span class="keyword">import</span> StringIO</div><div class="line"><span class="keyword">from</span> requests_toolbelt <span class="keyword">import</span> SSLAdapter</div><div class="line"><span class="keyword">import</span> ssl</div><div class="line"><span class="keyword">import</span> argparse</div><div class="line"><span class="keyword">import</span> ConfigParser <span class="keyword">as</span> CP</div><div class="line"></div><div class="line">leanote_host = <span class="keyword">None</span></div><div class="line">leanote_token = <span class="keyword">None</span></div><div class="line">local_zone = <span class="keyword">None</span></div><div class="line">args = <span class="keyword">None</span></div><div class="line"></div><div class="line">configpath = <span class="string">"Leanote.cfg"</span></div><div class="line"></div><div class="line">DEBUG = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_ok</span><span class="params">(myjson)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">      json_object = json.loads(myjson)</div><div class="line">    <span class="keyword">except</span> ValueError, e:</div><div class="line">        <span class="keyword">print</span> e</div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="string">'Ok'</span> <span class="keyword">in</span> json_object:</div><div class="line">        <span class="keyword">if</span> json_object[<span class="string">'Ok'</span>]:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> json_object[<span class="string">'Msg'</span>]</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">req_get</span><span class="params">(url, param = <span class="string">''</span>, type = <span class="string">'json'</span>, token = True)</span>:</span></div><div class="line">    <span class="keyword">if</span> token:</div><div class="line">        <span class="keyword">if</span> param:</div><div class="line">            param.update(&#123;<span class="string">'token'</span>: leanote_token&#125;)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            param=&#123;<span class="string">'token'</span>: leanote_token&#125;</div><div class="line"></div><div class="line">    s = requests.Session()</div><div class="line">    <span class="keyword">if</span> leanote_host.startswith(<span class="string">'https'</span>):</div><div class="line">        s.mount(<span class="string">'https://'</span>, SSLAdapter(ssl.PROTOCOL_TLSv1))</div><div class="line">    r = s.get(leanote_host + <span class="string">'/api/'</span> + url, params = param)</div><div class="line">    <span class="keyword">if</span> r.status_code == requests.codes.ok:</div><div class="line">        <span class="keyword">if</span> type==<span class="string">'json'</span>:</div><div class="line">            <span class="keyword">if</span> is_ok(r.text):</div><div class="line">                rj = json.loads(r.text)</div><div class="line">                <span class="comment"># if 'Msg' in rj:</span></div><div class="line">                <span class="comment">#     rj=rj['Msg']</span></div><div class="line">                <span class="keyword">return</span> rj</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">print</span> <span class="string">'[Err] requests to url %s fail'</span> %(r.url)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">elif</span> type==<span class="string">'image'</span>:</div><div class="line">            i = Image.open(StringIO(r.content))</div><div class="line">            <span class="keyword">return</span> i</div><div class="line"></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'[Err] connect to url %s fail, error code %d '</span> %(r.url, r.status_cde)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">req_post</span><span class="params">(url, param = <span class="string">''</span>, type = <span class="string">'json'</span>, token = True)</span>:</span></div><div class="line">    <span class="keyword">if</span> token:</div><div class="line">        <span class="keyword">if</span> param:</div><div class="line">            param.update(&#123;<span class="string">'token'</span>: leanote_token&#125;)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            param=&#123;<span class="string">'token'</span>: leanote_token&#125;</div><div class="line"></div><div class="line">    s = requests.Session()</div><div class="line">    <span class="keyword">if</span> leanote_host.startswith(<span class="string">'https'</span>):</div><div class="line">        s.mount(<span class="string">'https://'</span>, SSLAdapter(ssl.PROTOCOL_TLSv1))</div><div class="line">    r = s.post(leanote_host + <span class="string">'/api/'</span> + url, data = param)</div><div class="line">    <span class="keyword">if</span> r.status_code == requests.codes.ok:</div><div class="line">        <span class="keyword">if</span> type==<span class="string">'json'</span>:</div><div class="line">            <span class="keyword">if</span> is_ok(r.text):</div><div class="line">                rj = json.loads(r.text)</div><div class="line">                <span class="comment"># if 'Msg' in rj:</span></div><div class="line">                <span class="comment">#     rj=rj['Msg']</span></div><div class="line">                <span class="keyword">return</span> rj</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">print</span> <span class="string">'[Err] requests to url %s fail'</span> %(r.url)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'[Err] connect to url %s fail, error code %d '</span> %(r.url, r.status_cde)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#ret leanote_token</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(email, pwd)</span>:</span></div><div class="line">    param = &#123;</div><div class="line">        <span class="string">'email'</span>: email,</div><div class="line">        <span class="string">'pwd'</span>:   pwd,</div><div class="line">    &#125;</div><div class="line">    r = req_get(<span class="string">'auth/login'</span>, param, token=<span class="keyword">False</span>)</div><div class="line">    <span class="keyword">if</span> r:</div><div class="line">        <span class="keyword">print</span> <span class="string">'Login success! Welcome %s (%s)'</span> %(r[<span class="string">'Username'</span>], r[<span class="string">'Email'</span>])</div><div class="line">        <span class="keyword">return</span> r[<span class="string">'Token'</span>]</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'Login fail! Start again.'</span></div><div class="line">        exit()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> req_get(<span class="string">'auth/logout'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#ret dict(notebookId: type.Notebook&#125;</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNotebooks</span><span class="params">(includeTrash = False)</span>:</span></div><div class="line">    r = req_get(<span class="string">'notebook/getNotebooks'</span>)</div><div class="line">    <span class="keyword">if</span> r:</div><div class="line">        <span class="keyword">if</span> includeTrash:</div><div class="line">            <span class="keyword">return</span> &#123;notebook[<span class="string">'NotebookId'</span>] : notebook <span class="keyword">for</span> notebook <span class="keyword">in</span> r&#125;</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> &#123;notebook[<span class="string">'NotebookId'</span>] : notebook <span class="keyword">for</span> notebook <span class="keyword">in</span> r <span class="keyword">if</span> <span class="keyword">not</span> notebook[<span class="string">'IsDeleted'</span>]&#125;</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#ret [type.Note], which contains noteId, and note meta data</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNotesMeta</span><span class="params">(notebookId)</span>:</span></div><div class="line">    param = &#123;</div><div class="line">        <span class="string">'notebookId'</span>: notebookId,</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> req_get(<span class="string">'note/getNotes'</span>, param)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#ret type.NoteContent</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNoteDetail</span><span class="params">(noteId)</span>:</span></div><div class="line">    param = &#123;</div><div class="line">        <span class="string">'noteId'</span>: noteId,</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> req_get(<span class="string">'note/getNoteAndContent'</span>, param)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getImage</span><span class="params">(fileId)</span>:</span></div><div class="line">    param = &#123;</div><div class="line">        <span class="string">'fileId'</span>: fileId,</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> req_get(<span class="string">'file/getImage'</span>, param, type = <span class="string">'image'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addNotebook</span><span class="params">(title=<span class="string">'Import'</span>, parentId=<span class="string">''</span>, seq=<span class="number">-1</span>)</span>:</span></div><div class="line">    param = &#123;</div><div class="line">        <span class="string">'title'</span>: title,</div><div class="line">        <span class="string">'parentNotebookId'</span>: parentId,</div><div class="line">        <span class="string">'seq'</span> : seq</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> req_post(<span class="string">'notebook/addNotebook'</span>, param)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addNote</span><span class="params">(NotebookId, Title, Content, Tags=[], IsMarkdown = True, Abstract= <span class="string">''</span>, Files=[])</span>:</span></div><div class="line">    param = &#123;</div><div class="line">        <span class="string">'NotebookId'</span>: NotebookId,</div><div class="line">        <span class="string">'Title'</span>: Title,</div><div class="line">        <span class="string">'Content'</span>: Content,</div><div class="line">        <span class="string">'Tags[]'</span>: Tags,</div><div class="line">        <span class="string">'IsMarkdown'</span>: IsMarkdown,</div><div class="line">        <span class="string">'Abstract'</span>: Abstract,</div><div class="line">        <span class="comment">#'Files' : seq</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> req_post(<span class="string">'note/addNote'</span>, param)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readFromFile</span><span class="params">(filename)</span>:</span></div><div class="line">    <span class="keyword">import</span> yaml</div><div class="line">    file_meta = <span class="string">''</span></div><div class="line">    file_content = <span class="string">''</span></div><div class="line">    <span class="keyword">with</span> open (filename) <span class="keyword">as</span> f:</div><div class="line">        meta_flag=<span class="keyword">False</span></div><div class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</div><div class="line">            <span class="comment">#print line</span></div><div class="line">            <span class="keyword">if</span> meta_flag:</div><div class="line">                file_content += line</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">if</span> line.find(<span class="string">'---'</span>)&gt;<span class="number">-1</span>:</div><div class="line">                    meta_flag = <span class="keyword">True</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    file_meta += line</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> meta_flag:</div><div class="line">        file_content = file_meta</div><div class="line">        file_meta = <span class="string">''</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> meta_flag:</div><div class="line">        meta = yaml.load(file_meta)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        meta = &#123;&#125;</div><div class="line">    <span class="keyword">return</span> file_content, meta</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveToFile</span><span class="params">(notes, noteBooks, path = <span class="string">'.'</span>)</span>:</span></div><div class="line">    unique_noteTitle = set()</div><div class="line">    <span class="keyword">for</span> note <span class="keyword">in</span> notes:</div><div class="line">        <span class="keyword">if</span> note[<span class="string">'Title'</span>] == <span class="string">''</span>:</div><div class="line">            filename = note[<span class="string">'NoteId'</span>]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            filename = note[<span class="string">'Title'</span>]</div><div class="line"></div><div class="line">        <span class="keyword">if</span> filename <span class="keyword">in</span> unique_noteTitle:</div><div class="line">            filename=<span class="string">'%s_%s'</span> %(filename, note[<span class="string">'NoteId'</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            unique_noteTitle.add(filename)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> note[<span class="string">'IsMarkdown'</span>]:</div><div class="line">            filename += <span class="string">'.md'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            filename += <span class="string">'.txt'</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">with</span> open(path + <span class="string">'/'</span> + filename, <span class="string">'w'</span>) <span class="keyword">as</span> file:</div><div class="line">                <span class="keyword">print</span> <span class="string">'write file: %s'</span> %filename</div><div class="line">                file.write(<span class="string">'title: %s\n'</span> %note[<span class="string">'Title'</span>].encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"></div><div class="line">                date = dateutil.parser.parse(note[<span class="string">'CreatedTime'</span>])</div><div class="line">                file.write(<span class="string">'date: %s\n'</span> %datetime.strftime(date.astimezone(local_zone), <span class="string">'%Y/%m/%d %H:%M:%S'</span>))</div><div class="line"></div><div class="line">                date = dateutil.parser.parse(note[<span class="string">'UpdatedTime'</span>])</div><div class="line">                file.write(<span class="string">'updated: %s\n'</span> %datetime.strftime(date.astimezone(local_zone), <span class="string">'%Y/%m/%d %H:%M:%S'</span>))</div><div class="line"></div><div class="line">                <span class="keyword">if</span> note[<span class="string">'Tags'</span>]:</div><div class="line">                    <span class="keyword">if</span> len(note[<span class="string">'Tags'</span>]) == <span class="number">1</span>:</div><div class="line">                        <span class="keyword">if</span> note[<span class="string">'Tags'</span>][<span class="number">0</span>]:</div><div class="line">                            file.write(<span class="string">'tags:\n'</span>)</div><div class="line">                            <span class="keyword">for</span> tag <span class="keyword">in</span> note[<span class="string">'Tags'</span>]:</div><div class="line">                                file.write(<span class="string">'- %s\n'</span> %tag.encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line">                category = []</div><div class="line">                current_notebook = note[<span class="string">'NotebookId'</span>]</div><div class="line">                category.append(noteBooks[current_notebook][<span class="string">'Title'</span>])</div><div class="line">                <span class="keyword">while</span> noteBooks[current_notebook][<span class="string">'ParentNotebookId'</span>] != <span class="string">''</span>:</div><div class="line">                    category.append(noteBooks[noteBooks[current_notebook][<span class="string">'ParentNotebookId'</span>]][<span class="string">'Title'</span>])</div><div class="line">                    current_notebook = noteBooks[current_notebook][<span class="string">'ParentNotebookId'</span>]</div><div class="line">                file.write(<span class="string">'categories:\n'</span>)</div><div class="line">                category.reverse()</div><div class="line">                <span class="keyword">for</span> cat <span class="keyword">in</span> category:</div><div class="line">                    file.write(<span class="string">'- %s\n'</span> %cat.encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line">                file.write(<span class="string">'---\n'</span>)</div><div class="line">                file.write(<span class="string">'%s'</span> %note[<span class="string">'Content'</span>].encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line">            file.close()</div><div class="line">            <span class="keyword">if</span> note[<span class="string">'Files'</span>]:</div><div class="line">                <span class="keyword">if</span> len(note[<span class="string">'Files'</span>]) &gt; <span class="number">0</span>:</div><div class="line">                    <span class="keyword">for</span> attach <span class="keyword">in</span> note[<span class="string">'Files'</span>]:</div><div class="line">                        <span class="keyword">if</span> <span class="keyword">not</span> attach[<span class="string">'IsAttach'</span>]:</div><div class="line">                            i = getImage(attach[<span class="string">'FileId'</span>])</div><div class="line">                            <span class="keyword">print</span> <span class="string">'saving its image: %s.%s'</span> %(attach[<span class="string">'FileId'</span>], i.format)</div><div class="line">                            i.save(attach[<span class="string">'FileId'</span>] + <span class="string">'.'</span> + i.format)</div><div class="line"></div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">"error: "</span>, filename</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">LeanoteExportToMD</span><span class="params">(path = <span class="string">'.'</span>)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Reading your notebooks...'</span></div><div class="line">    noteBooks = getNotebooks()</div><div class="line"></div><div class="line">    <span class="comment">#get not deleted notes list</span></div><div class="line">    notes=[]</div><div class="line">    <span class="keyword">for</span> notebook <span class="keyword">in</span> noteBooks.values():</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> notebook[<span class="string">'IsDeleted'</span>]:</div><div class="line">            notesMeta = getNotesMeta(notebook[<span class="string">'NotebookId'</span>])</div><div class="line">            <span class="keyword">for</span> noteMeta <span class="keyword">in</span> notesMeta:</div><div class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> noteMeta[<span class="string">'IsTrash'</span>]:</div><div class="line">                        note = getNoteDetail(noteMeta[<span class="string">'NoteId'</span>])</div><div class="line">                        notes.append(note)</div><div class="line">    <span class="keyword">print</span> <span class="string">'found %d notes'</span> %len(notes)</div><div class="line"></div><div class="line">    <span class="comment">#write file</span></div><div class="line">    saveToFile(notes, noteBooks, path = path)</div><div class="line">    <span class="keyword">print</span> <span class="string">'all done, bye~'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">LeanoteImportFromMD</span><span class="params">(path=<span class="string">'.'</span>)</span>:</span></div><div class="line">    <span class="comment"># filelist = os.listdir(path)</span></div><div class="line">    <span class="comment"># filelist = [file for file in filelist if file.find('.md')&gt;-1 or file.find('.txt')&gt;-1]</span></div><div class="line"></div><div class="line">    filelist = readfiles(path)</div><div class="line"></div><div class="line">    importedNotebookTitleMapID = &#123;&#125;</div><div class="line">    ret = addNotebook(title=<span class="string">'imported_note'</span>, parentId=<span class="string">''</span>, seq=<span class="number">-1</span>)</div><div class="line">    <span class="keyword">if</span> ret:</div><div class="line">        <span class="keyword">print</span> <span class="string">'imporing into a new notebook: %s'</span> %ret[<span class="string">'Title'</span>]</div><div class="line">        importedNotebookTitleMapID[<span class="string">'import'</span>] = ret[<span class="string">'NotebookId'</span>]</div><div class="line"></div><div class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> filelist:</div><div class="line">        content, meta = readFromFile(path + <span class="string">'/'</span> + filename)</div><div class="line">        <span class="keyword">if</span> DEBUG:</div><div class="line">            <span class="keyword">print</span> meta</div><div class="line"></div><div class="line">        parentTitle=<span class="string">'import'</span></div><div class="line">        currentTitle=<span class="string">''</span></div><div class="line">        <span class="keyword">if</span> meta.get(<span class="string">'categories'</span>):</div><div class="line">            categories= meta.get(<span class="string">'categories'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            categories=[<span class="string">'import'</span>]</div><div class="line">        <span class="keyword">for</span> cat <span class="keyword">in</span> categories:</div><div class="line">            currentTitle=cat</div><div class="line">            <span class="keyword">if</span> currentTitle <span class="keyword">in</span> importedNotebookTitleMapID.keys():</div><div class="line">                parentTitle=currentTitle</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                ret = addNotebook(title = currentTitle, parentId = importedNotebookTitleMapID[parentTitle])</div><div class="line">                importedNotebookTitleMapID[currentTitle] = ret[<span class="string">'NotebookId'</span>]</div><div class="line">                parentTitle=currentTitle</div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> meta.get(<span class="string">'title'</span>):</div><div class="line">            meta[<span class="string">'title'</span>] = filename.replace(<span class="string">'.md'</span>,<span class="string">''</span>).replace(<span class="string">'.txt'</span>,<span class="string">''</span>)</div><div class="line">        importedNote = addNote(NotebookId=importedNotebookTitleMapID[currentTitle], Title=meta.get(<span class="string">'title'</span>), Content=content, Tags=meta.get(<span class="string">'tags'</span>, []), Abstract=<span class="string">''</span>)</div><div class="line">        <span class="keyword">if</span> importedNote:</div><div class="line">            <span class="keyword">print</span> <span class="string">'imported %s'</span> %filename</div><div class="line">    <span class="keyword">print</span> <span class="string">'all done, bye~'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfiles</span><span class="params">(path)</span>:</span></div><div class="line">    <span class="keyword">assert</span> os.path.exists(path)</div><div class="line">    filelist = [os.path.join(root, f) <span class="keyword">for</span> root,_,files <span class="keyword">in</span> os.walk(path) <span class="keyword">for</span> f <span class="keyword">in</span> files <span class="keyword">if</span> f.find(<span class="string">'.md'</span>)&gt;<span class="number">-1</span> <span class="keyword">or</span> f.find(<span class="string">'.txt'</span>)&gt;<span class="number">-1</span>]</div><div class="line">    <span class="keyword">assert</span> filelist, <span class="string">"No files fond in %s"</span> % path</div><div class="line">    <span class="keyword">return</span> filelist</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> leanote_host</div><div class="line">    <span class="keyword">global</span> leanote_token</div><div class="line">    <span class="keyword">global</span> local_zone</div><div class="line">    <span class="keyword">global</span> args</div><div class="line"></div><div class="line">    args = init_options()</div><div class="line"></div><div class="line">    leanote_host=args.host</div><div class="line">    leanote_email=args.user</div><div class="line">    leanote_password=args.passwd</div><div class="line">    path = args.path</div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'Connecting to %s'</span> %leanote_host</div><div class="line">    leanote_token = login(leanote_email, leanote_password)</div><div class="line">    local_zone=tz.tzlocal()</div><div class="line"></div><div class="line">    <span class="keyword">if</span> args.choice == <span class="string">'import'</span>:</div><div class="line">        LeanoteImportFromMD(path)</div><div class="line">    <span class="keyword">elif</span> args.choice == <span class="string">'export'</span>:</div><div class="line">        LeanoteExportToMD(path)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'command format: \npython Leanote4MD.py import\npython Leanote4MD.py export'</span></div><div class="line"></div><div class="line">    logout()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_options</span><span class="params">()</span>:</span></div><div class="line">    parser = argparse.ArgumentParser()</div><div class="line">    parser.add_argument(<span class="string">"choice"</span>, choices=[<span class="string">"import"</span>, <span class="string">"export"</span>], help=<span class="string">"import or export"</span>)</div><div class="line">    parser.add_argument(<span class="string">"--host"</span>, dest=<span class="string">"host"</span>, help=<span class="string">"host(defalt:http://leanote.com)"</span>)</div><div class="line">    parser.add_argument(<span class="string">"-u"</span>, <span class="string">"--user"</span>, dest=<span class="string">"user"</span>, help=<span class="string">"email for login"</span>)</div><div class="line">    parser.add_argument(<span class="string">"-p"</span>, <span class="string">"--passwd"</span>, dest=<span class="string">"passwd"</span>,help=<span class="string">"passwd for login"</span>)</div><div class="line">    parser.add_argument(<span class="string">"--path"</span>, dest=<span class="string">"path"</span>, help=<span class="string">"your save path (default is current dir)"</span>)</div><div class="line">    args = parser.parse_args()</div><div class="line"></div><div class="line">    config_args = readconfig()</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.host:</div><div class="line">        args.host = config_args.get(<span class="string">"host"</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.user:</div><div class="line">        args.user = config_args.get(<span class="string">"email"</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.passwd:</div><div class="line">        args.passwd = config_args.get(<span class="string">"passwd"</span>)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.path:</div><div class="line">        args.path = config_args.get(<span class="string">"path"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> DEBUG:</div><div class="line">        <span class="keyword">print</span> <span class="string">"choice:"</span>, args.choice</div><div class="line">        <span class="keyword">print</span> <span class="string">"host:"</span>, args.host</div><div class="line">        <span class="keyword">print</span> <span class="string">"user:"</span>,args.user</div><div class="line">        <span class="keyword">print</span> <span class="string">"passwd:"</span>,args.passwd</div><div class="line">        <span class="keyword">print</span> <span class="string">"path:"</span>, args.path</div><div class="line"></div><div class="line">    <span class="keyword">return</span> args</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">readconfig</span><span class="params">()</span>:</span></div><div class="line">    args = &#123;&#125;</div><div class="line">    config = CP.ConfigParser()</div><div class="line">    config.read(configpath)</div><div class="line">    args[<span class="string">"host"</span>] = config.get(<span class="string">"conn"</span>, <span class="string">"host"</span>)</div><div class="line">    args[<span class="string">"email"</span>] = config.get(<span class="string">"conn"</span>, <span class="string">"email"</span>)</div><div class="line">    args[<span class="string">"passwd"</span>] = config.get(<span class="string">"conn"</span>, <span class="string">"passwd"</span>)</div><div class="line">    args[<span class="string">"path"</span>] = config.get(<span class="string">"conn"</span>, <span class="string">"path"</span>)</div><div class="line">    <span class="keyword">return</span> args</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    sys.exit(main())</div></pre></td></tr></table></figure>
+</li>
+<li><p>备份脚本说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">#leanote导入导出MD工具</div><div class="line">- 可以把你储存在[Leanote](http://leanote.com)上的笔记、文章都导出成Markdown文件、文本文件</div><div class="line">- 也可以把你储存在硬盘的Markdown文件、文本文件都导入到[Leanote](http://leanote.com)上去</div><div class="line">- 目前支持导入导出含YAML格式的meta信息的文件，参照 [hexo](http://hexo.io/docs/front-matter.html)  的文件格式，也就是说文件头部可以有`title` `tags` </div><div class="line">`date` `categoris`等meta信息</div><div class="line">- 兼容官方网站，以及自建的服务器（基于beta4，以及API 0.1版本）</div><div class="line"></div><div class="line">#如何使用</div><div class="line">- 首先安装Python2版本</div><div class="line">- 确保机器已经安装 `requests` `Pillow` `PyYaml` `requests_toolbelt` 等模块，如果没装请 `pip install`</div><div class="line">- 然后在命令行执行`python leanote4MD.py`</div><div class="line">  - 如果报错，应该是你的 python 路径问题，或者缺少某些python module</div><div class="line">- 根据提示输入域名（默认是http://leanote.com）、用户邮箱、密码</div><div class="line">  - 域名不要忘记加`http://`</div><div class="line">  - 如果是自建服务器，请保证版本不低于 beta4</div><div class="line">  - 记得用邮箱，而不是用户名</div><div class="line">- 一般导入的错误都是文件没有严格按照YAML格式（多余空格等）造成的解析错误</div><div class="line"></div><div class="line"></div><div class="line">#功能</div><div class="line"></div><div class="line">- [x] 从Leanote导入、导出笔记本/子笔记本到MD或txt文本文件</div><div class="line">- [x] 保存为兼容 hexo front matter 的tag、category、date、title等</div><div class="line">  - 由于0.1版本API限制，导入时暂时无法设置 保存时间、修改时间</div><div class="line">- [x] 只导入、导出不在垃圾箱的笔记</div><div class="line">- [x] 数不尽的bug</div><div class="line">- [ ] 根据是否为已发布的blog，生成post或者draft属性</div><div class="line">- [x] 导出时保存图片到本地</div><div class="line">- [ ] 导入时提交图片到服务器</div></pre></td></tr></table></figure>
+</li>
+<li><p>备份脚本配置文件，原始备份脚本是交互式的，改为读取配置文件了</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cat Leanote.cfg</div><div class="line">[conn]</div><div class="line">host = http://leanote.com</div><div class="line">email = charlie.cui@qq.com</div><div class="line">passwd = </div><div class="line">path = /opt/Leanote4MD/LeaNote_BackUp/</div></pre></td></tr></table></figure>
+<ul>
+<li><p>备份脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">more backupnote </div><div class="line">#!/bin/bash</div><div class="line">_work_dir=/opt/Leanote4MD</div><div class="line">_date=`date +%Y-%m-%d`</div><div class="line"></div><div class="line">backup() &#123;</div><div class="line">	mkdir -p $&#123;_work_dir&#125;/LeaNote_BackUp/$&#123;_date&#125;</div><div class="line">	cd _$&#123;_work_dir&#125;/LeaNote_BackUp</div><div class="line">	$&#123;_work_dir&#125;/Leanote4MD.py export |tee $LogFile</div><div class="line">	mv *.md $&#123;_date&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">clean()&#123;</div><div class="line">	find  $&#123;_work_dir&#125;/LeaNote_BackUp/ -type d -mtime +30 |xargs rm -fr</div><div class="line">&#125;</div><div class="line">backup &amp;&amp; clean</div></pre></td></tr></table></figure>
+</li>
+<li><p>增加cron，每天备份一次</p>
+</li>
+</ul>
+<p><a href="http://ofc9x1ccn.bkt.clouddn.com/blog/Leanote4MD.py" target="_blank" rel="external">Leanote4MD.py</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/blog/" rel="tag"># blog</a>
+          
+            <a href="/tags/leanote/" rel="tag"># leanote</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/17/github-pages-nodisplay-vendors.html" rel="next" title="Hexo博客显示部分内容">
+                <i class="fa fa-chevron-left"></i> Hexo博客显示部分内容
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/18/many-container-on-docker.html" rel="prev" title="多容器应用栈">
+                多容器应用栈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/17/backup-leanote.html"
+     data-title="Leanote备份脚本"
+     data-content=""
+     data-url="http://czero000.github.io/2016/11/17/backup-leanote.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/17/backup-leanote.html"
+           data-title="Leanote备份脚本" data-url="http://czero000.github.io/2016/11/17/backup-leanote.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yuanlong1207" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Yuminstall" target="_blank">Yuminstall</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.0.2"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

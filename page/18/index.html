@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/curl-get-http-status-code.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/create-2t-partition.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/curl-get-http-status-code.html" itemprop="url">
-                  Curl命令获取http状态码
+                <a class="post-title-link" href="/2015/12/21/create-2t-partition.html" itemprop="url">
+                  创建大于2TB分区
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/curl-get-http-status-code.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/curl-get-http-status-code.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/create-2t-partition.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/create-2t-partition.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/12/20/curl-get-http-status-code.html" class="leancloud_visitors" data-flag-title="Curl命令获取http状态码">
+             <span id="/2015/12/21/create-2t-partition.html" class="leancloud_visitors" data-flag-title="创建大于2TB分区">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,12 +390,14 @@
       
         
           
-          通过curl的-w参数我们可以自定义curl的输出，%{http_code}代表http状态码1curl -I -m 10 -o /dev/null -s -w %&#123;http_code&#125;  www.letuknowit.com
-上面的输出是不含换行的，如果需要换行的话，加上\n1
+          parted命令介绍parted命令可以划分单个分区大于2T的GPT格式的分区，也可以划分普通的MBR分区，fdisk命令对于大于2T的分区无法划分，所以用fdisk无法看到parted划分的GPT格式的分区。
+Parted 命令分为两种模式：命令行模式和交互模式。
+
+命令行模式： parted [
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/curl-get-http-status-code.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/create-2t-partition.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -436,7 +438,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/bash-status.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/centos7-install-smokeping.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -461,8 +463,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/bash-status.html" itemprop="url">
-                  Bash状态码
+                <a class="post-title-link" href="/2015/12/20/centos7-install-smokeping.html" itemprop="url">
+                  Centos7安装smokeping
                 </a>
               
             
@@ -484,8 +486,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/bash-status.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/bash-status.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/centos7-install-smokeping.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/centos7-install-smokeping.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,7 +497,7 @@
 
           
           
-             <span id="/2015/12/20/bash-status.html" class="leancloud_visitors" data-flag-title="Bash状态码">
+             <span id="/2015/12/20/centos7-install-smokeping.html" class="leancloud_visitors" data-flag-title="Centos7安装smokeping">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -522,52 +524,11 @@
       
         
           
-          
-
-
-Linux Shell退出状态代码
-描述
-
-
-
-
-0
-命令执行成功
-
-
-1
-未知错误
-
-
-2
-误用Shell命令
-
-
-126
-命令无法执行
-
-
-127
-没有找到命令
-
-
-128
-无效的退出参数
-
-
-128+x
-使用Linux 信号x 的致命错误
-
-
-130
-使用Ctrl-C终止命令
-
-
-255
+          I am using Centos7 + smokeping-2.6.9 lets start up by install needed package before that, we will need to enable Epel repo You can install EPEL by run
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/bash-status.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/centos7-install-smokeping.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -608,7 +569,7 @@ Linux Shell退出状态代码
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/fishshell.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/smokeping-master-slave.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -633,8 +594,8 @@ Linux Shell退出状态代码
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/fishshell.html" itemprop="url">
-                  Fishshell
+                <a class="post-title-link" href="/2015/12/20/smokeping-master-slave.html" itemprop="url">
+                  Smokeping-主辅
                 </a>
               
             
@@ -656,8 +617,8 @@ Linux Shell退出状态代码
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/fishshell.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/fishshell.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/smokeping-master-slave.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-master-slave.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -667,7 +628,7 @@ Linux Shell退出状态代码
 
           
           
-             <span id="/2015/12/20/fishshell.html" class="leancloud_visitors" data-flag-title="Fishshell">
+             <span id="/2015/12/20/smokeping-master-slave.html" class="leancloud_visitors" data-flag-title="Smokeping-主辅">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -694,13 +655,11 @@ Linux Shell退出状态代码
       
         
           
-          什么是Fish ShellFISH（friendly interactive shell）是一个用户友好的命令行 shell，主要是用来进行交互式使用。shell 就是一个用来执行其他程序的程序。
-
-Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供命令建议，就像一个网络浏览
+          smokeping Master/Slave分布式模式在使用smokeping过程中，很容易发现，如果从单个节点去探测网络性能，并不能充分检测到整个网络的一个状态。smokeping提供了基于多节点的分布式模式，可以从多个节点去探测到网络的状态，这样我们才能全面客观的监控真个网络。smokeping
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/fishshell.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/smokeping-master-slave.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -741,7 +700,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/awk-split-substr-length.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/smokeping-support-chinese.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -766,8 +725,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/awk-split-substr-length.html" itemprop="url">
-                  awk内置函数的使用(split/substr/length)
+                <a class="post-title-link" href="/2015/12/20/smokeping-support-chinese.html" itemprop="url">
+                  Smokeping页面支持中文
                 </a>
               
             
@@ -789,8 +748,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/awk-split-substr-length.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/awk-split-substr-length.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/smokeping-support-chinese.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-support-chinese.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -800,7 +759,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
 
           
           
-             <span id="/2015/12/20/awk-split-substr-length.html" class="leancloud_visitors" data-flag-title="awk内置函数的使用(split/substr/length)">
+             <span id="/2015/12/20/smokeping-support-chinese.html" class="leancloud_visitors" data-flag-title="Smokeping页面支持中文">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -827,13 +786,13 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
       
         
           
-          split 初始化和类型强制awk的内建函数split允许你把一个字符串分隔为单词并存储在数组中。你可以自己定义域分隔符或者使用现在FS(域分隔符)的值。
-格式：
-12split (string, array, field separator)split (string, array)  --&gt
+          smokeping页面和rrdtool图片支持中文smokeping默认不支持中文，只需要修改如下便可：
+页面支持中文在配置文件的*** Presentation ***下面添加1charset = utf-8
+rrd图片支持中文安装中文支持123yum groupinstall &quot;chi
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/awk-split-substr-length.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/smokeping-support-chinese.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -874,7 +833,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/install-smokeping.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -899,8 +858,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               
                 
-                <a class="post-title-link" href="/2015/11/11/use-cobbler-centos6.5.html" itemprop="url">
-                  CentOS6.5部署Cobbler(使用)
+                <a class="post-title-link" href="/2015/12/20/install-smokeping.html" itemprop="url">
+                  Smokeping-安装
                 </a>
               
             
@@ -922,8 +881,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/11/11/use-cobbler-centos6.5.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/11/use-cobbler-centos6.5.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/install-smokeping.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-smokeping.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -933,7 +892,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
 
           
           
-             <span id="/2015/11/11/use-cobbler-centos6.5.html" class="leancloud_visitors" data-flag-title="CentOS6.5部署Cobbler(使用)">
+             <span id="/2015/12/20/install-smokeping.html" class="leancloud_visitors" data-flag-title="Smokeping-安装">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -960,13 +919,14 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
       
         
           
-          本篇接上篇文章，继续介绍 cobbler 的使用方法。
-RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
-导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的
+          Smokeping 监控网络质量什么是SmokepingSmokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：
+
+多种探测方式，包括 fping、echoping、dig、curl 等；
+易用可
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/11/use-cobbler-centos6.5.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/install-smokeping.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1002,7 +962,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1043,7 +1003,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1051,7 +1011,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1060,7 +1020,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1138,7 +1098,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

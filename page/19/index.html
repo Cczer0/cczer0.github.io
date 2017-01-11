@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/11/11/centos6.5-install-cobbler.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/install-rrdtool-trubleshooting.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/11/centos6.5-install-cobbler.html" itemprop="url">
-                  CentOS6.5部署Cobbler(安装)
+                <a class="post-title-link" href="/2015/12/20/install-rrdtool-trubleshooting.html" itemprop="url">
+                  RRDTOOL安装报错解决
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/11/11/centos6.5-install-cobbler.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/11/centos6.5-install-cobbler.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/install-rrdtool-trubleshooting.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-rrdtool-trubleshooting.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/11/11/centos6.5-install-cobbler.html" class="leancloud_visitors" data-flag-title="CentOS6.5部署Cobbler(安装)">
+             <span id="/2015/12/20/install-rrdtool-trubleshooting.html" class="leancloud_visitors" data-flag-title="RRDTOOL安装报错解决">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,11 +390,12 @@
       
         
           
-          Cobbler 介绍Cobbler 是一个快速网络安装 linux 的服务，而且在经过调整也可以支持安装 windows。该工具使用 python 开发，小巧轻便，使用简单的命令即可完成 PXE 网络安装环境的配置，同时还可以管理 DHCP、DNS，以及 yum 包镜像。Cobbler 支持命令行管
+          在安装rrdtool过程中，出现报错，原来是缺少perl模块
+报错信息123456789Can&apos;t locate ExtUtils/MakeMaker.pm in @INC (@INC contains: /usr/local/lib64/perl5 /usr/local/share/pe
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/11/centos6.5-install-cobbler.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/install-rrdtool-trubleshooting.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -435,7 +436,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/22/logstash-forwarder-transmission.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/cacti-monitor-switch-trubleshooting.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -460,8 +461,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/22/logstash-forwarder-transmission.html" itemprop="url">
-                  通过Logstash-Forwarder传输数据
+                <a class="post-title-link" href="/2015/12/20/cacti-monitor-switch-trubleshooting.html" itemprop="url">
+                  Cacti监控交换机不显示端口
                 </a>
               
             
@@ -483,8 +484,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/22/logstash-forwarder-transmission.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/22/logstash-forwarder-transmission.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/cacti-monitor-switch-trubleshooting.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/cacti-monitor-switch-trubleshooting.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -494,7 +495,7 @@
 
           
           
-             <span id="/2015/10/22/logstash-forwarder-transmission.html" class="leancloud_visitors" data-flag-title="通过Logstash-Forwarder传输数据">
+             <span id="/2015/12/20/cacti-monitor-switch-trubleshooting.html" class="leancloud_visitors" data-flag-title="Cacti监控交换机不显示端口">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -521,13 +522,11 @@
       
         
           
-          logstash 作为无状态的软件，配合消息队列系统，可以很轻松的做到线性扩,Redis 已经帮我们解决了很多的问题，而且也很轻量，为什么我们还需要 logstash-forwarder 呢? 简而言之它很好，但是它不安全。下面开始配置Logstash-forwarder
-
-Redis provid
+          Cacti监控cisco设备时图表上的标题显示为GigabitEthernet而并没有指出具体的端口号,一般说来，图片的流量统计描述都是|host_description| - Traffic - |query_ifName|按照这个形式来描述的，对于华为的设备，Gi显示成GigabitEthern
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/22/logstash-forwarder-transmission.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/cacti-monitor-switch-trubleshooting.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -568,7 +567,7 @@ Redis provid
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/21/nginx-logrotate.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/iptables-table-full-dropping-packet.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -593,8 +592,8 @@ Redis provid
             
               
                 
-                <a class="post-title-link" href="/2015/10/21/nginx-logrotate.html" itemprop="url">
-                  Nginx--日志轮滚
+                <a class="post-title-link" href="/2015/12/20/iptables-table-full-dropping-packet.html" itemprop="url">
+                  Ip_conntrack: table full dropping packet解决方法
                 </a>
               
             
@@ -616,8 +615,8 @@ Redis provid
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/21/nginx-logrotate.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/nginx-logrotate.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/iptables-table-full-dropping-packet.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/iptables-table-full-dropping-packet.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -627,7 +626,7 @@ Redis provid
 
           
           
-             <span id="/2015/10/21/nginx-logrotate.html" class="leancloud_visitors" data-flag-title="Nginx--日志轮滚">
+             <span id="/2015/12/20/iptables-table-full-dropping-packet.html" class="leancloud_visitors" data-flag-title="Ip_conntrack: table full dropping packet解决方法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -654,12 +653,11 @@ Redis provid
       
         
           
-          Nginx 默认不支持日志轮滚，通过下面方法解决
-脚本方式12345678910#!/bin/bash                                                                                                   
+          问题现象监控报警，发现ping有持续丢包，ifconfig看到网卡dripped:xx 一直在增加，messages日志有以下内容1234kernel: ip_conntrack: table full, dropping packet.kernel: printk: 443 messages su
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/21/nginx-logrotate.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/iptables-table-full-dropping-packet.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -700,7 +698,7 @@ Redis provid
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/21/vim-nginx-hight-light.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/bind-trubleshooting.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -725,8 +723,8 @@ Redis provid
             
               
                 
-                <a class="post-title-link" href="/2015/10/21/vim-nginx-hight-light.html" itemprop="url">
-                  Nginx代码高亮
+                <a class="post-title-link" href="/2015/12/20/bind-trubleshooting.html" itemprop="url">
+                  安装Bind问题解析
                 </a>
               
             
@@ -748,8 +746,8 @@ Redis provid
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/21/vim-nginx-hight-light.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/vim-nginx-hight-light.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/bind-trubleshooting.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/bind-trubleshooting.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -759,7 +757,7 @@ Redis provid
 
           
           
-             <span id="/2015/10/21/vim-nginx-hight-light.html" class="leancloud_visitors" data-flag-title="Nginx代码高亮">
+             <span id="/2015/12/20/bind-trubleshooting.html" class="leancloud_visitors" data-flag-title="安装Bind问题解析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -786,14 +784,15 @@ Redis provid
       
         
           
-          配置Vim 支持Nginx 配置文件高亮显示
+          安装Bind过程中发现的问题，本文是解决过程
+问题
+ipv6问题报错信息如下：
 
-下载 Nginx 配置文件的 Vim 语法高亮：http://www.vim.org/scripts/script.php?script_id=1886
-将下载的nginx.vim复制到~/.vim/syntax/文件夹下，并且在~/.vim/file
+1&quot;0-Nov-2015 16:40:55.395 lame-servers: info: error (network unreachable) resolving &apos;./NS/IN&apos;:
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/21/vim-nginx-hight-light.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/bind-trubleshooting.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -834,7 +833,7 @@ Redis provid
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/21/nginx-init-scripts.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/liunix-traffic-monitor-iftop.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -859,8 +858,8 @@ Redis provid
             
               
                 
-                <a class="post-title-link" href="/2015/10/21/nginx-init-scripts.html" itemprop="url">
-                  Nginx INIT启动脚本
+                <a class="post-title-link" href="/2015/12/20/liunix-traffic-monitor-iftop.html" itemprop="url">
+                  Linux流量监控工具iftop
                 </a>
               
             
@@ -882,8 +881,8 @@ Redis provid
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/21/nginx-init-scripts.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/21/nginx-init-scripts.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/liunix-traffic-monitor-iftop.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/liunix-traffic-monitor-iftop.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -893,7 +892,7 @@ Redis provid
 
           
           
-             <span id="/2015/10/21/nginx-init-scripts.html" class="leancloud_visitors" data-flag-title="Nginx INIT启动脚本">
+             <span id="/2015/12/20/liunix-traffic-monitor-iftop.html" class="leancloud_visitors" data-flag-title="Linux流量监控工具iftop">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -920,14 +919,12 @@ Redis provid
       
         
           
-          nginx服务自启动脚本
-CentOS/RHEL 5、6系列
-
-脚本内容123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616
+          在类unix系统中，大家熟悉的top命令可以查看系统资源、进程、内存占用等信息，且动态实时显示。要查看网络状态可以使用netstat、nmap等工具。若要查看实时的网络流量，监控TCP/IP连接等，则可以使用iftop。
+iftop简介类似于top的实时监控系统资源和进程等，iftop是一个实时流量
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/21/nginx-init-scripts.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/liunix-traffic-monitor-iftop.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -963,7 +960,7 @@ CentOS/RHEL 5、6系列
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1004,7 +1001,7 @@ CentOS/RHEL 5、6系列
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1012,7 +1009,7 @@ CentOS/RHEL 5、6系列
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1021,7 +1018,7 @@ CentOS/RHEL 5、6系列
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1099,7 +1096,7 @@ CentOS/RHEL 5、6系列
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

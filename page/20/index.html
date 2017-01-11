@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/19/install-bind-ms.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/curl-get-http-status-code.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/19/install-bind-ms.html" itemprop="url">
-                  Centos6配置主辅DNS
+                <a class="post-title-link" href="/2015/12/20/curl-get-http-status-code.html" itemprop="url">
+                  Curl命令获取http状态码
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/19/install-bind-ms.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/19/install-bind-ms.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/curl-get-http-status-code.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/curl-get-http-status-code.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/10/19/install-bind-ms.html" class="leancloud_visitors" data-flag-title="Centos6配置主辅DNS">
+             <span id="/2015/12/20/curl-get-http-status-code.html" class="leancloud_visitors" data-flag-title="Curl命令获取http状态码">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,11 +390,12 @@
       
         
           
-          主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果ser
+          通过curl的-w参数我们可以自定义curl的输出，%{http_code}代表http状态码1curl -I -m 10 -o /dev/null -s -w %&#123;http_code&#125;  www.letuknowit.com
+上面的输出是不含换行的，如果需要换行的话，加上\n1
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/19/install-bind-ms.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/curl-get-http-status-code.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -435,7 +436,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/14/install-redis.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/bash-status.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -460,8 +461,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/14/install-redis.html" itemprop="url">
-                  安装Redis
+                <a class="post-title-link" href="/2015/12/20/bash-status.html" itemprop="url">
+                  Bash状态码
                 </a>
               
             
@@ -483,8 +484,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/14/install-redis.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/install-redis.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/bash-status.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/bash-status.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -494,7 +495,7 @@
 
           
           
-             <span id="/2015/10/14/install-redis.html" class="leancloud_visitors" data-flag-title="安装Redis">
+             <span id="/2015/12/20/bash-status.html" class="leancloud_visitors" data-flag-title="Bash状态码">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -521,12 +522,52 @@
       
         
           
-          Redis 是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、 Key-Value 数据库，并提供多种语言的 API
-下载安装 redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz ta
+          
+
+
+Linux Shell退出状态代码
+描述
+
+
+
+
+0
+命令执行成功
+
+
+1
+未知错误
+
+
+2
+误用Shell命令
+
+
+126
+命令无法执行
+
+
+127
+没有找到命令
+
+
+128
+无效的退出参数
+
+
+128+x
+使用Linux 信号x 的致命错误
+
+
+130
+使用Ctrl-C终止命令
+
+
+255
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/14/install-redis.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/bash-status.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -567,7 +608,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/13/elasticsearch-config-file-explain-in-detail.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/fishshell.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -592,8 +633,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html" itemprop="url">
-                  Elasticsearch配置文件详解
+                <a class="post-title-link" href="/2015/12/20/fishshell.html" itemprop="url">
+                  Fishshell
                 </a>
               
             
@@ -615,8 +656,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/elasticsearch-config-file-explain-in-detail.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/fishshell.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/fishshell.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -626,7 +667,7 @@
 
           
           
-             <span id="/2015/10/13/elasticsearch-config-file-explain-in-detail.html" class="leancloud_visitors" data-flag-title="Elasticsearch配置文件详解">
+             <span id="/2015/12/20/fishshell.html" class="leancloud_visitors" data-flag-title="Fishshell">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -653,11 +694,13 @@
       
         
           
-           elasticsearch的config文件夹里面有两个配置文件：elasticsearch.yml和logging.yml，第一个是es的基本配置文件，第二个是日志配置文件，es也是使用log4j来记录日志的，所以logging.yml里的设置按普通log4j配置文件来设置就行了。下面主要讲解下
+          什么是Fish ShellFISH（friendly interactive shell）是一个用户友好的命令行 shell，主要是用来进行交互式使用。shell 就是一个用来执行其他程序的程序。
+
+Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供命令建议，就像一个网络浏览
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/fishshell.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -698,7 +741,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/13/elasticsearch-install-service-wrapper.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/awk-split-substr-length.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -723,8 +766,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/13/elasticsearch-install-service-wrapper.html" itemprop="url">
-                  ElasticSearch 安装service wrapper插件
+                <a class="post-title-link" href="/2015/12/20/awk-split-substr-length.html" itemprop="url">
+                  awk内置函数的使用
                 </a>
               
             
@@ -746,8 +789,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/13/elasticsearch-install-service-wrapper.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/elasticsearch-install-service-wrapper.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/awk-split-substr-length.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/awk-split-substr-length.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -757,7 +800,7 @@
 
           
           
-             <span id="/2015/10/13/elasticsearch-install-service-wrapper.html" class="leancloud_visitors" data-flag-title="ElasticSearch 安装service wrapper插件">
+             <span id="/2015/12/20/awk-split-substr-length.html" class="leancloud_visitors" data-flag-title="awk内置函数的使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -784,12 +827,13 @@
       
         
           
-          使用elasticsearch-servicewrapper这个es插件，它支持通过参数，指定是在后台或前台运行es，并且支持启动，停止，重启es服务（默认es脚本只能通过ctrl+c关闭es）
-下载软件包：1wget http://github.com/elasticsearch/elastics
+          split 初始化和类型强制awk的内建函数split允许你把一个字符串分隔为单词并存储在数组中。你可以自己定义域分隔符或者使用现在FS(域分隔符)的值。
+格式：
+12split (string, array, field separator)split (string, array)  --&gt
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/elasticsearch-install-service-wrapper.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/awk-split-substr-length.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -830,7 +874,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/13/install-elk.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -855,8 +899,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/13/install-elk.html" itemprop="url">
-                  安装ELK日志服务
+                <a class="post-title-link" href="/2015/11/11/use-cobbler-centos6.5.html" itemprop="url">
+                  CentOS6.5部署Cobbler(使用)
                 </a>
               
             
@@ -878,8 +922,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/13/install-elk.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/install-elk.html" itemprop="commentCount"></span>
+                <a href="/2015/11/11/use-cobbler-centos6.5.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/11/use-cobbler-centos6.5.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -889,7 +933,7 @@
 
           
           
-             <span id="/2015/10/13/install-elk.html" class="leancloud_visitors" data-flag-title="安装ELK日志服务">
+             <span id="/2015/11/11/use-cobbler-centos6.5.html" class="leancloud_visitors" data-flag-title="CentOS6.5部署Cobbler(使用)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -916,13 +960,13 @@
       
         
           
-          什么是ELK  ELK是ElasticSearch、Logstash、Kibana三个开源软件的组合，这三个产品可以单独使用，但当他们组合在一起使用时，你会发现一个强大的、可扩展的日志服务，而且都是归于Elastic.co公司名下，所以有此简称。  ELK具有如下几个优点：
-
-处理方式灵活：Elas
+          本篇接上篇文章，继续介绍 cobbler 的使用方法。
+RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
+导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/install-elk.html#more" rel="contents">
+            <a class="btn" href="/2015/11/11/use-cobbler-centos6.5.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -958,7 +1002,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -999,7 +1043,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1007,7 +1051,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1016,7 +1060,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1094,7 +1138,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

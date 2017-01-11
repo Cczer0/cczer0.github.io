@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/22/bash-change-to-zsh.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/ansible-variable.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/22/bash-change-to-zsh.html" itemprop="url">
-                  使用zsh作为默认shell
+                <a class="post-title-link" href="/2016/10/19/ansible-variable.html" itemprop="url">
+                  Ansible--变量使用
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/07/22/bash-change-to-zsh.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/bash-change-to-zsh.html" itemprop="commentCount"></span>
+                <a href="/2016/10/19/ansible-variable.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/ansible-variable.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2016/07/22/bash-change-to-zsh.html" class="leancloud_visitors" data-flag-title="使用zsh作为默认shell">
+             <span id="/2016/10/19/ansible-variable.html" class="leancloud_visitors" data-flag-title="Ansible--变量使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,14 +390,15 @@
       
         
           
-          号称终极 Shell 的 Zsh 兼容 Bash，在命令补全方面有很好的体验，丰富的插件和主题可提供使用，配合 Oh-my-zsh 更加强大。
-Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装前可以查看系统安装了哪些 Shell
-1cat /etc/shells
+          变量自动化技术使得重复做事变的更加容易，当系统有所不同，Ansible 可以是使用相同的 template，通过变量来处理不同系统。Ansible 的变量名称可以以 字母、数字和下划线 命名，变量开头要以 字母开头
 
+在 inventory 中定义变量
+
+可以参考 「Ansible–入门」 inve
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/22/bash-change-to-zsh.html#more" rel="contents">
+            <a class="btn" href="/2016/10/19/ansible-variable.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -438,7 +439,7 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/05/31/autocompletion-of-opensource-mysqlclient.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/the-advanced-ansible.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -463,8 +464,8 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
             
               
                 
-                <a class="post-title-link" href="/2016/05/31/autocompletion-of-opensource-mysqlclient.html" itemprop="url">
-                  开源MySQL自动补全客户端
+                <a class="post-title-link" href="/2016/10/19/the-advanced-ansible.html" itemprop="url">
+                  Ansible--高级技巧
                 </a>
               
             
@@ -486,8 +487,8 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/05/31/autocompletion-of-opensource-mysqlclient.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/autocompletion-of-opensource-mysqlclient.html" itemprop="commentCount"></span>
+                <a href="/2016/10/19/the-advanced-ansible.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/the-advanced-ansible.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -497,7 +498,7 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
 
           
           
-             <span id="/2016/05/31/autocompletion-of-opensource-mysqlclient.html" class="leancloud_visitors" data-flag-title="开源MySQL自动补全客户端">
+             <span id="/2016/10/19/the-advanced-ansible.html" class="leancloud_visitors" data-flag-title="Ansible--高级技巧">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -524,16 +525,12 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
       
         
           
-          介绍MyCli 是一个 MySQL 的命令行客户端，可以实现自动补全 auto-completion 和语法高亮，同时也可应用于 MariaDB 和 Percona。
-功能特征
-
-MyCli 使用 Python Prompt Toolkit 编写。
-支持语法高亮
-当你输入 SQL 关键字，数据库的表
+          Ansible 性能优化在使用 Ansible 过程中，当管理的服务器数量增加，就会有一个无法避免的问题–执行效率慢。下面是一些解决方法
+优化前的准备–收集数据在做性能优化之前首先要收集一些统计数据，这样才能为后面的性能优化提供数据支持，对比优化前后结果，这里推荐一个 Ansible 任务计时插件 
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/31/autocompletion-of-opensource-mysqlclient.html#more" rel="contents">
+            <a class="btn" href="/2016/10/19/the-advanced-ansible.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -574,7 +571,7 @@ MyCli 使用 Python Prompt Toolkit 编写。
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/05/09/python-auto-completion.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/ansible-loop.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -599,8 +596,8 @@ MyCli 使用 Python Prompt Toolkit 编写。
             
               
                 
-                <a class="post-title-link" href="/2016/05/09/python-auto-completion.html" itemprop="url">
-                  Python自动补全
+                <a class="post-title-link" href="/2016/10/19/ansible-loop.html" itemprop="url">
+                  Ansible--循环
                 </a>
               
             
@@ -622,8 +619,8 @@ MyCli 使用 Python Prompt Toolkit 编写。
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/05/09/python-auto-completion.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/python-auto-completion.html" itemprop="commentCount"></span>
+                <a href="/2016/10/19/ansible-loop.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/ansible-loop.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -633,7 +630,7 @@ MyCli 使用 Python Prompt Toolkit 编写。
 
           
           
-             <span id="/2016/05/09/python-auto-completion.html" class="leancloud_visitors" data-flag-title="Python自动补全">
+             <span id="/2016/10/19/ansible-loop.html" class="leancloud_visitors" data-flag-title="Ansible--循环">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -660,17 +657,15 @@ MyCli 使用 Python Prompt Toolkit 编写。
       
         
           
-          
-Python 自动补全下面是如何实现PythonTab补全和历史命令管理方法。
-Python的startup文件为readline添加tab键自动补全功能，像shell一样管理历史命令
+          循环Ansible的循环也与编程语言中的类似，循环可以帮你重复做一件事，直到它收到某一个特定结果。
+标准循环
+简写重复的任务
 
-获取python安装目录
-
-123&gt;&gt;&gt; import sys&gt;&gt;&gt; sy
+12345- name: add server users  user: name=&#123;&#123; item &#125;&#125; state=present
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/09/python-auto-completion.html#more" rel="contents">
+            <a class="btn" href="/2016/10/19/ansible-loop.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -711,7 +706,7 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/05/09/git-repo.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/rudiments-of-ansible.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -736,8 +731,8 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
             
               
                 
-                <a class="post-title-link" href="/2016/05/09/git-repo.html" itemprop="url">
-                  Git仓库搭建
+                <a class="post-title-link" href="/2016/10/19/rudiments-of-ansible.html" itemprop="url">
+                  Ansible-入门
                 </a>
               
             
@@ -759,8 +754,8 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/05/09/git-repo.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/git-repo.html" itemprop="commentCount"></span>
+                <a href="/2016/10/19/rudiments-of-ansible.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/rudiments-of-ansible.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -770,7 +765,7 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
 
           
           
-             <span id="/2016/05/09/git-repo.html" class="leancloud_visitors" data-flag-title="Git仓库搭建">
+             <span id="/2016/10/19/rudiments-of-ansible.html" class="leancloud_visitors" data-flag-title="Ansible-入门">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -797,17 +792,15 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
       
         
           
-          Github就是一个提供免费托管开源代码的远程仓库，但对于一些敏感代码或者不想开源的源代码，有不舍得付费，那么就需要自己搭建一台Git服务器作为私有仓库来使用。下面是搭建Git服务器过程。
-安装配置
-安装git
-1yum install git -y
+          什么是 AnsibleAnsible 是基于 python 的配置管理和应用部署工具。官方给的 title是 “Ansible is Simple IT Automation” —简单的自动化IT工具。
+架构图
+工作原理
 
-创建一个git用户，用来运行git服务
-1us
+管理端支持 local、 ssh、zeromq 三种方式连接被控端，默认使用
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/09/git-repo.html#more" rel="contents">
+            <a class="btn" href="/2016/10/19/rudiments-of-ansible.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -848,7 +841,7 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/27/mfs-Technology.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/build-gitlab.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -873,8 +866,8 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
             
               
                 
-                <a class="post-title-link" href="/2016/04/27/mfs-Technology.html" itemprop="url">
-                  MooseFS技术详解
+                <a class="post-title-link" href="/2016/10/19/build-gitlab.html" itemprop="url">
+                  搭建GitLab服务器
                 </a>
               
             
@@ -896,8 +889,8 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/27/mfs-Technology.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/mfs-Technology.html" itemprop="commentCount"></span>
+                <a href="/2016/10/19/build-gitlab.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/build-gitlab.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -907,7 +900,7 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
 
           
           
-             <span id="/2016/04/27/mfs-Technology.html" class="leancloud_visitors" data-flag-title="MooseFS技术详解">
+             <span id="/2016/10/19/build-gitlab.html" class="leancloud_visitors" data-flag-title="搭建GitLab服务器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -934,17 +927,12 @@ Python的startup文件为readline添加tab键自动补全功能，像shell一样
       
         
           
-          
-MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它把数据分散在多台服务器上，确保一份数据多个备份副本，对外提供统一的结构。
-功能特性对于标准的文件操作，MooseFS表现与其他类Unix文件系统一致。支持的通过文件系统特性：
-
-层次结构（目录树）
-兼容POSIX文件属性
-支持特殊
+          ﻿Gitlab 是一个基于 Ruby on Rails 开发的开源项目管理程序，可以通过 WEB 界面进行访问公开的或者私人项目，实现一个自托管的 Git 项目仓库。它拥有与 GitHub 类似的功能，可以浏览代码，管理缺陷和注释。
+安装依赖软件1apt-get install curl opens
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/27/mfs-Technology.html#more" rel="contents">
+            <a class="btn" href="/2016/10/19/build-gitlab.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -980,7 +968,7 @@ MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1021,7 +1009,7 @@ MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1029,7 +1017,7 @@ MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1038,7 +1026,7 @@ MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1116,7 +1104,7 @@ MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

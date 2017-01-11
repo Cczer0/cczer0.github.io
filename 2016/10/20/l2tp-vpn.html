@@ -88,22 +88,16 @@
 
 
 
-<meta name="description" content="利用 IPsec 和 L2TP 搭建 VPN安装 EPEL 源1yum install epel-release -y
-安装 软件包Openswan 是 linux 下 VPN 协议 IPSec的一种实现，CentOS7安装源中有它的开源社区版，叫做 libreswan，先在来安装1yum install libreswan xl2tpd ppp lsof -y
-设置内核参数123456echo">
+<meta name="description" content="利用 IPsec 和 L2TP 搭建 VPN安装 EPEL 源12345yum install epel-release -y// CentOS Linux release 7.3.1611 (Core)版本，epel源的软件包存在bug，需单独下载安装xl2tpdwget http://dl.fedoraproject.org/pub/epel/testing/7/x86_64/x/xl2tpd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IPsec和L2TP搭建VPN">
 <meta property="og:url" content="http://czero000.github.io/2016/10/20/l2tp-vpn.html">
 <meta property="og:site_name" content="Zero's Blog">
-<meta property="og:description" content="利用 IPsec 和 L2TP 搭建 VPN安装 EPEL 源1yum install epel-release -y
-安装 软件包Openswan 是 linux 下 VPN 协议 IPSec的一种实现，CentOS7安装源中有它的开源社区版，叫做 libreswan，先在来安装1yum install libreswan xl2tpd ppp lsof -y
-设置内核参数123456echo">
-<meta property="og:updated_time" content="2016-10-20T10:50:11.097Z">
+<meta property="og:description" content="利用 IPsec 和 L2TP 搭建 VPN安装 EPEL 源12345yum install epel-release -y// CentOS Linux release 7.3.1611 (Core)版本，epel源的软件包存在bug，需单独下载安装xl2tpdwget http://dl.fedoraproject.org/pub/epel/testing/7/x86_64/x/xl2tpd">
+<meta property="og:updated_time" content="2017-01-11T07:12:42.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPsec和L2TP搭建VPN">
-<meta name="twitter:description" content="利用 IPsec 和 L2TP 搭建 VPN安装 EPEL 源1yum install epel-release -y
-安装 软件包Openswan 是 linux 下 VPN 协议 IPSec的一种实现，CentOS7安装源中有它的开源社区版，叫做 libreswan，先在来安装1yum install libreswan xl2tpd ppp lsof -y
-设置内核参数123456echo">
+<meta name="twitter:description" content="利用 IPsec 和 L2TP 搭建 VPN安装 EPEL 源12345yum install epel-release -y// CentOS Linux release 7.3.1611 (Core)版本，epel源的软件包存在bug，需单独下载安装xl2tpdwget http://dl.fedoraproject.org/pub/epel/testing/7/x86_64/x/xl2tpd">
 
 
 
@@ -395,7 +389,7 @@
       
 
       
-        <h1 id="利用-IPsec-和-L2TP-搭建-VPN"><a href="#利用-IPsec-和-L2TP-搭建-VPN" class="headerlink" title="利用 IPsec 和 L2TP 搭建 VPN"></a>利用 IPsec 和 L2TP 搭建 VPN</h1><h2 id="安装-EPEL-源"><a href="#安装-EPEL-源" class="headerlink" title="安装 EPEL 源"></a>安装 EPEL 源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install epel-release -y</div></pre></td></tr></table></figure>
+        <h1 id="利用-IPsec-和-L2TP-搭建-VPN"><a href="#利用-IPsec-和-L2TP-搭建-VPN" class="headerlink" title="利用 IPsec 和 L2TP 搭建 VPN"></a>利用 IPsec 和 L2TP 搭建 VPN</h1><h2 id="安装-EPEL-源"><a href="#安装-EPEL-源" class="headerlink" title="安装 EPEL 源"></a>安装 EPEL 源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">yum install epel-release -y</div><div class="line"></div><div class="line">// CentOS Linux release 7.3.1611 (Core)版本，epel源的软件包存在bug，需单独下载安装xl2tpd</div><div class="line">wget http://dl.fedoraproject.org/pub/epel/testing/7/x86_64/x/xl2tpd-1.3.8-2.el7.x86_64.rpm</div><div class="line">rpm -ivh xl2tpd-1.3.8-2.el7.x86_64.rpm</div></pre></td></tr></table></figure>
 <h2 id="安装-软件包"><a href="#安装-软件包" class="headerlink" title="安装 软件包"></a>安装 软件包</h2><p>Openswan 是 linux 下 VPN 协议 IPSec的一种实现，CentOS7安装源中有它的开源社区版，叫做 libreswan，先在来安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install libreswan xl2tpd ppp lsof -y</div></pre></td></tr></table></figure></p>
 <h2 id="设置内核参数"><a href="#设置内核参数" class="headerlink" title="设置内核参数"></a>设置内核参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">echo &quot;net.ipv4.ip_forward = 1&quot; |  tee -a /etc/sysctl.conf</div><div class="line">echo &quot;net.ipv4.conf.all.accept_redirects = 0&quot; |  tee -a /etc/sysctl.conf</div><div class="line">echo &quot;net.ipv4.conf.all.send_redirects = 0&quot; |  tee -a /etc/sysctl.conf</div><div class="line">for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 &gt; $vpn/accept_redirects; echo 0 &gt; $vpn/send_redirects; done</div><div class="line">for i in /proc/sys/net/ipv4/conf/*;do echo 0 &gt; $i/rp_filter;done</div><div class="line">sysctl -p</div></pre></td></tr></table></figure>
 <h2 id="添加-rc-local-文件"><a href="#添加-rc-local-文件" class="headerlink" title="添加 rc.local 文件"></a>添加 rc.local 文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 &gt; $vpn/accept_redirects; echo 0 &gt; $vpn/send_redirects; done</div><div class="line">for i in /proc/sys/net/ipv4/conf/*;do echo 0 &gt; $i/rp_filter;done</div></pre></td></tr></table></figure>
@@ -404,7 +398,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#conn %default</div><div class="line">#    Forceencaps=yes</div><div class="line">conn L2TP-PSK-NAT  </div><div class="line">    rightsubnet=vhost:%priv</div><div class="line">    also=L2TP-PSK-noNAT</div><div class="line"></div><div class="line">conn L2TP-PSK-noNAT  </div><div class="line">    authby=secret</div><div class="line">    pfs=no</div><div class="line">    auto=add</div><div class="line">    type=transport</div><div class="line">    keyingtries=3</div><div class="line">    rekey=no</div><div class="line">    ikelifetime=8h</div><div class="line">    salifetime=1h</div><div class="line">    left=serverIP</div><div class="line">    leftprotoport=17/1701</div><div class="line">    right=%any</div><div class="line">    rightprotoport=17/%any</div></pre></td></tr></table></figure>
 </li>
 <li><p>设置共享秘钥</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /etc/ipsec.d/l2tp.secrets</div><div class="line">59.151.49.125 %any: PSK &quot;linekong&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /etc/ipsec.d/l2tp.secrets</div><div class="line">59.51.149.125 %any: PSK &quot;ShareSecrets&quot;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="启动-IPSec"><a href="#启动-IPSec" class="headerlink" title="启动 IPSec"></a>启动 IPSec</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start ipsec</div><div class="line">systemctl enable ipsec</div></pre></td></tr></table></figure>
@@ -415,7 +409,7 @@
 <h2 id="启动-IPSec-1"><a href="#启动-IPSec-1" class="headerlink" title="启动 IPSec"></a>启动 IPSec</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start xl2tpd</div><div class="line">systemctl enable xl2tpd</div></pre></td></tr></table></figure>
 <h2 id="利用-iptable-配置转发规则"><a href="#利用-iptable-配置转发规则" class="headerlink" title="利用 iptable 配置转发规则"></a>利用 iptable 配置转发规则</h2><ul>
 <li><p>gw.sh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">/sbin/iptables -t nat -F</div><div class="line"></div><div class="line">/sbin/iptables -t nat -A POSTROUTING -s 10.0.12.0/24 -d 172.16.0.0/16 -o eth1 -j SNAT --to-source 172.16.1.125</div><div class="line">/sbin/iptables -t nat -A POSTROUTING -s 10.0.12.0/24 ! -d 10.0.12.0/24 -o eth0 -j SNAT --to-source 59.151.49.125</div><div class="line">/sbin/iptables -t nat -A POSTROUTING -s 10.0.12.0/24 ! -d 172.16.0.0/16 -o eth0 -j SNAT --to-source 59.151.49.125</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">/sbin/iptables -t nat -F</div><div class="line"></div><div class="line">/sbin/iptables -t nat -A POSTROUTING -s 10.0.12.0/24 -d 172.16.0.0/16 -o eth1 -j SNAT --to-source 172.16.1.125</div><div class="line">/sbin/iptables -t nat -A POSTROUTING -s 10.0.12.0/24 ! -d 10.0.12.0/24 -o eth0 -j SNAT --to-source 59.51.149.125</div><div class="line">/sbin/iptables -t nat -A POSTROUTING -s 10.0.12.0/24 ! -d 172.16.0.0/16 -o eth0 -j SNAT --to-source 59.51.149.125</div></pre></td></tr></table></figure>
 </li>
 <li><p>forward.sh</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 172.16.3.100 为办公电脑IP</div><div class="line">#!/bin/bash</div><div class="line">/sbin/iptables -F FORWARD</div><div class="line"></div><div class="line">##[test]</div><div class="line">/sbin/iptables -A FORWARD -s 10.0.12.100 -p tcp -d 172.16.3.100 -j ACCEPT</div><div class="line"></div><div class="line">##[default]</div><div class="line">/sbin/iptables -A FORWARD -s 10.0.12.0/24 -d 172.16.0.0/255.255.0.0 -j DROP</div><div class="line">#/sbin/iptables -A FORWARD -s 10.0.12.0/24 -d 59.151.39.0/255.255.255.0 -j DROP</div><div class="line">#/sbin/iptables -A FORWARD -s 10.0.12.0/24 -d 59.151.49.0/255.255.255.0 -j DROP</div></pre></td></tr></table></figure>
@@ -556,7 +550,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -564,7 +558,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -573,7 +567,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -667,7 +661,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

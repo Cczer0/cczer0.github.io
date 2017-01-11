@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/introduce-megacli-command.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-shadowsocks.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/introduce-megacli-command.html" itemprop="url">
-                  Megacli命令指南
+                <a class="post-title-link" href="/2015/12/22/install-shadowsocks.html" itemprop="url">
+                  Shadowsocks搭建Sock5代理
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/21/introduce-megacli-command.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/introduce-megacli-command.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-shadowsocks.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-shadowsocks.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/12/21/introduce-megacli-command.html" class="leancloud_visitors" data-flag-title="Megacli命令指南">
+             <span id="/2015/12/22/install-shadowsocks.html" class="leancloud_visitors" data-flag-title="Shadowsocks搭建Sock5代理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,11 +390,13 @@
       
         
           
-          MegaCli 是一款管理维护硬件RAID软件，可以通过它来了解当前 raid 卡的所有信息，包括 raid卡的型号，raid 的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做
+          
+什么是ShadowSocks
+Shadowsocks 是一个安全的socks5代理，用于保护网络流量，是一个开源项目。通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/21/introduce-megacli-command.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-shadowsocks.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -435,7 +437,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/passwd-command-failed.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/pptp-username-log.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -460,8 +462,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/passwd-command-failed.html" itemprop="url">
-                  passwd修改密码失败
+                <a class="post-title-link" href="/2015/12/22/pptp-username-log.html" itemprop="url">
+                  pptpvpn记录登录用户名
                 </a>
               
             
@@ -483,8 +485,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/21/passwd-command-failed.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/passwd-command-failed.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/pptp-username-log.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/pptp-username-log.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -494,7 +496,7 @@
 
           
           
-             <span id="/2015/12/21/passwd-command-failed.html" class="leancloud_visitors" data-flag-title="passwd修改密码失败">
+             <span id="/2015/12/22/pptp-username-log.html" class="leancloud_visitors" data-flag-title="pptpvpn记录登录用户名">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -522,11 +524,11 @@
         
           
           
-问题今天增加一用户时，出现以下情况12345[root@ssq-54-104 ~]# passwd rootChanging password for user root.New UNIX password:/usr/share/cracklib/pw_dict: error reading he
+  pptpd的日志主要大部分都在/var/log/messages, /var/log/daemon等文件里面，但是仔细看了发现里面没有用户名，不知道用户是用了哪一个帐号登录上来的。于是就看了一下pppd的man，里面发现了一些环境变量如：IPLOCAL, IPREMOTE等，经过测试发现 PE
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/21/passwd-command-failed.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/pptp-username-log.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -567,7 +569,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/update-python.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-pptpd-on-centos7.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -592,8 +594,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/update-python.html" itemprop="url">
-                  Python2.4升级
+                <a class="post-title-link" href="/2015/12/22/install-pptpd-on-centos7.html" itemprop="url">
+                  centos7安装pptpd vpn
                 </a>
               
             
@@ -615,8 +617,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/21/update-python.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/update-python.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-pptpd-on-centos7.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-pptpd-on-centos7.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -626,7 +628,7 @@
 
           
           
-             <span id="/2015/12/21/update-python.html" class="leancloud_visitors" data-flag-title="Python2.4升级">
+             <span id="/2015/12/22/install-pptpd-on-centos7.html" class="leancloud_visitors" data-flag-title="centos7安装pptpd vpn">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -653,11 +655,15 @@
       
         
           
-          RHEL5.4系统中自带的Python版本是2.4，但是目前许多基于Python的应用要求的Python版本都要高于2.4，在升级Python版本时不要卸载Python2.4在安装Python2.7，这样会有很多的问题，保守的方法是直接安装Python2.7的源码包（系统中有很多程序依赖Python
+          系统环境12more /etc/redhat-release CentOS Linux release 7.1.1503 (Core)
+安装1yum install pptpd
+配置
+/etc/pptpd.conf
+123//增加下面内容localip   1.1.1.1remoteip 10.0.
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/21/update-python.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-pptpd-on-centos7.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -698,7 +704,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/centos6.5-install-vncserver.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-pptpd-by-scripts.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -723,8 +729,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/centos6.5-install-vncserver.html" itemprop="url">
-                  CentOS6.5安装VNC
+                <a class="post-title-link" href="/2015/12/22/install-pptpd-by-scripts.html" itemprop="url">
+                  PPTP VPN安装脚本
                 </a>
               
             
@@ -746,8 +752,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/21/centos6.5-install-vncserver.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/centos6.5-install-vncserver.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-pptpd-by-scripts.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-pptpd-by-scripts.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -757,7 +763,7 @@
 
           
           
-             <span id="/2015/12/21/centos6.5-install-vncserver.html" class="leancloud_visitors" data-flag-title="CentOS6.5安装VNC">
+             <span id="/2015/12/22/install-pptpd-by-scripts.html" class="leancloud_visitors" data-flag-title="PPTP VPN安装脚本">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -783,14 +789,10 @@
 
       
         
-          
-          安装图形支持1yum groupinstall -y  &apos;X Window System&apos; &apos;Desktop&apos; &apos;Desktop Platform&apos;
-安装VNC1yum install -y tigervnc-server
-配置VNC编辑v
-          ...
+          <p>pptp vpn 一键安装脚本，适用 rhel5.x_86-64 系统<br>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/21/centos6.5-install-vncserver.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-pptpd-by-scripts.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -831,7 +833,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/nfs-detail.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-ss5-proxy.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -856,8 +858,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/21/nfs-detail.html" itemprop="url">
-                  NFS详解
+                <a class="post-title-link" href="/2015/12/22/install-ss5-proxy.html" itemprop="url">
+                  安装ss5代理
                 </a>
               
             
@@ -879,8 +881,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/21/nfs-detail.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/nfs-detail.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-ss5-proxy.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-ss5-proxy.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -890,7 +892,7 @@
 
           
           
-             <span id="/2015/12/21/nfs-detail.html" class="leancloud_visitors" data-flag-title="NFS详解">
+             <span id="/2015/12/22/install-ss5-proxy.html" class="leancloud_visitors" data-flag-title="安装ss5代理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -917,12 +919,13 @@
       
         
           
-          NFS服务简介NFS简介
-NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协议，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享彼此的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Un
+          
+socks5代理服务官网：http://ss5.sourceforge.net/
+安装gcc编译环境和相关依赖包1yum -y install pam-devel openldap-devel cyrus-sasl-devel gcc gcc-c++ automake make openssl o
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/21/nfs-detail.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-ss5-proxy.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -958,7 +961,7 @@ NFS 是Network File System的缩写，即网络文件系统。一种使用于分
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -999,7 +1002,7 @@ NFS 是Network File System的缩写，即网络文件系统。一种使用于分
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1007,7 +1010,7 @@ NFS 是Network File System的缩写，即网络文件系统。一种使用于分
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1016,7 +1019,7 @@ NFS 是Network File System的缩写，即网络文件系统。一种使用于分
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1094,7 +1097,7 @@ NFS 是Network File System的缩写，即网络文件系统。一种使用于分
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

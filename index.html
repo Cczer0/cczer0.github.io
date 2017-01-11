@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/12/01/simplify-docker-image.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2017/01/11/rainlendar.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/01/simplify-docker-image.html" itemprop="url">
-                  精简docker镜像
+                <a class="post-title-link" href="/2017/01/11/rainlendar.html" itemprop="url">
+                  跨平台桌面日历软件rainlendar
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/01/simplify-docker-image.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/simplify-docker-image.html" itemprop="commentCount"></span>
+                <a href="/2017/01/11/rainlendar.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/rainlendar.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2016/12/01/simplify-docker-image.html" class="leancloud_visitors" data-flag-title="精简docker镜像">
+             <span id="/2017/01/11/rainlendar.html" class="leancloud_visitors" data-flag-title="跨平台桌面日历软件rainlendar">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,14 +390,12 @@
       
         
           
-          图注：一张图掌握 Docker 命令 - 简化版
-图注：一张图掌握 Docker 命令 - 完整版
-在 docker 镜像的制作过程中，有不少方式可以减少容器的空间占用，甚至镜像可以精简 98%，精简 docker 镜像，既节省了存储空间，又能节省带宽，加快传输。
-镜像层在开始制作镜像前，首先了解镜
+          Rainlendar 是一款跨平台桌面日历软件，它支持 Windows 、Mac 及 Linux，它的功能是能在桌面上显示一个漂亮的桌面日历及待办事项等等.
+123wget http://www.rainlendar.net/download/rainlendar2-lite_2.13.1.b147
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/simplify-docker-image.html#more" rel="contents">
+            <a class="btn" href="/2017/01/11/rainlendar.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -438,7 +436,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/11/18/many-container-on-docker.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2017/01/11/change-sshkey.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -463,8 +461,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/18/many-container-on-docker.html" itemprop="url">
-                  多容器应用栈
+                <a class="post-title-link" href="/2017/01/11/change-sshkey.html" itemprop="url">
+                  更改SSH Key密码
                 </a>
               
             
@@ -486,8 +484,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/18/many-container-on-docker.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/18/many-container-on-docker.html" itemprop="commentCount"></span>
+                <a href="/2017/01/11/change-sshkey.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/change-sshkey.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -497,7 +495,7 @@
 
           
           
-             <span id="/2016/11/18/many-container-on-docker.html" class="leancloud_visitors" data-flag-title="多容器应用栈">
+             <span id="/2017/01/11/change-sshkey.html" class="leancloud_visitors" data-flag-title="更改SSH Key密码">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -524,15 +522,17 @@
       
         
           
-          多容器应用栈创建一个使用 Express 框架的、带有 Redis 后端的 Node.js 应用，并完全 Docker 化。应用会创建一系列的镜像来部署多容器应用。
+          通过 ssh-keygen 生成带有密码的私钥文件，当想要更改密码，可以通过下面方式更改密码或者将密码置为空。
 
-Nodejs 容器，服务于 Node 应用
-Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份容器
-日志容器，用于
+使用 ssh-keygen
+
+12ssh-keygen -f id_rsa -p
+
+使用 openssl1openssl rsa -in ~/.ssh/id_rsa -out ~/.ss
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/18/many-container-on-docker.html#more" rel="contents">
+            <a class="btn" href="/2017/01/11/change-sshkey.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -573,7 +573,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/11/17/github-pages-nodisplay-vendors.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2017/01/09/install-bind-on-centos7.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -598,8 +598,8 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
             
               
                 
-                <a class="post-title-link" href="/2016/11/17/github-pages-nodisplay-vendors.html" itemprop="url">
-                  Hexo博客显示部分内容
+                <a class="post-title-link" href="/2017/01/09/install-bind-on-centos7.html" itemprop="url">
+                  Centos7安装bind-从服务器
                 </a>
               
             
@@ -621,8 +621,8 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/17/github-pages-nodisplay-vendors.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/17/github-pages-nodisplay-vendors.html" itemprop="commentCount"></span>
+                <a href="/2017/01/09/install-bind-on-centos7.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/09/install-bind-on-centos7.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -632,7 +632,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
 
           
           
-             <span id="/2016/11/17/github-pages-nodisplay-vendors.html" class="leancloud_visitors" data-flag-title="Hexo博客显示部分内容">
+             <span id="/2017/01/09/install-bind-on-centos7.html" class="leancloud_visitors" data-flag-title="Centos7安装bind-从服务器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -659,12 +659,15 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
       
         
           
-          今天更新 blog，一看全是空白，debug 结果全是 error,CSS 和 javascript都丢失了,显示jquery，css 都是 404。
-123456789首先修改source/vendors为source/lib，然后修改_config.yml， 将 _internal: vendo
+          系统环境
+系统版本: CentOS Linux release 7.1.1503 (Core) 
+软件安装: bind bind-libs bind-devel bind-utils bind-chroot
+
+安装1yum install bind bind-libs bind-devel bind
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/17/github-pages-nodisplay-vendors.html#more" rel="contents">
+            <a class="btn" href="/2017/01/09/install-bind-on-centos7.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -705,7 +708,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/11/17/Git-basic.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2017/01/06/docker-resource.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -730,8 +733,8 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
             
               
                 
-                <a class="post-title-link" href="/2016/11/17/Git-basic.html" itemprop="url">
-                  Git基础
+                <a class="post-title-link" href="/2017/01/06/docker-resource.html" itemprop="url">
+                  docker资源
                 </a>
               
             
@@ -753,8 +756,8 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/17/Git-basic.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/17/Git-basic.html" itemprop="commentCount"></span>
+                <a href="/2017/01/06/docker-resource.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/docker-resource.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -764,7 +767,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
 
           
           
-             <span id="/2016/11/17/Git-basic.html" class="leancloud_visitors" data-flag-title="Git基础">
+             <span id="/2017/01/06/docker-resource.html" class="leancloud_visitors" data-flag-title="docker资源">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -791,15 +794,15 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
       
         
           
-          关于版本控制什么是版本控制
+          Docker资源Docker官方英文资源：
+docker官网：http://www.docker.com
+Docker windows入门：https://docs.docker.com/windows/
+Docker Linux 入门：https://docs.docker.com/linux/
 
-版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。 在本书所展示的例子中，我们对保存着软件源代码的文件作版本控制，但实际上，你可以对任何类型的文件进行版本控制。
-
-版本控制系统的变迁想要做好版本控制，少不了相应的系统，版本控制系统也经历了不少
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/17/Git-basic.html#more" rel="contents">
+            <a class="btn" href="/2017/01/06/docker-resource.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -840,7 +843,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/26/ansible-managment-windows.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2017/01/05/nfs-error.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -865,8 +868,8 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
             
               
                 
-                <a class="post-title-link" href="/2016/10/26/ansible-managment-windows.html" itemprop="url">
-                  使用ansible管理windows主机
+                <a class="post-title-link" href="/2017/01/05/nfs-error.html" itemprop="url">
+                  nfs挂载错误
                 </a>
               
             
@@ -888,8 +891,8 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/26/ansible-managment-windows.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/ansible-managment-windows.html" itemprop="commentCount"></span>
+                <a href="/2017/01/05/nfs-error.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/05/nfs-error.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -899,7 +902,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
 
           
           
-             <span id="/2016/10/26/ansible-managment-windows.html" class="leancloud_visitors" data-flag-title="使用ansible管理windows主机">
+             <span id="/2017/01/05/nfs-error.html" class="leancloud_visitors" data-flag-title="nfs挂载错误">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -926,11 +929,11 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
       
         
           
-          Windows下Ansible工作原理Ansible 从 1.7+ 版本开始支持 Windows，但前提是管理机必须为 Linux 系统，远程主机的通信方式也由 SSH 变更为 PowerShell，基于 Kerberos 认证方式，同时管理机必须预安装Python 的 Winrm 模块，方可和远程
+          在 ubuntu-16.04中挂载nfs 提示1234567mount: wrong fs type, bad option, bad superblock on 172.16.8.88:/data/gjobs/upload,       missing codepage or helper pro
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/ansible-managment-windows.html#more" rel="contents">
+            <a class="btn" href="/2017/01/05/nfs-error.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -966,7 +969,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1007,7 +1010,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1015,7 +1018,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1024,7 +1027,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1102,7 +1105,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

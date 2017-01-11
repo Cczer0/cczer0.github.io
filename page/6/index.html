@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/18/git-common.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/04/18/git-common.html" itemprop="url">
-                  git常用命令
+                <a class="post-title-link" href="/2016/10/19/use-gitolite-manager-git.html" itemprop="url">
+                  使用gitolite管理git授权
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/18/git-common.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/git-common.html" itemprop="commentCount"></span>
+                <a href="/2016/10/19/use-gitolite-manager-git.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/use-gitolite-manager-git.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2016/04/18/git-common.html" class="leancloud_visitors" data-flag-title="git常用命令">
+             <span id="/2016/10/19/use-gitolite-manager-git.html" class="leancloud_visitors" data-flag-title="使用gitolite管理git授权">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,19 +390,13 @@
       
         
           
-          
-Git已经成为程序员日常工具之一，那些Git基本的命令，每天都要用的命令你都记住了吗？如果还没的话，笔者整理了一份清单，以备不时之需所用。
+          使用 gitolite 管理 git 服务器由于Git的设计初衷，在使用 Git 在面向团队服务时，如果需要对权限控制，就需要第三方的工具来帮助 Git。在 Git 管理工具中，有三个解决方案。
 
-三个基本概念
-
-工作区(Workspace)是计算机中项目的根目录
-
-暂存区(Index)像个缓存区域，临时保存你的改动
-版本库(Repository)分为
+Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级别的权限控制。现在项目已经停止开
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/18/git-common.html#more" rel="contents">
+            <a class="btn" href="/2016/10/19/use-gitolite-manager-git.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -443,7 +437,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/07/saltstack-nodegroup.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/08/09/git-diff.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -468,8 +462,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               
                 
-                <a class="post-title-link" href="/2016/04/07/saltstack-nodegroup.html" itemprop="url">
-                  SaltStack-Nodegroup
+                <a class="post-title-link" href="/2016/08/09/git-diff.html" itemprop="url">
+                  git log查看两个版本的不同
                 </a>
               
             
@@ -491,8 +485,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/07/saltstack-nodegroup.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/saltstack-nodegroup.html" itemprop="commentCount"></span>
+                <a href="/2016/08/09/git-diff.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/09/git-diff.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -502,7 +496,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
 
           
           
-             <span id="/2016/04/07/saltstack-nodegroup.html" class="leancloud_visitors" data-flag-title="SaltStack-Nodegroup">
+             <span id="/2016/08/09/git-diff.html" class="leancloud_visitors" data-flag-title="git log查看两个版本的不同">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -529,11 +523,23 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
       
         
           
-          为了便于管理功能相似的minion，SaltStack提供了分组模式，官方文档：http://docs.saltstack.com/en/latest/topics/targeting/nodegroups.htmlNode group为预先在master配置文件中定义的minion组，用来进行批量
-          ...
+          
+当前版本和上一个版本
+
+1git diff HEAD HEAD^
+
+特定版本
+1git diff commitID1 commitID2
+
+通过日志查看
+1git log state
+
+
+
+          
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/07/saltstack-nodegroup.html#more" rel="contents">
+            <a class="btn" href="/2016/08/09/git-diff.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -574,7 +580,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/07/saltstack-states.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/30/awk-mindmap.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -599,8 +605,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               
                 
-                <a class="post-title-link" href="/2016/04/07/saltstack-states.html" itemprop="url">
-                  SaltStack-States
+                <a class="post-title-link" href="/2016/07/30/awk-mindmap.html" itemprop="url">
+                  awk思维导图
                 </a>
               
             
@@ -622,8 +628,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/07/saltstack-states.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/saltstack-states.html" itemprop="commentCount"></span>
+                <a href="/2016/07/30/awk-mindmap.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/30/awk-mindmap.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -633,7 +639,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
 
           
           
-             <span id="/2016/04/07/saltstack-states.html" class="leancloud_visitors" data-flag-title="SaltStack-States">
+             <span id="/2016/07/30/awk-mindmap.html" class="leancloud_visitors" data-flag-title="awk思维导图">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -660,11 +666,12 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
       
         
           
-          SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这
-          ...
+          awk 思维导图
+
+          
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/07/saltstack-states.html#more" rel="contents">
+            <a class="btn" href="/2016/07/30/awk-mindmap.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -705,7 +712,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/06/saltstack-pillar.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/26/bash-mindmap.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -730,8 +737,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               
                 
-                <a class="post-title-link" href="/2016/04/06/saltstack-pillar.html" itemprop="url">
-                  SaltStack-Pillar
+                <a class="post-title-link" href="/2016/07/26/bash-mindmap.html" itemprop="url">
+                  Bash思维导图
                 </a>
               
             
@@ -753,8 +760,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/06/saltstack-pillar.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/saltstack-pillar.html" itemprop="commentCount"></span>
+                <a href="/2016/07/26/bash-mindmap.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/26/bash-mindmap.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -764,7 +771,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
 
           
           
-             <span id="/2016/04/06/saltstack-pillar.html" class="leancloud_visitors" data-flag-title="SaltStack-Pillar">
+             <span id="/2016/07/26/bash-mindmap.html" class="leancloud_visitors" data-flag-title="Bash思维导图">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -791,11 +798,12 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
       
         
           
-          什么是pillarPillar是SaltStack非常重要的一个组件，经常与States配合使用在配置管理中。它用于给特定的minin定义任何你需要的数据，定义存储格式与grains类似，都是用dict结构，使用YAML格式。pillar数据和minion相关联，每个minion只可以看到自己的数据
-          ...
+          Bash 思维导图
+
+          
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/06/saltstack-pillar.html#more" rel="contents">
+            <a class="btn" href="/2016/07/26/bash-mindmap.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -836,7 +844,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/05/glusterfs-technical-explanation.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/22/bash-change-to-zsh.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -861,8 +869,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               
                 
-                <a class="post-title-link" href="/2016/04/05/glusterfs-technical-explanation.html" itemprop="url">
-                  GlusterFS技术详解
+                <a class="post-title-link" href="/2016/07/22/bash-change-to-zsh.html" itemprop="url">
+                  使用zsh作为默认shell
                 </a>
               
             
@@ -884,8 +892,8 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/05/glusterfs-technical-explanation.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/05/glusterfs-technical-explanation.html" itemprop="commentCount"></span>
+                <a href="/2016/07/22/bash-change-to-zsh.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/bash-change-to-zsh.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -895,7 +903,7 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
 
           
           
-             <span id="/2016/04/05/glusterfs-technical-explanation.html" class="leancloud_visitors" data-flag-title="GlusterFS技术详解">
+             <span id="/2016/07/22/bash-change-to-zsh.html" class="leancloud_visitors" data-flag-title="使用zsh作为默认shell">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -922,12 +930,14 @@ Git已经成为程序员日常工具之一，那些Git基本的命令，每天�
       
         
           
-          什么是GlusterFS 
-GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他是一个开源的分布式文件系统，具有强大的横向扩展能力，通过扩展能够支持数PB存储容量和处理数千客户端。GlusterFS借助TCP/IP或InfiniBand RDMA(一种
+          号称终极 Shell 的 Zsh 兼容 Bash，在命令补全方面有很好的体验，丰富的插件和主题可提供使用，配合 Oh-my-zsh 更加强大。
+Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装前可以查看系统安装了哪些 Shell
+1cat /etc/shells
+
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/05/glusterfs-technical-explanation.html#more" rel="contents">
+            <a class="btn" href="/2016/07/22/bash-change-to-zsh.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -963,7 +973,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1004,7 +1014,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1012,7 +1022,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1021,7 +1031,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1099,7 +1109,7 @@ GlusterFS概述  GlusterFS是Scale-Out存储解决方案Gluster的核心，他�
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

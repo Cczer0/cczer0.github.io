@@ -90,23 +90,20 @@
 
 <meta name="description" content="smokeping页面和rrdtool图片支持中文smokeping默认不支持中文，只需要修改如下便可：
 页面支持中文在配置文件的*** Presentation ***下面添加1charset = utf-8
-rrd图片支持中文安装中文支持1yum groupinstall &amp;quot;chinese support&amp;quot;
-查看中文字体支持：123fc-list :lang=zhAR PL">
+rrd图片支持中文安装中文支持123yum groupinstall &amp;quot;chinese support&amp;quot;//centos7yum -y install wqy-zenh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Smokeping页面支持中文">
 <meta property="og:url" content="http://czero000.github.io/2015/12/20/smokeping-support-chinese.html">
 <meta property="og:site_name" content="Zero's Blog">
 <meta property="og:description" content="smokeping页面和rrdtool图片支持中文smokeping默认不支持中文，只需要修改如下便可：
 页面支持中文在配置文件的*** Presentation ***下面添加1charset = utf-8
-rrd图片支持中文安装中文支持1yum groupinstall &amp;quot;chinese support&amp;quot;
-查看中文字体支持：123fc-list :lang=zhAR PL">
-<meta property="og:updated_time" content="2016-10-20T10:50:11.101Z">
+rrd图片支持中文安装中文支持123yum groupinstall &amp;quot;chinese support&amp;quot;//centos7yum -y install wqy-zenh">
+<meta property="og:updated_time" content="2017-01-11T07:01:37.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smokeping页面支持中文">
 <meta name="twitter:description" content="smokeping页面和rrdtool图片支持中文smokeping默认不支持中文，只需要修改如下便可：
 页面支持中文在配置文件的*** Presentation ***下面添加1charset = utf-8
-rrd图片支持中文安装中文支持1yum groupinstall &amp;quot;chinese support&amp;quot;
-查看中文字体支持：123fc-list :lang=zhAR PL">
+rrd图片支持中文安装中文支持123yum groupinstall &amp;quot;chinese support&amp;quot;//centos7yum -y install wqy-zenh">
 
 
 
@@ -400,7 +397,7 @@ rrd图片支持中文安装中文支持1yum groupinstall &amp;quot;chinese suppo
       
         <h3 id="smokeping页面和rrdtool图片支持中文"><a href="#smokeping页面和rrdtool图片支持中文" class="headerlink" title="smokeping页面和rrdtool图片支持中文"></a>smokeping页面和rrdtool图片支持中文</h3><p>smokeping默认不支持中文，只需要修改如下便可：</p>
 <h4 id="页面支持中文"><a href="#页面支持中文" class="headerlink" title="页面支持中文"></a>页面支持中文</h4><p>在配置文件的<code>*** Presentation ***</code>下面添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">charset = utf-8</div></pre></td></tr></table></figure></p>
-<h4 id="rrd图片支持中文"><a href="#rrd图片支持中文" class="headerlink" title="rrd图片支持中文"></a>rrd图片支持中文</h4><h5 id="安装中文支持"><a href="#安装中文支持" class="headerlink" title="安装中文支持"></a>安装中文支持</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall &quot;chinese support&quot;</div></pre></td></tr></table></figure>
+<h4 id="rrd图片支持中文"><a href="#rrd图片支持中文" class="headerlink" title="rrd图片支持中文"></a>rrd图片支持中文</h4><h5 id="安装中文支持"><a href="#安装中文支持" class="headerlink" title="安装中文支持"></a>安装中文支持</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum groupinstall &quot;chinese support&quot;</div><div class="line">//centos7</div><div class="line">yum -y install wqy-zenhei-fonts</div></pre></td></tr></table></figure>
 <h5 id="查看中文字体支持："><a href="#查看中文字体支持：" class="headerlink" title="查看中文字体支持："></a>查看中文字体支持：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fc-list :lang=zh</div><div class="line">AR PL ZenKai Uni,文鼎PL中楷Uni:style=Medium</div><div class="line">AR PL ShanHeiSun Uni,文鼎PL細上海宋Uni,文鼎PL细上海宋Uni:style=Regular</div></pre></td></tr></table></figure>
 <h5 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h5><p>编辑 /usr/local/smokeping/lib/Smokeping/Graphs.pm</p>
 <pre><code>插入 &quot;&apos;--font TITLE:20:AR PL ShanHeiSun Uni&apos;，&quot;
@@ -456,8 +453,8 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/20/centos7-install-smokeping.html" rel="next" title="Centos7安装smokeping">
-                <i class="fa fa-chevron-left"></i> Centos7安装smokeping
+              <a href="/2015/12/20/install-smokeping.html" rel="next" title="Smokeping-安装">
+                <i class="fa fa-chevron-left"></i> Smokeping-安装
               </a>
             
           </div>
@@ -466,8 +463,8 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/21/create-2t-partition.html" rel="prev" title="创建大于2TB分区">
-                创建大于2TB分区 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/20/smokeping-master-slave.html" rel="prev" title="Smokeping-主辅">
+                Smokeping-主辅 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -559,7 +556,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -567,7 +564,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -576,7 +573,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">89</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -670,7 +667,7 @@ RRDtool did not understand your input: $ERROR. &quot; if $ERROR;
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
