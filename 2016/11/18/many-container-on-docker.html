@@ -106,7 +106,7 @@ Redis 容器，用于保存和集群化应用状态，Redis 会有两个备份�
 日志容器，用于捕捉应用日志
 
 Redis 镜像Redis 基础镜像构建 Redis 基础镜像，之后会使用基础镜像构">
-<meta property="og:updated_time" content="2017-01-11T09:44:49.086Z">
+<meta property="og:updated_time" content="2017-01-11T09:47:10.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多容器应用栈">
 <meta name="twitter:description" content="多容器应用栈创建一个使用 Express 框架的、带有 Redis 后端的 Node.js 应用，并完全 Docker 化。应用会创建一系列的镜像来部署多容器应用。
@@ -457,7 +457,7 @@ Redis 镜像Redis 基础镜像构建 Redis 基础镜像，之后会使用基础�
 <ul>
 <li>使用两次<code>--volumes-from</code>挂载<code>nodeapp</code>、<code>redis_primary</code>的卷，用来访问<code>Redis</code>和<code>Node</code>的日志</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">docker logs -f logstash</div><div class="line">&#123;</div><div class="line">	       &quot;message&quot; =&gt; &quot;::ffff:172.17.0.1 - - [Fri, 18 Nov 2016 08:30:31 GMT] \&quot;GET / HTTP/1.1\&quot; 200 20 \&quot;-\&quot; \&quot;curl/7.47.0\&quot;&quot;,</div><div class="line">           &quot;@version&quot; =&gt; &quot;1&quot;,</div><div class="line">	       &quot;@timestamp&quot; =&gt; &quot;2016-11-18T08:30:31.254Z&quot;,</div><div class="line">           &quot;host&quot; =&gt; &quot;98b2284cb329&quot;,</div><div class="line">           &quot;path&quot; =&gt; &quot;/var/log/nodeapp/nodeapp.log&quot;,</div><div class="line">           &quot;type&quot; =&gt; &quot;syslog&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">docker logs -f logstash</div><div class="line">&#123;</div><div class="line">      &quot;message&quot; =&gt; &quot;::ffff:172.17.0.1 - - [Fri, 18 Nov 2016 08:30:31 GMT] \&quot;GET / HTTP/1.1\&quot; 200 20 \&quot;-\&quot; \&quot;curl/7.47.0\&quot;&quot;,</div><div class="line">      &quot;@version&quot; =&gt; &quot;1&quot;,</div><div class="line">      &quot;@timestamp&quot; =&gt; &quot;2016-11-18T08:30:31.254Z&quot;,</div><div class="line">      &quot;host&quot; =&gt; &quot;98b2284cb329&quot;,</div><div class="line">      &quot;path&quot; =&gt; &quot;/var/log/nodeapp/nodeapp.log&quot;,</div><div class="line">      &quot;type&quot; =&gt; &quot;syslog&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>现在 Node 和 Redis 的日志便都输出到 logstash里面了。</p>
 
       
