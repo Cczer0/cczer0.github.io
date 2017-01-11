@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://czero000.github.io/2016/11/29/keepalived-systemctl.html</loc>
+    <lastmod>2017-01-11T09:49:51.947Z</lastmod>
+    <data>
+        <display>
+        <title>Keepalived Systemd启动脚本</title>
+        <pubTime>2016-11-29T06:07:33.000Z</pubTime>
+        
+        <tag>keepalived</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
+          
+             
+              <breadCrumb title="keepalived" url="http://czero000.github.io/categories/Web/keepalived/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://czero000.github.io/2016/11/18/many-container-on-docker.html</loc>
     <lastmod>2017-01-11T09:47:10.826Z</lastmod>
     <data>
@@ -363,29 +386,6 @@
         
         <tag>nginx</tag>
          
-        <tag>keepalived</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
-          
-             
-              <breadCrumb title="keepalived" url="http://czero000.github.io/categories/Web/keepalived/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/11/29/keepalived-systemctl.html</loc>
-    <lastmod>2017-01-11T08:05:13.698Z</lastmod>
-    <data>
-        <display>
-        <title>Keepalived Systemd启动脚本</title>
-        <pubTime>2016-11-29T06:07:33.000Z</pubTime>
-        
         <tag>keepalived</tag>
          
          
