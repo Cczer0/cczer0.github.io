@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://czero000.github.io/2016/11/29/keepalived-configfile.html</loc>
+    
+    <lastmod>2017-01-11T09:24:53.479Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2016/11/29/keepalived-lvs.html</loc>
     
     <lastmod>2017-01-11T09:13:49.079Z</lastmod>
@@ -103,13 +110,6 @@
     <loc>http://czero000.github.io/2016/11/29/keepalived-systemctl.html</loc>
     
     <lastmod>2017-01-11T08:05:13.698Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/11/29/keepalived-configfile.html</loc>
-    
-    <lastmod>2017-01-11T08:04:08.503Z</lastmod>
     
   </url>
   

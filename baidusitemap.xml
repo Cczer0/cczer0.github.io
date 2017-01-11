@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://czero000.github.io/2016/11/29/keepalived-configfile.html</loc>
+    <lastmod>2017-01-11T09:24:53.479Z</lastmod>
+    <data>
+        <display>
+        <title>keepalived配置文件说明</title>
+        <pubTime>2016-11-29T06:07:33.000Z</pubTime>
+        
+        <tag>keepalived</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
+          
+             
+              <breadCrumb title="keepalived" url="http://czero000.github.io/categories/Web/keepalived/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://czero000.github.io/2016/11/29/keepalived-lvs.html</loc>
     <lastmod>2017-01-11T09:13:49.079Z</lastmod>
     <data>
@@ -341,29 +364,6 @@
     <data>
         <display>
         <title>Keepalived Systemd启动脚本</title>
-        <pubTime>2016-11-29T06:07:33.000Z</pubTime>
-        
-        <tag>keepalived</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
-          
-             
-              <breadCrumb title="keepalived" url="http://czero000.github.io/categories/Web/keepalived/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/11/29/keepalived-configfile.html</loc>
-    <lastmod>2017-01-11T08:04:08.503Z</lastmod>
-    <data>
-        <display>
-        <title>keepalived配置文件说明</title>
         <pubTime>2016-11-29T06:07:33.000Z</pubTime>
         
         <tag>keepalived</tag>
