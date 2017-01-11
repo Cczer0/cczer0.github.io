@@ -67,7 +67,7 @@
 
     
     <entry>
-      <title><![CDATA[Ubuntu安装Megacli]]></title>
+      <title><![CDATA[linux命令行密码管理]]></title>
       <url>http://czero000.github.io/2016/12/29/ubuntu-pass.html</url>
       <content type="text"><![CDATA[软件：pass安装软件包1apt install pass 初始化仓库12gpg --gen-keypass init &lt;gpg-id&gt; 该命令会在~/.password-store目录中创建一个密码仓库 添加新的密码信息1pass insert &lt;password-name&gt; -m 查看密码名称列表1pass 复制密码到剪切板1pass -c &lt;password-name&gt; 粘帖剪切板中密码1Ctrl + Shift + v 移除密码记录1pass rm &lt;password-name&gt;]]></content>
     </entry>

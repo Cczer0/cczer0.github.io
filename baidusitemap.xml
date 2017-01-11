@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://czero000.github.io/2016/12/29/ubuntu-pass.html</loc>
+    <lastmod>2017-01-11T08:55:40.608Z</lastmod>
+    <data>
+        <display>
+        <title>linux命令行密码管理</title>
+        <pubTime>2016-12-29T04:13:23.000Z</pubTime>
+        
+        <tag>ubuntu</tag>
+         
+        <tag>pass</tag>
+         
+         
+           
+             
+              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
+          
+             
+              <breadCrumb title="Debian" url="http://czero000.github.io/categories/System/Debian/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://czero000.github.io/2016/10/19/except-ctrl-host.html</loc>
     <lastmod>2017-01-11T08:22:44.955Z</lastmod>
     <data>
@@ -553,31 +578,6 @@
         <tag>ubuntu</tag>
          
         <tag>redmine</tag>
-         
-         
-           
-             
-              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
-          
-             
-              <breadCrumb title="Debian" url="http://czero000.github.io/categories/System/Debian/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/12/29/ubuntu-pass.html</loc>
-    <lastmod>2017-01-11T07:47:04.361Z</lastmod>
-    <data>
-        <display>
-        <title>Ubuntu安装Megacli</title>
-        <pubTime>2016-12-29T04:13:23.000Z</pubTime>
-        
-        <tag>ubuntu</tag>
-         
-        <tag>pass</tag>
          
          
            
@@ -1361,29 +1361,6 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/01/04/glusterfs-administrator-guide.html</loc>
-    <lastmod>2016-10-20T10:50:11.137Z</lastmod>
-    <data>
-        <display>
-        <title>gulsterfs系统管理</title>
-        <pubTime>2016-01-04T04:42:12.000Z</pubTime>
-        
-        <tag>glusterfs</tag>
-         
-         
-           
-             
-              <breadCrumb title="运维技术" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="GlusterFS" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/GlusterFS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://czero000.github.io/2015/10/09/glusterfs-explain-in-detail.html</loc>
     <lastmod>2016-10-20T10:50:11.137Z</lastmod>
     <data>
@@ -1407,14 +1384,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/10/20/docker-images.html</loc>
-    <lastmod>2016-10-20T10:50:11.133Z</lastmod>
+    <loc>http://czero000.github.io/2016/01/04/glusterfs-administrator-guide.html</loc>
+    <lastmod>2016-10-20T10:50:11.137Z</lastmod>
     <data>
         <display>
-        <title>docker镜像</title>
-        <pubTime>2016-10-20T02:44:48.000Z</pubTime>
+        <title>gulsterfs系统管理</title>
+        <pubTime>2016-01-04T04:42:12.000Z</pubTime>
         
-        <tag>docker</tag>
+        <tag>glusterfs</tag>
          
          
            
@@ -1422,7 +1399,7 @@
               <breadCrumb title="运维技术" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
           
              
-              <breadCrumb title="Docker" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
+              <breadCrumb title="GlusterFS" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/GlusterFS/"/>
           
         </display>
     </data>
@@ -1430,14 +1407,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/10/20/rudiments-of-docker.html</loc>
+    <loc>http://czero000.github.io/2016/04/27/mfs-Technology.html</loc>
     <lastmod>2016-10-20T10:50:11.133Z</lastmod>
     <data>
         <display>
-        <title>Docker入门介绍</title>
-        <pubTime>2016-10-20T02:43:29.000Z</pubTime>
+        <title>MooseFS技术详解</title>
+        <pubTime>2016-04-27T01:37:56.000Z</pubTime>
         
-        <tag>docker</tag>
+        <tag>MooseFS</tag>
          
          
            
@@ -1445,7 +1422,7 @@
               <breadCrumb title="运维技术" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
           
              
-              <breadCrumb title="Docker" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
+              <breadCrumb title="MooseFS" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/MooseFS/"/>
           
         </display>
     </data>
@@ -1499,14 +1476,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/04/27/mfs-Technology.html</loc>
+    <loc>http://czero000.github.io/2016/10/20/rudiments-of-docker.html</loc>
     <lastmod>2016-10-20T10:50:11.133Z</lastmod>
     <data>
         <display>
-        <title>MooseFS技术详解</title>
-        <pubTime>2016-04-27T01:37:56.000Z</pubTime>
+        <title>Docker入门介绍</title>
+        <pubTime>2016-10-20T02:43:29.000Z</pubTime>
         
-        <tag>MooseFS</tag>
+        <tag>docker</tag>
          
          
            
@@ -1514,7 +1491,72 @@
               <breadCrumb title="运维技术" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
           
              
-              <breadCrumb title="MooseFS" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/MooseFS/"/>
+              <breadCrumb title="Docker" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2016/10/20/docker-images.html</loc>
+    <lastmod>2016-10-20T10:50:11.133Z</lastmod>
+    <data>
+        <display>
+        <title>docker镜像</title>
+        <pubTime>2016-10-20T02:44:48.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="运维技术" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Docker" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2015/06/24/use-hexo-to-build-a-static-blog.html</loc>
+    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Hexo 搭建静态博客</title>
+        <pubTime>2015-06-24T12:22:51.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>Blog</tag>
+         
+         
+           
+             
+              <breadCrumb title="Blog" url="http://czero000.github.io/categories/Blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2015/07/22/chinese-copywriting-guidelines.html</loc>
+    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    <data>
+        <display>
+        <title>中文书写指南</title>
+        <pubTime>2015-07-22T05:39:37.000Z</pubTime>
+        
+        <tag>书写指南</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔" url="http://czero000.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -1551,46 +1593,6 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/04/01/markdown-syntax.html</loc>
-    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
-    <data>
-        <display>
-        <title>Markdown简明语法说明</title>
-        <pubTime>2016-04-01T07:20:25.000Z</pubTime>
-        
-        <tag>markdown</tag>
-         
-         
-           
-             
-              <breadCrumb title="Markdown" url="http://czero000.github.io/categories/Markdown/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2015/07/22/chinese-copywriting-guidelines.html</loc>
-    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
-    <data>
-        <display>
-        <title>中文书写指南</title>
-        <pubTime>2015-07-22T05:39:37.000Z</pubTime>
-        
-        <tag>书写指南</tag>
-         
-         
-           
-             
-              <breadCrumb title="随笔" url="http://czero000.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://czero000.github.io/2015/10/22/logstash-forwarder-transmission.html</loc>
     <lastmod>2016-10-20T10:50:11.129Z</lastmod>
     <data>
@@ -1611,6 +1613,26 @@
           
              
               <breadCrumb title="ELK" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/ELK/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2016/04/01/markdown-syntax.html</loc>
+    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown简明语法说明</title>
+        <pubTime>2016-04-01T07:20:25.000Z</pubTime>
+        
+        <tag>markdown</tag>
+         
+         
+           
+             
+              <breadCrumb title="Markdown" url="http://czero000.github.io/categories/Markdown/"/>
           
         </display>
     </data>
@@ -1643,21 +1665,24 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/06/24/use-hexo-to-build-a-static-blog.html</loc>
-    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    <loc>http://czero000.github.io/2016/02/04/nginx-php-fpm.html</loc>
+    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
     <data>
         <display>
-        <title>使用 Hexo 搭建静态博客</title>
-        <pubTime>2015-06-24T12:22:51.000Z</pubTime>
+        <title>Nginx+PHP-FPM</title>
+        <pubTime>2016-02-04T08:01:39.000Z</pubTime>
         
-        <tag>Hexo</tag>
+        <tag>nginx</tag>
          
-        <tag>Blog</tag>
+        <tag>php-fpm</tag>
          
          
            
              
-              <breadCrumb title="Blog" url="http://czero000.github.io/categories/Blog/"/>
+              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
+          
+             
+              <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
           
         </display>
     </data>
@@ -1690,16 +1715,36 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/10/21/vim-nginx-hight-light.html</loc>
+    <loc>http://czero000.github.io/2016/01/21/http-status-code.html</loc>
     <lastmod>2016-10-20T10:50:11.125Z</lastmod>
     <data>
         <display>
-        <title>Nginx代码高亮</title>
-        <pubTime>2015-10-21T04:14:37.000Z</pubTime>
+        <title>HTTP状态码详解</title>
+        <pubTime>2016-01-21T08:05:14.000Z</pubTime>
+        
+        <tag>HTTP状态码</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2016/02/04/how-to-properly-configure-nginx-php.html</loc>
+    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
+    <data>
+        <display>
+        <title>如何正确配置Nginx+PHP（转载）</title>
+        <pubTime>2016-02-04T08:33:07.000Z</pubTime>
         
         <tag>nginx</tag>
          
-        <tag>nginx.vim</tag>
+        <tag>php</tag>
          
          
            
@@ -1738,36 +1783,16 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/01/21/http-status-code.html</loc>
+    <loc>http://czero000.github.io/2015/10/21/vim-nginx-hight-light.html</loc>
     <lastmod>2016-10-20T10:50:11.125Z</lastmod>
     <data>
         <display>
-        <title>HTTP状态码详解</title>
-        <pubTime>2016-01-21T08:05:14.000Z</pubTime>
-        
-        <tag>HTTP状态码</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/02/04/nginx-php-fpm.html</loc>
-    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx+PHP-FPM</title>
-        <pubTime>2016-02-04T08:01:39.000Z</pubTime>
+        <title>Nginx代码高亮</title>
+        <pubTime>2015-10-21T04:14:37.000Z</pubTime>
         
         <tag>nginx</tag>
          
-        <tag>php-fpm</tag>
+        <tag>nginx.vim</tag>
          
          
            
@@ -1776,104 +1801,6 @@
           
              
               <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/02/04/how-to-properly-configure-nginx-php.html</loc>
-    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
-    <data>
-        <display>
-        <title>如何正确配置Nginx+PHP（转载）</title>
-        <pubTime>2016-02-04T08:33:07.000Z</pubTime>
-        
-        <tag>nginx</tag>
-         
-        <tag>php</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
-          
-             
-              <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2015/10/21/nginx-logrotate.html</loc>
-    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx--日志轮滚</title>
-        <pubTime>2015-10-21T10:22:59.000Z</pubTime>
-        
-        <tag>nginx</tag>
-         
-        <tag>logrotate</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
-          
-             
-              <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html</loc>
-    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx编译参数详解</title>
-        <pubTime>2016-02-04T07:55:26.000Z</pubTime>
-        
-        <tag>nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
-          
-             
-              <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/01/06/kvm-pool-manage.html</loc>
-    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
-    <data>
-        <display>
-        <title>CentOS6.5安装kvm</title>
-        <pubTime>2016-01-06T09:51:27.000Z</pubTime>
-        
-        <tag>kvm</tag>
-         
-        <tag>virsh</tag>
-         
-         
-           
-             
-              <breadCrumb title="虚拟化" url="http://czero000.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-          
-             
-              <breadCrumb title="KVM" url="http://czero000.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/KVM/"/>
           
         </display>
     </data>
@@ -1887,6 +1814,52 @@
         <display>
         <title>Nginx配置文件详解</title>
         <pubTime>2016-02-04T07:59:49.000Z</pubTime>
+        
+        <tag>nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
+          
+             
+              <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html</loc>
+    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6.5部署Cobbler(使用)</title>
+        <pubTime>2015-11-11T07:36:34.000Z</pubTime>
+        
+        <tag>cobbler</tag>
+         
+         
+           
+             
+              <breadCrumb title="运维自动化" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+          
+             
+              <breadCrumb title="Cobbler" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/Cobbler/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html</loc>
+    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx编译参数详解</title>
+        <pubTime>2016-02-04T07:55:26.000Z</pubTime>
         
         <tag>nginx</tag>
          
@@ -1952,6 +1925,56 @@
 
     
   <url>
+    <loc>http://czero000.github.io/2015/10/21/nginx-logrotate.html</loc>
+    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx--日志轮滚</title>
+        <pubTime>2015-10-21T10:22:59.000Z</pubTime>
+        
+        <tag>nginx</tag>
+         
+        <tag>logrotate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://czero000.github.io/categories/Web/"/>
+          
+             
+              <breadCrumb title="Nginx" url="http://czero000.github.io/categories/Web/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2016/01/06/kvm-pool-manage.html</loc>
+    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6.5安装kvm</title>
+        <pubTime>2016-01-06T09:51:27.000Z</pubTime>
+        
+        <tag>kvm</tag>
+         
+        <tag>virsh</tag>
+         
+         
+           
+             
+              <breadCrumb title="虚拟化" url="http://czero000.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+          
+             
+              <breadCrumb title="KVM" url="http://czero000.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/KVM/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://czero000.github.io/2016/01/27/source-buile-nginx.html</loc>
     <lastmod>2016-10-20T10:50:11.121Z</lastmod>
     <data>
@@ -1975,14 +1998,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html</loc>
-    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    <loc>http://czero000.github.io/2016/10/19/ansible-variable.html</loc>
+    <lastmod>2016-10-20T10:50:11.117Z</lastmod>
     <data>
         <display>
-        <title>CentOS6.5部署Cobbler(使用)</title>
-        <pubTime>2015-11-11T07:36:34.000Z</pubTime>
+        <title>Ansible--变量使用</title>
+        <pubTime>2016-10-19T06:38:32.000Z</pubTime>
         
-        <tag>cobbler</tag>
+        <tag>ansible</tag>
          
          
            
@@ -1990,7 +2013,7 @@
               <breadCrumb title="运维自动化" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
           
              
-              <breadCrumb title="Cobbler" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/Cobbler/"/>
+              <breadCrumb title="Ansible" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/Ansible/"/>
           
         </display>
     </data>
@@ -1998,12 +2021,12 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/10/19/ansible-variable.html</loc>
+    <loc>http://czero000.github.io/2016/10/19/ansible-playbook.html</loc>
     <lastmod>2016-10-20T10:50:11.117Z</lastmod>
     <data>
         <display>
-        <title>Ansible--变量使用</title>
-        <pubTime>2016-10-19T06:38:32.000Z</pubTime>
+        <title>Ansible-Playbooks</title>
+        <pubTime>2016-10-19T06:41:10.000Z</pubTime>
         
         <tag>ansible</tag>
          
@@ -2067,14 +2090,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/10/19/ansible-playbook.html</loc>
-    <lastmod>2016-10-20T10:50:11.117Z</lastmod>
+    <loc>http://czero000.github.io/2016/04/01/saltstack-grains.html</loc>
+    <lastmod>2016-10-20T10:50:11.113Z</lastmod>
     <data>
         <display>
-        <title>Ansible-Playbooks</title>
-        <pubTime>2016-10-19T06:41:10.000Z</pubTime>
+        <title>SaltStack--Grains</title>
+        <pubTime>2016-04-01T09:02:33.000Z</pubTime>
         
-        <tag>ansible</tag>
+        <tag>saltstack</tag>
          
          
            
@@ -2082,7 +2105,7 @@
               <breadCrumb title="运维自动化" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
           
              
-              <breadCrumb title="Ansible" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/Ansible/"/>
+              <breadCrumb title="SaltStack" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/SaltStack/"/>
           
         </display>
     </data>
@@ -2228,35 +2251,12 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2016/04/01/saltstack-grains.html</loc>
-    <lastmod>2016-10-20T10:50:11.113Z</lastmod>
-    <data>
-        <display>
-        <title>SaltStack--Grains</title>
-        <pubTime>2016-04-01T09:02:33.000Z</pubTime>
-        
-        <tag>saltstack</tag>
-         
-         
-           
-             
-              <breadCrumb title="运维自动化" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-          
-             
-              <breadCrumb title="SaltStack" url="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/SaltStack/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2015/10/19/install-bind-ms.html</loc>
+    <loc>http://czero000.github.io/2015/12/20/bind-trubleshooting.html</loc>
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     <data>
         <display>
-        <title>Centos6配置主辅DNS</title>
-        <pubTime>2015-10-19T09:43:54.000Z</pubTime>
+        <title>安装Bind问题解析</title>
+        <pubTime>2015-12-20T11:17:36.000Z</pubTime>
         
         <tag>bind</tag>
          
@@ -2267,6 +2267,52 @@
           
              
               <breadCrumb title="DNS" url="http://czero000.github.io/categories/System/DNS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2015/12/29/update-kernel.html</loc>
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6.5升级内核</title>
+        <pubTime>2015-12-29T02:46:37.000Z</pubTime>
+        
+        <tag>kernel</tag>
+         
+         
+           
+             
+              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
+          
+             
+              <breadCrumb title="CentOS" url="http://czero000.github.io/categories/System/CentOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://czero000.github.io/2015/12/21/centos6.5-install-vncserver.html</loc>
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6.5安装VNC</title>
+        <pubTime>2015-12-21T14:00:59.000Z</pubTime>
+        
+        <tag>vncserver</tag>
+         
+         
+           
+             
+              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
+          
+             
+              <breadCrumb title="CentOS" url="http://czero000.github.io/categories/System/CentOS/"/>
           
         </display>
     </data>
@@ -2297,14 +2343,16 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/12/29/centos-install-xz.html</loc>
+    <loc>http://czero000.github.io/2016/07/26/bash-mindmap.html</loc>
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     <data>
         <display>
-        <title>安装XZ解压工具</title>
-        <pubTime>2015-12-29T03:01:28.000Z</pubTime>
+        <title>Bash思维导图</title>
+        <pubTime>2016-07-26T13:48:12.000Z</pubTime>
         
-        <tag>xz</tag>
+        <tag>bash</tag>
+         
+        <tag>mindmap</tag>
          
          
            
@@ -2312,7 +2360,7 @@
               <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
           
              
-              <breadCrumb title="CentOS" url="http://czero000.github.io/categories/System/CentOS/"/>
+              <breadCrumb title="Bash" url="http://czero000.github.io/categories/System/Bash/"/>
           
         </display>
     </data>
@@ -2320,12 +2368,12 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/12/20/bind-trubleshooting.html</loc>
+    <loc>http://czero000.github.io/2015/10/19/install-bind-ms.html</loc>
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     <data>
         <display>
-        <title>安装Bind问题解析</title>
-        <pubTime>2015-12-20T11:17:36.000Z</pubTime>
+        <title>Centos6配置主辅DNS</title>
+        <pubTime>2015-10-19T09:43:54.000Z</pubTime>
         
         <tag>bind</tag>
          
@@ -2336,29 +2384,6 @@
           
              
               <breadCrumb title="DNS" url="http://czero000.github.io/categories/System/DNS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/07/22/bash-change-to-zsh.html</loc>
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    <data>
-        <display>
-        <title>使用zsh作为默认shell</title>
-        <pubTime>2016-07-22T05:54:29.000Z</pubTime>
-        
-        <tag>zsh</tag>
-         
-         
-           
-             
-              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
-          
-             
-              <breadCrumb title="Bash" url="http://czero000.github.io/categories/System/Bash/"/>
           
         </display>
     </data>
@@ -2412,6 +2437,31 @@
 
     
   <url>
+    <loc>http://czero000.github.io/2015/12/20/fishshell.html</loc>
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    <data>
+        <display>
+        <title>Fishshell</title>
+        <pubTime>2015-12-20T09:09:14.000Z</pubTime>
+        
+        <tag>bash</tag>
+         
+        <tag>fishshell</tag>
+         
+         
+           
+             
+              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
+          
+             
+              <breadCrumb title="Bash" url="http://czero000.github.io/categories/System/Bash/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://czero000.github.io/2016/07/30/awk-mindmap.html</loc>
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     <data>
@@ -2439,16 +2489,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/12/20/fishshell.html</loc>
+    <loc>http://czero000.github.io/2016/07/22/bash-change-to-zsh.html</loc>
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     <data>
         <display>
-        <title>Fishshell</title>
-        <pubTime>2015-12-20T09:09:14.000Z</pubTime>
+        <title>使用zsh作为默认shell</title>
+        <pubTime>2016-07-22T05:54:29.000Z</pubTime>
         
-        <tag>bash</tag>
-         
-        <tag>fishshell</tag>
+        <tag>zsh</tag>
          
          
            
@@ -2510,62 +2558,14 @@
 
     
   <url>
-    <loc>http://czero000.github.io/2015/12/29/update-kernel.html</loc>
+    <loc>http://czero000.github.io/2015/12/29/centos-install-xz.html</loc>
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     <data>
         <display>
-        <title>CentOS6.5升级内核</title>
-        <pubTime>2015-12-29T02:46:37.000Z</pubTime>
+        <title>安装XZ解压工具</title>
+        <pubTime>2015-12-29T03:01:28.000Z</pubTime>
         
-        <tag>kernel</tag>
-         
-         
-           
-             
-              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
-          
-             
-              <breadCrumb title="CentOS" url="http://czero000.github.io/categories/System/CentOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2016/07/26/bash-mindmap.html</loc>
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    <data>
-        <display>
-        <title>Bash思维导图</title>
-        <pubTime>2016-07-26T13:48:12.000Z</pubTime>
-        
-        <tag>bash</tag>
-         
-        <tag>mindmap</tag>
-         
-         
-           
-             
-              <breadCrumb title="System" url="http://czero000.github.io/categories/System/"/>
-          
-             
-              <breadCrumb title="Bash" url="http://czero000.github.io/categories/System/Bash/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://czero000.github.io/2015/12/21/centos6.5-install-vncserver.html</loc>
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    <data>
-        <display>
-        <title>CentOS6.5安装VNC</title>
-        <pubTime>2015-12-21T14:00:59.000Z</pubTime>
-        
-        <tag>vncserver</tag>
+        <tag>xz</tag>
          
          
            
