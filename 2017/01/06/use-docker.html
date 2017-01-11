@@ -1,0 +1,1187 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googled18515fcec64d15c.html" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="使用 docker 创建一个静态网站将 docker 作为本地 web 开发环境是使用 docker 的最简单情况，可以完全实现生产环境，保证开发环境和部署环境一致，下面讲创建一个简单的网站 sample。
+通过 Dockerfile 创建 sample website
+创建工作目录
+
+123mkdir samplecd sampletouch Dockerfile
+
+创建 nginx 配置文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试使用docker">
+<meta property="og:url" content="http://czero000.github.io/2017/01/06/use-docker.html">
+<meta property="og:site_name" content="Zero's Blog">
+<meta property="og:description" content="使用 docker 创建一个静态网站将 docker 作为本地 web 开发环境是使用 docker 的最简单情况，可以完全实现生产环境，保证开发环境和部署环境一致，下面讲创建一个简单的网站 sample。
+通过 Dockerfile 创建 sample website
+创建工作目录
+
+123mkdir samplecd sampletouch Dockerfile
+
+创建 nginx 配置文件">
+<meta property="og:updated_time" content="2017-01-11T07:30:23.257Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="测试使用docker">
+<meta name="twitter:description" content="使用 docker 创建一个静态网站将 docker 作为本地 web 开发环境是使用 docker 的最简单情况，可以完全实现生产环境，保证开发环境和部署环境一致，下面讲创建一个简单的网站 sample。
+通过 Dockerfile 创建 sample website
+创建工作目录
+
+123mkdir samplecd sampletouch Dockerfile
+
+创建 nginx 配置文件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2017/01/06/use-docker.html"/>
+
+
+
+
+
+  <title> 测试使用docker | Zero's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71693959-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59079634";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2017/01/06/use-docker.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                测试使用docker
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/06/use-docker.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/use-docker.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/06/use-docker.html" class="leancloud_visitors" data-flag-title="测试使用docker">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="使用-docker-创建一个静态网站"><a href="#使用-docker-创建一个静态网站" class="headerlink" title="使用 docker 创建一个静态网站"></a>使用 docker 创建一个静态网站</h1><p>将 docker 作为本地 web 开发环境是使用 docker 的最简单情况，可以完全实现生产环境，保证开发环境和部署环境一致，下面讲创建一个简单的网站 sample。</p>
+<h2 id="通过-Dockerfile-创建-sample-website"><a href="#通过-Dockerfile-创建-sample-website" class="headerlink" title="通过 Dockerfile 创建 sample website"></a>通过 Dockerfile 创建 sample website</h2><ul>
+<li>创建工作目录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir sample</div><div class="line">cd sample</div><div class="line">touch Dockerfile</div></pre></td></tr></table></figure>
+<ul>
+<li>创建 nginx 配置文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir nginx ; cd nginx</div><div class="line">wget https://raw.githubusercontent.com/jamtur01/dockerbook-code/master/code/5/sample/nginx/global.conf</div><div class="line">wget https://raw.githubusercontent.com/jamtur01/dockerbook-code/master/code/5/sample/nginx/nginx.conf</div></pre></td></tr></table></figure>
+<ul>
+<li>编写 Dockerfile</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># For a simple website</div><div class="line"># V0.1</div><div class="line">FROM ubuntu:16.04</div><div class="line">MAINTAINER Charlie.Cui &lt;charlie.cui127@gmail.com&gt;</div><div class="line">ENV REFRESHED_AT 2016-11-01</div><div class="line">RUN apt-get update</div><div class="line">RUN apt-get -qqy install nginx</div><div class="line">RUN mkdir -p /var/www/html</div><div class="line">ADD nginx/global.conf /etc/nginx/conf.d/</div><div class="line">ADD nginx/nginx.conf /etc/nginx/nginx.conf</div><div class="line">EXPOSE 80</div></pre></td></tr></table></figure>
+<p>Dockerfile 内容主要包含下面几项</p>
+<ol>
+<li>安装 nginx</li>
+<li>在容器中创建一个目录 <code>/var/www/html</code></li>
+<li>将下载的本地 nginx 配置文件添加到镜像中</li>
+<li>开放镜像的 80 端口</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">//设置nginx 监听 80 端口，root目录为 /var/www/html/website</div><div class="line">::::::::::::::</div><div class="line">nginx/global.conf</div><div class="line">::::::::::::::</div><div class="line">server &#123;</div><div class="line">        listen          0.0.0.0:80;</div><div class="line">        server_name     _;</div><div class="line"></div><div class="line">        root            /var/www/html/website;</div><div class="line">        index           index.html index.htm;</div><div class="line"></div><div class="line">        access_log      /var/log/nginx/default_access.log;</div><div class="line">        error_log       /var/log/nginx/default_error.log;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">// 配置 nginx 为非守护进程模式， daemon off选项会阻止 nginx 进入后台，强制 nginx 在前台运行，这样是为了保持 docker 容器的活跃状态，默认情况下， nginx 会以守护进行方式启动，这会使容器短暂运行，在守护进程 fork 启动后，发起守护进程的源进程便会退出，容器也随之停止</div><div class="line">::::::::::::::</div><div class="line">nginx/nginx.conf</div><div class="line">::::::::::::::</div><div class="line">user www-data;</div><div class="line">worker_processes 4;</div><div class="line">pid /run/nginx.pid;</div><div class="line">daemon off;</div><div class="line"></div><div class="line">events &#123;  &#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line">  sendfile on;</div><div class="line">  tcp_nopush on;</div><div class="line">  tcp_nodelay on;</div><div class="line">  keepalive_timeout 65;</div><div class="line">  types_hash_max_size 2048;</div><div class="line">  include /etc/nginx/mime.types;</div><div class="line">  default_type application/octet-stream;</div><div class="line">  access_log /var/log/nginx/access.log;</div><div class="line">  error_log /var/log/nginx/error.log;</div><div class="line">  gzip on;</div><div class="line">  gzip_disable &quot;msie6&quot;;</div><div class="line">  include /etc/nginx/conf.d/*.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="构建-sample-网站和-nginx-镜像"><a href="#构建-sample-网站和-nginx-镜像" class="headerlink" title="构建 sample 网站和 nginx 镜像"></a>构建 sample 网站和 nginx 镜像</h2><p>利用之前的  Dockerfile，可以利用 <code>docker build</code> 命令构建出新的镜像，并将该镜像命名为 czero/nginx:v1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker build -t Czero/nginx:v1 .</div></pre></td></tr></table></figure></p>
+<p>通过 <code>docker history</code>可以看到构建过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">docker history czero/nginx:v1</div><div class="line">IMAGE               CREATED                  CREATED BY                                      SIZE                COMMENT</div><div class="line">32901d5b7262        19 hours ago             /bin/sh -c #(nop)  EXPOSE 80/tcp                0 B                 </div><div class="line">774362201d8f        19 hours ago             /bin/sh -c #(nop) ADD file:d6698a182fafaf3cb0   415 B               </div><div class="line">5e9f2a24c991        19 hours ago             /bin/sh -c #(nop) ADD file:9778ae1b43896011cc   286 B               </div><div class="line">5d9dd8c94af9        19 hours ago             /bin/sh -c mkdir -p /var/www/html               0 B                 </div><div class="line">4f866ff78749        19 hours ago             /bin/sh -c apt-get -qqy install nginx           56.81 MB            </div><div class="line">887048645d36        19 hours ago             /bin/sh -c apt-get update                       39.19 MB            </div><div class="line">6bc9139d50a3        20 hours ago             /bin/sh -c #(nop)  ENV REFRESHED_AT=2016-11-0   0 B                 </div><div class="line">0ce2ec18f130        20 hours ago             /bin/sh -c #(nop)  MAINTAINER Charlie.Cui &lt;ch   0 B                 </div><div class="line">c73a085dc378        Less than a second ago   /bin/sh -c #(nop)  CMD [&quot;/bin/bash&quot;]            0 B                 </div><div class="line">&lt;missing&gt;           Less than a second ago   /bin/sh -c mkdir -p /run/systemd &amp;&amp; echo &apos;doc   7 B                 </div><div class="line">&lt;missing&gt;           Less than a second ago   /bin/sh -c sed -i &apos;s/^#\s*\(deb.*universe\)$/   1.895 kB            </div><div class="line">&lt;missing&gt;           Less than a second ago   /bin/sh -c rm -rf /var/lib/apt/lists/*          0 B                 </div><div class="line">&lt;missing&gt;           Less than a second ago   /bin/sh -c set -xe   &amp;&amp; echo &apos;#!/bin/sh&apos; &gt; /u   745 B               </div><div class="line">&lt;missing&gt;           Less than a second ago   /bin/sh -c #(nop) ADD file:cd937b840fff16e04e   127.1 MB</div></pre></td></tr></table></figure>
+<h2 id="从-sample-网站和-nginx-镜像构建容器"><a href="#从-sample-网站和-nginx-镜像构建容器" class="headerlink" title="从 sample 网站和 nginx 镜像构建容器"></a>从 sample 网站和 nginx 镜像构建容器</h2><p>使用 czero/nginx:v1 镜像，构建容器</p>
+<ul>
+<li>生成网站首页</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 创建 website 目录，创建首页文件 index.html</div><div class="line">cd sample</div><div class="line">mkdir website</div><div class="line">cd website</div><div class="line">wget https://raw.githubusercontent.com/jamtur01/dockerbook-code/master/code/5/sample/website/index.html</div></pre></td></tr></table></figure>
+<ul>
+<li>创建容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 80:80 --name blog -v $PWD/website:/var/www/html/website:ro czero/nginx:v1 nginx</div></pre></td></tr></table></figure>
+<p>在执行<code>docker run</code>命令时，会创建一个 blog 容器，<code>-v</code>选项允许将宿主机的目录挂载到容器中，然后会传入 <code>nginx</code>启动命令，让 ningx 启动后已交互模式在前台运行。<br>卷在 docker 中非常有用，卷是一个或者多个容器内被选定的目录，可以绕过分层的联合文件系统，为 docker 提供持久数据或者共享数据，对卷的修改会直接生效，并会绕过镜像，当提交或者创建镜像时，卷不会被包含在镜像中。利用卷可以实现不想把代码或者应用等构建到镜像中，或者是希望同时对代码做开发和测试、代码频繁改动，不想在开发过程中重新构建镜像、希望在多个容器中共享代码。</p>
+<p><code>-v</code>参数指定了卷的源目录和容器里的目的目录，这两个目录通过<code>:</code>分隔，如果目的目录不存在，docker 会自动创建。也可以在目的目录后面添加<code>rw、ro</code>来指定目录的读写状态<br><code>-p</code>参数指定了将容器内部的端口映射到本地的指定端口，<code>本地端口:容器端口</code>，可以不指定本地端口。</p>
+<ul>
+<li>查看容器</li>
+</ul>
+<p>通过<code>docker ps</code>命令可以查看正在运行的容器，可以看到 blog 容器正在活跃状态，并将 80 端口映射到本地的 80端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                NAMES</div><div class="line">e479aa5da8ae        czero/nginx:v1      &quot;nginx&quot;             16 minutes ago      Up 16 minutes       0.0.0.0:80-&gt;80/tcp   blog</div></pre></td></tr></table></figure></p>
+<h2 id="使用-docker-构建一个-web-应用"><a href="#使用-docker-构建一个-web-应用" class="headerlink" title="使用 docker 构建一个 web 应用"></a>使用 docker 构建一个 web 应用</h2><p>现在构建一个更大的 web 应用，一个基于 sinatra 的 web 应用。</p>
+<h3 id="构建-sinatra-应用程序"><a href="#构建-sinatra-应用程序" class="headerlink" title="构建 sinatra 应用程序"></a>构建 sinatra 应用程序</h3><ul>
+<li>创建 Dockerfile 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># a sinatra website</div><div class="line">FROM ubuntu:16.04</div><div class="line">MAINTAINER Charlie.Cui &lt;charlie.cui127@gmail.com&gt;</div><div class="line">ENV REFRESHED_AT 2016-11-03</div><div class="line">RUN apt-get -qq update</div><div class="line">RUN apt-get -qqy install ruby ruby-dev build-essential redis-tools</div><div class="line">RUN gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/</div><div class="line">RUN gem install --no-rdoc --no-ri sinatra json redis</div><div class="line"></div><div class="line">RUN mkdir -p /opt/webapp</div><div class="line">EXPOSE 4567</div><div class="line"></div><div class="line">CMD [&quot;/opt/webapp/bin/webapp&quot;]</div></pre></td></tr></table></figure>
+<ul>
+<li>构建 docker 镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker build -t czero/sinatra:v1 .</div></pre></td></tr></table></figure>
+<h3 id="创建-sinatra-容器"><a href="#创建-sinatra-容器" class="headerlink" title="创建 sinatra 容器"></a>创建 sinatra 容器</h3><ul>
+<li>下载 sinatra web 应用代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget  --cut-dirs=3 -nH -r --no-parent --no-check-certificate http://dockerbook.com/code/5/sinatra/webapp/</div><div class="line">// 增加执行权限</div><div class="line">chmod +x $PWD/webapp/bin/webapp</div></pre></td></tr></table></figure>
+<ul>
+<li>创建 docker 容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 4567:4567 --name sinatra -v $PWD/webapp:/opt/webapp czero/sinatra:v1</div></pre></td></tr></table></figure>
+<p>Dockerfile 中的 <code>CMD</code> 指令，会让镜像启动容器时，执行该命令</p>
+<ul>
+<li>查看容器执行命令的输出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker logs sinatra</div><div class="line">[2016-03-17 05:10:39] INFO  WEBrick 1.3.1</div><div class="line">[2016-03-17 05:10:39] INFO  ruby 2.3.1 (2016-04-26) [x86_64-linux-gnu]</div><div class="line">== Sinatra (v1.4.7) has taken the stage on 4567 for development with backup from WEBrick</div><div class="line">[2016-03-17 05:10:39] INFO  WEBrick::HTTPServer#start: pid=1 port=4567</div><div class="line">172.16.3.139 - - [17/Mar/2016:05:11:01 +0000] &quot;GET / HTTP/1.1&quot; 200 36 0.0064</div></pre></td></tr></table></figure>
+<p>在运行 <code>docker logs</code> 命令时，加上<code>-f</code> 参数，会持续食醋胡容器的 <code>stderr</code> 和 <code>stdout</code></p>
+<ul>
+<li>查看 docker 容器中正在运行的程序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker top sinatra</div><div class="line">UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD</div><div class="line">root                14395               14378               0                   13:10               ?                   00:00:00            /usr/bin/ruby /opt/webapp/bin/webapp</div></pre></td></tr></table></figure>
+<ul>
+<li>查看 docekr 容器端口映射</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker port sinatra</div><div class="line">4567/tcp -&gt; 0.0.0.0:4567</div></pre></td></tr></table></figure>
+<ul>
+<li>访问 sinatra</li>
+</ul>
+<p>sinatra 应用只接受输入参数，并将输入转成 JSON 输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">curl -i -H &apos;Accept: application/json&apos; -d &apos;name=Foo&amp;status=Bar&apos; http://localhost:4567/json</div><div class="line">HTTP/1.1 200 OK</div><div class="line">Content-Type: text/html;charset=utf-8</div><div class="line">Content-Length: 29</div><div class="line">X-Xss-Protection: 1; mode=block</div><div class="line">X-Content-Type-Options: nosniff</div><div class="line">X-Frame-Options: SAMEORIGIN</div><div class="line">Server: WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)</div><div class="line">Date: Thu, 17 Mar 2016 07:47:18 GMT</div><div class="line">Connection: Keep-Alive</div><div class="line"></div><div class="line">&#123;&quot;name&quot;:&quot;Foo&quot;,&quot;status&quot;:&quot;Bar&quot;&#125;#</div></pre></td></tr></table></figure></p>
+<h2 id="构建-Redis-镜像和容器"><a href="#构建-Redis-镜像和容器" class="headerlink" title="构建 Redis 镜像和容器"></a>构建 Redis 镜像和容器</h2><p>扩展 sinatra 应用程序，在后端加入 redis 数据库，并在数据库中存入输入参数。构建全新的镜像和容器运行 redis 数据库，通过 docker 管理两个容器。</p>
+<ul>
+<li>创建Dockerfile</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">cat Dockerfile</div><div class="line"># contarner for sinatra redis</div><div class="line">FROM ubuntu:16.04</div><div class="line">MAINTAINER Charlie.Cui &lt;charlie.cui127@gmail.com&gt;</div><div class="line">ENV REFRESHED_AT 2016-11-03</div><div class="line">RUN apt-get -qq update</div><div class="line">RUN apt-get -qqy install redis-server redis-tools</div><div class="line">EXPOSE 6379</div><div class="line">ENTRYPOINT [&quot;/usr/bin/redis-server&quot;]</div><div class="line">CMD []</div></pre></td></tr></table></figure>
+<ul>
+<li>生成镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker build -t czero/redis:v1 .</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>dockerfile 指定安装 redis 服务，开放 6379 端口，并启动 redis 服务</p>
+<ul>
+<li>创建容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 6379:6379 --name sinatra_redis czero/redis:v1</div></pre></td></tr></table></figure>
+<ul>
+<li>测试连接 redis</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 本地安装 redis-tools</div><div class="line">apt install -f redis-tools</div><div class="line"></div><div class="line">// 连接 redis</div><div class="line">redis-cli -h 127.0.0.1</div></pre></td></tr></table></figure>
+<h2 id="连接到-redis-容器"><a href="#连接到-redis-容器" class="headerlink" title="连接到 redis 容器"></a>连接到 redis 容器</h2><p>连接到 docker 容器有两种方式，</p>
+<ul>
+<li>ip地址方式</li>
+<li>docker link功能</li>
+</ul>
+<h3 id="ip-方式连接"><a href="#ip-方式连接" class="headerlink" title="ip 方式连接"></a>ip 方式连接</h3><p>查看 容器 IP 信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker inspect sinatra_redis</div><div class="line"></div><div class="line">// 上面命令输出信息较多，可以利用-f 标志那个，过滤关键字</div><div class="line">docker inspect -f &apos;&#123;&#123; .NetworkSettings.IPAddress &#125;&#125;&apos; sinatra_redis</div><div class="line">172.17.0.3</div></pre></td></tr></table></figure></p>
+<p>安装docker时，会创建一个名为 <code>docker0</code> 的网卡，主机上的容器都会在这个网卡上分配到一个地址，docker0 网卡，拥有一个私有IP段，<code>172.16～172.30</code>，网卡是一个虚拟的以太网桥，用于连接本地忘了和容器网络，在容器中，会以<code>veth</code>开头来命令网卡，并随机分配到一个 ip 地址，当知道了容器的ip，两个容器便可以通过 IP及端口相互访问，但是这种方式有个缺点。由于容器的 ip 地址是由 <code>docker0</code> 网卡分配的 ip 地址，当容器被重启，容器本身的 ip 地址会改变，这样当两个容量使用固定 ip 地址方式访问，这样便会连接不上。</p>
+<h3 id="通过-link-连接-容器"><a href="#通过-link-连接-容器" class="headerlink" title="通过 link 连接 容器"></a>通过 link 连接 容器</h3><ul>
+<li>删除掉之前的容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker stop $(docker ps -q)</div><div class="line">doker rm $(docker ps -aq)</div></pre></td></tr></table></figure>
+<ul>
+<li>创建新的 redis 容器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d --name sinatra_redis czero/redis:v1</div></pre></td></tr></table></figure>
+<ul>
+<li>创建 web 应用连接 redis</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker run -p 4567 --name sinatra_web --link  sinatra_redis:db -t -i -v $PWD/sinatra_web/webapp:/opt/webapp czero/sinatra:v1 /bin/bash</div><div class="line">// 如果想要多个 web 应用同时连接 redis</div><div class="line">docker run -p 4567 --name sinatra_web1 --link  sinatra_redis:db -v $PWD/sinatra_web/webapp:/opt/webapp czero/sinatra:v1</div><div class="line">docker run -p 4567 --name sinatra_web2 --link  sinatra_redis:db -v $PWD/sinatra_web/webapp:/opt/webapp czero/sinatra:v1</div></pre></td></tr></table></figure>
+<p><code>--link</code> 标志创建两连个容器间父子连接，这个标志需要两个参数: <strong>一个是要连接的容器名称，另外一个便是连接后容器的别名</strong> ,上面列子便是连接到 <code>sinatra_redis</code> 容器，并使用 <code>db</code> 作为别名。别名可以访问公开的信息，而无需关注底层容器的名字。连接让父容器可以访问子容器，并且把子容器的一些连接细节分给父容器。<br>这样会在安全性上得到提高，在启动 redis 时，并没有使用 <code>-p</code> 开放容器端口，当使用<code>--link</code> 时，可以让父容器直接访问子容器的开放端口。在启动容器守护进程时，如果加上 <code>--ice=false</code> 便会关闭所有没有连接的容器通信。<strong>被连接的容器要求必须是同一主机上的容器，不同主机上的容器不能连接</strong></p>
+<p>在创建两个容器连接后，会在两个地方写入连接信息</p>
+<ol>
+<li>/etc/hosts 文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">more /etc/hosts</div><div class="line">172.17.0.2      db 9e0071f714c4 sinatra_redis</div><div class="line">172.17.0.3      744d452651ca</div></pre></td></tr></table></figure>
+<ol>
+<li>包含连接信息的环境变量中</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">env   </div><div class="line">HOSTNAME=744d452651ca</div><div class="line">DB_NAME=/sinatra_web/db</div><div class="line">DB_PORT_6379_TCP_PORT=6379</div><div class="line">TERM=xterm</div><div class="line">DB_PORT=tcp://172.17.0.2:6379</div><div class="line">DB_PORT_6379_TCP=tcp://172.17.0.2:6379</div></pre></td></tr></table></figure>
+<ul>
+<li>容器应用通信</li>
+</ul>
+<p>使用 host 或者 ENV 给应用加入连接信息，例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// web应用代码</div><div class="line">uri=URI.parse(env[&apos;DB_PORT&apos;])</div><div class="line">redis = redis.net(:host =&gt; uri.host, :port =&gt; uri.port )</div></pre></td></tr></table></figure></p>
+<p><strong>在docker run 命令中加入 –dns 或者 –dns-search 标志可以为容器定义dns</strong></p>
+<p>再次使用<code>curl</code>命令测试 sinatra 程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">curl -i -H &apos;Accept: application/json&apos; -d &apos;name=Foo&amp;status=Bar&apos; http://localhost:4567/json                                       </div><div class="line">HTTP/1.1 200 OK</div><div class="line">Content-Type: text/html;charset=utf-8</div><div class="line">Content-Length: 29</div><div class="line">X-Xss-Protection: 1; mode=block</div><div class="line">X-Content-Type-Options: nosniff</div><div class="line">X-Frame-Options: SAMEORIGIN</div><div class="line">Server: WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)</div><div class="line">Date: Fri, 18 Mar 2016 09:08:31 GMT</div><div class="line">Connection: Keep-Alive</div><div class="line"></div><div class="line">&#123;&quot;name&quot;:&quot;Foo&quot;,&quot;status&quot;:&quot;Bar&quot;&#125;</div></pre></td></tr></table></figure></p>
+<p>再次确认 redis 是否收到更新</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/05/nfs-error.html" rel="next" title="nfs挂载错误">
+                <i class="fa fa-chevron-left"></i> nfs挂载错误
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/06/docker-resource.html" rel="prev" title="docker资源">
+                docker资源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/01/06/use-docker.html"
+     data-title="测试使用docker"
+     data-content=""
+     data-url="http://czero000.github.io/2017/01/06/use-docker.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/06/use-docker.html"
+           data-title="测试使用docker" data-url="http://czero000.github.io/2017/01/06/use-docker.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">146</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yuanlong1207" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Yuminstall" target="_blank">Yuminstall</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-docker-创建一个静态网站"><span class="nav-number">1.</span> <span class="nav-text">使用 docker 创建一个静态网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-Dockerfile-创建-sample-website"><span class="nav-number">1.1.</span> <span class="nav-text">通过 Dockerfile 创建 sample website</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建-sample-网站和-nginx-镜像"><span class="nav-number">1.2.</span> <span class="nav-text">构建 sample 网站和 nginx 镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从-sample-网站和-nginx-镜像构建容器"><span class="nav-number">1.3.</span> <span class="nav-text">从 sample 网站和 nginx 镜像构建容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-docker-构建一个-web-应用"><span class="nav-number">1.4.</span> <span class="nav-text">使用 docker 构建一个 web 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建-sinatra-应用程序"><span class="nav-number">1.4.1.</span> <span class="nav-text">构建 sinatra 应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-sinatra-容器"><span class="nav-number">1.4.2.</span> <span class="nav-text">创建 sinatra 容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建-Redis-镜像和容器"><span class="nav-number">1.5.</span> <span class="nav-text">构建 Redis 镜像和容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接到-redis-容器"><span class="nav-number">1.6.</span> <span class="nav-text">连接到 redis 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ip-方式连接"><span class="nav-number">1.6.1.</span> <span class="nav-text">ip 方式连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-link-连接-容器"><span class="nav-number">1.6.2.</span> <span class="nav-text">通过 link 连接 容器</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.0.2"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/20/docker-blog.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/19/use-gitolite-manager-git.html" itemprop="url">
-                  使用gitolite管理git授权
+                <a class="post-title-link" href="/2016/10/20/docker-blog.html" itemprop="url">
+                  使用Dockerfile创建blog
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/19/use-gitolite-manager-git.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/use-gitolite-manager-git.html" itemprop="commentCount"></span>
+                <a href="/2016/10/20/docker-blog.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/docker-blog.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2016/10/19/use-gitolite-manager-git.html" class="leancloud_visitors" data-flag-title="使用gitolite管理git授权">
+             <span id="/2016/10/20/docker-blog.html" class="leancloud_visitors" data-flag-title="使用Dockerfile创建blog">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,13 +390,13 @@
       
         
           
-          使用 gitolite 管理 git 服务器由于Git的设计初衷，在使用 Git 在面向团队服务时，如果需要对权限控制，就需要第三方的工具来帮助 Git。在 Git 管理工具中，有三个解决方案。
-
-Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级别的权限控制。现在项目已经停止开
+          Docker 是一个有趣的技术，在过去的两年已经从一个想法变成了全世界的机构都在采用来部署应用的技术。下面会通过 docker 来创建一个blog。
+什么是 DockerDocker 是一个操作系统容器管理工具，通过将应用打包到操作系统容器里面，从而让你能轻松管理和部署应用。
+容器 vs 虚拟机容器
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/19/use-gitolite-manager-git.html#more" rel="contents">
+            <a class="btn" href="/2016/10/20/docker-blog.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -437,7 +437,7 @@ Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/08/09/git-diff.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/20/docker-images.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -462,8 +462,8 @@ Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级�
             
               
                 
-                <a class="post-title-link" href="/2016/08/09/git-diff.html" itemprop="url">
-                  git log查看两个版本的不同
+                <a class="post-title-link" href="/2016/10/20/docker-images.html" itemprop="url">
+                  docker镜像
                 </a>
               
             
@@ -485,8 +485,8 @@ Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/08/09/git-diff.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/09/git-diff.html" itemprop="commentCount"></span>
+                <a href="/2016/10/20/docker-images.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/docker-images.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -496,7 +496,7 @@ Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级�
 
           
           
-             <span id="/2016/08/09/git-diff.html" class="leancloud_visitors" data-flag-title="git log查看两个版本的不同">
+             <span id="/2016/10/20/docker-images.html" class="leancloud_visitors" data-flag-title="docker镜像">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -523,421 +523,409 @@ Gitosis 轻量级、开源项目，使用 SSH 公钥认证，只能做到库级�
       
         
           
-          
-当前版本和上一个版本
-
-1git diff HEAD HEAD^
-
-特定版本
-1git diff commitID1 commitID2
-
-通过日志查看
-1git log state
-
-
-
-          
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/09/git-diff.html#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/30/awk-mindmap.html">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="C.c">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Zero's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/30/awk-mindmap.html" itemprop="url">
-                  awk思维导图
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/07/30/awk-mindmap.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/30/awk-mindmap.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/30/awk-mindmap.html" class="leancloud_visitors" data-flag-title="awk思维导图">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">Visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          awk 思维导图
-
-          
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/30/awk-mindmap.html#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/26/bash-mindmap.html">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="C.c">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Zero's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/26/bash-mindmap.html" itemprop="url">
-                  Bash思维导图
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/07/26/bash-mindmap.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/26/bash-mindmap.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/26/bash-mindmap.html" class="leancloud_visitors" data-flag-title="Bash思维导图">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">Visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Bash 思维导图
-
-          
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/26/bash-mindmap.html#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/07/22/bash-change-to-zsh.html">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="C.c">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Zero's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/22/bash-change-to-zsh.html" itemprop="url">
-                  使用zsh作为默认shell
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/07/22/bash-change-to-zsh.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/bash-change-to-zsh.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/22/bash-change-to-zsh.html" class="leancloud_visitors" data-flag-title="使用zsh作为默认shell">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">Visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          号称终极 Shell 的 Zsh 兼容 Bash，在命令补全方面有很好的体验，丰富的插件和主题可提供使用，配合 Oh-my-zsh 更加强大。
-Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装前可以查看系统安装了哪些 Shell
-1cat /etc/shells
-
+          镜像什么是镜像
+镜像是 Docker 的三大组件之一
+Docker 镜像就是一个只读模版，一个镜像可以包含一个完整的ubuntu 操作系统，系统安装了 apache 和用户自定义应用软件。
+镜像可以用来创建容器，Docker 提供了一个简单的机制来创建镜像或者更新现有镜像，用户甚至可以直接从其他人哪
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/22/bash-change-to-zsh.html#more" rel="contents">
+            <a class="btn" href="/2016/10/20/docker-images.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/20/rudiments-of-docker.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/20/rudiments-of-docker.html" itemprop="url">
+                  Docker入门介绍
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/20/rudiments-of-docker.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/rudiments-of-docker.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/20/rudiments-of-docker.html" class="leancloud_visitors" data-flag-title="Docker入门介绍">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Docker 简介Docker 是什么
+Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient conta
+          ...
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/20/rudiments-of-docker.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/ansible-playbook.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/19/ansible-playbook.html" itemprop="url">
+                  Ansible-Playbooks
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/19/ansible-playbook.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/ansible-playbook.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/19/ansible-playbook.html" class="leancloud_visitors" data-flag-title="Ansible-Playbooks">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          PlaybooksPlaybooks 是 Ansible 的配置、部署、编排语言，相当于控制远程主机的一系列命令的集合，通过 YAML 语言编写。Ansible-Playbook 命令根据自上而写的顺序依次执行。 Playbook 允许传输摸个命令的状态到后面的指令，或者从一台主机的文件中获取内容并
+          ...
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/19/ansible-playbook.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/10/19/ansible-when.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/19/ansible-when.html" itemprop="url">
+                  Ansible-条件选择
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/19/ansible-when.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/ansible-when.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/19/ansible-when.html" class="leancloud_visitors" data-flag-title="Ansible-条件选择">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          条件选择Ansible 有类似于变成语言的条件判断语法，用于控制执行流。
+When 语句当有一个操作是要某个主机达到某个特定条件才会触发的 tasks，Ansible 可以使用 When 语句来实现。12345// 当主机为 Debian Linux 时立即关机tasks:  - name: &qu
+          ...
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/19/ansible-when.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -973,7 +961,7 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1014,7 +1002,7 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">146</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1022,7 +1010,7 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1031,7 +1019,7 @@ Linux 系统一般预装几种 Shell，系统默认的 Shell 是 Bash，安装�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

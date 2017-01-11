@@ -1,0 +1,1081 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googled18515fcec64d15c.html" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="grep," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="正则表达式翻译领域不乏让人摸不着头脑的词汇，比如“句柄”、“套接字”、“鲁棒性”。当然，“正则表达式”也属于这一类词汇。我刚接触正则表达式的时候，对这个名词感到非常迷惑。深入了解之后，才突然明白，原来所谓的 regular expression， 其实就是“有规律、有模式的字符串”而已。
+很少有一门技术，只需要投入少量的学习成本即可获得巨大的价值回报。正则表达式就属于这一类技术。可惜很多人被它密码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本处理">
+<meta property="og:url" content="http://czero000.github.io/2015/12/20/common-text-process.html">
+<meta property="og:site_name" content="Zero's Blog">
+<meta property="og:description" content="正则表达式翻译领域不乏让人摸不着头脑的词汇，比如“句柄”、“套接字”、“鲁棒性”。当然，“正则表达式”也属于这一类词汇。我刚接触正则表达式的时候，对这个名词感到非常迷惑。深入了解之后，才突然明白，原来所谓的 regular expression， 其实就是“有规律、有模式的字符串”而已。
+很少有一门技术，只需要投入少量的学习成本即可获得巨大的价值回报。正则表达式就属于这一类技术。可惜很多人被它密码">
+<meta property="og:updated_time" content="2017-01-11T07:57:07.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本处理">
+<meta name="twitter:description" content="正则表达式翻译领域不乏让人摸不着头脑的词汇，比如“句柄”、“套接字”、“鲁棒性”。当然，“正则表达式”也属于这一类词汇。我刚接触正则表达式的时候，对这个名词感到非常迷惑。深入了解之后，才突然明白，原来所谓的 regular expression， 其实就是“有规律、有模式的字符串”而已。
+很少有一门技术，只需要投入少量的学习成本即可获得巨大的价值回报。正则表达式就属于这一类技术。可惜很多人被它密码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2015/12/20/common-text-process.html"/>
+
+
+
+
+
+  <title> 文本处理 | Zero's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71693959-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59079634";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/common-text-process.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                文本处理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/12/20/common-text-process.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/common-text-process.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/12/20/common-text-process.html" class="leancloud_visitors" data-flag-title="文本处理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>正则表达式<br>翻译领域不乏让人摸不着头脑的词汇，比如“句柄”、“套接字”、“鲁棒性”。当然，“正则表达式”也属于这一类词汇。我刚接触正则表达式的时候，对这个名词感到非常迷惑。深入了解之后，才突然明白，原来所谓的 regular expression， 其实就是“有规律、有模式的字符串”而已。</p>
+<p>很少有一门技术，只需要投入少量的学习成本即可获得巨大的价值回报。正则表达式就属于这一类技术。可惜很多人被它密码般的语法形式当头棒喝，甚至连门都不得而入。</p>
+<p>为什么你应该学习正则表达式？其一，在实践中应用这门技术其实不难，只需理解为数不多的几个元字符以及并不复杂的语法，就能够获得强大的文本操控能力；其二，正则表达式往往能提供处理文本的最简单最高效的解决方法（有时也许是唯一的解法）。遇上复杂的情况，如果你不会正则表达式，就只好束手无策、黯然神伤了。</p>
+<p>正则表达式入门容易，精通却难。本文并不打算挑战此项任务，如果你希望系统地学习正则表达式，请一定阅读 Jeffrey Friedl 的著作 精通正则表达式。</p>
+<p>###文本检索<br>grep 命令可以完成简单的文本搜索任务。</p>
+<p>先来准备一份文本材料，把 grep 的帮助页保存为文本文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">man grep | col -b &gt; grephelp.txt</div><div class="line">下面，我想检索 grephelp.txt 文件中所有包含 &quot;find&quot; 这个单词的文本行：</div></pre></td></tr></table></figure></p>
+<p>grep “find” grephelp.txt<br>     To find all occurrences of the word <code>patricia&#39; in a file:
+     To find all occurrences of the pattern</code>.Pp’ at the beginning of a line:<br>     To find all lines in a file which do not contain the words `foo’ or<br>我希望匹配到的文本使用不同的颜色显示，可以添加 –color 选项，默认的颜色是红色。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep --color &quot;find&quot; grephelp.txt</div></pre></td></tr></table></figure></p>
+<p>我希望在匹配结果中显示文件名和行号，使用 -H 选项可以显示文件名，使用 -n 选项可以显示行号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">grep -H -n --color &quot;find&quot; grephelp.txt</div><div class="line">grephelp.txt:252:     To find all occurrences of the word `patricia&apos; in a file:</div><div class="line">grephelp.txt:256:     To find all occurrences of the pattern `.Pp&apos; at the beginning of a line:</div><div class="line">grephelp.txt:265:     To find all lines in a file which do not contain the words `foo&apos; or</div></pre></td></tr></table></figure></p>
+<p>很多时候，我们需要知道匹配行前后的上下文。-A 和 -B 这两个选项会是你的好朋友。-A n 表示显示匹配行以及其后的 n 行；-B n 表示显示匹配行以及之前的 n 行。现在，我们在匹配行的前后分别额外显示两行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">grep -A 2 -B 2 -H -n --color &quot;find&quot; grephelp.txt</div><div class="line">grephelp.txt-250-</div><div class="line">grephelp.txt-251-EXAMPLES</div><div class="line">grephelp.txt:252:     To find all occurrences of the word `patricia&apos; in a file:</div><div class="line">grephelp.txt-253-</div><div class="line">grephelp.txt-254-       $ grep &apos;patricia&apos; myfile</div><div class="line">--</div><div class="line">--</div><div class="line">grephelp.txt-254-       $ grep &apos;patricia&apos; myfile</div><div class="line">grephelp.txt-255-</div><div class="line">grephelp.txt:256:     To find all occurrences of the pattern `.Pp&apos; at the beginning of a line:</div><div class="line">grephelp.txt-257-</div><div class="line">grephelp.txt-258-       $ grep &apos;^\.Pp&apos; myfile</div><div class="line">--</div><div class="line">--</div><div class="line">grephelp.txt-263-     match any character.</div><div class="line">grephelp.txt-264-</div><div class="line">grephelp.txt:265:     To find all lines in a file which do not contain the words `foo&apos; or</div><div class="line">grephelp.txt-266-     `bar&apos;:</div><div class="line">grephelp.txt-267-</div></pre></td></tr></table></figure></p>
+<p>如果需要查找所有不包含 “find” 的文本行，该怎么做呢？很简单，使用 -v 选项即可。</p>
+<p>grep 还有两个变体，egrep 和 fgrep。相对于仅支持基本正则模式（BREs）的 grep 来说，egrep 支持扩展正则模式（EREs），因而检索能力更为强大；fgrep 是所有三个工具中速度最快的一个，因为它完全不支持正则模式。</p>
+<p>其实，我更喜欢一个叫做 ack 的工具。</p>
+<h3 id="文本替换"><a href="#文本替换" class="headerlink" title="文本替换"></a>文本替换</h3><p>tr 命令可以完成简单的字符转换任务。例如，可以通过 tr 把 grephelp.txt 文件转换为全文大写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat grephelp.txt | tr &apos;[:lower:]&apos; &apos;[:upper:]&apos;</div></pre></td></tr></table></figure></p>
+<p>简而言之，tr 的工作就是把第一个集合中的字符转换为第二个集合中的相应的字符。常用的字符集合有下面这些：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[:alnum:]：字母数字</div><div class="line">[:alpha:]：字母</div><div class="line">[:cntrl:] ：控制字符</div><div class="line">[:digit:]：数字</div><div class="line">[:graph:]: 图形字符</div><div class="line">[:lower:]：小写字母</div><div class="line">[:print:]：可打印字符</div><div class="line">[:punct:]：标点符号</div><div class="line">[:space:]：空白字符</div><div class="line">[:upper:]：大写字母</div><div class="line">[:xdigit:]：十六进制数字</div></pre></td></tr></table></figure></p>
+<p>tr 命令的应用场景非常受限，如果希望进行更加灵活的模式替换，我们还有 sed（也就是 stream editor，流编辑器）。</p>
+<p>把文件中所有的 “find” 文本替换为 “search”：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed &quot;s/find/search/g&quot; grephelp.txt</div></pre></td></tr></table></figure></p>
+<p>这条命令中，s 表示执行“替换操作”，/find/search/ 表示把 “find” 替换为 “search”，g 表示对一行中所有的匹配进行替换。sed 默认把处理结果打印到标准输出，我们可以通过重定向把处理结果转储到一个新文件中，或者使用选项 -i 把结果直接写回原文件（有风险，需谨慎）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i &quot;s/find/search/g&quot; grephelp.txt</div></pre></td></tr></table></figure></p>
+<p>把文件中所有的数字 n 替换为 “–n–” 的形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -E &quot;s/([0-9]+)/--\1--/g&quot; grephelp.txt</div></pre></td></tr></table></figure></p>
+<p>选项-E 表示在处理过程中使用扩展的正则模式（EREs），替换命令中的 \1 表示引用正则表达式的第一个捕获分组。请注意，-E 这个选项只在 Mac OS X 系统和 FreeBSD 系统上有效，其他 Unix 系统需要使用另一个等效的选项 -r。</p>
+<p>sed 的功能远不止这一些，篇幅所限，不可能详细讲解 sed 的用法。如果希望学习更多，请移步这篇文章。</p>
+<p>###文本去重<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cat -n sonnet116.txt</div><div class="line">1    Let me not to the marriage of true minds</div><div class="line">2    Admit impediments. Love is not love</div><div class="line">3    Which alters when it alteration finds,</div><div class="line">4    Or bends with the remover to remove:</div><div class="line">5    O, no! it is an ever-fix`ed mark,</div><div class="line">6    O, no! it is an ever-fix`ed mark,</div><div class="line">7    That looks on tempests and is never shaken;</div><div class="line">8    It is the star to every wand&apos;ring bark,</div><div class="line">9    Whose worth&apos;s unknown, although his heighth be taken.</div><div class="line">10    Love&apos;s not Time&apos;s fool, though rosy lips and cheeks</div><div class="line">11    Love&apos;s not Time&apos;s fool, though rosy lips and cheeks</div><div class="line">12    Love&apos;s not Time&apos;s fool, though rosy lips and cheeks</div><div class="line">13    Within his bending sickle&apos;s compass come;</div><div class="line">14    Love alters not with his brief hours and weeks,</div><div class="line">15    But bears it out even to the edge of doom:</div><div class="line">16    If this be error and upon me proved,</div><div class="line">17    I never writ, nor no man ever loved.</div></pre></td></tr></table></figure></p>
+<p>这是莎士比亚的一首十四行诗，只可惜第5行和第10行有重复（而且第10行重复了3次）。怎么查看文本中重复的行呢？uniq 命令可以帮助你。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">uniq -d sonnet116.txt</div><div class="line">O, no! it is an ever-fix`ed mark,</div><div class="line">Love&apos;s not Time&apos;s fool, though rosy lips and cheeks</div></pre></td></tr></table></figure></p>
+<p>选项 -d 表示仅输出重复的行。如果需要去重，使用不带选项的 uniq 命令就可以了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">uniq sonnet116.txt</div><div class="line">Let me not to the marriage of true minds</div><div class="line">Admit impediments. Love is not love</div><div class="line">Which alters when it alteration finds,</div><div class="line">Or bends with the remover to remove:</div><div class="line">O, no! it is an ever-fix`ed mark,</div><div class="line">That looks on tempests and is never shaken;</div><div class="line">It is the star to every wand&apos;ring bark,</div><div class="line">Whose worth&apos;s unknown, although his heighth be taken.</div><div class="line">Love&apos;s not Time&apos;s fool, though rosy lips and cheeks</div><div class="line">Within his bending sickle&apos;s compass come;</div><div class="line">Love alters not with his brief hours and weeks,</div><div class="line">But bears it out even to the edge of doom:</div><div class="line">If this be error and upon me proved,</div><div class="line">I never writ, nor no man ever loved.</div></pre></td></tr></table></figure></p>
+<p>想要查看每一行究竟重复了多少次？没问题，使用选项 -c：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">uniq -c sonnet116.txt</div><div class="line">1 Let me not to the marriage of true minds</div><div class="line">1 Admit impediments. Love is not love</div><div class="line">1 Which alters when it alteration finds,</div><div class="line">1 Or bends with the remover to remove:</div><div class="line">2 O, no! it is an ever-fix`ed mark,</div><div class="line">1 That looks on tempests and is never shaken;</div><div class="line">1 It is the star to every wand&apos;ring bark,</div><div class="line">1 Whose worth&apos;s unknown, although his heighth be taken.</div><div class="line">3 Love&apos;s not Time&apos;s fool, though rosy lips and cheeks</div><div class="line">1 Within his bending sickle&apos;s compass come;</div><div class="line">1 Love alters not with his brief hours and weeks,</div><div class="line">1 But bears it out even to the edge of doom:</div><div class="line">1 If this be error and upon me proved,</div><div class="line">1 I never writ, nor no man ever loved.</div></pre></td></tr></table></figure></p>
+<h3 id="文本排序"><a href="#文本排序" class="headerlink" title="文本排序"></a>文本排序</h3><p>假设有这样一个报表文件，第一列是月份，第二列是当月的销售个数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">cat report.txt</div><div class="line">March,19</div><div class="line">June,50</div><div class="line">February,17</div><div class="line">May,18</div><div class="line">August,16</div><div class="line">April,31</div><div class="line">May,18</div><div class="line">July,26</div><div class="line">January,24</div><div class="line">August,16</div><div class="line">这个文件的内容不仅顺序是乱的，而且还有重复。我希望按字母表顺序排序，可以下面这个命令：</div><div class="line"></div><div class="line">&gt; sort report.txt</div><div class="line">April,31</div><div class="line">August,16</div><div class="line">August,16</div><div class="line">February,17</div><div class="line">January,24</div><div class="line">July,26</div><div class="line">June,50</div><div class="line">March,19</div><div class="line">May,18</div><div class="line">May,18</div></pre></td></tr></table></figure></p>
+<p>选项 -u （表示 unique）可以在排序结果中去除重复行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sort -u report.txt</div><div class="line">April,31</div><div class="line">August,16</div><div class="line">February,17</div><div class="line">January,24</div><div class="line">July,26</div><div class="line">June,50</div><div class="line">March,19</div><div class="line">May,18</div></pre></td></tr></table></figure></p>
+<p>能不能按照月份排序呢？选项 -M （表示 month-sort）可以帮助我们：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sort -u -M report.txt</div><div class="line">January,24</div><div class="line">February,17</div><div class="line">March,19</div><div class="line">April,31</div><div class="line">May,18</div><div class="line">June,50</div><div class="line">July,26</div><div class="line">August,16</div></pre></td></tr></table></figure></p>
+<p>按照第二列的数字进行排序也是很简单的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sort -u -t&apos;,&apos; -k2 report.txt</div><div class="line">August,16</div><div class="line">February,17</div><div class="line">May,18</div><div class="line">March,19</div><div class="line">January,24</div><div class="line">July,26</div><div class="line">April,31</div><div class="line">June,50</div></pre></td></tr></table></figure></p>
+<p>上面的例子中，选项 -t’,’ 表示以逗号为分隔符对文本进行列分割；-k2 表示对第2列进行排序。</p>
+<p>当然了，把结果逆序排列也并非不可能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sort -u -r -t&apos;,&apos; -k2 report.txt</div><div class="line">June,50</div><div class="line">April,31</div><div class="line">July,26</div><div class="line">January,24</div><div class="line">March,19</div><div class="line">May,18</div><div class="line">February,17</div><div class="line">August,16</div></pre></td></tr></table></figure></p>
+<h3 id="文本统计"><a href="#文本统计" class="headerlink" title="文本统计"></a>文本统计</h3><p>wc 命令用来完成文本统计工作，通过使用不同的选项，它可以统计文件中的字节数（-c），字符数（-m），单词数（-w）与行数（-l）。</p>
+<p>例如，查看 grephelp.txt 这个文件总共有多少个单词：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wc -w grephelp.txt</div><div class="line">1571 grephelp.txt</div></pre></td></tr></table></figure></p>
+<p>查看 sonnet116.txt 这个文件总共有多少不重复的行（废话，十四行诗当然是有14行）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">uniq sonnet116.tx6 | wc -l</div><div class="line">14</div></pre></td></tr></table></figure></p>
+<p>你还应该试试 Awk 与 Perl<br>如果上面介绍的工具仍然不能满足你，也许你需要火力更强的武器。试试 Awk 与 Perl 吧。</p>
+<p>Awk 也是一款上古神器，它的年龄可能和 sed 不相上下。Awk 可谓是专门为了文本处理而生，它的语法和特性非常适合用于操纵文本和生成报表。如需学习，请参考 这篇文章，你会喜欢上它的。</p>
+<p>长久以来，Perl 背负了“只写语言”的恶名。实际上，只要处理得当，用 Perl 一样可以写出模块清晰的、容易阅读和理解的代码。根据我的经验，使用 Perl 的场合 80% 以上与文本处理有关。Perl 内置的正则表达式支持可能是所有语言中最好的，再加上简洁紧凑的语法以及便利的操作符，这些特性帮助 Perl 成了文本处理领域当仁不让的霸主。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/grep/" rel="tag"># grep</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/20/command-dig.html" rel="next" title="安装dig命令">
+                <i class="fa fa-chevron-left"></i> 安装dig命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/20/change-timezone.html" rel="prev" title="Ubuntu 16.04修改时区">
+                Ubuntu 16.04修改时区 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/20/common-text-process.html"
+     data-title="文本处理"
+     data-content=""
+     data-url="http://czero000.github.io/2015/12/20/common-text-process.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/20/common-text-process.html"
+           data-title="文本处理" data-url="http://czero000.github.io/2015/12/20/common-text-process.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">146</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yuanlong1207" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Yuminstall" target="_blank">Yuminstall</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本替换"><span class="nav-number">1.</span> <span class="nav-text">文本替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本排序"><span class="nav-number">2.</span> <span class="nav-text">文本排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本统计"><span class="nav-number">3.</span> <span class="nav-text">文本统计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.0.2"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

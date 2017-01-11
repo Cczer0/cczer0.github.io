@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/19/install-bind-ms.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/elementaryos.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/19/install-bind-ms.html" itemprop="url">
-                  Centos6配置主辅DNS
+                <a class="post-title-link" href="/2015/12/21/elementaryos.html" itemprop="url">
+                  elementaryos 系统
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/19/install-bind-ms.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/19/install-bind-ms.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/elementaryos.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/elementaryos.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/10/19/install-bind-ms.html" class="leancloud_visitors" data-flag-title="Centos6配置主辅DNS">
+             <span id="/2015/12/21/elementaryos.html" class="leancloud_visitors" data-flag-title="elementaryos 系统">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,11 +390,12 @@
       
         
           
-          主辅DN数据同步，首先master修改完成并重启服务后，将传送notify给slave。slave将查询master的SOA记录，master收到请求后将SOA记录发送给Slave，Slave收到后同时对比查询结果中的serial值，如果serial值不大于本机的话将结束数据同步过程；但是如果ser
+          
+安装桌面环境配置插件12345sudo apt update sudo apt install software-properties-commonsudo add-apt-repository ppa:philip.scott/elementary-tweakssudo apt updatesu
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/19/install-bind-ms.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/elementaryos.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -435,7 +436,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/14/install-redis.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/smokeping-master-slave.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -460,8 +461,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/14/install-redis.html" itemprop="url">
-                  安装Redis
+                <a class="post-title-link" href="/2015/12/20/smokeping-master-slave.html" itemprop="url">
+                  Smokeping-主辅
                 </a>
               
             
@@ -483,8 +484,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/14/install-redis.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/install-redis.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/smokeping-master-slave.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-master-slave.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -494,7 +495,7 @@
 
           
           
-             <span id="/2015/10/14/install-redis.html" class="leancloud_visitors" data-flag-title="安装Redis">
+             <span id="/2015/12/20/smokeping-master-slave.html" class="leancloud_visitors" data-flag-title="Smokeping-主辅">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -521,12 +522,11 @@
       
         
           
-          Redis 是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、 Key-Value 数据库，并提供多种语言的 API
-下载安装 redis12345wget http://download.redis.io/releases/redis-3.0.2.tar.gz ta
+          smokeping Master/Slave分布式模式在使用smokeping过程中，很容易发现，如果从单个节点去探测网络性能，并不能充分检测到整个网络的一个状态。smokeping提供了基于多节点的分布式模式，可以从多个节点去探测到网络的状态，这样我们才能全面客观的监控真个网络。smokeping
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/14/install-redis.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/smokeping-master-slave.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -567,7 +567,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/13/elasticsearch-config-file-explain-in-detail.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/centos7-install-smokeping.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -592,8 +592,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html" itemprop="url">
-                  Elasticsearch配置文件详解
+                <a class="post-title-link" href="/2015/12/20/centos7-install-smokeping.html" itemprop="url">
+                  Centos7安装smokeping
                 </a>
               
             
@@ -615,8 +615,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/elasticsearch-config-file-explain-in-detail.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/centos7-install-smokeping.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/centos7-install-smokeping.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -626,7 +626,7 @@
 
           
           
-             <span id="/2015/10/13/elasticsearch-config-file-explain-in-detail.html" class="leancloud_visitors" data-flag-title="Elasticsearch配置文件详解">
+             <span id="/2015/12/20/centos7-install-smokeping.html" class="leancloud_visitors" data-flag-title="Centos7安装smokeping">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -653,11 +653,11 @@
       
         
           
-           elasticsearch的config文件夹里面有两个配置文件：elasticsearch.yml和logging.yml，第一个是es的基本配置文件，第二个是日志配置文件，es也是使用log4j来记录日志的，所以logging.yml里的设置按普通log4j配置文件来设置就行了。下面主要讲解下
+          I am using Centos7 + smokeping-2.6.9 lets start up by install needed package before that, we will need to enable Epel repo You can install EPEL by run
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/elasticsearch-config-file-explain-in-detail.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/centos7-install-smokeping.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -698,7 +698,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/13/elasticsearch-install-service-wrapper.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/smokeping-support-chinese.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -723,8 +723,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/13/elasticsearch-install-service-wrapper.html" itemprop="url">
-                  ElasticSearch 安装service wrapper插件
+                <a class="post-title-link" href="/2015/12/20/smokeping-support-chinese.html" itemprop="url">
+                  Smokeping页面支持中文
                 </a>
               
             
@@ -746,8 +746,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/13/elasticsearch-install-service-wrapper.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/elasticsearch-install-service-wrapper.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/smokeping-support-chinese.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/smokeping-support-chinese.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -757,7 +757,7 @@
 
           
           
-             <span id="/2015/10/13/elasticsearch-install-service-wrapper.html" class="leancloud_visitors" data-flag-title="ElasticSearch 安装service wrapper插件">
+             <span id="/2015/12/20/smokeping-support-chinese.html" class="leancloud_visitors" data-flag-title="Smokeping页面支持中文">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -784,12 +784,13 @@
       
         
           
-          使用elasticsearch-servicewrapper这个es插件，它支持通过参数，指定是在后台或前台运行es，并且支持启动，停止，重启es服务（默认es脚本只能通过ctrl+c关闭es）
-下载软件包：1wget http://github.com/elasticsearch/elastics
+          smokeping页面和rrdtool图片支持中文smokeping默认不支持中文，只需要修改如下便可：
+页面支持中文在配置文件的*** Presentation ***下面添加1charset = utf-8
+rrd图片支持中文安装中文支持123yum groupinstall &quot;chi
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/elasticsearch-install-service-wrapper.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/smokeping-support-chinese.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -830,7 +831,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/10/13/install-elk.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/install-smokeping.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -855,8 +856,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/13/install-elk.html" itemprop="url">
-                  安装ELK日志服务
+                <a class="post-title-link" href="/2015/12/20/install-smokeping.html" itemprop="url">
+                  Smokeping-安装
                 </a>
               
             
@@ -878,8 +879,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/10/13/install-elk.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/install-elk.html" itemprop="commentCount"></span>
+                <a href="/2015/12/20/install-smokeping.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-smokeping.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -889,7 +890,7 @@
 
           
           
-             <span id="/2015/10/13/install-elk.html" class="leancloud_visitors" data-flag-title="安装ELK日志服务">
+             <span id="/2015/12/20/install-smokeping.html" class="leancloud_visitors" data-flag-title="Smokeping-安装">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -916,13 +917,14 @@
       
         
           
-          什么是ELK  ELK是ElasticSearch、Logstash、Kibana三个开源软件的组合，这三个产品可以单独使用，但当他们组合在一起使用时，你会发现一个强大的、可扩展的日志服务，而且都是归于Elastic.co公司名下，所以有此简称。  ELK具有如下几个优点：
+          Smokeping 监控网络质量什么是SmokepingSmokeping是 rrdtool 的作者 Tobi Oetiker 的作品，所以它在图形显示方面有很大优势，也是一个很有特点的 opensource 工具：
 
-处理方式灵活：Elas
+多种探测方式，包括 fping、echoping、dig、curl 等；
+易用可
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/install-elk.html#more" rel="contents">
+            <a class="btn" href="/2015/12/20/install-smokeping.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -958,7 +960,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -999,7 +1001,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">146</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1007,7 +1009,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1016,7 +1018,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

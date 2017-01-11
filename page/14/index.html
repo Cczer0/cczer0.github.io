@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/29/centos-install-chromium.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/how-to-properly-configure-nginx-php.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos-install-chromium.html" itemprop="url">
-                  安装Chromium浏览器
+                <a class="post-title-link" href="/2016/02/04/how-to-properly-configure-nginx-php.html" itemprop="url">
+                  如何正确配置Nginx+PHP（转载）
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/29/centos-install-chromium.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-chromium.html" itemprop="commentCount"></span>
+                <a href="/2016/02/04/how-to-properly-configure-nginx-php.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/how-to-properly-configure-nginx-php.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/12/29/centos-install-chromium.html" class="leancloud_visitors" data-flag-title="安装Chromium浏览器">
+             <span id="/2016/02/04/how-to-properly-configure-nginx-php.html" class="leancloud_visitors" data-flag-title="如何正确配置Nginx+PHP（转载）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -391,11 +391,12 @@
         
           
           
-之前Google就说了，由于CentOS/RHEL 6已经是过期的系统，所以不再会有Chrome了。 虽然后来由于引起了社区的抗议，从而改口，不再提CentOS/RHEL 6是过期系统了；但是，目前在CentOS/RHEL 6上已经没有Chrome可以下载使用了。  其实，根本的原因不是CentO
+对很多人而言，配置Nginx+PHP无外乎就是搜索一篇教程，然后拷贝粘贴。听上去似乎也没什么问题，可惜实际上网络上很多资料本身年久失修，漏洞百出，如果大家不求甚解，一味的拷贝粘贴，早晚有一天会为此付出代价。
+假设我们用PHP实现了一个前端控制器，或者直白点说就是统一入口：把PHP请求都发送到同一个
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/centos-install-chromium.html#more" rel="contents">
+            <a class="btn" href="/2016/02/04/how-to-properly-configure-nginx-php.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -436,7 +437,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/29/centos-install-transmission.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/nginx-php-fpm.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -461,8 +462,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos-install-transmission.html" itemprop="url">
-                  安装BT软件Transmission
+                <a class="post-title-link" href="/2016/02/04/nginx-php-fpm.html" itemprop="url">
+                  Nginx+PHP-FPM
                 </a>
               
             
@@ -484,8 +485,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/29/centos-install-transmission.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos-install-transmission.html" itemprop="commentCount"></span>
+                <a href="/2016/02/04/nginx-php-fpm.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-php-fpm.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,7 +496,7 @@
 
           
           
-             <span id="/2015/12/29/centos-install-transmission.html" class="leancloud_visitors" data-flag-title="安装BT软件Transmission">
+             <span id="/2016/02/04/nginx-php-fpm.html" class="leancloud_visitors" data-flag-title="Nginx+PHP-FPM">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -522,11 +523,11 @@
       
         
           
-          安装依赖包1yum -y install gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel vsftpd libe
+          Nginx + PHP-FPM(FastCGI Process Manager)简介Apache的效率和承载能力受到大多人的诟病，Nginx 藉由 Nob-blocking 与 epool 这些特性，大幅提高了并发数和处理速度，愈发收到人们的喜爱，但由于 Nginx 本身只是单纯的 HTTP Ser
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/centos-install-transmission.html#more" rel="contents">
+            <a class="btn" href="/2016/02/04/nginx-php-fpm.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -567,7 +568,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/29/update-kernel.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/nginx-configfile-detail.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -592,8 +593,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/update-kernel.html" itemprop="url">
-                  CentOS6.5升级内核
+                <a class="post-title-link" href="/2016/02/04/nginx-configfile-detail.html" itemprop="url">
+                  Nginx配置文件详解
                 </a>
               
             
@@ -615,8 +616,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/29/update-kernel.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/update-kernel.html" itemprop="commentCount"></span>
+                <a href="/2016/02/04/nginx-configfile-detail.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-configfile-detail.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -626,7 +627,7 @@
 
           
           
-             <span id="/2015/12/29/update-kernel.html" class="leancloud_visitors" data-flag-title="CentOS6.5升级内核">
+             <span id="/2016/02/04/nginx-configfile-detail.html" class="leancloud_visitors" data-flag-title="Nginx配置文件详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -653,12 +654,12 @@
       
         
           
-          查看当前系统内核12uname -r2.6.32-431.el6.x86_64
-下载linux内核包123wget http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.18.20.tar.gztar -zxf linux-3.18.20.tar.g
+          nginx 主配置文件详解安装 nginx 后，会在安装目录下生成 conf 目录，目录中 nginx.conf 便是 nginx 的主配置文件，nginx 是基于模块化的构建方式，在 ningx 配置文件中也有体现，可以分为核心模块、事件模块、邮件模块、HTTP 模块。
+核心模块123456789
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/update-kernel.html#more" rel="contents">
+            <a class="btn" href="/2016/02/04/nginx-configfile-detail.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -699,7 +700,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/29/install-epel.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -724,8 +725,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/install-epel.html" itemprop="url">
-                  epel安装地址
+                <a class="post-title-link" href="/2016/02/04/nginx-compiler-parameters.html" itemprop="url">
+                  Nginx编译参数详解
                 </a>
               
             
@@ -747,8 +748,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/29/install-epel.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/install-epel.html" itemprop="commentCount"></span>
+                <a href="/2016/02/04/nginx-compiler-parameters.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-compiler-parameters.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -758,7 +759,7 @@
 
           
           
-             <span id="/2015/12/29/install-epel.html" class="leancloud_visitors" data-flag-title="epel安装地址">
+             <span id="/2016/02/04/nginx-compiler-parameters.html" class="leancloud_visitors" data-flag-title="Nginx编译参数详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -785,12 +786,37 @@
       
         
           
-          CentOS71rpm -Uvh http://mirrors.yun-idc.com/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
+          
+
+
+编译参数
+说明
+
+
+
+
+–prefix=
+指向安装目录
+
+
+–sbin-path
+指向（执行）程序文件（nginx）
+
+
+–conf-path=
+指向配置文件（nginx.conf）
+
+
+–error-log-path=
+指向错误日志目录
+
+
+–pid-path=
+指向 pid 文件（ngin
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/install-epel.html#more" rel="contents">
+            <a class="btn" href="/2016/02/04/nginx-compiler-parameters.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -831,7 +857,7 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/29/centos7-support-chinese.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/nginx-loadbalance.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -856,8 +882,8 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
             
               
                 
-                <a class="post-title-link" href="/2015/12/29/centos7-support-chinese.html" itemprop="url">
-                  CentOS7安装中文支持
+                <a class="post-title-link" href="/2016/02/04/nginx-loadbalance.html" itemprop="url">
+                  Nginx负载均衡
                 </a>
               
             
@@ -879,8 +905,8 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/29/centos7-support-chinese.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/centos7-support-chinese.html" itemprop="commentCount"></span>
+                <a href="/2016/02/04/nginx-loadbalance.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-loadbalance.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -890,7 +916,7 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
 
           
           
-             <span id="/2015/12/29/centos7-support-chinese.html" class="leancloud_visitors" data-flag-title="CentOS7安装中文支持">
+             <span id="/2016/02/04/nginx-loadbalance.html" class="leancloud_visitors" data-flag-title="Nginx负载均衡">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -917,21 +943,12 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
       
         
           
-          Centos7是Centos系列的最新版本，与老版本出现了较大操作差异，下面是安装中文支持
-###中文支持
-
-安装语言包
-1yum install kde-l10n-Chinese -y
-
-修改系统默认语言
-1localectl set-locale LANG=zh_CN.utf8
-
-安装中文字体
-
+          Nginx负载均衡nginx不单可以作为强大的 web 服务器，也可以作为一个反向代理服务器，而且nginx还可以按照调度规则实现动态、静态页面的分离，可以按照轮询、 ip 哈希、 URL 哈希、权重等多种方式对后端服务器做负载均衡，同时还支持后端服务器的健康检查。
+如果只有一台服务器时,这个服务器
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/29/centos7-support-chinese.html#more" rel="contents">
+            <a class="btn" href="/2016/02/04/nginx-loadbalance.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -967,7 +984,7 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1008,7 +1025,7 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">146</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1016,7 +1033,7 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1025,7 +1042,7 @@ CentOS61234\\ 32位rpm -Uvh http://mirrors.yun-idc.com/epel/6/i3
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

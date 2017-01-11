@@ -1,0 +1,1082 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googled18515fcec64d15c.html" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="kvm," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="查看CPU的基本信息：####查看物理CPU的个数1cat /proc/cpuinfo |grep &amp;quot;physical id&amp;quot;|sort |uniq|wc -l
+查看逻辑CPU的个数1cat /proc/cpuinfo |grep &amp;quot;processor&amp;quot;|wc -l
+查看CPU是几核1cat /proc/cpuinfo |grep &amp;quot;cores&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kvm虚拟机CPU与物理主机CPU的隔离性检测">
+<meta property="og:url" content="http://czero000.github.io/2016/01/06/kvm-cpu-segregate.html">
+<meta property="og:site_name" content="Zero's Blog">
+<meta property="og:description" content="查看CPU的基本信息：####查看物理CPU的个数1cat /proc/cpuinfo |grep &amp;quot;physical id&amp;quot;|sort |uniq|wc -l
+查看逻辑CPU的个数1cat /proc/cpuinfo |grep &amp;quot;processor&amp;quot;|wc -l
+查看CPU是几核1cat /proc/cpuinfo |grep &amp;quot;cores&amp;q">
+<meta property="og:updated_time" content="2017-01-11T07:44:51.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kvm虚拟机CPU与物理主机CPU的隔离性检测">
+<meta name="twitter:description" content="查看CPU的基本信息：####查看物理CPU的个数1cat /proc/cpuinfo |grep &amp;quot;physical id&amp;quot;|sort |uniq|wc -l
+查看逻辑CPU的个数1cat /proc/cpuinfo |grep &amp;quot;processor&amp;quot;|wc -l
+查看CPU是几核1cat /proc/cpuinfo |grep &amp;quot;cores&amp;q">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主编大人'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://czero000.github.io/2016/01/06/kvm-cpu-segregate.html"/>
+
+
+
+
+
+  <title> kvm虚拟机CPU与物理主机CPU的隔离性检测 | Zero's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71693959-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8598c7081881fc1631368a001586d2c8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=59079634";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zero's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">点滴分享 多彩生活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/01/06/kvm-cpu-segregate.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="C.c">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zero's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zero's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                kvm虚拟机CPU与物理主机CPU的隔离性检测
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/01/06/kvm-cpu-segregate.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/06/kvm-cpu-segregate.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/01/06/kvm-cpu-segregate.html" class="leancloud_visitors" data-flag-title="kvm虚拟机CPU与物理主机CPU的隔离性检测">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="查看CPU的基本信息："><a href="#查看CPU的基本信息：" class="headerlink" title="查看CPU的基本信息："></a>查看CPU的基本信息：</h3><p>####查看物理CPU的个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo |grep &quot;physical id&quot;|sort |uniq|wc -l</div></pre></td></tr></table></figure></p>
+<h4 id="查看逻辑CPU的个数"><a href="#查看逻辑CPU的个数" class="headerlink" title="查看逻辑CPU的个数"></a>查看逻辑CPU的个数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo |grep &quot;processor&quot;|wc -l</div></pre></td></tr></table></figure>
+<h4 id="查看CPU是几核"><a href="#查看CPU是几核" class="headerlink" title="查看CPU是几核"></a>查看CPU是几核</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo |grep &quot;cores&quot;|uniq</div></pre></td></tr></table></figure>
+<h4 id="查看CPU的主频"><a href="#查看CPU的主频" class="headerlink" title="查看CPU的主频"></a>查看CPU的主频</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/cpuinfo |grep MHz|uniq</div></pre></td></tr></table></figure>
+<h3 id="指定进程到具体CPU上运行："><a href="#指定进程到具体CPU上运行：" class="headerlink" title="指定进程到具体CPU上运行："></a>指定进程到具体CPU上运行：</h3><p>taskset</p>
+<ul>
+<li><p>-p，  设定一个已存在的pid，而不是重新开启的一个新任务</p>
+</li>
+<li><p>-c，  指定一个处理，可以指定多个，以逗号分隔，也可指定方位，如2,4,5,6-8</p>
+</li>
+</ul>
+<h4 id="切换某个进程到指定的CPU上"><a href="#切换某个进程到指定的CPU上" class="headerlink" title="切换某个进程到指定的CPU上"></a>切换某个进程到指定的CPU上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">taskset -cp 3 13290</div></pre></td></tr></table></figure>
+<h4 id="让某程序运行在指定的CPU上"><a href="#让某程序运行在指定的CPU上" class="headerlink" title="让某程序运行在指定的CPU上"></a>让某程序运行在指定的CPU上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">taskset -c 1,2,4-7 tar jcf test.tar.gz test</div><div class="line">``` </div><div class="line"></div><div class="line">#### 查看物理主机的CPU个数为16个：</div></pre></td></tr></table></figure>
+<p>[root@test8 home]# cat /proc/cpuinfo |grep “processor”|wc -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">将CPU14和CPU15进行隔离：修改/boot/grub/grub.conf文件，在kernel一行的后面添加isolcpus=14,15</div></pre></td></tr></table></figure></p>
+<p>root (hd0,0)<br>kernel /boot/vmlinuz-2.6.32-279.2.1.el6.x86_64 ro root=UUID=4f8c5d8b-fc5f-49d2-96c8-71effe86e58f rd_NO_LUKS rd_NO_LVM rd_NO_MD rd_NO_DM LANG=zh_CN.UTF-8 KEYBOARDTYPE=pc KEYTABLE=us crashkernel=auto rhgb quiet isolcpus=14,15<br>initrd /boot/initramfs-2.6.32-279.2.1.el6.x86_64.img<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">注意：grub.conf是启动的配置文件，非常重要，提示在修改前对grub.conf做一下备份</div><div class="line"></div><div class="line">配置grub.conf完成后，重新启动主机，使用命令ps -eLo psr | grep 0 | wc -l可以查看CPU的使用情况</div></pre></td></tr></table></figure></p>
+<p>[root@test8 home]# ps -eLo psr | grep 0 | wc -l<br>131<br>[root@test8 home]# ps -eLo psr | grep 1 | wc -l<br>310<br>[root@test8 home]# ps -eLo psr | grep 2 | wc -l<br>84<br>[root@test8 home]# ps -eLo psr | grep 14 | wc -l<br>21<br>[root@test8 home]# ps -eLo psr | grep 15 | wc -l<br>21<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">显示CPU14和CPU15运行了21个线程（这些线程都是系统启动的守护线程，CPU14和CPU15中运行的相同）</div><div class="line"></div><div class="line">创建两个相同的虚拟机，查看系统中的虚拟机程序运行的进程号</div></pre></td></tr></table></figure></p>
+<p>[root@test8 home]# ps -eLo ruser,pid,ppid,lwp,psr,args | grep qemu | grep -v grep<br>qemu     11535     1 11535   3 /usr/libexec/qemu-kvm -name centosb -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1 ……<br>qemu     11535     1 11556   0 /usr/libexec/qemu-kvm -name centosb -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1 ……<br>qemu     11535     1 13001   3 /usr/libexec/qemu-kvm -name centosb -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1 ……<br>qemu     13224     1 13224  15 /usr/libexec/qemu-kvm -name test1 -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1……<br>qemu     13224     1 13248   4 /usr/libexec/qemu-kvm -name test1 -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1……<br>qemu     13224     1 17191   0 /usr/libexec/qemu-kvm -name test1 -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1…..<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">大致的意思是，创建两个虚拟机centosb和test1的进程号分别是11535、13224。</div><div class="line"></div><div class="line">将进程11535和13224分别绑定到CPU14（centosb）和CPU15（test1）上。在centosb上运行程序测试CPU性能。</div><div class="line"></div><div class="line">#### 进程测试之前的CPU情况：</div></pre></td></tr></table></figure></p>
+<p> [root@test8 home]# mpstat -P ALL<br>Linux 2.6.32-279.2.1.el6.x86_64 (test8.localdomain)     2013年12月17日  _x86<em>64</em>        (16 CPU)</p>
+<p>21时01分14秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle<br>21时01分14秒  all    4.87    0.00    0.40    0.59    0.00    0.02    0.00    0.42   93.71<br>21时01分14秒    0   22.44    0.00    1.30    4.55    0.00    0.19    0.00    0.23   71.28<br>21时01分14秒    1   16.33    0.00    1.04    3.35    0.00    0.07    0.00    0.18   79.03<br>21时01分14秒    2    6.04    0.00    0.42    0.09    0.00    0.00    0.00    0.10   93.34<br>21时01分14秒    3    3.54    0.00    0.37    0.12    0.00    0.00    0.00    0.12   95.84<br>21时01分14秒    4    4.07    0.00    0.25    0.08    0.00    0.00    0.00    0.05   95.55<br>21时01分14秒    5    3.58    0.00    0.34    0.04    0.00    0.00    0.00    0.10   95.94<br>21时01分14秒    6    2.31    0.00    0.19    0.04    0.00    0.00    0.00    0.10   97.35<br>21时01分14秒    7    3.71    0.00    0.26    0.06    0.00    0.00    0.00    0.05   95.91<br>21时01分14秒    8    3.46    0.00    0.39    0.36    0.00    0.01    0.00    0.02   95.76<br>21时01分14秒    9    4.06    0.00    0.41    0.24    0.00    0.01    0.00    0.04   95.25<br>21时01分14秒   10    3.15    0.00    0.41    0.09    0.00    0.00    0.00    0.02   96.33<br>21时01分14秒   11    3.08    0.00    0.42    0.08    0.00    0.01    0.00    0.04   96.38<br>21时01分14秒   12    1.52    0.00    0.23    0.08    0.00    0.01    0.00    0.06   98.11<br>21时01分14秒   13    0.62    0.00    0.17    0.09    0.00    0.00    0.00    0.01   99.10<br>21时01分14秒   14    0.01    0.00    0.06    0.03    0.00    0.00    0.00    0.03   99.88<br>21时01分14秒   15    0.01    0.00    0.06    0.03    0.00    0.00    0.00    0.03   99.88<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#### CPU14和CPU15的情况一样，运行一段测试程序后的使用情况</div></pre></td></tr></table></figure></p>
+<p>[root@test8 ~]# mpstat -P ALL<br>Linux 2.6.32-279.2.1.el6.x86_64 (test8.localdomain)     2013年12月18日  _x86<em>64</em>        (16 CPU)</p>
+<p>09时12分53秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle<br>09时12分53秒  all    4.74    0.00    0.35    0.44    0.00    0.02    0.00    0.18   94.26<br>09时12分53秒    0   25.30    0.00    1.33    4.11    0.00    0.23    0.00    0.03   69.01<br>09时12分53秒    1   15.11    0.01    0.90    2.33    0.00    0.06    0.00    0.02   81.57<br>09时12分53秒    2    5.39    0.01    0.37    0.03    0.00    0.00    0.00    0.01   94.19<br>09时12分53秒    3    3.42    0.00    0.31    0.03    0.00    0.00    0.00    0.01   96.22<br>09时12分53秒    4    3.86    0.00    0.23    0.02    0.00    0.00    0.00    0.01   95.89<br>09时12分53秒    5    2.96    0.00    0.20    0.01    0.00    0.00    0.00    0.01   96.82<br>09时12分53秒    6    2.19    0.00    0.17    0.01    0.00    0.00    0.00    0.01   97.61<br>09时12分53秒    7    3.33    0.00    0.21    0.01    0.00    0.00    0.00    0.01   96.44<br>09时12分53秒    8    3.03    0.00    0.34    0.20    0.00    0.00    0.00    0.00   96.42<br>09时12分53秒    9    3.75    0.01    0.38    0.11    0.00    0.00    0.00    0.00   95.75<br>09时12分53秒   10    2.53    0.00    0.30    0.02    0.00    0.00    0.00    0.00   97.15<br>09时12分53秒   11    2.64    0.00    0.30    0.02    0.00    0.00    0.00    0.00   97.03<br>09时12分53秒   12    1.48    0.00    0.18    0.01    0.00    0.01    0.00    0.01   98.30<br>09时12分53秒   13    0.91    0.01    0.18    0.02    0.00    0.00    0.00    0.00   98.89<br>09时12分53秒   14    0.01    0.00    0.11    0.10    0.00    0.00    0.00    2.64   97.14<br>09时12分53秒   15    0.02    0.00    0.14    0.09    0.00    0.00    0.00    0.10   99.65<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">可以看到CPU14在%guest中的数据2.64是明显高于CPU15的%guest的0.10，如果你运行测试程序更长的时间，这个值会更高（为什么是%guest 这个值高，因为我是远程登录到测试主机，并运行程序的，所以是guest）### 查看CPU的基本信息：</div><div class="line"></div><div class="line">####查看物理CPU的个数</div></pre></td></tr></table></figure></p>
+<p>cat /proc/cpuinfo |grep “physical id”|sort |uniq|wc -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#### 查看逻辑CPU的个数</div></pre></td></tr></table></figure></p>
+<p>cat /proc/cpuinfo |grep “processor”|wc -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 查看CPU是几核</div></pre></td></tr></table></figure></p>
+<p>cat /proc/cpuinfo |grep “cores”|uniq<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 查看CPU的主频</div></pre></td></tr></table></figure></p>
+<p>cat /proc/cpuinfo |grep MHz|uniq<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 指定进程到具体CPU上运行：</div><div class="line"></div><div class="line">taskset</div><div class="line"></div><div class="line">* -p，  设定一个已存在的pid，而不是重新开启的一个新任务</div><div class="line"></div><div class="line">* -c，  指定一个处理，可以指定多个，以逗号分隔，也可指定方位，如2,4,5,6-8</div><div class="line"></div><div class="line"></div><div class="line">#### 切换某个进程到指定的CPU上</div></pre></td></tr></table></figure></p>
+<p>taskset -cp 3 13290<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#### 让某程序运行在指定的CPU上</div></pre></td></tr></table></figure></p>
+<p>taskset -c 1,2,4-7 tar jcf test.tar.gz test<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 查看物理主机的CPU个数为16个：</div></pre></td></tr></table></figure></p>
+<p>[root@test8 home]# cat /proc/cpuinfo |grep “processor”|wc -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">将CPU14和CPU15进行隔离：修改/boot/grub/grub.conf文件，在kernel一行的后面添加isolcpus=14,15</div></pre></td></tr></table></figure></p>
+<p>root (hd0,0)<br>kernel /boot/vmlinuz-2.6.32-279.2.1.el6.x86_64 ro root=UUID=4f8c5d8b-fc5f-49d2-96c8-71effe86e58f rd_NO_LUKS rd_NO_LVM rd_NO_MD rd_NO_DM LANG=zh_CN.UTF-8 KEYBOARDTYPE=pc KEYTABLE=us crashkernel=auto rhgb quiet isolcpus=14,15<br>initrd /boot/initramfs-2.6.32-279.2.1.el6.x86_64.img<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">注意：grub.conf是启动的配置文件，非常重要，提示在修改前对grub.conf做一下备份</div><div class="line"></div><div class="line">配置grub.conf完成后，重新启动主机，使用命令ps -eLo psr | grep 0 | wc -l可以查看CPU的使用情况</div></pre></td></tr></table></figure></p>
+<p>[root@test8 home]# ps -eLo psr | grep 0 | wc -l<br>131<br>[root@test8 home]# ps -eLo psr | grep 1 | wc -l<br>310<br>[root@test8 home]# ps -eLo psr | grep 2 | wc -l<br>84<br>[root@test8 home]# ps -eLo psr | grep 14 | wc -l<br>21<br>[root@test8 home]# ps -eLo psr | grep 15 | wc -l<br>21<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">显示CPU14和CPU15运行了21个线程（这些线程都是系统启动的守护线程，CPU14和CPU15中运行的相同）</div><div class="line"></div><div class="line">创建两个相同的虚拟机，查看系统中的虚拟机程序运行的进程号</div></pre></td></tr></table></figure></p>
+<p>[root@test8 home]# ps -eLo ruser,pid,ppid,lwp,psr,args | grep qemu | grep -v grep<br>qemu     11535     1 11535   3 /usr/libexec/qemu-kvm -name centosb -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1 ……<br>qemu     11535     1 11556   0 /usr/libexec/qemu-kvm -name centosb -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1 ……<br>qemu     11535     1 13001   3 /usr/libexec/qemu-kvm -name centosb -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1 ……<br>qemu     13224     1 13224  15 /usr/libexec/qemu-kvm -name test1 -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1……<br>qemu     13224     1 13248   4 /usr/libexec/qemu-kvm -name test1 -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1……<br>qemu     13224     1 17191   0 /usr/libexec/qemu-kvm -name test1 -S -M rhel6.4.0 -enable-kvm -m 1024 -smp 1,sockets=1,cores=1,threads=1…..<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">大致的意思是，创建两个虚拟机centosb和test1的进程号分别是11535、13224。</div><div class="line"></div><div class="line">将进程11535和13224分别绑定到CPU14（centosb）和CPU15（test1）上。在centosb上运行程序测试CPU性能。</div><div class="line"></div><div class="line">#### 进程测试之前的CPU情况：</div></pre></td></tr></table></figure></p>
+<p> [root@test8 home]# mpstat -P ALL<br>Linux 2.6.32-279.2.1.el6.x86_64 (test8.localdomain)     2013年12月17日  _x86<em>64</em>        (16 CPU)</p>
+<p>21时01分14秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle<br>21时01分14秒  all    4.87    0.00    0.40    0.59    0.00    0.02    0.00    0.42   93.71<br>21时01分14秒    0   22.44    0.00    1.30    4.55    0.00    0.19    0.00    0.23   71.28<br>21时01分14秒    1   16.33    0.00    1.04    3.35    0.00    0.07    0.00    0.18   79.03<br>21时01分14秒    2    6.04    0.00    0.42    0.09    0.00    0.00    0.00    0.10   93.34<br>21时01分14秒    3    3.54    0.00    0.37    0.12    0.00    0.00    0.00    0.12   95.84<br>21时01分14秒    4    4.07    0.00    0.25    0.08    0.00    0.00    0.00    0.05   95.55<br>21时01分14秒    5    3.58    0.00    0.34    0.04    0.00    0.00    0.00    0.10   95.94<br>21时01分14秒    6    2.31    0.00    0.19    0.04    0.00    0.00    0.00    0.10   97.35<br>21时01分14秒    7    3.71    0.00    0.26    0.06    0.00    0.00    0.00    0.05   95.91<br>21时01分14秒    8    3.46    0.00    0.39    0.36    0.00    0.01    0.00    0.02   95.76<br>21时01分14秒    9    4.06    0.00    0.41    0.24    0.00    0.01    0.00    0.04   95.25<br>21时01分14秒   10    3.15    0.00    0.41    0.09    0.00    0.00    0.00    0.02   96.33<br>21时01分14秒   11    3.08    0.00    0.42    0.08    0.00    0.01    0.00    0.04   96.38<br>21时01分14秒   12    1.52    0.00    0.23    0.08    0.00    0.01    0.00    0.06   98.11<br>21时01分14秒   13    0.62    0.00    0.17    0.09    0.00    0.00    0.00    0.01   99.10<br>21时01分14秒   14    0.01    0.00    0.06    0.03    0.00    0.00    0.00    0.03   99.88<br>21时01分14秒   15    0.01    0.00    0.06    0.03    0.00    0.00    0.00    0.03   99.88<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#### CPU14和CPU15的情况一样，运行一段测试程序后的使用情况</div></pre></td></tr></table></figure></p>
+<p>[root@test8 ~]# mpstat -P ALL<br>Linux 2.6.32-279.2.1.el6.x86_64 (test8.localdomain)     2013年12月18日  _x86<em>64</em>        (16 CPU)</p>
+<p>09时12分53秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle<br>09时12分53秒  all    4.74    0.00    0.35    0.44    0.00    0.02    0.00    0.18   94.26<br>09时12分53秒    0   25.30    0.00    1.33    4.11    0.00    0.23    0.00    0.03   69.01<br>09时12分53秒    1   15.11    0.01    0.90    2.33    0.00    0.06    0.00    0.02   81.57<br>09时12分53秒    2    5.39    0.01    0.37    0.03    0.00    0.00    0.00    0.01   94.19<br>09时12分53秒    3    3.42    0.00    0.31    0.03    0.00    0.00    0.00    0.01   96.22<br>09时12分53秒    4    3.86    0.00    0.23    0.02    0.00    0.00    0.00    0.01   95.89<br>09时12分53秒    5    2.96    0.00    0.20    0.01    0.00    0.00    0.00    0.01   96.82<br>09时12分53秒    6    2.19    0.00    0.17    0.01    0.00    0.00    0.00    0.01   97.61<br>09时12分53秒    7    3.33    0.00    0.21    0.01    0.00    0.00    0.00    0.01   96.44<br>09时12分53秒    8    3.03    0.00    0.34    0.20    0.00    0.00    0.00    0.00   96.42<br>09时12分53秒    9    3.75    0.01    0.38    0.11    0.00    0.00    0.00    0.00   95.75<br>09时12分53秒   10    2.53    0.00    0.30    0.02    0.00    0.00    0.00    0.00   97.15<br>09时12分53秒   11    2.64    0.00    0.30    0.02    0.00    0.00    0.00    0.00   97.03<br>09时12分53秒   12    1.48    0.00    0.18    0.01    0.00    0.01    0.00    0.01   98.30<br>09时12分53秒   13    0.91    0.01    0.18    0.02    0.00    0.00    0.00    0.00   98.89<br>09时12分53秒   14    0.01    0.00    0.11    0.10    0.00    0.00    0.00    2.64   97.14<br>09时12分53秒   15    0.02    0.00    0.14    0.09    0.00    0.00    0.00    0.10   99.65<br>```<br>可以看到CPU14在%guest中的数据2.64是明显高于CPU15的%guest的0.10，如果你运行测试程序更长的时间，这个值会更高（为什么是%guest 这个值高，因为我是远程登录到测试主机，并运行程序的，所以是guest）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kvm/" rel="tag"># kvm</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/04/glusterfs-administrator-guide.html" rel="next" title="gulsterfs系统管理">
+                <i class="fa fa-chevron-left"></i> gulsterfs系统管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/06/kvm-pool-manage.html" rel="prev" title="CentOS6.5安装kvm">
+                CentOS6.5安装kvm <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/06/kvm-cpu-segregate.html"
+     data-title="kvm虚拟机CPU与物理主机CPU的隔离性检测"
+     data-content=""
+     data-url="http://czero000.github.io/2016/01/06/kvm-cpu-segregate.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/06/kvm-cpu-segregate.html"
+           data-title="kvm虚拟机CPU与物理主机CPU的隔离性检测" data-url="http://czero000.github.io/2016/01/06/kvm-cpu-segregate.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ofc9x1ccn.bkt.clouddn.com/blog/avatar.jpg"
+               alt="C.c" />
+          <p class="site-author-name" itemprop="name">C.c</p>
+          <p class="site-description motion-element" itemprop="description">Love Linux ♥ Love Python. 猴赛雷</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">146</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yuanlong1207" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.yuminstall.com" title="Yuminstall" target="_blank">Yuminstall</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看CPU的基本信息："><span class="nav-number">1.</span> <span class="nav-text">查看CPU的基本信息：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看逻辑CPU的个数"><span class="nav-number">1.1.</span> <span class="nav-text">查看逻辑CPU的个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看CPU是几核"><span class="nav-number">1.2.</span> <span class="nav-text">查看CPU是几核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看CPU的主频"><span class="nav-number">1.3.</span> <span class="nav-text">查看CPU的主频</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定进程到具体CPU上运行："><span class="nav-number">2.</span> <span class="nav-text">指定进程到具体CPU上运行：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#切换某个进程到指定的CPU上"><span class="nav-number">2.1.</span> <span class="nav-text">切换某个进程到指定的CPU上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#让某程序运行在指定的CPU上"><span class="nav-number">2.2.</span> <span class="nav-text">让某程序运行在指定的CPU上</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">C.c</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"czero000"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.0.2"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Rl3Nh6z96ldNfoGXOaUqBT47-gzGzoHsz", "NmOEHbcsySJxEnVKuV23xr49");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

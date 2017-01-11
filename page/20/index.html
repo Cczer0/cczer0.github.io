@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/curl-get-http-status-code.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/sourcecode-install-ntp.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/curl-get-http-status-code.html" itemprop="url">
-                  Curl命令获取http状态码
+                <a class="post-title-link" href="/2015/12/21/sourcecode-install-ntp.html" itemprop="url">
+                  编译安装ntp服务
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/curl-get-http-status-code.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/curl-get-http-status-code.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/sourcecode-install-ntp.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/sourcecode-install-ntp.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/12/20/curl-get-http-status-code.html" class="leancloud_visitors" data-flag-title="Curl命令获取http状态码">
+             <span id="/2015/12/21/sourcecode-install-ntp.html" class="leancloud_visitors" data-flag-title="编译安装ntp服务">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,12 +390,14 @@
       
         
           
-          通过curl的-w参数我们可以自定义curl的输出，%{http_code}代表http状态码1curl -I -m 10 -o /dev/null -s -w %&#123;http_code&#125;  www.letuknowit.com
-上面的输出是不含换行的，如果需要换行的话，加上\n1
+          
+升级背景NTP服务漏洞
+
+“未经过身份验证的攻击者能够迫使网络时间协议守护进程（ntpd）与恶意的时间服务器源进行同步，这样一来，攻击者就可以随意修改目标 系统的系统时间了。网络时间协议守护进程（ntpd）在处理某些经过加密的、没有得到应答的网络数据包时，会发生错误。”总的来说，恶意攻击者能够迫使
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/curl-get-http-status-code.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/sourcecode-install-ntp.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -436,7 +438,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/bash-status.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/inotify-command.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -461,8 +463,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/bash-status.html" itemprop="url">
-                  Bash状态码
+                <a class="post-title-link" href="/2015/12/21/inotify-command.html" itemprop="url">
+                  初识inotify
                 </a>
               
             
@@ -484,8 +486,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/bash-status.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/bash-status.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/inotify-command.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/inotify-command.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,7 +497,7 @@
 
           
           
-             <span id="/2015/12/20/bash-status.html" class="leancloud_visitors" data-flag-title="Bash状态码">
+             <span id="/2015/12/21/inotify-command.html" class="leancloud_visitors" data-flag-title="初识inotify">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -523,51 +525,19 @@
         
           
           
+在工作中，人们往往需要知道在某些文件、目录上都有那些变化，比如：
 
+通知配置文件的改变
+追踪某些关键的系统文件变化
+系统崩溃时进行自动清理
+自动触发备份进程
+向服务器上传文件结束时发出通知
 
-Linux Shell退出状态代码
-描述
-
-
-
-
-0
-命令执行成功
-
-
-1
-未知错误
-
-
-2
-误用Shell命令
-
-
-126
-命令无法执行
-
-
-127
-没有找到命令
-
-
-128
-无效的退出参数
-
-
-128+x
-使用Linux 信号x 的致命错误
-
-
-130
-使用Ctrl-C终止命令
-
-
-255
+通常使用文件轮询的通知机制，但是这种机制只适用经常改变的文件（因为它可以确保没过x秒就可以得到i/o），其
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/bash-status.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/inotify-command.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -608,7 +578,7 @@ Linux Shell退出状态代码
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/fishshell.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/rsync-inotify-backup.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -633,8 +603,8 @@ Linux Shell退出状态代码
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/fishshell.html" itemprop="url">
-                  Fishshell
+                <a class="post-title-link" href="/2015/12/21/rsync-inotify-backup.html" itemprop="url">
+                  rsync+inotify实现实时备份
                 </a>
               
             
@@ -656,8 +626,8 @@ Linux Shell退出状态代码
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/fishshell.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/fishshell.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/rsync-inotify-backup.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/rsync-inotify-backup.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -667,7 +637,7 @@ Linux Shell退出状态代码
 
           
           
-             <span id="/2015/12/20/fishshell.html" class="leancloud_visitors" data-flag-title="Fishshell">
+             <span id="/2015/12/21/rsync-inotify-backup.html" class="leancloud_visitors" data-flag-title="rsync+inotify实现实时备份">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -694,13 +664,12 @@ Linux Shell退出状态代码
       
         
           
-          什么是Fish ShellFISH（friendly interactive shell）是一个用户友好的命令行 shell，主要是用来进行交互式使用。shell 就是一个用来执行其他程序的程序。
-
-Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供命令建议，就像一个网络浏览
+          
+rsync的优点和缺点  与传统的cp、tar备份方式相比，rsync具有安全性高、备份迅速、支持赠礼备份等优点，通过rsync可以解决实时性能不高的数据备份需求，例如定期的备份文件到异地服务器，对本地磁盘做数据镜像等。  随着对数据安全性和可靠性的更高要求，rsync也逐渐暴露出不足。首先rsy
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/fishshell.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/rsync-inotify-backup.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -741,7 +710,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/awk-split-substr-length.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/update-openssl.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -766,8 +735,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/awk-split-substr-length.html" itemprop="url">
-                  awk内置函数的使用
+                <a class="post-title-link" href="/2015/12/21/update-openssl.html" itemprop="url">
+                  Openssl升级
                 </a>
               
             
@@ -789,8 +758,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/awk-split-substr-length.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/awk-split-substr-length.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/update-openssl.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/update-openssl.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -800,7 +769,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
 
           
           
-             <span id="/2015/12/20/awk-split-substr-length.html" class="leancloud_visitors" data-flag-title="awk内置函数的使用">
+             <span id="/2015/12/21/update-openssl.html" class="leancloud_visitors" data-flag-title="Openssl升级">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -827,13 +796,13 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
       
         
           
-          split 初始化和类型强制awk的内建函数split允许你把一个字符串分隔为单词并存储在数组中。你可以自己定义域分隔符或者使用现在FS(域分隔符)的值。
-格式：
-12split (string, array, field separator)split (string, array)  --&gt
+          
+查看当前版本信息12openssl versionOpenSSL 0.9.8e-fips-rhel5 01 Jul 2008
+安装新版本openssl123456789[root@Charlie ~]# wget http://www.openssl.org/source/openssl-1.0.
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/awk-split-substr-length.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/update-openssl.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -874,7 +843,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/21/introduce-megacli-command.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -899,8 +868,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               
                 
-                <a class="post-title-link" href="/2015/11/11/use-cobbler-centos6.5.html" itemprop="url">
-                  CentOS6.5部署Cobbler(使用)
+                <a class="post-title-link" href="/2015/12/21/introduce-megacli-command.html" itemprop="url">
+                  Megacli命令指南
                 </a>
               
             
@@ -922,8 +891,8 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/11/11/use-cobbler-centos6.5.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/11/use-cobbler-centos6.5.html" itemprop="commentCount"></span>
+                <a href="/2015/12/21/introduce-megacli-command.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/21/introduce-megacli-command.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -933,7 +902,7 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
 
           
           
-             <span id="/2015/11/11/use-cobbler-centos6.5.html" class="leancloud_visitors" data-flag-title="CentOS6.5部署Cobbler(使用)">
+             <span id="/2015/12/21/introduce-megacli-command.html" class="leancloud_visitors" data-flag-title="Megacli命令指南">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -960,13 +929,11 @@ Fish Shell 特性自动建议fish 会根据你的历史输入和补完来提供�
       
         
           
-          本篇接上篇文章，继续介绍 cobbler 的使用方法。
-RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x86_64-bin-DVD1.iso /mnt/
-导入 ISO 镜像由于 CentOS 镜像信息较多，所以导入的
+          MegaCli 是一款管理维护硬件RAID软件，可以通过它来了解当前 raid 卡的所有信息，包括 raid卡的型号，raid 的阵列类型，raid 上各磁盘状态，等等。通常，我们对硬盘当前的状态不太好确定，一般通过机房人员巡检来完成，有没有通过软件的方式来检查确定这个问题呢。MegaCli就可以做
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/11/use-cobbler-centos6.5.html#more" rel="contents">
+            <a class="btn" href="/2015/12/21/introduce-megacli-command.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1002,7 +969,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1043,7 +1010,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">146</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1051,7 +1018,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1060,7 +1027,7 @@ RedHat/CentOS导入CentOS6.5 ISO 镜像1mount -t auto -o loop CentOS-6.5-x8
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

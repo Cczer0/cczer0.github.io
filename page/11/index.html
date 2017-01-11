@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/nginx-loadbalance.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/05/09/git-repo.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/04/nginx-loadbalance.html" itemprop="url">
-                  Nginx负载均衡
+                <a class="post-title-link" href="/2016/05/09/git-repo.html" itemprop="url">
+                  Git仓库搭建
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/04/nginx-loadbalance.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-loadbalance.html" itemprop="commentCount"></span>
+                <a href="/2016/05/09/git-repo.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/git-repo.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2016/02/04/nginx-loadbalance.html" class="leancloud_visitors" data-flag-title="Nginx负载均衡">
+             <span id="/2016/05/09/git-repo.html" class="leancloud_visitors" data-flag-title="Git仓库搭建">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,12 +390,17 @@
       
         
           
-          Nginx负载均衡nginx不单可以作为强大的 web 服务器，也可以作为一个反向代理服务器，而且nginx还可以按照调度规则实现动态、静态页面的分离，可以按照轮询、 ip 哈希、 URL 哈希、权重等多种方式对后端服务器做负载均衡，同时还支持后端服务器的健康检查。
-如果只有一台服务器时,这个服务器
+          Github就是一个提供免费托管开源代码的远程仓库，但对于一些敏感代码或者不想开源的源代码，有不舍得付费，那么就需要自己搭建一台Git服务器作为私有仓库来使用。下面是搭建Git服务器过程。
+安装配置
+安装git
+1yum install git -y
+
+创建一个git用户，用来运行git服务
+1us
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/04/nginx-loadbalance.html#more" rel="contents">
+            <a class="btn" href="/2016/05/09/git-repo.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -436,7 +441,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/27/mfs-Technology.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -461,8 +466,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/04/nginx-compiler-parameters.html" itemprop="url">
-                  Nginx编译参数详解
+                <a class="post-title-link" href="/2016/04/27/mfs-Technology.html" itemprop="url">
+                  MooseFS技术详解
                 </a>
               
             
@@ -484,8 +489,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/04/nginx-compiler-parameters.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/nginx-compiler-parameters.html" itemprop="commentCount"></span>
+                <a href="/2016/04/27/mfs-Technology.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/mfs-Technology.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,7 +500,7 @@
 
           
           
-             <span id="/2016/02/04/nginx-compiler-parameters.html" class="leancloud_visitors" data-flag-title="Nginx编译参数详解">
+             <span id="/2016/04/27/mfs-Technology.html" class="leancloud_visitors" data-flag-title="MooseFS技术详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -523,36 +528,16 @@
         
           
           
+MFS 概述MooseFS是一款具有冗余容错功能的分布式文件系统。它把数据分散在多台服务器上，确保一份数据多个备份副本，对外提供统一的结构。
+功能特性对于标准的文件操作，MooseFS表现与其他类Unix文件系统一致。支持的通过文件系统特性：
 
-
-编译参数
-说明
-
-
-
-
-–prefix=
-指向安装目录
-
-
-–sbin-path
-指向（执行）程序文件（nginx）
-
-
-–conf-path=
-指向配置文件（nginx.conf）
-
-
-–error-log-path=
-指向错误日志目录
-
-
-–pid-path=
-指向 pid 文件（ngin
+层次结构（目录树）
+兼容POSIX文件属性
+支持特殊
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/04/nginx-compiler-parameters.html#more" rel="contents">
+            <a class="btn" href="/2016/04/27/mfs-Technology.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -593,7 +578,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/01/27/source-buile-nginx.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/18/git-common.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -618,8 +603,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/27/source-buile-nginx.html" itemprop="url">
-                  Nginx源码安装
+                <a class="post-title-link" href="/2016/04/18/git-common.html" itemprop="url">
+                  git常用命令
                 </a>
               
             
@@ -641,8 +626,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/01/27/source-buile-nginx.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/27/source-buile-nginx.html" itemprop="commentCount"></span>
+                <a href="/2016/04/18/git-common.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/git-common.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -652,7 +637,7 @@
 
           
           
-             <span id="/2016/01/27/source-buile-nginx.html" class="leancloud_visitors" data-flag-title="Nginx源码安装">
+             <span id="/2016/04/18/git-common.html" class="leancloud_visitors" data-flag-title="git常用命令">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -679,12 +664,19 @@
       
         
           
-          环境介绍系统版本系统环境默认采用 CentOS Linux release 7.1.1503 (Core)，
-软件获取官方网站：http://nginx.org最新稳定版本：nginx-1.8.1.tar.gz帮助文档：http://nginx.org/en/docs编译参数说明：http://ng
+          
+Git已经成为程序员日常工具之一，那些Git基本的命令，每天都要用的命令你都记住了吗？如果还没的话，笔者整理了一份清单，以备不时之需所用。
+
+三个基本概念
+
+工作区(Workspace)是计算机中项目的根目录
+
+暂存区(Index)像个缓存区域，临时保存你的改动
+版本库(Repository)分为
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/source-buile-nginx.html#more" rel="contents">
+            <a class="btn" href="/2016/04/18/git-common.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -725,7 +717,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/01/22/regex_fast_reference.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/07/saltstack-nodegroup.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -750,8 +742,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/22/regex_fast_reference.html" itemprop="url">
-                  常用正则速查
+                <a class="post-title-link" href="/2016/04/07/saltstack-nodegroup.html" itemprop="url">
+                  SaltStack-Nodegroup
                 </a>
               
             
@@ -773,8 +765,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/01/22/regex_fast_reference.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/22/regex_fast_reference.html" itemprop="commentCount"></span>
+                <a href="/2016/04/07/saltstack-nodegroup.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/saltstack-nodegroup.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -784,7 +776,7 @@
 
           
           
-             <span id="/2016/01/22/regex_fast_reference.html" class="leancloud_visitors" data-flag-title="常用正则速查">
+             <span id="/2016/04/07/saltstack-nodegroup.html" class="leancloud_visitors" data-flag-title="SaltStack-Nodegroup">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -811,12 +803,11 @@
       
         
           
-          
-常用正则匹配12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576
+          为了便于管理功能相似的minion，SaltStack提供了分组模式，官方文档：http://docs.saltstack.com/en/latest/topics/targeting/nodegroups.htmlNode group为预先在master配置文件中定义的minion组，用来进行批量
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/22/regex_fast_reference.html#more" rel="contents">
+            <a class="btn" href="/2016/04/07/saltstack-nodegroup.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -857,7 +848,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/01/21/http-status-code.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2016/04/07/saltstack-states.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -882,8 +873,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/21/http-status-code.html" itemprop="url">
-                  HTTP状态码详解
+                <a class="post-title-link" href="/2016/04/07/saltstack-states.html" itemprop="url">
+                  SaltStack-States
                 </a>
               
             
@@ -905,8 +896,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/01/21/http-status-code.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/21/http-status-code.html" itemprop="commentCount"></span>
+                <a href="/2016/04/07/saltstack-states.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/saltstack-states.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -916,7 +907,7 @@
 
           
           
-             <span id="/2016/01/21/http-status-code.html" class="leancloud_visitors" data-flag-title="HTTP状态码详解">
+             <span id="/2016/04/07/saltstack-states.html" class="leancloud_visitors" data-flag-title="SaltStack-States">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -943,11 +934,11 @@
       
         
           
-          什么是 HTTP 状态码HTTP 状态码 （HTTP Status Code）是用以表示网页服务器 HTTP 响应状态的 3 位数字代码。它由 RFC 2616 规范定义的，并得到 「RFC 2518、RFC 2817、RFC 2295、RFC 2774、RFC 4918」等规范扩展。所有状态码的第
+          SaltStack的stateSaltStack使用state模块文件进行配置管理，state使用YAML语法编写，其实它也支持python编写。sls(salt state file)文件为SaltStack state模块的核心，sls文件表示一个系统应处于的系统状态，并且有一个简单的格式设置这
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/21/http-status-code.html#more" rel="contents">
+            <a class="btn" href="/2016/04/07/saltstack-states.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -983,7 +974,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1024,7 +1015,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">146</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1032,7 +1023,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1041,7 +1032,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

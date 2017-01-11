@@ -304,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/install-rrdtool-trubleshooting.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/pptp-username-log.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -329,8 +329,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/install-rrdtool-trubleshooting.html" itemprop="url">
-                  RRDTOOL安装报错解决
+                <a class="post-title-link" href="/2015/12/22/pptp-username-log.html" itemprop="url">
+                  pptpvpn记录登录用户名
                 </a>
               
             
@@ -352,8 +352,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/install-rrdtool-trubleshooting.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/install-rrdtool-trubleshooting.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/pptp-username-log.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/pptp-username-log.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,7 +363,7 @@
 
           
           
-             <span id="/2015/12/20/install-rrdtool-trubleshooting.html" class="leancloud_visitors" data-flag-title="RRDTOOL安装报错解决">
+             <span id="/2015/12/22/pptp-username-log.html" class="leancloud_visitors" data-flag-title="pptpvpn记录登录用户名">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,12 +390,12 @@
       
         
           
-          在安装rrdtool过程中，出现报错，原来是缺少perl模块
-报错信息123456789Can&apos;t locate ExtUtils/MakeMaker.pm in @INC (@INC contains: /usr/local/lib64/perl5 /usr/local/share/pe
+          
+  pptpd的日志主要大部分都在/var/log/messages, /var/log/daemon等文件里面，但是仔细看了发现里面没有用户名，不知道用户是用了哪一个帐号登录上来的。于是就看了一下pppd的man，里面发现了一些环境变量如：IPLOCAL, IPREMOTE等，经过测试发现 PE
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/install-rrdtool-trubleshooting.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/pptp-username-log.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -436,7 +436,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/cacti-monitor-switch-trubleshooting.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-pptpd-on-centos7.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -461,8 +461,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/cacti-monitor-switch-trubleshooting.html" itemprop="url">
-                  Cacti监控交换机不显示端口
+                <a class="post-title-link" href="/2015/12/22/install-pptpd-on-centos7.html" itemprop="url">
+                  centos7安装pptpd vpn
                 </a>
               
             
@@ -484,8 +484,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/cacti-monitor-switch-trubleshooting.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/cacti-monitor-switch-trubleshooting.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-pptpd-on-centos7.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-pptpd-on-centos7.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,7 +495,7 @@
 
           
           
-             <span id="/2015/12/20/cacti-monitor-switch-trubleshooting.html" class="leancloud_visitors" data-flag-title="Cacti监控交换机不显示端口">
+             <span id="/2015/12/22/install-pptpd-on-centos7.html" class="leancloud_visitors" data-flag-title="centos7安装pptpd vpn">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -522,11 +522,15 @@
       
         
           
-          Cacti监控cisco设备时图表上的标题显示为GigabitEthernet而并没有指出具体的端口号,一般说来，图片的流量统计描述都是|host_description| - Traffic - |query_ifName|按照这个形式来描述的，对于华为的设备，Gi显示成GigabitEthern
+          系统环境12more /etc/redhat-release CentOS Linux release 7.1.1503 (Core)
+安装1yum install pptpd
+配置
+/etc/pptpd.conf
+123//增加下面内容localip   1.1.1.1remoteip 10.0.
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/cacti-monitor-switch-trubleshooting.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-pptpd-on-centos7.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -567,7 +571,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/iptables-table-full-dropping-packet.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-pptpd-by-scripts.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -592,8 +596,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/iptables-table-full-dropping-packet.html" itemprop="url">
-                  Ip_conntrack: table full dropping packet解决方法
+                <a class="post-title-link" href="/2015/12/22/install-pptpd-by-scripts.html" itemprop="url">
+                  PPTP VPN安装脚本
                 </a>
               
             
@@ -615,8 +619,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/iptables-table-full-dropping-packet.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/iptables-table-full-dropping-packet.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-pptpd-by-scripts.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-pptpd-by-scripts.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -626,7 +630,7 @@
 
           
           
-             <span id="/2015/12/20/iptables-table-full-dropping-packet.html" class="leancloud_visitors" data-flag-title="Ip_conntrack: table full dropping packet解决方法">
+             <span id="/2015/12/22/install-pptpd-by-scripts.html" class="leancloud_visitors" data-flag-title="PPTP VPN安装脚本">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -652,12 +656,10 @@
 
       
         
-          
-          问题现象监控报警，发现ping有持续丢包，ifconfig看到网卡dripped:xx 一直在增加，messages日志有以下内容1234kernel: ip_conntrack: table full, dropping packet.kernel: printk: 443 messages su
-          ...
+          <p>pptp vpn 一键安装脚本，适用 rhel5.x_86-64 系统<br>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/iptables-table-full-dropping-packet.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-pptpd-by-scripts.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -698,7 +700,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/bind-trubleshooting.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/install-ss5-proxy.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -723,8 +725,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/bind-trubleshooting.html" itemprop="url">
-                  安装Bind问题解析
+                <a class="post-title-link" href="/2015/12/22/install-ss5-proxy.html" itemprop="url">
+                  安装ss5代理
                 </a>
               
             
@@ -746,8 +748,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/bind-trubleshooting.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/bind-trubleshooting.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/install-ss5-proxy.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/install-ss5-proxy.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -757,7 +759,7 @@
 
           
           
-             <span id="/2015/12/20/bind-trubleshooting.html" class="leancloud_visitors" data-flag-title="安装Bind问题解析">
+             <span id="/2015/12/22/install-ss5-proxy.html" class="leancloud_visitors" data-flag-title="安装ss5代理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -784,15 +786,13 @@
       
         
           
-          安装Bind过程中发现的问题，本文是解决过程
-问题
-ipv6问题报错信息如下：
-
-1&quot;0-Nov-2015 16:40:55.395 lame-servers: info: error (network unreachable) resolving &apos;./NS/IN&apos;:
+          
+socks5代理服务官网：http://ss5.sourceforge.net/
+安装gcc编译环境和相关依赖包1yum -y install pam-devel openldap-devel cyrus-sasl-devel gcc gcc-c++ automake make openssl o
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/bind-trubleshooting.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/install-ss5-proxy.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -833,7 +833,7 @@ ipv6问题报错信息如下：
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/20/liunix-traffic-monitor-iftop.html">
+  <link itemprop="mainEntityOfPage" href="http://czero000.github.io/2015/12/22/create-yum-mirrors-by-self.html">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="C.c">
@@ -858,8 +858,8 @@ ipv6问题报错信息如下：
             
               
                 
-                <a class="post-title-link" href="/2015/12/20/liunix-traffic-monitor-iftop.html" itemprop="url">
-                  Linux流量监控工具iftop
+                <a class="post-title-link" href="/2015/12/22/create-yum-mirrors-by-self.html" itemprop="url">
+                  自建yum仓库同步脚本
                 </a>
               
             
@@ -881,8 +881,8 @@ ipv6问题报错信息如下：
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/20/liunix-traffic-monitor-iftop.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/20/liunix-traffic-monitor-iftop.html" itemprop="commentCount"></span>
+                <a href="/2015/12/22/create-yum-mirrors-by-self.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/22/create-yum-mirrors-by-self.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -892,7 +892,7 @@ ipv6问题报错信息如下：
 
           
           
-             <span id="/2015/12/20/liunix-traffic-monitor-iftop.html" class="leancloud_visitors" data-flag-title="Linux流量监控工具iftop">
+             <span id="/2015/12/22/create-yum-mirrors-by-self.html" class="leancloud_visitors" data-flag-title="自建yum仓库同步脚本">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -919,12 +919,14 @@ ipv6问题报错信息如下：
       
         
           
-          在类unix系统中，大家熟悉的top命令可以查看系统资源、进程、内存占用等信息，且动态实时显示。要查看网络状态可以使用netstat、nmap等工具。若要查看实时的网络流量，监控TCP/IP连接等，则可以使用iftop。
-iftop简介类似于top的实时监控系统资源和进程等，iftop是一个实时流量
+          
+自建yum仓库自建内部yum仓库，提高软件安装速度和方便性，同时不需要对新服务器开通对公网的访问权限，也提高了安全性。
+系统环境安装httpd作为web server，提供文件下载。安装环境请参考cobbler安装。
+同步脚本12345678910111213141516171819202122#
           ...
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/20/liunix-traffic-monitor-iftop.html#more" rel="contents">
+            <a class="btn" href="/2015/12/22/create-yum-mirrors-by-self.html#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -960,7 +962,7 @@ iftop简介类似于top的实时监控系统资源和进程等，iftop是一个�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1001,7 +1003,7 @@ iftop简介类似于top的实时监控系统资源和进程等，iftop是一个�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">146</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1009,7 +1011,7 @@ iftop简介类似于top的实时监控系统资源和进程等，iftop是一个�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1018,7 +1020,7 @@ iftop简介类似于top的实时监控系统资源和进程等，iftop是一个�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
