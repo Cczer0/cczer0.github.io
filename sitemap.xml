@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://czero000.github.io/2016/11/29/keepalived-lvs.html</loc>
+    
+    <lastmod>2017-01-11T09:11:15.234Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2017/01/11/keepalived-mail-notify.html</loc>
+    
+    <lastmod>2017-01-11T09:09:51.094Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2016/12/29/ubuntu-pass.html</loc>
     
     <lastmod>2017-01-11T08:55:40.608Z</lastmod>
@@ -75,13 +89,6 @@
     <loc>http://czero000.github.io/2016/11/29/keepalived.html</loc>
     
     <lastmod>2017-01-11T08:07:32.287Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/11/29/keepalived-lvs.html</loc>
-    
-    <lastmod>2017-01-11T08:06:52.828Z</lastmod>
     
   </url>
   
@@ -415,14 +422,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/10/09/glusterfs-explain-in-detail.html</loc>
+    <loc>http://czero000.github.io/2016/01/04/glusterfs-administrator-guide.html</loc>
     
     <lastmod>2016-10-20T10:50:11.137Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/01/04/glusterfs-administrator-guide.html</loc>
+    <loc>http://czero000.github.io/2015/10/09/glusterfs-explain-in-detail.html</loc>
     
     <lastmod>2016-10-20T10:50:11.137Z</lastmod>
     
@@ -436,14 +443,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/10/20/docker-blog.html</loc>
+    <loc>http://czero000.github.io/2016/10/20/docker-images.html</loc>
     
     <lastmod>2016-10-20T10:50:11.133Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/10/13/elasticsearch-config-file-explain-in-detail.html</loc>
+    <loc>http://czero000.github.io/2016/10/20/docker-blog.html</loc>
     
     <lastmod>2016-10-20T10:50:11.133Z</lastmod>
     
@@ -457,30 +464,9 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/10/20/docker-images.html</loc>
+    <loc>http://czero000.github.io/2015/10/13/elasticsearch-config-file-explain-in-detail.html</loc>
     
     <lastmod>2016-10-20T10:50:11.133Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/06/24/use-hexo-to-build-a-static-blog.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/07/22/chinese-copywriting-guidelines.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/10/13/install-elk.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
     
   </url>
   
@@ -492,7 +478,7 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/04/01/markdown-syntax.html</loc>
+    <loc>http://czero000.github.io/2015/06/24/use-hexo-to-build-a-static-blog.html</loc>
     
     <lastmod>2016-10-20T10:50:11.129Z</lastmod>
     
@@ -506,21 +492,35 @@
   </url>
   
   <url>
+    <loc>http://czero000.github.io/2016/04/01/markdown-syntax.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/10/13/install-elk.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/07/22/chinese-copywriting-guidelines.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.129Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/10/21/vim-nginx-hight-light.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2016/02/04/nginx-php-fpm.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/01/21/http-status-code.html</loc>
     
     <lastmod>2016-10-20T10:50:11.125Z</lastmod>
     
@@ -534,6 +534,13 @@
   </url>
   
   <url>
+    <loc>http://czero000.github.io/2016/02/16/how-to-setup-reverse-proxy-by-nginx.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.125Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2015/12/29/apache-add-moudle-cgi.html</loc>
     
     <lastmod>2016-10-20T10:50:11.125Z</lastmod>
@@ -541,28 +548,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/10/21/vim-nginx-hight-light.html</loc>
+    <loc>http://czero000.github.io/2016/01/21/http-status-code.html</loc>
     
     <lastmod>2016-10-20T10:50:11.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/02/04/nginx-configfile-detail.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html</loc>
+    <loc>http://czero000.github.io/2015/10/21/nginx-logrotate.html</loc>
     
     <lastmod>2016-10-20T10:50:11.121Z</lastmod>
     
@@ -576,14 +569,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/02/16/nginx-support-https.html</loc>
+    <loc>http://czero000.github.io/2016/01/27/source-buile-nginx.html</loc>
     
     <lastmod>2016-10-20T10:50:11.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/10/21/nginx-logrotate.html</loc>
+    <loc>http://czero000.github.io/2016/02/04/nginx-configfile-detail.html</loc>
     
     <lastmod>2016-10-20T10:50:11.121Z</lastmod>
     
@@ -597,9 +590,37 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/01/27/source-buile-nginx.html</loc>
+    <loc>http://czero000.github.io/2016/02/04/nginx-compiler-parameters.html</loc>
     
     <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/11/11/use-cobbler-centos6.5.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2016/02/16/nginx-support-https.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/11/11/centos6.5-install-cobbler.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.117Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2016/10/19/ansible-loop.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.117Z</lastmod>
     
   </url>
   
@@ -618,35 +639,7 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/10/19/ansible-loop.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.117Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/11/11/centos6.5-install-cobbler.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.117Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://czero000.github.io/2016/04/01/saltstack-grains.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/03/31/saltstack-target.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/10/20/ansible-dynamic-create-vhost.html</loc>
     
     <lastmod>2016-10-20T10:50:11.113Z</lastmod>
     
@@ -667,6 +660,13 @@
   </url>
   
   <url>
+    <loc>http://czero000.github.io/2016/03/31/saltstack-target.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.113Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2016/04/06/saltstack-pillar.html</loc>
     
     <lastmod>2016-10-20T10:50:11.113Z</lastmod>
@@ -681,91 +681,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/20/bind-trubleshooting.html</loc>
+    <loc>http://czero000.github.io/2016/10/20/ansible-dynamic-create-vhost.html</loc>
     
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/update-kernel.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/21/centos6.5-install-vncserver.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/20/bash-status.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/07/26/bash-mindmap.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/10/19/install-bind-ms.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/centos-install-transmission.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/centos-install-chromium.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/20/fishshell.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    <lastmod>2016-10-20T10:50:11.113Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://czero000.github.io/2016/07/30/awk-mindmap.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/07/22/bash-change-to-zsh.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/scripts-heard-info.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/01/22/regex_fast_reference.html</loc>
     
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
     
@@ -779,6 +702,62 @@
   </url>
   
   <url>
+    <loc>http://czero000.github.io/2015/12/29/update-kernel.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2016/07/22/bash-change-to-zsh.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/21/centos6.5-install-vncserver.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/29/scripts-heard-info.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/29/centos-install-chromium.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2016/01/22/regex_fast_reference.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/10/19/install-bind-ms.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/20/bind-trubleshooting.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2015/12/20/iptables-table-full-dropping-packet.html</loc>
     
     <lastmod>2016-10-20T10:50:11.109Z</lastmod>
@@ -786,7 +765,70 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/10/19/build-gitlab.html</loc>
+    <loc>http://czero000.github.io/2016/07/26/bash-mindmap.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/20/bash-status.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/29/centos-install-transmission.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/20/fishshell.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.109Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2016/05/09/git-repo.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/29/download-centos-iso.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/10/12/install-dropdox-with-cmd.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/21/nfs-detail.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/21/inotify-command.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/29/centos7-support-chinese.html</loc>
     
     <lastmod>2016-10-20T10:50:11.105Z</lastmod>
     
@@ -807,28 +849,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/29/centos7-support-chinese.html</loc>
+    <loc>http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html</loc>
     
     <lastmod>2016-10-20T10:50:11.105Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/29/download-centos-iso.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/21/inotify-command.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/21/nfs-detail.html</loc>
+    <loc>http://czero000.github.io/2016/10/19/build-gitlab.html</loc>
     
     <lastmod>2016-10-20T10:50:11.105Z</lastmod>
     
@@ -842,42 +870,7 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2016/05/09/git-repo.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/10/19/use-gitolite-manager-git.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/10/12/install-dropdox-with-cmd.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/21/passwd-command-failed.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.101Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://czero000.github.io/2015/12/21/update-openssl.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.101Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/install-epel.html</loc>
     
     <lastmod>2016-10-20T10:50:11.101Z</lastmod>
     
@@ -891,14 +884,7 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/22/create-yum-mirrors-by-self.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.101Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/change-em1-to-eth0.html</loc>
+    <loc>http://czero000.github.io/2015/12/21/passwd-command-failed.html</loc>
     
     <lastmod>2016-10-20T10:50:11.101Z</lastmod>
     
@@ -912,6 +898,13 @@
   </url>
   
   <url>
+    <loc>http://czero000.github.io/2015/12/29/change-em1-to-eth0.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.101Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2015/12/21/sourcecode-install-ntp.html</loc>
     
     <lastmod>2016-10-20T10:50:11.101Z</lastmod>
@@ -919,14 +912,21 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/20/cacti-monitor-switch-trubleshooting.html</loc>
+    <loc>http://czero000.github.io/2015/12/22/create-yum-mirrors-by-self.html</loc>
     
-    <lastmod>2016-10-20T10:50:11.097Z</lastmod>
+    <lastmod>2016-10-20T10:50:11.101Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/22/install-pptpd-by-scripts.html</loc>
+    <loc>http://czero000.github.io/2015/12/29/install-epel.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.101Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/20/centos7-install-smokeping.html</loc>
     
     <lastmod>2016-10-20T10:50:11.097Z</lastmod>
     
@@ -940,7 +940,14 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/20/centos7-install-smokeping.html</loc>
+    <loc>http://czero000.github.io/2015/12/22/install-pptpd-by-scripts.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/12/20/cacti-monitor-switch-trubleshooting.html</loc>
     
     <lastmod>2016-10-20T10:50:11.097Z</lastmod>
     
@@ -968,21 +975,14 @@
   </url>
   
   <url>
+    <loc>http://czero000.github.io/2015/12/21/update-python.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.089Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://czero000.github.io/2015/12/20/curl-get-http-status-code.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.089Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2016/03/30/learn-python-mindmap.html</loc>
-    
-    <lastmod>2016-10-20T10:50:11.089Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://czero000.github.io/2015/12/29/debian-support-chinese.html</loc>
     
     <lastmod>2016-10-20T10:50:11.089Z</lastmod>
     
@@ -996,7 +996,7 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/10/14/install-redis.html</loc>
+    <loc>http://czero000.github.io/2016/03/30/learn-python-mindmap.html</loc>
     
     <lastmod>2016-10-20T10:50:11.089Z</lastmod>
     
@@ -1010,7 +1010,7 @@
   </url>
   
   <url>
-    <loc>http://czero000.github.io/2015/12/21/update-python.html</loc>
+    <loc>http://czero000.github.io/2015/12/29/debian-support-chinese.html</loc>
     
     <lastmod>2016-10-20T10:50:11.089Z</lastmod>
     
@@ -1018,6 +1018,13 @@
   
   <url>
     <loc>http://czero000.github.io/2016/05/31/autocompletion-of-opensource-mysqlclient.html</loc>
+    
+    <lastmod>2016-10-20T10:50:11.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://czero000.github.io/2015/10/14/install-redis.html</loc>
     
     <lastmod>2016-10-20T10:50:11.089Z</lastmod>
     

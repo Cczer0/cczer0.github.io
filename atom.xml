@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://czero000.github.io/"/>
-  <updated>2017-01-11T06:59:41.684Z</updated>
+  <updated>2017-01-11T09:09:51.094Z</updated>
   <id>http://czero000.github.io/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>keepalived切换通知脚本</title>
+    <link href="http://czero000.github.io/2017/01/11/keepalived-mail-notify.html"/>
+    <id>http://czero000.github.io/2017/01/11/keepalived-mail-notify.html</id>
+    <published>2017-01-11T08:59:19.000Z</published>
+    <updated>2017-01-11T09:09:51.094Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">more changeState_mail.py</div><div class="line">#!/usr/bin/python</div><div class="line"># -*- coding: UTF-8 -*-</div><div class="line">import smtplib</div><div class="line">import socket</div><div class="line">import time</div><div class="line">from email.MIMEText import MIMEText</div><div class="line">from email.Utils import formatdate</div><div class="line">from email.Header import Header</div><div class="line">import sys</div><div class="line"></div><div class="line">#发送邮件的相关信息，根据实际情况填写</div><div class="line">smtpHost = &apos;mail.xxx.com&apos;</div><div class="line">smtpPort = &apos;25&apos;</div><div class="line">sslPort  = &apos;465&apos;</div><div class="line">fromMail = &apos;user@xxx.com&apos;</div><div class="line">toMail  = &apos;user@xxx.com&apos;</div><div class="line">username = &apos;user@xxx.com&apos;</div><div class="line">password = &apos;passwd&apos;</div><div class="line">#解决中文问题</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(&apos;utf8&apos;)</div><div class="line"> </div><div class="line">#邮件标题和内容</div><div class="line"> subject  = socket.gethostname() + &quot; HA status has changed&quot;</div><div class="line"> body= (time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)) + &quot; vrrp transition, &quot; + socket.gethostname() + &quot; changed to be &quot; + sys.argv[1]</div><div class="line">  </div><div class="line">#初始化邮件</div><div class="line">  encoding = &apos;utf-8&apos;</div><div class="line">  mail = MIMEText(body.encode(encoding),&apos;plain&apos;,encoding)</div><div class="line">  mail[&apos;Subject&apos;] = Header(subject,encoding)</div><div class="line">  mail[&apos;From&apos;] = fromMail</div><div class="line">  mail[&apos;To&apos;] = toMail</div><div class="line">  mail[&apos;Date&apos;] = formatdate()</div><div class="line">   </div><div class="line">   try:</div><div class="line">#连接smtp服务器，明文/SSL/TLS三种方式，根据你使用的SMTP支持情况选择一种</div><div class="line">#普通方式，通信过程不加密</div><div class="line">#smtp = smtplib.SMTP(smtpHost,smtpPort)</div><div class="line">#smtp.ehlo()</div><div class="line">#smtp.login(username,password)</div><div class="line">    </div><div class="line">#tls加密方式，通信过程加密，邮件数据安全，使用正常的smtp端口</div><div class="line">#smtp = smtplib.SMTP(smtpHost,smtpPort)</div><div class="line">#smtp.ehlo()</div><div class="line">#smtp.starttls()</div><div class="line">#smtp.ehlo()</div><div class="line">#smtp.login(username,password)</div><div class="line">	 </div><div class="line">#纯粹的ssl加密方式，通信过程加密，邮件数据安全</div><div class="line">		smtp = smtplib.SMTP_SSL(smtpHost,sslPort)</div><div class="line">		smtp.ehlo()</div><div class="line">		smtp.login(username,password)</div><div class="line">				  </div><div class="line">#发送邮件</div><div class="line">		smtp.sendmail(fromMail,toMail,mail.as_string())</div><div class="line">		smtp.close()</div><div class="line">		print &apos;OK&apos;</div><div class="line">	except Exception:</div><div class="line">	    print &apos;Error: unable to send email&apos;</div></pre></td></tr></table></figure>
+<p><a href="http://ofc9x1ccn.bkt.clouddn.com/keepalived/changeState_mail.py" target="_blank" rel="external">changeState_mail.py</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
+    
+    </summary>
+    
+      <category term="Web" scheme="http://czero000.github.io/categories/Web/"/>
+    
+      <category term="Keepalived" scheme="http://czero000.github.io/categories/Web/Keepalived/"/>
+    
+    
+      <category term="keepalived" scheme="http://czero000.github.io/tags/keepalived/"/>
+    
+  </entry>
   
   <entry>
     <title>跨平台桌面日历软件rainlendar</title>
@@ -126,49 +152,6 @@
     
     
       <category term="bind" scheme="http://czero000.github.io/tags/bind/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker资源</title>
-    <link href="http://czero000.github.io/2017/01/06/docker-resource.html"/>
-    <id>http://czero000.github.io/2017/01/06/docker-resource.html</id>
-    <published>2017-01-06T02:44:48.000Z</published>
-    <updated>2017-01-11T07:07:21.738Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker资源"><a href="#Docker资源" class="headerlink" title="Docker资源"></a>Docker资源</h1><h2 id="Docker官方英文资源："><a href="#Docker官方英文资源：" class="headerlink" title="Docker官方英文资源："></a>Docker官方英文资源：</h2><ul>
-<li>docker官网：<a href="http://www.docker.com" target="_blank" rel="external">http://www.docker.com</a></li>
-<li>Docker windows入门：<a href="https://docs.docker.com/windows/" target="_blank" rel="external">https://docs.docker.com/windows/</a></li>
-<li>Docker Linux 入门：<a href="https://docs.docker.com/linux/" target="_blank" rel="external">https://docs.docker.com/linux/</a></li>
-<li>Docker mac 入门：<a href="https://docs.docker.com/mac/" target="_blank" rel="external">https://docs.docker.com/mac/</a></li>
-<li>Docker 用户指引：<a href="https://docs.docker.com/engine/userguide/" target="_blank" rel="external">https://docs.docker.com/engine/userguide/</a></li>
-<li>Docker 官方博客：<a href="http://blog.docker.com/" target="_blank" rel="external">http://blog.docker.com/</a></li>
-<li>Docker Hub: <a href="https://hub.docker.com/" target="_blank" rel="external">https://hub.docker.com/</a></li>
-<li>Docker开源： <a href="https://www.docker.com/open-source" target="_blank" rel="external">https://www.docker.com/open-source</a></li>
-</ul>
-<h2 id="Docker中文资源："><a href="#Docker中文资源：" class="headerlink" title="Docker中文资源："></a>Docker中文资源：</h2><ul>
-<li>Docker中文网站：<a href="http://www.docker.org.cn" target="_blank" rel="external">http://www.docker.org.cn</a></li>
-<li>Docker入门教程: <a href="http://www.docker.org.cn/book/docker.html" target="_blank" rel="external">http://www.docker.org.cn/book/docker.html</a></li>
-<li>Docker安装手册：<a href="http://www.docker.org.cn/book/install.html" target="_blank" rel="external">http://www.docker.org.cn/book/install.html</a></li>
-<li>一小时Docker教程 ：<a href="https://blog.csphere.cn/archives/22" target="_blank" rel="external">https://blog.csphere.cn/archives/22</a></li>
-<li>docker从入门到实践：<a href="http://dockerpool.com/static/books/docker_practice/index.html" target="_blank" rel="external">http://dockerpool.com/static/books/docker_practice/index.html</a></li>
-<li>Docker纸质书：<a href="http://www.docker.org.cn/dockershuji.html" target="_blank" rel="external">http://www.docker.org.cn/dockershuji.html</a></li>
-<li>DockerPPT：<a href="http://www.docker.org.cn/dockerppt.html" target="_blank" rel="external">http://www.docker.org.cn/dockerppt.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Docker资源&quot;&gt;&lt;a href=&quot;#Docker资源&quot; class=&quot;headerlink&quot; title=&quot;Docker资源&quot;&gt;&lt;/a&gt;Docker资源&lt;/h1&gt;&lt;h2 id=&quot;Docker官方英文资源：&quot;&gt;&lt;a href=&quot;#Docker官方英文资源：&quot; c
-    
-    </summary>
-    
-      <category term="运维技术" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="Docker" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
-    
-    
-      <category term="docker" scheme="http://czero000.github.io/tags/docker/"/>
     
   </entry>
   
@@ -325,6 +308,49 @@
   </entry>
   
   <entry>
+    <title>docker资源</title>
+    <link href="http://czero000.github.io/2017/01/06/docker-resource.html"/>
+    <id>http://czero000.github.io/2017/01/06/docker-resource.html</id>
+    <published>2017-01-06T02:44:48.000Z</published>
+    <updated>2017-01-11T07:07:21.738Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker资源"><a href="#Docker资源" class="headerlink" title="Docker资源"></a>Docker资源</h1><h2 id="Docker官方英文资源："><a href="#Docker官方英文资源：" class="headerlink" title="Docker官方英文资源："></a>Docker官方英文资源：</h2><ul>
+<li>docker官网：<a href="http://www.docker.com" target="_blank" rel="external">http://www.docker.com</a></li>
+<li>Docker windows入门：<a href="https://docs.docker.com/windows/" target="_blank" rel="external">https://docs.docker.com/windows/</a></li>
+<li>Docker Linux 入门：<a href="https://docs.docker.com/linux/" target="_blank" rel="external">https://docs.docker.com/linux/</a></li>
+<li>Docker mac 入门：<a href="https://docs.docker.com/mac/" target="_blank" rel="external">https://docs.docker.com/mac/</a></li>
+<li>Docker 用户指引：<a href="https://docs.docker.com/engine/userguide/" target="_blank" rel="external">https://docs.docker.com/engine/userguide/</a></li>
+<li>Docker 官方博客：<a href="http://blog.docker.com/" target="_blank" rel="external">http://blog.docker.com/</a></li>
+<li>Docker Hub: <a href="https://hub.docker.com/" target="_blank" rel="external">https://hub.docker.com/</a></li>
+<li>Docker开源： <a href="https://www.docker.com/open-source" target="_blank" rel="external">https://www.docker.com/open-source</a></li>
+</ul>
+<h2 id="Docker中文资源："><a href="#Docker中文资源：" class="headerlink" title="Docker中文资源："></a>Docker中文资源：</h2><ul>
+<li>Docker中文网站：<a href="http://www.docker.org.cn" target="_blank" rel="external">http://www.docker.org.cn</a></li>
+<li>Docker入门教程: <a href="http://www.docker.org.cn/book/docker.html" target="_blank" rel="external">http://www.docker.org.cn/book/docker.html</a></li>
+<li>Docker安装手册：<a href="http://www.docker.org.cn/book/install.html" target="_blank" rel="external">http://www.docker.org.cn/book/install.html</a></li>
+<li>一小时Docker教程 ：<a href="https://blog.csphere.cn/archives/22" target="_blank" rel="external">https://blog.csphere.cn/archives/22</a></li>
+<li>docker从入门到实践：<a href="http://dockerpool.com/static/books/docker_practice/index.html" target="_blank" rel="external">http://dockerpool.com/static/books/docker_practice/index.html</a></li>
+<li>Docker纸质书：<a href="http://www.docker.org.cn/dockershuji.html" target="_blank" rel="external">http://www.docker.org.cn/dockershuji.html</a></li>
+<li>DockerPPT：<a href="http://www.docker.org.cn/dockerppt.html" target="_blank" rel="external">http://www.docker.org.cn/dockerppt.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Docker资源&quot;&gt;&lt;a href=&quot;#Docker资源&quot; class=&quot;headerlink&quot; title=&quot;Docker资源&quot;&gt;&lt;/a&gt;Docker资源&lt;/h1&gt;&lt;h2 id=&quot;Docker官方英文资源：&quot;&gt;&lt;a href=&quot;#Docker官方英文资源：&quot; c
+    
+    </summary>
+    
+      <category term="运维技术" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="Docker" scheme="http://czero000.github.io/categories/%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/Docker/"/>
+    
+    
+      <category term="docker" scheme="http://czero000.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>nfs挂载错误</title>
     <link href="http://czero000.github.io/2017/01/05/nfs-error.html"/>
     <id>http://czero000.github.io/2017/01/05/nfs-error.html</id>
@@ -347,6 +373,42 @@
     
     
       <category term="nfs" scheme="http://czero000.github.io/tags/nfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GoForIt-待办事项及倒计时器</title>
+    <link href="http://czero000.github.io/2017/01/04/go-for-it.html"/>
+    <id>http://czero000.github.io/2017/01/04/go-for-it.html</id>
+    <published>2017-01-04T06:58:57.000Z</published>
+    <updated>2017-01-11T07:09:54.235Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果您是拖延症患者的话，这款集成了待办事项及倒计时器的小软件或许可以帮助您提高工作效率。</p>
+<p>Go For It! 界面透着 Elementary/GNOME HIG 的简洁风格，使用 Vala/GTK3 创建，其待办事项部分以 Todo.txt（更多说明参见文末）格式保存。</p>
+<p>这个<a href="https://www.youtube.com/watch?v=mnw556C9FZQ#t=150" target="_blank" rel="external">视频说明了 Go For It! 的工作流程（朝内镜像）</a>，简单来说：</p>
+<ol>
+<li>在待办事项里添加打算完成的工作。</li>
+<li>选择一个事项，在倒计时器里设定预期完成时间，点击开始。</li>
+<li>开始工作。</li>
+<li>倒计时结束或任务完成后，点击确定将事项标记为完成。</li>
+<li>可以在事项完成后添加一个休息时间。</li>
+</ol>
+<p>Go For It! 提供 Linux 及 <a href="http://manuel-kehl.de/projects/go-for-it/download-windows-version" target="_blank" rel="external">Win</a> 平台版本，不久将提供 OS X 版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Ubuntu PPA：</div><div class="line">sudo add-apt-repository ppa:mank319/go-for-it &amp;&amp; sudo apt-get update</div><div class="line">sudo apt-get install go-for-it</div></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/mank319/Go-For-It" target="_blank" rel="external">Github编译指南</a></p>
+<p>与 Evernote 或 Google Keep 等具备待办事项功能的便笺本相比，<a href="http://todotxt.com/" target="_blank" rel="external">Todo.txt</a> 利用预定义纯文本方式记录事项，某种意义上保证了向前兼容性。同时因为是简单的纯文本，它可以方便和各个平台进行集成，包括命令行终端及 Vim 插件。iOS 及 Android 客户端更是不在话下。同步的工作由 Dropbox 实现。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果您是拖延症患者的话，这款集成了待办事项及倒计时器的小软件或许可以帮助您提高工作效率。&lt;/p&gt;
+&lt;p&gt;Go For It! 界面透着 Elementary/GNOME HIG 的简洁风格，使用 Vala/GTK3 创建，其待办事项部分以 Todo.txt（更多说明参见文末
+    
+    </summary>
+    
+      <category term="Other" scheme="http://czero000.github.io/categories/Other/"/>
+    
+    
+      <category term="goforit" scheme="http://czero000.github.io/tags/goforit/"/>
     
   </entry>
   
@@ -461,38 +523,38 @@
   </entry>
   
   <entry>
-    <title>GoForIt-待办事项及倒计时器</title>
-    <link href="http://czero000.github.io/2017/01/04/go-for-it.html"/>
-    <id>http://czero000.github.io/2017/01/04/go-for-it.html</id>
-    <published>2017-01-04T06:58:57.000Z</published>
-    <updated>2017-01-11T07:09:54.235Z</updated>
+    <title>linux命令行密码管理</title>
+    <link href="http://czero000.github.io/2016/12/29/ubuntu-pass.html"/>
+    <id>http://czero000.github.io/2016/12/29/ubuntu-pass.html</id>
+    <published>2016-12-29T04:13:23.000Z</published>
+    <updated>2017-01-11T08:55:40.608Z</updated>
     
-    <content type="html"><![CDATA[<p>如果您是拖延症患者的话，这款集成了待办事项及倒计时器的小软件或许可以帮助您提高工作效率。</p>
-<p>Go For It! 界面透着 Elementary/GNOME HIG 的简洁风格，使用 Vala/GTK3 创建，其待办事项部分以 Todo.txt（更多说明参见文末）格式保存。</p>
-<p>这个<a href="https://www.youtube.com/watch?v=mnw556C9FZQ#t=150" target="_blank" rel="external">视频说明了 Go For It! 的工作流程（朝内镜像）</a>，简单来说：</p>
-<ol>
-<li>在待办事项里添加打算完成的工作。</li>
-<li>选择一个事项，在倒计时器里设定预期完成时间，点击开始。</li>
-<li>开始工作。</li>
-<li>倒计时结束或任务完成后，点击确定将事项标记为完成。</li>
-<li>可以在事项完成后添加一个休息时间。</li>
-</ol>
-<p>Go For It! 提供 Linux 及 <a href="http://manuel-kehl.de/projects/go-for-it/download-windows-version" target="_blank" rel="external">Win</a> 平台版本，不久将提供 OS X 版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Ubuntu PPA：</div><div class="line">sudo add-apt-repository ppa:mank319/go-for-it &amp;&amp; sudo apt-get update</div><div class="line">sudo apt-get install go-for-it</div></pre></td></tr></table></figure></p>
-<p><a href="https://github.com/mank319/Go-For-It" target="_blank" rel="external">Github编译指南</a></p>
-<p>与 Evernote 或 Google Keep 等具备待办事项功能的便笺本相比，<a href="http://todotxt.com/" target="_blank" rel="external">Todo.txt</a> 利用预定义纯文本方式记录事项，某种意义上保证了向前兼容性。同时因为是简单的纯文本，它可以方便和各个平台进行集成，包括命令行终端及 Vim 插件。iOS 及 Android 客户端更是不在话下。同步的工作由 Dropbox 实现。</p>
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="软件：pass"><a href="#软件：pass" class="headerlink" title="软件：pass"></a>软件：pass</h1><h2 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt install pass</div></pre></td></tr></table></figure>
+<h2 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gpg --gen-key</div><div class="line">pass init &lt;gpg-id&gt;</div></pre></td></tr></table></figure>
+<p><em>该命令会在<code>~/.password-store</code>目录中创建一个密码仓库</em></p>
+<h2 id="添加新的密码信息"><a href="#添加新的密码信息" class="headerlink" title="添加新的密码信息"></a>添加新的密码信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass insert &lt;password-name&gt; -m</div></pre></td></tr></table></figure>
+<h2 id="查看密码名称列表"><a href="#查看密码名称列表" class="headerlink" title="查看密码名称列表"></a>查看密码名称列表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass</div></pre></td></tr></table></figure>
+<h2 id="复制密码到剪切板"><a href="#复制密码到剪切板" class="headerlink" title="复制密码到剪切板"></a>复制密码到剪切板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass -c &lt;password-name&gt;</div></pre></td></tr></table></figure>
+<h2 id="粘帖剪切板中密码"><a href="#粘帖剪切板中密码" class="headerlink" title="粘帖剪切板中密码"></a>粘帖剪切板中密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ctrl + Shift + v</div></pre></td></tr></table></figure>
+<h2 id="移除密码记录"><a href="#移除密码记录" class="headerlink" title="移除密码记录"></a>移除密码记录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass rm &lt;password-name&gt;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;如果您是拖延症患者的话，这款集成了待办事项及倒计时器的小软件或许可以帮助您提高工作效率。&lt;/p&gt;
-&lt;p&gt;Go For It! 界面透着 Elementary/GNOME HIG 的简洁风格，使用 Vala/GTK3 创建，其待办事项部分以 Todo.txt（更多说明参见文末
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;软件：pass&quot;&gt;&lt;a href=&quot;#软件：pass&quot; class=&quot;headerlink&quot; title=&quot;软件：pass&quot;&gt;&lt;/a&gt;软件：pass&lt;/h1&gt;&lt;h2 id=&quot;安装软件包&quot;&gt;&lt;a href=&quot;#安装软件包&quot; cla
     
     </summary>
     
-      <category term="Other" scheme="http://czero000.github.io/categories/Other/"/>
+      <category term="System" scheme="http://czero000.github.io/categories/System/"/>
+    
+      <category term="Debian" scheme="http://czero000.github.io/categories/System/Debian/"/>
     
     
-      <category term="goforit" scheme="http://czero000.github.io/tags/goforit/"/>
+      <category term="ubuntu" scheme="http://czero000.github.io/tags/ubuntu/"/>
+    
+      <category term="pass" scheme="http://czero000.github.io/tags/pass/"/>
     
   </entry>
   
@@ -570,42 +632,6 @@
       <category term="ubuntu" scheme="http://czero000.github.io/tags/ubuntu/"/>
     
       <category term="redmine" scheme="http://czero000.github.io/tags/redmine/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux命令行密码管理</title>
-    <link href="http://czero000.github.io/2016/12/29/ubuntu-pass.html"/>
-    <id>http://czero000.github.io/2016/12/29/ubuntu-pass.html</id>
-    <published>2016-12-29T04:13:23.000Z</published>
-    <updated>2017-01-11T08:55:40.608Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="软件：pass"><a href="#软件：pass" class="headerlink" title="软件：pass"></a>软件：pass</h1><h2 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt install pass</div></pre></td></tr></table></figure>
-<h2 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gpg --gen-key</div><div class="line">pass init &lt;gpg-id&gt;</div></pre></td></tr></table></figure>
-<p><em>该命令会在<code>~/.password-store</code>目录中创建一个密码仓库</em></p>
-<h2 id="添加新的密码信息"><a href="#添加新的密码信息" class="headerlink" title="添加新的密码信息"></a>添加新的密码信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass insert &lt;password-name&gt; -m</div></pre></td></tr></table></figure>
-<h2 id="查看密码名称列表"><a href="#查看密码名称列表" class="headerlink" title="查看密码名称列表"></a>查看密码名称列表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass</div></pre></td></tr></table></figure>
-<h2 id="复制密码到剪切板"><a href="#复制密码到剪切板" class="headerlink" title="复制密码到剪切板"></a>复制密码到剪切板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass -c &lt;password-name&gt;</div></pre></td></tr></table></figure>
-<h2 id="粘帖剪切板中密码"><a href="#粘帖剪切板中密码" class="headerlink" title="粘帖剪切板中密码"></a>粘帖剪切板中密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ctrl + Shift + v</div></pre></td></tr></table></figure>
-<h2 id="移除密码记录"><a href="#移除密码记录" class="headerlink" title="移除密码记录"></a>移除密码记录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass rm &lt;password-name&gt;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;软件：pass&quot;&gt;&lt;a href=&quot;#软件：pass&quot; class=&quot;headerlink&quot; title=&quot;软件：pass&quot;&gt;&lt;/a&gt;软件：pass&lt;/h1&gt;&lt;h2 id=&quot;安装软件包&quot;&gt;&lt;a href=&quot;#安装软件包&quot; cla
-    
-    </summary>
-    
-      <category term="System" scheme="http://czero000.github.io/categories/System/"/>
-    
-      <category term="Debian" scheme="http://czero000.github.io/categories/System/Debian/"/>
-    
-    
-      <category term="ubuntu" scheme="http://czero000.github.io/tags/ubuntu/"/>
-    
-      <category term="pass" scheme="http://czero000.github.io/tags/pass/"/>
     
   </entry>
   
@@ -710,97 +736,6 @@
   </entry>
   
   <entry>
-    <title>LVS+Keepalived高可用介绍</title>
-    <link href="http://czero000.github.io/2016/11/29/keepalived-lvs.html"/>
-    <id>http://czero000.github.io/2016/11/29/keepalived-lvs.html</id>
-    <published>2016-11-29T06:07:33.000Z</published>
-    <updated>2017-01-11T08:06:52.828Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="LVS-Keepalived介绍"><a href="#LVS-Keepalived介绍" class="headerlink" title="LVS+Keepalived介绍"></a>LVS+Keepalived介绍</h1><p>lVS是Linux Virtual Server的简写，即Linux虚拟服务器，是一个虚拟的服务器集群系统，LVS项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）；十种调度算法<code>（rrr|wrr|lc|wlc|lblc|lblcr|dh|sh|sed|nq）</code>。</p>
-<p>Keepalived是一个类似于layer3，4&amp;5交换机制的软件，主要用作RealServer的健康状态检查以及LoadBalance主机和BackUP主机之间failover的实现。高可用架</p>
-<p>##简单负载均衡架构</p>
-<p>IP信息列表：</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>IP</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LVS-VIP</td>
-<td>172.16.7.55</td>
-</tr>
-<tr>
-<td>LVS-Master</td>
-<td>172.16.7.56</td>
-</tr>
-<tr>
-<td>LVS-Slave</td>
-<td>172.16.7.57</td>
-</tr>
-<tr>
-<td>Web-RealServer</td>
-<td>172.16.7.16</td>
-</tr>
-<tr>
-<td>Web-RealServer</td>
-<td>172.16.7.144</td>
-</tr>
-</tbody>
-</table>
-<h1 id="安装LVS和Keepalived"><a href="#安装LVS和Keepalived" class="headerlink" title="安装LVS和Keepalived"></a>安装LVS和Keepalived</h1><p>IPVS (IP Virtual Server)是整个负载均衡的基础，如果没有这个基础，故障隔离与切换就毫无意义。IPVS基本上是一种高效的Layer-4交换机，它提供负载平衡的功能。当一个TCP连接的初始SYN报文到达时，IPVS就选择一台服务器，将报文转发给它。此后通过查发报文的IP和TCP报文头地址，保证此连接的后继报文被转发到相同的服务器。这样，IPVS无法检查到请求的内容再选择服务器，这就要求后端的服务器组是提供相同的服务，不管请求被送到哪一台服务器，返回结果都应该是一样的。但是在有一些应用中后端的服务器可能功能不一，有的是提供HTML文档的Web服务器，有的是提供图片的Web服务器，有的是提供CGI的Web服务器。这时，就需要基于内容请求分发 (Content-Based Request Distribution)，同时基于内容请求分发可以提高后端服务器上访问的局部性。IPVS具体实现是由Ipvsadm这个程序来完成，因此判断一个系统是否具备ipvs功能，只要查看Ipvsadm程序是否安装，最简单的办法便是执行命令ipvsadm。</p>
-<h2 id="下载相关软件包"><a href="#下载相关软件包" class="headerlink" title="下载相关软件包"></a>下载相关软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src/</div><div class="line">wget http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz</div><div class="line">wget http://www.keepalived.org/software/keepalived-1.2.17.tar.gz</div></pre></td></tr></table></figure>
-<h2 id="安装LVS和Keepalived-1"><a href="#安装LVS和Keepalived-1" class="headerlink" title="安装LVS和Keepalived"></a>安装LVS和Keepalived</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">lsmod | grep ip_vs                                                     #查看是否加载模块</div><div class="line">uname -r                                                              #查看内核版本   </div><div class="line">2.6.18-164.el5</div><div class="line">ln -s /usr/src/kernels/2.6.18-164.el5-i686/ /usr/src/linux            #防止ipvsadm找不到系统内核，需要安装kernel-devel</div><div class="line">tar -zxf ipvsadm-1.24.tar.gz                                          #解压源代码</div><div class="line">cd ipvsadm-1.24                                                       #切换目录</div><div class="line">make &amp;&amp; make install                                                  #编译安装</div><div class="line">find / -name ipvsadm                                                  #查找安装后文件位置</div><div class="line">/etc/rc.d/init.d/ipvsadm                       </div><div class="line">/usr/local/src/ipvsadm-1.24/ipvsadm</div><div class="line">/sbin/ipvsadm</div><div class="line"># ipvsadm                                                               #检验ipvsadm是否正确安装</div><div class="line">IP Virtual Server version 1.2.1 (size=4096)</div><div class="line">Prot LocalAddress:Port Scheduler Flags</div><div class="line"> -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn </div><div class="line">lsmod | grep ip_vs                                                    #内核是否加载模块</div><div class="line">ip_vs77441  0</div></pre></td></tr></table></figure>
-<p><strong>报错：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make[1]: *** [libipvs.o] Error 1</div><div class="line">make[1]: Leaving directory `/usr/local/src/ipvsadm-1.26/libipvs&apos;</div><div class="line">make: *** [libs] Error 2</div></pre></td></tr></table></figure></p>
-<p><strong>解决：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install libnl* popt* -y</div></pre></td></tr></table></figure></p>
-<h2 id="安装Keepalive"><a href="#安装Keepalive" class="headerlink" title="安装Keepalive"></a>安装Keepalive</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">cd ..</div><div class="line">tar -zxf keepalived-1.1.15.tar.gz</div><div class="line">cd keepalived-1.1.15</div><div class="line">./configure --prefix=/usr/local/keepalived \</div><div class="line">-with-kernel-dir=/usr/src/kernels/2.6.18-164.el5-i686</div><div class="line">Keepalived configuration</div><div class="line">------------------------</div><div class="line">Keepalived version       : 1.1.15</div><div class="line">Compiler: gcc</div><div class="line">Compiler flags: -g -O2</div><div class="line">Extra Lib: -lpopt -lssl -lcrypto</div><div class="line">Use IPVS Framework       : Yes</div><div class="line">IPVS sync daemon support : Yes</div><div class="line">Use VRRP Framework       : Yes</div><div class="line">Use LinkWatch: No</div><div class="line">Use Debug flags: No</div><div class="line">make &amp;&amp; make install</div><div class="line">find / -name keepalived</div><div class="line">/usr/local/keepalived</div><div class="line">/usr/local/keepalived/etc/sysconfig/keepalived</div><div class="line">/usr/local/keepalived/etc/rc.d/init.d/keepalived</div><div class="line">/usr/local/keepalived/etc/keepalived</div><div class="line">/usr/local/keepalived/sbin/keepalived</div><div class="line">cd /usr/local/keepalived/</div><div class="line">cp etc/rc.d/init.d/keepalived /etc/rc.d/init.d/</div><div class="line">cp etc/sysconfig/keepalived /etc/sysconfig/</div><div class="line">mkdir /etc/keepalived</div><div class="line">cp etc/keepalived/keepalived.conf /etc/keepalived/</div><div class="line">ln -s /usr/local/keepalived/sbin/keepalived /usr/sbin/</div></pre></td></tr></table></figure>
-<h1 id="配置LVS及Keepalived"><a href="#配置LVS及Keepalived" class="headerlink" title="配置LVS及Keepalived"></a>配置LVS及Keepalived</h1><h2 id="编写配置脚本"><a href="#编写配置脚本" class="headerlink" title="编写配置脚本"></a>编写配置脚本</h2><p>绑定VIP地址到LVS_Master上，并设定LVS工作模式为dr(此脚本不适用在Keepalived方案中，只可单独使用)，代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">cat lvs_dr</div><div class="line">#!/bin/bash</div><div class="line"># description: Start LVS of DirectorServer</div><div class="line"># Write by:Charlie.Cui</div><div class="line"> </div><div class="line">FRed=&quot;\E[31;40m&quot;; FGreen=&quot;\E[32;40m&quot;; FBlue=&quot;\E[34;40m&quot;; St0=&quot;\033[1m&quot;; St1=&quot;\033[5m&quot;; Ed=&quot;\033[0m&quot;  </div><div class="line"> </div><div class="line"># Set website director vip.</div><div class="line">LVS_VIP=172.16.7.55</div><div class="line">LVS_RIP1=172.16.7.16</div><div class="line">LVS_RIP2=172.16.7.144</div><div class="line"> </div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"> </div><div class="line">logger $0 called with $1</div><div class="line">case &quot;$1&quot; in</div><div class="line">start)</div><div class="line">        # set LVS vip</div><div class="line">        echo -e Starting LVS Of DirectorServer:&quot;\t&quot;&quot;$FGreen$Sto[OK]$Ed&quot;</div><div class="line">        echo -e Set LVS_VIP:&quot;\t&quot;&quot;$FGreen$Sto$LVS_VIP$Ed&quot;</div><div class="line">/sbin/ipvsadm --set 30 5 60</div><div class="line">/sbin/ifconfig eth1:0 $LVS_VIP broadcast $LVS_VIP netmask 255.255.255.255 broadcast $LVS_VIP up</div><div class="line">/sbin/route add -host $LVS_VIP dev eth1:0</div><div class="line">/sbin/ipvsadm -A -t $LVS_VIP:80 -s wrr -p 3</div><div class="line">/sbin/ipvsadm -a -t $LVS_VIP:80 -r $LVS_RIP1:80 -g -w 1</div><div class="line">/sbin/ipvsadm -a -t $LVS_VIP:80 -r $LVS_RIP2:80 -g -w 1</div><div class="line">touch /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1</div><div class="line">;;</div><div class="line">stop)</div><div class="line">/sbin/ipvsadm -C</div><div class="line">/sbin/ipvsadm -Z</div><div class="line">/sbin/route del -host $LVS_VIP dev eth1:0</div><div class="line">/sbin/ifconfig eth1:0 down</div><div class="line">/bin/rm -rf /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1</div><div class="line">        echo -e Stoping LVS Of DirectorServer:&quot;\t&quot;&quot;$FGreen$Sto[OK]$Ed&quot;</div><div class="line">;;</div><div class="line">status)</div><div class="line">        if [ ! -e /var/lock/subsys/ipvsadm ];then</div><div class="line">echo -e &quot;$FRed ipvsadm is stoped $Ed&quot;</div><div class="line">exit 1</div><div class="line">        else</div><div class="line">echo -e &quot;$FGreen$Sto ipvsadm is running $Ed&quot;</div><div class="line">        fi</div><div class="line">      ;;</div><div class="line">*)</div><div class="line">        echo &quot;Usage: $0 &#123;start|stop|status&#125;&quot;</div><div class="line">        exit 1</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
-<p>用ipvsadm -Ln查看虚拟服务器IP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ipvsadm -Ln</div><div class="line">IP Virtual Server version 1.2.1 (size=4096)</div><div class="line">Prot LocalAddress:Port Scheduler Flags</div><div class="line">  -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn</div><div class="line">TCP  172.16.7.55:80 wrr persistent 3</div><div class="line">  -&gt; 172.16.7.16:80Route   1      00</div><div class="line">  -&gt; 172.16.7.144:80Local   1      00    </div><div class="line">```  </div><div class="line"></div><div class="line">查看LVS_VIP 是否绑定到Master上</div></pre></td></tr></table></figure></p>
-<p>ip addr<br>1: lo:  mtu 16436 qdisc noqueue<br>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>    inet6 ::1/128 scope host<br>valid_lft forever preferred_lft forever<br>3: eth1:  mtu 1500 qdisc pfifo_fast qlen 1000<br>    link/ether 00:50:56:9f:00:38 brd ff:ff:ff:ff:ff:ff<br>    inet 172.16.7.56/24 brd 172.16.7.255 scope global eth1<br>    inet 172.16.7.55/32 brd 172.16.7.55 scope global eth1:0<br>    inet6 fe80::250:56ff:fe9f:38/64 scope link<br>valid_lft forever preferred_lft forever<br>4: sit0:  mtu 1480 qdisc noop<br>    link/sit 0.0.0.0 brd 0.0.0.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 配置Keepalived</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">修改/etc/keepalived/keepalived.conf,以下是Master的配置文件，Backup的只需要将红色的子修改即可。</div></pre></td></tr></table></figure></p>
-<p>cat /etc/keepalived/keepalived.conf<br>! Configuration File for keepalived</p>
-<p>global_defs {<br>   notification_email {<br>charlie.cui@hotmail.com                             #配置管理员邮箱，用于报警一行设置一个，可以设置多个<br>   }<br>notification_email_from mail.hotmail.com             #设置邮件发送地址<br>   smtp_server 127.0.0.1                        #smtp Server地址<br>   smtp_connect_timeout 30                              #与smtp服务超时时间<br>   router_id LVS_Master                                 #路由ID和backup要不同，不然会报错<br>}</p>
-<p>#set VIP<br>vrrp_instance VIP {<br>    state MASTER                                 #指定Keepalived的角色，master代表主，backup代表辅<br>    interface eth1                                       #指定HA检测网络的接口<br>virtual_router_id 51                         #虚拟路由标示，同一个vrrp_instance下面master和backup要一样<br>    priority 100                                 #优先级，数字大，优先级高，master要大于backup<br>    advert_int 1                                 #设定master与backup之间存活检查的时间间隔<br>    authentication {                                     #设定验证类型和密码<br>auth_type PASS                                   #设置验证类型，主要有PASS和AH两种<br>auth_pass 1111                                   #设置验证密码，master和backup要一样，这样才能正常通信<br>    }<br>    virtual_ipaddress {<br>172.16.7.55                                      #设置虚拟IP地址，可以设置多个，每行一个<br>    }<br>}</p>
-<p>virtual_server 172.16.7.55 80 {                         #设置虚拟服务器，需要指定ip地址和监听端口<br>    delay_loop 6                                 #健康检测时间，单位是秒<br>    lb_algo rr                                           #设置负载调度算法，这里是rr，即轮询算法<br>    lb_kind DR                                           #设置LVS实现负载均衡的机制，还可以为NAT和TUN<br>persistence_timeout 50                               #会话保持时间，单位是秒，这个选项对于动态网页是非常有用的，为集群中的session共享提供了一个很好的解决方案。有个这个会话保持功能用户的请求会被一直分发到某个服务节点，直到超过这个会话保持时间，需要注意的是，这个会话保持时间，是最大无响应超时时间，也就是说用户在操作动态页面时，如果在50秒内没有执行任何操作，那么接下来的操作会被分发的其他节点，但是如果一直操作，则不受50秒限制。<br>    protocol TCP                                 #指定转发协议类型，有tcp和udp两种</p>
-<p>real_server 172.16.7.16 80 {                     #配置RealServer信息，需要指定ip地址和监听端口<br>weight 3                                 #配置节点权重，数字大，权重大，服务器好可以设置较大的值，可以充分理由服务器资源<br>TCP_CHECK {                                      #RealServer的状态检测，单位秒<br>connect_timeout 3                             #超时无响应时间<br>nb_get_retry 3                                #重试次数<br>delay_before_retry 3                  #重试间隔<br>        }<br>    }</p>
-<p>real_server 172.16.7.144 80 {<br>weight 3<br>TCP_CHECK {<br>connect_timeout 3<br>nb_get_retry 3<br>delay_before_retry 3<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 配置RealServer</div></pre></td></tr></table></figure></p>
-<p>cat lvs_real</p>
-<p>#!/bin/bash</p>
-<p>##Description: Start realserver<br>FRed=”\E[31;40m”; FGreen=”\E[32;40m”; FBlue=”\E[34;40m”; St0=”\033[1m”; St1=”\033[5m”; Ed=”\033[0m”<br>VIP=172.16.7.55<br>source= /etc/rc.d/init.d/functions<br>case “$1” in<br>start)<br>        echo -e “$FRed$St0 Start LVS of Realserver $Ed “<br>        echo -e “$FGreen$St0 Set VIP: $VIP $Ed”<br>/sbin/ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 up<br>        echo “1” &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore<br>        echo “2” &gt;/proc/sys/net/ipv4/conf/lo/arp_announce<br>        echo “1” &gt;/proc/sys/net/ipv4/conf/all/arp_ignore<br>        echo “2” &gt;/proc/sys/net/ipv4/conf/all/arp_announce<br>;;<br>stop)<br>        echo -e “$FRed$St0 Close LVS Directorserver $Ed”</p>
-<p>/sbin/ifconfig lo:0 down<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/lo/arp_announce<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/all/arp_ignore<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/all/arp_announce<br>;;<br>*)<br>        echo “Usage:$0 {start|stop}”<br>exit 1<br>esac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 测试LVS+Keepalived</div><div class="line"></div><div class="line">### 在2台RealServer上面绑定LVS虚拟IP及抑制arp</div></pre></td></tr></table></figure></p>
-<p>/opt/lvs_real start<br> Start LVS of Realserver<br> Set VIP: 172.16.7.55 </p>
-<p>ip addr<br>1: lo:  mtu 16436 qdisc noqueue<br>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>    inet 172.16.7.55/32 brd 172.16.7.55 scope global lo:0<br>    inet6 ::1/128 scope host<br>valid_lft forever preferred_lft forever<br>3: eth1:  mtu 1500 qdisc pfifo_fast qlen 1000<br>    link/ether 00:e0:81:b9:a4:88 brd ff:ff:ff:ff:ff:ff<br>    inet 172.16.7.16/24 brd 172.16.7.255 scope global eth1<br>    inet6 fe80::2e0:81ff:feb9:a488/64 scope link<br>valid_lft forever preferred_lft forever<br>4: sit0:  mtu 1480 qdisc noop<br>    link/sit 0.0.0.0 brd 0.0.0.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">### 启动LVS_Master的keepalived服务，并查看日志</div></pre></td></tr></table></figure></p>
-<p>[root@ssq-58-56 opt]# /etc/init.d/keepalived start<br>Starting keepalived:[  OK  ]<br>[root@ssq-58-56 ~]# tail -f /var/log/messages<br>Apr  2 10:45:37 ssq-56 Keepalived: Terminating on signal<br>Apr  2 10:45:37 ssq-56 Keepalived_vrrp: Terminating VRRP child process on signal<br>Apr  2 10:45:37 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) removing protocol VIPs.<br>Apr  2 10:45:37 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 removed<br>Apr  2 10:45:37 ssq-56 Keepalived_healthcheckers: Terminating Healthchecker child process on signal<br>Apr  2 10:45:37 ssq-56 Keepalived: Stopping Keepalived v1.1.15 (03/19,2013)<br>Apr  2 10:46:07 ssq-56 Keepalived: Starting Keepalived v1.1.15 (03/19,2013)<br>Apr  2 10:46:07 ssq-56 Keepalived: Starting Healthcheck child process, pid=14324<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Using MII-BMSR NIC polling thread…<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 115.182.58.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Registering Kernel netlink reflector<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Registering Kernel netlink command channel<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Configuration is using : 12025 Bytes<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.16:80]<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.144:80]<br>Apr  2 10:46:07 ssq-56 Keepalived: Starting VRRP child process, pid=14325<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Using MII-BMSR NIC polling thread…<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Netlink reflector reports IP 115.182.58.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Registering Kernel netlink reflector<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Registering Kernel netlink command channel<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Registering gratutious ARP shared channel<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Configuration is using : 36411 Bytes<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: VRRP sockpool: [ifindex(3), proto(112), fd(8,9)]<br>Apr  2 10:46:08 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Transition to MASTER STATE<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Entering MASTER STATE<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) setting protocol VIPs.<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 10:46:09 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 10:46:14 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 启动backup的Keepalived服务，并查看日志</div></pre></td></tr></table></figure></p>
-<p>[root@ssq-58-57 opt]# /etc/init.d/keepalived start<br>Starting keepalived:[  OK  ]<br>[root@ssq-58-57 ~]# tail -f /var/log/messages<br>Apr  2 10:51:44 ssq-57 Keepalived: Starting Keepalived v1.1.15 (03/19,2013)<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Using MII-BMSR NIC polling thread…<br>Apr  2 10:51:44 ssq-57 Keepalived: Starting Healthcheck child process, pid=28840<br>Apr  2 10:51:44 ssq-57 Keepalived: Starting VRRP child process, pid=28841<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 115.182.58.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Registering Kernel netlink reflector<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Registering Kernel netlink command channel<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Configuration is using : 12023 Bytes<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.16:80]<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.144:80]<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Using MII-BMSR NIC polling thread…<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 115.182.58.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Registering Kernel netlink reflector<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Registering Kernel netlink command channel<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Registering gratutious ARP shared channel<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Configuration is using : 36409 Bytes<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Entering BACKUP STATE<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: VRRP sockpool: [ifindex(3), proto(112), fd(8,9)]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 使用ipvsadm查看lvs状态</div></pre></td></tr></table></figure></p>
-<p>[root@ssq-56 opt]# ipvsadm -Ln<br>IP Virtual Server version 1.2.1 (size=4096)<br>Prot LocalAddress:Port Scheduler Flags<br>  -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn<br>TCP  172.16.7.55:80 rr persistent 50<br>  -&gt; 172.16.7.144:80Route   3      00<br>  -&gt; 172.16.7.16:80Route   3      00    </p>
-<p>[root@ssq-57 opt]# ipvsadm -Ln<br>IP Virtual Server version 1.2.1 (size=4096)<br>Prot LocalAddress:Port Scheduler Flags<br>  -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn<br>TCP  172.16.7.55:80 rr persistent 50<br>  -&gt; 172.16.7.144:80Route   3      00<br>  -&gt; 172.16.7.16:80Route   3      00<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 测试负载均衡</div><div class="line"></div><div class="line">- 在172.16.7.16和172.16.7.144分别创建以本机IP命令的index.html文件，放到apache的DocumentRoot中（这里放置不同内容是为了方便测试，在生产环境中应该是相同文件）</div></pre></td></tr></table></figure></p>
-<p>[root@comp ~]# echo “172.16.7.16” &gt; /var/www/html/index.html<br>[root@ssq-144 ~]# echo “172.16.7.144” &gt; /var/www/html/index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">- 用两台不同机器访问VIP</div></pre></td></tr></table></figure></p>
-<p>[root@ssq-58-112 ~]# curl 172.16.7.55<br>172.16.7.16<br>[root@ssq-58-113 ~]# curl 172.16.7.55<br>172.16.7.144<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">看到两台机器访问VIP，得到的内容不一样，说明负载均衡成功。</div><div class="line"> </div><div class="line">### 测试高可用</div><div class="line">1. 关闭master的Keepalived服务器，并查看backup日志</div></pre></td></tr></table></figure></p>
-<p>[root@ssq-58-56 opt]# /etc/init.d/keepalived stop<br>Stopping keepalived:[  OK  ]<br>[root@ssq-58-57 ~]# tail -f /var/log/messages<br>Apr  2 11:10:19 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Transition to MASTER STATE<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Entering MASTER STATE<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) setting protocol VIPs.<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 11:10:20 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 11:10:25 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">说明backup已经接管服务，测试访问</div></pre></td></tr></table></figure></p>
-<p>curl 172.16.7.55<br>172.16.7.144<br>curl 172.16.7.55<br>172.16.7.16<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">web访问并没有受到影响</div><div class="line"> </div><div class="line">2. 启动master的Keepalived服务，并查看backup日志</div></pre></td></tr></table></figure></p>
-<p>/etc/init.d/keepalived start<br>Starting keepalived:[  OK  ]<br>[root@ssq-58-57 ~]# tail -f /var/log/messages<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Received higher prio advert<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Entering BACKUP STATE<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) removing protocol VIPs.<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.55 removed<br>Apr  2 11:13:48 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 removed<br>```<br>在master工作后，backup又将工作交还给master</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;LVS-Keepalived介绍&quot;&gt;&lt;a href=&quot;#LVS-Keepalived介绍&quot; class=&quot;headerlink&quot; title=&quot;LVS+Keepalived介绍&quot;&gt;&lt;/a&gt;LVS+Keepalived介绍&lt;/h1&gt;&lt;p&gt;lVS是Linux Virt
-    
-    </summary>
-    
-      <category term="Web" scheme="http://czero000.github.io/categories/Web/"/>
-    
-      <category term="keepalived" scheme="http://czero000.github.io/categories/Web/keepalived/"/>
-    
-    
-      <category term="keepalived" scheme="http://czero000.github.io/tags/keepalived/"/>
-    
-      <category term="lvs" scheme="http://czero000.github.io/tags/lvs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Keepalived Systemd启动脚本</title>
     <link href="http://czero000.github.io/2016/11/29/keepalived-systemctl.html"/>
     <id>http://czero000.github.io/2016/11/29/keepalived-systemctl.html</id>
@@ -827,31 +762,6 @@
         }
 }
 </code></pre><p>}<br>```</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
-    
-    </summary>
-    
-      <category term="Web" scheme="http://czero000.github.io/categories/Web/"/>
-    
-      <category term="keepalived" scheme="http://czero000.github.io/categories/Web/keepalived/"/>
-    
-    
-      <category term="keepalived" scheme="http://czero000.github.io/tags/keepalived/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>keepalived配置文件说明</title>
-    <link href="http://czero000.github.io/2016/11/29/keepalived-configfile.html"/>
-    <id>http://czero000.github.io/2016/11/29/keepalived-configfile.html</id>
-    <published>2016-11-29T06:07:33.000Z</published>
-    <updated>2017-01-11T08:04:08.503Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">keepalived既可以作为HA热备，也能作健康检查。下面对/etc/keepalived/keepalived.conf配置说明。</div><div class="line"></div><div class="line">global_defs &#123;</div><div class="line">   notification_email &#123;  #指定keepalived在发生切换时需要发送email到的对象，一行一个</div><div class="line">		monitor@3evip.cn</div><div class="line">   &#125;</div><div class="line">   notification_email_from monitor@3evip.cn #指定发件人</div><div class="line">   smtp_server stmp.3evip.cn #指定smtp服务器地址</div><div class="line">   smtp_connect_timeout 30 #指定smtp连接超时时间</div><div class="line">   router_id LVS_DEVEL #运行keepalived机器的一个标识</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_sync_group VG_1&#123; #监控多个网段的实例</div><div class="line">	group &#123;</div><div class="line">		inside_network #实例名</div><div class="line">		outside_network</div><div class="line">	&#125;</div><div class="line">	notify_master /path/xx.sh #指定当切换到master时，执行的脚本</div><div class="line">	netify_backup /path/xx.sh #指定当切换到backup时，执行的脚本</div><div class="line">	notify_fault &quot;path/xx.sh VG_1&quot; #故障时执行的脚本</div><div class="line">	notify /path/xx.sh </div><div class="line">	smtp_alert #使用global_defs中提供的邮件地址和smtp服务器发送邮件通知</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance inside_network &#123;</div><div class="line">    state BACKUP #指定那个为master，那个为backup，如果设置了nopreempt这个值不起作用，主备考priority决定</div><div class="line">    interface eth0 #设置实例绑定的网卡</div><div class="line">    dont_track_primary #忽略vrrp的interface错误（默认不设置）</div><div class="line">    track_interface&#123; #设置额外的监控，里面那个网卡出现问题都会切换</div><div class="line">		eth0</div><div class="line">		eth1</div><div class="line">    &#125;</div><div class="line">    mcast_src_ip #发送多播包的地址，如果不设置默认使用绑定网卡的primary ip</div><div class="line">    garp_master_delay #在切换到master状态后，延迟进行gratuitous ARP请求</div><div class="line">    virtual_router_id 50 #VPID标记</div><div class="line">    priority 99 #优先级，高优先级竞选为master</div><div class="line">    advert_int 1 #检查间隔，默认1秒</div><div class="line">    nopreempt #设置为不抢占 注：这个配置只能设置在backup主机上，而且这个主机优先级要比另外一台高</div><div class="line">    preempt_delay #抢占延时，默认5分钟</div><div class="line">    debug #debug级别</div><div class="line">    authentication &#123; #设置认证</div><div class="line">        auth_type PASS #认证方式</div><div class="line">        auth_pass 111111 #认证密码</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123; #设置vip</div><div class="line">        192.168.36.200</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">virtual_server 192.168.36.99 80 &#123;</div><div class="line">    delay_loop 6 #健康检查时间间隔</div><div class="line">    lb_algo rr  #lvs调度算法rr|wrr|lc|wlc|lblc|sh|dh</div><div class="line">    lb_kind DR  #负载均衡转发规则NAT|DR|RUN</div><div class="line">    persistence_timeout 5 #会话保持时间</div><div class="line">    protocol TCP #使用的协议</div><div class="line">    persistence_granularity &lt;NETMASK&gt; #lvs会话保持粒度</div><div class="line">    virtualhost &lt;string&gt; #检查的web服务器的虚拟主机（host：头）    </div><div class="line">    sorry_server&lt;IPADDR&gt; &lt;port&gt; #备用机，所有realserver失效后启用</div><div class="line">	real_server 192.168.200.5 23 &#123;</div><div class="line">            weight 1 #默认为1,0为失效</div><div class="line">            inhibit_on_failure #在服务器健康检查失效时，将其设为0，而不是直接从ipvs中删除 </div><div class="line">            notify_up &lt;string&gt; | &lt;quoted-string&gt; #在检测到server up后执行脚本</div><div class="line">            notify_down &lt;string&gt; | &lt;quoted-string&gt; #在检测到server down后执行脚本</div><div class="line">			TCP_CHECK &#123;</div><div class="line">				connect_timeout 3 #连接超时时间</div><div class="line">				nb_get_retry 3 #重连次数</div><div class="line">				delay_before_retry 3 #重连间隔时间</div><div class="line">				connect_port 23  健康检查的端口的端口</div><div class="line">				bindto &lt;ip&gt;   </div><div class="line">			&#125;</div><div class="line">			HTTP_GET | SSL_GET&#123;</div><div class="line">				url&#123; #检查url，可以指定多个</div><div class="line">						path /</div><div class="line">						digest &lt;string&gt; #检查后的摘要信息</div><div class="line">						status_code 200 #检查的返回状态码</div><div class="line">				&#125;</div><div class="line">				connect_port &lt;port&gt; </div><div class="line">				bindto &lt;IPADD&gt;</div><div class="line">				connect_timeout 5</div><div class="line">				nb_get_retry 3</div><div class="line">				delay_before_retry 2</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			SMTP_CHECK&#123;</div><div class="line">					host&#123;</div><div class="line">						connect_ip &lt;IP ADDRESS&gt;</div><div class="line">						connect_port &lt;port&gt; #默认检查25端口</div><div class="line">						bindto &lt;IP ADDRESS&gt;</div><div class="line">					&#125;</div><div class="line">					connect_timeout 5</div><div class="line">					retry 3</div><div class="line">					delay_before_retry 2</div><div class="line">					helo_name &lt;string&gt; | &lt;quoted-string&gt; #smtp helo请求命令参数，可选</div><div class="line">			&#125;</div><div class="line">			MISC_CHECK&#123;</div><div class="line">					misc_path &lt;string&gt; | &lt;quoted-string&gt; #外部脚本路径</div><div class="line">					misc_timeout #脚本执行超时时间</div><div class="line">					misc_dynamic #如设置该项，则退出状态码会用来动态调整服务器的权重，返回0 正常，不修改；返回1，检查失败，权重改为0；返回2-255，正常，权重设置为：返回状态码-2</div><div class="line">			&#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -910,6 +820,125 @@
     <summary type="html">
     
       &lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;p&gt;Keepalived 是一种高性能的服务器高可用或热备解决方案，Keepalived可以用来防止服务器单点故障(单点故障是指一旦某一点出现故
+    
+    </summary>
+    
+      <category term="Web" scheme="http://czero000.github.io/categories/Web/"/>
+    
+      <category term="keepalived" scheme="http://czero000.github.io/categories/Web/keepalived/"/>
+    
+    
+      <category term="keepalived" scheme="http://czero000.github.io/tags/keepalived/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LVS+Keepalived高可用介绍</title>
+    <link href="http://czero000.github.io/2016/11/29/keepalived-lvs.html"/>
+    <id>http://czero000.github.io/2016/11/29/keepalived-lvs.html</id>
+    <published>2016-11-29T06:07:33.000Z</published>
+    <updated>2017-01-11T09:11:15.234Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="LVS-Keepalived介绍"><a href="#LVS-Keepalived介绍" class="headerlink" title="LVS+Keepalived介绍"></a>LVS+Keepalived介绍</h1><p>lVS是Linux Virtual Server的简写，即Linux虚拟服务器，是一个虚拟的服务器集群系统，LVS项目在1998年5月由章文嵩博士成立，是中国国内最早出现的自由软件项目之一。目前有三种IP负载均衡技术（VS/NAT、VS/TUN和VS/DR）；十种调度算法<code>（rrr|wrr|lc|wlc|lblc|lblcr|dh|sh|sed|nq）</code>。</p>
+<p>Keepalived是一个类似于layer3，4&amp;5交换机制的软件，主要用作RealServer的健康状态检查以及LoadBalance主机和BackUP主机之间failover的实现。高可用架</p>
+<p>##简单负载均衡架构</p>
+<p>IP信息列表：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LVS-VIP</td>
+<td>172.16.7.55</td>
+</tr>
+<tr>
+<td>LVS-Master</td>
+<td>172.16.7.56</td>
+</tr>
+<tr>
+<td>LVS-Slave</td>
+<td>172.16.7.57</td>
+</tr>
+<tr>
+<td>Web-RealServer</td>
+<td>172.16.7.16</td>
+</tr>
+<tr>
+<td>Web-RealServer</td>
+<td>172.16.7.144</td>
+</tr>
+</tbody>
+</table>
+<h1 id="安装LVS和Keepalived"><a href="#安装LVS和Keepalived" class="headerlink" title="安装LVS和Keepalived"></a>安装LVS和Keepalived</h1><p>IPVS (IP Virtual Server)是整个负载均衡的基础，如果没有这个基础，故障隔离与切换就毫无意义。IPVS基本上是一种高效的Layer-4交换机，它提供负载平衡的功能。当一个TCP连接的初始SYN报文到达时，IPVS就选择一台服务器，将报文转发给它。此后通过查发报文的IP和TCP报文头地址，保证此连接的后继报文被转发到相同的服务器。这样，IPVS无法检查到请求的内容再选择服务器，这就要求后端的服务器组是提供相同的服务，不管请求被送到哪一台服务器，返回结果都应该是一样的。但是在有一些应用中后端的服务器可能功能不一，有的是提供HTML文档的Web服务器，有的是提供图片的Web服务器，有的是提供CGI的Web服务器。这时，就需要基于内容请求分发 (Content-Based Request Distribution)，同时基于内容请求分发可以提高后端服务器上访问的局部性。IPVS具体实现是由Ipvsadm这个程序来完成，因此判断一个系统是否具备ipvs功能，只要查看Ipvsadm程序是否安装，最简单的办法便是执行命令ipvsadm。</p>
+<h2 id="下载相关软件包"><a href="#下载相关软件包" class="headerlink" title="下载相关软件包"></a>下载相关软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src/</div><div class="line">wget http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz</div><div class="line">wget http://www.keepalived.org/software/keepalived-1.2.17.tar.gz</div></pre></td></tr></table></figure>
+<h2 id="安装LVS和Keepalived-1"><a href="#安装LVS和Keepalived-1" class="headerlink" title="安装LVS和Keepalived"></a>安装LVS和Keepalived</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">lsmod | grep ip_vs                                                     #查看是否加载模块</div><div class="line">uname -r                                                              #查看内核版本   </div><div class="line">2.6.18-164.el5</div><div class="line">ln -s /usr/src/kernels/2.6.18-164.el5-i686/ /usr/src/linux            #防止ipvsadm找不到系统内核，需要安装kernel-devel</div><div class="line">tar -zxf ipvsadm-1.24.tar.gz                                          #解压源代码</div><div class="line">cd ipvsadm-1.24                                                       #切换目录</div><div class="line">make &amp;&amp; make install                                                  #编译安装</div><div class="line">find / -name ipvsadm                                                  #查找安装后文件位置</div><div class="line">/etc/rc.d/init.d/ipvsadm                       </div><div class="line">/usr/local/src/ipvsadm-1.24/ipvsadm</div><div class="line">/sbin/ipvsadm</div><div class="line"># ipvsadm                                                               #检验ipvsadm是否正确安装</div><div class="line">IP Virtual Server version 1.2.1 (size=4096)</div><div class="line">Prot LocalAddress:Port Scheduler Flags</div><div class="line"> -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn </div><div class="line">lsmod | grep ip_vs                                                    #内核是否加载模块</div><div class="line">ip_vs77441  0</div></pre></td></tr></table></figure>
+<p><strong>报错：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make[1]: *** [libipvs.o] Error 1</div><div class="line">make[1]: Leaving directory `/usr/local/src/ipvsadm-1.26/libipvs&apos;</div><div class="line">make: *** [libs] Error 2</div></pre></td></tr></table></figure></p>
+<p><strong>解决：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install libnl* popt* -y</div></pre></td></tr></table></figure></p>
+<h2 id="安装Keepalive"><a href="#安装Keepalive" class="headerlink" title="安装Keepalive"></a>安装Keepalive</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">cd ..</div><div class="line">tar -zxf keepalived-1.1.15.tar.gz</div><div class="line">cd keepalived-1.1.15</div><div class="line">./configure --prefix=/usr/local/keepalived \</div><div class="line">-with-kernel-dir=/usr/src/kernels/2.6.18-164.el5-i686</div><div class="line">Keepalived configuration</div><div class="line">------------------------</div><div class="line">Keepalived version       : 1.1.15</div><div class="line">Compiler: gcc</div><div class="line">Compiler flags: -g -O2</div><div class="line">Extra Lib: -lpopt -lssl -lcrypto</div><div class="line">Use IPVS Framework       : Yes</div><div class="line">IPVS sync daemon support : Yes</div><div class="line">Use VRRP Framework       : Yes</div><div class="line">Use LinkWatch: No</div><div class="line">Use Debug flags: No</div><div class="line">make &amp;&amp; make install</div><div class="line">find / -name keepalived</div><div class="line">/usr/local/keepalived</div><div class="line">/usr/local/keepalived/etc/sysconfig/keepalived</div><div class="line">/usr/local/keepalived/etc/rc.d/init.d/keepalived</div><div class="line">/usr/local/keepalived/etc/keepalived</div><div class="line">/usr/local/keepalived/sbin/keepalived</div><div class="line">cd /usr/local/keepalived/</div><div class="line">cp etc/rc.d/init.d/keepalived /etc/rc.d/init.d/</div><div class="line">cp etc/sysconfig/keepalived /etc/sysconfig/</div><div class="line">mkdir /etc/keepalived</div><div class="line">cp etc/keepalived/keepalived.conf /etc/keepalived/</div><div class="line">ln -s /usr/local/keepalived/sbin/keepalived /usr/sbin/</div></pre></td></tr></table></figure>
+<h1 id="配置LVS及Keepalived"><a href="#配置LVS及Keepalived" class="headerlink" title="配置LVS及Keepalived"></a>配置LVS及Keepalived</h1><h2 id="编写配置脚本"><a href="#编写配置脚本" class="headerlink" title="编写配置脚本"></a>编写配置脚本</h2><p>绑定VIP地址到LVS_Master上，并设定LVS工作模式为dr(此脚本不适用在Keepalived方案中，只可单独使用)，代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">cat lvs_dr</div><div class="line">#!/bin/bash</div><div class="line"># description: Start LVS of DirectorServer</div><div class="line"># Write by:Charlie.Cui</div><div class="line"> </div><div class="line">FRed=&quot;\E[31;40m&quot;; FGreen=&quot;\E[32;40m&quot;; FBlue=&quot;\E[34;40m&quot;; St0=&quot;\033[1m&quot;; St1=&quot;\033[5m&quot;; Ed=&quot;\033[0m&quot;  </div><div class="line"> </div><div class="line"># Set website director vip.</div><div class="line">LVS_VIP=172.16.7.55</div><div class="line">LVS_RIP1=172.16.7.16</div><div class="line">LVS_RIP2=172.16.7.144</div><div class="line"> </div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"> </div><div class="line">logger $0 called with $1</div><div class="line">case &quot;$1&quot; in</div><div class="line">start)</div><div class="line">        # set LVS vip</div><div class="line">        echo -e Starting LVS Of DirectorServer:&quot;\t&quot;&quot;$FGreen$Sto[OK]$Ed&quot;</div><div class="line">        echo -e Set LVS_VIP:&quot;\t&quot;&quot;$FGreen$Sto$LVS_VIP$Ed&quot;</div><div class="line">/sbin/ipvsadm --set 30 5 60</div><div class="line">/sbin/ifconfig eth1:0 $LVS_VIP broadcast $LVS_VIP netmask 255.255.255.255 broadcast $LVS_VIP up</div><div class="line">/sbin/route add -host $LVS_VIP dev eth1:0</div><div class="line">/sbin/ipvsadm -A -t $LVS_VIP:80 -s wrr -p 3</div><div class="line">/sbin/ipvsadm -a -t $LVS_VIP:80 -r $LVS_RIP1:80 -g -w 1</div><div class="line">/sbin/ipvsadm -a -t $LVS_VIP:80 -r $LVS_RIP2:80 -g -w 1</div><div class="line">touch /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1</div><div class="line">;;</div><div class="line">stop)</div><div class="line">/sbin/ipvsadm -C</div><div class="line">/sbin/ipvsadm -Z</div><div class="line">/sbin/route del -host $LVS_VIP dev eth1:0</div><div class="line">/sbin/ifconfig eth1:0 down</div><div class="line">/bin/rm -rf /var/lock/subsys/ipvsadm &gt;/dev/null 2&gt;&amp;1</div><div class="line">        echo -e Stoping LVS Of DirectorServer:&quot;\t&quot;&quot;$FGreen$Sto[OK]$Ed&quot;</div><div class="line">;;</div><div class="line">status)</div><div class="line">        if [ ! -e /var/lock/subsys/ipvsadm ];then</div><div class="line">echo -e &quot;$FRed ipvsadm is stoped $Ed&quot;</div><div class="line">exit 1</div><div class="line">        else</div><div class="line">echo -e &quot;$FGreen$Sto ipvsadm is running $Ed&quot;</div><div class="line">        fi</div><div class="line">      ;;</div><div class="line">*)</div><div class="line">        echo &quot;Usage: $0 &#123;start|stop|status&#125;&quot;</div><div class="line">        exit 1</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<ul>
+<li>用ipvsadm -Ln查看虚拟服务器IP</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ipvsadm -Ln</div><div class="line">IP Virtual Server version 1.2.1 (size=4096)</div><div class="line">Prot LocalAddress:Port Scheduler Flags</div><div class="line">  -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn</div><div class="line">TCP  172.16.7.55:80 wrr persistent 3</div><div class="line">  -&gt; 172.16.7.16:80Route   1      00</div><div class="line">  -&gt; 172.16.7.144:80Local   1      00    </div><div class="line">```  </div><div class="line"></div><div class="line">- 查看LVS_VIP 是否绑定到Master上</div></pre></td></tr></table></figure>
+<p>ip addr<br>1: lo:  mtu 16436 qdisc noqueue<br>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>    inet6 ::1/128 scope host<br>valid_lft forever preferred_lft forever<br>3: eth1:  mtu 1500 qdisc pfifo_fast qlen 1000<br>    link/ether 00:50:56:9f:00:38 brd ff:ff:ff:ff:ff:ff<br>    inet 172.16.7.56/24 brd 172.16.7.255 scope global eth1<br>    inet 172.16.7.55/32 brd 172.16.7.55 scope global eth1:0<br>    inet6 fe80::250:56ff:fe9f:38/64 scope link<br>valid_lft forever preferred_lft forever<br>4: sit0:  mtu 1480 qdisc noop<br>    link/sit 0.0.0.0 brd 0.0.0.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 配置Keepalived</div><div class="line"></div><div class="line">修改/etc/keepalived/keepalived.conf,以下是Master的配置文件，Backup的只需要将红色的子修改即可。</div></pre></td></tr></table></figure></p>
+<p>cat /etc/keepalived/keepalived.conf<br>! Configuration File for keepalived</p>
+<p>global_defs {<br>   notification_email {<br>charlie.cui@hotmail.com                             #配置管理员邮箱，用于报警一行设置一个，可以设置多个<br>   }<br>notification_email_from mail.hotmail.com             #设置邮件发送地址<br>   smtp_server 127.0.0.1                        #smtp Server地址<br>   smtp_connect_timeout 30                              #与smtp服务超时时间<br>   router_id LVS_Master                                 #路由ID和backup要不同，不然会报错<br>}</p>
+<p>#set VIP<br>vrrp_instance VIP {<br>    state MASTER                                 #指定Keepalived的角色，master代表主，backup代表辅<br>    interface eth1                                       #指定HA检测网络的接口<br>virtual_router_id 51                         #虚拟路由标示，同一个vrrp_instance下面master和backup要一样<br>    priority 100                                 #优先级，数字大，优先级高，master要大于backup<br>    advert_int 1                                 #设定master与backup之间存活检查的时间间隔<br>    authentication {                                     #设定验证类型和密码<br>auth_type PASS                                   #设置验证类型，主要有PASS和AH两种<br>auth_pass 1111                                   #设置验证密码，master和backup要一样，这样才能正常通信<br>    }<br>    virtual_ipaddress {<br>172.16.7.55                                      #设置虚拟IP地址，可以设置多个，每行一个<br>    }<br>}</p>
+<p>virtual_server 172.16.7.55 80 {                         #设置虚拟服务器，需要指定ip地址和监听端口<br>    delay_loop 6                                 #健康检测时间，单位是秒<br>    lb_algo rr                                           #设置负载调度算法，这里是rr，即轮询算法<br>    lb_kind DR                                           #设置LVS实现负载均衡的机制，还可以为NAT和TUN<br>persistence_timeout 50                               #会话保持时间，单位是秒，这个选项对于动态网页是非常有用的，为集群中的session共享提供了一个很好的解决方案。有个这个会话保持功能用户的请求会被一直分发到某个服务节点，直到超过这个会话保持时间，需要注意的是，这个会话保持时间，是最大无响应超时时间，也就是说用户在操作动态页面时，如果在50秒内没有执行任何操作，那么接下来的操作会被分发的其他节点，但是如果一直操作，则不受50秒限制。<br>    protocol TCP                                 #指定转发协议类型，有tcp和udp两种</p>
+<p>real_server 172.16.7.16 80 {                     #配置RealServer信息，需要指定ip地址和监听端口<br>weight 3                                 #配置节点权重，数字大，权重大，服务器好可以设置较大的值，可以充分理由服务器资源<br>TCP_CHECK {                                      #RealServer的状态检测，单位秒<br>connect_timeout 3                             #超时无响应时间<br>nb_get_retry 3                                #重试次数<br>delay_before_retry 3                  #重试间隔<br>        }<br>    }</p>
+<p>real_server 172.16.7.144 80 {<br>weight 3<br>TCP_CHECK {<br>connect_timeout 3<br>nb_get_retry 3<br>delay_before_retry 3<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 配置RealServer</div></pre></td></tr></table></figure></p>
+<p>cat lvs_real</p>
+<p>#!/bin/bash</p>
+<p>##Description: Start realserver<br>FRed=”\E[31;40m”; FGreen=”\E[32;40m”; FBlue=”\E[34;40m”; St0=”\033[1m”; St1=”\033[5m”; Ed=”\033[0m”<br>VIP=172.16.7.55<br>source= /etc/rc.d/init.d/functions<br>case “$1” in<br>start)<br>        echo -e “$FRed$St0 Start LVS of Realserver $Ed “<br>        echo -e “$FGreen$St0 Set VIP: $VIP $Ed”<br>/sbin/ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 up<br>        echo “1” &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore<br>        echo “2” &gt;/proc/sys/net/ipv4/conf/lo/arp_announce<br>        echo “1” &gt;/proc/sys/net/ipv4/conf/all/arp_ignore<br>        echo “2” &gt;/proc/sys/net/ipv4/conf/all/arp_announce<br>;;<br>stop)<br>        echo -e “$FRed$St0 Close LVS Directorserver $Ed”</p>
+<p>/sbin/ifconfig lo:0 down<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/lo/arp_announce<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/all/arp_ignore<br>        echo “0” &gt;/proc/sys/net/ipv4/conf/all/arp_announce<br>;;<br>*)<br>        echo “Usage:$0 {start|stop}”<br>exit 1<br>esac<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 测试LVS+Keepalived</div><div class="line"></div><div class="line">### 在2台RealServer上面绑定LVS虚拟IP及抑制arp</div></pre></td></tr></table></figure></p>
+<p>/opt/lvs_real start<br> Start LVS of Realserver<br> Set VIP: 172.16.7.55 </p>
+<p>ip addr<br>1: lo:  mtu 16436 qdisc noqueue<br>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00<br>    inet 127.0.0.1/8 scope host lo<br>    inet 172.16.7.55/32 brd 172.16.7.55 scope global lo:0<br>    inet6 ::1/128 scope host<br>valid_lft forever preferred_lft forever<br>3: eth1:  mtu 1500 qdisc pfifo_fast qlen 1000<br>    link/ether 00:e0:81:b9:a4:88 brd ff:ff:ff:ff:ff:ff<br>    inet 172.16.7.16/24 brd 172.16.7.255 scope global eth1<br>    inet6 fe80::2e0:81ff:feb9:a488/64 scope link<br>valid_lft forever preferred_lft forever<br>4: sit0:  mtu 1480 qdisc noop<br>    link/sit 0.0.0.0 brd 0.0.0.0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">### 启动LVS_Master的keepalived服务，并查看日志</div></pre></td></tr></table></figure></p>
+<p>[root@ssq-58-56 opt]# /etc/init.d/keepalived start<br>Starting keepalived:[  OK  ]<br>[root@ssq-58-56 ~]# tail -f /var/log/messages<br>Apr  2 10:45:37 ssq-56 Keepalived: Terminating on signal<br>Apr  2 10:45:37 ssq-56 Keepalived_vrrp: Terminating VRRP child process on signal<br>Apr  2 10:45:37 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) removing protocol VIPs.<br>Apr  2 10:45:37 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 removed<br>Apr  2 10:45:37 ssq-56 Keepalived_healthcheckers: Terminating Healthchecker child process on signal<br>Apr  2 10:45:37 ssq-56 Keepalived: Stopping Keepalived v1.1.15 (03/19,2013)<br>Apr  2 10:46:07 ssq-56 Keepalived: Starting Keepalived v1.1.15 (03/19,2013)<br>Apr  2 10:46:07 ssq-56 Keepalived: Starting Healthcheck child process, pid=14324<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Using MII-BMSR NIC polling thread…<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 115.182.58.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Registering Kernel netlink reflector<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Registering Kernel netlink command channel<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Configuration is using : 12025 Bytes<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.16:80]<br>Apr  2 10:46:07 ssq-56 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.144:80]<br>Apr  2 10:46:07 ssq-56 Keepalived: Starting VRRP child process, pid=14325<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Using MII-BMSR NIC polling thread…<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Netlink reflector reports IP 115.182.58.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.56 added<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Registering Kernel netlink reflector<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Registering Kernel netlink command channel<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Registering gratutious ARP shared channel<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: Configuration is using : 36411 Bytes<br>Apr  2 10:46:07 ssq-56 Keepalived_vrrp: VRRP sockpool: [ifindex(3), proto(112), fd(8,9)]<br>Apr  2 10:46:08 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Transition to MASTER STATE<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Entering MASTER STATE<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) setting protocol VIPs.<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br>Apr  2 10:46:09 ssq-56 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 10:46:09 ssq-56 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 10:46:14 ssq-56 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 启动backup的Keepalived服务，并查看日志</div></pre></td></tr></table></figure></p>
+<p>[root@ssq-58-57 opt]# /etc/init.d/keepalived start<br>Starting keepalived:[  OK  ]<br>[root@ssq-58-57 ~]# tail -f /var/log/messages<br>Apr  2 10:51:44 ssq-57 Keepalived: Starting Keepalived v1.1.15 (03/19,2013)<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Using MII-BMSR NIC polling thread…<br>Apr  2 10:51:44 ssq-57 Keepalived: Starting Healthcheck child process, pid=28840<br>Apr  2 10:51:44 ssq-57 Keepalived: Starting VRRP child process, pid=28841<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 115.182.58.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Registering Kernel netlink reflector<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Registering Kernel netlink command channel<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Configuration is using : 12023 Bytes<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.16:80]<br>Apr  2 10:51:44 ssq-57 Keepalived_healthcheckers: Activating healtchecker for service [172.16.7.144:80]<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Using MII-BMSR NIC polling thread…<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 115.182.58.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.57 added<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Registering Kernel netlink reflector<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Registering Kernel netlink command channel<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Registering gratutious ARP shared channel<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Opening file ‘/etc/keepalived/keepalived.conf’.<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: Configuration is using : 36409 Bytes<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Entering BACKUP STATE<br>Apr  2 10:51:44 ssq-57 Keepalived_vrrp: VRRP sockpool: [ifindex(3), proto(112), fd(8,9)]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 使用ipvsadm查看lvs状态</div></pre></td></tr></table></figure></p>
+<p>[root@ssq-56 opt]# ipvsadm -Ln<br>IP Virtual Server version 1.2.1 (size=4096)<br>Prot LocalAddress:Port Scheduler Flags<br>  -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn<br>TCP  172.16.7.55:80 rr persistent 50<br>  -&gt; 172.16.7.144:80Route   3      00<br>  -&gt; 172.16.7.16:80Route   3      00    </p>
+<p>[root@ssq-57 opt]# ipvsadm -Ln<br>IP Virtual Server version 1.2.1 (size=4096)<br>Prot LocalAddress:Port Scheduler Flags<br>  -&gt; RemoteAddress:PortForward Weight ActiveConn InActConn<br>TCP  172.16.7.55:80 rr persistent 50<br>  -&gt; 172.16.7.144:80Route   3      00<br>  -&gt; 172.16.7.16:80Route   3      00<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 测试负载均衡</div><div class="line"></div><div class="line">- 在172.16.7.16和172.16.7.144分别创建以本机IP命令的index.html文件，放到apache的DocumentRoot中（这里放置不同内容是为了方便测试，在生产环境中应该是相同文件）</div></pre></td></tr></table></figure></p>
+<p>[root@comp ~]# echo “172.16.7.16” &gt; /var/www/html/index.html<br>[root@ssq-144 ~]# echo “172.16.7.144” &gt; /var/www/html/index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">- 用两台不同机器访问VIP</div></pre></td></tr></table></figure></p>
+<p>[root@ssq-58-112 ~]# curl 172.16.7.55<br>172.16.7.16<br>[root@ssq-58-113 ~]# curl 172.16.7.55<br>172.16.7.144<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">看到两台机器访问VIP，得到的内容不一样，说明负载均衡成功。</div><div class="line"> </div><div class="line">### 测试高可用</div><div class="line">1. 关闭master的Keepalived服务器，并查看backup日志</div></pre></td></tr></table></figure></p>
+<p>[root@ssq-58-56 opt]# /etc/init.d/keepalived stop<br>Stopping keepalived:[  OK  ]<br>[root@ssq-58-57 ~]# tail -f /var/log/messages<br>Apr  2 11:10:19 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Transition to MASTER STATE<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Entering MASTER STATE<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) setting protocol VIPs.<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br>Apr  2 11:10:20 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 11:10:20 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 added<br>Apr  2 11:10:25 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Sending gratuitous ARPs on eth1 for 172.16.7.55<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">说明backup已经接管服务，测试访问</div></pre></td></tr></table></figure></p>
+<p>curl 172.16.7.55<br>172.16.7.144<br>curl 172.16.7.55<br>172.16.7.16<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">web访问并没有受到影响</div><div class="line"> </div><div class="line">2. 启动master的Keepalived服务，并查看backup日志</div></pre></td></tr></table></figure></p>
+<p>/etc/init.d/keepalived start<br>Starting keepalived:[  OK  ]<br>[root@ssq-58-57 ~]# tail -f /var/log/messages<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Received higher prio advert<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) Entering BACKUP STATE<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: VRRP_Instance(VIP) removing protocol VIPs.<br>Apr  2 11:13:48 ssq-57 Keepalived_vrrp: Netlink reflector reports IP 172.16.7.55 removed<br>Apr  2 11:13:48 ssq-57 Keepalived_healthcheckers: Netlink reflector reports IP 172.16.7.55 removed<br>```<br>在master工作后，backup又将工作交还给master</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;LVS-Keepalived介绍&quot;&gt;&lt;a href=&quot;#LVS-Keepalived介绍&quot; class=&quot;headerlink&quot; title=&quot;LVS+Keepalived介绍&quot;&gt;&lt;/a&gt;LVS+Keepalived介绍&lt;/h1&gt;&lt;p&gt;lVS是Linux Virt
+    
+    </summary>
+    
+      <category term="Web" scheme="http://czero000.github.io/categories/Web/"/>
+    
+      <category term="keepalived" scheme="http://czero000.github.io/categories/Web/keepalived/"/>
+    
+    
+      <category term="keepalived" scheme="http://czero000.github.io/tags/keepalived/"/>
+    
+      <category term="lvs" scheme="http://czero000.github.io/tags/lvs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>keepalived配置文件说明</title>
+    <link href="http://czero000.github.io/2016/11/29/keepalived-configfile.html"/>
+    <id>http://czero000.github.io/2016/11/29/keepalived-configfile.html</id>
+    <published>2016-11-29T06:07:33.000Z</published>
+    <updated>2017-01-11T08:04:08.503Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">keepalived既可以作为HA热备，也能作健康检查。下面对/etc/keepalived/keepalived.conf配置说明。</div><div class="line"></div><div class="line">global_defs &#123;</div><div class="line">   notification_email &#123;  #指定keepalived在发生切换时需要发送email到的对象，一行一个</div><div class="line">		monitor@3evip.cn</div><div class="line">   &#125;</div><div class="line">   notification_email_from monitor@3evip.cn #指定发件人</div><div class="line">   smtp_server stmp.3evip.cn #指定smtp服务器地址</div><div class="line">   smtp_connect_timeout 30 #指定smtp连接超时时间</div><div class="line">   router_id LVS_DEVEL #运行keepalived机器的一个标识</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_sync_group VG_1&#123; #监控多个网段的实例</div><div class="line">	group &#123;</div><div class="line">		inside_network #实例名</div><div class="line">		outside_network</div><div class="line">	&#125;</div><div class="line">	notify_master /path/xx.sh #指定当切换到master时，执行的脚本</div><div class="line">	netify_backup /path/xx.sh #指定当切换到backup时，执行的脚本</div><div class="line">	notify_fault &quot;path/xx.sh VG_1&quot; #故障时执行的脚本</div><div class="line">	notify /path/xx.sh </div><div class="line">	smtp_alert #使用global_defs中提供的邮件地址和smtp服务器发送邮件通知</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance inside_network &#123;</div><div class="line">    state BACKUP #指定那个为master，那个为backup，如果设置了nopreempt这个值不起作用，主备考priority决定</div><div class="line">    interface eth0 #设置实例绑定的网卡</div><div class="line">    dont_track_primary #忽略vrrp的interface错误（默认不设置）</div><div class="line">    track_interface&#123; #设置额外的监控，里面那个网卡出现问题都会切换</div><div class="line">		eth0</div><div class="line">		eth1</div><div class="line">    &#125;</div><div class="line">    mcast_src_ip #发送多播包的地址，如果不设置默认使用绑定网卡的primary ip</div><div class="line">    garp_master_delay #在切换到master状态后，延迟进行gratuitous ARP请求</div><div class="line">    virtual_router_id 50 #VPID标记</div><div class="line">    priority 99 #优先级，高优先级竞选为master</div><div class="line">    advert_int 1 #检查间隔，默认1秒</div><div class="line">    nopreempt #设置为不抢占 注：这个配置只能设置在backup主机上，而且这个主机优先级要比另外一台高</div><div class="line">    preempt_delay #抢占延时，默认5分钟</div><div class="line">    debug #debug级别</div><div class="line">    authentication &#123; #设置认证</div><div class="line">        auth_type PASS #认证方式</div><div class="line">        auth_pass 111111 #认证密码</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123; #设置vip</div><div class="line">        192.168.36.200</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">virtual_server 192.168.36.99 80 &#123;</div><div class="line">    delay_loop 6 #健康检查时间间隔</div><div class="line">    lb_algo rr  #lvs调度算法rr|wrr|lc|wlc|lblc|sh|dh</div><div class="line">    lb_kind DR  #负载均衡转发规则NAT|DR|RUN</div><div class="line">    persistence_timeout 5 #会话保持时间</div><div class="line">    protocol TCP #使用的协议</div><div class="line">    persistence_granularity &lt;NETMASK&gt; #lvs会话保持粒度</div><div class="line">    virtualhost &lt;string&gt; #检查的web服务器的虚拟主机（host：头）    </div><div class="line">    sorry_server&lt;IPADDR&gt; &lt;port&gt; #备用机，所有realserver失效后启用</div><div class="line">	real_server 192.168.200.5 23 &#123;</div><div class="line">            weight 1 #默认为1,0为失效</div><div class="line">            inhibit_on_failure #在服务器健康检查失效时，将其设为0，而不是直接从ipvs中删除 </div><div class="line">            notify_up &lt;string&gt; | &lt;quoted-string&gt; #在检测到server up后执行脚本</div><div class="line">            notify_down &lt;string&gt; | &lt;quoted-string&gt; #在检测到server down后执行脚本</div><div class="line">			TCP_CHECK &#123;</div><div class="line">				connect_timeout 3 #连接超时时间</div><div class="line">				nb_get_retry 3 #重连次数</div><div class="line">				delay_before_retry 3 #重连间隔时间</div><div class="line">				connect_port 23  健康检查的端口的端口</div><div class="line">				bindto &lt;ip&gt;   </div><div class="line">			&#125;</div><div class="line">			HTTP_GET | SSL_GET&#123;</div><div class="line">				url&#123; #检查url，可以指定多个</div><div class="line">						path /</div><div class="line">						digest &lt;string&gt; #检查后的摘要信息</div><div class="line">						status_code 200 #检查的返回状态码</div><div class="line">				&#125;</div><div class="line">				connect_port &lt;port&gt; </div><div class="line">				bindto &lt;IPADD&gt;</div><div class="line">				connect_timeout 5</div><div class="line">				nb_get_retry 3</div><div class="line">				delay_before_retry 2</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			SMTP_CHECK&#123;</div><div class="line">					host&#123;</div><div class="line">						connect_ip &lt;IP ADDRESS&gt;</div><div class="line">						connect_port &lt;port&gt; #默认检查25端口</div><div class="line">						bindto &lt;IP ADDRESS&gt;</div><div class="line">					&#125;</div><div class="line">					connect_timeout 5</div><div class="line">					retry 3</div><div class="line">					delay_before_retry 2</div><div class="line">					helo_name &lt;string&gt; | &lt;quoted-string&gt; #smtp helo请求命令参数，可选</div><div class="line">			&#125;</div><div class="line">			MISC_CHECK&#123;</div><div class="line">					misc_path &lt;string&gt; | &lt;quoted-string&gt; #外部脚本路径</div><div class="line">					misc_timeout #脚本执行超时时间</div><div class="line">					misc_dynamic #如设置该项，则退出状态码会用来动态调整服务器的权重，返回0 正常，不修改；返回1，检查失败，权重改为0；返回2-255，正常，权重设置为：返回状态码-2</div><div class="line">			&#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
     
     </summary>
     
@@ -1157,33 +1186,6 @@
     
     
       <category term="docker" scheme="http://czero000.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo博客显示部分内容</title>
-    <link href="http://czero000.github.io/2016/11/17/github-pages-nodisplay-vendors.html"/>
-    <id>http://czero000.github.io/2016/11/17/github-pages-nodisplay-vendors.html</id>
-    <published>2016-11-17T03:49:46.000Z</published>
-    <updated>2016-11-17T03:55:09.103Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天更新 blog，一看全是空白，debug 结果全是 error,CSS 和 javascript都丢失了,显示<code>jquery，css</code> 都是 404。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">首先修改source/vendors为source/lib，然后修改_config.yml， 将 _internal: vendors修改为_internal:lib </div><div class="line">然后修改next底下所有引用source/vendors路径为source/lib。</div><div class="line">这些地方可以通过文件查找找出来。</div><div class="line">主要集中在这几个文件中。</div><div class="line">themes\.bowerrc </div><div class="line">themes\.gitignore </div><div class="line">themes\.javascript_ignore </div><div class="line">themes\bower.json 。</div><div class="line">修改完毕后，更新部署一遍就行了</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天更新 blog，一看全是空白，debug 结果全是 error,CSS 和 javascript都丢失了,显示&lt;code&gt;jquery，css&lt;/code&gt; 都是 404。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;
-    
-    </summary>
-    
-      <category term="Blog" scheme="http://czero000.github.io/categories/Blog/"/>
-    
-    
-      <category term="blog" scheme="http://czero000.github.io/tags/blog/"/>
-    
-      <category term="hexo" scheme="http://czero000.github.io/tags/hexo/"/>
     
   </entry>
   
